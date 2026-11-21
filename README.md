@@ -1,32 +1,32 @@
 # Backshade
 
-Console di programmazione per show live: luci, audio e video in un'unica applicazione semplice.
+Programming console for live shows: lights, audio and video in one simple application.
 
-Backshade è un'applicazione desktop multipiattaforma (Windows, Linux, macOS) basata su Electron, con interfaccia web utilizzabile anche da altri dispositivi della rete interna.
+Backshade is a cross-platform desktop application (Windows, Linux, macOS) built on Electron, with a web interface that can also be used from other devices on the local network.
 
-## Funzionalità previste
+## Planned features
 
-- Fixture DMX e Art-Net multiuniverso
-- Matrici LED
-- Periferiche audio e video esterne
-- Console virtuale su griglia personalizzabile per ogni show
-- Console semplice, ibrida tra live e programmazione, con scene e chaser
-- Show preprogrammati con editor a tracce in stile DAW
-- Regia video e riproduzione audio con immagini sovrapponibili
-- Integrazione tra luci, audio, video e mixer audio esterni
-- Show salvati come cartelle trasportabili tra dispositivi, con clonazione
-- Controllo remoto da desktop o mobile tramite webserver interno
+- Multi-universe DMX and Art-Net fixtures
+- LED matrices
+- External audio and video devices
+- Virtual console on a customizable grid for each show
+- Simple console, a hybrid of live operation and programming, with scenes and chasers
+- Pre-programmed shows with a DAW-style track editor
+- Video direction and audio playback with overlay images
+- Integration between lights, audio, video and external audio mixers
+- Shows saved as folders portable between devices, with cloning
+- Remote control from desktop or mobile through the built-in web server
 
-## Stato
+## Status
 
-Il progetto è in fase di inizializzazione. Vedi [ROADMAP.md](ROADMAP.md).
+The project is being initialized. See [ROADMAP.md](ROADMAP.md).
 
-## Documentazione per lo sviluppo
+## Development documentation
 
-- [AGENTS.md](AGENTS.md): regole per gli agenti AI
-- [ROADMAP.md](ROADMAP.md): fasi e avanzamento
-- [MEMORY.md](MEMORY.md): scelte e convenzioni
+- [AGENTS.md](AGENTS.md): rules for AI agents
+- [ROADMAP.md](ROADMAP.md): phases and progress
+- [MEMORY.md](MEMORY.md): choices and conventions
 
-## Licenza
+## License
 
-Distribuito con licenza [GNU General Public License v3.0](LICENSE).
+Released under the [GNU General Public License v3.0](LICENSE).

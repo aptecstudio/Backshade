@@ -1,92 +1,102 @@
-# AGENTS.md — Istruzioni per gli agenti AI
+# AGENTS.md - Instructions for AI agents
 
-Questo file definisce le regole che ogni agente AI deve seguire lavorando sul progetto **Backshade**.
+This file defines the rules every AI agent must follow when working on the **Backshade** project.
 
-## 1. Regole su questo file
+## 1. Rules about this file
 
-- L'agente AI **non deve modificare questo file** senza autorizzazione o esplicito consenso dell'umano.
-- Se l'agente ritiene utile una modifica, la propone all'umano e attende la conferma prima di applicarla.
+- The AI agent **must not modify this file** without the human's authorization or explicit consent.
+- If the agent thinks a change would help, it proposes it to the human and waits for confirmation before applying it.
 
-## 2. File di riferimento
+## 2. Reference files
 
-| File | Contenuto | Chi lo aggiorna |
+| File | Content | Updated by |
 | --- | --- | --- |
-| `AGENTS.md` | Regole per gli agenti AI | Solo con consenso dell'umano |
-| `ROADMAP.md` | Roadmap del progetto: fasi, sottofasi e stato di avanzamento | L'agente, a ogni fase o sottofase completata |
-| `MEMORY.md` | Scelte tecniche, convenzioni e decisioni prese | L'agente, ogni volta che viene presa una decisione |
-| `CHANGELOG.md` | Storico delle versioni rilasciate | L'agente, a ogni nuova versione approvata |
+| `AGENTS.md` | Rules for AI agents | Only with the human's consent |
+| `ROADMAP.md` | Project roadmap: phases, sub-phases and progress | The agent, at the end of each phase or sub-phase |
+| `MEMORY.md` | Technical choices, conventions and decisions | The agent, whenever a decision is made |
+| `CHANGELOG.md` | History of released versions | The agent, on each approved version |
 
-- La roadmap è descritta e segnata **esclusivamente** in `ROADMAP.md`: le voci completate si spuntano (`- [x]`).
-- Ogni scelta o convenzione (librerie, struttura, formati, nomi) va registrata in `MEMORY.md` prima o subito dopo essere stata applicata.
-- Prima di iniziare un lavoro, l'agente legge `ROADMAP.md` e `MEMORY.md`.
+- The roadmap is described and tracked **only** in `ROADMAP.md`: completed items are checked (`- [x]`).
+- Every choice or convention (libraries, structure, formats, names) is recorded in `MEMORY.md` before or right after it is applied.
+- Before starting any work, the agent reads `ROADMAP.md` and `MEMORY.md`.
 
-## 3. Lingua
+## 3. Language
 
-- I file `.md` e le conversazioni con gli umani sono **in italiano**.
-- Il codice sorgente e le nomenclature (variabili, funzioni, classi, file, cartelle, chiavi JSON, messaggi di commit tecnici) sono **in inglese**.
-- **Eccezione:** i commenti nel codice sono scritti **in italiano**.
-- I testi dell'interfaccia utente seguono il sistema di localizzazione definito in `MEMORY.md`.
+- Conversations with humans are **in Italian**.
+- `.md` files are **in English**.
+- Source code and naming (variables, functions, classes, files, folders, JSON keys, technical commit messages) are **in English**.
+- **Exception:** code comments are written **in Italian**.
+- User interface text follows the localization system defined in `MEMORY.md`.
 
-## 4. Stile del codice
+## 3.1 Allowed characters
 
-- Lo stile di ogni linguaggio rispetta lo standard di riferimento di quel linguaggio (indentazione, spaziature, righe vuote, nuove linee, punteggiatura, posizione delle parentesi, punto e virgola).
-- I commenti seguono le convenzioni del linguaggio (es. JSDoc per JavaScript) e sono scritti in italiano.
-- Ogni file termina con una nuova linea; niente spazi a fine riga.
-- Le regole di formattazione condivise sono definite in `.editorconfig`.
-- Le convenzioni specifiche (es. stile JavaScript ES5) sono dettagliate in `MEMORY.md`.
+- Source code, `.md` files and the application interface must contain **only readable, interpretable alphanumeric characters**: letters, digits, standard ASCII punctuation and whitespace.
+- Accented letters (e.g. `à`, `è`, `é`, `ì`, `ò`, `ù`) are allowed.
+- **Forbidden:** special characters, glyphs, symbols and emoji, such as long dashes, typographic quotes, arrows, the degree sign, the multiplication sign, bullets, box-drawing characters, check marks.
+- Use ASCII equivalents instead: `-` for dashes, `"` and `'` for quotes, `->` for arrows, `deg` for degrees, `x` for dimensions.
+- Icons in the interface come only from the icon library defined in `MEMORY.md`, never from characters.
 
-## 5. Dubbi e domande
+## 4. Code style
 
-- Quando l'agente ha dubbi deve **chiedere all'umano tramite sondaggi interattivi** (domande a scelta multipla), in italiano.
-- L'agente non procede su scelte ambigue, irreversibili o con impatto architetturale senza aver chiesto.
+- Each language follows its reference standard style (indentation, spacing, blank lines, new lines, punctuation, brace placement, semicolons).
+- Comments follow the language conventions (e.g. JSDoc for JavaScript) and are written in Italian.
+- Every file ends with a new line; no trailing whitespace.
+- Shared formatting rules are defined in `.editorconfig`.
+- Specific conventions (e.g. ES5 JavaScript style) are detailed in `MEMORY.md`.
 
-## 6. Git e versionamento
+## 5. Doubts and questions
 
-- Si lavora **solo sul branch `main`**. Non creare altri branch.
-- L'agente non esegue commit né push senza il consenso dell'umano.
-- Il versionamento segue [Semantic Versioning](https://semver.org/lang/it/).
-- La versione **1.0.0** corrisponde alla **prima versione avviabile** del software.
-- **Prima della 1.0.0** (fase iniziale non funzionante): a fine di ogni fase o sottofase l'agente chiede solo se fare commit e push.
-- **Dalla 1.0.0 in poi**: a fine di ogni fase o sottofase l'agente:
-  1. presenta la lista del changelog;
-  2. propone il nuovo numero di versione (patch, minor o major motivando la scelta);
-  3. chiede se procedere con commit e push.
-- Dopo l'approvazione l'agente aggiorna `CHANGELOG.md`, la versione in `package.json` e `ROADMAP.md`.
+- When the agent has doubts it must **ask the human through interactive polls** (multiple-choice questions), in Italian.
+- The agent does not proceed on ambiguous, irreversible or architecture-impacting choices without asking.
 
-## 7. Dipendenze
+## 6. Git and versioning
 
-- Usare **meno dipendenze possibili**. Preferire le API native di Node.js, Electron e del browser.
-- Ogni nuova dipendenza va proposta all'umano con un sondaggio, motivata e registrata in `MEMORY.md`.
-- Le librerie lato interfaccia vengono incluse in locale (vendor), mai da CDN: il software deve funzionare offline.
+- Work **only on the `main` branch**. Do not create other branches.
+- The agent does not commit or push without the human's consent.
+- Versioning follows [Semantic Versioning](https://semver.org/).
+- Version **1.0.0** is the **first runnable version** of the software.
+- **Before 1.0.0** (initial non-working stage): at the end of each phase or sub-phase the agent only asks whether to commit and push.
+- **From 1.0.0 onwards**: at the end of each phase or sub-phase the agent:
+  1. presents the changelog list;
+  2. proposes the new version number (patch, minor or major, explaining the choice);
+  3. asks whether to commit and push.
+- After approval the agent updates `CHANGELOG.md`, the version in `package.json` and `ROADMAP.md`.
 
-## 8. Progetto
+## 7. Dependencies
 
-**Backshade** è una console di programmazione per show live, multipiattaforma (Windows, Linux, macOS), basata su Electron con interfaccia web.
+- Use **as few dependencies as possible**. Prefer native Node.js, Electron and browser APIs.
+- Every new dependency is proposed to the human with a poll, justified and recorded in `MEMORY.md`.
+- UI libraries are bundled locally (vendor), never loaded from a CDN: the software must work offline.
 
-- **Tecnologie:** HTML, JavaScript vanilla **ES5**, jQuery, Tailwind CSS.
-- **Licenza:** GPL-3.0.
-- **Principio guida:** il software deve essere semplice.
+## 8. Project
 
-Funzionalità da gestire:
+**Backshade** is a programming console for live shows, cross-platform (Windows, Linux, macOS), built on Electron with a web interface.
 
-- Fixture DMX e Art-Net multiuniverso.
-- Matrici LED.
-- Periferiche video e audio esterne.
-- Console virtuale su griglia personalizzabile per ogni show.
-- Console semplice, ibrida tra live e programmazione, con salvataggio di scene e chaser.
-- Show preprogrammabili tramite interfaccia a tracce (come l'editor di una DAW).
-- Regia video e riproduzione audio con eventuali foto sovrapponibili.
-- Integrazione tra luci, audio e video.
-- Integrazione con eventuali mixer audio esterni.
-- Salvataggio e clonazione degli show come progetti in cartelle dedicate, trasportabili da un dispositivo a un altro.
-- Interfaccia web utilizzabile da desktop o mobile, raggiungibile tramite webserver sulla rete interna.
+- **Technologies:** HTML, vanilla JavaScript **ES5**, jQuery, Tailwind CSS.
+- **Repository layout:** the Electron application lives in `/app`; the static bilingual website (English and Italian) lives in `/landing` and is built with Astro, vanilla JavaScript and Tailwind CSS.
+- **License:** GPL-3.0.
+- **Guiding principle:** the software must be simple.
 
-## 9. Linee guida grafiche
+Features to support:
 
-- **Modello grafico:** scheumorfismo hardware (l'interfaccia richiama superfici, fader, pulsanti e display di una console fisica).
-- **Spaziature:** solo multipli di 8, sempre gli stessi valori della scala definita in `MEMORY.md`.
-- **Colori:** solo palette neutra; ridurre al minimo i gradienti; **nessun glow**.
-- **Icone:** mai emoji o emoticon. Solo icone a linea, tutte della stessa libreria (vedi `MEMORY.md`).
-- **Tipografia:** al massimo due pesi per font; **non usare testo UPPERCASE**.
-- **Decorazioni:** ridurre al minimo decorazioni e badge su testi e numeri.
-- **Grafici:** linee sottili e colori tenui; assi e dati hanno la priorità visiva.
+- Multi-universe DMX and Art-Net fixtures.
+- LED matrices.
+- External video and audio devices.
+- Virtual console on a customizable grid for each show.
+- Simple console, a hybrid of live operation and programming, with saved scenes and chasers.
+- Pre-programmable shows through a track-based interface (like a DAW editor).
+- Video direction and audio playback with optional overlay images.
+- Integration between lights, audio and video.
+- Integration with external audio mixers.
+- Saving and cloning shows as projects in dedicated folders, portable from one device to another.
+- Web interface usable from desktop or mobile, reachable through a web server on the local network.
+
+## 9. Design guidelines
+
+- **Visual model:** hardware skeuomorphism (the interface recalls the surfaces, faders, buttons and displays of a physical console). See `MEMORY.md` for the reference adopted.
+- **Spacing:** multiples of 8 only, always the same values from the scale defined in `MEMORY.md`.
+- **Colors:** neutral palette only; keep gradients to a minimum; **no glow**.
+- **Icons:** never emoji or emoticons. Line icons only, all from the same library (see `MEMORY.md`).
+- **Typography:** at most two weights per font; **do not use UPPERCASE text**.
+- **Decorations:** keep decorations and badges on text and numbers to a minimum.
+- **Charts:** thin lines and soft colors; axes and data take visual priority.

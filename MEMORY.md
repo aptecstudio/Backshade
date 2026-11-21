@@ -1,157 +1,204 @@
-# MEMORY.md — Scelte e convenzioni
+# MEMORY.md - Choices and conventions
 
-Registro delle decisioni tecniche e delle convenzioni di Backshade. Ogni voce indica lo stato:
+Log of Backshade's technical decisions and conventions. Each entry shows its status:
 
-- **Confermata**: decisa dall'umano o derivata direttamente dalle specifiche.
-- **Proposta**: scelta dall'agente in attesa di conferma; può cambiare.
+- **Confirmed**: decided by the human or derived directly from the specifications.
+- **Proposed**: chosen by the agent, awaiting confirmation; may change.
 
-## Generale
+## General
 
-| Tema | Decisione | Stato |
+| Topic | Decision | Status |
 | --- | --- | --- |
-| Nome | Backshade | Confermata |
-| Licenza | GPL-3.0 (`LICENSE`) | Confermata |
-| Branch | Solo `main` | Confermata |
-| Piattaforme | Windows, Linux, macOS | Confermata |
-| Runtime | Electron | Confermata |
-| Interfaccia | HTML, JavaScript vanilla ES5, jQuery, Tailwind CSS | Confermata |
-| Versionamento | SemVer, 1.0.0 alla prima versione avviabile | Confermata |
+| Name | Backshade | Confirmed |
+| License | GPL-3.0 (`LICENSE`) | Confirmed |
+| Branch | `main` only | Confirmed |
+| Platforms | Windows, Linux, macOS | Confirmed |
+| Runtime | Electron | Confirmed |
+| Interface | HTML, vanilla JavaScript ES5, jQuery, Tailwind CSS | Confirmed |
+| Versioning | SemVer, 1.0.0 at the first runnable version | Confirmed |
 
-## Architettura (proposta)
+## Language
 
-- **Motore nel processo main (Node.js):** gestione show, output DMX/Art-Net, clock della timeline, webserver. Il motore è l'unica fonte di verità dello stato.
-- **Interfaccia come client web:** la stessa interfaccia gira nella finestra Electron e nel browser di un dispositivo in rete. Comunica con il motore tramite un livello di trasporto unico:
-  - in Electron: IPC tramite `preload` con `contextIsolation` attivo;
-  - da remoto: WebSocket servito dal webserver interno.
-- **Uscite video:** finestre Electron dedicate a schermo intero sui display esterni.
-- **Audio:** Web Audio API ed elementi `<audio>`/`<video>` con selezione della periferica di uscita (`setSinkId`).
+| Context | Language | Status |
+| --- | --- | --- |
+| Conversations with humans and polls | Italian | Confirmed |
+| `.md` files | English (changed from Italian on 2026-11-21) | Confirmed |
+| Source code and naming | English | Confirmed |
+| Code comments | Italian | Confirmed |
+| Commit messages | English | Confirmed |
 
-Stato: Proposta.
+### Allowed characters
 
-## Struttura delle cartelle (proposta)
+- Code, `.md` files and interface: only letters, digits, standard ASCII punctuation and whitespace; accented letters allowed.
+- No special characters, glyphs, symbols or emoji (long dashes, typographic quotes, arrows, degree sign, multiplication sign, bullets, check marks).
+- ASCII replacements: `-` for dashes, `->` for arrows, `deg` for degrees, `x` for dimensions.
+
+Status: Confirmed (2026-11-21).
+
+## Architecture (proposed)
+
+- **Engine in the main process (Node.js):** show management, DMX/Art-Net output, timeline clock, web server. The engine is the single source of truth for state.
+- **Interface as a web client:** the same interface runs in the Electron window and in the browser of a networked device. It talks to the engine through a single transport layer:
+  - in Electron: IPC through `preload` with `contextIsolation` enabled;
+  - remotely: WebSocket served by the built-in web server.
+- **Video outputs:** dedicated fullscreen Electron windows on external displays.
+- **Audio:** Web Audio API and `<audio>`/`<video>` elements with output device selection (`setSinkId`).
+
+Status: Proposed.
+
+## Repository structure
+
+The repository contains two separate projects, each with its own `package.json`:
+
+| Folder | Content | Technologies | Status |
+| --- | --- | --- | --- |
+| `/app` | Electron application | HTML, vanilla JavaScript ES5, jQuery, Tailwind CSS | Confirmed |
+| `/landing` | Static bilingual website (English and Italian) | Astro, vanilla JavaScript, Tailwind CSS | Confirmed |
+
+Shared files (`AGENTS.md`, `ROADMAP.md`, `MEMORY.md`, `README.md`, `LICENSE`, `.editorconfig`, `.gitignore`) stay in the repository root.
+
+### `/app` structure (proposed)
 
 ```
-backshade/
+app/
   src/
-    main/        # processo main Electron, motore, webserver
-    preload/     # ponte IPC sicuro tra main e interfaccia
-    renderer/    # interfaccia web (html, js, css)
-    shared/      # costanti e modelli condivisi
+    main/        # Electron main process, engine, web server
+    preload/     # secure IPC bridge between main and interface
+    renderer/    # web interface (html, js, css)
+    shared/      # shared constants and models
   assets/
-    icons/       # icone a linea (sprite SVG)
-    fixtures/    # libreria delle fixture
-  build/         # risorse per il packaging
+    icons/       # line icons (SVG sprite)
+    fixtures/    # fixture library
+  build/         # packaging resources
 ```
 
-Stato: Proposta.
+Status: Proposed.
 
-## Stile del codice
+### `/landing` structure (proposed)
+
+```
+landing/
+  src/
+    pages/       # pages, with en/ and it/ locales
+    layouts/     # page layouts
+    components/  # Astro components
+    i18n/        # translation strings
+  public/        # static assets (icons, images, favicon)
+```
+
+- Static output only (`output: 'static'`), no server-side rendering.
+- Astro is the only framework dependency of the site; it does not affect the application.
+
+Status: Proposed.
+
+## Code style
 
 ### JavaScript
 
-- ES5 sia nell'interfaccia sia nel processo main, per coerenza: `var`, `function`, nessuna arrow function, nessun template literal, nessuna classe ES6, nessun `let`/`const`.
-- Moduli: CommonJS (`require` / `module.exports`) nel processo main; nell'interfaccia pattern a modulo (IIFE) con un unico namespace globale `Backshade`.
-- `'use strict';` all'inizio di ogni file o IIFE.
-- Indentazione 4 spazi, apici singoli, punto e virgola obbligatorio, parentesi graffa sulla stessa riga.
-- Nomi: `camelCase` per variabili e funzioni, `PascalCase` per costruttori, `UPPER_SNAKE_CASE` per costanti.
-- Commenti in italiano, documentazione con JSDoc.
+- ES5 in both the interface and the main process, for consistency: `var`, `function`, no arrow functions, no template literals, no ES6 classes, no `let`/`const`.
+- Modules: CommonJS (`require` / `module.exports`) in the main process; in the interface, the module pattern (IIFE) with a single global namespace `Backshade`.
+- `'use strict';` at the top of every file or IIFE.
+- 4-space indentation, single quotes, mandatory semicolons, opening brace on the same line.
+- Naming: `camelCase` for variables and functions, `PascalCase` for constructors, `UPPER_SNAKE_CASE` for constants.
+- Comments in Italian, documentation with JSDoc.
 
-Stato: Proposta.
+Status: Proposed.
 
-### HTML e CSS
+### HTML and CSS
 
-- Indentazione 4 spazi, attributi con doppi apici.
-- Classi Tailwind come stile principale; CSS personalizzato solo per componenti scheumorfici non esprimibili con le utility.
-- Nomi di file e cartelle in `kebab-case`.
+- 4-space indentation, double-quoted attributes.
+- Tailwind classes as the main styling; custom CSS only for skeuomorphic components that utilities cannot express.
+- File and folder names in `kebab-case`.
 
-Stato: Proposta.
+Status: Proposed.
 
-## Dipendenze (proposta)
+## Dependencies (proposed)
 
-Principio: meno dipendenze possibili.
+Principle: as few dependencies as possible.
 
-| Dipendenza | Tipo | Motivo |
+| Dependency | Type | Reason |
 | --- | --- | --- |
-| `electron` | sviluppo | Runtime dell'applicazione |
-| `tailwindcss` (CLI) | sviluppo | Compilazione del CSS; il CSS compilato è incluso nel progetto |
-| `electron-builder` | sviluppo | Packaging per le tre piattaforme |
-| jQuery 3.x | vendor | Manipolazione DOM nell'interfaccia |
-| Lucide | vendor | Libreria di icone a linea (licenza ISC), inclusa come sprite SVG (confermata) |
+| `electron` | development | Application runtime |
+| `tailwindcss` (CLI) | development | CSS compilation; the compiled CSS is committed |
+| `astro` | development, `/landing` only | Static site generator for the landing site |
+| `electron-builder` | development | Packaging for the three platforms |
+| jQuery 3.x | vendor | DOM manipulation in the interface |
+| Lucide | vendor | Line icon library (ISC license), bundled as an SVG sprite (confirmed) |
 
-Funzionalità realizzate con API native, senza dipendenze aggiuntive:
+Features built with native APIs, without extra dependencies:
 
-- Art-Net: UDP con il modulo `dgram` di Node.js.
-- Webserver: modulo `http` di Node.js.
-- OSC per mixer esterni: UDP con `dgram`.
-- MIDI per mixer e controller: Web MIDI API di Chromium.
+- Art-Net: UDP through Node.js `dgram`.
+- Web server: Node.js `http` module.
+- OSC for external mixers: UDP through `dgram`.
+- MIDI for mixers and controllers: Chromium Web MIDI API.
 
-Da valutare nelle fasi relative (da proporre con sondaggio):
+To be evaluated in the related phases (to be proposed with a poll):
 
-- WebSocket lato server: `ws` oppure implementazione minimale interna.
-- Interfacce DMX USB (es. Enttec): `serialport` (modulo nativo).
+- Server-side WebSocket: `ws` or a minimal internal implementation.
+- USB DMX interfaces (e.g. Enttec): `serialport` (native module).
 
-Stato: Proposta.
+Status: Proposed.
 
-## Formato degli show (proposta)
+## Show format (proposed)
 
-- Ogni show è una cartella `nome-show.backshade/` contenente:
-  - `show.json`: dati dello show (patch, scene, chaser, griglia, timeline);
-  - `media/`: file audio, video e immagini usati dallo show;
-  - `thumbnails/`: anteprime generate.
-- Tutti i percorsi interni sono **relativi** alla cartella dello show, così la cartella è trasportabile tra dispositivi.
-- I media importati vengono copiati dentro `media/`.
-- Clonare uno show significa copiare la cartella e assegnare un nuovo identificativo.
-- `show.json` contiene un campo `formatVersion` per gestire le migrazioni future.
+- Each show is a folder `show-name.backshade/` containing:
+  - `show.json`: show data (patch, scenes, chasers, grid, timeline);
+  - `media/`: audio, video and image files used by the show;
+  - `thumbnails/`: generated previews.
+- All internal paths are **relative** to the show folder, so the folder is portable between devices.
+- Imported media are copied into `media/`.
+- Cloning a show means copying the folder and assigning a new identifier.
+- `show.json` contains a `formatVersion` field to handle future migrations.
 
-Stato: Proposta.
+Status: Proposed.
 
 ## Design system
 
-### Spaziature
+### Spacing
 
-Scala unica, solo multipli di 8: `8, 16, 24, 32, 48, 64` px. Non si usano altri valori.
+Single scale, multiples of 8 only: `8, 16, 24, 32, 48, 64` px. No other values are used.
 
-Stato: Confermata (scala proposta).
+Status: Confirmed (proposed scale).
 
-### Colori
+### Colors
 
-Palette neutra (grigi caldi tipo metallo e plastica scura), un solo colore di accento tenue per lo stato attivo e colori di stato desaturati (verde, ambra, rosso) solo per indicatori funzionali. Nessun glow, gradienti ridotti al minimo.
+Neutral palette (warm greys like metal and dark plastic, cream panels), a single soft accent color for the active state and desaturated status colors (green, amber, red) only for functional indicators. No glow, gradients kept to a minimum.
 
-Stato: Proposta.
+Status: Proposed.
 
-### Tipografia
+### Typography
 
-- Font di sistema (`system-ui`) per i testi, monospaziato di sistema per valori numerici.
-- Due soli pesi: 400 e 500.
-- Nessun testo in maiuscolo (`text-transform: uppercase` vietato).
+- System font (`system-ui`) for text, system monospace for numeric values.
+- Two weights only: 400 and 500.
+- No uppercase text (`text-transform: uppercase` is forbidden).
 
-Stato: Proposta.
+Status: Proposed.
 
-### Icone
+### Icons
 
-- Libreria unica: **Lucide**, solo icone a linea, spessore tratto uniforme.
-- Mai emoji o emoticon.
+- Single library: **Lucide**, line icons only, uniform stroke width.
+- Never emoji or emoticons.
 
-Stato: Confermata.
+Status: Confirmed.
 
-### Modello grafico
+### Visual model
 
-Scheumorfismo hardware: pannelli in rilievo con bordi sottili, fader e encoder disegnati come componenti fisici, display a segmenti sobri, ombre interne leggere al posto dei gradienti.
+Hardware skeuomorphism, as a hybrid with the reference provided by the human (a modular hardware panel): cream and anthracite panels with corner screws, recessed LCD and segment displays, knobs with dotted scales, physical keycaps with LED strips, faders with LED meters, analog VU meters, toggle switches. Adapted to the project rules: no uppercase labels, no glow, neutral palette with a single soft accent.
 
-Stato: Confermata.
+Status: Confirmed.
 
-## Localizzazione
+## Localization
 
-- Lingua iniziale dell'interfaccia: italiano.
-- Le stringhe dell'interfaccia sono separate dal codice in file dedicati (es. `src/renderer/i18n/it.json`) per permettere altre lingue in futuro.
+- Initial interface language: Italian.
+- Interface strings are kept separate from the code in dedicated files (e.g. `src/renderer/i18n/it.json`) to allow other languages in the future.
 
-Stato: Proposta.
+Status: Proposed.
 
-## Distribuzione
+## Distribution
 
-- Packaging con `electron-builder`, pubblicazione su GitHub Releases.
-- Windows: installer NSIS e versione portabile. macOS: `.dmg` e `.zip` universal, firmati e notarizzati. Linux: AppImage e `.deb`.
-- **Non usare GitHub Actions**: le build si eseguono in locale con script npm.
-- Dettagli nella Fase 11 di `ROADMAP.md`.
+- Packaging with `electron-builder`, publishing on GitHub Releases.
+- Windows: NSIS installer and portable version. macOS: universal `.dmg` and `.zip`, signed and notarized. Linux: AppImage and `.deb`.
+- **Do not use GitHub Actions**: builds run locally through npm scripts.
+- Details in Phase 11 of `ROADMAP.md`.
 
-Stato: Confermata.
+Status: Confirmed.
