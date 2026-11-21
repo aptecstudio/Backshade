@@ -46,6 +46,17 @@ Status: Confirmed (2026-11-21).
 
 Status: Proposed.
 
+## Brand
+
+- Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.
+- Brand assets are taken from the `aptecstudio/woojam` repository and stored in `docs/brand/`.
+- `docs/brand/aptecstudio-wordmark.png`: Aptec Studio wordmark, light letters for dark backgrounds, 1080 x 200 px. It is a logo image, so its uppercase lettering is not covered by the no-uppercase text rule.
+- Credit line used in the interface and on the landing site: "Un prodotto Aptec Studio" (Italian) and "A product by Aptec Studio" (English), with the wordmark linking to the website.
+- Copyright notice: "Copyright (C) 2026 Aptec Studio".
+- A Backshade logo does not exist yet: the human will provide it. Until then the interface uses a temporary line mark.
+
+Status: Confirmed (2026-11-21).
+
 ## Repository structure
 
 The repository contains two separate projects, each with its own `package.json`:

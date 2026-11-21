@@ -2,6 +2,8 @@
 
 Programming console for live shows: lights, audio and video in one simple application.
 
+A product by [Aptec Studio](https://www.aptecstudio.com).
+
 Backshade is a cross-platform desktop application (Windows, Linux, macOS) built on Electron, with a web interface that can also be used from other devices on the local network.
 
 ## Planned features
@@ -26,7 +28,11 @@ The project is being initialized. See [ROADMAP.md](ROADMAP.md).
 - [AGENTS.md](AGENTS.md): rules for AI agents
 - [ROADMAP.md](ROADMAP.md): phases and progress
 - [MEMORY.md](MEMORY.md): choices and conventions
+- [docs/design](docs/design/README.md): design reference
+- [docs/brand](docs/brand/README.md): brand assets
 
 ## License
+
+Copyright (C) 2026 Aptec Studio.
 
 Released under the [GNU General Public License v3.0](LICENSE).

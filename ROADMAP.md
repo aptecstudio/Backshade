@@ -22,6 +22,7 @@ Versioning rules (see `AGENTS.md`):
   - [x] Icon library (Lucide)
   - [x] `.md` files in English
   - [x] Only alphanumeric characters, ASCII punctuation and accented letters (no glyphs or emoji)
+  - [x] Brand: Backshade is a product of Aptec Studio
 - [x] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference
 
 ## Phase 1 - Runnable base (target 1.0.0)
@@ -33,6 +34,7 @@ Versioning rules (see `AGENTS.md`):
 - [ ] 1.5 Application layout: top bar, section navigation, status bar
 - [ ] 1.6 Localization system (Italian)
 - [ ] 1.7 Single transport layer between interface and engine (IPC)
+- [ ] 1.8 About window: version, license and Aptec Studio credit with the wordmark
 
 ## Phase 2 - Shows and projects
 
@@ -144,6 +146,7 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
 - [ ] 12.1 Astro project in `/landing` with Tailwind CSS and vanilla JavaScript, static output only
 - [ ] 12.2 Bilingual structure (English and Italian) with Astro i18n routing and a language switch
 - [ ] 12.3 Layout and components consistent with the application design system (hardware skeuomorphism, spacing scale, palette, Lucide icons)
+  - [ ] 12.3.1 Footer with the Aptec Studio credit, wordmark and copyright, as in the WooJam landing
 - [ ] 12.4 Pages: home, features, download, documentation, license
 - [ ] 12.5 Download page linking the platform builds on GitHub Releases
 - [ ] 12.6 SEO basics: titles, descriptions, `hreflang`, sitemap, favicon
