@@ -22,7 +22,7 @@ Versioning rules (see `AGENTS.md`):
   - [x] Icon library (Lucide)
   - [x] `.md` files in English
   - [x] Only alphanumeric characters, ASCII punctuation and accented letters (no glyphs or emoji)
-- [ ] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference
+- [x] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference
 
 ## Phase 1 - Runnable base (target 1.0.0)
 
