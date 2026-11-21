@@ -185,6 +185,8 @@ Status: Confirmed.
 
 Hardware skeuomorphism, as a hybrid with the reference provided by the human (a modular hardware panel): cream and anthracite panels with corner screws, recessed LCD and segment displays, knobs with dotted scales, physical keycaps with LED strips, faders with LED meters, analog VU meters, toggle switches. Adapted to the project rules: no uppercase labels, no glow, neutral palette with a single soft accent.
 
+The approved screens, tokens and component descriptions are in `docs/design/README.md`.
+
 Status: Confirmed.
 
 ## Localization

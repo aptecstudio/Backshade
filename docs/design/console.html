@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<title>Backshade - console</title>
+
+<style>
+body{margin:0;background:#2a2926}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:#d6d3cc}a:hover{color:#ffffff}
+.scr{position:relative}
+.scr::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at 12px 12px,#8e897d 0 3px,transparent 4px),radial-gradient(circle at calc(100% - 12px) 12px,#8e897d 0 3px,transparent 4px),radial-gradient(circle at 12px calc(100% - 12px),#8e897d 0 3px,transparent 4px),radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),#8e897d 0 3px,transparent 4px)}
+</style></head>
+<body>
+
+
+<div style="box-sizing: border-box; min-height: 100vh; padding: 16px; display: flex; flex-direction: column; gap: 16px; background: #2a2926; color: #ebe8e0; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; font-weight: 400">
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+
+<section class="scr" style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #efebe1; color: #2a2927; border-radius: 8px; border: 1px solid #c9c3b4; box-shadow: inset 0 1px 0 #ffffff, 0 2px 0 #151514">
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2a2927" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M12 3v18M12 8h9M12 13h9M12 18h9"></path></svg>
+<span style="font-size: 16px; font-weight: 500">Backshade</span>
+<span style="font-size: 12px; color: #6b675e">show</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 8px 16px; background: #c6cbb0; color: #2b3024; border-radius: 4px; box-shadow: inset 0 2px 3px #8d927a; font-family: ui-monospace, 'SF Mono', Consolas, monospace">
+<span style="display: flex; justify-content: space-between"><span>Piazza estate 2026</span><span>46 fx</span></span>
+<span style="display: flex; justify-content: space-between"><span>salvato 16:24</span><span>4 univ</span></span>
+</div>
+</section>
+
+<nav class="scr" style="flex: 2 1 480px; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #33343a; border-radius: 8px; border: 1px solid #1b1c1e; box-shadow: inset 0 1px 0 #484a50, 0 2px 0 #151514">
+<span style="font-size: 12px; font-weight: 500">Sezioni <span style="font-weight: 400; color: #a8a59d">modalità</span></span>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+<button style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; background: #e6e1d5; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 1px 0 #a9a294; transform: translateY(2px)" aria-current="page"><span style="width: 16px; height: 4px; border-radius: 2px; background: #d0703c"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"></path></svg>Console</button>
+<button style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294"><span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg>Griglia</button>
+<button style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294"><span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h10M8 12h13M3 18h8M17 3v18"></path></svg>Timeline</button>
+<button style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294"><span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg>Patch</button>
+<button style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294"><span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M7 3v18M17 3v18M3 12h18"></path></svg>Media</button>
+</div>
+</nav>
+
+<section class="scr" style="flex: 1 1 320px; display: flex; gap: 16px; padding: 24px; background: #33343a; border-radius: 8px; border: 1px solid #1b1c1e; box-shadow: inset 0 1px 0 #484a50, 0 2px 0 #151514">
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 500">Timecode <span style="font-weight: 400; color: #a8a59d">show</span></span>
+<span style="padding: 8px 16px; background: #161615; border-radius: 4px; box-shadow: inset 0 2px 3px #000; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 24px; color: #e3a25a">00:12:48</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 500">Tempo <span style="font-weight: 400; color: #a8a59d">bpm</span></span>
+<span style="padding: 8px 16px; background: #161615; border-radius: 4px; box-shadow: inset 0 2px 3px #000; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 24px; color: #e3a25a">128</span>
+<button style="padding: 8px; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294">Tap</button>
+</div>
+</section>
+
+<section class="scr" style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #efebe1; color: #2a2927; border-radius: 8px; border: 1px solid #c9c3b4; box-shadow: inset 0 1px 0 #ffffff, 0 2px 0 #151514">
+<span style="font-size: 12px; font-weight: 500">Uscite <span style="font-weight: 400; color: #6b675e">rete</span></span>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #7fae7a; box-shadow: inset 0 1px 1px rgba(0,0,0,0.3)"></span>
+<span style="flex-grow: 1; display: flex; flex-direction: column"><span>Art-Net</span><span style="font-size: 12px; color: #6b675e; font-family: ui-monospace, 'SF Mono', Consolas, monospace">4 universi</span></span>
+<button style="position: relative; width: 24px; height: 40px; border-radius: 4px; background: #24252a; border: 1px solid #111111; box-shadow: inset 0 2px 3px #000" aria-label="Attiva Art-Net"><span style="position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 2px; background: #efebe1; box-shadow: 0 2px 0 #8f897c"></span></button>
+</div>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #7fae7a; box-shadow: inset 0 1px 1px rgba(0,0,0,0.3)"></span>
+<span style="flex-grow: 1; display: flex; flex-direction: column"><span>Remoto</span><span style="font-size: 12px; color: #6b675e; font-family: ui-monospace, 'SF Mono', Consolas, monospace">porta 8080</span></span>
+<button style="position: relative; width: 24px; height: 40px; border-radius: 4px; background: #24252a; border: 1px solid #111111; box-shadow: inset 0 2px 3px #000" aria-label="Attiva Remoto"><span style="position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 2px; background: #efebe1; box-shadow: 0 2px 0 #8f897c"></span></button>
+</div>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #c9c3b4; box-shadow: inset 0 1px 1px rgba(0,0,0,0.3)"></span>
+<span style="flex-grow: 1; display: flex; flex-direction: column"><span>Sync mixer</span><span style="font-size: 12px; color: #6b675e; font-family: ui-monospace, 'SF Mono', Consolas, monospace">osc spento</span></span>
+<button style="position: relative; width: 24px; height: 40px; border-radius: 4px; background: #24252a; border: 1px solid #111111; box-shadow: inset 0 2px 3px #000" aria-label="Attiva Sync mixer"><span style="position: absolute; left: 3px; bottom: 3px; width: 16px; height: 16px; border-radius: 2px; background: #efebe1; box-shadow: 0 2px 0 #8f897c"></span></button>
+</div>
+
+</section>
+
+<section class="scr" style="flex: 0 1 200px; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; background: #efebe1; color: #2a2927; border-radius: 8px; border: 1px solid #c9c3b4; box-shadow: inset 0 1px 0 #ffffff, 0 2px 0 #151514">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 500">Blackout <span style="font-weight: 400; color: #6b675e">totale</span></span>
+<button style="width: 80px; height: 80px; border-radius: 50%; background: #d0703c; border: 8px solid #d9d4c7; box-shadow: 0 0 0 1px #a9a294, 0 4px 0 #8f5530, inset 0 2px 0 #e8956a" aria-label="Blackout"></button>
+<span style="font-size: 12px; color: #6b675e">premi per oscurare</span>
+</section>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+
+<section class="scr" style="flex: 1 1 280px; max-width: 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #33343a; border-radius: 8px; border: 1px solid #1b1c1e; box-shadow: inset 0 1px 0 #484a50, 0 2px 0 #151514">
+<span style="font-size: 12px; font-weight: 500">Fixture <span style="font-weight: 400; color: #a8a59d">selezione</span></span>
+<div style="padding: 8px 16px; background: #c6cbb0; color: #2b3024; border-radius: 4px; box-shadow: inset 0 2px 3px #6e735d; font-family: ui-monospace, 'SF Mono', Consolas, monospace">3 di 46 selezionate</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<button style="padding: 8px 0; border-radius: 4px; background: #e6e1d5; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 1px 0 #a9a294; transform: translateY(2px)">Tutte</button>
+<button style="padding: 8px 0; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294">Wash</button>
+<button style="padding: 8px 0; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294">Spot</button>
+<button style="padding: 8px 0; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294">Led</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #3d3e44; box-shadow: 0 1px 0 #18191b, inset 0 1px 3px #18191b; transform: translateY(2px)">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #d0703c"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">101</span>
+<span style="flex-grow: 1; text-align: left">Wash sinistra 1</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">1.001</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #3d3e44; box-shadow: 0 1px 0 #18191b, inset 0 1px 3px #18191b; transform: translateY(2px)">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #d0703c"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">102</span>
+<span style="flex-grow: 1; text-align: left">Wash sinistra 2</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">1.017</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #3d3e44; box-shadow: 0 1px 0 #18191b, inset 0 1px 3px #18191b; transform: translateY(2px)">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #d0703c"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">103</span>
+<span style="flex-grow: 1; text-align: left">Wash destra 1</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">1.033</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #4a4b51; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #24252a"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">104</span>
+<span style="flex-grow: 1; text-align: left">Wash destra 2</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">1.049</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #4a4b51; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #24252a"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">201</span>
+<span style="flex-grow: 1; text-align: left">Spot palco 1</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">2.001</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #4a4b51; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #24252a"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">202</span>
+<span style="flex-grow: 1; text-align: left">Spot palco 2</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">2.021</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #4a4b51; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #24252a"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">301</span>
+<span style="flex-grow: 1; text-align: left">Matrice fondale</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">3.001</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #1b1c1e; color: #ebe8e0; background: #4a4b51; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #24252a"></span>
+<span style="width: 32px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">401</span>
+<span style="flex-grow: 1; text-align: left">Strobo centrale</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #a8a59d">4.001</span>
+</button>
+
+</div>
+</section>
+
+<section class="scr" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding: 24px; background: #efebe1; color: #2a2927; border-radius: 8px; border: 1px solid #c9c3b4; box-shadow: inset 0 1px 0 #ffffff, 0 2px 0 #151514">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+<span style="font-size: 12px; font-weight: 500">Programmer <span style="font-weight: 400; color: #6b675e">attributi live</span></span>
+<div style="display: flex; gap: 8px">
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>Pulisci</button>
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 4px; background: #a8542a; color: #ffffff; border: 1px solid #7d3d1d; box-shadow: 0 3px 0 #6e3519"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7M7 3v4a1 1 0 0 0 1 1h7"></path></svg>Salva scena</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="position: relative; width: 112px; height: 112px">
+
+<span style="position: absolute; left: 17.6px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 5.4px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 3.6px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 12.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 30.3px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 53.0px; top: 3.0px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 75.7px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 93.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 102.4px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 100.6px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 88.4px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<div style="position: absolute; left: 24px; top: 24px; width: 64px; height: 64px; box-sizing: border-box; border-radius: 50%; background: #d9d6cf; border: 4px dashed #2a2927; box-shadow: 0 3px 0 #8f897c; display: flex; justify-content: center; transform: rotate(95deg)">
+<div style="width: 2px; height: 16px; margin-top: 8px; background: #d0703c"></div>
+</div>
+</div>
+<span style="font-size: 12px; color: #6b675e">Intensità</span>
+<span style="padding: 0 8px; background: #161615; border-radius: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #e3a25a">85 %</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="position: relative; width: 112px; height: 112px">
+
+<span style="position: absolute; left: 17.6px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 5.4px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 3.6px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 12.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 30.3px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 53.0px; top: 3.0px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 75.7px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 93.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 102.4px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 100.6px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 88.4px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<div style="position: absolute; left: 24px; top: 24px; width: 64px; height: 64px; box-sizing: border-box; border-radius: 50%; background: #d9d6cf; border: 4px dashed #2a2927; box-shadow: 0 3px 0 #8f897c; display: flex; justify-content: center; transform: rotate(27deg)">
+<div style="width: 2px; height: 16px; margin-top: 8px; background: #d0703c"></div>
+</div>
+</div>
+<span style="font-size: 12px; color: #6b675e">Pan</span>
+<span style="padding: 0 8px; background: #161615; border-radius: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #e3a25a">212 deg</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="position: relative; width: 112px; height: 112px">
+
+<span style="position: absolute; left: 17.6px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 5.4px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 3.6px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 12.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 30.3px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 53.0px; top: 3.0px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 75.7px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 93.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 102.4px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 100.6px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 88.4px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<div style="position: absolute; left: 24px; top: 24px; width: 64px; height: 64px; box-sizing: border-box; border-radius: 50%; background: #d9d6cf; border: 4px dashed #2a2927; box-shadow: 0 3px 0 #8f897c; display: flex; justify-content: center; transform: rotate(-67deg)">
+<div style="width: 2px; height: 16px; margin-top: 8px; background: #d0703c"></div>
+</div>
+</div>
+<span style="font-size: 12px; color: #6b675e">Tilt</span>
+<span style="padding: 0 8px; background: #161615; border-radius: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #e3a25a">48 deg</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="position: relative; width: 112px; height: 112px">
+
+<span style="position: absolute; left: 17.6px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 5.4px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 3.6px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 12.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 30.3px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #d0703c"></span>
+
+<span style="position: absolute; left: 53.0px; top: 3.0px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 75.7px; top: 8.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 93.5px; top: 23.6px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 102.4px; top: 45.2px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 100.6px; top: 68.5px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<span style="position: absolute; left: 88.4px; top: 88.4px; width: 6px; height: 6px; border-radius: 50%; background: #c9c3b4"></span>
+
+<div style="position: absolute; left: 24px; top: 24px; width: 64px; height: 64px; box-sizing: border-box; border-radius: 50%; background: #d9d6cf; border: 4px dashed #2a2927; box-shadow: 0 3px 0 #8f897c; display: flex; justify-content: center; transform: rotate(-27deg)">
+<div style="width: 2px; height: 16px; margin-top: 8px; background: #d0703c"></div>
+</div>
+</div>
+<span style="font-size: 12px; color: #6b675e">Zoom</span>
+<span style="padding: 0 8px; background: #161615; border-radius: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #e3a25a">30 deg</span>
+</div>
+
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; color: #6b675e">Colore</span>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Bianco caldo"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #e9dcc4"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #e6e1d5; box-shadow: 0 1px 0 #a9a294; transform: translateY(2px)" aria-label="Ambra"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #c99a4a"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Rosso"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #a45a52"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Magenta"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #9a6488"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Blu"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #5d6f9a"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Ciano"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #5e9196"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Verde"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #6f8f62"></span></button>
+
+<button style="display: flex; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294" aria-label="Bianco freddo"><span style="flex-grow: 1; height: 16px; border-radius: 2px; background: #d8dde2"></span></button>
+
+</div>
+</div>
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; color: #6b675e">Posizione</span>
+<div style="position: relative; width: 136px; height: 136px; background: #1c2420; border-radius: 4px; border: 4px solid #2a2927; box-shadow: inset 0 2px 4px #000; background-image: linear-gradient(#2f3a34 1px, transparent 1px), linear-gradient(90deg, #2f3a34 1px, transparent 1px); background-size: 34px 34px">
+<div style="position: absolute; left: 80px; top: 40px; width: 16px; height: 16px; margin: -8px 0 0 -8px; box-sizing: border-box; border-radius: 50%; border: 2px solid #b9d2b4"></div>
+</div>
+</div>
+<div style="flex: 2 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; color: #6b675e">Uscita universo 1, canali 1-48</span>
+<div style="display: flex; gap: 8px; height: 136px; padding: 8px; background: #1c2420; border-radius: 4px; border: 4px solid #2a2927; box-shadow: inset 0 2px 4px #000">
+<div style="display: flex; flex-direction: column; justify-content: space-between; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 12px; color: #9fb59a; text-align: right"><span>255</span><span>128</span><span>0</span></div>
+<div style="flex-grow: 1; display: grid; grid-template-columns: repeat(48, minmax(0, 1fr)); align-items: end; border-left: 1px solid #6d8068; border-bottom: 1px solid #6d8068; background-image: linear-gradient(#2f3a34 1px, transparent 1px); background-size: 100% 50%">
+
+<div style="height: 85%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 85%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 71%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 16%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 100%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 85%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 85%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 71%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 16%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 100%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 85%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 85%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 71%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 16%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 100%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 78%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 78%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 59%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 12%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 100%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 50%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 25%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 100%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 35%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 50%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 25%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 100%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 35%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 24%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 24%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 24%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 24%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 47%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 47%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 47%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 47%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 12%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 12%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+<div style="height: 1%; display: flex; justify-content: center"><div style="width: 2px; background: #b9d2b4"></div></div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="scr" style="flex: 1 1 280px; max-width: 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #33343a; border-radius: 8px; border: 1px solid #1b1c1e; box-shadow: inset 0 1px 0 #484a50, 0 2px 0 #151514">
+<span style="font-size: 12px; font-weight: 500">Scene e chaser <span style="font-weight: 400; color: #a8a59d">12 salvate</span></span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #d0703c"></span>
+<span style="flex-grow: 1; text-align: left">Apertura</span>
+<span style="font-size: 12px; color: #6b675e">scena</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">3.0 s</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span>
+<span style="flex-grow: 1; text-align: left">Strofa caldo</span>
+<span style="font-size: 12px; color: #6b675e">scena</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">2.0 s</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span>
+<span style="flex-grow: 1; text-align: left">Ritornello</span>
+<span style="font-size: 12px; color: #6b675e">scena</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">1.5 s</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #d0703c"></span>
+<span style="flex-grow: 1; text-align: left">Chase 4 passi</span>
+<span style="font-size: 12px; color: #6b675e">chaser</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">128</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span>
+<span style="flex-grow: 1; text-align: left">Ballad blu</span>
+<span style="font-size: 12px; color: #6b675e">scena</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">4.0 s</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span>
+<span style="flex-grow: 1; text-align: left">Strobo finale</span>
+<span style="font-size: 12px; color: #6b675e">chaser</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">140</span>
+</button>
+
+<button style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; border: 1px solid #bdb7a8; color: #2a2927; background: #f7f4ed; box-shadow: 0 3px 0 #a9a294">
+<span style="width: 16px; height: 4px; border-radius: 2px; background: #c9c3b4"></span>
+<span style="flex-grow: 1; text-align: left">Chiusura</span>
+<span style="font-size: 12px; color: #6b675e">scena</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #6b675e">5.0 s</span>
+</button>
+
+</div>
+<button style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 4px; background: #a8542a; color: #ffffff; border: 1px solid #7d3d1d; box-shadow: 0 3px 0 #6e3519"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg>Go</button>
+</section>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+<section class="scr" style="flex: 999 1 720px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #33343a; border-radius: 8px; border: 1px solid #1b1c1e; box-shadow: inset 0 1px 0 #484a50, 0 2px 0 #151514">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-size: 12px; font-weight: 500">Playback <span style="font-weight: 400; color: #a8a59d">pagina 1 di 4</span></span>
+<span style="padding: 0 8px; background: #161615; border-radius: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #e3a25a">P1</span>
+</div>
+<div style="display: flex; gap: 8px; overflow-x: auto">
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Wash</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 20px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">85 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Wash"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Wash"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Spot</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 54px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">60 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Spot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Spot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Matrice</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 82px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">40 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Matrice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Matrice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Strobo</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 136px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">0 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Strobo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Strobo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Apertura</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 0px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #d0703c"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #d0703c"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">100 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Apertura"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Apertura"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Chase 4</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 41px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">70 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Chase 4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Chase 4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Video</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 14px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #d0703c"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">90 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Foto logo</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 95px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #24252a"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">30 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Foto logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Foto logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+<div style="flex: 1 0 96px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; background: #2a2b30; border-radius: 4px; box-shadow: inset 0 1px 3px #151516">
+<span style="font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px">Grand master</span>
+<div style="display: flex; gap: 8px">
+<div style="position: relative; width: 40px; height: 160px">
+<div style="position: absolute; left: 16px; top: 8px; width: 8px; height: 144px; background: #111213; border-radius: 4px; box-shadow: inset 0 1px 2px #000"></div>
+<div style="position: absolute; left: 0; top: 0px; width: 40px; height: 24px; border-radius: 4px; background: #f1ede4; box-shadow: 0 3px 0 #8f897c; display: flex; align-items: center; justify-content: center"><div style="width: 32px; height: 2px; background: #d0703c"></div></div>
+</div>
+<div style="display: flex; flex-direction: column-reverse; gap: 2px; padding-top: 8px">
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #8fb08a"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #d0703c"></span>
+
+<span style="width: 8px; height: 10px; border-radius: 1px; background: #d0703c"></span>
+
+</div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace">100 %</span>
+<div style="display: flex; gap: 8px">
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #f7f4ed; color: #2a2927; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Go Grand master"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="width: 40px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #4a4b51; border: 1px solid #1b1c1e; box-shadow: 0 3px 0 #18191b, inset 0 1px 0 #5e6066" aria-label="Flash Grand master"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="scr" style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 16px; padding: 24px; background: #efebe1; color: #2a2927; border-radius: 8px; border: 1px solid #c9c3b4; box-shadow: inset 0 1px 0 #ffffff, 0 2px 0 #151514">
+<span style="font-size: 12px; font-weight: 500">Audio master <span style="font-weight: 400; color: #6b675e">base musicale</span></span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+
+<div style="padding: 8px; background: #f3ead0; border-radius: 4px; border: 4px solid #2a2927; box-shadow: inset 0 2px 3px #b9ae8c">
+<svg viewBox="0 0 160 88" width="100%" role="img" aria-label="Livello L">
+<path d="M24 72 A 64 64 0 0 1 136 72" fill="none" stroke="#2a2927" stroke-width="1"></path>
+<path d="M114 38 A 64 64 0 0 1 136 72" fill="none" stroke="#b5523b" stroke-width="2"></path>
+<path d="M24.6 52.0L31.5 56.0M32.4 41.2L35.4 43.9M42.4 32.2L44.7 35.5M54.0 25.5L55.6 29.2M66.7 21.4L67.5 25.3M80.0 20.0L80.0 28.0M93.3 21.4L92.5 25.3M106.0 25.5L104.4 29.2M117.6 32.2L115.3 35.5M127.6 41.2L124.6 43.9M135.4 52.0L128.5 56.0" stroke="#2a2927" stroke-width="1"></path>
+<line x1="80" y1="84" x2="94.9" y2="25.9" stroke="#2a2927" stroke-width="1.5"></line>
+<circle cx="80" cy="84" r="4" fill="#2a2927"></circle>
+<text x="12" y="84" font-size="10" fill="#6b675e">L</text>
+</svg>
+</div>
+
+<div style="padding: 8px; background: #f3ead0; border-radius: 4px; border: 4px solid #2a2927; box-shadow: inset 0 2px 3px #b9ae8c">
+<svg viewBox="0 0 160 88" width="100%" role="img" aria-label="Livello R">
+<path d="M24 72 A 64 64 0 0 1 136 72" fill="none" stroke="#2a2927" stroke-width="1"></path>
+<path d="M114 38 A 64 64 0 0 1 136 72" fill="none" stroke="#b5523b" stroke-width="2"></path>
+<path d="M24.6 52.0L31.5 56.0M32.4 41.2L35.4 43.9M42.4 32.2L44.7 35.5M54.0 25.5L55.6 29.2M66.7 21.4L67.5 25.3M80.0 20.0L80.0 28.0M93.3 21.4L92.5 25.3M106.0 25.5L104.4 29.2M117.6 32.2L115.3 35.5M127.6 41.2L124.6 43.9M135.4 52.0L128.5 56.0" stroke="#2a2927" stroke-width="1"></path>
+<line x1="80" y1="84" x2="86.3" y2="24.3" stroke="#2a2927" stroke-width="1.5"></line>
+<circle cx="80" cy="84" r="4" fill="#2a2927"></circle>
+<text x="12" y="84" font-size="10" fill="#6b675e">R</text>
+</svg>
+</div>
+
+</div>
+<div style="display: flex; align-items: center; gap: 16px; padding: 8px 16px; background: #24252a; color: #ebe8e0; border-radius: 4px; box-shadow: inset 0 2px 3px #000">
+<span style="flex-grow: 1">intro-concerto.wav</span>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; color: #e3a25a">02:14 / 04:38</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<button style="display: flex; justify-content: center; padding: 8px; border-radius: 4px; background: #f7f4ed; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Indietro"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 19 2 12l9-7zM22 19l-9-7 9-7z"></path></svg></button>
+<button style="display: flex; justify-content: center; padding: 8px; border-radius: 4px; background: #e6e1d5; border: 1px solid #bdb7a8; box-shadow: 0 1px 0 #a9a294; transform: translateY(2px)" aria-label="Riproduci"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<button style="display: flex; justify-content: center; padding: 8px; border-radius: 4px; background: #f7f4ed; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Stop"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1"></rect></svg></button>
+<button style="display: flex; justify-content: center; padding: 8px; border-radius: 4px; background: #f7f4ed; border: 1px solid #bdb7a8; box-shadow: 0 3px 0 #a9a294" aria-label="Avanti"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m13 19 9-7-9-7zM2 19l9-7-9-7z"></path></svg></button>
+</div>
+</section>
+</div>
+
+<footer style="display: flex; flex-wrap: wrap; gap: 24px; padding: 0 8px; color: #a8a59d; font-size: 12px">
+<span>Uscita Art-Net 44 Hz</span>
+<span>2 client remoti collegati</span>
+<span style="flex-grow: 1"></span>
+<span>192.168.1.24:8080</span>
+</footer>
+</div>
+
+
+
+
+</body></html>
