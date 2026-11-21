@@ -1,0 +1,25 @@
+# Dipendenze
+node_modules/
+
+# Build e packaging
+dist/
+out/
+release/
+
+# Log
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Ambiente
+.env
+.env.*
