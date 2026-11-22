@@ -23,6 +23,8 @@ Versioning rules (see `AGENTS.md`):
   - [x] `.md` files in English
   - [x] Only alphanumeric characters, ASCII punctuation and accented letters (no glyphs or emoji)
   - [x] Brand: Backshade is a product of Aptec Studio
+  - [x] Official Backshade logo and derived icons in `docs/logo`
+  - [x] 3D stage with three.js (see Phase 13)
 - [x] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference (superseded)
 - [x] 0.8 New design direction defined (dark theme, flat panels, realistic controls)
 - [x] 0.9 Design draft redone and reference renderings published in `docs/design`
@@ -153,3 +155,24 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
 - [ ] 12.5 Download page linking the platform builds on GitHub Releases
 - [ ] 12.6 SEO basics: titles, descriptions, `hreflang`, sitemap, favicon
 - [ ] 12.7 Local build script and deploy procedure (hosting to be defined, no GitHub Actions)
+
+## Phase 13 - 3D stage
+
+3D modeling of the stage with three.js, and a live visualizer that emulates the fixtures from the DMX output. It depends on the fixture model and the output engine (Phase 3) and on the simple console (Phase 4). It is numbered after the existing phases to avoid renumbering them; its position in the development order can be decided later.
+
+- [ ] 13.1 three.js vendored locally and integrated in the ES5 interface (see `MEMORY.md`, Dependencies)
+- [ ] 13.2 Bundled `.obj` model library, ready to use:
+  - [ ] 13.2.1 Truss: straight sections of common lengths, corners, T and cross joints, base plates, towers
+  - [ ] 13.2.2 Stage: modular decks, risers, stairs
+  - [ ] 13.2.3 Most used fixtures: moving head spot, moving head wash, moving head beam, PAR, LED bar, blinder, strobe, follow spot
+  - [ ] 13.2.4 Moving fixtures split into separate parts (base, yoke, head) with defined pivot points, so pan and tilt can be animated
+- [ ] 13.3 Link between fixture definitions and 3D models: model, beam angle and zoom range, pan and tilt range, light output
+- [ ] 13.4 Stage editor: place, move, rotate and snap truss, decks and fixtures; hang fixtures on truss; camera views (front, top, side, free)
+- [ ] 13.5 Placed fixtures linked to the patch; stage layout saved in `show.json`
+- [ ] 13.6 Live emulation from the DMX output:
+  - [ ] 13.6.1 Brightness: intensity, dimmer curve, strobe
+  - [ ] 13.6.2 Colors: RGB/RGBW mixing, CMY, color wheel, color temperature
+  - [ ] 13.6.3 Movements: pan and tilt with realistic speed, zoom
+  - [ ] 13.6.4 Visible beams (volumetric cones) and light on the stage surfaces, with an optional haze level
+- [ ] 13.7 Performance: frame rate limit, quality levels, beam on/off switch
+- [ ] 13.8 Import of custom `.obj` models into the show folder

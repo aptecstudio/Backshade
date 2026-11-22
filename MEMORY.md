@@ -53,9 +53,11 @@ Status: Proposed.
 - `docs/brand/aptecstudio-wordmark.png`: Aptec Studio wordmark, light letters for dark backgrounds, 1080 x 200 px. It is a logo image, so its uppercase lettering is not covered by the no-uppercase text rule.
 - Credit line used in the interface and on the landing site: "Un prodotto Aptec Studio" (Italian) and "A product by Aptec Studio" (English), with the wordmark linking to the website.
 - Copyright notice: "Copyright (C) 2026 Aptec Studio".
-- A Backshade logo does not exist yet: the human will provide it. Until then the interface uses a temporary line mark.
+- Official Backshade logo: provided by the human on 2026-11-22 in `docs/logo/` (`icon-512.png` and `icon-maskable-512.png`, with their `.psd` sources). It replaces the temporary line mark and the "08a crossed beams" reference. Derived platform and web icons are in the same folder (see `docs/logo/README.md`).
+- Logo colors: background `#33343a`, mark `#ebe8e0`.
+- The `.psd` files are the masters: derived icons are regenerated from the PNG exports, never edited by hand.
 
-Status: Confirmed (2026-11-21).
+Status: Confirmed (2026-11-21, logo 2026-11-22).
 
 ## Repository structure
 
@@ -80,6 +82,7 @@ app/
   assets/
     icons/       # line icons (SVG sprite)
     fixtures/    # fixture library
+    models/      # 3D .obj models (truss, stage, fixtures)
   build/         # packaging resources
 ```
 
@@ -135,6 +138,7 @@ Principle: as few dependencies as possible.
 | `electron-builder` | development | Packaging for the three platforms |
 | jQuery 3.x | vendor | DOM manipulation in the interface |
 | Lucide | vendor | Line icon library (ISC license), bundled as an SVG sprite (confirmed) |
+| three.js | vendor | 3D stage modeling and fixture emulation (MIT license), including its `OBJLoader` (confirmed by the human on 2026-11-22, see Phase 13) |
 
 Features built with native APIs, without extra dependencies:
 
@@ -204,6 +208,23 @@ Hardware skeuomorphism, defined on 2026-11-22 (it replaces the earlier cream and
 The approved reference renderings, components and palette are in `docs/design/README.md`.
 
 Status: Confirmed (2026-11-22).
+
+## 3D stage
+
+Requested by the human on 2026-11-22:
+
+- the stage is modeled in 3D with **three.js**;
+- Backshade ships with ready-to-use `.obj` models of truss, the stage itself and the most used fixtures;
+- the 3D stage emulates the fixtures in brightness, colors and movements.
+
+Points to define in Phase 13 (to be proposed with a poll):
+
+- how three.js is loaded in the ES5 interface: recent releases are distributed as ES modules, so it needs a vendored build exposing a global, or a single isolated module file for the 3D view;
+- source and license of the bundled `.obj` models (made in-house or taken from a source compatible with GPL-3.0, such as CC0);
+- materials and textures (`.mtl` files) or materials defined in code;
+- model location: proposed `app/assets/models/` with `truss/`, `stage/` and `fixtures/` subfolders.
+
+Status: Confirmed (request), Proposed (open points).
 
 ## Localization
 

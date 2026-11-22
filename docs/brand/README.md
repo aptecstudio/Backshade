@@ -19,6 +19,14 @@ Backshade is a product of [Aptec Studio](https://www.aptecstudio.com). The Aptec
 
 ## Backshade logo
 
+The official logo is in [`docs/logo/`](../logo/README.md), together with the derived platform and web icons.
+
+![Backshade logo](../logo/png/icon-128.png)
+
+### Earlier reference (superseded)
+
+The section below documents the design reference that preceded the official logo. It is kept for history only.
+
 Reference for the chosen direction, "08a crossed beams": two stage beams crossing on the floor, one filled and one outlined, with the two fixtures in the accent color. The name is written "Backshade", with a capital initial.
 
 ![Backshade logo reference](logo-reference.png)
