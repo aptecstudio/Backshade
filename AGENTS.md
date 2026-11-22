@@ -42,7 +42,7 @@ This file defines the rules every AI agent must follow when working on the **Bac
 - Comments follow the language conventions (e.g. JSDoc for JavaScript) and are written in Italian.
 - Every file ends with a new line; no trailing whitespace.
 - Shared formatting rules are defined in `.editorconfig`.
-- Specific conventions (e.g. ES5 JavaScript style) are detailed in `MEMORY.md`.
+- Specific conventions (e.g. the JavaScript language level and module rules) are detailed in `MEMORY.md`.
 
 ## 5. Doubts and questions
 
@@ -72,7 +72,7 @@ This file defines the rules every AI agent must follow when working on the **Bac
 
 **Backshade** is a programming console for live shows, cross-platform (Windows, Linux, macOS), built on Electron with a web interface.
 
-- **Technologies:** HTML, vanilla JavaScript **ES5**, jQuery, Tailwind CSS.
+- **Technologies:** HTML, vanilla JavaScript up to **ES2017** (no newer language features), jQuery, Tailwind CSS.
 - **Repository layout:** the Electron application lives in `/app`; the static bilingual website (English and Italian) lives in `/landing` and is built with Astro, vanilla JavaScript and Tailwind CSS.
 - **License:** GPL-3.0.
 - **Guiding principle:** the software must be simple.

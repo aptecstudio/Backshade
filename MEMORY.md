@@ -14,7 +14,7 @@ Log of Backshade's technical decisions and conventions. Each entry shows its sta
 | Branch | `main` only | Confirmed |
 | Platforms | Windows, Linux, macOS | Confirmed |
 | Runtime | Electron | Confirmed |
-| Interface | HTML, vanilla JavaScript ES5, jQuery, Tailwind CSS | Confirmed |
+| Interface | HTML, vanilla JavaScript ES2017, jQuery, Tailwind CSS | Confirmed (ES5 replaced by ES2017 on 2026-11-22) |
 | Versioning | SemVer, 1.0.0 at the first runnable version | Confirmed |
 
 ## Language
@@ -65,7 +65,7 @@ The repository contains two separate projects, each with its own `package.json`:
 
 | Folder | Content | Technologies | Status |
 | --- | --- | --- | --- |
-| `/app` | Electron application | HTML, vanilla JavaScript ES5, jQuery, Tailwind CSS | Confirmed |
+| `/app` | Electron application | HTML, vanilla JavaScript ES2017, jQuery, Tailwind CSS | Confirmed |
 | `/landing` | Static bilingual website (English and Italian) | Astro, vanilla JavaScript, Tailwind CSS | Confirmed |
 
 Shared files (`AGENTS.md`, `ROADMAP.md`, `MEMORY.md`, `README.md`, `LICENSE`, `.editorconfig`, `.gitignore`) stay in the repository root.
@@ -109,9 +109,15 @@ Status: Proposed.
 
 ### JavaScript
 
-- ES5 in both the interface and the main process, for consistency: `var`, `function`, no arrow functions, no template literals, no ES6 classes, no `let`/`const`.
-- Modules: CommonJS (`require` / `module.exports`) in the main process; in the interface, the module pattern (IIFE) with a single global namespace `Backshade`.
-- `'use strict';` at the top of every file or IIFE.
+- ECMAScript 2017 is the highest language level, in both the interface and the main process (confirmed by the human on 2026-11-22, replacing ES5).
+  - Allowed: `const` and `let` (no `var`), arrow functions, template literals, classes, destructuring, default and rest parameters, array spread, `Promise`, `async`/`await`.
+  - Not allowed, because newer than ES2017: object spread and rest (`{ ...obj }`), `for await`, optional chaining (`?.`), nullish coalescing (`??`), `Array.prototype.flat`, `Object.fromEntries`, class fields and private members, top-level `await`, and any later feature.
+  - The limit applies to the project's own code; vendored libraries (jQuery, Lucide, three.js) are used as distributed.
+- Modules (confirmed on 2026-11-22):
+  - main process and `preload`: CommonJS (`require` / `module.exports`);
+  - interface: native ES modules (`<script type="module">`, `import` / `export`), without a bundler; three.js and its addons are imported directly from the vendor folder;
+  - jQuery is loaded as a classic script and used through its global `$`.
+- `'use strict';` at the top of every CommonJS file; ES modules are strict by default.
 - 4-space indentation, single quotes, mandatory semicolons, opening brace on the same line.
 - Naming: `camelCase` for variables and functions, `PascalCase` for constructors, `UPPER_SNAKE_CASE` for constants.
 - Comments in Italian, documentation with JSDoc.
@@ -219,7 +225,7 @@ Requested by the human on 2026-11-22:
 
 Points to define in Phase 13 (to be proposed with a poll):
 
-- how three.js is loaded in the ES5 interface: recent releases are distributed as ES modules, so it needs a vendored build exposing a global, or a single isolated module file for the 3D view;
+- how three.js is vendored: the module build and the needed addons (`OBJLoader`, camera controls), imported as native ES modules (see Code style);
 - source and license of the bundled `.obj` models (made in-house or taken from a source compatible with GPL-3.0, such as CC0);
 - materials and textures (`.mtl` files) or materials defined in code;
 - model location: proposed `app/assets/models/` with `truss/`, `stage/` and `fixtures/` subfolders.

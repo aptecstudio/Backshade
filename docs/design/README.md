@@ -2,7 +2,7 @@
 
 Reference renderings of the Backshade interface, approved by the human on 2026-11-22. They are the starting point for the design system built in Phase 1 (see `ROADMAP.md`, item 1.4).
 
-The files in this folder are a reference only: they are not application code and do not follow the ES5 rules of `/app`. Each screen is available as a PNG rendering and as a static HTML page to open in a browser.
+The files in this folder are a reference only: they are not application code and do not follow the code rules of `/app`. Each screen is available as a PNG rendering and as a static HTML page to open in a browser.
 
 ## Screens
 
