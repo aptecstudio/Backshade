@@ -194,14 +194,14 @@ Status: Confirmed.
 
 ### Visual model
 
-Hardware skeuomorphism, based on the references chosen by the human on 2026-11-22 (they replace the earlier cream and anthracite hybrid drafts):
+Hardware skeuomorphism, defined on 2026-11-22 (it replaces the earlier cream and anthracite hybrid drafts):
 
 - the theme is always dark;
 - panels and cards are flat, on a smooth dark surface;
 - controls are realistic: ribbed metal fader caps on thin slots with a printed scale, small knurled knobs, soft keys with a light gradient and shadow, small per-channel displays;
 - states use solid colors: accent label, small LED in the key corner, colored bar on the top edge; no glow.
 
-The references and their notes are in `docs/design/README.md`. The design draft was redone on these references on the Claude design canvas (2026-11-22).
+The approved reference renderings, components and palette are in `docs/design/README.md`.
 
 Status: Confirmed (2026-11-22).
 

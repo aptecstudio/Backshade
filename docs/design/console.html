@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<title>Backshade - console</title>
+
+<style>
+body{margin:0;background:#16171a}
+button{font:inherit;color:inherit;cursor:pointer;padding:0}
+a{color:#d6d3cc}a:hover{color:#ffffff}
+.panel{background:#1f2024;border:1px solid #2c2d32;border-radius:8px}
+.key{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 16px;border-radius:6px;border:1px solid #121316;background:linear-gradient(180deg,#36383d 0%,#2b2d31 100%);box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07);color:#e6e7ea;font-weight:500;box-sizing:border-box}
+.key.off{color:#9a9ca2}
+.key.on{color:#e8b420}
+.key.on::after{content:"";position:absolute;top:8px;right:8px;width:12px;height:6px;border-radius:1px;background:#e8b420;border:1px solid #7a5d10}
+.key.arm::before{content:"";position:absolute;top:-1px;left:16px;right:16px;height:4px;border-radius:0 0 2px 2px;background:#d8383a}
+.oled{background:#050506;border:1px solid #2c2d32;border-radius:4px;font-family:ui-monospace,'SF Mono',Consolas,monospace;color:#f2f2f2}
+.sq{width:28px;height:28px;border-radius:4px;border:2px solid #4a3a3c;background:linear-gradient(180deg,#2b2c30,#1e1f22);box-shadow:0 2px 3px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:#c9cbd0;box-sizing:border-box}
+.knob{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#3a3c41 0 45%,transparent 47%),repeating-conic-gradient(#121315 0 8deg,#2c2e32 8deg 16deg);box-shadow:0 0 0 1px #0a0a0b,0 3px 5px rgba(0,0,0,.6);display:flex;justify-content:center}
+.slot{position:absolute;left:50%;top:16px;bottom:8px;width:4px;margin-left:-2px;border-radius:2px;background:#050506;box-shadow:inset 0 1px 2px #000}
+.hole{position:absolute;left:50%;top:0;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#08090a;box-shadow:inset 0 1px 2px #000,0 1px 0 rgba(255,255,255,.06)}
+.cap{position:absolute;left:50%;width:28px;height:44px;margin-left:-14px;border-radius:2px;border:1px solid #55575c;box-sizing:border-box;background:linear-gradient(180deg,transparent 0 47%,#55575c 47% 53%,transparent 53%),repeating-linear-gradient(180deg,rgba(255,255,255,.35) 0 1px,rgba(0,0,0,.12) 1px 3px),linear-gradient(90deg,#8e9095,#dcdde0 45%,#c2c4c7 55%,#7f8186);box-shadow:0 4px 6px rgba(0,0,0,.6);opacity:.92}
+</style></head>
+<body>
+
+
+<div style="box-sizing: border-box; min-height: 100vh; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #16171a; color: #e6e7ea; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; font-weight: 400">
+
+<header class="panel" style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px 24px">
+<div style="display: flex; align-items: center; gap: 16px">
+<svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 8L22 42H38z" fill="#e6e7ea"></path><path d="M9 8L22 42H38zM39 8L26 42H10zM4 42h40" stroke="#e6e7ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6 4h6v4H6zM36 4h6v4h-6z" fill="#d0703c"></path></svg>
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 13px; font-weight: 500; color: #e8b420">Backshade</span>
+<span style="font-size: 20px; font-weight: 500">Piazza estate 2026</span>
+</div>
+</div>
+<nav style="display: flex; gap: 8px">
+<button class="key on" style="width: 96px">Console</button>
+<button class="key" style="width: 96px">Griglia</button>
+<button class="key" style="width: 96px">Timeline</button>
+<button class="key off" style="width: 96px">Patch</button>
+<button class="key off" style="width: 96px">Media</button>
+</nav>
+<div style="flex-grow: 1"></div>
+<div class="oled" style="padding: 8px 16px; font-size: 24px; color: #e8b420; border-radius: 6px">00:12:48:20</div>
+<div class="oled" style="padding: 8px 16px; font-size: 24px; color: #e8b420; border-radius: 6px">128.0</div>
+<button class="key arm" style="width: 128px">Blackout</button>
+</header>
+
+<section class="panel" style="display: flex; gap: 24px; padding: 24px">
+<div style="flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px">
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #e0403a"></span>F1</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #3ecf5a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Dimmer"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Dimmer</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F2</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Colore"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Colore</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F3</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Posizione"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Posizione</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F4</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Beam"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Beam</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F5</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Effetti"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Effetti</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F6</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Scene"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Scene</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F7</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Chaser"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Chaser</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F8</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Media"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Media</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F9</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Audio"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Audio</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="display: flex; align-items: center; gap: 4px; font-size: 11px; color: #9a9ca2"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5a2a28"></span>F10</span>
+<button style="width: 100%; max-width: 64px; height: 28px; border-radius: 4px; box-sizing: border-box; border: 2px solid #2f6b3a; background: linear-gradient(180deg, #2b2c30, #1e1f22); box-shadow: 0 2px 3px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06)" aria-label="Utente"></button>
+<span style="font-size: 11px; color: #c9cbd0; white-space: nowrap">Utente</span>
+</div>
+
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Wash sx</span>
+<span style="font-size: 12px">85 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 85%; height: 4px; background: #4a78d6"></div></div>
+</div>
+<div class="knob" style="transform: rotate(0deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="border-color: #f07a2a; color: #f07a2a" aria-label="Flash Wash sx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Wash sx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 45px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #e03a3a; color: #f2f2f2" aria-label="Seleziona Wash sx"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">1</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Wash dx</span>
+<span style="font-size: 12px">85 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 85%; height: 4px; background: #4a78d6"></div></div>
+</div>
+<div class="knob" style="transform: rotate(0deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Wash dx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Wash dx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 45px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #e03a3a; color: #f2f2f2" aria-label="Seleziona Wash dx"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">2</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Spot</span>
+<span style="font-size: 12px">60 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 60%; height: 4px; background: #c06a3a"></div></div>
+</div>
+<div class="knob" style="transform: rotate(-54deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Spot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #39c6e6; color: #39c6e6" aria-label="Solo Spot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 93px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #e03a3a; color: #f2f2f2" aria-label="Seleziona Spot"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">3</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Matrice</span>
+<span style="font-size: 12px">40 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 40%; height: 4px; background: #8a5ad6"></div></div>
+</div>
+<div class="knob" style="transform: rotate(54deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Matrice"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Matrice"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 131px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Matrice"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">4</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Strobo</span>
+<span style="font-size: 12px">0 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 0%; height: 4px; background: #c8a43a"></div></div>
+</div>
+<div class="knob" style="transform: rotate(108deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Strobo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Strobo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 208px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Strobo"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">5</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Chase 4</span>
+<span style="font-size: 12px">128 bpm</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 70%; height: 4px; background: #3aa08a"></div></div>
+</div>
+<div class="knob" style="transform: rotate(27deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Chase 4"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Chase 4"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 74px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Chase 4"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">6</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Apertura</span>
+<span style="font-size: 12px">100 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 100%; height: 4px; background: #c454b4"></div></div>
+</div>
+<div class="knob" style="transform: rotate(-27deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="border-color: #f07a2a; color: #f07a2a" aria-label="Flash Apertura"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Apertura"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 16px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Apertura"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">7</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Base</span>
+<span style="font-size: 12px">-6.0 dB</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 62%; height: 4px; background: #4aa860"></div></div>
+</div>
+<div class="knob" style="transform: rotate(0deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Base"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Base"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>+10</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>-10</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>-20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>-40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>-inf</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 89px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Base"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">8</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Video</span>
+<span style="font-size: 12px">90 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 90%; height: 4px; background: #3aa0b0"></div></div>
+</div>
+<div class="knob" style="transform: rotate(-81deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Video"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Video"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 35px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Video"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">9</span>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 8px; min-width: 0">
+<div class="oled" style="align-self: stretch; display: flex; flex-direction: column; gap: 4px; padding: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Logo</span>
+<span style="font-size: 12px">30 %</span>
+<div style="height: 4px; background: #1a1b1e"><div style="width: 30%; height: 4px; background: #c89a3a"></div></div>
+</div>
+<div class="knob" style="transform: rotate(-81deg)"><div style="width: 2px; height: 10px; margin-top: 4px; background: #e6e7ea"></div></div>
+<div style="display: flex; gap: 8px">
+<button class="sq" style="" aria-label="Flash Logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></button>
+<button class="sq" style="border-color: #1f4a55" aria-label="Solo Logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></button>
+</div>
+<div style="position: relative; width: 100%; height: 264px">
+
+<span style="position: absolute; left: calc(50% + 12px); top: 32px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>100</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 70px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>80</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 109px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>60</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 147px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>40</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 186px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>20</span>
+
+<span style="position: absolute; left: calc(50% + 12px); top: 224px; display: flex; align-items: center; gap: 4px; font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 9px; line-height: 12px; white-space: nowrap; color: #8d9096"><span style="width: 6px; height: 1px; background: #5d5f64"></span>0</span>
+
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 150px"></div>
+</div>
+<button class="sq" style="width: 36px; border-color: #5a3a3c; color: #9a9ca2" aria-label="Seleziona Logo"><span style="font-size: 10px; font-weight: 500">sel</span></button>
+<span style="font-size: 12px; font-weight: 500; color: #c9cbd0">10</span>
+</div>
+
+</div>
+
+<div style="flex: 0 0 200px; display: flex; flex-direction: column; gap: 16px; padding-left: 24px; border-left: 1px solid #2c2d32">
+<span style="font-size: 12px; color: #9a9ca2">Playback</span>
+<div class="oled" style="display: flex; flex-direction: column; gap: 4px; padding: 8px 16px">
+<span style="font-size: 11px; color: #9a9ca2">cue attiva</span>
+<span style="font-size: 16px">1 Apertura</span>
+<span style="font-size: 11px; color: #9a9ca2">prossima: 2 Strofa caldo</span>
+</div>
+<button class="key on" style="height: 64px; font-size: 18px">Go</button>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button class="key" style="padding: 0">Pausa</button>
+<button class="key" style="padding: 0">Indietro</button>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 16px; border-top: 1px solid #2c2d32">
+<span style="font-size: 11px; color: #9a9ca2">grand master</span>
+<div style="position: relative; width: 56px; height: 264px">
+<div class="hole"></div>
+<div class="slot"></div>
+<div class="cap" style="top: 16px; width: 36px; margin-left: -18px"></div>
+</div>
+<span style="font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: 12px">100 %</span>
+</div>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<section class="panel" style="flex: 3 1 600px; display: flex; flex-direction: column; gap: 16px; padding: 24px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 12px; color: #9a9ca2">Programmer, 3 fixture selezionate</span>
+<div style="display: flex; gap: 8px"><button class="key off" style="height: 40px">Pulisci</button><button class="key on" style="height: 40px; padding-right: 32px">Salva scena</button></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px">
+<button class="key on">Dimmer</button>
+<button class="key arm">Colore</button>
+<button class="key">Posizione</button>
+<button class="key">Beam</button>
+<button class="key off">Effetti</button>
+<button class="key off">Gruppi</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+
+<div style="display: flex; align-items: center; gap: 16px">
+<div class="knob" style="flex: 0 0 auto; width: 48px; height: 48px; transform: rotate(95deg)"><div style="width: 2px; height: 14px; margin-top: 6px; background: #e6e7ea"></div></div>
+<div class="oled" style="flex-grow: 1; display: flex; flex-direction: column; padding: 8px"><span style="font-size: 11px; color: #9a9ca2">Intensità</span><span style="font-size: 16px">85 %</span></div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<div class="knob" style="flex: 0 0 auto; width: 48px; height: 48px; transform: rotate(27deg)"><div style="width: 2px; height: 14px; margin-top: 6px; background: #e6e7ea"></div></div>
+<div class="oled" style="flex-grow: 1; display: flex; flex-direction: column; padding: 8px"><span style="font-size: 11px; color: #9a9ca2">Pan</span><span style="font-size: 16px">212 deg</span></div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<div class="knob" style="flex: 0 0 auto; width: 48px; height: 48px; transform: rotate(-68deg)"><div style="width: 2px; height: 14px; margin-top: 6px; background: #e6e7ea"></div></div>
+<div class="oled" style="flex-grow: 1; display: flex; flex-direction: column; padding: 8px"><span style="font-size: 11px; color: #9a9ca2">Tilt</span><span style="font-size: 16px">48 deg</span></div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 16px">
+<div class="knob" style="flex: 0 0 auto; width: 48px; height: 48px; transform: rotate(-27deg)"><div style="width: 2px; height: 14px; margin-top: 6px; background: #e6e7ea"></div></div>
+<div class="oled" style="flex-grow: 1; display: flex; flex-direction: column; padding: 8px"><span style="font-size: 11px; color: #9a9ca2">Zoom</span><span style="font-size: 16px">30 deg</span></div>
+</div>
+
+</div>
+</section>
+
+<section class="panel" style="flex: 2 1 400px; display: flex; flex-direction: column; gap: 16px; padding: 24px">
+<span style="font-size: 12px; color: #9a9ca2">Lista cue</span>
+<div class="oled" style="display: flex; flex-direction: column; padding: 4px">
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 2px; font-size: 13px; background: #2a2410; color: #e8b420"><span style="width: 24px; color: #9a9ca2">1</span><span style="flex-grow: 1; font-family: system-ui, sans-serif">Apertura</span><span>3.0 s</span></div>
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 2px; font-size: 13px; color: #d3d5da"><span style="width: 24px; color: #9a9ca2">2</span><span style="flex-grow: 1; font-family: system-ui, sans-serif">Strofa caldo</span><span>2.0 s</span></div>
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 2px; font-size: 13px; color: #d3d5da"><span style="width: 24px; color: #9a9ca2">3</span><span style="flex-grow: 1; font-family: system-ui, sans-serif">Ritornello</span><span>1.5 s</span></div>
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 2px; font-size: 13px; color: #d3d5da"><span style="width: 24px; color: #9a9ca2">4</span><span style="flex-grow: 1; font-family: system-ui, sans-serif">Chase 4 passi</span><span>128 bpm</span></div>
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 2px; font-size: 13px; color: #d3d5da"><span style="width: 24px; color: #9a9ca2">5</span><span style="flex-grow: 1; font-family: system-ui, sans-serif">Ballad blu</span><span>4.0 s</span></div>
+
+</div>
+</section>
+</div>
+
+<footer style="display: flex; flex-wrap: wrap; gap: 24px; padding: 0 8px; color: #8d9096; font-size: 12px">
+<span>Art-Net 44 Hz, 4 universi</span>
+<span>2 client remoti collegati</span>
+<span style="flex-grow: 1"></span>
+<a href="https://www.aptecstudio.com" style="display: flex; align-items: center; gap: 8px; color: #8d9096; text-decoration: none">Un prodotto <img src="../brand/aptecstudio-wordmark.png" alt="Aptec Studio" style="height: 16px; width: auto"></a>
+</footer>
+</div>
+
+
+
+
+</body></html>

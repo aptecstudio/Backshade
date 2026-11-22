@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<title>Backshade - timeline</title>
+
+<style>
+body{margin:0;background:#16171a}
+button{font:inherit;color:inherit;cursor:pointer;padding:0}
+a{color:#d6d3cc}a:hover{color:#ffffff}
+.panel{background:#1f2024;border:1px solid #2c2d32;border-radius:8px}
+.key{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 16px;border-radius:6px;border:1px solid #121316;background:linear-gradient(180deg,#36383d 0%,#2b2d31 100%);box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07);color:#e6e7ea;font-weight:500;box-sizing:border-box}
+.key.off{color:#9a9ca2}
+.key.on{color:#e8b420}
+.key.on::after{content:"";position:absolute;top:8px;right:8px;width:12px;height:6px;border-radius:1px;background:#e8b420;border:1px solid #7a5d10}
+.key.arm::before{content:"";position:absolute;top:-1px;left:12px;right:12px;height:4px;border-radius:0 0 2px 2px;background:#d8383a}
+.oled{background:#050506;border:1px solid #2c2d32;border-radius:6px;font-family:ui-monospace,'SF Mono',Consolas,monospace;color:#e8b420}
+.sel{display:flex;align-items:center;justify-content:space-between;gap:8px;height:20px;padding:0 8px;border-radius:3px;background:#17181b;border:1px solid #2c2d32;font-size:11px;color:#c9cbd0}
+</style></head>
+<body>
+
+
+<div style="box-sizing: border-box; min-height: 100vh; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #16171a; color: #e6e7ea; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; font-weight: 400">
+
+<header class="panel" style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding: 16px 24px">
+<div style="display: flex; align-items: center; gap: 16px">
+<svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 8L22 42H38z" fill="#e6e7ea"></path><path d="M9 8L22 42H38zM39 8L26 42H10zM4 42h40" stroke="#e6e7ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6 4h6v4H6zM36 4h6v4h-6z" fill="#d0703c"></path></svg>
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 13px; font-weight: 500; color: #e8b420">Backshade timeline</span>
+<span style="font-size: 20px; font-weight: 500">Piazza estate 2026</span>
+</div>
+</div>
+<div style="display: flex; gap: 8px">
+<button class="key" style="width: 56px; padding: 0" aria-label="Inizio"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 20 9 12l10-8zM5 19V5"></path></svg></button>
+<button class="key" style="width: 56px; padding: 0" aria-label="Stop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6h12v12H6z"></path></svg></button>
+<button class="key on" style="width: 72px; padding: 0" aria-label="Play"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg></button>
+<button class="key arm" style="width: 56px; padding: 0" aria-label="Registra"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10z"></path></svg></button>
+<button class="key off" style="width: 56px; padding: 0" aria-label="Loop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m17 2 4 4-4 4M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v1a4 4 0 0 1-4 4H3"></path></svg></button>
+</div>
+<div style="flex-grow: 1"></div>
+<div class="oled" style="display: flex; flex-direction: column; padding: 4px 16px"><span style="font-size: 10px; color: #9a9ca2; font-family: system-ui, sans-serif">tempo</span><span style="font-size: 22px">00:04:12:08</span></div>
+<div class="oled" style="display: flex; flex-direction: column; padding: 4px 16px"><span style="font-size: 10px; color: #9a9ca2; font-family: system-ui, sans-serif">battuta</span><span style="font-size: 22px">34.2.1</span></div>
+<div class="oled" style="display: flex; flex-direction: column; padding: 4px 16px"><span style="font-size: 10px; color: #9a9ca2; font-family: system-ui, sans-serif">bpm</span><span style="font-size: 22px">128.0</span></div>
+<button class="key on" style="padding-right: 32px">Aggancio</button>
+</header>
+
+<section class="panel" style="overflow: hidden; padding: 0">
+<div style="display: flex; height: 32px; border-bottom: 1px solid #2c2d32">
+<div style="flex: 0 0 240px; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-right: 1px solid #2c2d32; font-size: 12px; color: #9a9ca2">7 tracce<span style="flex-grow: 1"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg></div>
+<div style="position: relative; flex-grow: 1; background: #1a1b1e">
+
+<span style="position: absolute; left: 0.00%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">1</span>
+
+<span style="position: absolute; left: 11.11%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">5</span>
+
+<span style="position: absolute; left: 22.22%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">9</span>
+
+<span style="position: absolute; left: 33.33%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">13</span>
+
+<span style="position: absolute; left: 44.44%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">17</span>
+
+<span style="position: absolute; left: 55.56%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">21</span>
+
+<span style="position: absolute; left: 66.67%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">25</span>
+
+<span style="position: absolute; left: 77.78%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">29</span>
+
+<span style="position: absolute; left: 88.89%; top: 0; bottom: 0; padding-left: 4px; border-left: 1px solid #3a3c41; display: flex; align-items: center; font-size: 11px; color: #9a9ca2">33</span>
+
+</div>
+</div>
+<div style="position: relative">
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #9a9ca2; background: #2c2d32">1</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Luci palco</span>
+<span class="sel"><span>Universo 1</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Master luci</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1e1f23; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+<div style="position: absolute; left: 0%; width: 11%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #4a78d673; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #4a78d6; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Apertura</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 24h12M32 30h12M56 15h12M80 10h12M104 13h12M128 26h12M152 13h12M176 16h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 22%; width: 11%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #4a78d673; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #4a78d6; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Strofa caldo</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 27h12M32 16h12M56 23h12M80 28h12M104 31h12M128 20h12M152 15h12M176 19h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 33%; width: 11%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #4a78d673; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #4a78d6; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Ritornello</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 19h12M32 22h12M56 14h12M80 27h12M104 11h12M128 27h12M152 9h12M176 16h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 55%; width: 22%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #4a78d673; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #4a78d6; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Ballad blu</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 19h12M32 21h12M56 22h12M80 24h12M104 26h12M128 17h12M152 28h12M176 9h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+
+</div>
+</div>
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #9a9ca2; background: #2c2d32">2</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Effetti</span>
+<span class="sel"><span>Universo 2</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Master luci</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1c1d20; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+<div style="position: absolute; left: 33%; width: 11%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #8a5ad673; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #8a5ad6; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Chase 4 passi</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 9h12M32 18h12M56 29h12M80 10h12M104 27h12M128 23h12M152 29h12M176 17h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 77%; width: 11%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #8a5ad673; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #8a5ad6; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Strobo finale</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 26h12M32 27h12M56 22h12M80 24h12M104 15h12M128 29h12M152 26h12M176 28h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+
+</div>
+</div>
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #9a9ca2; background: #2c2d32">3</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Fondale LED</span>
+<span class="sel"><span>Matrice A</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Master luci</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1e1f23; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+<div style="position: absolute; left: 0%; width: 22%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #3aa08a73; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #3aa08a; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Gradiente</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 23h12M32 19h12M56 26h12M80 15h12M104 13h12M128 20h12M152 13h12M176 17h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 33%; width: 11%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #3aa08a73; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #3aa08a; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Testo</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20h12M32 29h12M56 18h12M80 12h12M104 24h12M128 25h12M152 30h12M176 9h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 55%; width: 33%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #3aa08a73; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #3aa08a; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Pixel map</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 25h12M32 12h12M56 17h12M80 28h12M104 16h12M128 10h12M152 19h12M176 28h12" fill="none" stroke="#ffffff" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+
+</div>
+</div>
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #ffffff; background: #c8383a">4</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Base musicale</span>
+<span class="sel"><span>Ingresso 1</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Uscita 1-2</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1c1d20; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+<div style="position: absolute; left: 0%; width: 44%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #4aa86073; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #4aa860; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">intro-concerto.wav</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20L0 14.3L2 17.7L4 17.4L6 15.4L8 9.3L10 13.4L12 11.1L14 10.7L16 12.7L18 16.8L20 10.8L22 12.1L24 4.8L26 16.7L28 5.9L30 6.8L32 8.6L34 16.7L36 4.9L38 8.5L40 9.1L42 7.6L44 10.8L46 6.7L48 8.5L50 9.0L52 3.2L54 16.7L56 12.3L58 8.0L60 9.8L62 13.8L64 13.8L66 12.5L68 8.1L70 14.6L72 17.5L74 16.7L76 6.5L78 7.6L80 8.9L82 9.4L84 14.0L86 14.8L88 15.4L90 10.4L92 17.5L94 13.1L96 17.9L98 15.1L100 12.8L102 9.8L104 11.1L106 14.6L108 16.4L110 12.3L112 14.6L114 16.9L116 16.0L118 6.1L120 15.7L122 17.0L124 9.4L126 6.2L128 7.7L130 5.9L132 11.8L134 11.7L136 3.8L138 11.9L140 7.6L142 12.6L144 15.2L146 4.7L148 9.7L150 15.2L152 12.1L154 4.7L156 5.7L158 7.8L160 6.5L162 10.7L164 15.1L166 8.5L168 9.3L170 14.0L172 17.1L174 9.8L176 13.0L178 15.5L180 17.0L182 17.4L184 12.7L186 16.6L188 14.6L190 12.7L192 14.9L194 16.0L196 9.8L198 16.3L200 11.4L200 28.6L198 23.7L196 30.2L194 24.0L192 25.1L190 27.3L188 25.4L186 23.4L184 27.3L182 22.6L180 23.0L178 24.5L176 27.0L174 30.2L172 22.9L170 26.0L168 30.7L166 31.5L164 24.9L162 29.3L160 33.5L158 32.2L156 34.3L154 35.3L152 27.9L150 24.8L148 30.3L146 35.3L144 24.8L142 27.4L140 32.4L138 28.1L136 36.2L134 28.3L132 28.2L130 34.1L128 32.3L126 33.8L124 30.6L122 23.0L120 24.3L118 33.9L116 24.0L114 23.1L112 25.4L110 27.7L108 23.6L106 25.4L104 28.9L102 30.2L100 27.2L98 24.9L96 22.1L94 26.9L92 22.5L90 29.6L88 24.6L86 25.2L84 26.0L82 30.6L80 31.1L78 32.4L76 33.5L74 23.3L72 22.5L70 25.4L68 31.9L66 27.5L64 26.2L62 26.2L60 30.2L58 32.0L56 27.7L54 23.3L52 36.8L50 31.0L48 31.5L46 33.3L44 29.2L42 32.4L40 30.9L38 31.5L36 35.1L34 23.3L32 31.4L30 33.2L28 34.1L26 23.3L24 35.2L22 27.9L20 29.2L18 23.2L16 27.3L14 29.3L12 28.9L10 26.6L8 30.7L6 24.6L4 22.6L2 22.3L0 25.7z" fill="#4aa860cc" stroke="none" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 44%; width: 33%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #4aa86073; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #4aa860; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">base-strofa.wav</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20L0 14.2L2 11.6L4 16.5L6 16.5L8 17.6L10 15.7L12 17.1L14 7.6L16 15.4L18 9.2L20 16.5L22 10.5L24 10.4L26 5.6L28 7.9L30 3.9L32 7.0L34 17.5L36 12.2L38 17.2L40 2.9L42 15.0L44 14.1L46 3.4L48 4.6L50 6.1L52 13.1L54 6.4L56 3.0L58 9.3L60 13.6L62 13.3L64 16.7L66 4.8L68 14.9L70 13.8L72 17.1L74 16.7L76 10.3L78 16.6L80 14.0L82 12.9L84 13.1L86 14.1L88 15.5L90 13.1L92 12.9L94 15.0L96 11.5L98 13.1L100 14.8L102 10.8L104 12.1L106 12.8L108 10.7L110 17.2L112 15.1L114 6.1L116 12.8L118 17.9L120 16.8L122 17.4L124 15.0L126 11.2L128 12.0L130 13.9L132 10.4L134 4.0L136 8.4L138 8.4L140 3.0L142 7.9L144 14.6L146 2.8L148 5.9L150 6.5L152 12.5L154 11.5L156 9.2L158 9.8L160 17.5L162 15.3L164 4.7L166 5.1L168 6.0L170 17.4L172 9.6L174 14.6L176 16.2L178 11.6L180 12.0L182 11.6L184 16.4L186 15.0L188 16.5L190 12.7L192 17.9L194 18.0L196 11.2L198 10.0L200 13.0L200 27.0L198 30.0L196 28.8L194 22.0L192 22.1L190 27.3L188 23.5L186 25.0L184 23.6L182 28.4L180 28.0L178 28.4L176 23.8L174 25.4L172 30.4L170 22.6L168 34.0L166 34.9L164 35.3L162 24.7L160 22.5L158 30.2L156 30.8L154 28.5L152 27.5L150 33.5L148 34.1L146 37.2L144 25.4L142 32.1L140 37.0L138 31.6L136 31.6L134 36.0L132 29.6L130 26.1L128 28.0L126 28.8L124 25.0L122 22.6L120 23.2L118 22.1L116 27.2L114 33.9L112 24.9L110 22.8L108 29.3L106 27.2L104 27.9L102 29.2L100 25.2L98 26.9L96 28.5L94 25.0L92 27.1L90 26.9L88 24.5L86 25.9L84 26.9L82 27.1L80 26.0L78 23.4L76 29.7L74 23.3L72 22.9L70 26.2L68 25.1L66 35.2L64 23.3L62 26.7L60 26.4L58 30.7L56 37.0L54 33.6L52 26.9L50 33.9L48 35.4L46 36.6L44 25.9L42 25.0L40 37.1L38 22.8L36 27.8L34 22.5L32 33.0L30 36.1L28 32.1L26 34.4L24 29.6L22 29.5L20 23.5L18 30.8L16 24.6L14 32.4L12 22.9L10 24.3L8 22.4L6 23.5L4 23.5L2 28.4L0 25.8z" fill="#4aa860cc" stroke="none" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+
+</div>
+</div>
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #9a9ca2; background: #2c2d32">5</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Voce guida</span>
+<span class="sel"><span>Ingresso 3</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Uscita 1-2</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1e1f23; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+<div style="position: absolute; left: 33%; width: 22%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #c454b473; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #c454b4; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">guida-ritornello.wav</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20L0 13.9L2 15.5L4 17.0L6 11.5L8 9.6L10 15.0L12 11.8L14 17.8L16 12.6L18 11.4L20 17.8L22 17.8L24 17.7L26 13.3L28 12.9L30 11.8L32 11.8L34 4.0L36 14.9L38 7.8L40 16.0L42 6.2L44 10.4L46 11.9L48 10.3L50 13.3L52 16.3L54 5.0L56 9.8L58 6.9L60 15.1L62 9.2L64 8.8L66 17.9L68 5.6L70 14.4L72 9.3L74 7.1L76 17.5L78 10.9L80 7.9L82 14.3L84 15.5L86 13.6L88 12.5L90 17.9L92 11.2L94 15.8L96 16.0L98 12.2L100 11.2L102 13.6L104 15.1L106 12.7L108 17.2L110 17.8L112 7.8L114 12.8L116 14.0L118 14.5L120 4.9L122 9.5L124 16.1L126 16.3L128 13.4L130 4.5L132 13.5L134 4.7L136 3.2L138 3.6L140 8.0L142 6.7L144 11.9L146 16.8L148 8.3L150 15.9L152 8.7L154 16.8L156 9.4L158 8.8L160 10.7L162 16.2L164 10.3L166 13.7L168 15.4L170 7.9L172 7.1L174 15.5L176 9.1L178 10.2L180 12.5L182 17.6L184 15.8L186 12.5L188 12.7L190 12.4L192 17.2L194 13.3L196 10.8L198 17.4L200 10.5L200 29.5L198 22.6L196 29.2L194 26.7L192 22.8L190 27.6L188 27.3L186 27.5L184 24.2L182 22.4L180 27.5L178 29.8L176 30.9L174 24.5L172 32.9L170 32.1L168 24.6L166 26.3L164 29.7L162 23.8L160 29.3L158 31.2L156 30.6L154 23.2L152 31.3L150 24.1L148 31.7L146 23.2L144 28.1L142 33.3L140 32.0L138 36.4L136 36.8L134 35.3L132 26.5L130 35.5L128 26.6L126 23.7L124 23.9L122 30.5L120 35.1L118 25.5L116 26.0L114 27.2L112 32.2L110 22.2L108 22.8L106 27.3L104 24.9L102 26.4L100 28.8L98 27.8L96 24.0L94 24.2L92 28.8L90 22.1L88 27.5L86 26.4L84 24.5L82 25.7L80 32.1L78 29.1L76 22.5L74 32.9L72 30.7L70 25.6L68 34.4L66 22.1L64 31.2L62 30.8L60 24.9L58 33.1L56 30.2L54 35.0L52 23.7L50 26.7L48 29.7L46 28.1L44 29.6L42 33.8L40 24.0L38 32.2L36 25.1L34 36.0L32 28.2L30 28.2L28 27.1L26 26.7L24 22.3L22 22.2L20 22.2L18 28.6L16 27.4L14 22.2L12 28.2L10 25.0L8 30.4L6 28.5L4 23.0L2 24.5L0 26.1z" fill="#c454b4cc" stroke="none" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+
+</div>
+</div>
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #9a9ca2; background: #2c2d32">6</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Schermo centrale</span>
+<span class="sel"><span>Video 1</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Display 2</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1c1d20; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+<div style="position: absolute; left: 0%; width: 22%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #3aa0b073; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #3aa0b0; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">intro.mp4</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20L0 13.5L2 17.7L4 12.2L6 10.5L8 13.8L10 17.8L12 9.8L14 9.9L16 7.4L18 7.8L20 14.2L22 6.0L24 11.9L26 10.3L28 11.8L30 17.5L32 4.4L34 5.2L36 2.8L38 5.5L40 8.6L42 6.0L44 8.0L46 16.6L48 6.2L50 5.0L52 6.2L54 12.4L56 5.9L58 2.9L60 17.6L62 4.2L64 14.9L66 15.6L68 8.5L70 6.5L72 15.5L74 12.1L76 13.9L78 12.0L80 10.4L82 17.2L84 12.4L86 10.9L88 14.1L90 12.0L92 16.9L94 11.9L96 14.5L98 16.4L100 10.5L102 16.1L104 14.5L106 10.0L108 14.6L110 17.3L112 17.8L114 15.3L116 9.1L118 5.1L120 13.4L122 8.4L124 16.5L126 16.6L128 11.2L130 5.5L132 3.9L134 11.6L136 9.7L138 15.0L140 2.4L142 7.7L144 12.3L146 9.0L148 8.6L150 5.1L152 8.7L154 5.9L156 17.8L158 10.8L160 8.6L162 13.3L164 9.1L166 10.1L168 15.2L170 11.7L172 17.4L174 17.2L176 12.9L178 14.0L180 15.2L182 9.6L184 17.2L186 15.5L188 15.2L190 14.3L192 13.4L194 16.2L196 16.8L198 13.3L200 10.1L200 29.9L198 26.7L196 23.2L194 23.8L192 26.6L190 25.7L188 24.8L186 24.5L184 22.8L182 30.4L180 24.8L178 26.0L176 27.1L174 22.8L172 22.6L170 28.3L168 24.8L166 29.9L164 30.9L162 26.7L160 31.4L158 29.2L156 22.2L154 34.1L152 31.3L150 34.9L148 31.4L146 31.0L144 27.7L142 32.3L140 37.6L138 25.0L136 30.3L134 28.4L132 36.1L130 34.5L128 28.8L126 23.4L124 23.5L122 31.6L120 26.6L118 34.9L116 30.9L114 24.7L112 22.2L110 22.7L108 25.4L106 30.0L104 25.5L102 23.9L100 29.5L98 23.6L96 25.5L94 28.1L92 23.1L90 28.0L88 25.9L86 29.1L84 27.6L82 22.8L80 29.6L78 28.0L76 26.1L74 27.9L72 24.5L70 33.5L68 31.5L66 24.4L64 25.1L62 35.8L60 22.4L58 37.1L56 34.1L54 27.6L52 33.8L50 35.0L48 33.8L46 23.4L44 32.0L42 34.0L40 31.4L38 34.5L36 37.2L34 34.8L32 35.6L30 22.5L28 28.2L26 29.7L24 28.1L22 34.0L20 25.8L18 32.2L16 32.6L14 30.1L12 30.2L10 22.2L8 26.2L6 29.5L4 27.8L2 22.3L0 26.5z" fill="#3aa0b0cc" stroke="none" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 22%; width: 44%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #3aa0b073; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #3aa0b0; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">live-camera</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20L0 16.0L2 14.8L4 13.7L6 13.9L8 10.2L10 9.1L12 17.1L14 16.1L16 14.3L18 11.9L20 8.3L22 15.8L24 15.5L26 16.4L28 5.8L30 10.4L32 9.3L34 5.3L36 3.5L38 8.6L40 10.0L42 4.4L44 8.6L46 13.5L48 7.0L50 2.6L52 8.7L54 4.6L56 15.7L58 5.3L60 6.5L62 9.9L64 11.8L66 6.2L68 10.0L70 7.3L72 11.8L74 9.7L76 13.5L78 16.5L80 15.5L82 12.4L84 16.1L86 11.9L88 11.7L90 17.2L92 15.0L94 15.4L96 16.3L98 11.3L100 10.5L102 17.5L104 13.3L106 11.1L108 8.0L110 10.7L112 16.1L114 13.9L116 8.1L118 8.2L120 9.3L122 13.9L124 5.8L126 14.1L128 8.8L130 4.3L132 7.9L134 15.7L136 13.2L138 14.9L140 12.8L142 10.3L144 12.9L146 9.3L148 4.5L150 11.1L152 14.2L154 5.3L156 3.4L158 5.9L160 5.9L162 13.2L164 8.4L166 14.1L168 5.9L170 14.1L172 11.0L174 15.3L176 17.3L178 16.1L180 12.5L182 14.9L184 14.3L186 14.6L188 13.9L190 12.1L192 16.2L194 15.7L196 11.2L198 14.7L200 10.6L200 29.4L198 25.3L196 28.8L194 24.3L192 23.8L190 27.9L188 26.1L186 25.4L184 25.7L182 25.1L180 27.5L178 23.9L176 22.7L174 24.7L172 29.0L170 25.9L168 34.1L166 25.9L164 31.6L162 26.8L160 34.1L158 34.1L156 36.6L154 34.7L152 25.8L150 28.9L148 35.5L146 30.7L144 27.1L142 29.7L140 27.2L138 25.1L136 26.8L134 24.3L132 32.1L130 35.7L128 31.2L126 25.9L124 34.2L122 26.1L120 30.7L118 31.8L116 31.9L114 26.1L112 23.9L110 29.3L108 32.0L106 28.9L104 26.7L102 22.5L100 29.5L98 28.7L96 23.7L94 24.6L92 25.0L90 22.8L88 28.3L86 28.1L84 23.9L82 27.6L80 24.5L78 23.5L76 26.5L74 30.3L72 28.2L70 32.7L68 30.0L66 33.8L64 28.2L62 30.1L60 33.5L58 34.7L56 24.3L54 35.4L52 31.3L50 37.4L48 33.0L46 26.5L44 31.4L42 35.6L40 30.0L38 31.4L36 36.5L34 34.7L32 30.7L30 29.6L28 34.2L26 23.6L24 24.5L22 24.2L20 31.7L18 28.1L16 25.7L14 23.9L12 22.9L10 30.9L8 29.8L6 26.1L4 26.3L2 25.2L0 24.0z" fill="#3aa0b0cc" stroke="none" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div style="position: absolute; left: 77%; width: 23%; top: 4px; bottom: 4px; display: flex; flex-direction: column; border-radius: 6px 6px 2px 2px; overflow: hidden; background: #3aa0b073; box-shadow: 0 1px 2px rgba(0,0,0,.5)">
+<span style="flex: 0 0 auto; padding: 4px 8px; background: #3aa0b0; font-size: 11px; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">outro.mp4</span>
+<svg style="flex-grow: 1; width: 100%" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20L0 14.0L2 16.6L4 14.8L6 11.0L8 16.0L10 11.0L12 9.6L14 9.2L16 16.9L18 17.9L20 12.9L22 6.0L24 7.4L26 12.2L28 8.7L30 9.2L32 14.0L34 7.7L36 4.7L38 12.4L40 11.3L42 2.4L44 16.2L46 13.0L48 12.0L50 2.9L52 6.2L54 10.8L56 13.7L58 15.7L60 8.2L62 10.2L64 4.3L66 12.8L68 16.6L70 10.8L72 17.7L74 12.7L76 13.8L78 17.5L80 8.1L82 9.8L84 10.0L86 9.1L88 15.4L90 11.6L92 17.6L94 16.1L96 15.1L98 13.9L100 16.8L102 17.7L104 9.9L106 14.9L108 16.9L110 13.4L112 15.7L114 17.8L116 9.8L118 15.1L120 15.0L122 4.7L124 6.6L126 16.4L128 6.7L130 12.8L132 16.4L134 10.6L136 13.7L138 8.0L140 9.7L142 18.0L144 16.6L146 13.0L148 2.9L150 3.7L152 13.7L154 9.7L156 10.4L158 6.0L160 15.3L162 13.8L164 13.1L166 14.0L168 9.2L170 14.2L172 14.5L174 16.6L176 16.9L178 12.1L180 8.9L182 16.8L184 13.0L186 12.8L188 12.5L190 12.5L192 12.5L194 13.0L196 13.6L198 14.0L200 9.1L200 30.9L198 26.0L196 26.4L194 27.0L192 27.5L190 27.5L188 27.5L186 27.2L184 27.0L182 23.2L180 31.1L178 27.9L176 23.1L174 23.4L172 25.5L170 25.8L168 30.8L166 26.0L164 26.9L162 26.2L160 24.7L158 34.0L156 29.6L154 30.3L152 26.3L150 36.3L148 37.1L146 27.0L144 23.4L142 22.0L140 30.3L138 32.0L136 26.3L134 29.4L132 23.6L130 27.2L128 33.3L126 23.6L124 33.4L122 35.3L120 25.0L118 24.9L116 30.2L114 22.2L112 24.3L110 26.6L108 23.1L106 25.1L104 30.1L102 22.3L100 23.2L98 26.1L96 24.9L94 23.9L92 22.4L90 28.4L88 24.6L86 30.9L84 30.0L82 30.2L80 31.9L78 22.5L76 26.2L74 27.3L72 22.3L70 29.2L68 23.4L66 27.2L64 35.7L62 29.8L60 31.8L58 24.3L56 26.3L54 29.2L52 33.8L50 37.1L48 28.0L46 27.0L44 23.8L42 37.6L40 28.7L38 27.6L36 35.3L34 32.3L32 26.0L30 30.8L28 31.3L26 27.8L24 32.6L22 34.0L20 27.1L18 22.1L16 23.1L14 30.8L12 30.4L10 29.0L8 24.0L6 29.0L4 25.2L2 23.4L0 26.0z" fill="#3aa0b0cc" stroke="none" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+
+</div>
+</div>
+
+<div style="display: flex; height: 80px; border-bottom: 1px solid #121316">
+<div style="flex: 0 0 240px; box-sizing: border-box; display: flex; gap: 8px; padding: 8px 16px 8px 8px; border-right: 1px solid #2c2d32; background: #222327">
+<span style="flex: 0 0 24px; height: 64px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; box-sizing: border-box; border-radius: 3px; font-size: 11px; font-weight: 500; color: #9a9ca2; background: #2c2d32">7</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Mixer esterno</span>
+<span class="sel"><span>Osc</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+<span class="sel"><span>Mixer sala</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
+</div>
+</div>
+<div style="position: relative; flex-grow: 1; background: #1e1f23; background-image: linear-gradient(90deg, #2a2b30 1px, transparent 1px), linear-gradient(90deg, #232428 1px, transparent 1px); background-size: 11.11% 100%, 2.78% 100%">
+
+
+<svg style="position: absolute; inset: 8px 0" width="100%" height="64" viewBox="0 0 1000 64" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,52 120,52 180,16 520,16 560,36 760,36 820,10 1000,10" fill="none" stroke="#e8b420" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+
+</div>
+</div>
+
+<div style="position: absolute; left: calc(240px + (100% - 240px) * 0.36); top: 0; bottom: 0; width: 1px; background: #f2f2f2"></div>
+</div>
+</section>
+
+<footer style="display: flex; flex-wrap: wrap; gap: 24px; padding: 0 8px; color: #8d9096; font-size: 12px">
+<span>36 battute, 18:00 min</span>
+<span>Luci, audio e video sullo stesso clock</span>
+<span style="flex-grow: 1"></span>
+<a href="https://www.aptecstudio.com" style="display: flex; align-items: center; gap: 8px; color: #8d9096; text-decoration: none">Un prodotto <img src="../brand/aptecstudio-wordmark.png" alt="Aptec Studio" style="height: 16px; width: auto"></a>
+</footer>
+</div>
+
+
+
+
+</body></html>

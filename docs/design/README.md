@@ -1,54 +1,92 @@
-# Backshade design references
+# Backshade design reference
 
-Visual references chosen by the human for the Backshade interface. They replace the earlier design drafts and are the starting point for the design system built in Phase 1 (see `ROADMAP.md`, item 1.4).
+Reference renderings of the Backshade interface, approved by the human on 2026-11-22. They are the starting point for the design system built in Phase 1 (see `ROADMAP.md`, item 1.4).
 
-These images are references for style and layout only. Backshade does not copy their brands, names or exact layouts, and it keeps the project rules in `AGENTS.md`: no uppercase text, no glow, only ASCII characters and accented letters, line icons from one library.
+The files in this folder are a reference only: they are not application code and do not follow the ES5 rules of `/app`. Each screen is available as a PNG rendering and as a static HTML page to open in a browser.
 
-## Hardware controller
+## Screens
 
-![Hardware controller reference](reference-controller.jpg)
+### Console (desktop)
 
-Reference for the console surface and the channel strips.
+Controller surface with function keys, channel strips (small display, knob, flash and solo keys, long fader with scale, select key), playback section with cue display, go key and grand master, programmer and cue list.
 
-- Smooth dark body, flat, with no visible panel decoration.
-- One column per channel: small display with name and value, knob, two square keys, long fader, select key, channel number.
-- Small per-channel displays: dark screen, light text, name on the first line and value on the second, thin level bar.
-- Small dark knobs with a knurled edge.
-- Square keys with a colored outline or backlight to show their state.
-- Long, thin fader slots with a printed scale (numbers and ticks) next to them.
-- Fader caps: grey, ribbed, slightly translucent look, wider than the slot.
-- Function keys on top with a small status LED next to the label.
+![Console](console.png)
 
-## Track timeline
+Page: [console.html](console.html)
 
-![Track timeline reference](reference-timeline.jpg)
+### Track timeline (desktop)
 
-Reference for the pre-programmed show editor (Phase 8).
+DAW-style arrangement for pre-programmed shows: transport keys, time, bar and tempo displays, track headers with input and output selectors, colored clips with a header strip, light steps or waveforms, automation lane for the external mixer, white playhead.
 
-- Dark grid with bar numbers on the ruler and thin vertical grid lines.
-- Track headers on the left: track name, input and output selectors.
-- Clips colored per track, with a slightly darker header strip holding the clip name and rounded top corners.
-- Audio clips show the waveform inside the clip in a lighter tone of the same color.
-- Thin vertical playhead line across all tracks.
+![Timeline](timeline.png)
 
-## Remote keys
+Page: [timeline.html](timeline.html)
 
-![Remote keys reference](reference-remote-keys.png)
+### Remote (mobile)
 
-Reference for keys and header of the web interface, desktop and mobile.
+Web interface served on the local network: header with timecode, soft keys, four channel strips, blackout and go keys.
 
-- Dark panels with subtle borders.
-- Header with the application name in the accent color and a subtitle below.
-- Timecode in a monospace font, accent color, inside a dark rounded box.
-- Soft keys: dark grey rounded rectangles with a light gradient and a soft shadow.
-- Key states:
-  - active: label in the accent color and a small accent LED in the top right corner;
-  - selected or armed: a colored bar along the top edge;
-  - inactive: grey label.
+![Remote mobile](remote-mobile.png)
 
-## Rules taken from the references
+Page: [remote-mobile.html](remote-mobile.html)
+
+## Rules
 
 - The theme is always dark.
-- Panels and cards are flat.
-- Controls (faders, knobs, keys, displays) are realistic: gradients and shadows are allowed on them.
+- Panels and cards are flat: background `#1f2024`, border `#2c2d32`, radius `8` px, on a `#16171a` surface.
+- Controls are realistic: gradients and shadows are allowed only on faders, knobs, keys and displays.
 - No glow: LEDs and states use solid colors.
+
+## Components
+
+### Soft keys
+
+- Rounded rectangle, radius `6` px, height `48` px, light vertical gradient (`#36383d` to `#2b2d31`), soft drop shadow.
+- Normal: light label `#e6e7ea`.
+- Inactive: grey label `#9a9ca2`.
+- Active: label in the accent `#e8b420` and a small accent LED in the top right corner.
+- Armed or selected: a red bar `#d8383a` along the top edge.
+
+### Square keys
+
+- `28` px square, radius `4` px, `2` px colored outline that shows the state: flash orange `#f07a2a`, solo cyan `#39c6e6`, select red `#e03a3a`; dimmed outline when off.
+- Line icon inside, or a short lowercase label such as "sel".
+
+### Function keys
+
+- Small key with a green outline (`#3ecf5a` active, `#2f6b3a` inactive), a status dot above and the label below.
+
+### Displays
+
+- Black screen `#050506` with a thin border, monospace text.
+- Channel displays: name, value and a thin level bar in the channel color.
+- Timecode and tempo: accent `#e8b420` digits.
+
+### Knobs
+
+- Dark round knob with a knurled edge and a light indicator line.
+
+### Faders
+
+- Thin black slot with a round end at the top and a printed scale on the right (`100` to `0` for lights, `+10` to `-inf` for audio).
+- Grey, ribbed, slightly translucent cap wider than the slot, with a darker center line.
+
+### Timeline clips
+
+- Colored header strip with the clip name, body in the same color at lower opacity, rounded top corners.
+- Light clips show steps, audio and video clips show a waveform, automation is a thin accent line.
+
+## Palette
+
+| Role | Value |
+| --- | --- |
+| Surface | `#16171a` |
+| Panel | `#1f2024`, border `#2c2d32` |
+| Text | `#e6e7ea`, secondary `#9a9ca2` |
+| Accent | `#e8b420` |
+| Armed | `#d8383a` |
+| Channel colors | blue `#4a78d6`, orange `#c06a3a`, purple `#8a5ad6`, yellow `#c8a43a`, teal `#3aa08a`, pink `#c454b4`, green `#4aa860`, cyan `#3aa0b0`, amber `#c89a3a` |
+
+## Source
+
+The screens were designed on a Claude design canvas: [Backshade - bozza grafica](https://claude.ai/artifact/HLRQ26ymWZ4WZRd1CWPqqC) (private, visible to the owner unless shared). The HTML pages are static exports of that canvas.
