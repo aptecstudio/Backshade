@@ -95,7 +95,7 @@ Features to support:
 
 - **Visual model:** hardware skeuomorphism (the interface recalls the surfaces, faders, buttons and displays of a physical console). See `MEMORY.md` for the reference adopted.
 - **Spacing:** multiples of 8 only, always the same values from the scale defined in `MEMORY.md`.
-- **Colors:** neutral palette only; keep gradients to a minimum; **no glow**.
+- **Theme and colors:** dark theme only, neutral palette; panels and cards are flat; gradients and shadows are allowed only on realistic controls (faders, knobs, keys, displays); **no glow**.
 - **Icons:** never emoji or emoticons. Line icons only, all from the same library (see `MEMORY.md`).
 - **Typography:** at most two weights per font; **do not use UPPERCASE text**.
 - **Decorations:** keep decorations and badges on text and numbers to a minimum.

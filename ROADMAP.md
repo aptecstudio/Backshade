@@ -23,7 +23,9 @@ Versioning rules (see `AGENTS.md`):
   - [x] `.md` files in English
   - [x] Only alphanumeric characters, ASCII punctuation and accented letters (no glyphs or emoji)
   - [x] Brand: Backshade is a product of Aptec Studio
-- [x] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference
+- [x] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference (superseded)
+- [x] 0.8 New design references saved in `docs/design` (dark theme, flat panels, realistic controls)
+- [x] 0.9 Design draft redone on the new references (Claude design canvas)
 
 ## Phase 1 - Runnable base (target 1.0.0)
 

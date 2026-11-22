@@ -173,9 +173,9 @@ Status: Confirmed (proposed scale).
 
 ### Colors
 
-Neutral palette (warm greys like metal and dark plastic, cream panels), a single soft accent color for the active state and desaturated status colors (green, amber, red) only for functional indicators. No glow, gradients kept to a minimum.
+Dark theme only. Neutral dark greys for surfaces, a single accent color for active states and desaturated status colors (green, amber, red) only for functional indicators. No glow. Gradients and shadows only on realistic controls (see Visual model).
 
-Status: Proposed.
+Status: Proposed (dark theme, no glow and realistic controls confirmed on 2026-11-22).
 
 ### Typography
 
@@ -194,11 +194,16 @@ Status: Confirmed.
 
 ### Visual model
 
-Hardware skeuomorphism, as a hybrid with the reference provided by the human (a modular hardware panel): cream and anthracite panels with corner screws, recessed LCD and segment displays, knobs with dotted scales, physical keycaps with LED strips, faders with LED meters, analog VU meters, toggle switches. Adapted to the project rules: no uppercase labels, no glow, neutral palette with a single soft accent.
+Hardware skeuomorphism, based on the references chosen by the human on 2026-11-22 (they replace the earlier cream and anthracite hybrid drafts):
 
-The approved screens, tokens and component descriptions are in `docs/design/README.md`.
+- the theme is always dark;
+- panels and cards are flat, on a smooth dark surface;
+- controls are realistic: ribbed metal fader caps on thin slots with a printed scale, small knurled knobs, soft keys with a light gradient and shadow, small per-channel displays;
+- states use solid colors: accent label, small LED in the key corner, colored bar on the top edge; no glow.
 
-Status: Confirmed.
+The references and their notes are in `docs/design/README.md`. The design draft was redone on these references on the Claude design canvas (2026-11-22).
+
+Status: Confirmed (2026-11-22).
 
 ## Localization
 
