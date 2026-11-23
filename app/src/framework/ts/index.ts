@@ -54,6 +54,9 @@ export { Panel, type PanelOptions } from './panel/panel.js';
 
 // Moduli, elenchi, finestre e tastiera
 export { TextField, type TextFieldOptions } from './forms/text-field.js';
+export { TextArea, type TextAreaOptions } from './forms/text-area.js';
+export { NumberField, type NumberFieldOptions } from './forms/number-field.js';
+export { ChoiceKeys, type ChoiceKeysOptions, type ChoiceOption } from './forms/choice-keys.js';
 export { ListItem, type ListItemOptions } from './list/list-item.js';
 export { Dialog, type DialogOptions } from './overlay/dialog.js';
 export { onShortcut } from './keyboard/shortcuts.js';

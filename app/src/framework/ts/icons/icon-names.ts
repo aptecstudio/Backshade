@@ -8,9 +8,14 @@ export const ICON_NAMES = [
     'circle',
     'file-plus',
     'folder-open',
+    'folder-search',
     'headphones',
     'house',
+    'image',
     'layout-template',
+    'music',
+    'package',
+    'package-open',
     'pencil',
     'play',
     'plus',
@@ -21,6 +26,7 @@ export const ICON_NAMES = [
     'square',
     'trash-2',
     'triangle-alert',
+    'video',
     'x',
     'zap'
 ] as const;

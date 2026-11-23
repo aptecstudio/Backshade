@@ -1,6 +1,11 @@
 // Stile di base del documento: superficie, testo e font
 @use '../tokens' as *;
 
+// Tema scuro anche per i controlli nativi (barre di scorrimento, campi)
+:root {
+    color-scheme: dark;
+}
+
 body {
     background: color('surface');
     color: color('text');

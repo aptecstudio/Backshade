@@ -29,3 +29,41 @@
         color: color('text-secondary');
     }
 }
+
+.text-field__input--area {
+    height: auto;
+    padding: space(1) space(2);
+    line-height: 1.5;
+    resize: vertical;
+}
+
+// Campo numerico: stretto, cifre in monospazio, unità a destra
+.number-field__row {
+    display: flex;
+    align-items: center;
+    gap: space(1);
+}
+
+.number-field__input {
+    width: 96px;
+    font-family: $font-family-mono;
+    text-align: right;
+}
+
+.number-field__unit {
+    font-size: $font-size-small;
+    color: color('text-secondary');
+}
+
+// Scelta a tasti
+.choice-keys {
+    display: flex;
+    flex-direction: column;
+    gap: space(1);
+}
+
+.choice-keys__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(1);
+}
