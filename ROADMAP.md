@@ -4,8 +4,8 @@ Project progress. Completed items are checked with `- [x]`.
 
 Versioning rules (see `AGENTS.md`):
 
-- no versions are assigned until the first runnable version;
-- **1.0.0** is the first runnable version (end of Phase 1);
+- no versions are assigned during development, even when the application already runs;
+- **1.0.0** is the first release, published when all the planned features are implemented and the application is ready for distribution and testing (decided by the human on 2026-11-23, replacing "end of Phase 1");
 - from then on, at the end of each phase or sub-phase a new version is proposed with a changelog.
 
 ---
@@ -25,21 +25,22 @@ Versioning rules (see `AGENTS.md`):
   - [x] Brand: Backshade is a product of Aptec Studio
   - [x] Official Backshade logo and derived icons in `docs/logo`
   - [x] 3D stage with three.js (see Phase 13)
-  - [x] JavaScript up to ES2017 with native ES modules in the interface (replaces ES5)
+  - [x] TypeScript and SCSS with internal frameworks in `app/src/framework/ts` and `app/src/framework/scss` (replace JavaScript, jQuery and Tailwind)
 - [x] 0.7 Design draft revised as a hybrid with the hardware skeuomorphism reference (superseded)
 - [x] 0.8 New design direction defined (dark theme, flat panels, realistic controls)
 - [x] 0.9 Design draft redone and reference renderings published in `docs/design`
 
-## Phase 1 - Runnable base (target 1.0.0)
+## Phase 1 - Runnable base
 
 - [x] 1.1 `/app` folder with `package.json`, Electron, start scripts
 - [x] 1.2 Main process, secure `preload`, main window
-- [ ] 1.3 Tailwind CSS pipeline and vendored jQuery and Lucide
-- [ ] 1.4 Design system: spacing tokens, palette, typography, base skeuomorphic components (panel, key, fader, knob, display)
-- [ ] 1.5 Application layout: top bar, section navigation, status bar
-- [ ] 1.6 Localization system (Italian)
-- [ ] 1.7 Single transport layer between interface and engine (IPC)
-- [ ] 1.8 About window: version, license and Aptec Studio credit with the wordmark
+- [x] 1.3 TypeScript and SCSS build pipeline, base of the internal frameworks (`app/src/framework/ts`, `app/src/framework/scss`)
+- [x] 1.3.1 Lucide icons as individual SVG files, with the sprite and the icon names generated at build
+- [x] 1.4 Design system: spacing tokens, palette, typography, base skeuomorphic components (panel, key, fader, knob, display), with the component catalog
+- [x] 1.5 Application layout: top bar, section navigation, status bar, settings section with the language choice
+- [x] 1.6 Localization system: English default, Italian included, language packs installable by the user
+- [x] 1.7 Single transport layer between interface and engine (IPC), with typed contract and shared protocol
+- [x] 1.8 About window: version, license and Aptec Studio credit with the wordmark
 
 ## Phase 2 - Shows and projects
 
@@ -148,7 +149,7 @@ Status: Confirmed (no use of GitHub Actions).
 
 Static website presenting Backshade, in English and Italian. It lives in `/landing`, separate from the Electron application in `/app`.
 
-- [ ] 12.1 Astro project in `/landing` with Tailwind CSS and vanilla JavaScript, static output only
+- [ ] 12.1 Astro project in `/landing` with Tailwind CSS and TypeScript, static output only
 - [ ] 12.2 Bilingual structure (English and Italian) with Astro i18n routing and a language switch
 - [ ] 12.3 Layout and components consistent with the application design system (hardware skeuomorphism, spacing scale, palette, Lucide icons)
   - [ ] 12.3.1 Footer with the Aptec Studio credit, wordmark and copyright, as in the WooJam landing

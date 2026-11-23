@@ -39,11 +39,11 @@ This file defines the rules every AI agent must follow when working on the **Bac
 ## 4. Code style
 
 - Each language follows its reference standard style (indentation, spacing, blank lines, new lines, punctuation, brace placement, semicolons).
-- Comments follow the language conventions (e.g. JSDoc for JavaScript) and are written in Italian.
+- Comments follow the language conventions (e.g. JSDoc/TSDoc for TypeScript) and are written in Italian.
 - Single responsibility: each file is a component with one specific task; different contexts or roles are never mixed in the same file (see `MEMORY.md`).
 - Every file ends with a new line; no trailing whitespace.
 - Shared formatting rules are defined in `.editorconfig`.
-- Specific conventions (e.g. the JavaScript language level and module rules) are detailed in `MEMORY.md`.
+- Specific conventions (e.g. the TypeScript configuration, the module rules and the internal frameworks) are detailed in `MEMORY.md`.
 
 ## 5. Doubts and questions
 
@@ -55,8 +55,8 @@ This file defines the rules every AI agent must follow when working on the **Bac
 - Work **only on the `main` branch**. Do not create other branches.
 - The agent does not commit or push without the human's consent.
 - Versioning follows [Semantic Versioning](https://semver.org/).
-- Version **1.0.0** is the **first runnable version** of the software.
-- **Before 1.0.0** (initial non-working stage): at the end of each phase or sub-phase the agent only asks whether to commit and push.
+- Version **1.0.0** is the **first release**: it is published when all the planned features are implemented and the software is ready for distribution and testing.
+- **Before 1.0.0** (development stage, even when the software already runs): no version numbers are assigned; at the end of each phase or sub-phase the agent only asks whether to commit and push.
 - **From 1.0.0 onwards**: at the end of each phase or sub-phase the agent:
   1. presents the changelog list;
   2. proposes the new version number (patch, minor or major, explaining the choice);
@@ -73,8 +73,8 @@ This file defines the rules every AI agent must follow when working on the **Bac
 
 **Backshade** is a programming console for live shows, cross-platform (Windows, Linux, macOS), built on Electron with a web interface.
 
-- **Technologies:** HTML, vanilla JavaScript up to **ES2017** (no newer language features), jQuery, Tailwind CSS.
-- **Repository layout:** the Electron application lives in `/app`; the static bilingual website (English and Italian) lives in `/landing` and is built with Astro, vanilla JavaScript and Tailwind CSS.
+- **Technologies:** HTML, **TypeScript**, **SCSS**, with an internal TypeScript framework and an internal SCSS framework that live only in `app/src/framework/ts` and `app/src/framework/scss`.
+- **Repository layout:** the Electron application lives in `/app`; the static bilingual website (English and Italian) lives in `/landing` and is built with Astro, TypeScript and Tailwind CSS.
 - **License:** GPL-3.0.
 - **Guiding principle:** the software must be simple.
 

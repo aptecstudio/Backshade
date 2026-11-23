@@ -18,6 +18,7 @@ Backshade is a cross-platform desktop application (Windows, Linux, macOS) built 
 - Integration between lights, audio, video and external audio mixers
 - Shows saved as folders portable between devices, with cloning
 - Remote control from desktop or mobile through the built-in web server
+- Multilingual interface (English and Italian), extensible with language packs
 
 ## Status
 
@@ -30,6 +31,7 @@ The project is being initialized. See [ROADMAP.md](ROADMAP.md).
 - [MEMORY.md](MEMORY.md): choices and conventions
 - [docs/design](docs/design/README.md): design reference
 - [docs/brand](docs/brand/README.md): brand assets
+- [docs/localization](docs/localization/README.md): languages and language packs
 
 ## License
 
