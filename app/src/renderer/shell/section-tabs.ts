@@ -29,6 +29,15 @@ export class SectionTabs extends Stack {
     }
 
     /**
+     * Abilita o disabilita tutti i tasti, ad esempio quando non c'è uno show aperto.
+     */
+    setDisabled(disabled: boolean): void {
+        for (const key of this.keys.values()) {
+            key.setDisabled(disabled);
+        }
+    }
+
+    /**
      * Rende attivo il tasto della sezione aperta.
      */
     private highlight(active: SectionId): void {

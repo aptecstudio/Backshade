@@ -28,9 +28,11 @@ export class BrandBlock extends Stack {
     }
 
     /**
-     * Mostra il nome dello show aperto, o il testo predefinito se nessuno è aperto.
+     * Mostra il nome dello show aperto, con un asterisco se ci sono modifiche
+     * non salvate, o il testo predefinito se nessuno show è aperto.
      */
-    setShowName(name: string | null): void {
-        this.showName.setText(name ?? t('shell.noShow'));
+    setShow(name: string | null, dirty: boolean): void {
+        this.showName.setText(name === null ? t('shell.noShow') : `${name}${dirty ? ' *' : ''}`);
+        this.showName.element.title = dirty ? t('start.unsaved') : '';
     }
 }

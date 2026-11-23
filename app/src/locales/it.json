@@ -27,9 +27,91 @@
       "settings": "Impostazioni",
       "placeholder": "Questa sezione arriverà in una prossima versione."
     },
+    "start": {
+      "title": "Start",
+      "newShow": "Nuovo show",
+      "openShow": "Apri show",
+      "manageTemplates": "Modelli",
+      "recent": "Show recenti",
+      "noRecent": "Nessuno show recente. Crea un nuovo show o aprine uno da una cartella.",
+      "missing": "Non trovato: spostato o cancellato",
+      "removeRecent": "Togli dagli show recenti",
+      "modified": "Salvato {date}",
+      "currentShow": "Show aperto",
+      "unsaved": "Modifiche non salvate",
+      "saved": "Tutte le modifiche sono salvate",
+      "save": "Salva",
+      "saveAs": "Salva come",
+      "saveAsTemplate": "Salva come modello",
+      "rename": "Rinomina",
+      "closeShow": "Chiudi show",
+      "actions": "Azioni"
+    },
+    "newShow": {
+      "title": "Nuovo show",
+      "name": "Nome",
+      "defaultName": "Nuovo show",
+      "folder": "Cartella",
+      "chooseFolder": "Scegli cartella",
+      "template": "Modello",
+      "create": "Crea"
+    },
+    "saveAs": {
+      "title": "Salva show come",
+      "save": "Salva"
+    },
+    "renameShow": {
+      "title": "Rinomina show",
+      "apply": "Rinomina"
+    },
+    "templates": {
+      "title": "Modelli",
+      "saveTitle": "Salva come modello",
+      "name": "Nome",
+      "description": "Descrizione",
+      "included": "Inclusi",
+      "user": "Creati da te",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "editTitle": "Modifica modello",
+      "deleteTitle": "Elimina modello",
+      "deleteConfirm": "Il modello \"{name}\" verrà eliminato. Gli show creati da questo modello non cambiano.",
+      "empty": "Non hai ancora creato modelli. Apri uno show e usa \"Salva come modello\".",
+      "readOnly": "I modelli inclusi non si possono modificare.",
+      "saved": "Modello \"{name}\" salvato."
+    },
+    "recovery": {
+      "title": "Recupera modifiche",
+      "message": "Questo show ha modifiche non salvate conservate dal salvataggio automatico. Vuoi recuperarle?",
+      "recover": "Recupera",
+      "discard": "Scarta"
+    },
+    "unsaved": {
+      "title": "Modifiche non salvate",
+      "message": "Lo show \"{name}\" ha modifiche non salvate. Vuoi salvarle?",
+      "save": "Salva",
+      "discard": "Non salvare"
+    },
+    "errors": {
+      "title": "Operazione non riuscita",
+      "generic": "Si è verificato un errore imprevisto.",
+      "unsavedChanges": "Lo show ha modifiche non salvate. Salvalo prima.",
+      "invalidName": "Inserisci un nome valido.",
+      "showNotFound": "Nella cartella scelta non c'è nessuno show.",
+      "invalidShow": "Il file dello show è danneggiato o non leggibile.",
+      "newerShowFormat": "Questo show è stato creato con una versione più recente di Backshade.",
+      "templateNotFound": "Il modello non esiste più.",
+      "templateReadOnly": "I modelli inclusi non si possono modificare.",
+      "noShow": "Nessuno show aperto.",
+      "desktopOnly": "Questa azione è disponibile solo nell'applicazione desktop.",
+      "noRecovery": "Non ci sono modifiche da recuperare."
+    },
     "settings": {
       "language": "Lingua",
-      "languageHint": "La lingua è salvata su questo dispositivo."
+      "languageHint": "La lingua è salvata su questo dispositivo.",
+      "showsFolder": "Cartella degli show",
+      "showsFolderHint": "I nuovi show vengono creati qui, se non scegli un'altra cartella.",
+      "chooseFolder": "Scegli cartella"
     },
     "about": {
       "title": "Informazioni su Backshade",

@@ -6,11 +6,12 @@
 
 import type { Component, IconName } from '../../framework/ts/index.js';
 import type { TextKey } from '../i18n/i18n.js';
+import { StartPage } from '../start/start-page.js';
 import { PlaceholderSection } from './placeholder-section.js';
 import { SettingsSection } from './settings/settings-section.js';
 
 /** Identificativo di una sezione */
-export type SectionId = 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'media' | 'settings';
+export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'media' | 'settings';
 
 /** Definizione di una sezione */
 export interface SectionDefinition {
@@ -23,7 +24,7 @@ export interface SectionDefinition {
     create(): Component;
 }
 
-/** Sezioni principali, mostrate come tasti nella barra in alto */
+/** Sezioni di lavoro sullo show, mostrate come tasti nella barra in alto */
 export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'console', labelKey: 'sections.console', create: () => new PlaceholderSection('sections.console') },
     { id: 'virtualConsole', labelKey: 'sections.virtualConsole', create: () => new PlaceholderSection('sections.virtualConsole') },
@@ -32,7 +33,15 @@ export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'media', labelKey: 'sections.media', create: () => new PlaceholderSection('sections.media') }
 ];
 
-/** Sezione delle impostazioni, mostrata come tasto con icona */
+/** Schermata iniziale con gli show recenti */
+export const START_SECTION: SectionDefinition = {
+    id: 'start',
+    labelKey: 'start.title',
+    icon: 'house',
+    create: () => new StartPage()
+};
+
+/** Sezione delle impostazioni */
 export const SETTINGS_SECTION: SectionDefinition = {
     id: 'settings',
     labelKey: 'sections.settings',
@@ -41,14 +50,14 @@ export const SETTINGS_SECTION: SectionDefinition = {
 };
 
 /** Tutte le sezioni */
-export const ALL_SECTIONS: readonly SectionDefinition[] = [...MAIN_SECTIONS, SETTINGS_SECTION];
+export const ALL_SECTIONS: readonly SectionDefinition[] = [START_SECTION, ...MAIN_SECTIONS, SETTINGS_SECTION];
 
-/** Sezione aperta al primo avvio */
+/** Sezione di lavoro aperta quando si apre il primo show */
 export const DEFAULT_SECTION: SectionId = 'console';
 
 /**
- * Indica se un testo è l'identificativo di una sezione esistente.
+ * Indica se un testo è l'identificativo di una sezione di lavoro sullo show.
  */
-export function isSectionId(value: string | null): value is SectionId {
-    return ALL_SECTIONS.some((section) => section.id === value);
+export function isMainSectionId(value: string | null): value is SectionId {
+    return MAIN_SECTIONS.some((section) => section.id === value);
 }

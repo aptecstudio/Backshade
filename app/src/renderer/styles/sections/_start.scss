@@ -1,0 +1,64 @@
+// Schermata iniziale, gestione dei modelli e finestre degli show
+@use 'framework/scss/tokens' as *;
+
+.start-page {
+    min-height: 100%;
+}
+
+.start-page__side {
+    flex: 0 0 320px;
+}
+
+.start-actions .panel__body {
+    gap: space(1);
+}
+
+.start-actions .key {
+    justify-content: flex-start;
+}
+
+.current-show .label {
+    overflow-wrap: anywhere;
+}
+
+.recent-shows {
+    flex: 1 1 auto;
+}
+
+.recent-shows .panel__body {
+    gap: space(1);
+}
+
+.recent-shows__row > .list-item {
+    flex: 1 1 auto;
+}
+
+.recent-shows__text,
+.template-row__text {
+    min-width: 0;
+    gap: 0;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.template-choice {
+    max-height: 240px;
+    overflow: auto;
+}
+
+.template-row {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.folder-picker > .text-field {
+    flex: 1 1 auto;
+}

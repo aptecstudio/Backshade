@@ -27,9 +27,91 @@
       "settings": "Settings",
       "placeholder": "This section will arrive in a next version."
     },
+    "start": {
+      "title": "Start",
+      "newShow": "New show",
+      "openShow": "Open show",
+      "manageTemplates": "Templates",
+      "recent": "Recent shows",
+      "noRecent": "No recent shows yet. Create a new show or open one from a folder.",
+      "missing": "Not found: moved or deleted",
+      "removeRecent": "Remove from recent shows",
+      "modified": "Saved {date}",
+      "currentShow": "Current show",
+      "unsaved": "Unsaved changes",
+      "saved": "All changes saved",
+      "save": "Save",
+      "saveAs": "Save as",
+      "saveAsTemplate": "Save as template",
+      "rename": "Rename",
+      "closeShow": "Close show",
+      "actions": "Actions"
+    },
+    "newShow": {
+      "title": "New show",
+      "name": "Name",
+      "defaultName": "New show",
+      "folder": "Folder",
+      "chooseFolder": "Choose folder",
+      "template": "Template",
+      "create": "Create"
+    },
+    "saveAs": {
+      "title": "Save show as",
+      "save": "Save"
+    },
+    "renameShow": {
+      "title": "Rename show",
+      "apply": "Rename"
+    },
+    "templates": {
+      "title": "Templates",
+      "saveTitle": "Save as template",
+      "name": "Name",
+      "description": "Description",
+      "included": "Included",
+      "user": "Created by you",
+      "edit": "Edit",
+      "delete": "Delete",
+      "editTitle": "Edit template",
+      "deleteTitle": "Delete template",
+      "deleteConfirm": "The template \"{name}\" will be deleted. Shows created from it are not affected.",
+      "empty": "You have not created any templates yet. Open a show and use \"Save as template\".",
+      "readOnly": "Included templates cannot be changed.",
+      "saved": "Template \"{name}\" saved."
+    },
+    "recovery": {
+      "title": "Recover changes",
+      "message": "This show has unsaved changes kept by the autosave. Do you want to recover them?",
+      "recover": "Recover",
+      "discard": "Discard"
+    },
+    "unsaved": {
+      "title": "Unsaved changes",
+      "message": "The show \"{name}\" has unsaved changes. Do you want to save them?",
+      "save": "Save",
+      "discard": "Do not save"
+    },
+    "errors": {
+      "title": "The operation could not be completed",
+      "generic": "An unexpected error occurred.",
+      "unsavedChanges": "The show has unsaved changes. Save it first.",
+      "invalidName": "Enter a valid name.",
+      "showNotFound": "No show was found in the selected folder.",
+      "invalidShow": "The show file is damaged or not readable.",
+      "newerShowFormat": "This show was created with a newer version of Backshade.",
+      "templateNotFound": "The template no longer exists.",
+      "templateReadOnly": "Included templates cannot be changed.",
+      "noShow": "No show is open.",
+      "desktopOnly": "This action is available only in the desktop application.",
+      "noRecovery": "There are no changes to recover."
+    },
     "settings": {
       "language": "Language",
-      "languageHint": "The language is saved on this device."
+      "languageHint": "The language is saved on this device.",
+      "showsFolder": "Shows folder",
+      "showsFolderHint": "New shows are created here, unless you choose another folder.",
+      "chooseFolder": "Choose folder"
     },
     "about": {
       "title": "About Backshade",
