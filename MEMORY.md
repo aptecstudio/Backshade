@@ -71,6 +71,16 @@ Status: Confirmed (2026-11-23).
 
 Status: Confirmed (2026-11-23).
 
+## Start page
+
+Requested by the human on 2026-11-23, after the Studio One start page. Developed as the first block of Phase 2, together with the show format (2.1), new, open and save (2.2) and recent shows (2.5).
+
+- Full page inside the main window, in place of the sections: shown at launch and when a show is closed; reopened with a "Start" key in the top bar.
+- Contents: recent shows (name, last modified date, folder; one click opens the show; shows moved or deleted are marked) and the actions new show (name and folder) and open show from a folder.
+- Not included for now: thumbnails, favorites, templates and demo show.
+
+Status: Confirmed (2026-11-23).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.
@@ -220,6 +230,7 @@ SCSS replaces Tailwind CSS in `/app` (2026-11-23). Compiled with Dart Sass (`sas
 - `app/src/framework/scss/tokens/`: design tokens that generate no CSS: spacing (`space(n)`, raises an error outside the scale), colors (`color(name)`), typography (`$font-*`), radius (`$radius-*`); collected by `tokens/_index.scss`.
 - `app/src/framework/scss/base/`: reset and document styles; generates CSS and is included once.
 - `app/src/framework/scss/components/`: one partial per component (BEM class names, for example `.key`, `.key--active`, `.key__led`), collected by `components/_index.scss`. Material colors of the realistic controls (knob and fader cap) are local variables of their partial, taken from the reference renderings.
+- Knobs are drawn concentric: knurled ring, smooth cap and indicator share the same center (corrected on 2026-11-23 at the human's request; the cap was offset upward).
 - Dynamic values (fader position, knob angle, level) are passed to CSS through custom properties set with the CSSOM (`style.setProperty`), which the Content Security Policy allows; inline `style` attributes are never used.
 - Application styles live in `app/src/renderer/styles/` and use the framework; `main.scss` is the single entry point.
 - Values always come from the tokens: no hard-coded spacing or colors in the application styles.

@@ -44,6 +44,8 @@ Versioning rules (see `AGENTS.md`):
 
 ## Phase 2 - Shows and projects
 
+Development order: the first block is 2.1, 2.2, 2.5 and 2.8 together, so the start page is born working with real shows.
+
 - [ ] 2.1 Show folder format and `show.json` with `formatVersion`
 - [ ] 2.2 New, open, save, save as
 - [ ] 2.3 Show cloning
@@ -51,6 +53,10 @@ Versioning rules (see `AGENTS.md`):
 - [ ] 2.5 Recent shows list and default shows folder
 - [ ] 2.6 Export and import as a single archive for transport
 - [ ] 2.7 Global application settings separate from show settings
+- [ ] 2.8 Start page at launch, as in Studio One (see `MEMORY.md`, Start page)
+  - [ ] 2.8.1 Full page in the main window, shown at launch and when a show is closed; reopened with a "Start" key in the top bar
+  - [ ] 2.8.2 Recent shows with name, last modified date and folder; one click opens the show; moved or deleted shows are marked
+  - [ ] 2.8.3 New show (name and folder) and open show from a folder
 
 ## Phase 3 - DMX and Art-Net
 
