@@ -232,6 +232,46 @@ Points to define in Phase 13 (to be proposed with a poll):
 
 Status: Confirmed (request), Proposed (open points).
 
+### Video outputs in the 3D stage
+
+Requested by the human on 2026-11-23: the 3D stage also emulates the video outputs, so the whole show can be pre-programmed. It includes (Phase 13.9):
+
+- screens and LED walls showing the real program output of the linked video output as a live texture;
+- virtual projectors with lens and position, projecting on the stage surfaces and models;
+- the preview of the videomapping (warp, masks, edge blending) on the 3D surfaces.
+
+Status: Confirmed (2026-11-23).
+
+## Videomapping
+
+Requested by the human on 2026-11-23 (Phase 14). Supported features:
+
+- 2D warp on the output: corner pin, mesh warp, masks, input crop;
+- edge blending between overlapping projectors;
+- 3D mapping on the stage models with virtual projectors calibrated on the real ones;
+- pixel mapping of the video on LED walls and LED matrices.
+
+Proposed technical choices:
+
+- rendering with WebGL in the fullscreen output windows, through three.js (already a dependency), without new libraries;
+- mapping settings and presets saved in `show.json`.
+
+Status: Confirmed (features), Proposed (technical choices).
+
+## Multi-device
+
+Requested by the human on 2026-11-23 (Phase 15): several machines work on the same show, each with a department (lights, video, audio), in real time and in sync.
+
+- **Architecture: master and nodes** (confirmed by the human on 2026-11-23). The master holds the show and the clock and is the source of truth; the other machines are full Backshade instances joining as nodes with a role.
+- Each node drives its own outputs locally from the replicated state; frames are never streamed over the network, only state changes and clock data.
+- Transport: WebSocket, with the same protocol as IPC and the remote web interface (see Architecture); the server-side WebSocket choice is the one still to be evaluated in Dependencies.
+- Discovery: UDP broadcast through Node.js `dgram`, plus manual connection by address.
+- Clock sync: NTP-like round trip measurement between node and master, to align cue and timeline playback.
+- Conflicts: edits go through the master, with edit locks per object.
+- Media: missing files are copied from the master and checked by hash.
+
+Status: Confirmed (architecture), Proposed (other points).
+
 ## Localization
 
 - Initial interface language: Italian.

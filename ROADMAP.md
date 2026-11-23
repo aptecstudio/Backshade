@@ -177,3 +177,44 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [ ] 13.6.4 Visible beams (volumetric cones) and light on the stage surfaces, with an optional haze level
 - [ ] 13.7 Performance: frame rate limit, quality levels, beam on/off switch
 - [ ] 13.8 Import of custom `.obj` models into the show folder
+- [ ] 13.9 Video outputs in the 3D stage, to pre-program the whole show (lights and video together) without the real hardware:
+  - [ ] 13.9.1 Screens and LED walls: flat or curved surfaces, sized in meters and pixels, showing the real program output of the linked video output as a live texture
+  - [ ] 13.9.2 Virtual projectors: position, orientation, lens (throw ratio, lens shift), brightness and aspect ratio; the image is projected on the stage surfaces and models, with the visible light cone
+  - [ ] 13.9.3 Preview of the videomapping (Phase 14): warp, masks and edge blending shown on the 3D surfaces as they would appear in the venue
+  - [ ] 13.9.4 Screens, LED walls and projectors placed in the stage editor and linked to the video outputs of Phase 7; layout saved in `show.json`
+
+## Phase 14 - Videomapping
+
+Mapping of the video outputs on real surfaces: screens, projection surfaces, scenery and LED walls. It depends on the video outputs and layers (Phase 7) and, for the 3D mapping, on the 3D stage (Phase 13). Rendering runs on the GPU with WebGL in the output windows.
+
+- [ ] 14.1 Output model: each video output has a canvas (resolution) split into one or more mapping surfaces, each with its own source (layer, media, video input)
+- [ ] 14.2 2D warp on the output:
+  - [ ] 14.2.1 Corner pin (four corners)
+  - [ ] 14.2.2 Mesh warp with an editable grid of points (bezier interpolation)
+  - [ ] 14.2.3 Masks: polygons and bezier shapes, with feather and inversion
+  - [ ] 14.2.4 Input crop: the part of the source shown on each surface
+- [ ] 14.3 Edge blending between overlapping projectors: blend width, curve and gamma per edge, black level compensation
+- [ ] 14.4 3D mapping on models:
+  - [ ] 14.4.1 Mapping surfaces taken from the 3D stage models (scenery, objects, imported `.obj`)
+  - [ ] 14.4.2 Virtual projector calibrated on the real one (position, orientation, lens), so the render from its point of view matches the real projection
+  - [ ] 14.4.3 Calibration helper: matching points between the model and the real projected image
+- [ ] 14.5 Pixel mapping of the video on LED walls and LED matrices (extends Phase 5.4): pixel area, pixel order, output on Art-Net universes or on a video output
+- [ ] 14.6 Mapping editor: live editing directly on the output, test patterns (grid, colors, numbers per projector), snap and zoom
+- [ ] 14.7 Mapping presets saved in `show.json`, recallable from cues and from the timeline (Phase 8)
+
+## Phase 15 - Multi-device
+
+Several Backshade machines work on the same show at the same time, each with its own department (for example lights on one machine, video on another), communicating in real time and staying in sync. It extends the transport of the remote web interface (Phase 10) and depends on the shared clock (Phase 8.5). Architecture: one master and several nodes (see `MEMORY.md`, Multi-device).
+
+- [ ] 15.1 Session: a machine starts as master and opens the show; other machines join as nodes on the local network
+- [ ] 15.2 Discovery of masters on the network (UDP broadcast through `dgram`) and manual connection by address
+- [ ] 15.3 Roles per node: lights, video, audio, playback only, full; a role defines which parts of the show the node edits and which outputs it drives
+- [ ] 15.4 State replication: the master is the source of truth; nodes receive the full state on join and then incremental changes; edits from a node are sent to the master, validated and broadcast to everyone
+- [ ] 15.5 Edit locks per object (fixture, scene, cue, track, mapping) to avoid conflicts between operators
+- [ ] 15.6 Clock synchronization: nodes estimate the offset and the latency from the master (round trip measurement, NTP-like), so cues and timeline playback start at the same instant on every machine
+- [ ] 15.7 Local outputs: each node drives its own outputs (Art-Net, video outputs, audio devices) from the replicated state, without streaming the frames over the network
+- [ ] 15.8 Media distribution: missing media files are copied from the master to the node show folder, with a check by hash
+- [ ] 15.9 Monitoring: list of connected nodes with role, latency, clock offset and status; alerts on disconnection
+- [ ] 15.10 Disconnection handling: a node that loses the master keeps its outputs on the last state and resynchronizes when it reconnects
+- [ ] 15.11 Backup master that takes over if the master stops (to be evaluated)
+- [ ] 15.12 Access protection with a session PIN, shared with the remote web interface (Phase 10.4)
