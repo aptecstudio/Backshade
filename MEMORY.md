@@ -24,7 +24,7 @@ Log of Backshade's technical decisions and conventions. Each entry shows its sta
 | Conversations with humans and polls | Italian | Confirmed |
 | `.md` files | English (changed from Italian on 2026-11-21) | Confirmed |
 | Source code and naming | English | Confirmed |
-| Code comments | Italian | Confirmed |
+| Code comments, log and error messages in the code | English (changed from Italian on 2026-11-23) | Confirmed |
 | Commit messages | English | Confirmed |
 
 ### Allowed characters
@@ -95,6 +95,7 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Shortcuts:** Ctrl or Cmd + S save, + Shift + S save as, + N new show, + O open show.
 - **Window close:** with unsaved changes the main window does not close; the engine sends `app.closeRequested`, the interface asks the user and then calls `app.confirmClose`.
 - **Framework additions:** `TextField`, `TextArea`, `NumberField` (accepts comma or point as decimal separator, clamps to its limits), `ChoiceKeys`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules and set `color-scheme: dark` for native controls.
+- **Scrollbars** (`framework/scss/base/_scrollbar.scss`, requested by the human on 2026-11-23): themed like the console, 8 px (`space(1)`), transparent track, thumb in the key grey with the key border and a lighter tone on hover and drag, no arrow buttons; browsers without the webkit selectors get `scrollbar-color` with the same colors.
 - **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC.
 
 Status: Confirmed (2026-11-23).
@@ -237,7 +238,7 @@ TypeScript replaces JavaScript in the whole project (decided by the human on 202
 - 4-space indentation, single quotes, mandatory semicolons, opening brace on the same line.
 - Single responsibility (requested by the human on 2026-11-23): each file is a component with one specific task. Different contexts or roles (for example engine logic and interface, transport and rendering, data model and view) are never mixed in the same file. A file that grows to cover more than one task is split.
 - Naming: `camelCase` for variables and functions, `PascalCase` for classes, types and interfaces, `UPPER_SNAKE_CASE` for constants.
-- Comments in Italian, documentation with JSDoc/TSDoc.
+- Comments in English (changed from Italian on 2026-11-23), documentation with JSDoc/TSDoc. Log and developer error messages are in English too; texts shown to the user always come from the language packs.
 
 Status: Confirmed (2026-11-23).
 
@@ -419,6 +420,7 @@ Requested by the human on 2026-11-22:
 
 - the stage is modeled in 3D with **three.js**;
 - Backshade ships with ready-to-use `.obj` models of truss, the stage itself and the most used fixtures;
+- the model library also includes musicians with their instrument (drummer, guitarist, bassist, pianist, singer) and stage elements (amplifiers, risers and platforms, wedge monitors, PA speakers, stands, cases), requested by the human on 2026-11-23;
 - the 3D stage emulates the fixtures in brightness, colors and movements.
 
 Points to define in Phase 13 (to be proposed with a poll):
@@ -426,7 +428,7 @@ Points to define in Phase 13 (to be proposed with a poll):
 - how three.js is vendored: the module build and the needed addons (`OBJLoader`, camera controls), imported as native ES modules (see Code style);
 - source and license of the bundled `.obj` models (made in-house or taken from a source compatible with GPL-3.0, such as CC0);
 - materials and textures (`.mtl` files) or materials defined in code;
-- model location: proposed `app/assets/models/` with `truss/`, `stage/` and `fixtures/` subfolders.
+- model location: proposed `app/assets/models/` with `truss/`, `stage/`, `fixtures/`, `musicians/` and `stage-elements/` subfolders.
 
 Status: Confirmed (request), Proposed (open points).
 

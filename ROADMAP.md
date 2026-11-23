@@ -181,6 +181,8 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [ ] 13.2.2 Stage: modular decks, risers, stairs
   - [ ] 13.2.3 Most used fixtures: moving head spot, moving head wash, moving head beam, PAR, LED bar, blinder, strobe, follow spot
   - [ ] 13.2.4 Moving fixtures split into separate parts (base, yoke, head) with defined pivot points, so pan and tilt can be animated
+  - [ ] 13.2.5 Musicians with their instrument: drummer (with drum kit), guitarist, bassist, pianist (with piano or keyboard), singer (with microphone and stand); neutral figures, to visualize the band on stage and aim the lights
+  - [ ] 13.2.6 Stage elements: guitar and bass amplifiers and cabinets, drum riser, risers and platforms, floor wedge monitors, PA speakers and subwoofers, microphone stands, keyboard stands, instrument stands, cases and flight cases, DJ booth
 - [ ] 13.3 Link between fixture definitions and 3D models: model, beam angle and zoom range, pan and tilt range, light output
 - [ ] 13.4 Stage editor: place, move, rotate and snap truss, decks and fixtures; hang fixtures on truss; camera views (front, top, side, free)
 - [ ] 13.5 Placed fixtures linked to the patch; stage layout saved in `show.json`
