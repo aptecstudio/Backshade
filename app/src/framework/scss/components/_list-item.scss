@@ -1,0 +1,33 @@
+// Righe cliccabili degli elenchi: piatte, evidenziate al passaggio
+@use '../tokens' as *;
+@use 'focus';
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: space(2);
+    width: 100%;
+    min-width: 0;
+    padding: space(1) space(2);
+    border: 1px solid transparent;
+    border-radius: $radius-square-key;
+    background: none;
+    color: color('text');
+    text-align: left;
+    cursor: pointer;
+
+    @include focus.focus-ring;
+
+    &:hover {
+        background: color('key-bottom');
+    }
+}
+
+.list-item--selected {
+    border-color: color('accent');
+    background: color('key-bottom');
+}
+
+.list-item--muted {
+    color: color('text-secondary');
+}

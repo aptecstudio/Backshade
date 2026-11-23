@@ -6,13 +6,22 @@
 export const ICON_NAMES = [
     'chevron-down',
     'circle',
+    'file-plus',
+    'folder-open',
     'headphones',
+    'house',
+    'layout-template',
+    'pencil',
     'play',
     'plus',
     'repeat',
+    'save',
     'settings',
     'skip-back',
     'square',
+    'trash-2',
+    'triangle-alert',
+    'x',
     'zap'
 ] as const;
 

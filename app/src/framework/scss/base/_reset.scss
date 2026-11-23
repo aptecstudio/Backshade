@@ -19,3 +19,8 @@ textarea {
     font: inherit;
     color: inherit;
 }
+
+// L'attributo hidden vale sempre, anche sugli elementi con display impostato dai componenti
+[hidden] {
+    display: none !important;
+}

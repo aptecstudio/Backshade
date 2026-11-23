@@ -1,0 +1,31 @@
+// Campo di testo: superficie incassata come un display, etichetta sopra
+@use '../tokens' as *;
+@use 'focus';
+
+.text-field {
+    display: flex;
+    flex-direction: column;
+    gap: space(1);
+    min-width: 0;
+}
+
+.text-field__label {
+    font-size: $font-size-small;
+    color: color('text-secondary');
+}
+
+.text-field__input {
+    height: 40px;
+    padding: 0 space(2);
+    border: 1px solid color('panel-border');
+    border-radius: $radius-square-key;
+    background: color('display');
+    color: color('text');
+    font-size: $font-size-base;
+
+    @include focus.focus-ring;
+
+    &:read-only {
+        color: color('text-secondary');
+    }
+}

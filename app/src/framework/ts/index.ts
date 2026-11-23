@@ -52,6 +52,12 @@ export { ExternalLink, type ExternalLinkOptions } from './text/external-link.js'
 export { ImageView, type ImageViewOptions } from './media/image-view.js';
 export { Panel, type PanelOptions } from './panel/panel.js';
 
+// Moduli, elenchi, finestre e tastiera
+export { TextField, type TextFieldOptions } from './forms/text-field.js';
+export { ListItem, type ListItemOptions } from './list/list-item.js';
+export { Dialog, type DialogOptions } from './overlay/dialog.js';
+export { onShortcut } from './keyboard/shortcuts.js';
+
 // Tasti
 export { Key, type KeyOptions, type KeyState } from './keys/key.js';
 export { SquareKey, type SquareKeyOptions, type SquareKeyVariant } from './keys/square-key.js';

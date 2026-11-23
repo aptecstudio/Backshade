@@ -87,6 +87,13 @@ export class Key extends Component<HTMLButtonElement> {
     }
 
     /**
+     * Abilita o disabilita il tasto; un tasto disabilitato non si può premere.
+     */
+    setDisabled(disabled: boolean): void {
+        this.element.disabled = disabled;
+    }
+
+    /**
      * Mostra o nasconde la barra dello stato armato.
      */
     setArmed(armed: boolean): void {
