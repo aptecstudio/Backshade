@@ -32,8 +32,8 @@ Versioning rules (see `AGENTS.md`):
 
 ## Phase 1 - Runnable base (target 1.0.0)
 
-- [ ] 1.1 `/app` folder with `package.json`, Electron, start scripts
-- [ ] 1.2 Main process, secure `preload`, main window
+- [x] 1.1 `/app` folder with `package.json`, Electron, start scripts
+- [x] 1.2 Main process, secure `preload`, main window
 - [ ] 1.3 Tailwind CSS pipeline and vendored jQuery and Lucide
 - [ ] 1.4 Design system: spacing tokens, palette, typography, base skeuomorphic components (panel, key, fader, knob, display)
 - [ ] 1.5 Application layout: top bar, section navigation, status bar

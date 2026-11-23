@@ -35,7 +35,7 @@ Log of Backshade's technical decisions and conventions. Each entry shows its sta
 
 Status: Confirmed (2026-11-21).
 
-## Architecture (proposed)
+## Architecture
 
 - **Engine in the main process (Node.js):** show management, DMX/Art-Net output, timeline clock, web server. The engine is the single source of truth for state.
 - **Interface as a web client:** the same interface runs in the Electron window and in the browser of a networked device. It talks to the engine through a single transport layer:
@@ -44,7 +44,7 @@ Status: Confirmed (2026-11-21).
 - **Video outputs:** dedicated fullscreen Electron windows on external displays.
 - **Audio:** Web Audio API and `<audio>`/`<video>` elements with output device selection (`setSinkId`).
 
-Status: Proposed.
+Status: Confirmed (2026-11-23).
 
 ## Brand
 
@@ -70,7 +70,7 @@ The repository contains two separate projects, each with its own `package.json`:
 
 Shared files (`AGENTS.md`, `ROADMAP.md`, `MEMORY.md`, `README.md`, `LICENSE`, `.editorconfig`, `.gitignore`) stay in the repository root.
 
-### `/app` structure (proposed)
+### `/app` structure
 
 ```
 app/
@@ -86,7 +86,7 @@ app/
   build/         # packaging resources
 ```
 
-Status: Proposed.
+Status: Confirmed (2026-11-23).
 
 ### `/landing` structure (proposed)
 
@@ -119,6 +119,7 @@ Status: Proposed.
   - jQuery is loaded as a classic script and used through its global `$`.
 - `'use strict';` at the top of every CommonJS file; ES modules are strict by default.
 - 4-space indentation, single quotes, mandatory semicolons, opening brace on the same line.
+- Single responsibility (requested by the human on 2026-11-23): each file is a component with one specific task. Different contexts or roles (for example engine logic and interface, transport and rendering, data model and view) are never mixed in the same file. A file that grows to cover more than one task is split.
 - Naming: `camelCase` for variables and functions, `PascalCase` for constructors, `UPPER_SNAKE_CASE` for constants.
 - Comments in Italian, documentation with JSDoc.
 
@@ -139,7 +140,7 @@ Principle: as few dependencies as possible.
 | Dependency | Type | Reason |
 | --- | --- | --- |
 | `electron` | development | Application runtime |
-| `tailwindcss` (CLI) | development | CSS compilation; the compiled CSS is committed |
+| `tailwindcss` and `@tailwindcss/cli` (v4) | development | CSS compilation; theme tokens defined in CSS with `@theme`; the compiled CSS is committed (v4 confirmed on 2026-11-23) |
 | `astro` | development, `/landing` only | Static site generator for the landing site |
 | `electron-builder` | development | Packaging for the three platforms |
 | jQuery 3.x | vendor | DOM manipulation in the interface |

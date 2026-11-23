@@ -1,0 +1,17 @@
+{
+  "name": "backshade",
+  "productName": "Backshade",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Programming console for live shows",
+  "author": "Aptec Studio",
+  "homepage": "https://www.aptecstudio.com",
+  "license": "GPL-3.0-only",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "45.4.1"
+  }
+}

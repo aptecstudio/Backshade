@@ -40,6 +40,7 @@ This file defines the rules every AI agent must follow when working on the **Bac
 
 - Each language follows its reference standard style (indentation, spacing, blank lines, new lines, punctuation, brace placement, semicolons).
 - Comments follow the language conventions (e.g. JSDoc for JavaScript) and are written in Italian.
+- Single responsibility: each file is a component with one specific task; different contexts or roles are never mixed in the same file (see `MEMORY.md`).
 - Every file ends with a new line; no trailing whitespace.
 - Shared formatting rules are defined in `.editorconfig`.
 - Specific conventions (e.g. the JavaScript language level and module rules) are detailed in `MEMORY.md`.
