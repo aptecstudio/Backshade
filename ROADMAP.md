@@ -37,6 +37,7 @@ Versioning rules (see `AGENTS.md`):
 - [x] 1.3 TypeScript and SCSS build pipeline, base of the internal frameworks (`app/src/framework/ts`, `app/src/framework/scss`)
 - [x] 1.3.1 Lucide icons as individual SVG files, with the sprite and the icon names generated at build
 - [x] 1.4 Design system: spacing tokens, palette, typography, base skeuomorphic components (panel, key, fader, knob, display), with the component catalog
+  - [x] 1.4.1 Value input controls: time field with a time picker and jog wheel, color wheel for RGB values, typed values for faders and knobs
 - [x] 1.5 Application layout: top bar, section navigation, status bar, settings section with the language choice
 - [x] 1.6 Localization system: English default, Italian included, language packs installable by the user
 - [x] 1.7 Single transport layer between interface and engine (IPC), with typed contract and shared protocol
@@ -78,7 +79,7 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 ## Phase 4 - Simple console (live and programming)
 
 - [ ] 4.1 Fixture and group selection
-- [ ] 4.2 Attribute control: intensity, color, position, beam
+- [ ] 4.2 Attribute control: intensity, color (color wheel for RGB), position, beam; every time with the time field
 - [ ] 4.3 Programmer: live editing and value capture
 - [ ] 4.4 Scenes: save, recall, fade in/out
 - [ ] 4.5 Chasers: steps, timing, BPM, tap tempo, playback modes

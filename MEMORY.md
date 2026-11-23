@@ -96,6 +96,10 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Window close:** with unsaved changes the main window does not close; the engine sends `app.closeRequested`, the interface asks the user and then calls `app.confirmClose`.
 - **Framework additions:** `TextField`, `TextArea`, `NumberField` (accepts comma or point as decimal separator, clamps to its limits), `ChoiceKeys`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules and set `color-scheme: dark` for native controls.
 - **Scrollbars** (`framework/scss/base/_scrollbar.scss`, requested by the human on 2026-11-23): themed like the console, 8 px (`space(1)`), transparent track, thumb in the key grey with the key border and a lighter tone on hover and drag, no arrow buttons; browsers without the webkit selectors get `scrollbar-color` with the same colors.
+- **Value input controls** (requested by the human on 2026-11-23), to be used everywhere:
+  - **durations:** always a `TimeField`, a key showing the time ("2.5 s", "1:15.0") that opens the time picker: large readout, `JogWheel` turned by dragging around its center (one turn is 10 s, 1 s in fine mode), mouse wheel and arrow keys, step keys (-1, -0.1, +0.1, +1 s), zero key and direct entry of the seconds;
+  - **RGB colors:** always a `ColorWheel`: hue around the wheel (red at the top, clockwise), saturation from the center, brightness on a `LinearSlider`, plus R, G, B (0 to 255) and hex fields;
+  - **fader and knob values:** a `RangeInput` under the control lets the value be typed on the keyboard (displayed range configurable, for example 0 to 100 % or 0 to 255); control and field stay in sync also when the engine changes the value (`RangeControl.onRender`).
 - **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC.
 
 Status: Confirmed (2026-11-23).
