@@ -28,6 +28,10 @@ function templateRow(template: TemplateInfo): Stack {
         ]
     }), new Spacer());
 
+    const exportKey = new Key({ label: t('templates.export'), icon: 'package', iconOnly: true });
+    exportKey.onPress(() => void exportTemplate(template));
+    row.append(exportKey);
+
     if (template.source === 'user') {
         const edit = new Key({ label: t('templates.edit'), icon: 'pencil', iconOnly: true });
         const remove = new Key({ label: t('templates.delete'), icon: 'trash-2', iconOnly: true });
@@ -36,6 +40,30 @@ function templateRow(template: TemplateInfo): Stack {
         row.append(edit, remove);
     }
     return row;
+}
+
+async function exportTemplate(template: TemplateInfo): Promise<void> {
+    try {
+        const file = await engine().request('template.export', { id: template.id });
+        if (file !== null) {
+            await askChoice(t('templates.export'), t('templates.exported', { file }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
+        }
+    } catch (error) {
+        await showError(error);
+    }
+}
+
+async function importTemplate(): Promise<void> {
+    try {
+        const template = await engine().request('template.import');
+        if (template !== null) {
+            await askChoice(t('templates.import'), t('templates.imported', { name: localized(template.name) }), [
+                { id: 'ok', label: t('common.ok'), primary: true }
+            ]);
+        }
+    } catch (error) {
+        await showError(error);
+    }
 }
 
 async function editTemplate(template: TemplateInfo): Promise<void> {
@@ -100,9 +128,11 @@ export function openTemplateManager(): void {
         content.append(...groups);
     };
 
+    const importKey = new Key({ label: t('templates.import'), icon: 'package-open' });
+    importKey.onPress(() => void importTemplate());
     const close = new Key({ label: t('common.close') });
     close.onPress(() => dialog.close());
-    dialog.addActions(close);
+    dialog.addActions(importKey, close);
     dialog.onCancel(() => dialog.close());
 
     const stop = engine().on('templates.changed', () => void render());

@@ -7,6 +7,7 @@
 import type { Component, IconName } from '../../framework/ts/index.js';
 import type { TextKey } from '../i18n/i18n.js';
 import { StartPage } from '../start/start-page.js';
+import { MediaSection } from './media/media-section.js';
 import { PlaceholderSection } from './placeholder-section.js';
 import { SettingsSection } from './settings/settings-section.js';
 
@@ -30,7 +31,7 @@ export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'virtualConsole', labelKey: 'sections.virtualConsole', create: () => new PlaceholderSection('sections.virtualConsole') },
     { id: 'timeline', labelKey: 'sections.timeline', create: () => new PlaceholderSection('sections.timeline') },
     { id: 'patch', labelKey: 'sections.patch', create: () => new PlaceholderSection('sections.patch') },
-    { id: 'media', labelKey: 'sections.media', create: () => new PlaceholderSection('sections.media') }
+    { id: 'media', labelKey: 'sections.media', create: () => new MediaSection() }
 ];
 
 /** Schermata iniziale con gli show recenti */

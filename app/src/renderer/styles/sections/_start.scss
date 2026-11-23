@@ -34,7 +34,8 @@
 }
 
 .recent-shows__text,
-.template-row__text {
+.template-row__text,
+.media-row__text {
     min-width: 0;
     gap: 0;
 
@@ -61,4 +62,17 @@
 
 .folder-picker > .text-field {
     flex: 1 1 auto;
+}
+
+.media-row {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.show-settings {
+    max-width: 720px;
 }

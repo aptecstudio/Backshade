@@ -45,7 +45,10 @@
       "saveAsTemplate": "Salva come modello",
       "rename": "Rinomina",
       "closeShow": "Chiudi show",
-      "actions": "Azioni"
+      "actions": "Azioni",
+      "importShow": "Importa show",
+      "exportShow": "Esporta show",
+      "exported": "Show esportato in {file}."
     },
     "newShow": {
       "title": "Nuovo show",
@@ -78,7 +81,24 @@
       "deleteConfirm": "Il modello \"{name}\" verrà eliminato. Gli show creati da questo modello non cambiano.",
       "empty": "Non hai ancora creato modelli. Apri uno show e usa \"Salva come modello\".",
       "readOnly": "I modelli inclusi non si possono modificare.",
-      "saved": "Modello \"{name}\" salvato."
+      "saved": "Modello \"{name}\" salvato.",
+      "import": "Importa modello",
+      "export": "Esporta modello",
+      "exported": "Modello esportato in {file}.",
+      "imported": "Modello \"{name}\" importato."
+    },
+    "media": {
+      "title": "Media",
+      "import": "Importa media",
+      "empty": "Questo show non ha ancora media. I file importati vengono copiati nella cartella media dello show.",
+      "reveal": "Mostra nella cartella",
+      "delete": "Elimina",
+      "deleteTitle": "Elimina media",
+      "deleteConfirm": "Il file \"{name}\" verrà eliminato dalla cartella dello show.",
+      "kindAudio": "Audio",
+      "kindVideo": "Video",
+      "kindImage": "Immagine",
+      "count": "{count} file, {size}"
     },
     "recovery": {
       "title": "Recupera modifiche",
@@ -104,14 +124,34 @@
       "templateReadOnly": "I modelli inclusi non si possono modificare.",
       "noShow": "Nessuno show aperto.",
       "desktopOnly": "Questa azione è disponibile solo nell'applicazione desktop.",
-      "noRecovery": "Non ci sono modifiche da recuperare."
+      "noRecovery": "Non ci sono modifiche da recuperare.",
+      "invalidArchive": "Il file non è un archivio Backshade valido oppure è danneggiato.",
+      "wrongArchiveKind": "L'archivio contiene un tipo di contenuto diverso.",
+      "mediaNotFound": "Il file del media non esiste più.",
+      "invalidMediaPath": "Il percorso del media non è valido."
     },
     "settings": {
       "language": "Lingua",
       "languageHint": "La lingua è salvata su questo dispositivo.",
       "showsFolder": "Cartella degli show",
       "showsFolderHint": "I nuovi show vengono creati qui, se non scegli un'altra cartella.",
-      "chooseFolder": "Scegli cartella"
+      "chooseFolder": "Scegli cartella",
+      "application": "Applicazione",
+      "show": "Show",
+      "showGeneral": "Generale",
+      "description": "Descrizione",
+      "notes": "Note",
+      "timecode": "Timecode",
+      "timecodeRate": "Frame rate",
+      "fades": "Fade predefiniti",
+      "fadeIn": "Fade in",
+      "fadeOut": "Fade out",
+      "seconds": "s",
+      "showSettingsHint": "Le impostazioni dello show vengono salvate con lo show.",
+      "rate24": "24 fps",
+      "rate25": "25 fps",
+      "rate2997": "29,97 fps drop frame",
+      "rate30": "30 fps"
     },
     "about": {
       "title": "Informazioni su Backshade",
@@ -167,7 +207,11 @@
       "percent": "{value} %",
       "degrees": "{value} deg",
       "decibel": "{value} dB",
-      "bpm": "{value} bpm"
+      "bpm": "{value} bpm",
+      "bytes": "{value} B",
+      "kilobytes": "{value} KB",
+      "megabytes": "{value} MB",
+      "gigabytes": "{value} GB"
     },
     "catalog": {
       "title": "Catalogo componenti",

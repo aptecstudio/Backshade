@@ -112,6 +112,35 @@ export function openRecent(folder: string): Promise<void> {
     });
 }
 
+/** Importa uno show da un archivio .bshow e lo apre */
+export function importShow(): Promise<void> {
+    return guarded(async () => {
+        if (!await resolveUnsaved()) {
+            return;
+        }
+        const result = await engine().request('show.import');
+        if (result !== null) {
+            await afterOpen(result);
+        }
+    });
+}
+
+/** Esporta lo show aperto in un archivio .bshow; prima lo salva se serve */
+export function exportShow(): Promise<void> {
+    return guarded(async () => {
+        if (currentShow() === null) {
+            return;
+        }
+        if (currentShow()?.dirty === true) {
+            update(await engine().request('show.save'));
+        }
+        const file = await engine().request('show.export');
+        if (file !== null) {
+            await askChoice(t('start.exportShow'), t('start.exported', { file }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
+        }
+    });
+}
+
 /** Salva lo show aperto */
 export function saveShow(): Promise<void> {
     return guarded(async () => {

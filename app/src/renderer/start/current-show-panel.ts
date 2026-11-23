@@ -6,7 +6,7 @@
 import { Key, Label, Panel, Stack } from '../../framework/ts/index.js';
 import type { ShowSummary } from '../../shared/transport/engine-api.js';
 import { t } from '../i18n/i18n.js';
-import { closeShow, renameShow, saveAsTemplate, saveShow, saveShowAs } from '../show/show-commands.js';
+import { closeShow, exportShow, renameShow, saveAsTemplate, saveShow, saveShowAs } from '../show/show-commands.js';
 import { currentShow, onShowChange } from '../show/show-store.js';
 
 export class CurrentShowPanel extends Panel {
@@ -26,6 +26,7 @@ export class CurrentShowPanel extends Panel {
             [t('start.saveAs'), saveShowAs],
             [t('start.rename'), renameShow],
             [t('start.saveAsTemplate'), saveAsTemplate],
+            [t('start.exportShow'), exportShow],
             [t('start.closeShow'), closeShow]
         ];
         const keys = commands.map(([label, command]) => {

@@ -45,7 +45,10 @@
       "saveAsTemplate": "Save as template",
       "rename": "Rename",
       "closeShow": "Close show",
-      "actions": "Actions"
+      "actions": "Actions",
+      "importShow": "Import show",
+      "exportShow": "Export show",
+      "exported": "Show exported to {file}."
     },
     "newShow": {
       "title": "New show",
@@ -78,7 +81,24 @@
       "deleteConfirm": "The template \"{name}\" will be deleted. Shows created from it are not affected.",
       "empty": "You have not created any templates yet. Open a show and use \"Save as template\".",
       "readOnly": "Included templates cannot be changed.",
-      "saved": "Template \"{name}\" saved."
+      "saved": "Template \"{name}\" saved.",
+      "import": "Import template",
+      "export": "Export template",
+      "exported": "Template exported to {file}.",
+      "imported": "Template \"{name}\" imported."
+    },
+    "media": {
+      "title": "Media",
+      "import": "Import media",
+      "empty": "This show has no media yet. Imported files are copied into the media folder of the show.",
+      "reveal": "Show in folder",
+      "delete": "Delete",
+      "deleteTitle": "Delete media",
+      "deleteConfirm": "The file \"{name}\" will be deleted from the show folder.",
+      "kindAudio": "Audio",
+      "kindVideo": "Video",
+      "kindImage": "Image",
+      "count": "{count} files, {size}"
     },
     "recovery": {
       "title": "Recover changes",
@@ -104,14 +124,34 @@
       "templateReadOnly": "Included templates cannot be changed.",
       "noShow": "No show is open.",
       "desktopOnly": "This action is available only in the desktop application.",
-      "noRecovery": "There are no changes to recover."
+      "noRecovery": "There are no changes to recover.",
+      "invalidArchive": "The file is not a valid Backshade archive or it is damaged.",
+      "wrongArchiveKind": "The archive contains a different type of content.",
+      "mediaNotFound": "The media file no longer exists.",
+      "invalidMediaPath": "The media path is not valid."
     },
     "settings": {
       "language": "Language",
       "languageHint": "The language is saved on this device.",
       "showsFolder": "Shows folder",
       "showsFolderHint": "New shows are created here, unless you choose another folder.",
-      "chooseFolder": "Choose folder"
+      "chooseFolder": "Choose folder",
+      "application": "Application",
+      "show": "Show",
+      "showGeneral": "General",
+      "description": "Description",
+      "notes": "Notes",
+      "timecode": "Timecode",
+      "timecodeRate": "Frame rate",
+      "fades": "Default fades",
+      "fadeIn": "Fade in",
+      "fadeOut": "Fade out",
+      "seconds": "s",
+      "showSettingsHint": "Show settings are saved with the show.",
+      "rate24": "24 fps",
+      "rate25": "25 fps",
+      "rate2997": "29.97 fps drop frame",
+      "rate30": "30 fps"
     },
     "about": {
       "title": "About Backshade",
@@ -167,7 +207,11 @@
       "percent": "{value} %",
       "degrees": "{value} deg",
       "decibel": "{value} dB",
-      "bpm": "{value} bpm"
+      "bpm": "{value} bpm",
+      "bytes": "{value} B",
+      "kilobytes": "{value} KB",
+      "megabytes": "{value} MB",
+      "gigabytes": "{value} GB"
     },
     "catalog": {
       "title": "Component catalog",

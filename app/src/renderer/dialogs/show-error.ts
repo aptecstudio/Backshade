@@ -17,7 +17,11 @@ const MESSAGES: Record<string, TextKey> = {
     'template-read-only': 'errors.templateReadOnly',
     'no-show': 'errors.noShow',
     'desktop-only': 'errors.desktopOnly',
-    'no-recovery': 'errors.noRecovery'
+    'no-recovery': 'errors.noRecovery',
+    'invalid-archive': 'errors.invalidArchive',
+    'wrong-archive-kind': 'errors.wrongArchiveKind',
+    'media-not-found': 'errors.mediaNotFound',
+    'invalid-media-path': 'errors.invalidMediaPath'
 };
 
 /**
