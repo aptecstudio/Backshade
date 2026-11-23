@@ -81,6 +81,23 @@ Requested by the human on 2026-11-23, after the Studio One start page. Developed
 
 Status: Confirmed (2026-11-23).
 
+## Shows: implementation
+
+Built in the first block of Phase 2 (2026-11-23).
+
+- **Engine** (`src/main/shows/`): `ShowSession` holds the open show and is the only source of truth; `show-files.ts` reads and validates `show.json` (a newer `formatVersion` is refused), writes it atomically, keeps the last 10 saved versions in `history/` and writes the recovery copy in `autosave/` every 2 minutes when there are unsaved changes (and at quit). A show with unsaved changes is never replaced or closed silently: the engine answers `unsaved-changes`.
+- **Recent shows:** `recent-shows.json` in the user data folder, at most 20 entries, updated on create, open, save and save as; missing folders are reported, never removed automatically.
+- **Global settings:** `settings.json` in the user data folder (`defaultShowsFolder` for now).
+- **Errors:** methods throw `EngineError` with a stable code (for example `unsaved-changes`, `invalid-name`, `show-not-found`); the interface translates codes in `errors.*` texts (`src/renderer/dialogs/show-error.ts`).
+- **Names:** names chosen by the user become folder names without the characters forbidden on Windows, macOS or Linux; an existing folder gets a number (`Name 2.backshade`).
+- **Interface:** `show-store.ts` mirrors the open show from the `show.changed` event; `show-commands.ts` runs the user operations (new, open, open recent, save, save as, rename, save as template, close) and asks to save unsaved changes before replacing or closing the show, and offers recovery when opening.
+- **Start page:** it is the `start` section (key with the `house` icon). Without an open show it is the only reachable page besides the settings and the main section keys are disabled; when a show opens the last main section is restored.
+- **Shortcuts:** Ctrl or Cmd + S save, + Shift + S save as, + N new show, + O open show.
+- **Window close:** with unsaved changes the main window does not close; the engine sends `app.closeRequested`, the interface asks the user and then calls `app.confirmClose`.
+- **Framework additions:** `TextField`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules.
+
+Status: Confirmed (2026-11-23).
+
 ## Show templates
 
 Requested by the human on 2026-11-23 (Phase 2.9).
@@ -89,6 +106,7 @@ Requested by the human on 2026-11-23 (Phase 2.9).
 - Included templates live in the application; for now only "Empty show". More included templates come after the fixtures and the console (Phases 3 and 4).
 - User templates live in `templates/` in the user data folder (`app.getPath('userData')`), like the language packs: no administrator rights, they survive updates.
 - The user creates a template with "Save as template" from the open show (name and description), and can export and import a template as a single archive, with the same format as the show export (2.6).
+- Files: a template folder is `<name>.backshade/` with `show.json` and `template.json` (`name` and `description`, either a text or an object with one text per language code, used by the included templates). Template identifiers are `bundled:<folder name>` and `user:<folder name>`. Included templates live in `app/templates/`.
 - Template management screen (requested by the human on 2026-11-23), opened from the start page: it lists included and user templates; user templates can be renamed, have their description edited and be deleted (with confirmation); included templates are read-only.
 
 Status: Confirmed (2026-11-23).
