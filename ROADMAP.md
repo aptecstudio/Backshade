@@ -38,6 +38,7 @@ Versioning rules (see `AGENTS.md`):
 - [x] 1.3.1 Lucide icons as individual SVG files, with the sprite and the icon names generated at build
 - [x] 1.4 Design system: spacing tokens, palette, typography, base skeuomorphic components (panel, key, fader, knob, display), with the component catalog
   - [x] 1.4.1 Value input controls: time field with a time picker and jog wheel, color wheel for RGB values, typed values for faders and knobs
+  - [x] 1.4.2 Display of fader and knob values as percentage or 0-255, chosen separately in the settings
 - [x] 1.5 Application layout: top bar, section navigation, status bar, settings section with the language choice
 - [x] 1.6 Localization system: English default, Italian included, language packs installable by the user
 - [x] 1.7 Single transport layer between interface and engine (IPC), with typed contract and shared protocol
