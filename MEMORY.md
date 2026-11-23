@@ -460,17 +460,40 @@ Status: Confirmed (features), Proposed (technical choices).
 
 ## Multi-device
 
-Requested by the human on 2026-11-23 (Phase 15): several machines work on the same show, each with a department (lights, video, audio), in real time and in sync.
+Requested by the human on 2026-11-23 (Phase 15): several machines work on the same show in real time and in sync.
 
-- **Architecture: master and nodes** (confirmed by the human on 2026-11-23). The master holds the show and the clock and is the source of truth; the other machines are full Backshade instances joining as nodes with a role.
+- **Architecture: master and nodes** (confirmed by the human on 2026-11-23). The master holds the show and the clock and is the source of truth; the other machines are full Backshade instances joining as nodes.
+- **Two working modes** (requested by the human on 2026-11-23), which can be combined in the same session:
+  - **master-slave:** the slaves mirror the master (state and playback); a slave can be an additional operator position or a tracking backup that runs in parallel with its outputs disabled and takes over when needed;
+  - **distributed hardware:** the machines are synchronized and each one is dedicated to a task, driving only the hardware connected to it. The show stores a **hardware map** that assigns every output and input device (DMX interfaces and Art-Net universes, video outputs and displays, audio devices, MIDI controllers, timecode inputs) to a machine, identified by a stable machine identifier. Inputs on any machine are forwarded to the master. If a machine fails, its hardware can be reassigned to another machine with the same devices.
 - Each node drives its own outputs locally from the replicated state; frames are never streamed over the network, only state changes and clock data.
 - Transport: WebSocket, with the same protocol as IPC and the remote web interface (see Architecture); the server-side WebSocket choice is the one still to be evaluated in Dependencies.
 - Discovery: UDP broadcast through Node.js `dgram`, plus manual connection by address.
-- Clock sync: NTP-like round trip measurement between node and master, to align cue and timeline playback.
+- Clock sync: NTP-like round trip measurement between node and master, to align cue, timeline, audio and video playback.
 - Conflicts: edits go through the master, with edit locks per object.
 - Media: missing files are copied from the master and checked by hash.
 
-Status: Confirmed (architecture), Proposed (other points).
+Status: Confirmed (architecture and the two modes), Proposed (other points).
+
+## Touch and external controllers
+
+Requested by the human on 2026-11-23 (Phase 16). These are requirements for **every** component, also before Phase 16:
+
+- **Touch:** components use pointer events only (mouse, pen and touch with the same code), never functions available only on hover; hit areas are at least 48 px even when the visible control is smaller; several controls can be used at the same time with multi-touch (each drag follows its own pointer, as `RangeControl` already does); dragging a control never scrolls or zooms the page (`touch-action: none` on the controls); long press replaces the right click. A touch mode with larger controls can be chosen per device.
+- **External MIDI hardware:** every control that changes a value or triggers an action must be mappable with MIDI learn and must send feedback (LEDs, motorized faders) when the controller supports it; faders without motors use pickup to avoid jumps. Mappings are saved per show and per workstation; profiles for common controllers are bundled. MIDI goes through the Web MIDI API, with the permission granted by the main process.
+- OSC control surfaces use the OSC layer of Phase 9.2; HID devices such as Stream Deck need a native dependency and are to be evaluated.
+
+Status: Confirmed (requirements), Proposed (details).
+
+## Text gobos
+
+Requested by the human on 2026-11-23 (Phase 7.7): text layers for the video outputs and LED walls with a gobo look.
+
+- Text with font, size, weight, color, outline, alignment and position; gobo look with a shape mask and soft edge, focus (blur), rotation and prism repeat; animations (scroll, rotation, fade, type-on); dynamic texts (cue or song name, timecode, clock, countdown).
+- Recallable from scenes, cues and the timeline, saved in `show.json` with presets; shown in the 3D stage (screens, LED walls, virtual projectors) and usable in the pixel mapping.
+- Rendering in the output windows with WebGL or canvas, without new dependencies; fonts are the system fonts or font files copied into the show `media/` folder, so the show stays portable.
+
+Status: Confirmed (feature), Proposed (technical choices).
 
 ## Localization
 

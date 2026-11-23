@@ -97,7 +97,8 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 - [ ] 6.2 Widgets: key, fader, knob, color picker, XY pad, label, monitor
 - [ ] 6.3 Linking widgets to scenes, chasers, groups, media and cues
 - [ ] 6.4 Edit mode and run mode
-- [ ] 6.5 MIDI mapping of widgets
+- [ ] 6.5 MIDI mapping of widgets (with MIDI learn and feedback, see Phase 16)
+- [ ] 6.6 Touch use of the grid: large hit areas, several faders and keys at the same time with multi-touch (see Phase 16)
 
 ## Phase 7 - Audio and video
 
@@ -107,6 +108,13 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 - [ ] 7.4 Layers: video, overlay images, opacity, transitions
 - [ ] 7.5 Video inputs (webcams and capture cards)
 - [ ] 7.6 Preview and program
+- [ ] 7.7 Text gobos: text layers on the video outputs and LED walls, with a gobo look
+  - [ ] 7.7.1 Text, font, size, weight, color, outline, alignment and position
+  - [ ] 7.7.2 Gobo look: shape mask (circle or custom) with soft edge, focus (blur), rotation, prism repeat
+  - [ ] 7.7.3 Animations: scroll, rotation, fade, type-on; speed and direction
+  - [ ] 7.7.4 Dynamic texts: cue or song name, timecode, clock, countdown
+  - [ ] 7.7.5 Text gobos recallable from scenes, cues and the timeline, saved in `show.json` with their own presets
+  - [ ] 7.7.6 Shown in the 3D stage on screens, LED walls and virtual projectors (13.9), and usable in the pixel mapping (5.4, 14.5)
 
 ## Phase 8 - Pre-programmed shows (track timeline)
 
@@ -121,7 +129,7 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 
 - [ ] 9.1 Lights, audio and video integration: cross triggers and sync
 - [ ] 9.2 External audio mixers via OSC (native UDP)
-- [ ] 9.3 Mixers and controllers via MIDI (Web MIDI API)
+- [ ] 9.3 Mixers and controllers via MIDI (Web MIDI API), on the shared MIDI layer of Phase 16
 - [ ] 9.4 Profiles for the most common mixers (to be defined)
 - [ ] 9.5 External timecode (MIDI Timecode, to be evaluated)
 
@@ -220,7 +228,10 @@ Mapping of the video outputs on real surfaces: screens, projection surfaces, sce
 
 ## Phase 15 - Multi-device
 
-Several Backshade machines work on the same show at the same time, each with its own department (for example lights on one machine, video on another), communicating in real time and staying in sync. It extends the transport of the remote web interface (Phase 10) and depends on the shared clock (Phase 8.5). Architecture: one master and several nodes (see `MEMORY.md`, Multi-device).
+Several Backshade machines work on the same show at the same time, communicating in real time and staying in sync. It extends the transport of the remote web interface (Phase 10) and depends on the shared clock (Phase 8.5). Architecture: one master and several nodes (see `MEMORY.md`, Multi-device), with two working modes that can be combined:
+
+- **Master-slave:** the slaves follow the master entirely (state and playback), as additional operator positions or as a backup ready to take over.
+- **Distributed hardware:** the machines are synchronized and each one is dedicated to a specific task, driving only the part of the hardware connected to it (for example DMX interfaces on one machine, video outputs on another, audio interfaces on a third).
 
 - [ ] 15.1 Session: a machine starts as master and opens the show; other machines join as nodes on the local network
 - [ ] 15.2 Discovery of masters on the network (UDP broadcast through `dgram`) and manual connection by address
@@ -234,3 +245,37 @@ Several Backshade machines work on the same show at the same time, each with its
 - [ ] 15.10 Disconnection handling: a node that loses the master keeps its outputs on the last state and resynchronizes when it reconnects
 - [ ] 15.11 Backup master that takes over if the master stops (to be evaluated)
 - [ ] 15.12 Access protection with a session PIN, shared with the remote web interface (Phase 10.4)
+- [ ] 15.13 Master-slave mode:
+  - [ ] 15.13.1 Slave machines mirror the master: same state, same playback, same cue position
+  - [ ] 15.13.2 Slave as operator position: it can show and control the show with the permissions of its role
+  - [ ] 15.13.3 Slave as backup (tracking backup): it runs the show in parallel with its outputs disabled and takes over on request or when the master stops (extends 15.11)
+- [ ] 15.14 Distributed hardware mode:
+  - [ ] 15.14.1 Stable machine identity (identifier and name), kept across sessions and restarts
+  - [ ] 15.14.2 Hardware map saved in the show: every output and input device (DMX interfaces and Art-Net universes, video outputs and displays, audio devices, MIDI controllers, timecode inputs) is assigned to a machine
+  - [ ] 15.14.3 Each machine drives only the hardware assigned to it; the others never touch it
+  - [ ] 15.14.4 Inputs connected to any machine (MIDI controllers, timecode, touch screens) are forwarded to the master and act on the whole show
+  - [ ] 15.14.5 Synchronized start of cues, timeline, audio and video on all machines (clock of 15.6), with a check of the residual offset
+  - [ ] 15.14.6 Hardware map editor: list of the machines with their detected devices, assignment by drag or selection, warnings for devices missing on the assigned machine
+  - [ ] 15.14.7 Failure of a machine: alert and quick reassignment of its hardware to another machine where the same devices are available
+
+## Phase 16 - Touch and external controllers
+
+Requirements that apply to the whole interface: every new component is designed to work with touch screens and to be controlled from external MIDI hardware. This phase collects the shared parts; each phase applies them to its own components.
+
+- [ ] 16.1 Touch support in every component:
+  - [ ] 16.1.1 Pointer events only (mouse, pen, touch with the same code), no functions available only on hover
+  - [ ] 16.1.2 Hit areas of at least 48 px also for small controls (square keys, knobs), with the visual size unchanged
+  - [ ] 16.1.3 Multi-touch: several faders, knobs and keys moved or pressed at the same time
+  - [ ] 16.1.4 No accidental scrolling or zooming while a control is dragged; long press instead of right click
+  - [ ] 16.1.5 Gestures where useful: pinch zoom and two-finger pan in the timeline, the 3D stage and the mapping editor
+  - [ ] 16.1.6 Touch mode with larger controls, chosen per device
+- [ ] 16.2 MIDI layer shared by the whole application (Web MIDI API, permission granted by the main process):
+  - [ ] 16.2.1 Detection of MIDI devices and hot plug, with status in the interface
+  - [ ] 16.2.2 MIDI learn on any control: faders, knobs, keys, go and back, scenes, chasers, cues, grid widgets
+  - [ ] 16.2.3 Feedback to the controller: LEDs, motorized faders, displays, rings of the encoders
+  - [ ] 16.2.4 Pickup (soft takeover) for faders and knobs without motors, to avoid jumps
+  - [ ] 16.2.5 Notes, control change, program change, pitch bend, relative encoders, MIDI Show Control
+  - [ ] 16.2.6 Mappings saved per show and per workstation (the same show on different hardware)
+  - [ ] 16.2.7 Ready-made profiles for common controllers (for example Akai APC, Novation Launchpad and Launch Control, Behringer X-Touch, Korg nanoKONTROL), also in Mackie Control mode
+  - [ ] 16.2.8 Monitor of the received and sent MIDI messages
+- [ ] 16.3 Other controllers: OSC control surfaces (for example TouchOSC) on the OSC layer of Phase 9.2; HID devices such as Stream Deck to be evaluated (they need a native dependency)
