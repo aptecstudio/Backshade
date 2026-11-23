@@ -23,3 +23,9 @@ export const BUNDLED_LOCALES_DIR = path.join(WEB_ROOT, 'locales');
 
 /** Pacchetti di lingua installati dall'utente, nella cartella dati dell'utente */
 export const USER_LOCALES_DIR = path.join(app.getPath('userData'), 'locales');
+
+/** Modelli di show inclusi nell'applicazione */
+export const BUNDLED_TEMPLATES_DIR = path.join(appRoot, 'templates');
+
+/** Modelli di show creati dall'utente */
+export const USER_TEMPLATES_DIR = path.join(app.getPath('userData'), 'templates');

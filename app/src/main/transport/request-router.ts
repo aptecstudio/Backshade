@@ -5,6 +5,7 @@
 
 import type { EngineMethod, EngineMethods } from '../../shared/transport/engine-api';
 import { isRequestMessage, type ResponseMessage } from '../../shared/transport/protocol';
+import { EngineError } from './engine-error';
 
 /** Provenienza di una richiesta */
 export interface RequestContext {
@@ -54,6 +55,9 @@ export class RequestRouter {
             const result = await handler(message.params, context);
             return { type: 'response', id: message.id, ok: true, result };
         } catch (error) {
+            if (error instanceof EngineError) {
+                return { type: 'response', id: message.id, ok: false, error: { code: error.code, message: error.message } };
+            }
             console.error(`Errore nel metodo ${message.method}`, error);
             const description = error instanceof Error ? error.message : String(error);
             return { type: 'response', id: message.id, ok: false, error: { code: 'method-failed', message: description } };

@@ -11,6 +11,10 @@ import * as appProtocol from '../protocol/app-protocol';
 const SURFACE_COLOR = '#16171a';
 
 let instance: BrowserWindow | null = null;
+// Decide se la finestra può chiudersi; false la tiene aperta
+let closeGuard: () => boolean = () => true;
+// La chiusura è stata confermata dall'utente
+let closeAllowed = false;
 
 /**
  * Crea la finestra principale, se non è già aperta.
@@ -42,8 +46,15 @@ export function create(page: string): BrowserWindow {
         window.show();
     });
 
+    window.on('close', (event) => {
+        if (!closeAllowed && !closeGuard()) {
+            event.preventDefault();
+        }
+    });
+
     window.on('closed', () => {
         instance = null;
+        closeAllowed = false;
     });
 
     void window.loadURL(appProtocol.pageUrl(page));
@@ -63,4 +74,23 @@ export function focus(): void {
         instance.restore();
     }
     instance.focus();
+}
+
+/**
+ * Imposta la funzione che decide se la finestra principale può chiudersi.
+ */
+export function setCloseGuard(guard: () => boolean): void {
+    closeGuard = guard;
+}
+
+/**
+ * Chiude la finestra principale dopo la conferma dell'utente, senza
+ * chiedere di nuovo.
+ */
+export function closeConfirmed(): void {
+    if (instance === null) {
+        return;
+    }
+    closeAllowed = true;
+    instance.close();
 }
