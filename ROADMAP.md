@@ -49,20 +49,20 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 - [x] 2.1 Show folder format and `show.json` with `formatVersion`
 - [x] 2.2 New, open, save, save as, with autosave recovery and history of saved versions
 - [x] 2.3 Show cloning (save as: copy of the folder with a new name and identifier)
-- [ ] 2.4 Internal media management with relative paths
+- [x] 2.4 Internal media management with relative paths (Media section: import, list, show in folder, delete)
 - [x] 2.5 Recent shows list and default shows folder, chosen in the settings
-- [ ] 2.6 Export and import as a single archive for transport
-- [ ] 2.7 Global application settings separate from show settings
+- [x] 2.6 Export and import as a single archive for transport (`.bshow`, internal ZIP with Zip64)
+- [x] 2.7 Global application settings separate from show settings (description and notes, timecode frame rate, default fades)
 - [x] 2.8 Start page at launch, as in Studio One (see `MEMORY.md`, Start page)
   - [x] 2.8.1 Full page in the main window, shown at launch and when a show is closed; reopened with a "Start" key in the top bar
   - [x] 2.8.2 Recent shows with name, last modified date and folder; one click opens the show; moved or deleted shows are marked
   - [x] 2.8.3 New show (name and folder) and open show from a folder
   - [x] 2.8.4 Choice of the template for a new show, among the included templates and those created by the user
-- [ ] 2.9 Show templates (see `MEMORY.md`, Show templates)
+- [x] 2.9 Show templates (see `MEMORY.md`, Show templates)
   - [x] 2.9.1 A template is a complete show folder; a new show is a copy with a new name and identifier
   - [x] 2.9.2 Included template: "Empty show" (more included templates after Phases 3 and 4)
   - [x] 2.9.3 Save as template from the open show, with name and description, in the user data folder
-  - [ ] 2.9.4 Export and import of a template as a single archive, with the same format as the show export (2.6)
+  - [x] 2.9.4 Export and import of a template as a single archive, with the same format as the show export (2.6)
   - [x] 2.9.5 Template management screen, opened from the start page: list of included and user templates; rename, edit the description and delete user templates; included templates are read-only
 
 ## Phase 3 - DMX and Art-Net

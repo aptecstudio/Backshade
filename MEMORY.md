@@ -94,7 +94,43 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Start page:** it is the `start` section (key with the `house` icon). Without an open show it is the only reachable page besides the settings and the main section keys are disabled; when a show opens the last main section is restored.
 - **Shortcuts:** Ctrl or Cmd + S save, + Shift + S save as, + N new show, + O open show.
 - **Window close:** with unsaved changes the main window does not close; the engine sends `app.closeRequested`, the interface asks the user and then calls `app.confirmClose`.
-- **Framework additions:** `TextField`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules.
+- **Framework additions:** `TextField`, `TextArea`, `NumberField` (accepts comma or point as decimal separator, clamps to its limits), `ChoiceKeys`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules and set `color-scheme: dark` for native controls.
+- **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC.
+
+Status: Confirmed (2026-11-23).
+
+## Show media
+
+Built in Phase 2.4 (2026-11-23).
+
+- The `media/` folder of the show is the only source of truth for media files: the list is read from the folder, so it can never disagree with the files on disk. Cues and tracks of later phases will reference media by their path relative to `media/`, always with `/` as separator.
+- Accepted types by extension (`src/shared/show/media-kinds.ts`): audio (wav, mp3, aif, aiff, flac, ogg, m4a), video (mp4, mov, m4v, webm, mkv), image (png, jpg, jpeg, webp, gif, svg). Other files are skipped.
+- Import copies the files (asynchronously, so large videos do not block the engine); a name already in use gets a number (`Name 2.wav`). Import and delete act on disk immediately and are not part of the unsaved changes of `show.json`.
+- Every path coming from the interface is resolved inside `media/`; paths that leave it are refused (`invalid-media-path`).
+
+Status: Confirmed (2026-11-23).
+
+## Show settings
+
+Built in Phase 2.7 (2026-11-23), stored in `show.json` under `settings` (`src/shared/show/show-settings.ts`):
+
+- `description` and `notes`: free text;
+- `timecodeRate`: `24`, `25` (default), `29.97df` (drop frame) or `30`;
+- `fadeInSeconds` and `fadeOutSeconds`: default fades of scenes and cues, 0 to 600 seconds, default 0.
+- Missing or invalid values in a file are completed with the defaults when the show is read; invalid values sent by the interface are refused (`invalid-params`).
+- The settings section has two tabs: Application (saved on the workstation) and Show (saved with the show, available only with an open show). Show settings changes are unsaved changes of the show.
+
+Status: Confirmed (2026-11-23).
+
+## Archives
+
+Built in Phases 2.6 and 2.9.4 (2026-11-23).
+
+- Extensions: `.bshow` for shows, `.btemplate` for templates (confirmed by the human on 2026-11-23). Both are standard ZIP files, readable by any ZIP tool.
+- Content: `archive.json` (`kind` show or template, `formatVersion` 1, `name`, `createdWith`) and `content/` with the files of the show or template folder, without `autosave/` and `history/`.
+- ZIP implementation (`src/main/archive/`): text files (JSON, SVG, text) are compressed with deflate, media are stored without recompression and streamed; Zip64 is used for entries, offsets or archives over 4 GB. The reader supports store and deflate, checks CRC and size of every file and refuses paths outside the destination. Verified with `unzip` and `7z`.
+- Export requires a saved show (the interface saves it first). Import extracts into a temporary folder, validates it and only then moves it to its final place; an invalid archive leaves nothing on disk (`invalid-archive`), an archive of the wrong kind is refused (`wrong-archive-kind`).
+- Imported shows go to the default shows folder and keep their identifier (the same show moved to another workstation); imported templates go to the user templates folder.
 
 Status: Confirmed (2026-11-23).
 
@@ -292,6 +328,7 @@ Principle: as few dependencies as possible.
 
 Features built with native APIs, without extra dependencies:
 
+- ZIP archives (`.bshow`, `.btemplate`): internal reader and writer on Node.js `zlib`, with Zip64 (decided by the human on 2026-11-23).
 - Art-Net: UDP through Node.js `dgram`.
 - DOM manipulation: internal TypeScript framework (replaces jQuery).
 - Web server: Node.js `http` module.
