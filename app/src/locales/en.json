@@ -150,7 +150,13 @@
       "rate24": "24 fps",
       "rate25": "25 fps",
       "rate2997": "29.97 fps drop frame",
-      "rate30": "30 fps"
+      "rate30": "30 fps",
+      "controlValues": "Fader and knob values",
+      "faderValues": "Faders",
+      "knobValues": "Knobs",
+      "valuesPercent": "Percentage",
+      "valuesDmx": "0-255",
+      "controlValuesHint": "The choice is saved on this device."
     },
     "about": {
       "title": "About Backshade",

@@ -150,7 +150,13 @@
       "rate24": "24 fps",
       "rate25": "25 fps",
       "rate2997": "29,97 fps drop frame",
-      "rate30": "30 fps"
+      "rate30": "30 fps",
+      "controlValues": "Valori di fader e trimmer",
+      "faderValues": "Fader",
+      "knobValues": "Trimmer",
+      "valuesPercent": "Percentuale",
+      "valuesDmx": "0-255",
+      "controlValuesHint": "La scelta è salvata su questo dispositivo."
     },
     "about": {
       "title": "Informazioni su Backshade",
@@ -232,7 +238,7 @@
       "squareKeys": "Tasti quadrati",
       "functionKeys": "Tasti funzione",
       "displays": "Display",
-      "controls": "Manopole e fader",
+      "controls": "Trimmer e fader",
       "sample": {
         "washLeft": "Wash sx",
         "spot": "Spot",

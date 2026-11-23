@@ -39,7 +39,7 @@ export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends 
     private current = Number.NaN;
     private readonly changes = new Emitter<number>();
     private readonly renders = new Emitter<number>();
-    private readonly formatValue: (value: number) => string;
+    private formatValue: (value: number) => string;
 
     protected constructor(element: E, options: RangeControlOptions) {
         super(element);
@@ -91,6 +91,16 @@ export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends 
      */
     onRender(listener: (value: number) => void): Unsubscribe {
         return this.renders.subscribe(listener);
+    }
+
+    /**
+     * Changes the value text read by assistive technologies.
+     */
+    setFormatValue(format: (value: number) => string): void {
+        this.formatValue = format;
+        if (!Number.isNaN(this.current)) {
+            this.element.setAttribute('aria-valuetext', format(this.current));
+        }
     }
 
     /**

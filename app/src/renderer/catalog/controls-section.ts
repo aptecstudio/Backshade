@@ -19,6 +19,7 @@ import {
     type FaderTick
 } from '../../framework/ts/index.js';
 import { t } from '../i18n/i18n.js';
+import { bindControlValue } from '../preferences/control-values.js';
 
 /** Sample data of a channel strip */
 interface SampleStrip {
@@ -54,14 +55,14 @@ export class ControlsSection extends Panel {
      * Sample channel strip: display, knob, keys, fader and select.
      */
     private strip(sample: SampleStrip, number: number): Stack {
-        const percent = (value: number): string => t('units.percent', { value: Math.round(value * 100) });
-        const display = new ChannelDisplay({ name: sample.name, value: percent(sample.value), level: sample.value, color: sample.color });
-        const fader = new Fader({ label: t('console.channel', { number }), value: sample.value, scale: sample.scale, formatValue: percent });
+        const display = new ChannelDisplay({ name: sample.name, value: '', level: sample.value, color: sample.color });
+        const fader = new Fader({ label: t('console.channel', { number }), value: sample.value, scale: sample.scale });
+        const input = new RangeInput(fader, { label: t('console.channel', { number }) });
+        const knob = new Knob({ label: t('attributes.intensity'), value: 0.5 });
 
-        fader.onChange((value) => {
-            display.setValue(percent(value));
-            display.setLevel(value);
-        });
+        this.track(fader.onRender((value) => display.setLevel(value)));
+        this.track(bindControlValue('fader', fader, { input, text: (text) => display.setValue(text) }));
+        this.track(bindControlValue('knob', knob));
 
         return new Stack({
             gap: 2,
@@ -69,7 +70,7 @@ export class ControlsSection extends Panel {
             classes: ['catalog-strip'],
             children: [
                 display,
-                new Knob({ label: t('attributes.intensity'), value: 0.5 }),
+                knob,
                 new Stack({
                     direction: 'row',
                     gap: 1,
@@ -79,7 +80,7 @@ export class ControlsSection extends Panel {
                     ]
                 }),
                 fader,
-                new RangeInput(fader, { label: t('console.channel', { number }), unit: '%' }),
+                input,
                 new SquareKey({ variant: 'select', text: t('console.selectShort'), label: t('console.select'), on: number === 1 }),
                 new Label({ text: String(number), size: 'small', weight: 'medium' })
             ]
@@ -87,10 +88,9 @@ export class ControlsSection extends Panel {
     }
 
     private grandMaster(): Stack {
-        const percent = (value: number): string => t('units.percent', { value: Math.round(value * 100) });
-        const level = new Label({ text: percent(1), size: 'small' });
-        const fader = new Fader({ label: t('console.grandMaster'), value: 1, formatValue: percent });
-        fader.onChange((value) => level.setText(percent(value)));
+        const level = new Label({ text: '', size: 'small' });
+        const fader = new Fader({ label: t('console.grandMaster'), value: 1 });
+        this.track(bindControlValue('fader', fader, { text: (text) => level.setText(text) }));
 
         return new Stack({
             gap: 2,
@@ -100,17 +100,17 @@ export class ControlsSection extends Panel {
     }
 
     private programmerKnob(): Stack {
-        const percent = (value: number): string => t('units.percent', { value: Math.round(value * 100) });
-        const display = new ValueDisplay({ caption: t('attributes.intensity'), value: percent(0.85) });
-        const knob = new Knob({ label: t('attributes.intensity'), value: 0.85, size: 'large', formatValue: percent });
-        knob.onChange((value) => display.setValue(percent(value)));
+        const display = new ValueDisplay({ caption: t('attributes.intensity'), value: '' });
+        const knob = new Knob({ label: t('attributes.intensity'), value: 0.85, size: 'large' });
+        const input = new RangeInput(knob, { label: t('attributes.intensity') });
+        this.track(bindControlValue('knob', knob, { input, text: (text) => display.setValue(text) }));
 
         return new Stack({
             direction: 'row',
             gap: 2,
             align: 'center',
             classes: ['catalog-displays'],
-            children: [knob, new RangeInput(knob, { label: t('attributes.intensity'), unit: '%' }), display]
+            children: [knob, input, display]
         });
     }
 }

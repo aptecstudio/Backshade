@@ -9,6 +9,7 @@ import { t } from '../../i18n/i18n.js';
 import { currentShow, onShowChange } from '../../show/show-store.js';
 import { engine } from '../../transport/engine.js';
 import { AboutSettings } from './about-settings.js';
+import { ControlValuesSettings } from './control-values-settings.js';
 import { LanguageSettings } from './language-settings.js';
 import { ShowSettingsPanels } from './show-settings-panels.js';
 import { ShowsFolderSettings } from './shows-folder-settings.js';
@@ -49,7 +50,7 @@ export class SettingsSection extends Stack {
         this.content?.destroy();
         this.content = null;
         if (tab === 'application') {
-            this.mountContent(new Stack({ gap: 3, children: [new LanguageSettings(), new ShowsFolderSettings(), new AboutSettings()] }));
+            this.mountContent(new Stack({ gap: 3, children: [new LanguageSettings(), new ControlValuesSettings(), new ShowsFolderSettings(), new AboutSettings()] }));
             return;
         }
         void engine().request('show.getSettings').then((settings) => {

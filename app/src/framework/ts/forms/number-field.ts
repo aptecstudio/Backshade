@@ -31,12 +31,13 @@ export class NumberField extends Component<HTMLDivElement> {
     private readonly input: HTMLInputElement;
     private readonly changes = new Emitter<number>();
     private readonly options: NumberFieldOptions;
+    private readonly unit: HTMLSpanElement;
     private current: number;
 
     constructor(options: NumberFieldOptions) {
         super(create('div', { classes: ['text-field', 'number-field'] }));
 
-        this.options = options;
+        this.options = { ...options };
         this.current = options.value;
         const id = `number-field-${nextId++}`;
         this.input = create('input', {
@@ -44,10 +45,9 @@ export class NumberField extends Component<HTMLDivElement> {
             attributes: { id, type: 'text', inputmode: 'decimal', autocomplete: 'off' }
         });
 
-        const row = create('div', { classes: ['number-field__row'], children: [this.input] });
-        if (options.unit !== undefined) {
-            row.append(create('span', { classes: ['number-field__unit'], text: options.unit }));
-        }
+        this.unit = create('span', { classes: ['number-field__unit'], text: options.unit ?? '' });
+        this.unit.hidden = options.unit === undefined || options.unit === '';
+        const row = create('div', { classes: ['number-field__row'], children: [this.input, this.unit] });
         if (options.label !== undefined) {
             this.element.append(create('label', { classes: ['text-field__label'], attributes: { for: id }, text: options.label }));
         } else {
@@ -77,6 +77,20 @@ export class NumberField extends Component<HTMLDivElement> {
     setValue(value: number): void {
         this.current = clamp(value, this.options.min, this.options.max);
         this.render();
+    }
+
+    /**
+     * Changes limits, decimal digits and unit, for example to switch from a
+     * percentage to a 0 to 255 value; the current value is kept within the new limits.
+     */
+    setRange(range: Pick<NumberFieldOptions, 'min' | 'max' | 'decimals' | 'unit'>): void {
+        this.options.min = range.min;
+        this.options.max = range.max;
+        this.options.decimals = range.decimals;
+        this.options.unit = range.unit;
+        this.unit.textContent = range.unit ?? '';
+        this.unit.hidden = range.unit === undefined || range.unit === '';
+        this.setValue(this.current);
     }
 
     /**
