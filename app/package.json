@@ -7,11 +7,23 @@
   "author": "Aptec Studio",
   "homepage": "https://www.aptecstudio.com",
   "license": "GPL-3.0-only",
-  "main": "src/main/main.js",
+  "main": "dist/node/main/main.js",
   "scripts": {
-    "start": "electron ."
+    "clean": "node scripts/clean.mts",
+    "build:icons": "node scripts/build-icons.mts",
+    "build:locales": "node scripts/build-locales.mts",
+    "build:node": "tsc -p tsconfig.node.json",
+    "build:web": "tsc -p tsconfig.web.json",
+    "build:styles": "sass --load-path=src --no-source-map src/renderer/styles/main.scss dist/web/renderer/styles/main.css",
+    "build:static": "node scripts/copy-static.mts",
+    "build": "npm run clean && npm run build:icons && npm run build:locales && npm run build:node && npm run build:web && npm run build:styles && npm run build:static",
+    "check:scripts": "tsc -p tsconfig.scripts.json",
+    "start": "npm run build && electron .",
+    "catalog": "npm run build && electron . --catalog"
   },
   "devDependencies": {
-    "electron": "45.4.1"
+    "electron": "45.4.1",
+    "sass": "1.108.2",
+    "typescript": "7.0.2"
   }
 }
