@@ -59,10 +59,11 @@ export class ControlsSection extends Panel {
         const fader = new Fader({ label: t('console.channel', { number }), value: sample.value, scale: sample.scale });
         const input = new RangeInput(fader, { label: t('console.channel', { number }) });
         const knob = new Knob({ label: t('attributes.intensity'), value: 0.5 });
+        const knobInput = new RangeInput(knob, { label: t('attributes.intensity') });
 
         this.track(fader.onRender((value) => display.setLevel(value)));
         this.track(bindControlValue('fader', fader, { input, text: (text) => display.setValue(text) }));
-        this.track(bindControlValue('knob', knob));
+        this.track(bindControlValue('knob', knob, { input: knobInput }));
 
         return new Stack({
             gap: 2,
@@ -71,6 +72,7 @@ export class ControlsSection extends Panel {
             children: [
                 display,
                 knob,
+                knobInput,
                 new Stack({
                     direction: 'row',
                     gap: 1,
