@@ -1,5 +1,5 @@
 /**
- * Marchio nella barra in alto: logo, nome dell'applicazione e nome dello show.
+ * Brand in the top bar: logo, application name and show name.
  */
 
 import { ImageView, Label, Stack } from '../../framework/ts/index.js';
@@ -28,8 +28,8 @@ export class BrandBlock extends Stack {
     }
 
     /**
-     * Mostra il nome dello show aperto, con un asterisco se ci sono modifiche
-     * non salvate, o il testo predefinito se nessuno show è aperto.
+     * Shows the name of the open show, with an asterisk if there are unsaved
+     * changes, or the default text if no show is open.
      */
     setShow(name: string | null, dirty: boolean): void {
         this.showName.setText(name === null ? t('shell.noShow') : `${name}${dirty ? ' *' : ''}`);

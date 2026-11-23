@@ -1,6 +1,6 @@
 /**
- * Schermata iniziale, come la pagina Start di Studio One: azioni e show
- * aperto a sinistra, show recenti a destra.
+ * Start page, like the Studio One Start page: actions and open
+ * show on the left, recent shows on the right.
  */
 
 import { Stack } from '../../framework/ts/index.js';

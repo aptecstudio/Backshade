@@ -1,22 +1,22 @@
 /**
- * Domanda all'utente con un messaggio e alcune scelte: restituisce la
- * scelta fatta, o null se la finestra viene annullata con Esc.
+ * Asks the user a question with a message and some choices: returns the
+ * choice made, or null if the dialog is cancelled with Esc.
  */
 
 import { Dialog, Key, Label } from '../../framework/ts/index.js';
 
-/** Scelta offerta all'utente */
+/** Choice offered to the user */
 export interface Choice<T extends string> {
     id: T;
     label: string;
-    /** Scelta principale, evidenziata */
+    /** Main choice, highlighted */
     primary?: boolean;
-    /** Scelta che distrugge dati, segnata in rosso */
+    /** Choice that destroys data, marked in red */
     destructive?: boolean;
 }
 
 /**
- * Mostra la domanda e attende la risposta.
+ * Shows the question and waits for the answer.
  */
 export function askChoice<T extends string>(title: string, message: string, choices: readonly Choice<T>[]): Promise<T | null> {
     return new Promise((resolve) => {

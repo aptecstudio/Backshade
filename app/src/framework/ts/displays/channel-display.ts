@@ -1,6 +1,6 @@
 /**
- * Piccolo display di canale: nome, valore e barra di livello nel colore
- * del canale.
+ * Small channel display: name, value and level bar in the channel
+ * color.
  */
 
 import { Component } from '../core/component.js';
@@ -8,15 +8,15 @@ import { clamp } from '../core/clamp.js';
 import { create } from '../dom/create.js';
 import { channelColorClass, type ChannelColor } from '../theme/channel-colors.js';
 
-/** Opzioni di un display di canale */
+/** Channel display options */
 export interface ChannelDisplayOptions {
-    /** Nome del canale */
+    /** Channel name */
     name: string;
-    /** Valore già formattato, ad esempio "85 %" */
+    /** Already formatted value, for example "85 %" */
     value: string;
-    /** Livello della barra, da 0 a 1 */
+    /** Bar level, from 0 to 1 */
     level: number;
-    /** Colore del canale */
+    /** Channel color */
     color: ChannelColor;
 }
 
@@ -43,28 +43,28 @@ export class ChannelDisplay extends Component<HTMLDivElement> {
     }
 
     /**
-     * Cambia il nome del canale.
+     * Changes the channel name.
      */
     setName(name: string): void {
         this.nameElement.textContent = name;
     }
 
     /**
-     * Cambia il valore mostrato.
+     * Changes the displayed value.
      */
     setValue(value: string): void {
         this.valueElement.textContent = value;
     }
 
     /**
-     * Cambia il livello della barra, da 0 a 1.
+     * Changes the bar level, from 0 to 1.
      */
     setLevel(level: number): void {
         this.levelFill.style.setProperty('--level', String(clamp(level, 0, 1)));
     }
 
     /**
-     * Cambia il colore del canale.
+     * Changes the channel color.
      */
     setColor(color: ChannelColor): void {
         this.element.classList.replace(channelColorClass(this.color), channelColorClass(color));

@@ -1,7 +1,7 @@
 /**
- * Elenco delle sezioni dell'applicazione, nell'ordine della navigazione.
- * Ogni sezione dichiara il proprio testo, un'icona opzionale e la funzione
- * che ne crea il contenuto, chiamata solo quando la sezione viene aperta.
+ * List of the application sections, in navigation order.
+ * Each section declares its text, an optional icon and the function
+ * that creates its content, called only when the section is opened.
  */
 
 import type { Component, IconName } from '../../framework/ts/index.js';
@@ -11,21 +11,21 @@ import { MediaSection } from './media/media-section.js';
 import { PlaceholderSection } from './placeholder-section.js';
 import { SettingsSection } from './settings/settings-section.js';
 
-/** Identificativo di una sezione */
+/** Identifier of a section */
 export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'media' | 'settings';
 
-/** Definizione di una sezione */
+/** Section definition */
 export interface SectionDefinition {
     id: SectionId;
-    /** Testo del tasto di navigazione */
+    /** Text of the navigation key */
     labelKey: TextKey;
-    /** Se presente, il tasto mostra solo l'icona */
+    /** If present, the key shows only the icon */
     icon?: IconName;
-    /** Crea il contenuto della sezione */
+    /** Creates the content of the section */
     create(): Component;
 }
 
-/** Sezioni di lavoro sullo show, mostrate come tasti nella barra in alto */
+/** Working sections of the show, shown as keys in the top bar */
 export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'console', labelKey: 'sections.console', create: () => new PlaceholderSection('sections.console') },
     { id: 'virtualConsole', labelKey: 'sections.virtualConsole', create: () => new PlaceholderSection('sections.virtualConsole') },
@@ -34,7 +34,7 @@ export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'media', labelKey: 'sections.media', create: () => new MediaSection() }
 ];
 
-/** Schermata iniziale con gli show recenti */
+/** Start page with the recent shows */
 export const START_SECTION: SectionDefinition = {
     id: 'start',
     labelKey: 'start.title',
@@ -42,7 +42,7 @@ export const START_SECTION: SectionDefinition = {
     create: () => new StartPage()
 };
 
-/** Sezione delle impostazioni */
+/** Settings section */
 export const SETTINGS_SECTION: SectionDefinition = {
     id: 'settings',
     labelKey: 'sections.settings',
@@ -50,14 +50,14 @@ export const SETTINGS_SECTION: SectionDefinition = {
     create: () => new SettingsSection()
 };
 
-/** Tutte le sezioni */
+/** All the sections */
 export const ALL_SECTIONS: readonly SectionDefinition[] = [START_SECTION, ...MAIN_SECTIONS, SETTINGS_SECTION];
 
-/** Sezione di lavoro aperta quando si apre il primo show */
+/** Working section opened when the first show is opened */
 export const DEFAULT_SECTION: SectionId = 'console';
 
 /**
- * Indica se un testo è l'identificativo di una sezione di lavoro sullo show.
+ * Tells whether a text is the identifier of a working section of the show.
  */
 export function isMainSectionId(value: string | null): value is SectionId {
     return MAIN_SECTIONS.some((section) => section.id === value);

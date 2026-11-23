@@ -1,19 +1,19 @@
 /**
- * Testo semplice: etichette, didascalie e titoli.
+ * Plain text: labels, captions and titles.
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 
-/** Opzioni di un'etichetta */
+/** Label options */
 export interface LabelOptions {
-    /** Testo, già tradotto */
+    /** Text, already translated */
     text: string;
-    /** Tono del colore: primario (predefinito) o secondario */
+    /** Color tone: primary (default) or secondary */
     tone?: 'primary' | 'secondary' | 'accent';
-    /** Dimensione: piccola, normale (predefinita) o grande */
+    /** Size: small, normal (default) or large */
     size?: 'small' | 'base' | 'large';
-    /** Peso: normale (predefinito) o medio */
+    /** Weight: regular (default) or medium */
     weight?: 'regular' | 'medium';
 }
 
@@ -31,7 +31,7 @@ export class Label extends Component<HTMLSpanElement> {
     }
 
     /**
-     * Cambia il testo dell'etichetta.
+     * Changes the label text.
      */
     setText(text: string): void {
         this.element.textContent = text;

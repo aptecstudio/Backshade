@@ -1,6 +1,6 @@
 /**
- * Spazio flessibile che occupa tutto lo spazio libero in uno stack,
- * spingendo gli elementi successivi verso il fondo o verso destra.
+ * Flexible space that takes all the free space in a stack,
+ * pushing the following elements to the end or to the right.
  */
 
 import { Component } from '../core/component.js';

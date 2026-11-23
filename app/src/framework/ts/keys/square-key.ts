@@ -1,6 +1,6 @@
 /**
- * Tasto quadrato della striscia di canale: il contorno colorato indica la
- * funzione (flash, solo, select) e si accende quando il tasto è attivo.
+ * Square key of the channel strip: the colored outline shows the
+ * function (flash, solo, select) and lights up when the key is active.
  */
 
 import { Component } from '../core/component.js';
@@ -10,20 +10,20 @@ import type { Unsubscribe } from '../dom/events.js';
 import { icon } from '../icons/icon.js';
 import type { IconName } from '../icons/icon-names.js';
 
-/** Funzione del tasto, che ne determina il colore */
+/** Key function, which sets its color */
 export type SquareKeyVariant = 'flash' | 'solo' | 'select';
 
-/** Opzioni di un tasto quadrato */
+/** Square key options */
 export interface SquareKeyOptions {
-    /** Funzione del tasto */
+    /** Key function */
     variant: SquareKeyVariant;
-    /** Nome per le tecnologie assistive, già tradotto */
+    /** Name for assistive technologies, already translated */
     label: string;
-    /** Icona mostrata nel tasto */
+    /** Icon shown in the key */
     icon?: IconName;
-    /** Testo breve mostrato nel tasto (in minuscolo), in alternativa all'icona */
+    /** Short text shown in the key (lowercase), as an alternative to the icon */
     text?: string;
-    /** Stato iniziale acceso */
+    /** Initial on state */
     on?: boolean;
 }
 
@@ -53,7 +53,7 @@ export class SquareKey extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Accende o spegne il tasto.
+     * Turns the key on or off.
      */
     setOn(on: boolean): void {
         this.element.classList.toggle('square-key--on', on);
@@ -61,7 +61,7 @@ export class SquareKey extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Registra un listener per la pressione del tasto.
+     * Registers a listener for key presses.
      */
     onPress(listener: () => void): Unsubscribe {
         return this.presses.subscribe(listener);

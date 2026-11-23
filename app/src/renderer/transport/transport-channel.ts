@@ -1,14 +1,14 @@
 /**
- * Canale di trasporto verso il motore, indipendente dal mezzo:
- * IPC nella finestra Electron, WebSocket nei client remoti (fase 10).
+ * Transport channel to the engine, independent of the medium:
+ * IPC in the Electron window, WebSocket in remote clients (Phase 10).
  */
 
 import type { Unsubscribe } from '../../framework/ts/index.js';
 import type { EventMessage, RequestMessage, ResponseMessage } from '../../shared/transport/protocol.js';
 
 export interface TransportChannel {
-    /** Invia una richiesta e restituisce la risposta */
+    /** Sends a request and returns the response */
     request(message: RequestMessage): Promise<ResponseMessage>;
-    /** Registra un listener per gli eventi */
+    /** Registers a listener for the events */
     onEvent(listener: (message: EventMessage) => void): Unsubscribe;
 }

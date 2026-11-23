@@ -1,5 +1,5 @@
 /**
- * Contenuto provvisorio di una sezione non ancora sviluppata.
+ * Temporary content of a section not yet developed.
  */
 
 import { Label, Panel } from '../../framework/ts/index.js';

@@ -1,14 +1,14 @@
 /**
- * Ponte sicuro tra processo main e interfaccia.
- * Espone solo un trasporto di messaggi generico, mai l'intero ipcRenderer:
- * l'interfaccia può soltanto inviare richieste e ricevere eventi.
+ * Secure bridge between the main process and the interface.
+ * Exposes only a generic message transport, never the whole ipcRenderer:
+ * the interface can only send requests and receive events.
  */
 
 import { contextBridge, ipcRenderer, type IpcRendererEvent } from 'electron';
 import type { HostBridge } from '../shared/transport/host-bridge';
 import type { EventMessage, ResponseMessage } from '../shared/transport/protocol';
 
-// Uguali a shared/transport/ipc-channels.ts: il preload in sandbox non può importare altri file
+// Equal to shared/transport/ipc-channels.ts: the sandboxed preload cannot import other files
 const REQUEST_CHANNEL = 'backshade:request';
 const EVENT_CHANNEL = 'backshade:event';
 

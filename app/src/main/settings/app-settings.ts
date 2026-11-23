@@ -1,6 +1,6 @@
 /**
- * Impostazioni globali dell'applicazione, salvate nella cartella dati
- * dell'utente e separate dalle impostazioni degli show.
+ * Global application settings, saved in the user data
+ * folder and separate from the show settings.
  */
 
 import path from 'node:path';
@@ -13,14 +13,14 @@ function settingsFile(): string {
 }
 
 /**
- * Valori predefiniti: i nuovi show vanno in Documenti/Backshade/Shows.
+ * Default values: new shows go to Documents/Backshade/Shows.
  */
 function defaults(): AppSettings {
     return { defaultShowsFolder: path.join(app.getPath('documents'), 'Backshade', 'Shows') };
 }
 
 /**
- * Legge le impostazioni; i valori mancanti o non validi prendono il predefinito.
+ * Reads the settings; missing or invalid values take the default.
  */
 export function readSettings(): AppSettings {
     const result = defaults();
@@ -30,13 +30,13 @@ export function readSettings(): AppSettings {
             result.defaultShowsFolder = data.defaultShowsFolder;
         }
     } catch (error) {
-        console.warn('Impostazioni non leggibili, uso i valori predefiniti', error);
+        console.warn('Unreadable settings, using the default values', error);
     }
     return result;
 }
 
 /**
- * Salva le impostazioni indicate, mantenendo le altre.
+ * Saves the given settings, keeping the others.
  */
 export function updateSettings(changes: Partial<AppSettings>): AppSettings {
     const next = { ...readSettings(), ...changes };

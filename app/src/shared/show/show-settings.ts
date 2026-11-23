@@ -1,32 +1,32 @@
 /**
- * Impostazioni dello show, salvate in show.json e separate dalle
- * impostazioni globali dell'applicazione.
+ * Show settings, saved in show.json and separate from the
+ * global application settings.
  */
 
-/** Frame rate del timecode */
+/** Timecode frame rate */
 export type TimecodeRate = '24' | '25' | '29.97df' | '30';
 
-/** Frame rate disponibili, nell'ordine di presentazione */
+/** Available frame rates, in presentation order */
 export const TIMECODE_RATES: readonly TimecodeRate[] = ['24', '25', '29.97df', '30'];
 
-/** Impostazioni dello show */
+/** Show settings */
 export interface ShowSettings {
-    /** Descrizione breve: luogo, data, tipo di evento */
+    /** Short description: venue, date, type of event */
     description: string;
-    /** Note libere: contatti, orari, indicazioni tecniche */
+    /** Free notes: contacts, schedules, technical notes */
     notes: string;
-    /** Frame rate del timecode, per timeline e sincronizzazione */
+    /** Timecode frame rate, for timeline and synchronization */
     timecodeRate: TimecodeRate;
-    /** Fade in predefinito di scene e cue, in secondi */
+    /** Default fade in of scenes and cues, in seconds */
     fadeInSeconds: number;
-    /** Fade out predefinito di scene e cue, in secondi */
+    /** Default fade out of scenes and cues, in seconds */
     fadeOutSeconds: number;
 }
 
-/** Limiti dei tempi di fade, in secondi */
+/** Limits of the fade times, in seconds */
 export const FADE_LIMITS = { min: 0, max: 600 } as const;
 
-/** Valori predefiniti di un nuovo show */
+/** Default values of a new show */
 export const DEFAULT_SHOW_SETTINGS: ShowSettings = {
     description: '',
     notes: '',
@@ -36,8 +36,8 @@ export const DEFAULT_SHOW_SETTINGS: ShowSettings = {
 };
 
 /**
- * Completa e corregge impostazioni lette da un file: i valori mancanti o
- * non validi prendono il predefinito.
+ * Completes and corrects settings read from a file: missing or
+ * invalid values take the default.
  */
 export function normalizeShowSettings(value: unknown): ShowSettings {
     const input = typeof value === 'object' && value !== null ? value as Partial<Record<keyof ShowSettings, unknown>> : {};

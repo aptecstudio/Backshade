@@ -1,7 +1,7 @@
 /**
- * Impostazioni dello show aperto: descrizione e note, frame rate del
- * timecode, tempi di fade predefiniti. Ogni modifica va al motore subito
- * e diventa una modifica dello show da salvare.
+ * Settings of the open show: description and notes, timecode
+ * frame rate, default fade times. Every change goes to the engine immediately
+ * and becomes an unsaved change of the show.
  */
 
 import { ChoiceKeys, Label, NumberField, Panel, Stack, TextArea, TextField } from '../../../framework/ts/index.js';
@@ -10,18 +10,18 @@ import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 
-// Attesa dopo l'ultima battuta prima di inviare un testo al motore
+// Wait after the last keystroke before sending a text to the engine
 const TEXT_DELAY_MS = 400;
 
 /**
- * Invia una modifica al motore, mostrando l'eventuale errore.
+ * Sends a change to the engine, showing any error.
  */
 function send(changes: Partial<ShowSettings>): void {
     void engine().request('show.updateSettings', changes).catch(showError);
 }
 
 /**
- * Restituisce una funzione che invia il testo dopo una pausa di scrittura.
+ * Returns a function that sends the text after a pause in typing.
  */
 function delayed(field: 'description' | 'notes'): (value: string) => void {
     let timer: number | undefined;

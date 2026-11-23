@@ -1,22 +1,22 @@
 /**
- * Manopola zigrinata con linea indicatrice. Si regola trascinando in
- * verticale (con Maiusc per la regolazione fine), con la rotella o la tastiera.
+ * Knurled knob with an indicator line. It is adjusted by dragging
+ * vertically (Shift for fine adjustment), with the mouse wheel or the keyboard.
  */
 
 import { create } from '../dom/create.js';
 import { trackPointerDrag } from './pointer-drag.js';
 import { RangeControl, type RangeControlOptions } from './range-control.js';
 
-/** Opzioni di una manopola */
+/** Knob options */
 export interface KnobOptions extends RangeControlOptions {
-    /** Dimensione: piccola (predefinita, strisce di canale) o grande (programmer) */
+    /** Size: small (default, channel strips) or large (programmer) */
     size?: 'small' | 'large';
 }
 
-// Pixel di trascinamento per percorrere l'intera corsa
+// Drag distance in pixels to cover the whole travel
 const DRAG_RANGE_PX = 200;
 const FINE_FACTOR = 0.1;
-// Rotazione dell'indicatore agli estremi della corsa, in gradi
+// Indicator rotation at the ends of the travel, in degrees
 const MIN_ANGLE = -135;
 const MAX_ANGLE = 135;
 
@@ -39,7 +39,7 @@ export class Knob extends RangeControl<HTMLDivElement> {
     }
 
     /**
-     * Trascinamento verticale: verso l'alto aumenta il valore.
+     * Vertical drag: moving up increases the value.
      */
     private startDrag(event: PointerEvent): void {
         if (event.button !== 0) {

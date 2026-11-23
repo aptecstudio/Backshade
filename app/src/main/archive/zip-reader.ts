@@ -1,8 +1,8 @@
 /**
- * Lettura ed estrazione di archivi ZIP senza dipendenze, con zlib di Node.
- * Supporta i metodi store e deflate e Zip64. Ogni file estratto viene
- * verificato (CRC e dimensione) e nessun percorso può uscire dalla
- * cartella di destinazione.
+ * Reading and extraction of ZIP archives without dependencies, with Node zlib.
+ * Supports the store and deflate methods and Zip64. Every extracted file is
+ * checked (CRC and size) and no path can leave the
+ * target folder.
  */
 
 import fs from 'node:fs';
@@ -11,7 +11,7 @@ import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import zlib from 'node:zlib';
 
-/** Voce dell'archivio */
+/** Archive entry */
 export interface ZipEntry {
     name: string;
     method: number;
@@ -22,7 +22,7 @@ export interface ZipEntry {
     isDirectory: boolean;
 }
 
-/** Errore di un archivio non valido o non supportato */
+/** Error of an invalid or unsupported archive */
 export class ZipFormatError extends Error {
     constructor(message: string) {
         super(message);
@@ -32,20 +32,20 @@ export class ZipFormatError extends Error {
 
 const MAX32 = 0xffffffff;
 const MAX16 = 0xffff;
-// Fine della directory centrale: 22 byte più un commento di al massimo 64 KB
+// End of central directory: 22 bytes plus a comment of at most 64 KB
 const TAIL_SIZE = 22 + MAX16;
 
 async function readAt(handle: fs.promises.FileHandle, position: number, length: number): Promise<Buffer> {
     const buffer = Buffer.alloc(length);
     const { bytesRead } = await handle.read(buffer, 0, length, position);
     if (bytesRead !== length) {
-        throw new ZipFormatError('Archivio troncato');
+        throw new ZipFormatError('Truncated archive');
     }
     return buffer;
 }
 
 /**
- * Posizione, dimensione e numero di voci della directory centrale.
+ * Position, size and number of entries of the central directory.
  */
 async function findCentralDirectory(handle: fs.promises.FileHandle, fileSize: number): Promise<{ offset: number; size: number; count: number }> {
     const tailLength = Math.min(fileSize, TAIL_SIZE);
@@ -57,7 +57,7 @@ async function findCentralDirectory(handle: fs.promises.FileHandle, fileSize: nu
         index--;
     }
     if (index < 0) {
-        throw new ZipFormatError('Fine della directory centrale non trovata');
+        throw new ZipFormatError('End of central directory not found');
     }
 
     let count = tail.readUInt16LE(index + 10);
@@ -68,11 +68,11 @@ async function findCentralDirectory(handle: fs.promises.FileHandle, fileSize: nu
         const locatorPosition = tailStart + index - 20;
         const locator = await readAt(handle, locatorPosition, 20);
         if (locator.readUInt32LE(0) !== 0x07064b50) {
-            throw new ZipFormatError('Localizzatore Zip64 non trovato');
+            throw new ZipFormatError('Zip64 locator not found');
         }
         const record = await readAt(handle, Number(locator.readBigUInt64LE(8)), 56);
         if (record.readUInt32LE(0) !== 0x06064b50) {
-            throw new ZipFormatError('Record Zip64 non valido');
+            throw new ZipFormatError('Invalid Zip64 record');
         }
         count = Number(record.readBigUInt64LE(32));
         size = Number(record.readBigUInt64LE(40));
@@ -82,7 +82,7 @@ async function findCentralDirectory(handle: fs.promises.FileHandle, fileSize: nu
 }
 
 /**
- * Legge l'elenco delle voci di un archivio.
+ * Reads the list of entries of an archive.
  */
 export async function readZipEntries(file: string): Promise<ZipEntry[]> {
     const handle = await fs.promises.open(file, 'r');
@@ -95,7 +95,7 @@ export async function readZipEntries(file: string): Promise<ZipEntry[]> {
         let position = 0;
         for (let index = 0; index < central.count; index++) {
             if (directory.readUInt32LE(position) !== 0x02014b50) {
-                throw new ZipFormatError('Voce della directory centrale non valida');
+                throw new ZipFormatError('Invalid central directory entry');
             }
             const method = directory.readUInt16LE(position + 10);
             const crc = directory.readUInt32LE(position + 16);
@@ -107,7 +107,7 @@ export async function readZipEntries(file: string): Promise<ZipEntry[]> {
             let offset = directory.readUInt32LE(position + 42);
             const name = directory.toString('utf8', position + 46, position + 46 + nameLength);
 
-            // Campo Zip64: contiene, in ordine, solo i valori che valgono 0xFFFFFFFF
+            // Zip64 field: contains, in order, only the values equal to 0xFFFFFFFF
             let extra = position + 46 + nameLength;
             const extraEnd = extra + extraLength;
             while (extra + 4 <= extraEnd) {
@@ -140,23 +140,23 @@ export async function readZipEntries(file: string): Promise<ZipEntry[]> {
 }
 
 /**
- * Converte il nome di una voce in un percorso dentro target.
- * @throws ZipFormatError per percorsi assoluti o che escono da target
+ * Converts the name of an entry into a path inside target.
+ * @throws ZipFormatError for absolute paths or paths leaving target
  */
 function safeTarget(target: string, name: string): string {
     if (name.includes('\\') || name.startsWith('/') || /^[a-zA-Z]:/.test(name)
         || name.split('/').includes('..')) {
-        throw new ZipFormatError(`Percorso non ammesso nell'archivio: ${name}`);
+        throw new ZipFormatError(`Path not allowed in the archive: ${name}`);
     }
     const resolved = path.resolve(target, ...name.split('/').filter((part) => part !== ''));
     if (resolved !== target && !resolved.startsWith(target + path.sep)) {
-        throw new ZipFormatError(`Percorso non ammesso nell'archivio: ${name}`);
+        throw new ZipFormatError(`Path not allowed in the archive: ${name}`);
     }
     return resolved;
 }
 
 /**
- * Estrae tutte le voci in target, che deve esistere ed essere vuota.
+ * Extracts all entries into target, which must exist and be empty.
  */
 export async function extractZip(file: string, target: string): Promise<void> {
     const root = path.resolve(target);
@@ -171,13 +171,13 @@ export async function extractZip(file: string, target: string): Promise<void> {
                 continue;
             }
             if (entry.method !== 0 && entry.method !== 8) {
-                throw new ZipFormatError(`Metodo di compressione non supportato: ${entry.method}`);
+                throw new ZipFormatError(`Unsupported compression method: ${entry.method}`);
             }
             await fs.promises.mkdir(path.dirname(destination), { recursive: true });
 
             const local = await readAt(handle, entry.offset, 30);
             if (local.readUInt32LE(0) !== 0x04034b50) {
-                throw new ZipFormatError(`Intestazione locale non valida: ${entry.name}`);
+                throw new ZipFormatError(`Invalid local header: ${entry.name}`);
             }
             const dataStart = entry.offset + 30 + local.readUInt16LE(26) + local.readUInt16LE(28);
 
@@ -191,7 +191,7 @@ export async function extractZip(file: string, target: string): Promise<void> {
                 }
             });
             if (entry.compressedSize === 0) {
-                // File vuoto: niente dati da leggere
+                // Empty file: no data to read
                 await fs.promises.writeFile(destination, '', { flag: 'wx' });
             } else {
                 const output = fs.createWriteStream(destination, { flags: 'wx' });
@@ -204,7 +204,7 @@ export async function extractZip(file: string, target: string): Promise<void> {
             }
 
             if (size !== entry.size || (crc >>> 0) !== (entry.crc >>> 0)) {
-                throw new ZipFormatError(`Dati danneggiati nell'archivio: ${entry.name}`);
+                throw new ZipFormatError(`Damaged data in the archive: ${entry.name}`);
             }
         }
     } finally {

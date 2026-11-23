@@ -1,6 +1,6 @@
 /**
- * Scelta di una cartella: campo con il percorso e tasto per sceglierne
- * un'altra con la finestra del sistema.
+ * Folder choice: field with the path and key to choose another one
+ * with the system dialog.
  */
 
 import { Key, Stack, TextField } from '../../../framework/ts/index.js';
@@ -26,7 +26,7 @@ export class FolderPicker extends Stack {
         this.append(this.field, choose);
     }
 
-    /** Cartella scelta */
+    /** Chosen folder */
     get folder(): string {
         return this.field.value.trim();
     }

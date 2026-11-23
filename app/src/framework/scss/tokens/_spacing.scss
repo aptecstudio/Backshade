@@ -1,4 +1,4 @@
-// Scala delle spaziature: solo multipli di 8 (vedi MEMORY.md, Design system)
+// Spacing scale: multiples of 8 only (see MEMORY.md, Design system)
 @use 'sass:map';
 
 $scale: (
@@ -10,8 +10,8 @@ $scale: (
     8: 64px
 );
 
-/// Restituisce una spaziatura della scala; errore se il passo non esiste.
-/// @param {Number} $step - Passo della scala: 1, 2, 3, 4, 6 o 8
+/// Returns a spacing from the scale; error if the step does not exist.
+/// @param {Number} $step - Scale step: 1, 2, 3, 4, 6 or 8
 @function space($step) {
     @if not map.has-key($scale, $step) {
         @error 'Spaziatura "#{$step}" non presente nella scala: usa 1, 2, 3, 4, 6 o 8.';

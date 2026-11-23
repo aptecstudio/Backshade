@@ -1,5 +1,5 @@
 /**
- * Area di testo su più righe con etichetta, per note e descrizioni lunghe.
+ * Multi-line text area with a label, for notes and long descriptions.
  */
 
 import { Component } from '../core/component.js';
@@ -7,15 +7,15 @@ import { Emitter } from '../core/emitter.js';
 import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni di un'area di testo */
+/** Text area options */
 export interface TextAreaOptions {
-    /** Etichetta sopra il campo, già tradotta */
+    /** Label above the field, already translated */
     label: string;
-    /** Valore iniziale */
+    /** Initial value */
     value?: string;
-    /** Righe visibili (predefinite 6) */
+    /** Visible rows (default 6) */
     rows?: number;
-    /** Lunghezza massima */
+    /** Maximum length */
     maxLength?: number;
 }
 
@@ -45,20 +45,20 @@ export class TextArea extends Component<HTMLDivElement> {
         this.track(() => this.changes.clear());
     }
 
-    /** Valore attuale */
+    /** Current value */
     get value(): string {
         return this.input.value;
     }
 
     /**
-     * Cambia il valore senza notificare i listener.
+     * Changes the value without notifying the listeners.
      */
     setValue(value: string): void {
         this.input.value = value;
     }
 
     /**
-     * Registra un listener per le modifiche dell'utente.
+     * Registers a listener for the changes of the user.
      */
     onInput(listener: (value: string) => void): Unsubscribe {
         return this.changes.subscribe(listener);

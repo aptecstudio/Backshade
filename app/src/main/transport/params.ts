@@ -1,33 +1,33 @@
 /**
- * Verifica dei parametri delle richieste, che possono arrivare da client
- * remoti: ogni metodo controlla i propri parametri con queste funzioni.
+ * Validation of request parameters, which can come from remote
+ * clients: every method checks its own parameters with these functions.
  */
 
 import { EngineError } from './engine-error';
 
 /**
- * Restituisce i parametri come oggetto, o un errore se non lo sono.
+ * Returns the parameters as an object, or an error if they are not one.
  */
 export function requireObject(params: unknown): Record<string, unknown> {
     if (typeof params !== 'object' || params === null || Array.isArray(params)) {
-        throw new EngineError('invalid-params', 'Parametri mancanti o non validi');
+        throw new EngineError('invalid-params', 'Missing or invalid parameters');
     }
     return params as Record<string, unknown>;
 }
 
 /**
- * Restituisce un campo di testo obbligatorio.
+ * Returns a required text field.
  */
 export function requireString(params: Record<string, unknown>, field: string): string {
     const value = params[field];
     if (typeof value !== 'string') {
-        throw new EngineError('invalid-params', `Campo "${field}" mancante o non valido`);
+        throw new EngineError('invalid-params', `Missing or invalid field "${field}"`);
     }
     return value;
 }
 
 /**
- * Restituisce un campo di testo opzionale.
+ * Returns an optional text field.
  */
 export function optionalString(params: Record<string, unknown>, field: string): string | undefined {
     const value = params[field];
@@ -35,13 +35,13 @@ export function optionalString(params: Record<string, unknown>, field: string): 
         return undefined;
     }
     if (typeof value !== 'string') {
-        throw new EngineError('invalid-params', `Campo "${field}" non valido`);
+        throw new EngineError('invalid-params', `Invalid field "${field}"`);
     }
     return value;
 }
 
 /**
- * Restituisce un campo booleano opzionale.
+ * Returns an optional boolean field.
  */
 export function optionalBoolean(params: Record<string, unknown>, field: string): boolean | undefined {
     const value = params[field];
@@ -49,7 +49,7 @@ export function optionalBoolean(params: Record<string, unknown>, field: string):
         return undefined;
     }
     if (typeof value !== 'boolean') {
-        throw new EngineError('invalid-params', `Campo "${field}" non valido`);
+        throw new EngineError('invalid-params', `Invalid field "${field}"`);
     }
     return value;
 }

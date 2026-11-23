@@ -1,6 +1,6 @@
 /**
- * Tasto funzione: punto di stato e didascalia sopra (ad esempio "F1"),
- * tasto con contorno verde, etichetta sotto.
+ * Function key: status dot and caption above (for example "F1"),
+ * key with a green outline, label below.
  */
 
 import { Component } from '../core/component.js';
@@ -8,13 +8,13 @@ import { Emitter } from '../core/emitter.js';
 import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni di un tasto funzione */
+/** Function key options */
 export interface FunctionKeyOptions {
-    /** Didascalia sopra il tasto, ad esempio "F1" */
+    /** Caption above the key, for example "F1" */
     caption: string;
-    /** Etichetta sotto il tasto, già tradotta */
+    /** Label below the key, already translated */
     label: string;
-    /** Stato iniziale attivo */
+    /** Initial active state */
     active?: boolean;
 }
 
@@ -43,7 +43,7 @@ export class FunctionKey extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Attiva o disattiva il tasto.
+     * Activates or deactivates the key.
      */
     setActive(active: boolean): void {
         this.element.classList.toggle('function-key--active', active);
@@ -51,7 +51,7 @@ export class FunctionKey extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Registra un listener per la pressione del tasto.
+     * Registers a listener for key presses.
      */
     onPress(listener: () => void): Unsubscribe {
         return this.presses.subscribe(listener);

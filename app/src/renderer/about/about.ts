@@ -1,6 +1,6 @@
 /**
- * Punto di ingresso della finestra Informazioni: prepara la localizzazione,
- * chiede al motore le informazioni sull'applicazione e monta la pagina.
+ * Entry point of the About window: prepares the localization,
+ * asks the engine for the application information and mounts the page.
  */
 
 import { initI18n, t } from '../i18n/i18n.js';

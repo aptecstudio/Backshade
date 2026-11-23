@@ -1,20 +1,20 @@
 /**
- * Trascinamento con il puntatore (mouse, penna, tocco): cattura il
- * puntatore sull'elemento e segue i movimenti fino al rilascio.
+ * Pointer drag (mouse, pen, touch): captures the pointer on the
+ * element and follows its movements until release.
  */
 
 import { on } from '../dom/events.js';
 
-/** Funzioni chiamate durante il trascinamento */
+/** Functions called during the drag */
 export interface DragHandlers {
-    /** Chiamata a ogni movimento del puntatore */
+    /** Called on every pointer movement */
     move(event: PointerEvent): void;
-    /** Chiamata al rilascio o all'annullamento */
+    /** Called on release or cancellation */
     end?(): void;
 }
 
 /**
- * Avvia il trascinamento a partire da un evento pointerdown.
+ * Starts the drag from a pointerdown event.
  */
 export function trackPointerDrag(target: HTMLElement, start: PointerEvent, handlers: DragHandlers): void {
     target.setPointerCapture(start.pointerId);

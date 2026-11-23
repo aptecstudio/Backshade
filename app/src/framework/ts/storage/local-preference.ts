@@ -1,7 +1,7 @@
 /**
- * Preferenza testuale salvata nel browser del dispositivo (localStorage).
- * Se l'archiviazione non è disponibile, la preferenza semplicemente non viene
- * ricordata: l'interfaccia funziona comunque.
+ * Text preference saved in the browser of the device (localStorage).
+ * If storage is not available, the preference is simply not
+ * remembered: the interface works anyway.
  */
 export class LocalPreference {
     private readonly key: string;
@@ -11,7 +11,7 @@ export class LocalPreference {
     }
 
     /**
-     * Restituisce il valore salvato, o null se assente o non leggibile.
+     * Returns the saved value, or null if missing or not readable.
      */
     get(): string | null {
         try {
@@ -22,13 +22,13 @@ export class LocalPreference {
     }
 
     /**
-     * Salva il valore; gli errori di archiviazione vengono ignorati.
+     * Saves the value; storage errors are ignored.
      */
     set(value: string): void {
         try {
             window.localStorage.setItem(this.key, value);
         } catch {
-            // Archiviazione non disponibile: la scelta vale solo per questa sessione
+            // Storage not available: the choice lasts only for this session
         }
     }
 }

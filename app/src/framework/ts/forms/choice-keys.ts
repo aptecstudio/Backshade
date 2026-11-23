@@ -1,6 +1,6 @@
 /**
- * Scelta di un valore tra pochi, con una fila di tasti: il tasto del
- * valore scelto è attivo.
+ * Choice of one value among a few, with a row of keys: the key of the
+ * chosen value is active.
  */
 
 import { Component } from '../core/component.js';
@@ -9,15 +9,15 @@ import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 import { Key } from '../keys/key.js';
 
-/** Valore offerto */
+/** Offered value */
 export interface ChoiceOption<T extends string> {
     value: T;
     label: string;
 }
 
-/** Opzioni di una scelta a tasti */
+/** Choice keys options */
 export interface ChoiceKeysOptions<T extends string> {
-    /** Etichetta sopra i tasti, già tradotta */
+    /** Label above the keys, already translated */
     label: string;
     options: readonly ChoiceOption<T>[];
     value: T;
@@ -54,7 +54,7 @@ export class ChoiceKeys<T extends string> extends Component<HTMLDivElement> {
     }
 
     /**
-     * Cambia il valore scelto senza notificare i listener.
+     * Changes the chosen value without notifying the listeners.
      */
     setValue(value: T): void {
         this.current = value;
@@ -64,7 +64,7 @@ export class ChoiceKeys<T extends string> extends Component<HTMLDivElement> {
     }
 
     /**
-     * Registra un listener per le scelte dell'utente.
+     * Registers a listener for the choices of the user.
      */
     onChange(listener: (value: T) => void): Unsubscribe {
         return this.changes.subscribe(listener);

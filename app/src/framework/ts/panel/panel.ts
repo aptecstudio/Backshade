@@ -1,15 +1,15 @@
 /**
- * Pannello piatto che raggruppa altri componenti, con un titolo opzionale.
+ * Flat panel grouping other components, with an optional title.
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 
-/** Opzioni di un pannello */
+/** Panel options */
 export interface PanelOptions {
-    /** Titolo del pannello, già tradotto */
+    /** Panel title, already translated */
     title?: string;
-    /** Classi CSS aggiuntive */
+    /** Additional CSS classes */
     classes?: string[];
 }
 

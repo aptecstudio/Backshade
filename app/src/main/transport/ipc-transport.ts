@@ -1,7 +1,7 @@
 /**
- * Trasporto IPC per le finestre Electron: riceve le richieste dal preload
- * e invia gli eventi a tutte le pagine dell'interfaccia interna.
- * Accetta solo messaggi da pagine servite dal protocollo app://.
+ * IPC transport for the Electron windows: receives the requests from the preload
+ * and sends the events to all pages of the internal interface.
+ * Accepts only messages from pages served by the app:// protocol.
  */
 
 import { ipcMain, webContents, type IpcMainInvokeEvent } from 'electron';
@@ -12,19 +12,19 @@ import type { EventBus } from './event-bus';
 import type { RequestRouter } from './request-router';
 
 /**
- * Indica se la richiesta arriva da una pagina dell'interfaccia interna.
+ * Tells whether the request comes from a page of the internal interface.
  */
 function isTrustedSender(event: IpcMainInvokeEvent): boolean {
     return event.senderFrame !== null && appProtocol.isInternalUrl(event.senderFrame.url);
 }
 
 /**
- * Collega il trasporto IPC al router delle richieste e al bus degli eventi.
+ * Connects the IPC transport to the request router and to the event bus.
  */
 export function attachIpcTransport(router: RequestRouter, bus: EventBus): void {
     ipcMain.handle(REQUEST_CHANNEL, (event, message: unknown): Promise<ResponseMessage> | ResponseMessage => {
         if (!isTrustedSender(event)) {
-            return { type: 'response', id: -1, ok: false, error: { code: 'forbidden', message: 'Origine non ammessa' } };
+            return { type: 'response', id: -1, ok: false, error: { code: 'forbidden', message: 'Origin not allowed' } };
         }
         return router.handle(message, { transport: 'ipc' });
     });

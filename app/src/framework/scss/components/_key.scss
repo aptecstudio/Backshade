@@ -1,4 +1,4 @@
-// Tasto morbido: sfumatura verticale leggera e ombra, LED e barra di stato
+// Soft key: light vertical gradient and shadow, LED and status bar
 @use '../tokens' as *;
 @use 'focus';
 
@@ -53,7 +53,7 @@
     color: color('accent');
 }
 
-// LED nell'angolo in alto a destra, visibile solo da attivo
+// LED in the top right corner, visible only when active
 .key__led {
     position: absolute;
     top: space(1);
@@ -70,7 +70,7 @@
     display: block;
 }
 
-// Barra rossa sul bordo superiore, visibile da armato o selezionato
+// Red bar on the top edge, visible when armed or selected
 .key__armed-bar {
     position: absolute;
     top: -1px;

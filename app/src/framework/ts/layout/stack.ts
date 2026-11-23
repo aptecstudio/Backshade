@@ -1,25 +1,25 @@
 /**
- * Contenitore che dispone i figli in riga o in colonna, con una spaziatura
- * della scala.
+ * Container that lays out its children in a row or a column, with a spacing
+ * from the scale.
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 import type { SpacingStep } from '../theme/spacing.js';
 
-/** Opzioni di uno stack */
+/** Stack options */
 export interface StackOptions {
-    /** Direzione: riga o colonna (predefinita) */
+    /** Direction: row or column (default) */
     direction?: 'row' | 'column';
-    /** Spaziatura tra i figli, come passo della scala (predefinito 1) */
+    /** Spacing between children, as a scale step (default 1) */
     gap?: SpacingStep;
-    /** Allineamento sull'asse trasversale */
+    /** Alignment on the cross axis */
     align?: 'start' | 'center' | 'end' | 'stretch';
-    /** Va a capo quando lo spazio non basta */
+    /** Wraps when there is not enough space */
     wrap?: boolean;
-    /** Classi CSS aggiuntive */
+    /** Additional CSS classes */
     classes?: string[];
-    /** Figli iniziali */
+    /** Initial children */
     children?: Component[];
 }
 

@@ -1,6 +1,6 @@
 /**
- * Punto di ingresso del processo main: gestisce solo il ciclo di vita
- * dell'applicazione e delega ogni compito ai moduli dedicati.
+ * Entry point of the main process: it handles only the lifecycle of
+ * the application and delegates every task to the dedicated modules.
  */
 
 import { app, BrowserWindow } from 'electron';
@@ -12,10 +12,10 @@ import * as appProtocol from './protocol/app-protocol';
 import * as navigationGuard from './security/navigation-guard';
 import * as mainWindow from './window/main-window';
 
-// Il protocollo interno va registrato prima che l'app sia pronta
+// The internal protocol must be registered before the app is ready
 appProtocol.registerScheme();
 
-// Una sola istanza: un secondo avvio riporta in primo piano la finestra esistente
+// Single instance: a second launch brings the existing window to the front
 if (!app.requestSingleInstanceLock()) {
     app.quit();
 } else {
@@ -34,7 +34,7 @@ if (!app.requestSingleInstanceLock()) {
         startEngine();
         mainWindow.create(startPage());
 
-        // macOS: riapre la finestra quando si clicca l'icona nel dock
+        // macOS: reopens the window when the dock icon is clicked
         app.on('activate', () => {
             if (BrowserWindow.getAllWindows().length === 0) {
                 mainWindow.create(startPage());
@@ -42,7 +42,7 @@ if (!app.requestSingleInstanceLock()) {
         });
     });
 
-    // Su macOS l'applicazione resta attiva finché l'utente non esce esplicitamente
+    // On macOS the application stays active until the user quits explicitly
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
             app.quit();

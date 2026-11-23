@@ -1,17 +1,17 @@
 /**
- * Immagine statica, ad esempio un logo.
+ * Static image, for example a logo.
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 
-/** Opzioni di un'immagine */
+/** Image options */
 export interface ImageViewOptions {
-    /** Indirizzo dell'immagine */
+    /** Image address */
     src: string;
-    /** Testo alternativo, già tradotto; vuoto per le immagini decorative */
+    /** Alternative text, already translated; empty for decorative images */
     alt: string;
-    /** Classi CSS aggiuntive */
+    /** Additional CSS classes */
     classes?: string[];
 }
 

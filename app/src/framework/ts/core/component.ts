@@ -1,13 +1,13 @@
 /**
- * Classe base di tutti i componenti dell'interfaccia.
- * Ogni componente possiede il proprio elemento radice, i componenti figli
- * e le funzioni di pulizia (listener), rilasciati tutti con destroy().
+ * Base class of all interface components.
+ * Each component owns its root element, its child components
+ * and its cleanup functions (listeners), all released by destroy().
  */
 
 import { on, type Unsubscribe } from '../dom/events.js';
 
 export abstract class Component<E extends HTMLElement = HTMLElement> {
-    /** Elemento radice del componente */
+    /** Root element of the component */
     readonly element: E;
 
     private readonly children: Component[] = [];
@@ -19,7 +19,7 @@ export abstract class Component<E extends HTMLElement = HTMLElement> {
     }
 
     /**
-     * Inserisce il componente in un elemento esistente della pagina.
+     * Inserts the component into an existing element of the page.
      */
     mount(target: HTMLElement): this {
         target.append(this.element);
@@ -27,7 +27,7 @@ export abstract class Component<E extends HTMLElement = HTMLElement> {
     }
 
     /**
-     * Aggiunge componenti figli al contenitore del componente.
+     * Adds child components to the container of the component.
      */
     append(...children: Component[]): this {
         for (const child of children) {
@@ -38,16 +38,16 @@ export abstract class Component<E extends HTMLElement = HTMLElement> {
     }
 
     /**
-     * Registra come figlio un componente il cui elemento è già stato inserito
-     * nel DOM dal componente stesso (ad esempio al posto di un altro), così
-     * viene distrutto insieme al padre.
+     * Registers as a child a component whose element has already been inserted
+     * in the DOM by the component itself (for example in place of another one), so
+     * it is destroyed together with its parent.
      */
     protected adopt(child: Component): void {
         this.children.push(child);
     }
 
     /**
-     * Distrugge il componente: figli, listener ed elemento.
+     * Destroys the component: children, listeners and element.
      */
     destroy(): void {
         if (this.destroyed) {
@@ -66,15 +66,15 @@ export abstract class Component<E extends HTMLElement = HTMLElement> {
     }
 
     /**
-     * Elemento che riceve i figli; i componenti con una struttura interna
-     * possono restituire un elemento diverso dalla radice.
+     * Element that receives the children; components with an inner structure
+     * can return an element other than the root.
      */
     protected get contentElement(): HTMLElement {
         return this.element;
     }
 
     /**
-     * Registra un listener che viene rimosso automaticamente con destroy().
+     * Registers a listener that is removed automatically by destroy().
      */
     protected listen<K extends keyof HTMLElementEventMap>(
         target: HTMLElement | Document | Window,
@@ -86,7 +86,7 @@ export abstract class Component<E extends HTMLElement = HTMLElement> {
     }
 
     /**
-     * Registra una funzione di pulizia da eseguire con destroy().
+     * Registers a cleanup function to run on destroy().
      */
     protected track(cleanup: Unsubscribe): void {
         this.cleanups.push(cleanup);

@@ -1,6 +1,6 @@
 /**
- * Metodi template.*: elenco, salvataggio dello show aperto come modello,
- * modifica ed eliminazione dei modelli dell'utente.
+ * template.* methods: list, saving the open show as a template,
+ * editing and deleting user templates.
  */
 
 import type { TemplateInfo } from '../../shared/transport/engine-api';
@@ -24,7 +24,7 @@ import type { RequestContext, RequestRouter } from '../transport/request-router'
 import { chooseFile, chooseSaveFile } from '../window/file-dialogs';
 
 /**
- * Toglie il percorso su disco, che l'interfaccia non deve conoscere.
+ * Removes the path on disk, which the interface must not know.
  */
 function toInfo({ id, name, description, source }: TemplateRecord): TemplateInfo {
     return { id, name, description, source };
@@ -32,19 +32,19 @@ function toInfo({ id, name, description, source }: TemplateRecord): TemplateInfo
 
 function requireDesktop(context: RequestContext): void {
     if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Disponibile solo nell\'applicazione desktop');
+        throw new EngineError('desktop-only', 'Available only in the desktop application');
     }
 }
 
 /**
- * Nome del modello nella lingua di riferimento, per i nomi dei file.
+ * Template name in the reference language, for file names.
  */
 function plainName(record: TemplateRecord): string {
     return typeof record.name === 'string' ? record.name : record.name.en ?? Object.values(record.name)[0] ?? 'template';
 }
 
 /**
- * Registra i metodi del servizio.
+ * Registers the methods of the service.
  */
 export function registerTemplateService(router: RequestRouter, bus: EventBus, session: ShowSession): void {
     const changed = (): void => bus.emit('templates.changed', {});
@@ -58,7 +58,7 @@ export function registerTemplateService(router: RequestRouter, bus: EventBus, se
             throw new EngineError('no-show', 'Nessuno show aperto');
         }
         if (show.dirty) {
-            throw new EngineError('unsaved-changes', 'Salvare lo show prima di crearne un modello');
+            throw new EngineError('unsaved-changes', 'Save the show before creating a template from it');
         }
         const record = createTemplateFromShow(show.folder, requireString(input, 'name'), requireString(input, 'description'));
         changed();

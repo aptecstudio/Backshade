@@ -1,6 +1,6 @@
 /**
- * Area centrale che mostra il contenuto della sezione aperta. Al cambio di
- * sezione il contenuto precedente viene distrutto e quello nuovo creato.
+ * Central area showing the content of the open section. When the section
+ * changes the previous content is destroyed and the new one created.
  */
 
 import { Component, create } from '../../framework/ts/index.js';
@@ -19,7 +19,7 @@ export class SectionHost extends Component<HTMLElement> {
     }
 
     /**
-     * Sostituisce il contenuto con quello della sezione indicata.
+     * Replaces the content with that of the given section.
      */
     private show(id: SectionId): void {
         const definition = ALL_SECTIONS.find((section) => section.id === id);

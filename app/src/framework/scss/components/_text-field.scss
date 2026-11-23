@@ -1,4 +1,4 @@
-// Campo di testo: superficie incassata come un display, etichetta sopra
+// Text field: inset surface like a display, label above
 @use '../tokens' as *;
 @use 'focus';
 
@@ -37,7 +37,7 @@
     resize: vertical;
 }
 
-// Campo numerico: stretto, cifre in monospazio, unità a destra
+// Number field: narrow, monospaced digits, unit on the right
 .number-field__row {
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@
     color: color('text-secondary');
 }
 
-// Scelta a tasti
+// Choice keys
 .choice-keys {
     display: flex;
     flex-direction: column;

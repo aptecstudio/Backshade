@@ -1,37 +1,37 @@
 /**
- * Scrittura di archivi ZIP senza dipendenze, con zlib di Node.
- * - I file di testo (JSON, SVG, testo) vengono compressi con deflate; gli
- *   altri, come audio, video e immagini, sono già compressi e vengono
- *   salvati senza ricomprimerli, leggendoli a blocchi.
- * - Zip64 per file, posizioni o archivi oltre i 4 GB.
- * - Ogni voce usa il descrittore dei dati (CRC e dimensioni dopo i dati),
- *   così i file grandi si scrivono in un solo passaggio.
+ * Writing of ZIP archives without dependencies, with Node zlib.
+ * - Text files (JSON, SVG, text) are compressed with deflate; the
+ *   others, such as audio, video and images, are already compressed and are
+ *   stored without recompressing them, reading them in chunks.
+ * - Zip64 for files, offsets or archives over 4 GB.
+ * - Every entry uses the data descriptor (CRC and sizes after the data),
+ *   so large files are written in a single pass.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 
-/** File da mettere nell'archivio: da disco o da memoria */
+/** File to put in the archive: from disk or from memory */
 export interface ZipSource {
-    /** Percorso nell'archivio, con "/" come separatore */
+    /** Path in the archive, with "/" as separator */
     name: string;
-    /** File su disco */
+    /** File on disk */
     file?: string;
-    /** Contenuto in memoria, in alternativa a file */
+    /** Content in memory, as an alternative to file */
     data?: Buffer;
 }
 
-/** Opzioni di scrittura */
+/** Write options */
 export interface ZipWriteOptions {
-    /** Usa sempre Zip64 (per le prove di compatibilità) */
+    /** Always use Zip64 (for compatibility tests) */
     forceZip64?: boolean;
 }
 
 const MAX32 = 0xffffffff;
 const MAX16 = 0xffff;
 const COMPRESSED_EXTENSIONS = new Set(['.json', '.txt', '.svg', '.csv', '.xml', '.md']);
-// Bit 3: descrittore dei dati; bit 11: nomi in UTF-8
+// Bit 3: data descriptor; bit 11: UTF-8 names
 const FLAGS = 0x0808;
 const READ_CHUNK = 1024 * 1024;
 
@@ -48,7 +48,7 @@ interface CentralRecord {
 }
 
 /**
- * Data e ora nel formato MS-DOS usato da ZIP.
+ * Date and time in the MS-DOS format used by ZIP.
  */
 function dosDateTime(date: Date): { time: number; date: number } {
     const year = Math.max(1980, date.getFullYear());
@@ -59,7 +59,7 @@ function dosDateTime(date: Date): { time: number; date: number } {
 }
 
 /**
- * Campo extra Zip64 (id 0x0001) con i valori a 64 bit indicati.
+ * Zip64 extra field (id 0x0001) with the given 64-bit values.
  */
 function zip64Extra(values: readonly number[]): Buffer {
     const extra = Buffer.alloc(4 + values.length * 8);
@@ -70,7 +70,7 @@ function zip64Extra(values: readonly number[]): Buffer {
 }
 
 /**
- * Scrive un archivio ZIP con i file indicati, nell'ordine dato.
+ * Writes a ZIP archive with the given files, in the given order.
  */
 export async function writeZip(target: string, sources: readonly ZipSource[], options: ZipWriteOptions = {}): Promise<void> {
     const handle = await fs.promises.open(target, 'w');
@@ -91,7 +91,7 @@ export async function writeZip(target: string, sources: readonly ZipSource[], op
             const zip64 = options.forceZip64 === true || expectedSize >= MAX32 || offset >= MAX32;
             const localOffset = offset;
 
-            // Intestazione locale: CRC e dimensioni arrivano nel descrittore dopo i dati
+            // Local header: CRC and sizes come in the descriptor after the data
             const extra = zip64 ? zip64Extra([0, 0]) : Buffer.alloc(0);
             const header = Buffer.alloc(30);
             header.writeUInt32LE(0x04034b50, 0);
@@ -132,7 +132,7 @@ export async function writeZip(target: string, sources: readonly ZipSource[], op
                 compressedSize = size;
             }
 
-            // Descrittore dei dati, con dimensioni a 64 bit per Zip64
+            // Data descriptor, with 64-bit sizes for Zip64
             const descriptor = Buffer.alloc(zip64 ? 24 : 16);
             descriptor.writeUInt32LE(0x08074b50, 0);
             descriptor.writeUInt32LE(crc >>> 0, 4);
@@ -160,7 +160,7 @@ export async function writeZip(target: string, sources: readonly ZipSource[], op
 }
 
 /**
- * Voce della directory centrale; i valori oltre i 32 bit vanno nel campo Zip64.
+ * Central directory entry; values over 32 bits go in the Zip64 field.
  */
 function centralEntry(record: CentralRecord, force: boolean): Buffer {
     const sizeIn64 = force || record.size >= MAX32;
@@ -197,7 +197,7 @@ function centralEntry(record: CentralRecord, force: boolean): Buffer {
 }
 
 /**
- * Fine della directory centrale, preceduta dai record Zip64 quando servono.
+ * End of central directory, preceded by the Zip64 records when needed.
  */
 function endOfCentralDirectory(count: number, size: number, offset: number, position: number, force: boolean): Buffer {
     const parts: Buffer[] = [];

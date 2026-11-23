@@ -1,5 +1,5 @@
 /**
- * Metodo app.getInfo: nome, versione, licenza e versioni dei componenti.
+ * app.getInfo method: name, version, license and component versions.
  */
 
 import { app } from 'electron';
@@ -9,7 +9,7 @@ import type { RequestRouter } from '../transport/request-router';
 const LICENSE = 'GPL-3.0';
 
 /**
- * Raccoglie le informazioni sull'applicazione.
+ * Collects the information about the application.
  */
 function readAppInfo(): AppInfo {
     return {
@@ -25,7 +25,7 @@ function readAppInfo(): AppInfo {
 }
 
 /**
- * Registra i metodi del servizio.
+ * Registers the methods of the service.
  */
 export function registerAppInfoService(router: RequestRouter): void {
     router.register('app.getInfo', () => readAppInfo());

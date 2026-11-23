@@ -1,7 +1,7 @@
 /**
- * Gestione dei modelli: elenco dei modelli inclusi (sola lettura) e di
- * quelli dell'utente, con modifica di nome e descrizione ed eliminazione.
- * L'elenco si aggiorna con l'evento templates.changed.
+ * Template management: list of the included templates (read-only) and of
+ * the user templates, with name and description editing and deletion.
+ * The list updates with the templates.changed event.
  */
 
 import { Dialog, Key, Label, Panel, Spacer, Stack } from '../../framework/ts/index.js';
@@ -14,7 +14,7 @@ import { engine } from '../transport/engine.js';
 import { localized } from './template-text.js';
 
 /**
- * Riga di un modello, con i tasti di modifica per i modelli dell'utente.
+ * Row of a template, with the edit keys for user templates.
  */
 function templateRow(template: TemplateInfo): Stack {
     const name = localized(template.name);
@@ -97,7 +97,7 @@ async function deleteTemplate(template: TemplateInfo): Promise<void> {
 }
 
 /**
- * Pannello di un gruppo di modelli.
+ * Panel of a group of templates.
  */
 function group(title: string, templates: readonly TemplateInfo[], emptyText: string): Panel {
     const panel = new Panel({ title, classes: ['template-group'] });
@@ -110,7 +110,7 @@ function group(title: string, templates: readonly TemplateInfo[], emptyText: str
 }
 
 /**
- * Apre la gestione dei modelli.
+ * Opens the template management.
  */
 export function openTemplateManager(): void {
     const dialog = new Dialog({ title: t('templates.title'), size: 'wide' });

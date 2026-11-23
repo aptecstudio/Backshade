@@ -1,12 +1,12 @@
 /**
- * Domanda all'utente uno o più testi (ad esempio nome e descrizione):
- * restituisce i valori inseriti, o null se annulla.
+ * Asks the user for one or more texts (for example name and description):
+ * returns the entered values, or null if cancelled.
  */
 
 import { Dialog, Key, TextField } from '../../framework/ts/index.js';
 import { t } from '../i18n/i18n.js';
 
-/** Campo richiesto */
+/** Requested field */
 export interface TextQuestion {
     label: string;
     value: string;
@@ -14,7 +14,7 @@ export interface TextQuestion {
 }
 
 /**
- * Mostra la finestra e attende i valori, nello stesso ordine dei campi.
+ * Shows the dialog and waits for the values, in the same order as the fields.
  */
 export function askText(title: string, fields: readonly TextQuestion[], confirmLabel: string): Promise<string[] | null> {
     return new Promise((resolve) => {

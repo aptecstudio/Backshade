@@ -1,6 +1,6 @@
 /**
- * Riga cliccabile di un elenco (ad esempio uno show recente o un modello),
- * con contenuto fatto di componenti e uno stato selezionato opzionale.
+ * Clickable row of a list (for example a recent show or a template),
+ * with content made of components and an optional selected state.
  */
 
 import { Component } from '../core/component.js';
@@ -8,13 +8,13 @@ import { Emitter } from '../core/emitter.js';
 import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni di una riga */
+/** Row options */
 export interface ListItemOptions {
-    /** Contenuto della riga */
+    /** Row content */
     children?: Component[];
-    /** Descrizione per le tecnologie assistive, già tradotta */
+    /** Description for assistive technologies, already translated */
     label?: string;
-    /** Riga attenuata, ad esempio per un elemento non disponibile */
+    /** Muted row, for example for an unavailable item */
     muted?: boolean;
 }
 
@@ -36,7 +36,7 @@ export class ListItem extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Segna la riga come selezionata.
+     * Marks the row as selected.
      */
     setSelected(selected: boolean): void {
         this.element.classList.toggle('list-item--selected', selected);
@@ -44,7 +44,7 @@ export class ListItem extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Registra un listener per la pressione della riga.
+     * Registers a listener for row presses.
      */
     onPress(listener: () => void): Unsubscribe {
         return this.presses.subscribe(listener);

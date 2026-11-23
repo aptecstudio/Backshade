@@ -1,4 +1,4 @@
-// Display: schermo nero con bordo sottile e testo monospazio
+// Display: black screen with a thin border and monospaced text
 @use '../tokens' as *;
 
 .display {
@@ -10,7 +10,7 @@
     font-family: $font-family-mono;
 }
 
-// Display di canale: nome, valore, barra di livello
+// Channel display: name, value, level bar
 .display--channel {
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@
     background: var(--channel-color, #{color('accent')});
 }
 
-// Display a cifre grandi: timecode e tempo
+// Display with large digits: timecode and tempo
 .display--readout {
     flex-shrink: 0;
     padding: space(1) space(2);
@@ -49,7 +49,7 @@
     white-space: nowrap;
 }
 
-// Display con didascalia e valore
+// Display with caption and value
 .display--value {
     display: flex;
     flex-direction: column;

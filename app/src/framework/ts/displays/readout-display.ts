@@ -1,15 +1,15 @@
 /**
- * Display a cifre grandi nel colore di accento, per timecode e tempo.
+ * Display with large digits in the accent color, for timecode and tempo.
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 
-/** Opzioni di un display a cifre */
+/** Readout display options */
 export interface ReadoutDisplayOptions {
-    /** Testo mostrato, ad esempio "00:12:48:20" */
+    /** Displayed text, for example "00:12:48:20" */
     text: string;
-    /** Nome per le tecnologie assistive, già tradotto */
+    /** Name for assistive technologies, already translated */
     label: string;
 }
 
@@ -23,7 +23,7 @@ export class ReadoutDisplay extends Component<HTMLDivElement> {
     }
 
     /**
-     * Cambia il testo mostrato.
+     * Changes the displayed text.
      */
     setText(text: string): void {
         this.element.textContent = text;

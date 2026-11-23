@@ -1,12 +1,12 @@
 /**
- * Messaggi di errore per l'utente: traduce i codici restituiti dal motore.
+ * Error messages for the user: translates the codes returned by the engine.
  */
 
 import { t, type TextKey } from '../i18n/i18n.js';
 import { EngineRequestError } from '../transport/engine-client.js';
 import { askChoice } from './ask-choice.js';
 
-// Codici del motore con un messaggio dedicato (codice -> chiave del testo)
+// Engine codes with a dedicated message (code -> text key)
 const MESSAGES: Record<string, TextKey> = {
     'unsaved-changes': 'errors.unsavedChanges',
     'invalid-name': 'errors.invalidName',
@@ -25,7 +25,7 @@ const MESSAGES: Record<string, TextKey> = {
 };
 
 /**
- * Restituisce il messaggio per l'utente di un errore.
+ * Returns the user message of an error.
  */
 export function errorMessage(error: unknown): string {
     if (error instanceof EngineRequestError && Object.hasOwn(MESSAGES, error.code)) {
@@ -35,7 +35,7 @@ export function errorMessage(error: unknown): string {
 }
 
 /**
- * Mostra un errore all'utente e lo registra in console.
+ * Shows an error to the user and logs it in the console.
  */
 export async function showError(error: unknown): Promise<void> {
     console.error(error);

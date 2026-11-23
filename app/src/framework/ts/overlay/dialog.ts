@@ -1,7 +1,7 @@
 /**
- * Finestra di dialogo modale: titolo, contenuto e tasti delle azioni.
- * Esc la annulla; il focus resta dentro la finestra finché è aperta e
- * torna all'elemento precedente alla chiusura.
+ * Modal dialog: title, content and action keys.
+ * Esc cancels it; the focus stays inside the dialog while it is open and
+ * goes back to the previous element when it closes.
  */
 
 import { Component } from '../core/component.js';
@@ -9,11 +9,11 @@ import { Emitter } from '../core/emitter.js';
 import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni di una finestra di dialogo */
+/** Dialog options */
 export interface DialogOptions {
-    /** Titolo, già tradotto */
+    /** Title, already translated */
     title: string;
-    /** Larghezza: normale (predefinita) o ampia */
+    /** Width: normal (default) or wide */
     size?: 'normal' | 'wide';
 }
 
@@ -48,7 +48,7 @@ export class Dialog extends Component<HTMLDivElement> {
     }
 
     /**
-     * Mostra la finestra sopra la pagina e porta il focus sul primo controllo.
+     * Shows the dialog over the page and moves the focus to the first control.
      */
     open(): this {
         this.previousFocus = document.activeElement;
@@ -60,7 +60,7 @@ export class Dialog extends Component<HTMLDivElement> {
     }
 
     /**
-     * Chiude e distrugge la finestra, riportando il focus dove era.
+     * Closes and destroys the dialog, moving the focus back where it was.
      */
     close(): void {
         const previous = this.previousFocus;
@@ -71,7 +71,7 @@ export class Dialog extends Component<HTMLDivElement> {
     }
 
     /**
-     * Aggiunge i tasti delle azioni, in basso a destra.
+     * Adds the action keys, at the bottom right.
      */
     addActions(...actions: Component[]): this {
         for (const action of actions) {
@@ -82,7 +82,7 @@ export class Dialog extends Component<HTMLDivElement> {
     }
 
     /**
-     * Registra un listener per l'annullamento con Esc.
+     * Registers a listener for cancellation with Esc.
      */
     onCancel(listener: () => void): Unsubscribe {
         return this.cancels.subscribe(listener);
@@ -93,7 +93,7 @@ export class Dialog extends Component<HTMLDivElement> {
     }
 
     /**
-     * Esc annulla; Tab gira tra i controlli della finestra.
+     * Esc cancels; Tab cycles through the controls of the dialog.
      */
     private handleKey(event: KeyboardEvent, panel: HTMLElement): void {
         if (event.key === 'Escape') {

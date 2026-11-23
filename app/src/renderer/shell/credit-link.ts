@@ -1,5 +1,5 @@
 /**
- * Credito Aptec Studio: "A product by" seguito dal wordmark, collegato al sito.
+ * Aptec Studio credit: "A product by" followed by the wordmark, linked to the website.
  */
 
 import { ExternalLink, ImageView, Label } from '../../framework/ts/index.js';

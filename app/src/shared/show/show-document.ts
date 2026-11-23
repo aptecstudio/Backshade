@@ -1,31 +1,31 @@
 /**
- * Struttura del file show.json, condivisa tra motore e interfaccia.
- * Le fasi successive aggiungono qui le proprie sezioni (patch, scene,
- * timeline); ogni cambio incompatibile aumenta SHOW_FORMAT_VERSION.
+ * Structure of the show.json file, shared between engine and interface.
+ * The next phases add their own sections here (patch, scenes,
+ * timeline); every incompatible change increases SHOW_FORMAT_VERSION.
  */
 
 import type { ShowSettings } from './show-settings.js';
 
-/** Versione del formato di show.json */
+/** Format version of show.json */
 export const SHOW_FORMAT_VERSION = 1;
 
-/** Estensione della cartella di uno show */
+/** Extension of a show folder */
 export const SHOW_FOLDER_EXTENSION = '.backshade';
 
-/** Contenuto di show.json */
+/** Content of show.json */
 export interface ShowDocument {
-    /** Versione del formato del file */
+    /** Format version of the file */
     formatVersion: number;
-    /** Identificativo univoco dello show */
+    /** Unique identifier of the show */
     id: string;
-    /** Nome dello show */
+    /** Show name */
     name: string;
-    /** Data di creazione, ISO 8601 */
+    /** Creation date, ISO 8601 */
     createdAt: string;
-    /** Data dell'ultimo salvataggio, ISO 8601 */
+    /** Date of the last save, ISO 8601 */
     modifiedAt: string;
-    /** Versione di Backshade che ha creato lo show */
+    /** Backshade version that created the show */
     createdWith: string;
-    /** Impostazioni dello show; mancanti nei file meno recenti, completate alla lettura */
+    /** Show settings; missing in older files, completed when reading */
     settings: ShowSettings;
 }

@@ -1,14 +1,14 @@
 /**
- * Scelta della lingua da usare tra quelle disponibili.
+ * Choice of the language to use among the available ones.
  */
 
 /**
- * Restituisce la prima lingua richiesta che è disponibile, in ordine di
- * preferenza. Una richiesta regionale (ad esempio "it-IT") vale anche per la
- * lingua base ("it"), e viceversa. Se nessuna è disponibile, restituisce fallback.
- * @param available - Codici delle lingue disponibili
- * @param requested - Codici richiesti, dal più al meno preferito; i valori vuoti vengono ignorati
- * @param fallback - Lingua da usare se nessuna richiesta è disponibile
+ * Returns the first requested language that is available, in order of
+ * preference. A regional request (for example "it-IT") also matches the
+ * base language ("it"), and vice versa. If none is available, returns fallback.
+ * @param available - Codes of the available languages
+ * @param requested - Requested codes, from the most to the least preferred; empty values are ignored
+ * @param fallback - Language to use if no requested one is available
  */
 export function negotiateLocale(
     available: readonly string[],

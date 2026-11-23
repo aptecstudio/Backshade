@@ -1,14 +1,14 @@
 /**
- * Copia di una cartella con esclusione di alcuni elementi di primo livello
- * (ad esempio copie di recupero e cronologia quando si copia uno show).
+ * Copy of a folder excluding some top-level entries
+ * (for example recovery copies and history when copying a show).
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 
 /**
- * Copia source in target, che non deve esistere.
- * @param exclude - Nomi di file o cartelle di primo livello da non copiare
+ * Copies source to target, which must not exist.
+ * @param exclude - Names of top-level files or folders not to copy
  */
 export function copyFolder(source: string, target: string, exclude: readonly string[] = []): void {
     fs.cpSync(source, target, {

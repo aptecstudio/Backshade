@@ -1,11 +1,11 @@
 /**
- * Tipi di media gestiti da uno show, riconosciuti dall'estensione del file.
+ * Media types handled by a show, recognized by the file extension.
  */
 
-/** Tipo di media */
+/** Media type */
 export type MediaKind = 'audio' | 'video' | 'image';
 
-/** Estensioni ammesse per ogni tipo, in minuscolo e senza punto */
+/** Allowed extensions for each type, lowercase and without the dot */
 export const MEDIA_EXTENSIONS: Readonly<Record<MediaKind, readonly string[]>> = {
     audio: ['wav', 'mp3', 'aif', 'aiff', 'flac', 'ogg', 'm4a'],
     video: ['mp4', 'mov', 'm4v', 'webm', 'mkv'],
@@ -13,7 +13,7 @@ export const MEDIA_EXTENSIONS: Readonly<Record<MediaKind, readonly string[]>> = 
 };
 
 /**
- * Restituisce il tipo di media di un nome di file, o null se non è ammesso.
+ * Returns the media type of a file name, or null if it is not allowed.
  */
 export function mediaKindOf(fileName: string): MediaKind | null {
     const dot = fileName.lastIndexOf('.');

@@ -1,10 +1,10 @@
 /**
- * Base dei controlli a valore continuo (manopole e fader).
- * Il valore va da 0 a 1. Gestisce accessibilità (ruolo slider), tastiera,
- * rotella del mouse e notifica dei cambi fatti dall'utente.
+ * Base of continuous value controls (knobs and faders).
+ * The value goes from 0 to 1. It handles accessibility (slider role), keyboard,
+ * mouse wheel and notification of the changes made by the user.
  *
- * Le classi derivate creano la propria struttura e chiamano setValue()
- * alla fine del costruttore per il primo disegno.
+ * Derived classes build their own structure and call setValue()
+ * at the end of the constructor for the first rendering.
  */
 
 import { clamp } from '../core/clamp.js';
@@ -12,24 +12,24 @@ import { Component } from '../core/component.js';
 import { Emitter } from '../core/emitter.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni comuni dei controlli a valore continuo */
+/** Common options of continuous value controls */
 export interface RangeControlOptions {
-    /** Nome per le tecnologie assistive, già tradotto */
+    /** Name for assistive technologies, already translated */
     label: string;
-    /** Valore iniziale, da 0 a 1 (predefinito 0) */
+    /** Initial value, from 0 to 1 (default 0) */
     value?: number;
-    /** Testo del valore per le tecnologie assistive */
+    /** Value text for assistive technologies */
     formatValue?: (value: number) => string;
 }
 
-// Passi di variazione del valore
+// Value change steps
 const STEP = 0.01;
 const PAGE_STEP = 0.1;
 const WHEEL_STEP = 0.02;
 const FINE_FACTOR = 0.1;
 
 /**
- * Formato predefinito del valore: percentuale intera.
+ * Default value format: whole percentage.
  */
 function formatPercent(value: number): string {
     return `${Math.round(value * 100)} %`;
@@ -59,14 +59,14 @@ export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends 
         this.track(() => this.changes.clear());
     }
 
-    /** Valore attuale, da 0 a 1 */
+    /** Current value, from 0 to 1 */
     get value(): number {
         return this.current;
     }
 
     /**
-     * Imposta il valore. Con notify a false (predefinito) non notifica i
-     * listener: serve per aggiornare il controllo dallo stato del motore.
+     * Sets the value. With notify false (default) the listeners are not
+     * notified: it is used to update the control from the engine state.
      */
     setValue(value: number, notify = false): void {
         const next = clamp(value, 0, 1);
@@ -83,33 +83,33 @@ export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends 
     }
 
     /**
-     * Registra un listener per i cambi di valore fatti dall'utente.
+     * Registers a listener for value changes made by the user.
      */
     onChange(listener: (value: number) => void): Unsubscribe {
         return this.changes.subscribe(listener);
     }
 
     /**
-     * Aggiorna la grafica del controllo per il valore indicato.
+     * Updates the control graphics for the given value.
      */
     protected abstract render(value: number): void;
 
     /**
-     * Varia il valore come azione dell'utente.
+     * Changes the value as a user action.
      */
     protected changeBy(delta: number): void {
         this.setValue(this.current + delta, true);
     }
 
     /**
-     * Imposta il valore come azione dell'utente.
+     * Sets the value as a user action.
      */
     protected setFromUser(value: number): void {
         this.setValue(value, true);
     }
 
     /**
-     * Tastiera: frecce, pagina su e giù, inizio e fine; con Maiusc il passo è fine.
+     * Keyboard: arrows, page up and down, home and end; with Shift the step is fine.
      */
     private handleKey(event: KeyboardEvent): void {
         const step = event.shiftKey ? STEP * FINE_FACTOR : STEP;

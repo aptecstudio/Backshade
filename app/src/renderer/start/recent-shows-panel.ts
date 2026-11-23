@@ -1,7 +1,7 @@
 /**
- * Show recenti nella schermata iniziale: nome, data dell'ultimo salvataggio
- * e cartella; un clic apre lo show. Gli show spostati o cancellati sono
- * segnati e si possono togliere dall'elenco.
+ * Recent shows on the start page: name, last save date
+ * and folder; one click opens the show. Moved or deleted shows are
+ * marked and can be removed from the list.
  */
 
 import { icon, Key, Label, ListItem, Panel, Stack, type Component } from '../../framework/ts/index.js';

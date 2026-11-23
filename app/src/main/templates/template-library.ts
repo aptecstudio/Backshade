@@ -1,7 +1,7 @@
 /**
- * Libreria dei modelli di show. Un modello è una cartella show completa
- * con in più template.json (nome e descrizione). I modelli inclusi sono
- * in sola lettura; quelli dell'utente stanno nella cartella dati dell'utente.
+ * Library of show templates. A template is a complete show folder
+ * with an additional template.json (name and description). Included templates are
+ * read-only; user templates live in the user data folder.
  */
 
 import fs from 'node:fs';
@@ -15,13 +15,13 @@ import { toFileName, uniquePath } from '../storage/file-names';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
 import { EngineError } from '../transport/engine-error';
 
-/** File con nome e descrizione del modello */
+/** File with the name and description of the template */
 export const TEMPLATE_FILE = 'template.json';
 
-/** Elementi del modello da non copiare in un nuovo show */
+/** Template entries not to copy into a new show */
 export const TEMPLATE_ONLY_ENTRIES: readonly string[] = [TEMPLATE_FILE];
 
-/** Modello trovato su disco */
+/** Template found on disk */
 export interface TemplateRecord extends TemplateInfo {
     folder: string;
 }
@@ -40,7 +40,7 @@ function isLocalizedText(value: unknown): value is LocalizedText {
 }
 
 /**
- * Legge un modello; restituisce null se la cartella non è un modello valido.
+ * Reads a template; returns null if the folder is not a valid template.
  */
 function readTemplate(source: TemplateInfo['source'], folder: string): TemplateRecord | null {
     if (!isShowFolder(folder)) {
@@ -57,26 +57,26 @@ function readTemplate(source: TemplateInfo['source'], folder: string): TemplateR
             folder
         };
     } catch (error) {
-        console.warn(`Modello ignorato, template.json non leggibile: ${folder}`, error);
+        console.warn(`Template ignored, unreadable template.json: ${folder}`, error);
         return null;
     }
 }
 
 /**
- * Legge un modello appena creato o importato.
- * @throws EngineError "invalid-archive" se la cartella non contiene uno show
+ * Reads a template that has just been created or imported.
+ * @throws EngineError "invalid-archive" if the folder does not contain a show
  */
 export function readTemplateFolder(source: TemplateInfo['source'], folder: string): TemplateRecord {
     const record = readTemplate(source, folder);
     if (record === null) {
         fs.rmSync(folder, { recursive: true, force: true });
-        throw new EngineError('invalid-archive', 'Il modello non contiene uno show valido');
+        throw new EngineError('invalid-archive', 'The template does not contain a valid show');
     }
     return record;
 }
 
 /**
- * Restituisce tutti i modelli: prima quelli inclusi, poi quelli dell'utente.
+ * Returns all the templates: first the included ones, then the user ones.
  */
 export function listTemplates(): TemplateRecord[] {
     const records: TemplateRecord[] = [];
@@ -97,31 +97,31 @@ export function listTemplates(): TemplateRecord[] {
 }
 
 /**
- * Cerca un modello per identificativo.
+ * Finds a template by identifier.
  * @throws EngineError "template-not-found"
  */
 export function findTemplate(id: string): TemplateRecord {
     const record = listTemplates().find((template) => template.id === id);
     if (record === undefined) {
-        throw new EngineError('template-not-found', `Modello non trovato: ${id}`);
+        throw new EngineError('template-not-found', `Template not found: ${id}`);
     }
     return record;
 }
 
 /**
- * Cerca un modello dell'utente, l'unico tipo modificabile.
- * @throws EngineError "template-read-only" per i modelli inclusi
+ * Finds a user template, the only editable kind.
+ * @throws EngineError "template-read-only" for included templates
  */
 function findUserTemplate(id: string): TemplateRecord {
     const record = findTemplate(id);
     if (record.source !== 'user') {
-        throw new EngineError('template-read-only', 'I modelli inclusi non si possono modificare');
+        throw new EngineError('template-read-only', 'Included templates cannot be changed');
     }
     return record;
 }
 
 /**
- * Crea un modello dell'utente copiando la cartella di uno show salvato.
+ * Creates a user template by copying the folder of a saved show.
  */
 export function createTemplateFromShow(showFolder: string, name: string, description: string): TemplateRecord {
     fs.mkdirSync(USER_TEMPLATES_DIR, { recursive: true });
@@ -132,19 +132,19 @@ export function createTemplateFromShow(showFolder: string, name: string, descrip
 }
 
 /**
- * Cambia nome e descrizione di un modello dell'utente.
+ * Changes the name and description of a user template.
  */
 export function updateTemplate(id: string, name: string, description: string): TemplateRecord {
     const record = findUserTemplate(id);
     if (name.trim() === '') {
-        throw new EngineError('invalid-name', 'Nome vuoto');
+        throw new EngineError('invalid-name', 'Empty name');
     }
     writeJsonFileAtomic(path.join(record.folder, TEMPLATE_FILE), { name: name.trim(), description: description.trim() });
     return readTemplateFolder('user', record.folder);
 }
 
 /**
- * Elimina un modello dell'utente.
+ * Deletes a user template.
  */
 export function deleteTemplate(id: string): void {
     fs.rmSync(findUserTemplate(id).folder, { recursive: true, force: true });

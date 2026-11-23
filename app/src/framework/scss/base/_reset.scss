@@ -1,4 +1,4 @@
-// Reset minimo del browser
+// Minimal browser reset
 
 *,
 *::before,
@@ -20,7 +20,7 @@ textarea {
     color: inherit;
 }
 
-// L'attributo hidden vale sempre, anche sugli elementi con display impostato dai componenti
+// The hidden attribute always wins, even on elements whose display is set by components
 [hidden] {
     display: none !important;
 }

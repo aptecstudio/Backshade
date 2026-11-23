@@ -1,19 +1,19 @@
 /**
- * Finestra Salva come: nuovo nome e cartella dello show.
+ * Save as dialog: new name and folder of the show.
  */
 
 import { Dialog, Key, TextField } from '../../../framework/ts/index.js';
 import { t } from '../../i18n/i18n.js';
 import { FolderPicker } from './folder-picker.js';
 
-/** Dati per salvare con un altro nome */
+/** Data to save under another name */
 export interface SaveAsChoice {
     name: string;
     folder: string;
 }
 
 /**
- * Mostra la finestra e attende la scelta.
+ * Shows the dialog and waits for the choice.
  */
 export function askSaveAs(currentName: string, defaultFolder: string): Promise<SaveAsChoice | null> {
     return new Promise((resolve) => {

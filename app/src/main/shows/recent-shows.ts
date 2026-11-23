@@ -1,5 +1,5 @@
 /**
- * Elenco degli show recenti, salvato nella cartella dati dell'utente.
+ * List of the recent shows, saved in the user data folder.
  */
 
 import path from 'node:path';
@@ -21,7 +21,7 @@ function storeFile(): string {
 }
 
 /**
- * Legge le voci salvate, ignorando quelle non valide.
+ * Reads the saved entries, ignoring the invalid ones.
  */
 function readEntries(): RecentEntry[] {
     let data: unknown;
@@ -44,7 +44,7 @@ function writeEntries(entries: RecentEntry[]): void {
 }
 
 /**
- * Restituisce gli show recenti, segnando quelli non più presenti.
+ * Returns the recent shows, marking those no longer present.
  */
 export function listRecentShows(): RecentShow[] {
     return readEntries().map((entry) => {
@@ -63,7 +63,7 @@ export function listRecentShows(): RecentShow[] {
 }
 
 /**
- * Mette uno show in cima ai recenti.
+ * Puts a show at the top of the recent shows.
  */
 export function addRecentShow(name: string, folder: string): void {
     const entries = readEntries().filter((entry) => path.resolve(entry.folder) !== path.resolve(folder));
@@ -72,7 +72,7 @@ export function addRecentShow(name: string, folder: string): void {
 }
 
 /**
- * Toglie uno show dai recenti.
+ * Removes a show from the recent shows.
  */
 export function removeRecentShow(folder: string): void {
     writeEntries(readEntries().filter((entry) => path.resolve(entry.folder) !== path.resolve(folder)));

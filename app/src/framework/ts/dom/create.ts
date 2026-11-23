@@ -1,21 +1,21 @@
 /**
- * Creazione degli elementi del DOM.
+ * Creation of DOM elements.
  */
 
-/** Opzioni per la creazione di un elemento */
+/** Options for creating an element */
 export interface CreateOptions {
-    /** Classi CSS da applicare */
+    /** CSS classes to apply */
     classes?: string[];
-    /** Attributi da impostare */
+    /** Attributes to set */
     attributes?: Record<string, string>;
-    /** Testo contenuto, inserito come testo e mai come HTML */
+    /** Text content, always inserted as text and never as HTML */
     text?: string;
-    /** Figli da aggiungere in ordine */
+    /** Children to append in order */
     children?: Node[];
 }
 
 /**
- * Crea un elemento con classi, attributi, testo e figli.
+ * Creates an element with classes, attributes, text and children.
  */
 export function create<K extends keyof HTMLElementTagNameMap>(
     tag: K,

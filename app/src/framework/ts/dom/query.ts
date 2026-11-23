@@ -1,16 +1,16 @@
 /**
- * Selezione degli elementi del DOM.
+ * Selection of DOM elements.
  */
 
 /**
- * Restituisce il primo elemento che corrisponde al selettore, o null.
+ * Returns the first element matching the selector, or null.
  */
 export function query<T extends Element = HTMLElement>(selector: string, root: ParentNode = document): T | null {
     return root.querySelector<T>(selector);
 }
 
 /**
- * Restituisce tutti gli elementi che corrispondono al selettore, come array.
+ * Returns all elements matching the selector, as an array.
  */
 export function queryAll<T extends Element = HTMLElement>(selector: string, root: ParentNode = document): T[] {
     return Array.from(root.querySelectorAll<T>(selector));

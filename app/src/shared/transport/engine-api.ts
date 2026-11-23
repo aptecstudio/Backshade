@@ -1,14 +1,14 @@
 /**
- * Contratto tra interfaccia e motore: metodi che l'interfaccia può chiamare
- * ed eventi che il motore può inviare, con i tipi dei dati.
- * Il motore verifica i parametri di ogni metodo, perché le richieste
- * possono arrivare da client remoti.
+ * Contract between interface and engine: methods the interface can call
+ * and events the engine can send, with their data types.
+ * The engine checks the parameters of every method, because requests
+ * can come from remote clients.
  */
 
 import type { MediaKind } from '../show/media-kinds.js';
 import type { ShowSettings } from '../show/show-settings.js';
 
-/** Informazioni sull'applicazione, per la finestra Informazioni */
+/** Information about the application, for the About window */
 export interface AppInfo {
     name: string;
     version: string;
@@ -20,162 +20,162 @@ export interface AppInfo {
     arch: string;
 }
 
-/** Testo in una lingua o tradotto in più lingue (codice lingua -> testo) */
+/** Text in one language or translated in several languages (language code -> text) */
 export type LocalizedText = string | Record<string, string>;
 
-/** Show aperto */
+/** Open show */
 export interface ShowSummary {
     id: string;
     name: string;
-    /** Cartella dello show */
+    /** Show folder */
     folder: string;
-    /** Data dell'ultimo salvataggio, ISO 8601 */
+    /** Date of the last save, ISO 8601 */
     modifiedAt: string;
-    /** Ci sono modifiche non salvate */
+    /** There are unsaved changes */
     dirty: boolean;
 }
 
-/** Risultato dell'apertura di uno show */
+/** Result of opening a show */
 export interface OpenShowResult {
     show: ShowSummary;
-    /** Esiste una copia di recupero più recente dell'ultimo salvataggio */
+    /** There is a recovery copy newer than the last save */
     recoveryAvailable: boolean;
 }
 
-/** Show recente */
+/** Recent show */
 export interface RecentShow {
     name: string;
     folder: string;
-    /** Data dell'ultima apertura, ISO 8601 */
+    /** Date of the last opening, ISO 8601 */
     openedAt: string;
-    /** Data dell'ultimo salvataggio, ISO 8601, se lo show esiste ancora */
+    /** Date of the last save, ISO 8601, if the show still exists */
     modifiedAt: string | null;
-    /** Lo show non si trova più nella cartella (spostato o cancellato) */
+    /** The show is no longer in its folder (moved or deleted) */
     missing: boolean;
 }
 
-/** Modello di show */
+/** Show template */
 export interface TemplateInfo {
-    /** Identificativo, ad esempio "bundled:empty" o "user:Palco piccolo" */
+    /** Identifier, for example "bundled:empty" or "user:Small stage" */
     id: string;
     name: LocalizedText;
     description: LocalizedText;
-    /** Incluso nell'applicazione (sola lettura) o creato dall'utente */
+    /** Included in the application (read-only) or created by the user */
     source: 'bundled' | 'user';
 }
 
-/** Media di uno show */
+/** Media of a show */
 export interface MediaItem {
-    /** Percorso relativo alla cartella media/, con "/" come separatore */
+    /** Path relative to the media/ folder, with "/" as separator */
     file: string;
-    /** Nome del file */
+    /** File name */
     name: string;
     kind: MediaKind;
-    /** Dimensione in byte */
+    /** Size in bytes */
     size: number;
-    /** Data dell'ultima modifica del file, ISO 8601 */
+    /** Date of the last change of the file, ISO 8601 */
     modifiedAt: string;
 }
 
-/** Impostazioni globali dell'applicazione */
+/** Global application settings */
 export interface AppSettings {
-    /** Cartella predefinita dei nuovi show */
+    /** Default folder of new shows */
     defaultShowsFolder: string;
 }
 
-/** Metodi del motore: parametri e risultato */
+/** Engine methods: parameters and result */
 export interface EngineMethods {
-    /** Informazioni sull'applicazione */
+    /** Information about the application */
     'app.getInfo': { params: undefined; result: AppInfo };
-    /** Chiude la finestra principale dopo la conferma dell'utente */
+    /** Closes the main window after the confirmation of the user */
     'app.confirmClose': { params: undefined; result: undefined };
-    /** Apre la finestra Informazioni (solo nell'applicazione desktop) */
+    /** Opens the About window (desktop application only) */
     'window.openAbout': { params: undefined; result: undefined };
-    /** Fa scegliere una cartella all'utente (solo nell'applicazione desktop) */
+    /** Lets the user choose a folder (desktop application only) */
     'dialog.chooseFolder': { params: { defaultPath?: string }; result: string | null };
 
-    /** Show aperto, o null */
+    /** Open show, or null */
     'show.getCurrent': { params: undefined; result: ShowSummary | null };
-    /** Crea uno show da un modello e lo apre */
+    /** Creates a show from a template and opens it */
     'show.create': { params: { name: string; folder: string; templateId: string }; result: OpenShowResult };
-    /** Apre lo show di una cartella */
+    /** Opens the show of a folder */
     'show.open': { params: { folder: string }; result: OpenShowResult };
-    /** Fa scegliere la cartella di uno show e lo apre; null se annullato */
+    /** Lets the user choose the folder of a show and opens it; null if cancelled */
     'show.chooseAndOpen': { params: undefined; result: OpenShowResult | null };
-    /** Salva lo show aperto */
+    /** Saves the open show */
     'show.save': { params: undefined; result: ShowSummary };
-    /** Salva lo show aperto con un nuovo nome in una cartella */
+    /** Saves the open show with a new name in a folder */
     'show.saveAs': { params: { name: string; folder: string }; result: ShowSummary };
-    /** Rinomina lo show aperto (modifica non salvata) */
+    /** Renames the open show (unsaved change) */
     'show.rename': { params: { name: string }; result: ShowSummary };
-    /** Carica la copia di recupero dello show aperto */
+    /** Loads the recovery copy of the open show */
     'show.recover': { params: undefined; result: ShowSummary };
-    /** Elimina la copia di recupero dello show aperto */
+    /** Deletes the recovery copy of the open show */
     'show.discardRecovery': { params: undefined; result: undefined };
-    /** Chiude lo show; con discard a true scarta le modifiche non salvate */
+    /** Closes the show; with discard true the unsaved changes are discarded */
     'show.close': { params: { discard?: boolean }; result: undefined };
 
-    /** Esporta lo show aperto e salvato in un archivio .bshow; restituisce il file, o null se annullato */
+    /** Exports the open, saved show to a .bshow archive; returns the file, or null if cancelled */
     'show.export': { params: undefined; result: string | null };
-    /** Importa uno show da un archivio .bshow nella cartella predefinita e lo apre; null se annullato */
+    /** Imports a show from a .bshow archive into the default folder and opens it; null if cancelled */
     'show.import': { params: undefined; result: OpenShowResult | null };
 
-    /** Impostazioni dello show aperto */
+    /** Settings of the open show */
     'show.getSettings': { params: undefined; result: ShowSettings };
-    /** Cambia le impostazioni dello show aperto (modifica non salvata) */
+    /** Changes the settings of the open show (unsaved change) */
     'show.updateSettings': { params: Partial<ShowSettings>; result: ShowSettings };
 
-    /** Media dello show aperto */
+    /** Media of the open show */
     'media.list': { params: undefined; result: MediaItem[] };
-    /** Fa scegliere file all'utente e li copia nei media dello show (solo nell'applicazione desktop) */
+    /** Lets the user choose files and copies them into the show media (desktop application only) */
     'media.import': { params: undefined; result: MediaItem[] };
-    /** Elimina un media dallo show */
+    /** Deletes a media file from the show */
     'media.remove': { params: { file: string }; result: undefined };
-    /** Mostra un media nella cartella del sistema (solo nell'applicazione desktop) */
+    /** Shows a media file in the system folder (desktop application only) */
     'media.reveal': { params: { file: string }; result: undefined };
 
-    /** Show recenti, dal più recente */
+    /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
-    /** Toglie uno show dai recenti */
+    /** Removes a show from the recent shows */
     'recent.remove': { params: { folder: string }; result: undefined };
 
-    /** Modelli disponibili: inclusi e dell'utente */
+    /** Available templates: included and from the user */
     'template.list': { params: undefined; result: TemplateInfo[] };
-    /** Salva lo show aperto come modello dell'utente */
+    /** Saves the open show as a user template */
     'template.saveCurrent': { params: { name: string; description: string }; result: TemplateInfo };
-    /** Cambia nome e descrizione di un modello dell'utente */
+    /** Changes the name and description of a user template */
     'template.update': { params: { id: string; name: string; description: string }; result: TemplateInfo };
-    /** Elimina un modello dell'utente */
+    /** Deletes a user template */
     'template.delete': { params: { id: string }; result: undefined };
-    /** Esporta un modello in un archivio .btemplate; restituisce il file, o null se annullato */
+    /** Exports a template to a .btemplate archive; returns the file, or null if cancelled */
     'template.export': { params: { id: string }; result: string | null };
-    /** Importa un modello da un archivio .btemplate; null se annullato */
+    /** Imports a template from a .btemplate archive; null if cancelled */
     'template.import': { params: undefined; result: TemplateInfo | null };
 
-    /** Impostazioni globali */
+    /** Global settings */
     'settings.get': { params: undefined; result: AppSettings };
-    /** Cambia le impostazioni globali */
+    /** Changes the global settings */
     'settings.update': { params: Partial<AppSettings>; result: AppSettings };
 }
 
-/** Eventi del motore e relativi dati */
+/** Engine events and their data */
 export interface EngineEvents {
-    /** L'elenco delle lingue disponibili è cambiato (pacchetto aggiunto o rimosso) */
+    /** The list of available languages has changed (pack added or removed) */
     'locales.changed': { codes: string[] };
-    /** Lo show aperto è cambiato (aperto, salvato, modificato, chiuso) */
+    /** The open show has changed (opened, saved, modified, closed) */
     'show.changed': { show: ShowSummary | null };
-    /** I media dello show aperto sono cambiati */
+    /** The media of the open show have changed */
     'media.changed': Record<string, never>;
-    /** L'elenco degli show recenti è cambiato */
+    /** The list of recent shows has changed */
     'recent.changed': Record<string, never>;
-    /** L'elenco dei modelli è cambiato */
+    /** The list of templates has changed */
     'templates.changed': Record<string, never>;
-    /** L'utente vuole chiudere la finestra con modifiche non salvate */
+    /** The user wants to close the window with unsaved changes */
     'app.closeRequested': Record<string, never>;
 }
 
-/** Nome di un metodo del motore */
+/** Name of an engine method */
 export type EngineMethod = keyof EngineMethods;
 
-/** Nome di un evento del motore */
+/** Name of an engine event */
 export type EngineEvent = keyof EngineEvents;

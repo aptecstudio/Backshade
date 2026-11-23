@@ -24,8 +24,7 @@ This file defines the rules every AI agent must follow when working on the **Bac
 
 - Conversations with humans are **in Italian**.
 - `.md` files are **in English**.
-- Source code and naming (variables, functions, classes, files, folders, JSON keys, technical commit messages) are **in English**.
-- **Exception:** code comments are written **in Italian**.
+- Source code and naming (variables, functions, classes, files, folders, JSON keys, technical commit messages) are **in English**, **code comments included** (changed from Italian on 2026-11-23).
 - User interface text follows the localization system defined in `MEMORY.md`.
 
 ## 3.1 Allowed characters
@@ -39,7 +38,7 @@ This file defines the rules every AI agent must follow when working on the **Bac
 ## 4. Code style
 
 - Each language follows its reference standard style (indentation, spacing, blank lines, new lines, punctuation, brace placement, semicolons).
-- Comments follow the language conventions (e.g. JSDoc/TSDoc for TypeScript) and are written in Italian.
+- Comments follow the language conventions (e.g. JSDoc/TSDoc for TypeScript) and are written in English, like the rest of the source code, including log and error messages.
 - Single responsibility: each file is a component with one specific task; different contexts or roles are never mixed in the same file (see `MEMORY.md`).
 - Every file ends with a new line; no trailing whitespace.
 - Shared formatting rules are defined in `.editorconfig`.

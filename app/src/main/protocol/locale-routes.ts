@@ -1,8 +1,8 @@
 /**
- * Indirizzi dei pacchetti di lingua serviti all'interfaccia:
- * - /locales/index.json: elenco delle lingue disponibili (codice e nome);
- * - /locales/<codice>.json: pacchetto di una lingua, incluso o dell'utente.
- * Gli stessi indirizzi serviranno al web server remoto.
+ * Addresses of the language packs served to the interface:
+ * - /locales/index.json: list of the available languages (code and name);
+ * - /locales/<code>.json: pack of a language, included or from the user.
+ * The same addresses will be used by the remote web server.
  */
 
 import { pathToFileURL } from 'node:url';
@@ -14,8 +14,8 @@ const PACK_PATTERN = /^\/locales\/([A-Za-z-]+)\.json$/;
 const NO_CACHE = { 'cache-control': 'no-store' };
 
 /**
- * Risponde alle richieste dei pacchetti di lingua.
- * Restituisce null se il percorso non riguarda le lingue.
+ * Answers the requests for language packs.
+ * Returns null if the path is not about languages.
  */
 export function handleLocaleRequest(pathname: string): Response | Promise<Response> | null {
     if (pathname === INDEX_PATH) {

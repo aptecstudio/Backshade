@@ -1,6 +1,6 @@
 /**
- * Tasto morbido della console: etichetta, icona opzionale, LED di stato
- * attivo e barra rossa per lo stato armato o selezionato.
+ * Soft console key: label, optional icon, active status LED
+ * and red bar for the armed or selected state.
  */
 
 import { Component } from '../core/component.js';
@@ -10,22 +10,22 @@ import type { Unsubscribe } from '../dom/events.js';
 import { icon } from '../icons/icon.js';
 import type { IconName } from '../icons/icon-names.js';
 
-/** Stato visivo di un tasto */
+/** Visual state of a key */
 export type KeyState = 'normal' | 'inactive' | 'active';
 
-/** Opzioni di un tasto */
+/** Key options */
 export interface KeyOptions {
-    /** Etichetta, già tradotta */
+    /** Label, already translated */
     label: string;
-    /** Icona prima dell'etichetta */
+    /** Icon before the label */
     icon?: IconName;
-    /** Stato iniziale (predefinito 'normal') */
+    /** Initial state (default 'normal') */
     state?: KeyState;
-    /** Stato armato o selezionato */
+    /** Armed or selected state */
     armed?: boolean;
-    /** Dimensione: normale (predefinita) o grande, ad esempio per il tasto go */
+    /** Size: normal (default) or large, for example for the go key */
     size?: 'normal' | 'large';
-    /** Mostra solo l'icona: l'etichetta resta come nome per le tecnologie assistive */
+    /** Shows only the icon: the label stays as the name for assistive technologies */
     iconOnly?: boolean;
 }
 
@@ -67,7 +67,7 @@ export class Key extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Cambia l'etichetta del tasto.
+     * Changes the key label.
      */
     setLabel(text: string): void {
         this.labelElement.textContent = text;
@@ -78,7 +78,7 @@ export class Key extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Cambia lo stato visivo del tasto.
+     * Changes the visual state of the key.
      */
     setState(state: KeyState): void {
         this.element.classList.toggle('key--inactive', state === 'inactive');
@@ -87,21 +87,21 @@ export class Key extends Component<HTMLButtonElement> {
     }
 
     /**
-     * Abilita o disabilita il tasto; un tasto disabilitato non si può premere.
+     * Enables or disables the key; a disabled key cannot be pressed.
      */
     setDisabled(disabled: boolean): void {
         this.element.disabled = disabled;
     }
 
     /**
-     * Mostra o nasconde la barra dello stato armato.
+     * Shows or hides the armed state bar.
      */
     setArmed(armed: boolean): void {
         this.element.classList.toggle('key--armed', armed);
     }
 
     /**
-     * Registra un listener per la pressione del tasto.
+     * Registers a listener for key presses.
      */
     onPress(listener: () => void): Unsubscribe {
         return this.presses.subscribe(listener);

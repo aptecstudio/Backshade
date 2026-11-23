@@ -1,22 +1,22 @@
 /**
- * Funzioni esposte dal preload all'interfaccia (window.backshadeHost).
- * Presenti solo nella finestra Electron; nei client remoti non esistono.
+ * Functions exposed by the preload to the interface (window.backshadeHost).
+ * Present only in the Electron window; they do not exist in remote clients.
  */
 
 import type { EventMessage, RequestMessage, ResponseMessage } from './protocol.js';
 
-/** Trasporto dei messaggi verso il motore */
+/** Message transport to the engine */
 export interface HostTransport {
-    /** Invia una richiesta e restituisce la risposta */
+    /** Sends a request and returns the response */
     request(message: RequestMessage): Promise<ResponseMessage>;
-    /** Registra un listener per gli eventi; restituisce la funzione che lo rimuove */
+    /** Registers a listener for the events; returns the function that removes it */
     onEvent(listener: (message: EventMessage) => void): () => void;
 }
 
-/** Oggetto window.backshadeHost */
+/** window.backshadeHost object */
 export interface HostBridge {
-    /** Sistema operativo della postazione */
+    /** Operating system of the workstation */
     readonly platform: string;
-    /** Trasporto verso il motore */
+    /** Transport to the engine */
     readonly transport: HostTransport;
 }

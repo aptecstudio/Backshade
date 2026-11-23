@@ -1,15 +1,15 @@
-// Fader lungo: fessura, scala stampata e cappuccio metallico; posizione da --fader-value
+// Long fader: slot, printed scale and metal cap; position from --fader-value
 @use '../tokens' as *;
 @use 'focus';
 
-// Geometria: la corsa va dal centro della tacca 100 a quella 0
+// Geometry: the travel goes from the center of the 100 mark to the 0 mark
 $height: 264px;
 $travel-top: 38px;
 $travel-bottom: 34px;
 $cap-width: 28px;
 $cap-height: 44px;
 
-// Materiali (dalla resa di riferimento in docs/design)
+// Materials (from the reference rendering in docs/design)
 $hole: #08090a;
 $cap-edge: #55575c;
 $cap-dark: #8e9095;

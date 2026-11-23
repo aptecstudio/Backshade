@@ -1,7 +1,7 @@
 /**
- * Metodi show.*: crea, apre, salva, rinomina, recupera e chiude lo show.
- * Ogni cambio dello show aperto viene notificato con l'evento show.changed;
- * gli show aperti o creati entrano nei recenti.
+ * show.* methods: create, open, save, rename, recover and close the show.
+ * Every change of the open show is notified with the show.changed event;
+ * opened or created shows go into the recent shows.
  */
 
 import path from 'node:path';
@@ -21,12 +21,12 @@ import { chooseFile, chooseFolder, chooseSaveFile } from '../window/file-dialogs
 
 function requireDesktop(context: RequestContext): void {
     if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Disponibile solo nell\'applicazione desktop');
+        throw new EngineError('desktop-only', 'Available only in the desktop application');
     }
 }
 
 /**
- * Registra i metodi del servizio.
+ * Registers the methods of the service.
  */
 export function registerShowService(router: RequestRouter, bus: EventBus, session: ShowSession): void {
     const remember = (result: OpenShowResult): OpenShowResult => {
@@ -56,7 +56,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
             return null;
         }
         if (!isShowFolder(folder)) {
-            throw new EngineError('show-not-found', `Nessuno show nella cartella: ${folder}`);
+            throw new EngineError('show-not-found', `No show in the folder: ${folder}`);
         }
         return remember(session.open(folder));
     });
@@ -68,7 +68,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
             throw new EngineError('no-show', 'Nessuno show aperto');
         }
         if (show.dirty) {
-            throw new EngineError('unsaved-changes', 'Salvare lo show prima di esportarlo');
+            throw new EngineError('unsaved-changes', 'Save the show before exporting it');
         }
         const target = await chooseSaveFile(
             [{ name: 'Backshade show', extensions: [ARCHIVE_EXTENSIONS.show] }],
@@ -84,7 +84,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
     router.register('show.import', async (_params, context) => {
         requireDesktop(context);
         if (session.dirty) {
-            throw new EngineError('unsaved-changes', 'Lo show aperto ha modifiche non salvate');
+            throw new EngineError('unsaved-changes', 'The open show has unsaved changes');
         }
         const archive = await chooseFile([{ name: 'Backshade show', extensions: [ARCHIVE_EXTENSIONS.show] }]);
         if (archive === null) {
@@ -125,7 +125,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         }
         if (rate !== undefined) {
             if (!TIMECODE_RATES.includes(rate as TimecodeRate)) {
-                throw new EngineError('invalid-params', `Frame rate non valido: ${rate}`);
+                throw new EngineError('invalid-params', `Invalid frame rate: ${rate}`);
             }
             changes.timecodeRate = rate as TimecodeRate;
         }
@@ -135,7 +135,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
                 continue;
             }
             if (typeof value !== 'number' || !Number.isFinite(value)) {
-                throw new EngineError('invalid-params', `Campo "${field}" non valido`);
+                throw new EngineError('invalid-params', `Invalid field "${field}"`);
             }
             changes[field] = value;
         }

@@ -1,11 +1,11 @@
 /**
- * Nomi dei canali IPC tra processo main e preload.
- * Il preload gira in sandbox e non può importare altri file: ripete questi
- * valori, che vanno tenuti uguali.
+ * Names of the IPC channels between main process and preload.
+ * The preload runs in a sandbox and cannot import other files: it repeats these
+ * values, which must be kept equal.
  */
 
-/** Canale delle richieste (invoke) */
+/** Request channel (invoke) */
 export const REQUEST_CHANNEL = 'backshade:request';
 
-/** Canale degli eventi dal motore */
+/** Channel of the events from the engine */
 export const EVENT_CHANNEL = 'backshade:event';

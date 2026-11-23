@@ -1,24 +1,24 @@
 /**
- * Finestra principale dell'applicazione: creazione, opzioni di sicurezza
- * e riferimento all'istanza aperta.
+ * Main window of the application: creation, security options
+ * and reference to the open instance.
  */
 
 import { BrowserWindow } from 'electron';
 import { ICON_FILE, PRELOAD_FILE } from '../paths';
 import * as appProtocol from '../protocol/app-protocol';
 
-// Colore della superficie (vedi docs/design): evita il lampo bianco all'apertura
+// Surface color (see docs/design): avoids the white flash when opening
 const SURFACE_COLOR = '#16171a';
 
 let instance: BrowserWindow | null = null;
-// Decide se la finestra può chiudersi; false la tiene aperta
+// Decides whether the window can close; false keeps it open
 let closeGuard: () => boolean = () => true;
-// La chiusura è stata confermata dall'utente
+// The close has been confirmed by the user
 let closeAllowed = false;
 
 /**
- * Crea la finestra principale, se non è già aperta.
- * @param page - Pagina dell'interfaccia, relativa alla cartella web
+ * Creates the main window, if it is not already open.
+ * @param page - Interface page, relative to the web folder
  */
 export function create(page: string): BrowserWindow {
     if (instance !== null) {
@@ -64,7 +64,7 @@ export function create(page: string): BrowserWindow {
 }
 
 /**
- * Porta in primo piano la finestra principale, ripristinandola se ridotta a icona.
+ * Brings the main window to the front, restoring it if minimized.
  */
 export function focus(): void {
     if (instance === null) {
@@ -77,15 +77,15 @@ export function focus(): void {
 }
 
 /**
- * Imposta la funzione che decide se la finestra principale può chiudersi.
+ * Sets the function that decides whether the main window can close.
  */
 export function setCloseGuard(guard: () => boolean): void {
     closeGuard = guard;
 }
 
 /**
- * Chiude la finestra principale dopo la conferma dell'utente, senza
- * chiedere di nuovo.
+ * Closes the main window after the confirmation of the user, without
+ * asking again.
  */
 export function closeConfirmed(): void {
     if (instance === null) {

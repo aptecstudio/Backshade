@@ -1,5 +1,5 @@
 /**
- * Metodi settings.*: lettura e modifica delle impostazioni globali.
+ * settings.* methods: reading and changing the global settings.
  */
 
 import path from 'node:path';
@@ -9,7 +9,7 @@ import { optionalString, requireObject } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 /**
- * Registra i metodi del servizio.
+ * Registers the methods of the service.
  */
 export function registerSettingsService(router: RequestRouter): void {
     router.register('settings.get', () => readSettings());

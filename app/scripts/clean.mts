@@ -1,5 +1,5 @@
 /**
- * Svuota la cartella dist prima di una nuova build.
+ * Empties the dist folder before a new build.
  */
 
 import fs from 'node:fs';

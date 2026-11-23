@@ -1,14 +1,14 @@
 /**
- * Applica le traduzioni agli elementi del DOM tramite attributi dichiarativi:
- * - data-i18n="chiave": testo dell'elemento;
- * - data-i18n-title="chiave": attributo title;
- * - data-i18n-aria-label="chiave": attributo aria-label.
- * Il testo viene sempre inserito come testo, mai come HTML.
+ * Applies translations to DOM elements through declarative attributes:
+ * - data-i18n="key": text of the element;
+ * - data-i18n-title="key": title attribute;
+ * - data-i18n-aria-label="key": aria-label attribute.
+ * The text is always inserted as text, never as HTML.
  */
 
 import { queryAll } from '../dom/query.js';
 
-/** Funzione che traduce una chiave letta da un attributo */
+/** Function that translates a key read from an attribute */
 export type TranslateKey = (key: string) => string;
 
 const ATTRIBUTE_TARGETS: ReadonlyArray<[string, string]> = [
@@ -17,7 +17,7 @@ const ATTRIBUTE_TARGETS: ReadonlyArray<[string, string]> = [
 ];
 
 /**
- * Traduce l'elemento root e tutti i suoi discendenti con attributi data-i18n.
+ * Translates the root element and all its descendants with data-i18n attributes.
  */
 export function applyTranslations(root: HTMLElement, translate: TranslateKey): void {
     const elements = [root, ...queryAll('*', root)];

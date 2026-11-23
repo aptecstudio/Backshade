@@ -1,6 +1,6 @@
 /**
- * Errore dei metodi del motore con un codice stabile, che l'interfaccia
- * traduce in un messaggio per l'utente.
+ * Error of the engine methods with a stable code, which the interface
+ * translates into a message for the user.
  */
 export class EngineError extends Error {
     readonly code: string;

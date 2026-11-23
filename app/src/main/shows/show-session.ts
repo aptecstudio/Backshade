@@ -1,7 +1,7 @@
 /**
- * Show aperto: è l'unica fonte di verità sui dati dello show. Gestisce
- * creazione, apertura, salvataggio, salva come, chiusura e la copia di
- * recupero periodica delle modifiche non salvate.
+ * Open show: it is the only source of truth for the show data. It handles
+ * creating, opening, saving, save as, closing and the periodic
+ * recovery copy of unsaved changes.
  */
 
 import { randomUUID } from 'node:crypto';
@@ -15,7 +15,7 @@ import { toFileName, uniquePath } from '../storage/file-names';
 import { EngineError } from '../transport/engine-error';
 import * as showFiles from './show-files';
 
-// Intervallo della copia di recupero
+// Interval of the recovery copy
 const AUTOSAVE_INTERVAL_MS = 2 * 60 * 1000;
 
 interface OpenShow {
@@ -24,7 +24,7 @@ interface OpenShow {
     dirty: boolean;
 }
 
-/** Funzione chiamata a ogni cambio dello show aperto */
+/** Function called at every change of the open show */
 export type ShowChangeListener = (show: ShowSummary | null) => void;
 
 export class ShowSession {
@@ -36,7 +36,7 @@ export class ShowSession {
         this.listener = listener;
     }
 
-    /** Show aperto, o null */
+    /** Open show, or null */
     summary(): ShowSummary | null {
         if (this.current === null) {
             return null;
@@ -50,15 +50,15 @@ export class ShowSession {
         };
     }
 
-    /** Ci sono modifiche non salvate */
+    /** There are unsaved changes */
     get dirty(): boolean {
         return this.current?.dirty === true;
     }
 
     /**
-     * Crea uno show copiando un modello e lo apre.
-     * @param templateFolder - Cartella del modello
-     * @param exclude - Elementi del modello da non copiare (ad esempio template.json)
+     * Creates a show by copying a template and opens it.
+     * @param templateFolder - Template folder
+     * @param exclude - Template entries not to copy (for example template.json)
      */
     create(name: string, parentFolder: string, templateFolder: string, exclude: readonly string[]): OpenShowResult {
         this.requireClosedOrSaved();
@@ -81,7 +81,7 @@ export class ShowSession {
     }
 
     /**
-     * Apre lo show di una cartella.
+     * Opens the show of a folder.
      */
     open(folder: string): OpenShowResult {
         this.requireClosedOrSaved();
@@ -97,7 +97,7 @@ export class ShowSession {
     }
 
     /**
-     * Salva lo show aperto.
+     * Saves the open show.
      */
     save(): ShowSummary {
         const show = this.requireOpen();
@@ -110,8 +110,8 @@ export class ShowSession {
     }
 
     /**
-     * Salva lo show aperto come nuovo show, con nuovo nome e identificativo,
-     * e apre la copia.
+     * Saves the open show as a new show, with a new name and identifier,
+     * and opens the copy.
      */
     saveAs(name: string, parentFolder: string): ShowSummary {
         const show = this.requireOpen();
@@ -129,13 +129,13 @@ export class ShowSession {
     }
 
     /**
-     * Rinomina lo show aperto; la modifica va salvata.
+     * Renames the open show; the change must be saved.
      */
     rename(name: string): ShowSummary {
         const show = this.requireOpen();
         const trimmed = name.trim();
         if (trimmed === '') {
-            throw new EngineError('invalid-name', 'Nome vuoto');
+            throw new EngineError('invalid-name', 'Empty name');
         }
         show.document = { ...show.document, name: trimmed };
         show.dirty = true;
@@ -144,7 +144,7 @@ export class ShowSession {
     }
 
     /**
-     * Cartella dello show aperto.
+     * Folder of the open show.
      * @throws EngineError "no-show"
      */
     folder(): string {
@@ -152,15 +152,15 @@ export class ShowSession {
     }
 
     /**
-     * Impostazioni dello show aperto.
+     * Settings of the open show.
      */
     settings(): ShowSettings {
         return this.requireOpen().document.settings;
     }
 
     /**
-     * Cambia le impostazioni dello show aperto; la modifica va salvata.
-     * I valori non validi vengono corretti.
+     * Changes the settings of the open show; the change must be saved.
+     * Invalid values are corrected.
      */
     updateSettings(changes: Partial<ShowSettings>): ShowSettings {
         const show = this.requireOpen();
@@ -174,7 +174,7 @@ export class ShowSession {
     }
 
     /**
-     * Carica la copia di recupero al posto dei dati salvati.
+     * Loads the recovery copy in place of the saved data.
      */
     recover(): ShowSummary {
         const show = this.requireOpen();
@@ -185,21 +185,21 @@ export class ShowSession {
     }
 
     /**
-     * Elimina la copia di recupero.
+     * Deletes the recovery copy.
      */
     discardRecovery(): void {
         showFiles.removeAutosave(this.requireOpen().folder);
     }
 
     /**
-     * Chiude lo show. Con modifiche non salvate serve discard, altrimenti errore.
+     * Closes the show. With unsaved changes discard is required, otherwise an error is thrown.
      */
     close(discard: boolean): void {
         if (this.current === null) {
             return;
         }
         if (this.current.dirty && !discard) {
-            throw new EngineError('unsaved-changes', 'Lo show ha modifiche non salvate');
+            throw new EngineError('unsaved-changes', 'The show has unsaved changes');
         }
         showFiles.removeAutosave(this.current.folder);
         this.closeQuietly();
@@ -207,7 +207,7 @@ export class ShowSession {
     }
 
     /**
-     * Ferma la copia di recupero, ad esempio all'uscita dall'applicazione.
+     * Stops the recovery copy, for example when the application quits.
      */
     dispose(): void {
         this.stopAutosave();
@@ -231,7 +231,7 @@ export class ShowSession {
     }
 
     /**
-     * Scrive la copia di recupero se ci sono modifiche non salvate.
+     * Writes the recovery copy if there are unsaved changes.
      */
     autosave(): void {
         if (this.current === null || !this.current.dirty) {
@@ -240,16 +240,16 @@ export class ShowSession {
         try {
             showFiles.writeAutosave(this.current.folder, this.current.document);
         } catch (error) {
-            console.error('Copia di recupero non riuscita', error);
+            console.error('Recovery copy failed', error);
         }
     }
 
     /**
-     * Impedisce di sostituire uno show con modifiche non salvate.
+     * Prevents replacing a show with unsaved changes.
      */
     private requireClosedOrSaved(): void {
         if (this.current?.dirty === true) {
-            throw new EngineError('unsaved-changes', 'Lo show aperto ha modifiche non salvate');
+            throw new EngineError('unsaved-changes', 'The open show has unsaved changes');
         }
     }
 

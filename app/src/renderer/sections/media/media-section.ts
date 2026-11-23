@@ -1,6 +1,6 @@
 /**
- * Sezione Media: file audio, video e immagini dello show aperto, copiati
- * nella cartella media/ dello show. Si aggiorna con l'evento media.changed.
+ * Media section: audio, video and image files of the open show, copied
+ * into the media/ folder of the show. It updates with the media.changed event.
  */
 
 import { icon, Key, Label, Panel, Spacer, Stack, type Component, type IconName } from '../../../framework/ts/index.js';

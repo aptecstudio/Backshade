@@ -1,11 +1,11 @@
 /**
- * Finestre di sistema per scegliere file e cartelle, aperte sopra la
- * finestra attiva. Restituiscono null se l'utente annulla.
+ * System dialogs to choose files and folders, opened over the
+ * active window. They return null if the user cancels.
  */
 
 import { BrowserWindow, dialog } from 'electron';
 
-/** Filtro dei tipi di file */
+/** File type filter */
 export interface FileFilter {
     name: string;
     extensions: string[];
@@ -18,7 +18,7 @@ async function showOpen(options: Electron.OpenDialogOptions): Promise<string[]> 
 }
 
 /**
- * Fa scegliere una cartella.
+ * Lets the user choose a folder.
  */
 export async function chooseFolder(defaultPath?: string): Promise<string | null> {
     const [folder] = await showOpen({ properties: ['openDirectory', 'createDirectory'], defaultPath });
@@ -26,7 +26,7 @@ export async function chooseFolder(defaultPath?: string): Promise<string | null>
 }
 
 /**
- * Fa scegliere un file da aprire.
+ * Lets the user choose a file to open.
  */
 export async function chooseFile(filters: FileFilter[], defaultPath?: string): Promise<string | null> {
     const [file] = await showOpen({ properties: ['openFile'], filters, defaultPath });
@@ -34,14 +34,14 @@ export async function chooseFile(filters: FileFilter[], defaultPath?: string): P
 }
 
 /**
- * Fa scegliere più file da aprire.
+ * Lets the user choose several files to open.
  */
 export function chooseFiles(filters: FileFilter[]): Promise<string[]> {
     return showOpen({ properties: ['openFile', 'multiSelections'], filters });
 }
 
 /**
- * Fa scegliere dove salvare un file.
+ * Lets the user choose where to save a file.
  */
 export async function chooseSaveFile(filters: FileFilter[], defaultPath: string): Promise<string | null> {
     const window = BrowserWindow.getFocusedWindow();

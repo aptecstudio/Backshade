@@ -1,13 +1,13 @@
 /**
- * Client tipizzato del motore: chiamate ai metodi ed eventi, con i tipi
- * del contratto in shared/transport/engine-api.ts.
+ * Typed engine client: method calls and events, with the types
+ * of the contract in shared/transport/engine-api.ts.
  */
 
 import type { Unsubscribe } from '../../framework/ts/index.js';
 import type { EngineEvent, EngineEvents, EngineMethod, EngineMethods } from '../../shared/transport/engine-api.js';
 import type { TransportChannel } from './transport-channel.js';
 
-/** Errore restituito dal motore */
+/** Error returned by the engine */
 export class EngineRequestError extends Error {
     readonly code: string;
 
@@ -27,8 +27,8 @@ export class EngineClient {
     }
 
     /**
-     * Chiama un metodo del motore e restituisce il risultato.
-     * @throws EngineRequestError se il motore risponde con un errore
+     * Calls an engine method and returns its result.
+     * @throws EngineRequestError if the engine answers with an error
      */
     async request<M extends EngineMethod>(
         method: M,
@@ -44,7 +44,7 @@ export class EngineClient {
     }
 
     /**
-     * Registra un listener per un evento del motore.
+     * Registers a listener for an engine event.
      */
     on<E extends EngineEvent>(event: E, listener: (payload: EngineEvents[E]) => void): Unsubscribe {
         return this.channel.onEvent((message) => {

@@ -1,11 +1,11 @@
 /**
- * Formattazione di date e ore nella lingua attiva.
+ * Formatting of dates and times in the active language.
  */
 
 import { currentLocale } from './i18n.js';
 
 /**
- * Restituisce data e ora brevi, ad esempio "23 nov 2026, 18:30".
+ * Returns a short date and time, for example "23 Nov 2026, 18:30".
  */
 export function formatDateTime(iso: string): string {
     const date = new Date(iso);

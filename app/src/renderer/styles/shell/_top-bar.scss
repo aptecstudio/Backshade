@@ -1,4 +1,4 @@
-// Barra in alto: marchio, navigazione, display e impostazioni
+// Top bar: brand, navigation, displays and settings
 @use 'framework/scss/tokens' as *;
 
 .top-bar {
@@ -33,8 +33,8 @@
     flex-shrink: 0;
 }
 
-// Su finestre strette i display lasciano spazio alla navigazione:
-// prima si nasconde il tempo, poi il timecode
+// On narrow windows the displays leave room for the navigation:
+// the tempo is hidden first, then the timecode
 @media (max-width: 1279px) {
     .top-bar__tempo {
         display: none;

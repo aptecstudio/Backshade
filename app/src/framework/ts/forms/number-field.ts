@@ -1,7 +1,7 @@
 /**
- * Campo numerico con etichetta e unità, ad esempio un tempo in secondi.
- * Il valore viene verificato quando l'utente conferma (Invio o uscita dal
- * campo): fuori dai limiti viene corretto, se non è un numero torna al precedente.
+ * Number field with a label and a unit, for example a time in seconds.
+ * The value is checked when the user confirms it (Enter or leaving the
+ * field): outside the limits it is corrected, if it is not a number it goes back to the previous one.
  */
 
 import { Component } from '../core/component.js';
@@ -10,16 +10,16 @@ import { Emitter } from '../core/emitter.js';
 import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni di un campo numerico */
+/** Number field options */
 export interface NumberFieldOptions {
-    /** Etichetta sopra il campo, già tradotta */
+    /** Label above the field, already translated */
     label: string;
-    /** Unità mostrata accanto al valore, ad esempio "s" */
+    /** Unit shown next to the value, for example "s" */
     unit?: string;
     value: number;
     min: number;
     max: number;
-    /** Cifre decimali mostrate (predefinite 0) */
+    /** Decimal digits shown (default 0) */
     decimals?: number;
 }
 
@@ -58,13 +58,13 @@ export class NumberField extends Component<HTMLDivElement> {
         this.track(() => this.changes.clear());
     }
 
-    /** Valore attuale */
+    /** Current value */
     get value(): number {
         return this.current;
     }
 
     /**
-     * Cambia il valore senza notificare i listener.
+     * Changes the value without notifying the listeners.
      */
     setValue(value: number): void {
         this.current = clamp(value, this.options.min, this.options.max);
@@ -72,7 +72,7 @@ export class NumberField extends Component<HTMLDivElement> {
     }
 
     /**
-     * Registra un listener per i valori confermati dall'utente.
+     * Registers a listener for the values confirmed by the user.
      */
     onChange(listener: (value: number) => void): Unsubscribe {
         return this.changes.subscribe(listener);
@@ -83,7 +83,7 @@ export class NumberField extends Component<HTMLDivElement> {
     }
 
     /**
-     * Legge il testo inserito; accetta sia il punto sia la virgola decimale.
+     * Reads the entered text; both point and comma are accepted as decimal separator.
      */
     private commit(): void {
         const parsed = Number(this.input.value.replace(',', '.').trim());

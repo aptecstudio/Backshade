@@ -1,5 +1,5 @@
 /**
- * Cartella predefinita dei nuovi show, nelle impostazioni globali.
+ * Default folder of new shows, in the global settings.
  */
 
 import { Key, Label, Panel, Stack, TextField } from '../../../framework/ts/index.js';

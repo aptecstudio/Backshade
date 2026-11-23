@@ -1,6 +1,6 @@
 /**
- * Punto di ingresso dell'interfaccia (ES module): prepara la localizzazione,
- * legge lo show aperto dal motore e monta la struttura dell'applicazione.
+ * Entry point of the interface (ES module): prepares the localization,
+ * reads the open show from the engine and mounts the application structure.
  */
 
 import { initI18n, t } from './i18n/i18n.js';

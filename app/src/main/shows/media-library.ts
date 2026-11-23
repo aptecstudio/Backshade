@@ -1,7 +1,7 @@
 /**
- * Media di uno show: file nella cartella media/ dello show, che è l'unica
- * fonte di verità. I percorsi sono relativi a media/ e usano "/" come
- * separatore, così lo show resta portabile tra sistemi diversi.
+ * Media of a show: files in the media/ folder of the show, which is the only
+ * source of truth. Paths are relative to media/ and use "/" as
+ * separator, so the show stays portable between systems.
  */
 
 import fs from 'node:fs';
@@ -17,22 +17,22 @@ function mediaRoot(showFolder: string): string {
 }
 
 /**
- * Converte un percorso relativo a media/ in un percorso assoluto, verificando
- * che resti dentro la cartella.
+ * Converts a path relative to media/ into an absolute path, checking
+ * that it stays inside the folder.
  * @throws EngineError "invalid-media-path"
  */
 export function resolveMediaPath(showFolder: string, relative: string): string {
     const root = mediaRoot(showFolder);
     const absolute = path.resolve(root, ...relative.split('/'));
     if (relative === '' || !absolute.startsWith(root + path.sep)) {
-        throw new EngineError('invalid-media-path', `Percorso del media non valido: ${relative}`);
+        throw new EngineError('invalid-media-path', `Invalid media path: ${relative}`);
     }
     return absolute;
 }
 
 /**
- * Elenca i media dello show, ordinati per nome; i file di tipo non
- * riconosciuto vengono ignorati.
+ * Lists the media of the show, sorted by name; files of an
+ * unknown type are ignored.
  */
 export function listMedia(showFolder: string): MediaItem[] {
     const root = mediaRoot(showFolder);
@@ -59,7 +59,7 @@ export function listMedia(showFolder: string): MediaItem[] {
 }
 
 /**
- * Restituisce un nome libero in media/, aggiungendo un numero se esiste già.
+ * Returns a free name in media/, adding a number if it already exists.
  */
 function freeName(root: string, fileName: string): string {
     const extension = path.extname(fileName);
@@ -72,9 +72,9 @@ function freeName(root: string, fileName: string): string {
 }
 
 /**
- * Copia file esterni in media/. I file con tipo non ammesso vengono saltati.
- * La copia è asincrona per non bloccare il motore con i video grandi.
- * @returns i media importati
+ * Copies external files into media/. Files of a type that is not allowed are skipped.
+ * The copy is asynchronous so that large videos do not block the engine.
+ * @returns the imported media
  */
 export async function importMedia(showFolder: string, sources: readonly string[]): Promise<MediaItem[]> {
     const root = mediaRoot(showFolder);
@@ -93,12 +93,12 @@ export async function importMedia(showFolder: string, sources: readonly string[]
 }
 
 /**
- * Elimina un media dalla cartella dello show.
+ * Deletes a media file from the show folder.
  */
 export function removeMedia(showFolder: string, relative: string): void {
     const absolute = resolveMediaPath(showFolder, relative);
     if (!fs.existsSync(absolute)) {
-        throw new EngineError('media-not-found', `Media non trovato: ${relative}`);
+        throw new EngineError('media-not-found', `Media not found: ${relative}`);
     }
     fs.rmSync(absolute);
 }

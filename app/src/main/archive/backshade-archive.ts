@@ -1,7 +1,7 @@
 /**
- * Archivi Backshade (.bshow per gli show, .btemplate per i modelli): file
- * ZIP con archive.json (tipo, versione, nome) e la cartella content/ con il
- * contenuto della cartella dello show o del modello.
+ * Backshade archives (.bshow for shows, .btemplate for templates): ZIP
+ * files with archive.json (kind, version, name) and the content/ folder with
+ * the content of the show or template folder.
  */
 
 import { randomUUID } from 'node:crypto';
@@ -15,10 +15,10 @@ import { EngineError } from '../transport/engine-error';
 import { extractZip } from './zip-reader';
 import { writeZip, type ZipSource } from './zip-writer';
 
-/** Tipo di archivio */
+/** Archive kind */
 export type ArchiveKind = 'show' | 'template';
 
-/** Estensione di ogni tipo di archivio, senza punto */
+/** Extension of each archive kind, without the dot */
 export const ARCHIVE_EXTENSIONS: Readonly<Record<ArchiveKind, string>> = { show: 'bshow', template: 'btemplate' };
 
 const META_FILE = 'archive.json';
@@ -33,7 +33,7 @@ interface ArchiveMeta {
 }
 
 /**
- * Elenca i file di una cartella, esclusi gli elementi di primo livello indicati.
+ * Lists the files of a folder, excluding the given top-level entries.
  */
 function collectFiles(folder: string, exclude: readonly string[]): string[] {
     return fs.readdirSync(folder, { recursive: true, withFileTypes: true })
@@ -44,7 +44,7 @@ function collectFiles(folder: string, exclude: readonly string[]): string[] {
 }
 
 /**
- * Crea l'archivio di una cartella.
+ * Creates the archive of a folder.
  */
 export async function packFolder(folder: string, target: string, kind: ArchiveKind, name: string, exclude: readonly string[]): Promise<void> {
     const meta: ArchiveMeta = { kind, formatVersion: FORMAT_VERSION, name, createdWith: app.getVersion() };
@@ -56,7 +56,7 @@ export async function packFolder(folder: string, target: string, kind: ArchiveKi
         }))
     ];
 
-    // Scrittura in un file temporaneo, rinominato solo a lavoro finito
+    // Writes to a temporary file, renamed only when the work is done
     const temporary = `${target}.${process.pid}.tmp`;
     try {
         await writeZip(temporary, sources);
@@ -68,9 +68,9 @@ export async function packFolder(folder: string, target: string, kind: ArchiveKi
 }
 
 /**
- * Estrae un archivio in una nuova cartella dentro parentFolder e la
- * restituisce. Se l'archivio non è valido non lascia nulla su disco.
- * @throws EngineError "invalid-archive" o "wrong-archive-kind"
+ * Extracts an archive into a new folder inside parentFolder and
+ * returns it. If the archive is not valid, nothing is left on disk.
+ * @throws EngineError "invalid-archive" or "wrong-archive-kind"
  */
 export async function unpackArchive(archive: string, parentFolder: string, kind: ArchiveKind): Promise<string> {
     await fs.promises.mkdir(parentFolder, { recursive: true });
@@ -81,7 +81,7 @@ export async function unpackArchive(archive: string, parentFolder: string, kind:
         try {
             await extractZip(archive, staging);
         } catch (error) {
-            throw new EngineError('invalid-archive', `Archivio non valido: ${error instanceof Error ? error.message : String(error)}`);
+            throw new EngineError('invalid-archive', `Invalid archive: ${error instanceof Error ? error.message : String(error)}`);
         }
 
         let meta: Partial<ArchiveMeta> | undefined;
@@ -92,13 +92,13 @@ export async function unpackArchive(archive: string, parentFolder: string, kind:
         }
         if (meta === undefined || typeof meta.name !== 'string' || typeof meta.formatVersion !== 'number'
             || !fs.existsSync(path.join(staging, CONTENT_FOLDER))) {
-            throw new EngineError('invalid-archive', 'Archivio senza dati Backshade');
+            throw new EngineError('invalid-archive', 'Archive without Backshade data');
         }
         if (meta.kind !== kind) {
-            throw new EngineError('wrong-archive-kind', `L'archivio contiene un ${String(meta.kind)}, non un ${kind}`);
+            throw new EngineError('wrong-archive-kind', `The archive contains a ${String(meta.kind)}, not a ${kind}`);
         }
         if (meta.formatVersion > FORMAT_VERSION) {
-            throw new EngineError('newer-show-format', 'Archivio creato con una versione più recente di Backshade');
+            throw new EngineError('newer-show-format', 'Archive created with a newer version of Backshade');
         }
 
         const folder = uniquePath(parentFolder, toFileName(meta.name), SHOW_FOLDER_EXTENSION);

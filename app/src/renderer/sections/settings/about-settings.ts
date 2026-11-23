@@ -1,6 +1,6 @@
 /**
- * Pannello Informazioni nelle impostazioni: versione e accesso alla
- * finestra Informazioni.
+ * About panel in the settings: version and access to the
+ * About window.
  */
 
 import { Key, Label, Panel, Stack } from '../../../framework/ts/index.js';

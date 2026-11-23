@@ -1,41 +1,41 @@
 /**
- * Registro dei pacchetti di lingua: cerca i pacchetti inclusi
- * nell'applicazione e quelli installati dall'utente. A parità di codice
- * vince il pacchetto dell'utente, così una traduzione può essere corretta
- * senza aggiornare l'applicazione.
+ * Registry of the language packs: finds the packs included in
+ * the application and those installed by the user. With the same code
+ * the user pack wins, so a translation can be corrected
+ * without updating the application.
  *
- * Le cartelle vengono rilette a ogni richiesta: un pacchetto aggiunto
- * compare al successivo caricamento dell'interfaccia, senza riavvio.
+ * The folders are read again at every request: an added pack
+ * appears at the next load of the interface, without restarting.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { BUNDLED_LOCALES_DIR, USER_LOCALES_DIR } from '../paths';
 
-/** Pacchetto di lingua trovato su disco */
+/** Language pack found on disk */
 export interface LocaleEntry {
-    /** Codice della lingua, uguale al nome del file (ad esempio "it", "pt-BR") */
+    /** Language code, equal to the file name (for example "it", "pt-BR") */
     code: string;
-    /** Nome della lingua nella lingua stessa */
+    /** Name of the language in the language itself */
     name: string;
-    /** Percorso del file */
+    /** File path */
     file: string;
 }
 
-// Codice lingua: due o tre lettere minuscole, regione opzionale in maiuscolo
+// Language code: two or three lowercase letters, optional uppercase region
 const CODE_PATTERN = /^[a-z]{2,3}(-[A-Z]{2})?$/;
 const SUPPORTED_FORMAT = 1;
 const EXTENSION = '.json';
 
 /**
- * Legge i dati di un pacchetto; restituisce null se il file non è valido.
+ * Reads the data of a pack; returns null if the file is not valid.
  */
 function readEntry(directory: string, fileName: string): LocaleEntry | null {
     const code = fileName.slice(0, -EXTENSION.length);
     const file = path.join(directory, fileName);
 
     if (!CODE_PATTERN.test(code)) {
-        console.warn(`Pacchetto di lingua ignorato, nome del file non valido: ${file}`);
+        console.warn(`Language pack ignored, invalid file name: ${file}`);
         return null;
     }
 
@@ -46,18 +46,18 @@ function readEntry(directory: string, fileName: string): LocaleEntry | null {
         const meta = data.meta;
         if (meta === undefined || meta.code !== code || typeof meta.name !== 'string'
             || meta.formatVersion !== SUPPORTED_FORMAT) {
-            console.warn(`Pacchetto di lingua ignorato, dati "meta" non validi: ${file}`);
+            console.warn(`Language pack ignored, invalid "meta" data: ${file}`);
             return null;
         }
         return { code, name: meta.name, file };
     } catch (error) {
-        console.warn(`Pacchetto di lingua ignorato, JSON non leggibile: ${file}`, error);
+        console.warn(`Language pack ignored, unreadable JSON: ${file}`, error);
         return null;
     }
 }
 
 /**
- * Restituisce i pacchetti validi di una cartella; nessuno se la cartella manca.
+ * Returns the valid packs of a folder; none if the folder is missing.
  */
 function scan(directory: string): LocaleEntry[] {
     if (!fs.existsSync(directory)) {
@@ -70,14 +70,14 @@ function scan(directory: string): LocaleEntry[] {
 }
 
 /**
- * Crea la cartella dei pacchetti dell'utente, così è pronta per installarne di nuovi.
+ * Creates the folder of the user packs, so it is ready for new ones.
  */
 export function ensureUserDirectory(): void {
     fs.mkdirSync(USER_LOCALES_DIR, { recursive: true });
 }
 
 /**
- * Restituisce tutte le lingue disponibili, ordinate per codice.
+ * Returns all the available languages, sorted by code.
  */
 export function listLocales(): LocaleEntry[] {
     const entries = new Map<string, LocaleEntry>();
@@ -90,7 +90,7 @@ export function listLocales(): LocaleEntry[] {
 }
 
 /**
- * Cerca una lingua per codice.
+ * Finds a language by code.
  */
 export function findLocale(code: string): LocaleEntry | undefined {
     return listLocales().find((entry) => entry.code === code);

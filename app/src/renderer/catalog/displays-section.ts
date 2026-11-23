@@ -1,5 +1,5 @@
 /**
- * Sezione del catalogo con i display: cifre, canale e valore.
+ * Catalog section with the displays: digits, channel and value.
  */
 
 import { ChannelDisplay, Panel, ReadoutDisplay, Stack, ValueDisplay } from '../../framework/ts/index.js';

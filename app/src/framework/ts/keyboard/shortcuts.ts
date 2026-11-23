@@ -1,6 +1,6 @@
 /**
- * Scorciatoie da tastiera nella forma "mod+s" o "mod+shift+s", dove mod è
- * Cmd su macOS e Ctrl sugli altri sistemi.
+ * Keyboard shortcuts in the form "mod+s" or "mod+shift+s", where mod is
+ * Cmd on macOS and Ctrl on the other systems.
  */
 
 import { on, type Unsubscribe } from '../dom/events.js';
@@ -33,7 +33,7 @@ function matches(event: KeyboardEvent, shortcut: ParsedShortcut): boolean {
 }
 
 /**
- * Registra una scorciatoia sul documento; restituisce la funzione che la rimuove.
+ * Registers a shortcut on the document; returns the function that removes it.
  */
 export function onShortcut(shortcut: string, handler: (event: KeyboardEvent) => void): Unsubscribe {
     const parsed = parse(shortcut);

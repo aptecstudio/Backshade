@@ -1,13 +1,13 @@
 /**
- * Localizzazione dell'interfaccia di Backshade: scelta della lingua, testi
- * e cambio lingua.
+ * Localization of the Backshade interface: language choice, texts
+ * and language change.
  *
- * - La lingua di riferimento è l'inglese: le chiavi valide sono quelle di en.json
- *   e i testi mancanti in un'altra lingua vengono presi dall'inglese.
- * - Le lingue disponibili (incluse e installate dall'utente) arrivano dal
- *   processo main tramite /locales/index.json.
- * - La scelta è salvata sul dispositivo; senza scelta si usa la lingua di
- *   sistema, se disponibile, altrimenti l'inglese.
+ * - The reference language is English: the valid keys are those of en.json
+ *   and texts missing in another language are taken from English.
+ * - The available languages (included and installed by the user) come from the
+ *   main process through /locales/index.json.
+ * - The choice is saved on the device; without a choice the system language
+ *   is used, if available, otherwise English.
  */
 
 import {
@@ -22,13 +22,13 @@ import {
     type Translate
 } from '../../framework/ts/index.js';
 
-/** Struttura dei testi, ricavata dalla lingua di riferimento */
+/** Structure of the texts, derived from the reference language */
 export type Messages = typeof import('../../locales/en.json')['messages'];
 
-/** Chiave di un testo dell'interfaccia */
+/** Key of an interface text */
 export type TextKey = MessageKey<Messages>;
 
-/** Lingua di riferimento e predefinita */
+/** Reference and default language */
 export const DEFAULT_LOCALE = 'en';
 
 const LOCALES_URL = '/locales';
@@ -39,14 +39,14 @@ let activeLocale = DEFAULT_LOCALE;
 let locales: LanguageInfo[] = [];
 
 /**
- * Indirizzo del pacchetto di una lingua.
+ * Address of the pack of a language.
  */
 function packUrl(code: string): string {
     return `${LOCALES_URL}/${code}.json`;
 }
 
 /**
- * Sceglie e carica la lingua. Va chiamata una volta, prima di usare t().
+ * Chooses and loads the language. To be called once, before using t().
  */
 export async function initI18n(): Promise<void> {
     locales = await loadLanguageList(`${LOCALES_URL}/index.json`);
@@ -63,7 +63,7 @@ export async function initI18n(): Promise<void> {
         try {
             pack = await loadLanguagePack(packUrl(code));
         } catch (error) {
-            console.warn(`Lingua "${code}" non caricata, uso l'inglese`, error);
+            console.warn(`Language "${code}" not loaded, using English`, error);
         }
     }
 
@@ -73,32 +73,32 @@ export async function initI18n(): Promise<void> {
 }
 
 /**
- * Restituisce il testo di una chiave nella lingua attiva.
+ * Returns the text of a key in the active language.
  */
 export function t(key: TextKey, params?: MessageParams): string {
     if (translate === null) {
-        throw new Error('Localizzazione non inizializzata: chiamare initI18n() prima di t()');
+        throw new Error('Localization not initialized: call initI18n() before t()');
     }
     return translate(key, params);
 }
 
 /**
- * Traduce una chiave letta dal DOM, dove il tipo non può essere verificato.
+ * Translates a key read from the DOM, where its type cannot be checked.
  */
 export function translateKey(key: string): string {
     return t(key as TextKey);
 }
 
 /**
- * Lingue disponibili, con il nome nella lingua stessa.
+ * Available languages, with the name in the language itself.
  */
 export function availableLocales(): readonly LanguageInfo[] {
     return locales;
 }
 
 /**
- * Rilegge l'elenco delle lingue disponibili, ad esempio dopo l'installazione
- * di un pacchetto. La lingua attiva non cambia.
+ * Reads the list of available languages again, for example after a pack has
+ * been installed. The active language does not change.
  */
 export async function refreshLocales(): Promise<readonly LanguageInfo[]> {
     locales = await loadLanguageList(`${LOCALES_URL}/index.json`);
@@ -106,15 +106,15 @@ export async function refreshLocales(): Promise<readonly LanguageInfo[]> {
 }
 
 /**
- * Codice della lingua attiva.
+ * Code of the active language.
  */
 export function currentLocale(): string {
     return activeLocale;
 }
 
 /**
- * Salva la lingua scelta per questo dispositivo e ricarica l'interfaccia,
- * così ogni componente viene ricreato con i nuovi testi.
+ * Saves the chosen language for this device and reloads the interface,
+ * so every component is rebuilt with the new texts.
  */
 export function changeLocale(code: string): void {
     preference.set(code);

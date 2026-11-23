@@ -1,7 +1,7 @@
 /**
- * Avvio del motore: crea router delle richieste, bus degli eventi e
- * sessione dello show, registra i servizi e collega i trasporti. È l'unico
- * punto che conosce tutti i servizi; i servizi non si conoscono tra loro.
+ * Engine startup: creates the request router, the event bus and the
+ * show session, registers the services and connects the transports. It is the only
+ * place that knows all the services; the services do not know each other.
  */
 
 import { app } from 'electron';
@@ -20,7 +20,7 @@ import { attachIpcTransport } from '../transport/ipc-transport';
 import { RequestRouter } from '../transport/request-router';
 
 /**
- * Avvia il motore. Va chiamata una volta, dopo app.whenReady().
+ * Starts the engine. To be called once, after app.whenReady().
  */
 export function startEngine(): void {
     const router = new RequestRouter();
@@ -39,7 +39,7 @@ export function startEngine(): void {
 
     attachIpcTransport(router, bus);
 
-    // All'uscita la copia di recupero resta solo se ci sono modifiche non salvate
+    // At quit the recovery copy stays only if there are unsaved changes
     app.on('before-quit', () => {
         session.autosave();
         session.dispose();

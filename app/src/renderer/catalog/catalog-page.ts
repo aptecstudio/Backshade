@@ -1,6 +1,6 @@
 /**
- * Pagina del catalogo: mostra tutti i componenti del framework con i loro
- * stati, per svilupparli e confrontarli con docs/design.
+ * Catalog page: shows all the framework components with their
+ * states, to develop them and compare them with docs/design.
  */
 
 import { Label, Stack } from '../../framework/ts/index.js';

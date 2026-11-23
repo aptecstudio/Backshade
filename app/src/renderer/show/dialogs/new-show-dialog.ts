@@ -1,6 +1,6 @@
 /**
- * Finestra Nuovo show: nome, cartella e modello di partenza.
- * Restituisce i dati scelti, o null se l'utente annulla.
+ * New show dialog: name, folder and starting template.
+ * Returns the chosen data, or null if the user cancels.
  */
 
 import { Dialog, Key, Label, ListItem, Stack, TextField } from '../../../framework/ts/index.js';
@@ -9,7 +9,7 @@ import { t } from '../../i18n/i18n.js';
 import { localized } from '../../templates/template-text.js';
 import { FolderPicker } from './folder-picker.js';
 
-/** Dati del nuovo show */
+/** New show data */
 export interface NewShowChoice {
     name: string;
     folder: string;
@@ -17,7 +17,7 @@ export interface NewShowChoice {
 }
 
 /**
- * Mostra la finestra e attende la scelta.
+ * Shows the dialog and waits for the choice.
  */
 export function askNewShow(templates: readonly TemplateInfo[], defaultFolder: string): Promise<NewShowChoice | null> {
     return new Promise((resolve) => {

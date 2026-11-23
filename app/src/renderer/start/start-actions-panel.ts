@@ -1,5 +1,5 @@
 /**
- * Azioni della schermata iniziale: nuovo show, apri show, modelli.
+ * Actions of the start page: new show, open show, templates.
  */
 
 import { Key, Panel } from '../../framework/ts/index.js';

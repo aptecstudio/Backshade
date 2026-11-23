@@ -1,5 +1,5 @@
 /**
- * Campo di testo con etichetta, per nomi, descrizioni e percorsi.
+ * Text field with a label, for names, descriptions and paths.
  */
 
 import { Component } from '../core/component.js';
@@ -7,15 +7,15 @@ import { Emitter } from '../core/emitter.js';
 import { create } from '../dom/create.js';
 import type { Unsubscribe } from '../dom/events.js';
 
-/** Opzioni di un campo di testo */
+/** Text field options */
 export interface TextFieldOptions {
-    /** Etichetta sopra il campo, già tradotta */
+    /** Label above the field, already translated */
     label: string;
-    /** Valore iniziale */
+    /** Initial value */
     value?: string;
-    /** Lunghezza massima */
+    /** Maximum length */
     maxLength?: number;
-    /** Campo in sola lettura, ad esempio per mostrare un percorso */
+    /** Read-only field, for example to show a path */
     readOnly?: boolean;
 }
 
@@ -48,20 +48,20 @@ export class TextField extends Component<HTMLDivElement> {
         this.track(() => this.changes.clear());
     }
 
-    /** Valore attuale */
+    /** Current value */
     get value(): string {
         return this.input.value;
     }
 
     /**
-     * Cambia il valore senza notificare i listener.
+     * Changes the value without notifying the listeners.
      */
     setValue(value: string): void {
         this.input.value = value;
     }
 
     /**
-     * Porta il focus nel campo e seleziona il testo.
+     * Moves the focus to the field and selects its text.
      */
     focus(): void {
         this.input.focus();
@@ -69,7 +69,7 @@ export class TextField extends Component<HTMLDivElement> {
     }
 
     /**
-     * Registra un listener per le modifiche dell'utente.
+     * Registers a listener for the changes of the user.
      */
     onInput(listener: (value: string) => void): Unsubscribe {
         return this.changes.subscribe(listener);

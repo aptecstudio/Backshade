@@ -1,6 +1,6 @@
 /**
- * Sezione del catalogo con i tasti: morbidi, quadrati e funzione.
- * Un clic cambia lo stato, per provare le varianti.
+ * Catalog section with the keys: soft, square and function keys.
+ * A click changes the state, to try the variants.
  */
 
 import { FunctionKey, Key, Label, Panel, SquareKey, Stack, type KeyState } from '../../framework/ts/index.js';
@@ -26,7 +26,7 @@ export class KeysSection extends Panel {
         const blackout = new Key({ label: t('console.blackout'), armed: true });
         const play = new Key({ label: t('playback.go'), icon: 'play', size: 'large', state: 'active' });
 
-        // Rotazione degli stati per provare le varianti
+        // Rotation of the states to try the variants
         const states: KeyState[] = ['normal', 'active', 'inactive'];
         for (const key of [consoleKey, grid, patch]) {
             let index = 0;

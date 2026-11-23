@@ -1,7 +1,7 @@
 /**
- * Struttura principale dell'applicazione: barra in alto, area della
- * sezione aperta e barra di stato. Segue lo show aperto: senza show mostra
- * la schermata iniziale, all'apertura riprende l'ultima sezione di lavoro.
+ * Main structure of the application: top bar, area of the
+ * open section and status bar. It follows the open show: without a show it shows
+ * the start page, when a show opens it restores the last working section.
  */
 
 import { onShortcut, Stack } from '../../framework/ts/index.js';
@@ -45,7 +45,7 @@ export class AppShell extends Stack {
     }
 
     /**
-     * Aggiorna barra, titolo e sezione in base allo show aperto.
+     * Updates bar, title and section according to the open show.
      */
     private applyShow(show: ShowSummary | null): void {
         this.topBar.setShow(show);

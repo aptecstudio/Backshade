@@ -1,6 +1,6 @@
 /**
- * Punto di ingresso del catalogo dei componenti (solo sviluppo):
- * prepara la localizzazione e monta la pagina.
+ * Entry point of the component catalog (development only):
+ * prepares the localization and mounts the page.
  */
 
 import { t, initI18n } from '../i18n/i18n.js';

@@ -1,8 +1,8 @@
 /**
- * Operazioni sullo show richieste dall'utente: nuovo, apri, salva, salva
- * come, salva come modello, rinomina, chiudi. Ogni operazione che
- * sostituisce lo show aperto chiede prima di salvare le modifiche, e
- * all'apertura propone il recupero delle modifiche non salvate.
+ * Show operations requested by the user: new, open, save, save
+ * as, save as template, rename, close. Every operation that
+ * replaces the open show first asks to save the changes, and
+ * on opening offers to recover the unsaved changes.
  */
 
 import type { OpenShowResult } from '../../shared/transport/engine-api.js';
@@ -17,7 +17,7 @@ import { askSaveAs } from './dialogs/save-as-dialog.js';
 import { currentShow, update } from './show-store.js';
 
 /**
- * Esegue un'operazione mostrando all'utente l'eventuale errore.
+ * Runs an operation, showing any error to the user.
  */
 async function guarded(operation: () => Promise<void>): Promise<void> {
     try {
@@ -28,9 +28,9 @@ async function guarded(operation: () => Promise<void>): Promise<void> {
 }
 
 /**
- * Se lo show aperto ha modifiche non salvate chiede se salvarle.
- * Restituisce false se l'utente annulla; dopo "Non salvare" lo show viene
- * chiuso scartando le modifiche.
+ * If the open show has unsaved changes, asks whether to save them.
+ * Returns false if the user cancels; after "Do not save" the show is
+ * closed discarding the changes.
  */
 async function resolveUnsaved(): Promise<boolean> {
     const show = currentShow();
@@ -54,7 +54,7 @@ async function resolveUnsaved(): Promise<boolean> {
 }
 
 /**
- * Dopo l'apertura propone il recupero delle modifiche non salvate.
+ * After opening, offers to recover the unsaved changes.
  */
 async function afterOpen(result: OpenShowResult): Promise<void> {
     update(result.show);
@@ -72,7 +72,7 @@ async function afterOpen(result: OpenShowResult): Promise<void> {
     }
 }
 
-/** Crea un nuovo show da un modello */
+/** Creates a new show from a template */
 export function newShow(): Promise<void> {
     return guarded(async () => {
         if (!await resolveUnsaved()) {
@@ -86,7 +86,7 @@ export function newShow(): Promise<void> {
     });
 }
 
-/** Apre uno show scegliendo la cartella */
+/** Opens a show by choosing its folder */
 export function openShow(): Promise<void> {
     return guarded(async () => {
         if (!await resolveUnsaved()) {
@@ -99,7 +99,7 @@ export function openShow(): Promise<void> {
     });
 }
 
-/** Apre uno show recente */
+/** Opens a recent show */
 export function openRecent(folder: string): Promise<void> {
     return guarded(async () => {
         if (currentShow()?.folder === folder) {
@@ -112,7 +112,7 @@ export function openRecent(folder: string): Promise<void> {
     });
 }
 
-/** Importa uno show da un archivio .bshow e lo apre */
+/** Imports a show from a .bshow archive and opens it */
 export function importShow(): Promise<void> {
     return guarded(async () => {
         if (!await resolveUnsaved()) {
@@ -125,7 +125,7 @@ export function importShow(): Promise<void> {
     });
 }
 
-/** Esporta lo show aperto in un archivio .bshow; prima lo salva se serve */
+/** Exports the open show to a .bshow archive; saves it first if needed */
 export function exportShow(): Promise<void> {
     return guarded(async () => {
         if (currentShow() === null) {
@@ -141,7 +141,7 @@ export function exportShow(): Promise<void> {
     });
 }
 
-/** Salva lo show aperto */
+/** Saves the open show */
 export function saveShow(): Promise<void> {
     return guarded(async () => {
         if (currentShow() !== null) {
@@ -150,7 +150,7 @@ export function saveShow(): Promise<void> {
     });
 }
 
-/** Salva lo show aperto con un altro nome */
+/** Saves the open show under another name */
 export function saveShowAs(): Promise<void> {
     return guarded(async () => {
         const show = currentShow();
@@ -165,7 +165,7 @@ export function saveShowAs(): Promise<void> {
     });
 }
 
-/** Rinomina lo show aperto */
+/** Renames the open show */
 export function renameShow(): Promise<void> {
     return guarded(async () => {
         const show = currentShow();
@@ -179,7 +179,7 @@ export function renameShow(): Promise<void> {
     });
 }
 
-/** Salva lo show aperto come modello dell'utente; prima lo salva se serve */
+/** Saves the open show as a user template; saves it first if needed */
 export function saveAsTemplate(): Promise<void> {
     return guarded(async () => {
         const show = currentShow();
@@ -203,7 +203,7 @@ export function saveAsTemplate(): Promise<void> {
     });
 }
 
-/** Chiude lo show aperto */
+/** Closes the open show */
 export function closeShow(): Promise<void> {
     return guarded(async () => {
         const show = currentShow();
@@ -224,7 +224,7 @@ export function closeShow(): Promise<void> {
 }
 
 /**
- * Risponde alla chiusura della finestra con modifiche non salvate.
+ * Answers the window close with unsaved changes.
  */
 export function confirmWindowClose(): Promise<void> {
     return guarded(async () => {

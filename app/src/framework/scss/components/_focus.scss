@@ -1,4 +1,4 @@
-// Contorno di focus da tastiera, comune a tutti i controlli: colore pieno, nessun bagliore
+// Keyboard focus outline, shared by all controls: solid color, no glow
 @use '../tokens' as *;
 
 @mixin focus-ring {

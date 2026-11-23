@@ -1,15 +1,15 @@
-// Manopola zigrinata: corona e cappuccio concentrici, linea indicatrice che
-// ruota attorno al centro con --knob-angle
+// Knurled knob: concentric ring and cap, indicator line rotating
+// around the center with --knob-angle
 @use '../tokens' as *;
 @use 'focus';
 
-// Materiali della manopola (dalla resa di riferimento in docs/design)
+// Knob materials (from the reference rendering in docs/design)
 $knob-cap-top: #43454a;
 $knob-cap-bottom: #323438;
 $knob-ridge-dark: #121315;
 $knob-ridge-light: #2c2e32;
 $knob-outline: #0a0a0b;
-// Diametro del cappuccio rispetto alla manopola
+// Cap diameter relative to the knob
 $cap-ratio: 64%;
 
 .knob {
@@ -25,7 +25,7 @@ $cap-ratio: 64%;
 
     @include focus.focus-ring;
 
-    // Cappuccio liscio, centrato sulla corona; la luce viene dall'alto
+    // Smooth cap, centered on the ring; the light comes from above
     &::after {
         position: absolute;
         top: 50%;
@@ -40,7 +40,7 @@ $cap-ratio: 64%;
     }
 }
 
-// Indicatore: ruota attorno al centro della manopola, sopra il cappuccio
+// Indicator: rotates around the center of the knob, above the cap
 .knob__indicator {
     position: absolute;
     z-index: 1;

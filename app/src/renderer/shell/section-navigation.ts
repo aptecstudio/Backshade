@@ -1,7 +1,7 @@
 /**
- * Stato della navigazione: sezione aperta e notifica dei cambi.
- * L'ultima sezione di lavoro aperta è ricordata su questo dispositivo e
- * viene riaperta quando si apre uno show.
+ * Navigation state: open section and change notifications.
+ * The last open working section is remembered on this device and
+ * reopened when a show is opened.
  */
 
 import { Emitter, LocalPreference, type Unsubscribe } from '../../framework/ts/index.js';
@@ -16,13 +16,13 @@ export class SectionNavigation {
         this.current = initial;
     }
 
-    /** Sezione aperta */
+    /** Open section */
     get section(): SectionId {
         return this.current;
     }
 
     /**
-     * Ultima sezione di lavoro aperta su questo dispositivo.
+     * Last working section opened on this device.
      */
     lastMainSection(): SectionId {
         const saved = this.preference.get();
@@ -30,7 +30,7 @@ export class SectionNavigation {
     }
 
     /**
-     * Apre una sezione e notifica il cambio.
+     * Opens a section and notifies the change.
      */
     open(section: SectionId): void {
         if (section === this.current) {
@@ -44,7 +44,7 @@ export class SectionNavigation {
     }
 
     /**
-     * Registra un listener per i cambi di sezione.
+     * Registers a listener for section changes.
      */
     onChange(listener: (section: SectionId) => void): Unsubscribe {
         return this.changes.subscribe(listener);

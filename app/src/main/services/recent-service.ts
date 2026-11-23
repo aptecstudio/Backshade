@@ -1,5 +1,5 @@
 /**
- * Metodi recent.*: elenco degli show recenti e rimozione di una voce.
+ * recent.* methods: list of the recent shows and removal of an entry.
  */
 
 import { listRecentShows, removeRecentShow } from '../shows/recent-shows';
@@ -8,7 +8,7 @@ import { requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 /**
- * Registra i metodi del servizio.
+ * Registers the methods of the service.
  */
 export function registerRecentService(router: RequestRouter, bus: EventBus): void {
     router.register('recent.list', () => listRecentShows());

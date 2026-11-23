@@ -1,15 +1,15 @@
 /**
- * Display con didascalia e valore, ad esempio "Pan" e "212 deg".
+ * Display with caption and value, for example "Pan" and "212 deg".
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 
-/** Opzioni di un display con valore */
+/** Value display options */
 export interface ValueDisplayOptions {
-    /** Didascalia, già tradotta */
+    /** Caption, already translated */
     caption: string;
-    /** Valore già formattato */
+    /** Already formatted value */
     value: string;
 }
 
@@ -27,7 +27,7 @@ export class ValueDisplay extends Component<HTMLDivElement> {
     }
 
     /**
-     * Cambia il valore mostrato.
+     * Changes the displayed value.
      */
     setValue(value: string): void {
         this.valueElement.textContent = value;

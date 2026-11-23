@@ -1,7 +1,7 @@
 /**
- * Scelta della lingua dell'interfaccia, salvata su questo dispositivo.
- * Mostra tutte le lingue disponibili, incluse quelle installate dall'utente,
- * e si aggiorna quando il motore segnala un pacchetto aggiunto o rimosso.
+ * Choice of the interface language, saved on this device.
+ * It shows all the available languages, including those installed by the user,
+ * and updates when the engine reports a pack added or removed.
  */
 
 import { Key, Label, Panel, Stack, type LanguageInfo } from '../../../framework/ts/index.js';
@@ -23,7 +23,7 @@ export class LanguageSettings extends Panel {
     }
 
     /**
-     * Crea un tasto per ogni lingua; quello della lingua attiva è acceso.
+     * Creates one key per language; the key of the active language is lit.
      */
     private createKeys(locales: readonly LanguageInfo[]): Stack {
         const keys = locales.map((locale) => {
@@ -38,7 +38,7 @@ export class LanguageSettings extends Panel {
     }
 
     /**
-     * Sostituisce i tasti con quelli del nuovo elenco.
+     * Replaces the keys with those of the new list.
      */
     private replaceKeys(locales: readonly LanguageInfo[]): void {
         const next = this.createKeys(locales);

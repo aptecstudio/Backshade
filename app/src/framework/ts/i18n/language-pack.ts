@@ -1,27 +1,27 @@
 /**
- * Pacchetti di lingua: un file JSON per lingua con i dati della lingua
- * (meta) e i testi (messages). Le strutture scaricate vengono verificate,
- * perché i pacchetti possono essere installati dall'utente.
+ * Language packs: one JSON file per language with the language data
+ * (meta) and the texts (messages). Downloaded structures are checked,
+ * because packs can be installed by the user.
  */
 
 import { fetchJson } from '../net/fetch-json.js';
 import type { MessageTree } from './translator.js';
 
-/** Versione del formato dei pacchetti supportata */
+/** Supported pack format version */
 export const LANGUAGE_PACK_FORMAT = 1;
 
-/** Lingua disponibile: codice (ad esempio "en", "pt-BR") e nome nella lingua stessa */
+/** Available language: code (for example "en", "pt-BR") and name in the language itself */
 export interface LanguageInfo {
     code: string;
     name: string;
 }
 
-/** Dati di un pacchetto di lingua */
+/** Language pack data */
 export interface LanguageMeta extends LanguageInfo {
     formatVersion: number;
 }
 
-/** Pacchetto di lingua completo */
+/** Complete language pack */
 export interface LanguagePack {
     meta: LanguageMeta;
     messages: MessageTree;
@@ -40,29 +40,29 @@ function isLanguageMeta(value: unknown): value is LanguageMeta {
 }
 
 /**
- * Scarica e verifica un pacchetto di lingua.
+ * Downloads and checks a language pack.
  */
 export async function loadLanguagePack(url: string): Promise<LanguagePack> {
     const data = await fetchJson(url);
 
     if (!isObject(data) || !isLanguageMeta(data.meta) || !isObject(data.messages)) {
-        throw new Error(`Pacchetto di lingua non valido: ${url}`);
+        throw new Error(`Invalid language pack: ${url}`);
     }
     if (data.meta.formatVersion !== LANGUAGE_PACK_FORMAT) {
-        throw new Error(`Versione del formato non supportata in ${url}`);
+        throw new Error(`Unsupported format version in ${url}`);
     }
 
     return data as unknown as LanguagePack;
 }
 
 /**
- * Scarica e verifica l'elenco delle lingue disponibili.
+ * Downloads and checks the list of available languages.
  */
 export async function loadLanguageList(url: string): Promise<LanguageInfo[]> {
     const data = await fetchJson(url);
 
     if (!Array.isArray(data)) {
-        throw new Error(`Elenco delle lingue non valido: ${url}`);
+        throw new Error(`Invalid language list: ${url}`);
     }
 
     return data.filter(isLanguageInfo).map(({ code, name }) => ({ code, name }));

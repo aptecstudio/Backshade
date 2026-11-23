@@ -1,7 +1,7 @@
 /**
- * Sezione delle impostazioni, divisa in due schede: impostazioni
- * dell'applicazione (salvate sulla postazione) e impostazioni dello show
- * (salvate con lo show, disponibili solo con uno show aperto).
+ * Settings section, split into two tabs: application settings
+ * (saved on the workstation) and show settings
+ * (saved with the show, available only with an open show).
  */
 
 import { Key, Stack, type Component } from '../../../framework/ts/index.js';

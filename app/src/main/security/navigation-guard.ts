@@ -1,13 +1,13 @@
 /**
- * Protezione della navigazione: le finestre restano sull'interfaccia
- * interna, i collegamenti esterni si aprono nel browser di sistema.
+ * Navigation protection: windows stay on the internal interface,
+ * external links open in the system browser.
  */
 
 import { shell, type WebContents } from 'electron';
 import * as appProtocol from '../protocol/app-protocol';
 
 /**
- * Indica se un indirizzo esterno può essere aperto nel browser di sistema.
+ * Tells whether an external address can be opened in the system browser.
  */
 function isSafeExternalUrl(targetUrl: string): boolean {
     try {
@@ -19,7 +19,7 @@ function isSafeExternalUrl(targetUrl: string): boolean {
 }
 
 /**
- * Applica le regole di navigazione a un webContents.
+ * Applies the navigation rules to a webContents.
  */
 export function protect(contents: WebContents): void {
     contents.on('will-navigate', (event, targetUrl) => {

@@ -1,6 +1,6 @@
 /**
- * Barra di stato in basso: stato dell'applicazione a sinistra, credito
- * Aptec Studio a destra.
+ * Status bar at the bottom: application status on the left, Aptec Studio
+ * credit on the right.
  */
 
 import { Component, Label, Spacer, create } from '../../framework/ts/index.js';
@@ -20,7 +20,7 @@ export class StatusBar extends Component<HTMLElement> {
     }
 
     /**
-     * Cambia il testo di stato.
+     * Changes the status text.
      */
     setStatus(text: string): void {
         this.status.setText(text);

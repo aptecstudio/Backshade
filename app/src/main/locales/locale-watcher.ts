@@ -1,18 +1,18 @@
 /**
- * Sorveglianza della cartella dei pacchetti di lingua dell'utente.
- * Più modifiche ravvicinate (ad esempio la copia di un file) producono
- * una sola notifica.
+ * Watcher of the user language pack folder.
+ * Several close changes (for example copying a file) produce
+ * a single notification.
  */
 
 import fs from 'node:fs';
 import { USER_LOCALES_DIR } from '../paths';
 
-// Attesa dopo l'ultima modifica prima di notificare
+// Wait after the last change before notifying
 const DEBOUNCE_MS = 300;
 
 /**
- * Chiama onChange quando la cartella cambia; restituisce la funzione che
- * ferma la sorveglianza. Se la cartella non è sorvegliabile, non fa nulla.
+ * Calls onChange when the folder changes; returns the function that
+ * stops watching. If the folder cannot be watched, it does nothing.
  */
 export function watchUserLocales(onChange: () => void): () => void {
     let timer: NodeJS.Timeout | null = null;
@@ -29,7 +29,7 @@ export function watchUserLocales(onChange: () => void): () => void {
             }, DEBOUNCE_MS);
         });
     } catch (error) {
-        console.warn('Cartella delle lingue dell\'utente non sorvegliabile', error);
+        console.warn('The user language folder cannot be watched', error);
         return () => undefined;
     }
 

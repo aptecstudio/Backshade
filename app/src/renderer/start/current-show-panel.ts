@@ -1,6 +1,6 @@
 /**
- * Show aperto nella schermata iniziale: nome, stato del salvataggio e
- * operazioni sullo show. Visibile solo quando uno show è aperto.
+ * Open show on the start page: name, save state and
+ * show operations. Visible only when a show is open.
  */
 
 import { Key, Label, Panel, Stack } from '../../framework/ts/index.js';

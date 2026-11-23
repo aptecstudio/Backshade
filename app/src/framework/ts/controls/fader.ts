@@ -1,7 +1,7 @@
 /**
- * Fader lungo: fessura sottile, scala stampata e cappuccio metallico
- * zigrinato. Il cappuccio si trascina senza saltare; un clic sulla corsa
- * porta il cappuccio in quel punto.
+ * Long fader: thin slot, printed scale and knurled metal cap.
+ * The cap is dragged without jumping; a click on the travel
+ * moves the cap to that point.
  */
 
 import { create } from '../dom/create.js';
@@ -9,9 +9,9 @@ import type { FaderTick } from './fader-scales.js';
 import { trackPointerDrag } from './pointer-drag.js';
 import { RangeControl, type RangeControlOptions } from './range-control.js';
 
-/** Opzioni di un fader */
+/** Fader options */
 export interface FaderOptions extends RangeControlOptions {
-    /** Scala stampata accanto alla fessura; vuota per nessuna scala */
+    /** Scale printed next to the slot; empty for no scale */
     scale?: readonly FaderTick[];
 }
 
@@ -47,7 +47,7 @@ export class Fader extends RangeControl<HTMLDivElement> {
     }
 
     /**
-     * Converte la posizione verticale del puntatore in un valore.
+     * Converts the vertical pointer position into a value.
      */
     private valueAt(clientY: number, offset: number): number {
         const rect = this.travel.getBoundingClientRect();
@@ -61,7 +61,7 @@ export class Fader extends RangeControl<HTMLDivElement> {
         event.preventDefault();
         this.element.focus();
 
-        // Sul cappuccio si conserva la distanza dal centro, così non salta
+        // On the cap the distance from the center is kept, so it does not jump
         let offset = 0;
         if (event.target instanceof Node && this.cap.contains(event.target)) {
             const capRect = this.cap.getBoundingClientRect();

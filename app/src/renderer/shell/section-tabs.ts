@@ -1,5 +1,5 @@
 /**
- * Tasti di navigazione tra le sezioni: il tasto della sezione aperta è attivo.
+ * Navigation keys between sections: the key of the open section is active.
  */
 
 import { Key, Stack } from '../../framework/ts/index.js';
@@ -29,7 +29,7 @@ export class SectionTabs extends Stack {
     }
 
     /**
-     * Abilita o disabilita tutti i tasti, ad esempio quando non c'è uno show aperto.
+     * Enables or disables all the keys, for example when no show is open.
      */
     setDisabled(disabled: boolean): void {
         for (const key of this.keys.values()) {
@@ -38,7 +38,7 @@ export class SectionTabs extends Stack {
     }
 
     /**
-     * Rende attivo il tasto della sezione aperta.
+     * Makes the key of the open section active.
      */
     private highlight(active: SectionId): void {
         for (const [id, key] of this.keys) {

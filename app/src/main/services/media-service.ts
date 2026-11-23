@@ -1,6 +1,6 @@
 /**
- * Metodi media.*: elenco, importazione, eliminazione e visualizzazione nel
- * sistema dei media dello show aperto. Ogni cambio è notificato con media.changed.
+ * media.* methods: list, import, delete and reveal in the
+ * system of the media of the open show. Every change is notified with media.changed.
  */
 
 import { shell } from 'electron';
@@ -15,12 +15,12 @@ import { chooseFiles } from '../window/file-dialogs';
 
 function requireDesktop(context: RequestContext): void {
     if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Disponibile solo nell\'applicazione desktop');
+        throw new EngineError('desktop-only', 'Available only in the desktop application');
     }
 }
 
 /**
- * Registra i metodi del servizio.
+ * Registers the methods of the service.
  */
 export function registerMediaService(router: RequestRouter, bus: EventBus, session: ShowSession): void {
     const changed = (): void => bus.emit('media.changed', {});

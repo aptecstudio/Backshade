@@ -1,10 +1,10 @@
 /**
- * Barra in alto: marchio e show, navigazione tra le sezioni, display di
- * timecode e tempo, tasti Start e Impostazioni.
+ * Top bar: brand and show, navigation between sections, timecode
+ * and tempo displays, Start and Settings keys.
  *
- * I display mostrano valori neutri finché il motore non li fornisce
- * (fasi 1.7 e 8). Il tasto blackout arriverà con il motore di uscita (fase 3.5):
- * un tasto di sicurezza senza effetto sarebbe fuorviante in uno spettacolo dal vivo.
+ * The displays show neutral values until the engine provides them
+ * (Phases 1.7 and 8). The blackout key will come with the output engine (Phase 3.5):
+ * a safety key without effect would be misleading in a live show.
  */
 
 import { Panel, ReadoutDisplay, Spacer, Stack } from '../../framework/ts/index.js';
@@ -50,8 +50,8 @@ export class TopBar extends Panel {
     }
 
     /**
-     * Aggiorna nome dello show e navigazione: senza show le sezioni di lavoro
-     * non sono disponibili.
+     * Updates the show name and the navigation: without a show the working sections
+     * are not available.
      */
     setShow(show: ShowSummary | null): void {
         this.brand.setShow(show?.name ?? null, show?.dirty === true);

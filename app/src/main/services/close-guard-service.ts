@@ -1,7 +1,7 @@
 /**
- * Protezione alla chiusura: se lo show ha modifiche non salvate, la
- * finestra principale non si chiude subito e l'interfaccia riceve
- * app.closeRequested, per chiedere all'utente se salvare.
+ * Close protection: if the show has unsaved changes, the
+ * main window does not close immediately and the interface receives
+ * app.closeRequested, to ask the user whether to save.
  */
 
 import type { ShowSession } from '../shows/show-session';
@@ -9,7 +9,7 @@ import type { EventBus } from '../transport/event-bus';
 import * as mainWindow from '../window/main-window';
 
 /**
- * Attiva la protezione sulla finestra principale.
+ * Activates the protection on the main window.
  */
 export function startCloseGuard(bus: EventBus, session: ShowSession): void {
     mainWindow.setCloseGuard(() => {

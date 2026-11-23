@@ -1,7 +1,7 @@
 /**
- * Copia i file statici dell'interfaccia, mantenendo la struttura delle cartelle:
- * - pagine HTML da src/renderer a dist/web/renderer;
- * - immagini da assets/images a dist/web/assets/images.
+ * Copies the static files of the interface, keeping the folder structure:
+ * - HTML pages from src/renderer to dist/web/renderer;
+ * - images from assets/images to dist/web/assets/images.
  */
 
 import fs from 'node:fs';
@@ -11,7 +11,7 @@ const appDir = path.join(import.meta.dirname, '..');
 const webDir = path.join(appDir, 'dist', 'web');
 
 /**
- * Copia i file con le estensioni indicate da una cartella all'altra.
+ * Copies the files with the given extensions from one folder to another.
  */
 function copyFiles(sourceDir: string, targetDir: string, extensions: ReadonlySet<string>): void {
     for (const entry of fs.readdirSync(sourceDir, { recursive: true, withFileTypes: true })) {

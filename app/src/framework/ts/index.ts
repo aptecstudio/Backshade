@@ -1,6 +1,6 @@
 /**
- * Punto di accesso al framework TypeScript interno di Backshade.
- * Raccoglie ed esporta i moduli pubblici del framework.
+ * Entry point of the internal TypeScript framework of Backshade.
+ * Collects and exports the public modules of the framework.
  */
 
 // DOM
@@ -8,24 +8,24 @@ export { query, queryAll } from './dom/query.js';
 export { create, type CreateOptions } from './dom/create.js';
 export { on, delegate, type Unsubscribe } from './dom/events.js';
 
-// Base dei componenti
+// Component base
 export { Component } from './core/component.js';
 export { Emitter, type Listener } from './core/emitter.js';
 export { clamp } from './core/clamp.js';
 
-// Tema
+// Theme
 export type { SpacingStep } from './theme/spacing.js';
 export { CHANNEL_COLORS, channelColorClass, type ChannelColor } from './theme/channel-colors.js';
 
-// Rete e archiviazione
+// Network and storage
 export { fetchJson } from './net/fetch-json.js';
 export { LocalPreference } from './storage/local-preference.js';
 
-// Icone
+// Icons
 export { icon, type IconOptions } from './icons/icon.js';
 export { ICON_NAMES, type IconName } from './icons/icon-names.js';
 
-// Localizzazione
+// Localization
 export {
     createTranslator,
     type MessageTree,
@@ -44,7 +44,7 @@ export {
 export { negotiateLocale } from './i18n/negotiate-locale.js';
 export { applyTranslations, type TranslateKey } from './i18n/apply-translations.js';
 
-// Struttura e testo
+// Structure and text
 export { Stack, type StackOptions } from './layout/stack.js';
 export { Spacer } from './layout/spacer.js';
 export { Label, type LabelOptions } from './text/label.js';
@@ -52,7 +52,7 @@ export { ExternalLink, type ExternalLinkOptions } from './text/external-link.js'
 export { ImageView, type ImageViewOptions } from './media/image-view.js';
 export { Panel, type PanelOptions } from './panel/panel.js';
 
-// Moduli, elenchi, finestre e tastiera
+// Forms, lists, dialogs and keyboard
 export { TextField, type TextFieldOptions } from './forms/text-field.js';
 export { TextArea, type TextAreaOptions } from './forms/text-area.js';
 export { NumberField, type NumberFieldOptions } from './forms/number-field.js';
@@ -61,17 +61,17 @@ export { ListItem, type ListItemOptions } from './list/list-item.js';
 export { Dialog, type DialogOptions } from './overlay/dialog.js';
 export { onShortcut } from './keyboard/shortcuts.js';
 
-// Tasti
+// Keys
 export { Key, type KeyOptions, type KeyState } from './keys/key.js';
 export { SquareKey, type SquareKeyOptions, type SquareKeyVariant } from './keys/square-key.js';
 export { FunctionKey, type FunctionKeyOptions } from './keys/function-key.js';
 
-// Display
+// Displays
 export { ChannelDisplay, type ChannelDisplayOptions } from './displays/channel-display.js';
 export { ReadoutDisplay, type ReadoutDisplayOptions } from './displays/readout-display.js';
 export { ValueDisplay, type ValueDisplayOptions } from './displays/value-display.js';
 
-// Controlli
+// Controls
 export { RangeControl, type RangeControlOptions } from './controls/range-control.js';
 export { Knob, type KnobOptions } from './controls/knob.js';
 export { Fader, type FaderOptions } from './controls/fader.js';

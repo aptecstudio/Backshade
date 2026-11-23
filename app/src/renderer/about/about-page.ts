@@ -1,6 +1,6 @@
 /**
- * Pagina Informazioni: logo, nome, versione, licenza, crediti e versioni
- * dei componenti, con il tasto per chiudere la finestra.
+ * About page: logo, name, version, license, credits and component
+ * versions, with the key to close the window.
  */
 
 import { ExternalLink, ImageView, Key, Label, Stack } from '../../framework/ts/index.js';

@@ -1,6 +1,6 @@
 /**
- * Colori dei canali, uguali a $channels in framework/scss/tokens/_colors.scss.
- * Ogni colore corrisponde alla classe CSS channel-color--<nome>.
+ * Channel colors, equal to $channels in framework/scss/tokens/_colors.scss.
+ * Each color matches the CSS class channel-color--<name>.
  */
 export const CHANNEL_COLORS = [
     'blue',
@@ -14,11 +14,11 @@ export const CHANNEL_COLORS = [
     'amber'
 ] as const;
 
-/** Nome di un colore dei canali */
+/** Name of a channel color */
 export type ChannelColor = typeof CHANNEL_COLORS[number];
 
 /**
- * Restituisce la classe CSS di un colore dei canali.
+ * Returns the CSS class of a channel color.
  */
 export function channelColorClass(color: ChannelColor): string {
     return `channel-color--${color}`;

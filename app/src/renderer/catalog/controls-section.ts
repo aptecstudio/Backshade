@@ -1,6 +1,6 @@
 /**
- * Sezione del catalogo con manopole e fader, collegati ai display per
- * provare trascinamento, rotella e tastiera.
+ * Catalog section with knobs and faders, connected to the displays to
+ * try dragging, mouse wheel and keyboard.
  */
 
 import {
@@ -19,7 +19,7 @@ import {
 } from '../../framework/ts/index.js';
 import { t } from '../i18n/i18n.js';
 
-/** Dati di esempio di una striscia di canale */
+/** Sample data of a channel strip */
 interface SampleStrip {
     name: string;
     color: ChannelColor;
@@ -50,7 +50,7 @@ export class ControlsSection extends Panel {
     }
 
     /**
-     * Striscia di canale di esempio: display, manopola, tasti, fader e selezione.
+     * Sample channel strip: display, knob, keys, fader and select.
      */
     private strip(sample: SampleStrip, number: number): Stack {
         const percent = (value: number): string => t('units.percent', { value: Math.round(value * 100) });

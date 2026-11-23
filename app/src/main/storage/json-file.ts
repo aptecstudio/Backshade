@@ -1,15 +1,15 @@
 /**
- * Lettura e scrittura di file JSON. La scrittura è atomica: il contenuto
- * viene scritto in un file temporaneo accanto a quello finale e poi
- * rinominato, così un'interruzione non lascia mai un file a metà.
+ * Reading and writing of JSON files. Writing is atomic: the content
+ * is written to a temporary file next to the final one and then
+ * renamed, so an interruption never leaves a half-written file.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 
 /**
- * Legge un file JSON; restituisce undefined se il file non esiste.
- * @throws se il file esiste ma non è JSON valido
+ * Reads a JSON file; returns undefined if the file does not exist.
+ * @throws if the file exists but is not valid JSON
  */
 export function readJsonFile(file: string): unknown {
     if (!fs.existsSync(file)) {
@@ -19,7 +19,7 @@ export function readJsonFile(file: string): unknown {
 }
 
 /**
- * Scrive un valore come JSON leggibile, in modo atomico.
+ * Writes a value as readable JSON, atomically.
  */
 export function writeJsonFileAtomic(file: string, value: unknown): void {
     fs.mkdirSync(path.dirname(file), { recursive: true });

@@ -1,36 +1,36 @@
 /**
- * Protocollo dei messaggi tra interfaccia e motore. È lo stesso per ogni
- * trasporto: IPC nella finestra Electron, WebSocket per i client remoti
- * (fase 10). I messaggi sono oggetti JSON.
+ * Message protocol between interface and engine. It is the same for every
+ * transport: IPC in the Electron window, WebSocket for remote clients
+ * (Phase 10). Messages are JSON objects.
  *
- * - request: l'interfaccia chiede al motore di eseguire un metodo;
- * - response: il motore risponde a una richiesta, con lo stesso id;
- * - event: il motore notifica un cambiamento a tutte le interfacce collegate.
+ * - request: the interface asks the engine to run a method;
+ * - response: the engine answers a request, with the same id;
+ * - event: the engine notifies a change to all connected interfaces.
  */
 
-/** Versione del protocollo */
+/** Protocol version */
 export const PROTOCOL_VERSION = 1;
 
-/** Richiesta dall'interfaccia al motore */
+/** Request from the interface to the engine */
 export interface RequestMessage {
     type: 'request';
-    /** Identificativo scelto dal client, ripetuto nella risposta */
+    /** Identifier chosen by the client, repeated in the response */
     id: number;
-    /** Nome del metodo, ad esempio "app.getInfo" */
+    /** Method name, for example "app.getInfo" */
     method: string;
-    /** Parametri del metodo */
+    /** Method parameters */
     params?: unknown;
 }
 
-/** Errore restituito da una richiesta */
+/** Error returned by a request */
 export interface ResponseError {
-    /** Codice stabile, ad esempio "unknown-method" */
+    /** Stable code, for example "unknown-method" */
     code: string;
-    /** Descrizione per il log, non mostrata all'utente */
+    /** Description for the log, not shown to the user */
     message: string;
 }
 
-/** Risposta riuscita */
+/** Successful response */
 export interface SuccessResponse {
     type: 'response';
     id: number;
@@ -38,7 +38,7 @@ export interface SuccessResponse {
     result: unknown;
 }
 
-/** Risposta con errore */
+/** Error response */
 export interface ErrorResponse {
     type: 'response';
     id: number;
@@ -46,21 +46,21 @@ export interface ErrorResponse {
     error: ResponseError;
 }
 
-/** Risposta del motore a una richiesta */
+/** Engine response to a request */
 export type ResponseMessage = SuccessResponse | ErrorResponse;
 
-/** Evento dal motore alle interfacce */
+/** Event from the engine to the interfaces */
 export interface EventMessage {
     type: 'event';
-    /** Nome dell'evento, ad esempio "locales.changed" */
+    /** Event name, for example "locales.changed" */
     event: string;
-    /** Dati dell'evento */
+    /** Event data */
     payload: unknown;
 }
 
 /**
- * Indica se un valore ricevuto è una richiesta valida.
- * I messaggi arrivano anche da client remoti: vanno sempre verificati.
+ * Tells whether a received value is a valid request.
+ * Messages also come from remote clients: they must always be checked.
  */
 export function isRequestMessage(value: unknown): value is RequestMessage {
     if (typeof value !== 'object' || value === null) {

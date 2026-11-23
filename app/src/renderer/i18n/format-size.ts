@@ -1,5 +1,5 @@
 /**
- * Formattazione delle dimensioni dei file nella lingua attiva (unità decimali).
+ * Formatting of file sizes in the active language (decimal units).
  */
 
 import { currentLocale, t } from './i18n.js';
@@ -7,7 +7,7 @@ import { currentLocale, t } from './i18n.js';
 const UNITS = ['units.bytes', 'units.kilobytes', 'units.megabytes', 'units.gigabytes'] as const;
 
 /**
- * Restituisce una dimensione leggibile, ad esempio "12,4 MB".
+ * Returns a readable size, for example "12.4 MB".
  */
 export function formatSize(bytes: number): string {
     let value = bytes;

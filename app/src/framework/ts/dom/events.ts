@@ -1,13 +1,13 @@
 /**
- * Gestione degli eventi del DOM. Ogni registrazione restituisce la
- * funzione che la rimuove, così i componenti possono ripulire i listener.
+ * DOM event handling. Every registration returns the function
+ * that removes it, so components can clean up their listeners.
  */
 
-/** Funzione che rimuove un listener */
+/** Function that removes a listener */
 export type Unsubscribe = () => void;
 
 /**
- * Registra un listener su un elemento.
+ * Registers a listener on an element.
  */
 export function on<K extends keyof HTMLElementEventMap>(
     target: HTMLElement | Document | Window,
@@ -21,8 +21,8 @@ export function on<K extends keyof HTMLElementEventMap>(
 }
 
 /**
- * Registra un listener delegato: scatta per gli elementi discendenti di root
- * che corrispondono al selettore, anche se aggiunti in seguito.
+ * Registers a delegated listener: it fires for the descendants of root
+ * that match the selector, even when added later.
  */
 export function delegate<K extends keyof HTMLElementEventMap>(
     root: HTMLElement | Document,

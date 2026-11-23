@@ -1,5 +1,5 @@
 /**
- * Creazione delle icone a partire dallo sprite generato in fase di build.
+ * Creation of icons from the sprite generated at build time.
  */
 
 import type { IconName } from './icon-names.js';
@@ -7,16 +7,16 @@ import type { IconName } from './icon-names.js';
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const SPRITE_URL = '/assets/icons.svg';
 
-/** Opzioni di un'icona */
+/** Icon options */
 export interface IconOptions {
-    /** Testo per le tecnologie assistive; senza, l'icona è decorativa */
+    /** Text for assistive technologies; without it the icon is decorative */
     label?: string;
-    /** Classi CSS aggiuntive */
+    /** Additional CSS classes */
     classes?: string[];
 }
 
 /**
- * Crea un'icona dello sprite. Il colore segue quello del testo (currentColor).
+ * Creates a sprite icon. Its color follows the text color (currentColor).
  */
 export function icon(name: IconName, options: IconOptions = {}): SVGSVGElement {
     const svg = document.createElementNS(SVG_NS, 'svg');

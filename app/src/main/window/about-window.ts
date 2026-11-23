@@ -1,20 +1,20 @@
 /**
- * Finestra Informazioni: piccola, a dimensione fissa, figlia della finestra
- * principale. Una sola istanza: se è già aperta viene portata in primo piano.
+ * About window: small, fixed size, child of the main
+ * window. Single instance: if it is already open it is brought to the front.
  */
 
 import { BrowserWindow } from 'electron';
 import { ICON_FILE, PRELOAD_FILE } from '../paths';
 import * as appProtocol from '../protocol/app-protocol';
 
-// Colore della superficie (vedi docs/design)
+// Surface color (see docs/design)
 const SURFACE_COLOR = '#16171a';
 const PAGE = 'renderer/about.html';
 
 let instance: BrowserWindow | null = null;
 
 /**
- * Apre la finestra Informazioni, o la porta in primo piano se è già aperta.
+ * Opens the About window, or brings it to the front if it is already open.
  */
 export function open(): void {
     if (instance !== null) {

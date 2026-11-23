@@ -1,7 +1,7 @@
 /**
- * Protocollo interno app:// che serve i file dell'interfaccia.
- * Sostituisce file:// per avere un'origine stabile, necessaria agli
- * ES modules nativi e alla Content Security Policy.
+ * Internal app:// protocol serving the interface files.
+ * It replaces file:// to have a stable origin, needed by
+ * native ES modules and by the Content Security Policy.
  */
 
 import path from 'node:path';
@@ -14,7 +14,7 @@ const SCHEME = 'app';
 const HOST = 'backshade';
 
 /**
- * Registra lo schema come privilegiato. Va chiamata prima di app.whenReady().
+ * Registers the scheme as privileged. To be called before app.whenReady().
  */
 export function registerScheme(): void {
     protocol.registerSchemesAsPrivileged([
@@ -30,8 +30,8 @@ export function registerScheme(): void {
 }
 
 /**
- * Converte una richiesta in un percorso dentro la cartella dell'interfaccia.
- * Restituisce null se il percorso esce dalla cartella.
+ * Converts a request into a path inside the interface folder.
+ * Returns null if the path leaves the folder.
  */
 function resolveFilePath(url: URL): string | null {
     const relativePath = decodeURIComponent(url.pathname);
@@ -45,7 +45,7 @@ function resolveFilePath(url: URL): string | null {
 }
 
 /**
- * Attiva il gestore del protocollo. Va chiamata dopo app.whenReady().
+ * Activates the protocol handler. To be called after app.whenReady().
  */
 export function handle(): void {
     protocol.handle(SCHEME, (request) => {
@@ -71,15 +71,15 @@ export function handle(): void {
 }
 
 /**
- * Restituisce l'indirizzo di una pagina dell'interfaccia.
- * @param page - Percorso relativo alla cartella web, ad esempio 'renderer/index.html'
+ * Returns the address of an interface page.
+ * @param page - Path relative to the web folder, for example 'renderer/index.html'
  */
 export function pageUrl(page: string): string {
     return `${SCHEME}://${HOST}/${page}`;
 }
 
 /**
- * Indica se un indirizzo appartiene all'interfaccia interna.
+ * Tells whether an address belongs to the internal interface.
  */
 export function isInternalUrl(targetUrl: string): boolean {
     try {

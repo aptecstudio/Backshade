@@ -1,11 +1,11 @@
 /**
- * Menu dell'applicazione.
- * - macOS: menu standard con i ruoli di sistema (testi tradotti dal sistema),
- *   con il pannello Informazioni nativo; la finestra Informazioni di Backshade
- *   si apre dalle Impostazioni, come sulle altre piattaforme.
- * - Windows e Linux: nessun menu nell'applicazione distribuita, perché
- *   l'interfaccia ha la propria navigazione; durante lo sviluppo resta il
- *   menu predefinito di Electron (ricarica, strumenti di sviluppo).
+ * Application menu.
+ * - macOS: standard menu with system roles (texts translated by the system),
+ *   with the native About panel; the Backshade About window
+ *   opens from Settings, as on the other platforms.
+ * - Windows and Linux: no menu in the packaged application, because
+ *   the interface has its own navigation; during development the
+ *   default Electron menu stays (reload, developer tools).
  */
 
 import { app, Menu } from 'electron';
@@ -14,7 +14,7 @@ const WEBSITE_URL = 'https://www.aptecstudio.com';
 const COPYRIGHT = 'Copyright (C) 2026 Aptec Studio';
 
 /**
- * Installa il menu dell'applicazione. Va chiamata dopo app.whenReady().
+ * Installs the application menu. To be called after app.whenReady().
  */
 export function installAppMenu(): void {
     if (process.platform === 'darwin') {

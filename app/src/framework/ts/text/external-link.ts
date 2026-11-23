@@ -1,20 +1,20 @@
 /**
- * Collegamento a un sito esterno, aperto nel browser di sistema.
- * Il contenuto è fatto di componenti (testo, immagini).
+ * Link to an external website, opened in the system browser.
+ * Its content is made of components (text, images).
  */
 
 import { Component } from '../core/component.js';
 import { create } from '../dom/create.js';
 
-/** Opzioni di un collegamento esterno */
+/** External link options */
 export interface ExternalLinkOptions {
-    /** Indirizzo del sito, http o https */
+    /** Website address, http or https */
     href: string;
-    /** Descrizione per le tecnologie assistive, già tradotta */
+    /** Description for assistive technologies, already translated */
     label?: string;
-    /** Classi CSS aggiuntive */
+    /** Additional CSS classes */
     classes?: string[];
-    /** Contenuto del collegamento */
+    /** Link content */
     children?: Component[];
 }
 
