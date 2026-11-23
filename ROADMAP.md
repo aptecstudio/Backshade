@@ -44,7 +44,7 @@ Versioning rules (see `AGENTS.md`):
 
 ## Phase 2 - Shows and projects
 
-Development order: the first block is 2.1, 2.2, 2.5 and 2.8 together, so the start page is born working with real shows.
+Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9.5 together, so the start page is born working with real shows and templates; 2.9.4 follows the archive export (2.6).
 
 - [ ] 2.1 Show folder format and `show.json` with `formatVersion`
 - [ ] 2.2 New, open, save, save as
@@ -57,6 +57,13 @@ Development order: the first block is 2.1, 2.2, 2.5 and 2.8 together, so the sta
   - [ ] 2.8.1 Full page in the main window, shown at launch and when a show is closed; reopened with a "Start" key in the top bar
   - [ ] 2.8.2 Recent shows with name, last modified date and folder; one click opens the show; moved or deleted shows are marked
   - [ ] 2.8.3 New show (name and folder) and open show from a folder
+  - [ ] 2.8.4 Choice of the template for a new show, among the included templates and those created by the user
+- [ ] 2.9 Show templates (see `MEMORY.md`, Show templates)
+  - [ ] 2.9.1 A template is a complete show folder; a new show is a copy with a new name and identifier
+  - [ ] 2.9.2 Included template: "Empty show" (more included templates after Phases 3 and 4)
+  - [ ] 2.9.3 Save as template from the open show, with name and description, in the user data folder
+  - [ ] 2.9.4 Export and import of a template as a single archive, with the same format as the show export (2.6)
+  - [ ] 2.9.5 Template management screen, opened from the start page: list of included and user templates; rename, edit the description and delete user templates; included templates are read-only
 
 ## Phase 3 - DMX and Art-Net
 

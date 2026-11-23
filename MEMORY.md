@@ -76,8 +76,20 @@ Status: Confirmed (2026-11-23).
 Requested by the human on 2026-11-23, after the Studio One start page. Developed as the first block of Phase 2, together with the show format (2.1), new, open and save (2.2) and recent shows (2.5).
 
 - Full page inside the main window, in place of the sections: shown at launch and when a show is closed; reopened with a "Start" key in the top bar.
-- Contents: recent shows (name, last modified date, folder; one click opens the show; shows moved or deleted are marked) and the actions new show (name and folder) and open show from a folder.
-- Not included for now: thumbnails, favorites, templates and demo show.
+- Contents: recent shows (name, last modified date, folder; one click opens the show; shows moved or deleted are marked), the actions new show (name and folder) and open show from a folder, and the choice of the template for a new show.
+- Not included for now: thumbnails, favorites and demo show.
+
+Status: Confirmed (2026-11-23).
+
+## Show templates
+
+Requested by the human on 2026-11-23 (Phase 2.9).
+
+- A template is a **complete show folder**, with the same format as a show (`show.json`, `media/`): creating a show from a template copies the folder and assigns a new name and identifier. There is no second format.
+- Included templates live in the application; for now only "Empty show". More included templates come after the fixtures and the console (Phases 3 and 4).
+- User templates live in `templates/` in the user data folder (`app.getPath('userData')`), like the language packs: no administrator rights, they survive updates.
+- The user creates a template with "Save as template" from the open show (name and description), and can export and import a template as a single archive, with the same format as the show export (2.6).
+- Template management screen (requested by the human on 2026-11-23), opened from the start page: it lists included and user templates; user templates can be renamed, have their description edited and be deleted (with confirmation); included templates are read-only.
 
 Status: Confirmed (2026-11-23).
 
@@ -275,18 +287,31 @@ To be evaluated in the related phases (to be proposed with a poll):
 
 Status: Proposed.
 
-## Show format (proposed)
+## Show format
 
-- Each show is a folder `show-name.backshade/` containing:
-  - `show.json`: show data (patch, scenes, chasers, grid, timeline);
+Confirmed by the human on 2026-11-23.
+
+- Each show is a folder `<show name>.backshade/` containing:
+  - `show.json`: **all** the show data in a single file (patch, scenes, chasers, grid, timeline, as the phases add them), with `formatVersion` to handle future migrations;
   - `media/`: audio, video and image files used by the show;
-  - `thumbnails/`: generated previews.
+  - `thumbnails/`: generated previews;
+  - `autosave/`: recovery copy written by the autosave;
+  - `history/`: the last saved versions of `show.json`, kept as backups.
 - All internal paths are **relative** to the show folder, so the folder is portable between devices.
 - Imported media are copied into `media/`.
 - Cloning a show means copying the folder and assigning a new identifier.
-- `show.json` contains a `formatVersion` field to handle future migrations.
 
-Status: Proposed.
+### Saving
+
+- **Manual save plus autosave**, as in Studio One: explicit Save and Save as; every few minutes, if there are unsaved changes, a recovery copy is written to `autosave/`. When a show with a recovery copy newer than `show.json` is opened (for example after an unexpected exit), the interface offers to recover it. A clean save or close removes the recovery copy.
+- Every save keeps the previous `show.json` in `history/` (last versions only).
+- Writes are atomic: the new file is written next to the old one and then renamed, so a crash never leaves a half-written `show.json`.
+
+### Default folder
+
+- New shows are created by default in `Documents/Backshade/Shows`; the folder can be changed for each new show and, as the default, in the settings (requested by the human on 2026-11-23).
+
+Status: Confirmed (2026-11-23).
 
 ## Design system
 
