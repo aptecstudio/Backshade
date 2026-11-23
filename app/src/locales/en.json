@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "code": "en",
+    "name": "English",
+    "formatVersion": 1
+  },
+  "messages": {
+    "app": {
+      "name": "Backshade",
+      "credit": "A product by Aptec Studio",
+      "copyright": "Copyright (C) 2026 Aptec Studio",
+      "creditPrefix": "A product by",
+      "websiteLabel": "Aptec Studio website"
+    },
+    "shell": {
+      "noShow": "No show open",
+      "navigation": "Sections",
+      "logo": "Backshade"
+    },
+    "sections": {
+      "console": "Console",
+      "virtualConsole": "Grid",
+      "timeline": "Timeline",
+      "patch": "Patch",
+      "media": "Media",
+      "stage": "3D stage",
+      "settings": "Settings",
+      "placeholder": "This section will arrive in a next version."
+    },
+    "settings": {
+      "language": "Language",
+      "languageHint": "The language is saved on this device."
+    },
+    "about": {
+      "title": "About Backshade",
+      "open": "About Backshade",
+      "version": "Version {version}",
+      "runtime": "Electron {electron}, Chromium {chrome}, Node.js {node}",
+      "license": "Released under the GNU General Public License v3.0.",
+      "licenseLink": "Read the license",
+      "description": "Programming console for live shows: lights, audio and video in one simple application."
+    },
+    "common": {
+      "ok": "Ok",
+      "cancel": "Cancel",
+      "close": "Close",
+      "save": "Save",
+      "delete": "Delete"
+    },
+    "status": {
+      "ready": "Ready",
+      "connected": "Connected to {target}",
+      "disconnected": "Disconnected"
+    },
+    "console": {
+      "grid": "Grid",
+      "blackout": "Blackout",
+      "flash": "Flash",
+      "solo": "Solo",
+      "select": "Select",
+      "selectShort": "sel",
+      "grandMaster": "grand master",
+      "timecode": "Timecode",
+      "tempo": "Tempo",
+      "channel": "Channel {number}"
+    },
+    "playback": {
+      "title": "Playback",
+      "go": "Go",
+      "pause": "Pause",
+      "back": "Back"
+    },
+    "attributes": {
+      "dimmer": "Dimmer",
+      "color": "Color",
+      "position": "Position",
+      "beam": "Beam",
+      "effects": "Effects",
+      "intensity": "Intensity",
+      "pan": "Pan",
+      "tilt": "Tilt",
+      "zoom": "Zoom"
+    },
+    "units": {
+      "percent": "{value} %",
+      "degrees": "{value} deg",
+      "decibel": "{value} dB",
+      "bpm": "{value} bpm"
+    },
+    "catalog": {
+      "title": "Component catalog",
+      "keys": "Keys",
+      "squareKeys": "Square keys",
+      "functionKeys": "Function keys",
+      "displays": "Displays",
+      "controls": "Knobs and faders",
+      "sample": {
+        "washLeft": "Wash L",
+        "spot": "Spot",
+        "bass": "Backing",
+        "chase": "Chase 4"
+      }
+    }
+  }
+}
