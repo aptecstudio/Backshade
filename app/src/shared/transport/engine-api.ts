@@ -5,6 +5,9 @@
  * possono arrivare da client remoti.
  */
 
+import type { MediaKind } from '../show/media-kinds.js';
+import type { ShowSettings } from '../show/show-settings.js';
+
 /** Informazioni sull'applicazione, per la finestra Informazioni */
 export interface AppInfo {
     name: string;
@@ -61,6 +64,19 @@ export interface TemplateInfo {
     source: 'bundled' | 'user';
 }
 
+/** Media di uno show */
+export interface MediaItem {
+    /** Percorso relativo alla cartella media/, con "/" come separatore */
+    file: string;
+    /** Nome del file */
+    name: string;
+    kind: MediaKind;
+    /** Dimensione in byte */
+    size: number;
+    /** Data dell'ultima modifica del file, ISO 8601 */
+    modifiedAt: string;
+}
+
 /** Impostazioni globali dell'applicazione */
 export interface AppSettings {
     /** Cartella predefinita dei nuovi show */
@@ -99,6 +115,25 @@ export interface EngineMethods {
     /** Chiude lo show; con discard a true scarta le modifiche non salvate */
     'show.close': { params: { discard?: boolean }; result: undefined };
 
+    /** Esporta lo show aperto e salvato in un archivio .bshow; restituisce il file, o null se annullato */
+    'show.export': { params: undefined; result: string | null };
+    /** Importa uno show da un archivio .bshow nella cartella predefinita e lo apre; null se annullato */
+    'show.import': { params: undefined; result: OpenShowResult | null };
+
+    /** Impostazioni dello show aperto */
+    'show.getSettings': { params: undefined; result: ShowSettings };
+    /** Cambia le impostazioni dello show aperto (modifica non salvata) */
+    'show.updateSettings': { params: Partial<ShowSettings>; result: ShowSettings };
+
+    /** Media dello show aperto */
+    'media.list': { params: undefined; result: MediaItem[] };
+    /** Fa scegliere file all'utente e li copia nei media dello show (solo nell'applicazione desktop) */
+    'media.import': { params: undefined; result: MediaItem[] };
+    /** Elimina un media dallo show */
+    'media.remove': { params: { file: string }; result: undefined };
+    /** Mostra un media nella cartella del sistema (solo nell'applicazione desktop) */
+    'media.reveal': { params: { file: string }; result: undefined };
+
     /** Show recenti, dal più recente */
     'recent.list': { params: undefined; result: RecentShow[] };
     /** Toglie uno show dai recenti */
@@ -112,6 +147,10 @@ export interface EngineMethods {
     'template.update': { params: { id: string; name: string; description: string }; result: TemplateInfo };
     /** Elimina un modello dell'utente */
     'template.delete': { params: { id: string }; result: undefined };
+    /** Esporta un modello in un archivio .btemplate; restituisce il file, o null se annullato */
+    'template.export': { params: { id: string }; result: string | null };
+    /** Importa un modello da un archivio .btemplate; null se annullato */
+    'template.import': { params: undefined; result: TemplateInfo | null };
 
     /** Impostazioni globali */
     'settings.get': { params: undefined; result: AppSettings };
@@ -125,6 +164,8 @@ export interface EngineEvents {
     'locales.changed': { codes: string[] };
     /** Lo show aperto è cambiato (aperto, salvato, modificato, chiuso) */
     'show.changed': { show: ShowSummary | null };
+    /** I media dello show aperto sono cambiati */
+    'media.changed': Record<string, never>;
     /** L'elenco degli show recenti è cambiato */
     'recent.changed': Record<string, never>;
     /** L'elenco dei modelli è cambiato */

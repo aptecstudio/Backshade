@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { SHOW_FORMAT_VERSION, type ShowDocument } from '../../shared/show/show-document';
+import { normalizeShowSettings } from '../../shared/show/show-settings';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
 import { EngineError } from '../transport/engine-error';
 
@@ -32,7 +33,7 @@ function toShowDocument(data: unknown, file: string): ShowDocument {
     if (document.formatVersion > SHOW_FORMAT_VERSION) {
         throw new EngineError('newer-show-format', `Show creato con una versione più recente di Backshade: ${file}`);
     }
-    return data as ShowDocument;
+    return { ...(data as ShowDocument), settings: normalizeShowSettings(document.settings) };
 }
 
 /**

@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { app } from 'electron';
 import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show-document';
+import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
 import type { OpenShowResult, ShowSummary } from '../../shared/transport/engine-api';
 import { copyFolder } from '../storage/copy-folder';
 import { toFileName, uniquePath } from '../storage/file-names';
@@ -140,6 +141,36 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         return this.requireSummary();
+    }
+
+    /**
+     * Cartella dello show aperto.
+     * @throws EngineError "no-show"
+     */
+    folder(): string {
+        return this.requireOpen().folder;
+    }
+
+    /**
+     * Impostazioni dello show aperto.
+     */
+    settings(): ShowSettings {
+        return this.requireOpen().document.settings;
+    }
+
+    /**
+     * Cambia le impostazioni dello show aperto; la modifica va salvata.
+     * I valori non validi vengono corretti.
+     */
+    updateSettings(changes: Partial<ShowSettings>): ShowSettings {
+        const show = this.requireOpen();
+        const next = normalizeShowSettings({ ...show.document.settings, ...changes });
+        if (JSON.stringify(next) !== JSON.stringify(show.document.settings)) {
+            show.document = { ...show.document, settings: next };
+            show.dirty = true;
+            this.notify();
+        }
+        return next;
     }
 
     /**

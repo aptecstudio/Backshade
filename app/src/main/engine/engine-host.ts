@@ -8,6 +8,7 @@ import { app } from 'electron';
 import { startCloseGuard } from '../services/close-guard-service';
 import { registerAppInfoService } from '../services/app-info-service';
 import { startLocaleService } from '../services/locale-service';
+import { registerMediaService } from '../services/media-service';
 import { registerRecentService } from '../services/recent-service';
 import { registerSettingsService } from '../services/settings-service';
 import { registerShowService } from '../services/show-service';
@@ -32,6 +33,7 @@ export function startEngine(): void {
     registerShowService(router, bus, session);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
+    registerMediaService(router, bus, session);
     startLocaleService(bus);
     startCloseGuard(bus, session);
 

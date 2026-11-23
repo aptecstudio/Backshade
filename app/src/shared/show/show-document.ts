@@ -4,6 +4,8 @@
  * timeline); ogni cambio incompatibile aumenta SHOW_FORMAT_VERSION.
  */
 
+import type { ShowSettings } from './show-settings.js';
+
 /** Versione del formato di show.json */
 export const SHOW_FORMAT_VERSION = 1;
 
@@ -24,4 +26,6 @@ export interface ShowDocument {
     modifiedAt: string;
     /** Versione di Backshade che ha creato lo show */
     createdWith: string;
+    /** Impostazioni dello show; mancanti nei file meno recenti, completate alla lettura */
+    settings: ShowSettings;
 }

@@ -4,5 +4,12 @@
   "name": "Empty show",
   "createdAt": "2026-11-23T00:00:00.000Z",
   "modifiedAt": "2026-11-23T00:00:00.000Z",
-  "createdWith": "0.0.0"
+  "createdWith": "0.0.0",
+  "settings": {
+    "description": "",
+    "notes": "",
+    "timecodeRate": "25",
+    "fadeInSeconds": 0,
+    "fadeOutSeconds": 0
+  }
 }

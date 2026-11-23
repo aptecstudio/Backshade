@@ -63,6 +63,19 @@ function readTemplate(source: TemplateInfo['source'], folder: string): TemplateR
 }
 
 /**
+ * Legge un modello appena creato o importato.
+ * @throws EngineError "invalid-archive" se la cartella non contiene uno show
+ */
+export function readTemplateFolder(source: TemplateInfo['source'], folder: string): TemplateRecord {
+    const record = readTemplate(source, folder);
+    if (record === null) {
+        fs.rmSync(folder, { recursive: true, force: true });
+        throw new EngineError('invalid-archive', 'Il modello non contiene uno show valido');
+    }
+    return record;
+}
+
+/**
  * Restituisce tutti i modelli: prima quelli inclusi, poi quelli dell'utente.
  */
 export function listTemplates(): TemplateRecord[] {
@@ -115,7 +128,7 @@ export function createTemplateFromShow(showFolder: string, name: string, descrip
     const folder = uniquePath(USER_TEMPLATES_DIR, toFileName(name), SHOW_FOLDER_EXTENSION);
     copyFolder(showFolder, folder, TRANSIENT_ENTRIES);
     writeJsonFileAtomic(path.join(folder, TEMPLATE_FILE), { name: name.trim(), description: description.trim() });
-    return readTemplate('user', folder) as TemplateRecord;
+    return readTemplateFolder('user', folder);
 }
 
 /**
@@ -127,7 +140,7 @@ export function updateTemplate(id: string, name: string, description: string): T
         throw new EngineError('invalid-name', 'Nome vuoto');
     }
     writeJsonFileAtomic(path.join(record.folder, TEMPLATE_FILE), { name: name.trim(), description: description.trim() });
-    return readTemplate('user', record.folder) as TemplateRecord;
+    return readTemplateFolder('user', record.folder);
 }
 
 /**

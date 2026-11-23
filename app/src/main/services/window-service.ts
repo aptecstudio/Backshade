@@ -4,11 +4,11 @@
  * disponibili, perché agirebbero sulla postazione.
  */
 
-import { BrowserWindow, dialog } from 'electron';
 import { EngineError } from '../transport/engine-error';
 import { optionalString, requireObject } from '../transport/params';
 import type { RequestContext, RequestRouter } from '../transport/request-router';
 import * as aboutWindow from '../window/about-window';
+import { chooseFolder } from '../window/file-dialogs';
 import * as mainWindow from '../window/main-window';
 
 function requireDesktop(context: RequestContext): void {
@@ -30,10 +30,7 @@ export function registerWindowService(router: RequestRouter): void {
     router.register('dialog.chooseFolder', async (params, context) => {
         requireDesktop(context);
         const defaultPath = params === undefined ? undefined : optionalString(requireObject(params), 'defaultPath');
-        const options: Electron.OpenDialogOptions = { properties: ['openDirectory', 'createDirectory'], defaultPath };
-        const window = BrowserWindow.getFocusedWindow();
-        const choice = window === null ? await dialog.showOpenDialog(options) : await dialog.showOpenDialog(window, options);
-        return choice.canceled || choice.filePaths.length === 0 ? null : choice.filePaths[0];
+        return chooseFolder(defaultPath);
     });
 
     router.register('app.confirmClose', (_params, context) => {
