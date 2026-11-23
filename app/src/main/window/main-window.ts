@@ -1,64 +1,61 @@
-'use strict';
-
 /**
  * Finestra principale dell'applicazione: creazione, opzioni di sicurezza
  * e riferimento all'istanza aperta.
  */
 
-const path = require('path');
-const { BrowserWindow } = require('electron');
-const appProtocol = require('../protocol/app-protocol');
+import { BrowserWindow } from 'electron';
+import { ICON_FILE, PRELOAD_FILE } from '../paths';
+import * as appProtocol from '../protocol/app-protocol';
 
 // Colore della superficie (vedi docs/design): evita il lampo bianco all'apertura
 const SURFACE_COLOR = '#16171a';
-const ICON_PATH = path.join(__dirname, '..', '..', '..', 'build', 'icon.png');
-const PRELOAD_PATH = path.join(__dirname, '..', '..', 'preload', 'preload.js');
 
-let instance = null;
+let instance: BrowserWindow | null = null;
 
 /**
  * Crea la finestra principale, se non è già aperta.
- * @returns {BrowserWindow}
+ * @param page - Pagina dell'interfaccia, relativa alla cartella web
  */
-function create() {
+export function create(page: string): BrowserWindow {
     if (instance !== null) {
         return instance;
     }
 
-    instance = new BrowserWindow({
+    const window = new BrowserWindow({
         width: 1440,
         height: 900,
         minWidth: 1024,
         minHeight: 640,
         show: false,
         backgroundColor: SURFACE_COLOR,
-        icon: ICON_PATH,
+        icon: ICON_FILE,
         title: 'Backshade',
         webPreferences: {
-            preload: PRELOAD_PATH,
+            preload: PRELOAD_FILE,
             contextIsolation: true,
             nodeIntegration: false,
             sandbox: true
         }
     });
 
-    instance.once('ready-to-show', () => {
-        instance.show();
+    window.once('ready-to-show', () => {
+        window.show();
     });
 
-    instance.on('closed', () => {
+    window.on('closed', () => {
         instance = null;
     });
 
-    instance.loadURL(appProtocol.pageUrl('index.html'));
+    void window.loadURL(appProtocol.pageUrl(page));
 
-    return instance;
+    instance = window;
+    return window;
 }
 
 /**
  * Porta in primo piano la finestra principale, ripristinandola se ridotta a icona.
  */
-function focus() {
+export function focus(): void {
     if (instance === null) {
         return;
     }
@@ -67,8 +64,3 @@ function focus() {
     }
     instance.focus();
 }
-
-module.exports = {
-    create,
-    focus
-};

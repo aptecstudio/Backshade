@@ -1,23 +1,22 @@
-'use strict';
-
 /**
  * Protocollo interno app:// che serve i file dell'interfaccia.
  * Sostituisce file:// per avere un'origine stabile, necessaria agli
  * ES modules nativi e alla Content Security Policy.
  */
 
-const path = require('path');
-const { pathToFileURL } = require('url');
-const { protocol, net } = require('electron');
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { net, protocol } from 'electron';
+import { WEB_ROOT } from '../paths';
+import { handleLocaleRequest } from './locale-routes';
 
 const SCHEME = 'app';
 const HOST = 'backshade';
-const RENDERER_ROOT = path.join(__dirname, '..', '..', 'renderer');
 
 /**
  * Registra lo schema come privilegiato. Va chiamata prima di app.whenReady().
  */
-function registerScheme() {
+export function registerScheme(): void {
     protocol.registerSchemesAsPrivileged([
         {
             scheme: SCHEME,
@@ -32,21 +31,13 @@ function registerScheme() {
 
 /**
  * Converte una richiesta in un percorso dentro la cartella dell'interfaccia.
- * Restituisce null se l'host non è valido o il percorso esce dalla cartella.
- * @param {string} requestUrl
- * @returns {string|null}
+ * Restituisce null se il percorso esce dalla cartella.
  */
-function resolveFilePath(requestUrl) {
-    const url = new URL(requestUrl);
-
-    if (url.host !== HOST) {
-        return null;
-    }
-
+function resolveFilePath(url: URL): string | null {
     const relativePath = decodeURIComponent(url.pathname);
-    const filePath = path.normalize(path.join(RENDERER_ROOT, relativePath));
+    const filePath = path.normalize(path.join(WEB_ROOT, relativePath));
 
-    if (filePath !== RENDERER_ROOT && !filePath.startsWith(RENDERER_ROOT + path.sep)) {
+    if (filePath !== WEB_ROOT && !filePath.startsWith(WEB_ROOT + path.sep)) {
         return null;
     }
 
@@ -56,9 +47,20 @@ function resolveFilePath(requestUrl) {
 /**
  * Attiva il gestore del protocollo. Va chiamata dopo app.whenReady().
  */
-function handle() {
+export function handle(): void {
     protocol.handle(SCHEME, (request) => {
-        const filePath = resolveFilePath(request.url);
+        const url = new URL(request.url);
+
+        if (url.host !== HOST) {
+            return new Response(null, { status: 404 });
+        }
+
+        const localeResponse = handleLocaleRequest(url.pathname);
+        if (localeResponse !== null) {
+            return localeResponse;
+        }
+
+        const filePath = resolveFilePath(url);
 
         if (filePath === null) {
             return new Response(null, { status: 404 });
@@ -70,30 +72,20 @@ function handle() {
 
 /**
  * Restituisce l'indirizzo di una pagina dell'interfaccia.
- * @param {string} page - Percorso relativo alla cartella renderer, ad esempio 'index.html'
- * @returns {string}
+ * @param page - Percorso relativo alla cartella web, ad esempio 'renderer/index.html'
  */
-function pageUrl(page) {
+export function pageUrl(page: string): string {
     return `${SCHEME}://${HOST}/${page}`;
 }
 
 /**
  * Indica se un indirizzo appartiene all'interfaccia interna.
- * @param {string} targetUrl
- * @returns {boolean}
  */
-function isInternalUrl(targetUrl) {
+export function isInternalUrl(targetUrl: string): boolean {
     try {
         const url = new URL(targetUrl);
         return url.protocol === `${SCHEME}:` && url.host === HOST;
-    } catch (error) {
+    } catch {
         return false;
     }
 }
-
-module.exports = {
-    registerScheme,
-    handle,
-    pageUrl,
-    isInternalUrl
-};

@@ -1,14 +1,16 @@
-'use strict';
-
 /**
  * Punto di ingresso del processo main: gestisce solo il ciclo di vita
  * dell'applicazione e delega ogni compito ai moduli dedicati.
  */
 
-const { app, BrowserWindow } = require('electron');
-const appProtocol = require('./protocol/app-protocol');
-const navigationGuard = require('./security/navigation-guard');
-const mainWindow = require('./window/main-window');
+import { app, BrowserWindow } from 'electron';
+import { startEngine } from './engine/engine-host';
+import { startPage } from './launch-options';
+import * as localeRegistry from './locales/locale-registry';
+import { installAppMenu } from './menu/app-menu';
+import * as appProtocol from './protocol/app-protocol';
+import * as navigationGuard from './security/navigation-guard';
+import * as mainWindow from './window/main-window';
 
 // Il protocollo interno va registrato prima che l'app sia pronta
 appProtocol.registerScheme();
@@ -21,18 +23,21 @@ if (!app.requestSingleInstanceLock()) {
         mainWindow.focus();
     });
 
-    app.on('web-contents-created', (event, contents) => {
+    app.on('web-contents-created', (_event, contents) => {
         navigationGuard.protect(contents);
     });
 
     app.whenReady().then(() => {
+        localeRegistry.ensureUserDirectory();
         appProtocol.handle();
-        mainWindow.create();
+        installAppMenu();
+        startEngine();
+        mainWindow.create(startPage());
 
         // macOS: riapre la finestra quando si clicca l'icona nel dock
         app.on('activate', () => {
             if (BrowserWindow.getAllWindows().length === 0) {
-                mainWindow.create();
+                mainWindow.create(startPage());
             }
         });
     });
