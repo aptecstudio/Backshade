@@ -1,0 +1,27 @@
+// Pannello piatto: niente sfumature né ombre
+@use '../tokens' as *;
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: space(2);
+    min-width: 0;
+    padding: space(3);
+    background: color('panel');
+    border: 1px solid color('panel-border');
+    border-radius: $radius-panel;
+}
+
+.panel__title {
+    margin: 0;
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    color: color('text-secondary');
+}
+
+.panel__body {
+    display: flex;
+    flex-direction: column;
+    gap: space(2);
+    min-width: 0;
+}

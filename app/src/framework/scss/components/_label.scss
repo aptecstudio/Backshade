@@ -1,0 +1,34 @@
+// Etichette di testo
+@use '../tokens' as *;
+
+.label--primary {
+    color: color('text');
+}
+
+.label--secondary {
+    color: color('text-secondary');
+}
+
+.label--accent {
+    color: color('accent');
+}
+
+.label--small {
+    font-size: $font-size-small;
+}
+
+.label--base {
+    font-size: $font-size-base;
+}
+
+.label--large {
+    font-size: $font-size-large;
+}
+
+.label--regular {
+    font-weight: $font-weight-regular;
+}
+
+.label--medium {
+    font-weight: $font-weight-medium;
+}

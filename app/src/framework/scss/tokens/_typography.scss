@@ -1,0 +1,13 @@
+// Tipografia: font di sistema e due soli pesi (vedi MEMORY.md, Design system)
+
+$family-text: system-ui, sans-serif;
+$family-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'DejaVu Sans Mono', monospace;
+
+$weight-regular: 400;
+$weight-medium: 500;
+
+$size-micro: 10px;
+$size-small: 12px;
+$size-base: 14px;
+$size-large: 16px;
+$size-readout: 24px;

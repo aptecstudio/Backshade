@@ -1,0 +1,103 @@
+// Fader lungo: fessura, scala stampata e cappuccio metallico; posizione da --fader-value
+@use '../tokens' as *;
+@use 'focus';
+
+// Geometria: la corsa va dal centro della tacca 100 a quella 0
+$height: 264px;
+$travel-top: 38px;
+$travel-bottom: 34px;
+$cap-width: 28px;
+$cap-height: 44px;
+
+// Materiali (dalla resa di riferimento in docs/design)
+$hole: #08090a;
+$cap-edge: #55575c;
+$cap-dark: #8e9095;
+$cap-light: #dcdde0;
+$cap-mid: #c2c4c7;
+$cap-shade: #7f8186;
+
+.fader {
+    position: relative;
+    flex-shrink: 0;
+    width: 64px;
+    height: $height;
+    cursor: ns-resize;
+    touch-action: none;
+    user-select: none;
+
+    @include focus.focus-ring;
+}
+
+.fader__hole {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    border-radius: 50%;
+    background: $hole;
+    box-shadow: inset 0 1px 2px #000, 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.fader__slot {
+    position: absolute;
+    top: 16px;
+    bottom: space(1);
+    left: 50%;
+    width: 4px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: color('display');
+    box-shadow: inset 0 1px 2px #000;
+}
+
+.fader__travel {
+    position: absolute;
+    top: $travel-top;
+    right: 0;
+    bottom: $travel-bottom;
+    left: 0;
+}
+
+.fader__tick {
+    position: absolute;
+    top: calc((1 - var(--tick-position, 0)) * 100%);
+    left: calc(50% + 12px);
+    display: flex;
+    align-items: center;
+    gap: space(1);
+    color: color('scale-text');
+    font-family: $font-family-mono;
+    font-size: $font-size-micro;
+    line-height: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translateY(-50%);
+
+    &::before {
+        width: 6px;
+        height: 1px;
+        background: color('scale-tick');
+        content: '';
+    }
+}
+
+.fader__cap {
+    position: absolute;
+    top: calc((1 - var(--fader-value, 0)) * 100%);
+    left: 50%;
+    width: $cap-width;
+    height: $cap-height;
+    margin-top: -$cap-height * 0.5;
+    margin-left: -$cap-width * 0.5;
+    border: 1px solid $cap-edge;
+    border-radius: 2px;
+    background:
+        linear-gradient(180deg, transparent 0 47%, $cap-edge 47% 53%, transparent 53%),
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0 1px, rgba(0, 0, 0, 0.12) 1px 3px),
+        linear-gradient(90deg, $cap-dark, $cap-light 45%, $cap-mid 55%, $cap-shade);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    opacity: 0.92;
+}

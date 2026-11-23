@@ -1,0 +1,66 @@
+// Display: schermo nero con bordo sottile e testo monospazio
+@use '../tokens' as *;
+
+.display {
+    min-width: 0;
+    border: 1px solid color('panel-border');
+    border-radius: $radius-square-key;
+    background: color('display');
+    color: color('display-text');
+    font-family: $font-family-mono;
+}
+
+// Display di canale: nome, valore, barra di livello
+.display--channel {
+    display: flex;
+    flex-direction: column;
+    padding: space(1);
+    font-size: $font-size-small;
+    line-height: 16px;
+
+    .display__name {
+        overflow: hidden;
+        font-weight: $font-weight-medium;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.display__level {
+    height: 4px;
+    margin-top: space(1);
+    background: color('level-track');
+}
+
+.display__level-fill {
+    width: calc(var(--level, 0) * 100%);
+    height: 100%;
+    background: var(--channel-color, #{color('accent')});
+}
+
+// Display a cifre grandi: timecode e tempo
+.display--readout {
+    flex-shrink: 0;
+    padding: space(1) space(2);
+    border-radius: $radius-key;
+    color: color('accent');
+    font-size: $font-size-readout;
+    line-height: 32px;
+    white-space: nowrap;
+}
+
+// Display con didascalia e valore
+.display--value {
+    display: flex;
+    flex-direction: column;
+    padding: space(1);
+
+    .display__caption {
+        font-size: $font-size-micro;
+        color: color('label');
+    }
+
+    .display__value {
+        font-size: $font-size-large;
+    }
+}

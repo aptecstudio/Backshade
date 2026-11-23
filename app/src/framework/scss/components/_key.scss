@@ -1,0 +1,81 @@
+// Tasto morbido: sfumatura verticale leggera e ombra, LED e barra di stato
+@use '../tokens' as *;
+@use 'focus';
+
+.key {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: space(1);
+    min-width: 96px;
+    height: 48px;
+    padding: 0 space(2);
+    border: 1px solid color('key-border');
+    border-radius: $radius-key;
+    background: linear-gradient(180deg, color('key-top') 0%, color('key-bottom') 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    color: color('text');
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    user-select: none;
+
+    @include focus.focus-ring;
+
+    &:active {
+        background: linear-gradient(180deg, color('key-bottom') 0%, color('key-top') 100%);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+}
+
+.key--icon-only {
+    min-width: 48px;
+    padding: 0;
+}
+
+.key--large {
+    height: 64px;
+    font-size: $font-size-large;
+}
+
+.key--inactive {
+    color: color('text-secondary');
+}
+
+.key--active {
+    color: color('accent');
+}
+
+// LED nell'angolo in alto a destra, visibile solo da attivo
+.key__led {
+    position: absolute;
+    top: space(1);
+    right: space(1);
+    display: none;
+    width: 12px;
+    height: 6px;
+    border: 1px solid color('led-border');
+    border-radius: 1px;
+    background: color('accent');
+}
+
+.key--active .key__led {
+    display: block;
+}
+
+// Barra rossa sul bordo superiore, visibile da armato o selezionato
+.key__armed-bar {
+    position: absolute;
+    top: -1px;
+    right: space(2);
+    left: space(2);
+    display: none;
+    height: 4px;
+    border-radius: 0 0 2px 2px;
+    background: color('armed');
+}
+
+.key--armed .key__armed-bar {
+    display: block;
+}

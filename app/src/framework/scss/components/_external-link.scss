@@ -1,0 +1,17 @@
+// Collegamenti esterni: colore del testo circostante, nessuna sottolineatura
+@use '../tokens' as *;
+@use 'focus';
+
+.external-link {
+    display: inline-flex;
+    align-items: center;
+    gap: space(1);
+    color: inherit;
+    text-decoration: none;
+
+    @include focus.focus-ring;
+
+    &:hover {
+        color: color('text');
+    }
+}

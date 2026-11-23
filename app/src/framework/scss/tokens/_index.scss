@@ -1,0 +1,6 @@
+// Raccoglie tutti i token del design system, senza generare CSS
+
+@forward 'spacing';
+@forward 'colors';
+@forward 'typography' as font-*;
+@forward 'radius' as radius-*;

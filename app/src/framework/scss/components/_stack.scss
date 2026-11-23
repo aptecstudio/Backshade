@@ -1,0 +1,31 @@
+// Contenitore in riga o in colonna con spaziatura della scala
+@use '../tokens' as *;
+
+.stack {
+    display: flex;
+    min-width: 0;
+}
+
+.stack--row {
+    flex-direction: row;
+}
+
+.stack--column {
+    flex-direction: column;
+}
+
+.stack--wrap {
+    flex-wrap: wrap;
+}
+
+@each $step, $value in $scale {
+    .stack--gap-#{$step} {
+        gap: $value;
+    }
+}
+
+@each $align, $value in ('start': flex-start, 'center': center, 'end': flex-end, 'stretch': stretch) {
+    .stack--align-#{$align} {
+        align-items: $value;
+    }
+}

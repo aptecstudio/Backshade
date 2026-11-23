@@ -1,0 +1,8 @@
+// Classi dei colori dei canali: impostano --channel-color per i componenti interni
+@use '../tokens' as *;
+
+@each $name, $value in $channels {
+    .channel-color--#{$name} {
+        --channel-color: #{$value};
+    }
+}

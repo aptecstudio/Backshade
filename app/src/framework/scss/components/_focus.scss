@@ -1,0 +1,13 @@
+// Contorno di focus da tastiera, comune a tutti i controlli: colore pieno, nessun bagliore
+@use '../tokens' as *;
+
+@mixin focus-ring {
+    &:focus-visible {
+        outline: 2px solid color('accent');
+        outline-offset: 2px;
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+}

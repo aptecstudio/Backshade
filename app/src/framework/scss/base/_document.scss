@@ -1,0 +1,11 @@
+// Stile di base del documento: superficie, testo e font
+@use '../tokens' as *;
+
+body {
+    background: color('surface');
+    color: color('text');
+    font-family: $font-family-text;
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    -webkit-font-smoothing: antialiased;
+}

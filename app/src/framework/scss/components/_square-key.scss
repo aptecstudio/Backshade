@@ -1,0 +1,58 @@
+// Tasto quadrato della striscia di canale: il contorno indica funzione e stato
+@use '../tokens' as *;
+@use 'focus';
+
+.square-key {
+    --square-key-on: #{color('select')};
+    --square-key-off: #{color('select-off')};
+
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 2px solid var(--square-key-off);
+    border-radius: $radius-square-key;
+    background: linear-gradient(180deg, color('square-key-top'), color('square-key-bottom'));
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    color: color('label');
+    cursor: pointer;
+    user-select: none;
+
+    @include focus.focus-ring;
+
+    .icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.square-key--wide {
+    width: 36px;
+}
+
+.square-key--flash {
+    --square-key-on: #{color('flash')};
+    --square-key-off: #{color('flash-off')};
+}
+
+.square-key--solo {
+    --square-key-on: #{color('solo')};
+    --square-key-off: #{color('solo-off')};
+}
+
+.square-key--on {
+    border-color: var(--square-key-on);
+    color: var(--square-key-on);
+}
+
+.square-key--select.square-key--on {
+    color: color('display-text');
+}
+
+.square-key__text {
+    font-size: $font-size-micro;
+    font-weight: $font-weight-medium;
+}
