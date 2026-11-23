@@ -146,7 +146,6 @@
       "fades": "Default fades",
       "fadeIn": "Fade in",
       "fadeOut": "Fade out",
-      "seconds": "s",
       "showSettingsHint": "Show settings are saved with the show.",
       "rate24": "24 fps",
       "rate25": "25 fps",
@@ -213,6 +212,20 @@
       "megabytes": "{value} MB",
       "gigabytes": "{value} GB"
     },
+    "time": {
+      "fine": "Fine",
+      "reset": "Zero",
+      "seconds": "Seconds",
+      "wheel": "Time wheel"
+    },
+    "color": {
+      "wheel": "Color wheel",
+      "brightness": "Brightness",
+      "red": "R",
+      "green": "G",
+      "blue": "B",
+      "hex": "Hex"
+    },
     "catalog": {
       "title": "Component catalog",
       "keys": "Keys",
@@ -225,7 +238,8 @@
         "spot": "Spot",
         "bass": "Backing",
         "chase": "Chase 4"
-      }
+      },
+      "inputs": "Time and color"
     }
   }
 }

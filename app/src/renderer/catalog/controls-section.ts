@@ -11,6 +11,7 @@ import {
     Label,
     LIGHT_SCALE,
     Panel,
+    RangeInput,
     SquareKey,
     Stack,
     ValueDisplay,
@@ -78,6 +79,7 @@ export class ControlsSection extends Panel {
                     ]
                 }),
                 fader,
+                new RangeInput(fader, { label: t('console.channel', { number }), unit: '%' }),
                 new SquareKey({ variant: 'select', text: t('console.selectShort'), label: t('console.select'), on: number === 1 }),
                 new Label({ text: String(number), size: 'small', weight: 'medium' })
             ]
@@ -103,6 +105,12 @@ export class ControlsSection extends Panel {
         const knob = new Knob({ label: t('attributes.intensity'), value: 0.85, size: 'large', formatValue: percent });
         knob.onChange((value) => display.setValue(percent(value)));
 
-        return new Stack({ direction: 'row', gap: 2, align: 'center', classes: ['catalog-displays'], children: [knob, display] });
+        return new Stack({
+            direction: 'row',
+            gap: 2,
+            align: 'center',
+            classes: ['catalog-displays'],
+            children: [knob, new RangeInput(knob, { label: t('attributes.intensity'), unit: '%' }), display]
+        });
     }
 }

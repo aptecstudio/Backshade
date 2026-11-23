@@ -4,9 +4,10 @@
  * and becomes an unsaved change of the show.
  */
 
-import { ChoiceKeys, Label, NumberField, Panel, Stack, TextArea, TextField } from '../../../framework/ts/index.js';
+import { ChoiceKeys, Label, Panel, Stack, TextArea, TextField, TimeField } from '../../../framework/ts/index.js';
 import { FADE_LIMITS, type ShowSettings, type TimecodeRate } from '../../../shared/show/show-settings.js';
 import { showError } from '../../dialogs/show-error.js';
+import { timePickerLabels } from '../../i18n/control-labels.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 
@@ -52,8 +53,8 @@ export class ShowSettingsPanels extends Stack {
         });
         rate.onChange((value) => send({ timecodeRate: value }));
 
-        const fade = (label: string, value: number): NumberField => new NumberField({
-            label, value, unit: t('settings.seconds'), min: FADE_LIMITS.min, max: FADE_LIMITS.max, decimals: 1
+        const fade = (label: string, value: number): TimeField => new TimeField({
+            label, value, min: FADE_LIMITS.min, max: FADE_LIMITS.max, decimals: 1, labels: timePickerLabels()
         });
         const fadeIn = fade(t('settings.fadeIn'), settings.fadeInSeconds);
         const fadeOut = fade(t('settings.fadeOut'), settings.fadeOutSeconds);
