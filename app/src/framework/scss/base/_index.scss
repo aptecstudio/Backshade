@@ -1,4 +1,5 @@
-// Stili di base del framework: genera CSS, va incluso una sola volta
+// Base styles of the framework: generates CSS, to be included only once
 
 @use 'reset';
 @use 'document';
+@use 'scrollbar';

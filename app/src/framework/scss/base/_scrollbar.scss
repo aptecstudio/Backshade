@@ -1,0 +1,41 @@
+// Scrollbars themed like the console: thin, transparent track, thumb in the key grey,
+// no arrows and no glow; sizes come from the spacing scale
+@use '../tokens' as *;
+
+$size: space(1);
+
+::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 1px solid color('key-border');
+    border-radius: $radius-square-key;
+    background: color('scrollbar-thumb');
+
+    &:hover {
+        background: color('scrollbar-thumb-hover');
+    }
+
+    &:active {
+        background: color('scrollbar-thumb-active');
+    }
+}
+
+// Browsers without the webkit selectors (for example Firefox on a remote device)
+@supports not selector(::-webkit-scrollbar) {
+    * {
+        scrollbar-color: color('scrollbar-thumb') transparent;
+        scrollbar-width: thin;
+    }
+}

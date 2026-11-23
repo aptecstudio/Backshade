@@ -1,4 +1,4 @@
-// Palette del tema scuro (vedi docs/design/README.md)
+// Dark theme palette (see docs/design/README.md)
 @use 'sass:map';
 
 $palette: (
@@ -12,14 +12,14 @@ $palette: (
     'display': #050506,
     'display-text': #f2f2f2,
     'label': #c9cbd0,
-    // Tasti
+    // Keys
     'key-top': #36383d,
     'key-bottom': #2b2d31,
     'key-border': #121316,
     'square-key-top': #2b2c30,
     'square-key-bottom': #1e1f22,
     'led-border': #7a5d10,
-    // Stati dei tasti quadrati e dei tasti funzione: acceso e spento
+    // States of square keys and function keys: on and off
     'flash': #f07a2a,
     'flash-off': #4a3e36,
     'solo': #39c6e6,
@@ -30,13 +30,17 @@ $palette: (
     'function-off': #2f6b3a,
     'function-dot': #e0403a,
     'function-dot-off': #5a2a28,
-    // Display e scale dei fader
+    // Displays and fader scales
     'level-track': #1a1b1e,
     'scale-text': #8d9096,
-    'scale-tick': #5d5f64
+    'scale-tick': #5d5f64,
+    // Scrollbars
+    'scrollbar-thumb': #36383d,
+    'scrollbar-thumb-hover': #46484e,
+    'scrollbar-thumb-active': #5d5f64
 );
 
-// Colori dei canali
+// Channel colors
 $channels: (
     'blue': #4a78d6,
     'orange': #c06a3a,
@@ -49,8 +53,8 @@ $channels: (
     'amber': #c89a3a
 );
 
-/// Restituisce un colore della palette; errore se il nome non esiste.
-/// @param {String} $name - Nome del colore
+/// Returns a palette color; error if the name does not exist.
+/// @param {String} $name - Color name
 @function color($name) {
     @if not map.has-key($palette, $name) {
         @error 'Colore "#{$name}" non presente nella palette.';
