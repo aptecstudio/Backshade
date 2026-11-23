@@ -1,0 +1,20 @@
+// Icone lineari dello sprite: tratto uniforme, colore del testo
+@use '../tokens' as *;
+
+.icon {
+    display: inline-block;
+    flex-shrink: 0;
+    width: space(2);
+    height: space(2);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: middle;
+}
+
+.icon--large {
+    width: space(3);
+    height: space(3);
+}
