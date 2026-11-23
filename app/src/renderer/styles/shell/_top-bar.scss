@@ -1,0 +1,48 @@
+// Barra in alto: marchio, navigazione, display e impostazioni
+@use 'framework/scss/tokens' as *;
+
+.top-bar {
+    flex-shrink: 0;
+    padding: space(2) space(3);
+}
+
+.brand-block {
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.brand-block__logo {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-panel;
+}
+
+.brand-block__names {
+    gap: 0;
+    min-width: 0;
+    max-width: 240px;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.section-tabs {
+    flex-shrink: 0;
+}
+
+// Su finestre strette i display lasciano spazio alla navigazione:
+// prima si nasconde il tempo, poi il timecode
+@media (max-width: 1279px) {
+    .top-bar__tempo {
+        display: none;
+    }
+}
+
+@media (max-width: 1199px) {
+    .top-bar__timecode {
+        display: none;
+    }
+}

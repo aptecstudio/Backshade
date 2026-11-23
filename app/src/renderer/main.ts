@@ -1,7 +1,13 @@
 /**
- * Punto di ingresso dell'interfaccia (ES module).
- * Per ora segnala solo che l'interfaccia è stata caricata; layout e
- * componenti arrivano con le fasi 1.4 e 1.5.
+ * Punto di ingresso dell'interfaccia (ES module): prepara la localizzazione
+ * e monta la struttura dell'applicazione.
  */
+
+import { initI18n, t } from './i18n/i18n.js';
+import { AppShell } from './shell/app-shell.js';
+
+await initI18n();
+document.title = t('app.name');
+new AppShell().mount(document.body);
 
 document.documentElement.dataset.ready = 'true';

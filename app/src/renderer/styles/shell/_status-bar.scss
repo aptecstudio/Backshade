@@ -1,0 +1,15 @@
+// Barra di stato: testo piccolo e secondario, credito con wordmark
+@use 'framework/scss/tokens' as *;
+
+.status-bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: space(3);
+    padding: 0 space(1);
+}
+
+.credit-link__wordmark {
+    width: auto;
+    height: 16px;
+}

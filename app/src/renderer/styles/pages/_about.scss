@@ -1,0 +1,15 @@
+// Finestra Informazioni
+@use 'framework/scss/tokens' as *;
+
+.about-page {
+    min-height: 100%;
+    justify-content: center;
+    padding: space(4);
+    text-align: center;
+}
+
+.about-page__logo {
+    width: 96px;
+    height: 96px;
+    border-radius: $radius-panel;
+}

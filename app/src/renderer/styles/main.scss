@@ -1,0 +1,10 @@
+// Foglio di stile principale dell'interfaccia: raccoglie framework e stili dell'app
+
+@use 'framework/scss/base';
+@use 'framework/scss/components';
+@use 'shell/app-shell';
+@use 'shell/top-bar';
+@use 'shell/status-bar';
+@use 'sections/sections';
+@use 'pages/about';
+@use 'pages/catalog';

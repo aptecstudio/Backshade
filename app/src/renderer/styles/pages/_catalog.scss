@@ -1,0 +1,18 @@
+// Pagina del catalogo dei componenti (solo sviluppo)
+@use 'framework/scss/tokens' as *;
+
+.catalog-page {
+    padding: space(4);
+}
+
+.catalog-strip {
+    width: 96px;
+
+    .display {
+        align-self: stretch;
+    }
+}
+
+.catalog-displays > .display {
+    width: 128px;
+}

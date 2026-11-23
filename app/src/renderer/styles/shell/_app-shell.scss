@@ -1,0 +1,13 @@
+// Struttura principale: occupa tutta la finestra, solo l'area centrale scorre
+@use 'framework/scss/tokens' as *;
+
+.app-shell {
+    height: 100%;
+    padding: space(3) space(4) space(2);
+}
+
+.section-host {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+}
