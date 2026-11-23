@@ -1,13 +1,29 @@
-'use strict';
-
 /**
  * Ponte sicuro tra processo main e interfaccia.
- * Espone solo le funzioni dichiarate qui, mai l'intero ipcRenderer.
- * Il livello di trasporto vero e proprio arriva con la fase 1.7.
+ * Espone solo un trasporto di messaggi generico, mai l'intero ipcRenderer:
+ * l'interfaccia può soltanto inviare richieste e ricevere eventi.
  */
 
-const { contextBridge } = require('electron');
+import { contextBridge, ipcRenderer, type IpcRendererEvent } from 'electron';
+import type { HostBridge } from '../shared/transport/host-bridge';
+import type { EventMessage, ResponseMessage } from '../shared/transport/protocol';
 
-contextBridge.exposeInMainWorld('backshadeHost', {
-    platform: process.platform
-});
+// Uguali a shared/transport/ipc-channels.ts: il preload in sandbox non può importare altri file
+const REQUEST_CHANNEL = 'backshade:request';
+const EVENT_CHANNEL = 'backshade:event';
+
+const bridge: HostBridge = {
+    platform: process.platform,
+    transport: {
+        request: (message) => ipcRenderer.invoke(REQUEST_CHANNEL, message) as Promise<ResponseMessage>,
+        onEvent: (listener) => {
+            const handler = (_event: IpcRendererEvent, message: EventMessage): void => listener(message);
+            ipcRenderer.on(EVENT_CHANNEL, handler);
+            return () => {
+                ipcRenderer.removeListener(EVENT_CHANNEL, handler);
+            };
+        }
+    }
+};
+
+contextBridge.exposeInMainWorld('backshadeHost', bridge);
