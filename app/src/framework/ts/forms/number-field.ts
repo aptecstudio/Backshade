@@ -12,8 +12,10 @@ import type { Unsubscribe } from '../dom/events.js';
 
 /** Number field options */
 export interface NumberFieldOptions {
-    /** Label above the field, already translated */
-    label: string;
+    /** Label above the field, already translated; without it, the field is compact */
+    label?: string;
+    /** Name for assistive technologies, for compact fields without a label */
+    ariaLabel?: string;
     /** Unit shown next to the value, for example "s" */
     unit?: string;
     value: number;
@@ -46,7 +48,13 @@ export class NumberField extends Component<HTMLDivElement> {
         if (options.unit !== undefined) {
             row.append(create('span', { classes: ['number-field__unit'], text: options.unit }));
         }
-        this.element.append(create('label', { classes: ['text-field__label'], attributes: { for: id }, text: options.label }), row);
+        if (options.label !== undefined) {
+            this.element.append(create('label', { classes: ['text-field__label'], attributes: { for: id }, text: options.label }));
+        } else {
+            this.element.classList.add('number-field--compact');
+            this.input.setAttribute('aria-label', options.ariaLabel ?? '');
+        }
+        this.element.append(row);
 
         this.render();
         this.listen(this.input, 'change', () => this.commit());

@@ -38,6 +38,7 @@ function formatPercent(value: number): string {
 export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends Component<E> {
     private current = Number.NaN;
     private readonly changes = new Emitter<number>();
+    private readonly renders = new Emitter<number>();
     private readonly formatValue: (value: number) => string;
 
     protected constructor(element: E, options: RangeControlOptions) {
@@ -57,6 +58,7 @@ export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends 
             this.changeBy(-Math.sign(event.deltaY) * WHEEL_STEP * factor);
         }, { passive: false });
         this.track(() => this.changes.clear());
+        this.track(() => this.renders.clear());
     }
 
     /** Current value, from 0 to 1 */
@@ -77,9 +79,18 @@ export abstract class RangeControl<E extends HTMLElement = HTMLElement> extends 
         this.render(next);
         this.element.setAttribute('aria-valuenow', String(Math.round(next * 100)));
         this.element.setAttribute('aria-valuetext', this.formatValue(next));
+        this.renders.emit(next);
         if (notify) {
             this.changes.emit(next);
         }
+    }
+
+    /**
+     * Registers a listener for every value change, including those set by the
+     * engine without notification; used to keep bound views in sync.
+     */
+    onRender(listener: (value: number) => void): Unsubscribe {
+        return this.renders.subscribe(listener);
     }
 
     /**

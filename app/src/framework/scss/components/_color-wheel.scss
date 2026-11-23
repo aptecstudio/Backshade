@@ -1,0 +1,63 @@
+// Color wheel: hue around, saturation from the center, brightness as a dark overlay
+@use '../tokens' as *;
+
+$size: 192px;
+
+.color-wheel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: space(3);
+}
+
+.color-wheel__disc {
+    position: relative;
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle closest-side, #fff, rgba(255, 255, 255, 0)),
+        conic-gradient(from 0deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+    box-shadow: 0 0 0 1px color('panel-border');
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.color-wheel__shade {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #000;
+    opacity: var(--wheel-shade, 0);
+    pointer-events: none;
+}
+
+.color-wheel__marker {
+    position: absolute;
+    top: calc(50% + var(--marker-y, 0) * 50%);
+    left: calc(50% + var(--marker-x, 0) * 50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #000;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.color-wheel__side {
+    flex: 0 1 320px;
+    min-width: 240px;
+}
+
+.color-wheel__swatch {
+    height: 48px;
+    border: 1px solid color('panel-border');
+    border-radius: $radius-square-key;
+    background: var(--swatch-color, #000);
+}
+
+.color-wheel .number-field__input {
+    width: 64px;
+}

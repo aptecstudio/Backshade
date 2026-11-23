@@ -1,0 +1,53 @@
+// Time field and time picker
+@use '../tokens' as *;
+@use 'focus';
+
+.time-field__button {
+    display: inline-flex;
+    align-items: center;
+    gap: space(1);
+    min-width: 128px;
+    height: 40px;
+    padding: 0 space(2);
+    border: 1px solid color('panel-border');
+    border-radius: $radius-square-key;
+    background: color('display');
+    color: color('text');
+    font-family: $font-family-mono;
+    cursor: pointer;
+
+    @include focus.focus-ring;
+
+    .icon {
+        color: color('text-secondary');
+    }
+}
+
+.time-picker__readout {
+    align-self: stretch;
+    text-align: center;
+}
+
+.time-picker__body {
+    justify-content: center;
+}
+
+.time-picker__steps {
+    justify-content: center;
+}
+
+.time-picker__steps .key {
+    min-width: 0;
+    flex: 1 1 0;
+}
+
+// Field bound to a fader or a knob, under the control
+.range-input .number-field__input {
+    width: 64px;
+    height: 32px;
+    padding: 0 space(1);
+}
+
+.number-field--compact .number-field__row {
+    justify-content: center;
+}

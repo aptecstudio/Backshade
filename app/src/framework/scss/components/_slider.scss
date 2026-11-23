@@ -1,0 +1,40 @@
+// Horizontal slider: 48 px hit area for touch, thin track from black to --slider-color
+@use '../tokens' as *;
+@use 'focus';
+
+.slider {
+    position: relative;
+    width: 100%;
+    min-width: 128px;
+    height: 48px;
+    cursor: ew-resize;
+    touch-action: none;
+    user-select: none;
+
+    @include focus.focus-ring;
+}
+
+.slider__track {
+    position: absolute;
+    top: 50%;
+    right: space(1);
+    left: space(1);
+    height: space(1);
+    border: 1px solid color('panel-border');
+    border-radius: 4px;
+    background: linear-gradient(90deg, #000, var(--slider-color, #{color('text')}));
+    transform: translateY(-50%);
+}
+
+.slider__cap {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--slider-value, 0) * 100%);
+    width: 16px;
+    height: 32px;
+    border: 1px solid color('key-border');
+    border-radius: $radius-square-key;
+    background: linear-gradient(180deg, color('key-top'), color('key-bottom'));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    transform: translate(-50%, -50%);
+}

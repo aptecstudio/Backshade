@@ -24,6 +24,7 @@ export const ICON_NAMES = [
     'settings',
     'skip-back',
     'square',
+    'timer',
     'trash-2',
     'triangle-alert',
     'video',
