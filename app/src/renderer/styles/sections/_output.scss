@@ -18,6 +18,27 @@
     align-items: center;
 }
 
+.usb-table__row {
+    grid-template-columns: space(8) minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr);
+}
+
+.usb-port-row > .select-field {
+    flex: 1 1 auto;
+}
+
+.usb-status--connected {
+    color: color('function');
+}
+
+.usb-status--error {
+    color: color('warning');
+}
+
+.usb-status--connected .label,
+.usb-status--error .label {
+    color: inherit;
+}
+
 .output-table__row--header {
     padding: space(1) space(2);
     border: 1px solid transparent;

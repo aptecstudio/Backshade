@@ -5,6 +5,7 @@
 
 import path from 'node:path';
 import { app } from 'electron';
+import { normalizeUsbDmxDevice, type UsbDmxDevice } from '../../shared/output/usb-dmx';
 import type { AppSettings } from '../../shared/transport/engine-api';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
 
@@ -20,7 +21,8 @@ function defaults(): AppSettings {
     return {
         defaultShowsFolder: path.join(app.getPath('documents'), 'Backshade', 'Shows'),
         artNetInterface: '',
-        outputEnabled: true
+        outputEnabled: true,
+        usbDmxDevices: []
     };
 }
 
@@ -39,6 +41,11 @@ export function readSettings(): AppSettings {
         }
         if (typeof data?.outputEnabled === 'boolean') {
             result.outputEnabled = data.outputEnabled;
+        }
+        if (Array.isArray(data?.usbDmxDevices)) {
+            result.usbDmxDevices = data.usbDmxDevices
+                .map(normalizeUsbDmxDevice)
+                .filter((device): device is UsbDmxDevice => device !== null);
         }
     } catch (error) {
         console.warn('Unreadable settings, using the default values', error);

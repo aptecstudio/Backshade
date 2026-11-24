@@ -1,6 +1,6 @@
 /**
  * Output section: grand master and blackout, Art-Net settings, Art-Net
- * destinations of the universes and DMX monitor. Without an open show
+ * destinations of the universes, USB DMX interfaces and DMX monitor. Without an open show
  * only the master and the workstation settings are shown.
  */
 
@@ -13,6 +13,7 @@ import { MasterPanel } from './master-panel.js';
 import { MonitorPanel } from './monitor-panel.js';
 import { NetworkPanel } from './network-panel.js';
 import { UniversesPanel } from './universes-panel.js';
+import { UsbPanel } from './usb-panel.js';
 
 export class OutputSection extends Stack {
     private readonly network = new NetworkPanel();
@@ -22,7 +23,7 @@ export class OutputSection extends Stack {
     constructor() {
         super({ gap: 3, classes: ['output-section'] });
         this.append(
-            new Stack({ direction: 'row', gap: 3, align: 'stretch', children: [new MasterPanel(), new Stack({ gap: 3, classes: ['output-section__main'], children: [this.network, this.universes] })] }),
+            new Stack({ direction: 'row', gap: 3, align: 'stretch', children: [new MasterPanel(), new Stack({ gap: 3, classes: ['output-section__main'], children: [this.network, this.universes, new UsbPanel()] })] }),
             this.monitor
         );
 

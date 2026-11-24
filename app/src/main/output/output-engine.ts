@@ -1,8 +1,9 @@
 /**
  * DMX output engine: at the frame rate of the show it merges the sources
- * of every universe and sends the frames with Art-Net. The universes sent
- * are those used by the patch and those configured in the output, unless
- * disabled. Grand master and blackout belong to the running session and
+ * of every universe and sends the frames with Art-Net and to the USB DMX
+ * interfaces. Art-Net sends the universes used by the patch and those
+ * configured in the output, unless disabled; every USB interface sends
+ * the universe assigned to it. Grand master and blackout belong to the running session and
  * are not saved; output on or off and the network interface are settings
  * of the workstation.
  */
@@ -14,6 +15,7 @@ import type { OutputState } from '../../shared/transport/engine-api';
 import { artDmx } from '../artnet/artnet-packets';
 import type { ArtNetSocket } from '../artnet/artnet-socket';
 import { listNetworkInterfaces } from '../artnet/network-interfaces';
+import type { UsbDmxManager } from '../usbdmx/usb-dmx-manager';
 import { buildChannelMap, type UniverseMap } from './channel-map';
 import { DmxMixer } from './dmx-mixer';
 
@@ -30,6 +32,7 @@ const LIMITED_BROADCAST = '255.255.255.255';
 export class OutputEngine {
     readonly mixer = new DmxMixer();
     private readonly socket: ArtNetSocket;
+    private readonly usb: UsbDmxManager;
     private content: OutputContent | null = null;
     private channelMap = new Map<number, UniverseMap>();
     private readonly sequences = new Map<number, number>();
@@ -40,8 +43,9 @@ export class OutputEngine {
     private artNetInterface: string;
     private broadcasts: string[] = [];
 
-    constructor(socket: ArtNetSocket, workstation: { enabled: boolean; artNetInterface: string }) {
+    constructor(socket: ArtNetSocket, usb: UsbDmxManager, workstation: { enabled: boolean; artNetInterface: string }) {
         this.socket = socket;
+        this.usb = usb;
         this.enabled = workstation.enabled;
         this.artNetInterface = workstation.artNetInterface;
         this.broadcasts = this.findBroadcasts();
@@ -74,21 +78,38 @@ export class OutputEngine {
         this.restart();
     }
 
+    /**
+     * Starts sending again, for example after the USB interfaces changed.
+     */
+    refresh(): void {
+        this.restart();
+    }
+
     /** Broadcast addresses where Art-Net is sent */
     get broadcastAddresses(): readonly string[] {
         return this.broadcasts;
     }
 
     /**
-     * Universes being sent: used by the patch or configured, and enabled.
+     * Universes sent with Art-Net: used by the patch or configured, and enabled.
      */
-    universes(): number[] {
+    artNetUniverses(): number[] {
         if (this.content === null) {
             return [];
         }
         const output = this.content.output;
         const numbers = new Set([...this.channelMap.keys(), ...output.universes.map((item) => item.universe)]);
         return [...numbers].filter((universe) => outputUniverse(output, universe).enabled).sort((a, b) => a - b);
+    }
+
+    /**
+     * Universes being sent, with Art-Net or USB.
+     */
+    universes(): number[] {
+        if (this.content === null) {
+            return [];
+        }
+        return [...new Set([...this.artNetUniverses(), ...this.usb.universes()])].sort((a, b) => a - b);
     }
 
     /**
@@ -106,7 +127,9 @@ export class OutputEngine {
             artNetInterface: this.artNetInterface,
             universes: this.enabled ? this.universes() : [],
             canDiscover: this.socket.canDiscover,
-            error: this.socket.error
+            error: this.socket.error,
+            usbAvailable: this.usb.available,
+            usbDevices: this.usb.state()
         };
     }
 
@@ -140,11 +163,17 @@ export class OutputEngine {
         if (this.content === null) {
             return;
         }
+        const artNet = new Set(this.artNetUniverses());
         for (const universe of this.universes()) {
+            const frame = this.frame(universe);
+            this.usb.send(universe, frame);
+            if (!artNet.has(universe)) {
+                continue;
+            }
             const destination = outputUniverse(this.content.output, universe);
             const sequence = (this.sequences.get(universe) ?? 0) % 255 + 1;
             this.sequences.set(universe, sequence);
-            const packet = artDmx(destination.portAddress, sequence, this.frame(universe));
+            const packet = artDmx(destination.portAddress, sequence, frame);
             const addresses = destination.transport === 'unicast' ? destination.targets : this.broadcasts;
             for (const address of addresses) {
                 this.socket.send(packet, address);

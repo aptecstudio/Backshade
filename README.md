@@ -67,7 +67,13 @@ Planned (see [ROADMAP.md](ROADMAP.md)):
 
 ## Dependencies
 
-Backshade uses as few dependencies as possible. There are no runtime dependencies: everything the application needs at runtime is built on Electron, Node.js and browser APIs, or is part of the project.
+Backshade uses as few dependencies as possible: everything the application needs at runtime is built on Electron, Node.js and browser APIs, or is part of the project, with one exception.
+
+Runtime dependency (in `app/package.json`):
+
+| Package | Version | Purpose |
+| --- | --- | --- |
+| `@serialport/bindings-cpp` | 13.0.1 | Native access to the serial ports, for USB DMX interfaces (Enttec DMX USB Pro, Open DMX); prebuilt N-API binaries, no rebuild for Electron |
 
 Development dependencies (in `app/package.json`, installed with `npm ci`):
 

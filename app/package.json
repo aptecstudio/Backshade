@@ -25,5 +25,8 @@
     "electron": "45.4.1",
     "sass": "1.108.2",
     "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "@serialport/bindings-cpp": "13.0.1"
   }
 }

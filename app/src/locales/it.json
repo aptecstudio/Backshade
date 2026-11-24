@@ -567,7 +567,31 @@
       "monitorEmpty": "Nessun universo da mostrare.",
       "valuesDmx": "0-255",
       "valuesPercent": "%",
-      "channelValue": "Canale {address}: {value}"
+      "channelValue": "Canale {address}: {value}",
+      "usb": "Interfacce USB DMX",
+      "usbHint": "Interfacce collegate a questa postazione; ognuna invia un universo. Sono salvate sulla postazione e ritrovate dal numero di serie.",
+      "usbUnavailable": "Le porte seriali non sono disponibili su questo computer.",
+      "usbEmpty": "Ancora nessuna interfaccia USB DMX.",
+      "addUsb": "Aggiungi interfaccia",
+      "usbTitle": "Interfaccia USB DMX",
+      "usbPort": "Porta seriale",
+      "usbNoPorts": "Nessuna porta seriale trovata. Collega l'interfaccia e cerca di nuovo.",
+      "usbRefresh": "Cerca di nuovo",
+      "usbType": "Tipo",
+      "usbTypeEnttecPro": "Enttec DMX USB Pro e compatibili",
+      "usbTypeOpenDmx": "Open DMX USB (FTDI)",
+      "usbUniverse": "Universo",
+      "usbEnabled": "Invio",
+      "usbRemove": "Togli interfaccia",
+      "usbPortLabel": "{path}, {details}",
+      "usbSerial": "numero di serie {serial}",
+      "usbLikely": "USB DMX",
+      "columnDevice": "Interfaccia",
+      "columnStatus": "Stato",
+      "usbConnected": "Collegata",
+      "usbMissing": "Non collegata",
+      "usbError": "Errore: {error}",
+      "usbDisabled": "Non inviata"
     }
   }
 }

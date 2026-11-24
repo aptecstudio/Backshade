@@ -1,7 +1,7 @@
 /**
  * output.* methods: grand master, blackout, output of the workstation,
- * Art-Net configuration of the open show, values sent (for the DMX
- * monitor) and search of the Art-Net nodes. The engine follows the open
+ * Art-Net configuration of the open show, USB DMX interfaces of the
+ * workstation, values sent (for the DMX monitor) and search of the Art-Net nodes. The engine follows the open
  * show: patch, output configuration and fixture library.
  */
 
@@ -14,6 +14,7 @@ import {
     outputUniverse,
     type ShowOutput
 } from '../../shared/output/output-config';
+import { normalizeUsbDmxDevice } from '../../shared/output/usb-dmx';
 import { MAX_UNIVERSE } from '../../shared/patch/patch';
 import { ArtNetSocket } from '../artnet/artnet-socket';
 import { listNetworkInterfaces } from '../artnet/network-interfaces';
@@ -23,8 +24,11 @@ import { readSettings, updateSettings } from '../settings/app-settings';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
-import { optionalBoolean, optionalString, requireInteger, requireObject } from '../transport/params';
+import { optionalBoolean, optionalString, requireInteger, requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
+import { requireDesktop } from '../transport/require-desktop';
+import { listSerialPorts } from '../usbdmx/serial-binding';
+import { portId, UsbDmxManager } from '../usbdmx/usb-dmx-manager';
 
 // Time given to the nodes to answer an ArtPoll (the protocol allows up to 3 s)
 const DISCOVERY_MS = 2500;
@@ -43,13 +47,20 @@ function requireUniverse(value: number): number {
 export function registerOutputService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): () => void {
     const socket = new ArtNetSocket();
     const settings = readSettings();
-    const engine = new OutputEngine(socket, { enabled: settings.outputEnabled, artNetInterface: settings.artNetInterface });
+    // The state is announced when a USB interface connects or disconnects
+    let announce = (): void => undefined;
+    const usb = new UsbDmxManager(() => announce());
+    const engine = new OutputEngine(socket, usb, { enabled: settings.outputEnabled, artNetInterface: settings.artNetInterface });
 
     const stateChanged = (): ReturnType<OutputEngine['state']> => {
         const state = engine.state();
         bus.emit('output.stateChanged', { state });
         return state;
     };
+    announce = () => {
+        stateChanged();
+    };
+    usb.configure(settings.usbDmxDevices);
     const follow = (): void => {
         engine.setContent(session.summary() === null
             ? null
@@ -161,9 +172,48 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
         return nodes.sort((a, b) => a.address.localeCompare(b.address, undefined, { numeric: true }));
     });
 
+    router.register('output.listSerialPorts', async (_params, context) => {
+        requireDesktop(context);
+        const ports = await listSerialPorts();
+        return ports
+            .map((port) => ({
+                path: port.path,
+                serialNumber: port.serialNumber ?? null,
+                manufacturer: port.manufacturer ?? null,
+                vendorId: port.vendorId ?? null,
+                productId: port.productId ?? null,
+                id: portId(port),
+                // FTDI, the chip of Enttec and of most compatible interfaces
+                likelyDmx: port.vendorId?.toLowerCase() === '0403'
+            }))
+            .sort((a, b) => Number(b.likelyDmx) - Number(a.likelyDmx) || a.path.localeCompare(b.path));
+    });
+
+    router.register('output.setUsbDevice', (params, context) => {
+        requireDesktop(context);
+        const device = normalizeUsbDmxDevice(params);
+        if (device === null) {
+            throw new EngineError('invalid-params', 'Invalid USB DMX interface');
+        }
+        const devices = [...readSettings().usbDmxDevices.filter((item) => item.id !== device.id), device]
+            .sort((a, b) => a.universe - b.universe);
+        usb.configure(updateSettings({ usbDmxDevices: devices }).usbDmxDevices);
+        engine.refresh();
+        return stateChanged();
+    });
+
+    router.register('output.removeUsbDevice', (params, context) => {
+        requireDesktop(context);
+        const id = requireString(requireObject(params), 'id');
+        usb.configure(updateSettings({ usbDmxDevices: readSettings().usbDmxDevices.filter((item) => item.id !== id) }).usbDmxDevices);
+        engine.refresh();
+        return stateChanged();
+    });
+
     follow();
     return () => {
         engine.dispose();
         socket.close();
+        void usb.dispose();
     };
 }

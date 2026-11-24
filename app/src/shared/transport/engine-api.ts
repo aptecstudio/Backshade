@@ -8,6 +8,7 @@
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
 import type { OutputTransport, ShowOutput } from '../output/output-config.js';
+import type { UsbDmxDevice, UsbDmxStatus } from '../output/usb-dmx.js';
 import type { PatchedFixture } from '../patch/patch.js';
 import type { MediaKind } from '../show/media-kinds.js';
 import type { ShowSettings } from '../show/show-settings.js';
@@ -164,6 +165,28 @@ export interface AppSettings {
     artNetInterface: string;
     /** The workstation sends DMX output */
     outputEnabled: boolean;
+    /** USB DMX interfaces of the workstation */
+    usbDmxDevices: UsbDmxDevice[];
+}
+
+/** Serial port of the computer, for the choice of a USB DMX interface */
+export interface SerialPortInfo {
+    path: string;
+    /** Serial number, or null if the system does not give it */
+    serialNumber: string | null;
+    manufacturer: string | null;
+    vendorId: string | null;
+    productId: string | null;
+    /** Identifier used to find the device again */
+    id: string;
+    /** FTDI chip, used by most USB DMX interfaces */
+    likelyDmx: boolean;
+}
+
+/** USB DMX interface with its connection */
+export interface UsbDmxDeviceState extends UsbDmxDevice {
+    status: UsbDmxStatus;
+    error: string | null;
 }
 
 /** IPv4 network interface of the computer */
@@ -200,6 +223,10 @@ export interface OutputState {
     canDiscover: boolean;
     /** Last network error, or null */
     error: string | null;
+    /** The serial ports can be used on this computer */
+    usbAvailable: boolean;
+    /** USB DMX interfaces of the workstation */
+    usbDevices: UsbDmxDeviceState[];
 }
 
 /** Changes to the Art-Net destination of a universe */
@@ -313,6 +340,12 @@ export interface EngineMethods {
     'output.listInterfaces': { params: undefined; result: NetworkInterfaceInfo[] };
     /** Searches the Art-Net nodes of the network */
     'output.discover': { params: undefined; result: ArtNetNodeInfo[] };
+    /** Serial ports of the computer, USB DMX interfaces first (desktop application only) */
+    'output.listSerialPorts': { params: undefined; result: SerialPortInfo[] };
+    /** Adds or changes a USB DMX interface of the workstation (desktop application only) */
+    'output.setUsbDevice': { params: UsbDmxDevice; result: OutputState };
+    /** Removes a USB DMX interface of the workstation (desktop application only) */
+    'output.removeUsbDevice': { params: { id: string }; result: OutputState };
 
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
