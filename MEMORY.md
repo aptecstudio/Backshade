@@ -198,6 +198,19 @@ Built in the second block of Phase 3 (3.4, 3.5, 3.6) on 2026-11-24.
 
 Status: Confirmed (configuration in the show, numbering, broadcast or unicast with ArtPoll), Proposed (Output section and its layout, intensity rules of the merge, frame rate limits, continuous sending).
 
+## USB DMX interfaces
+
+Built in Phase 3.7 on 2026-11-24, with the native dependency chosen by the human (serialport).
+
+- **Dependency:** only `@serialport/bindings-cpp` (the native part of serialport, without its streams and parsers), runtime dependency pinned to 13.0.1. It ships prebuilt N-API binaries for Windows, macOS and Linux (x64 and arm64), which load in Electron without a rebuild. It is loaded lazily (`src/main/usbdmx/serial-binding.ts`): if it cannot be loaded, USB DMX is shown as unavailable and the rest of the engine works. Packaging (Phase 11) must keep the native module outside the asar archive (`asarUnpack`).
+- **Supported interfaces:** Enttec DMX USB Pro and compatible (message with label 6 "Output Only Send DMX Packet", the interface makes the DMX timing) and Open DMX USB with an FTDI chip only (250000 baud, 8N2, break of at least 1 ms before every frame, RTS low). The user chooses the type, because both use the same FTDI identifiers.
+- **Workstation settings:** the interfaces are hardware of the computer, so they are saved in `settings.json` (`usbDmxDevices`: `id`, `path`, `type`, `universe`, `enabled`), not in the show; Phase 15 (hardware map) may move them into the show. A device is found again by its serial number, then by its path; ports not listed by the system are opened by path on macOS and Linux.
+- **Engine:** every interface receives the frame of its universe at the frame rate of the show, from the same merge as Art-Net; a frame is skipped while the previous one is still being written. Interfaces not connected are searched again every 3 seconds; a write error closes the device and it is opened again when it comes back. The connection (connected, not connected, error, not sent) is part of the output state.
+- **Interface:** panel "USB DMX interfaces" in the Output section, with a dialog to choose the serial port (FTDI ports first), the type, the universe and sending. Adding and removing interfaces is available only in the desktop application.
+- Verified: the Enttec message byte by byte on a virtual serial port; Open DMX needs real hardware to be verified (break and 250000 baud).
+
+Status: Confirmed (dependency), Proposed (settings on the workstation, supported types, reconnection).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.
@@ -376,6 +389,7 @@ Principle: as few dependencies as possible.
 | `astro` | development, `/landing` only | Static site generator for the landing site |
 | `electron-builder` | development | Packaging for the three platforms |
 | Lucide | vendor | Line icon library (ISC license), version 1.78.0, individual SVG files with a sprite generated at build (confirmed) |
+| `@serialport/bindings-cpp` (13.0.1) | runtime, `/app` only | Native access to the serial ports for the USB DMX interfaces (confirmed by the human on 2026-11-24, Phase 3.7) |
 | three.js | vendor | 3D stage modeling and fixture emulation (MIT license), including its `OBJLoader` (confirmed by the human on 2026-11-22, see Phase 13) |
 
 Features built with native APIs, without extra dependencies:
@@ -390,7 +404,6 @@ Features built with native APIs, without extra dependencies:
 To be evaluated in the related phases (to be proposed with a poll):
 
 - Server-side WebSocket: `ws` or a minimal internal implementation.
-- USB DMX interfaces (e.g. Enttec): `serialport` (native module).
 
 Status: Proposed.
 

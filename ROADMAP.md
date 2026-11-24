@@ -83,7 +83,7 @@ Development order: the first block is 3.1, 3.2 and 3.3 together, so the Patch se
   - [x] 3.4.2 Network interface and output on or off per workstation
 - [x] 3.5 Output engine: frame rate, HTP/LTP merge, blackout, grand master
 - [x] 3.6 DMX channel monitor per universe
-- [ ] 3.7 USB DMX interfaces (to be evaluated, requires a native dependency)
+- [x] 3.7 USB DMX interfaces: Enttec DMX USB Pro and compatible, Open DMX USB (FTDI), one universe per interface, through `@serialport/bindings-cpp`
 
 ## Phase 4 - Simple console (live and programming)
 
