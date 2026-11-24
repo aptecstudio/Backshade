@@ -95,7 +95,7 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Shortcuts:** Ctrl or Cmd + S save, + Shift + S save as, + N new show, + O open show.
 - **Window close:** with unsaved changes the main window does not close; the engine sends `app.closeRequested`, the interface asks the user and then calls `app.confirmClose`.
 - **Framework additions:** `TextField`, `TextArea`, `NumberField` (accepts comma or point as decimal separator, clamps to its limits), `ChoiceKeys`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules and set `color-scheme: dark` for native controls.
-- **Framework additions of Phase 3:** `SelectField` (native select styled as the text fields, with groups), compact `TextField` without a label (`ariaLabel`) and its `onChange` on confirmation, `Dialog` size `large` for editors, `TabBar` (flat tabs, 48 px high), `ListItem` `classes`, labels keep line breaks, palette color `warning` for functional indicators.
+- **Framework additions of Phase 3:** `SelectField` (native select styled as the text fields, with groups), compact `TextField` without a label (`ariaLabel`) and its `onChange` on confirmation, `Dialog` size `large` for editors, `TabBar` (flat tabs, 48 px high), `ChoiceKeys` without a label and with a `value` getter, `ListItem` `classes`, labels keep line breaks, palette color `warning` for functional indicators.
 - **Desktop-only methods:** `requireDesktop()` (`src/main/transport/require-desktop.ts`) is the single guard used by every service.
 - **Scrollbars** (`framework/scss/base/_scrollbar.scss`, requested by the human on 2026-11-23): themed like the console, 8 px (`space(1)`), transparent track, thumb in the key grey with the key border and a lighter tone on hover and drag, no arrow buttons; browsers without the webkit selectors get `scrollbar-color` with the same colors.
 - **Value input controls** (requested by the human on 2026-11-23), to be used everywhere:
@@ -181,6 +181,22 @@ Built in the first block of Phase 3 (3.1, 3.2, 3.3) on 2026-11-24.
 - **Fixture type icons** (requested by the human on 2026-11-24): every category has a Lucide icon (`src/renderer/fixtures/fixture-icons.ts`), shown in the patch list and in the library lists: dimmer `lightbulb`, PAR `cone`, LED bar `columns-4`, pixel bar `grid-3x2`, moving head `spotlight`, scanner `scan-line`, strobe `zap`, blinder `sun`, effect `sparkles`, laser `radar`, fog machine `cloud-fog`, hazer `haze`, other `circle-dot`; a missing definition shows `circle-help`.
 
 Status: Confirmed (format, physical data, references by identifier with missing resources dialog, library source), Proposed (attribute and category lists, file extension, user definitions replacing included ones).
+
+## DMX output and Art-Net
+
+Built in the second block of Phase 3 (3.4, 3.5, 3.6) on 2026-11-24.
+
+- **Configuration in the show** (confirmed by the human on 2026-11-24): `show.json` has `output` with `frameRate` (1 to 44 fps, default 40) and `universes`, the Art-Net destinations of the universes that differ from the default (`src/shared/output/output-config.ts`). Each destination has `enabled`, `portAddress` (0 to 32767: Net, Sub-Net, Universe), `transport` (`broadcast` or `unicast`) and `targets` (IPv4 addresses, at most 16).
+- **Default destination** (confirmed by the human on 2026-11-24): Backshade universe 1 is Art-Net Port-Address 0 (universe N -> N - 1), broadcast; it can be changed per universe.
+- **Broadcast or unicast per universe** (confirmed by the human on 2026-11-24), with the search of the nodes through ArtPoll (2.5 s) to choose unicast addresses.
+- **Workstation settings** in `settings.json`: `outputEnabled` (default true) and `artNetInterface` (IPv4 address of the interface, empty for all the external interfaces). Broadcast goes to the directed broadcast address of the chosen interface, or of every external interface; the loopback interface sends to 127.0.0.1, for visualizers on the same computer. A chosen interface that is not available sends nothing rather than on a wrong network.
+- **Art-Net** (`src/main/artnet/`): ArtDmx, ArtPoll and ArtPollReply built and read with Node.js `dgram`, no dependencies. The socket listens on port 6454 when it is free; when another program uses it, output still works from another port but the search of the nodes is not available (shown to the user).
+- **Output engine** (`src/main/output/`): at the frame rate of the show every universe is composed and sent. Universes sent: those used by the patch and those configured, unless disabled. Sending is continuous (no change detection), which keeps nodes and their timeouts simple.
+- **Merge** (`dmx-mixer.ts`): sources (programmer, playbacks and cues of the next phases) write channel levels. Intensity channels are merged HTP, all the others LTP (the last written wins); channels without sources take the default value of the definition. Intensity channels are the dimmer channels of a fixture, or its additive color channels (red, green, blue, white, warm and cold white, amber, UV, lime) when it has no dimmer. The grand master and the blackout scale only the intensity channels, 16-bit pairs as one value. Grand master and blackout are not saved: every session starts at full and without blackout.
+- **Interface:** new main section Output (`src/renderer/sections/output/`) with the grand master fader and blackout key, the Art-Net settings with the output status, the universes table with the destination dialog, and the DMX monitor. The blackout key is also in the top bar; when on it is active with the red bar of the armed state, in every window (`src/renderer/output/output-store.ts` follows `output.stateChanged`).
+- **DMX monitor:** grid of the 512 channels of a universe like the DMX map of the patch, with value and level bar, in DMX values or percent (remembered per device, `backshade.monitorUnit`); values are read about 15 times per second while the section is open (`output.getFrame`).
+
+Status: Confirmed (configuration in the show, numbering, broadcast or unicast with ArtPoll), Proposed (Output section and its layout, intensity rules of the merge, frame rate limits, continuous sending).
 
 ## Brand
 
@@ -291,14 +307,14 @@ Built in Phase 1.5 after the console reference rendering (`docs/design/console.p
 
 - `AppShell`: top bar, section area and status bar; only the section area scrolls.
 - `TopBar`: `BrandBlock` (logo, "Backshade" in the accent color, name of the open show or "No show open"), timecode and tempo displays, Start and Settings keys.
-- Section navigation (moved into the status bar at the human's request on 2026-11-24): `SectionTabBar` shows the main sections (console, grid, timeline, patch, media) as flat tabs (framework `TabBar`) in the middle of the status bar; the active tab has the accent label and an accent bar on its top edge, as the states of the keys; disabled without an open show.
+- Section navigation (moved into the status bar at the human's request on 2026-11-24): `SectionTabBar` shows the main sections (console, grid, timeline, patch, output, media) as flat tabs (framework `TabBar`) in the middle of the status bar; the active tab has the accent label and an accent bar on its top edge, as the states of the keys; disabled without an open show.
 - `SectionNavigation`: open section and change notifications; the last open section is remembered per device (`localStorage`, key `backshade.section`).
 - `SectionHost`: shows the open section; the previous section component is destroyed and the new one created when the section changes.
 - `StatusBar`: application status on the left, section tabs in the middle, "A product by" with the Aptec Studio wordmark linking to the website on the right.
-- Sections are declared in `src/renderer/sections/section-definitions.ts` (identifier, text, optional icon, factory). Main sections: console, grid (virtual console), timeline, patch, media; settings has its own key. Sections not yet developed show a placeholder panel.
+- Sections are declared in `src/renderer/sections/section-definitions.ts` (identifier, text, optional icon, factory). Main sections: console, grid (virtual console), timeline, patch, output, media; settings has its own key. Sections not yet developed show a placeholder panel.
 - Settings: `SettingsSection` collects one panel per setting; the first is `LanguageSettings`.
 - Timecode and tempo show neutral values (`00:00:00:00`, `---.-`) until the engine provides them.
-- The blackout key of the reference is added with the output engine (Phase 3.5): a safety key without effect would be misleading in a live show.
+- The blackout key of the reference is in the top bar since the output engine (Phase 3.5).
 - Narrow windows: the show name is shortened with an ellipsis; with the navigation in the status bar the timecode and tempo displays always fit down to the minimum window width (1024 px).
 - Images used by the interface live in `app/assets/images/` (copied from `docs/logo` and `docs/brand`) and are served at `/assets/images/`.
 
@@ -365,7 +381,7 @@ Principle: as few dependencies as possible.
 Features built with native APIs, without extra dependencies:
 
 - ZIP archives (`.bshow`, `.btemplate`): internal reader and writer on Node.js `zlib`, with Zip64 (decided by the human on 2026-11-23).
-- Art-Net: UDP through Node.js `dgram`.
+- Art-Net: UDP through Node.js `dgram` (built in Phase 3.4).
 - DOM manipulation: internal TypeScript framework (replaces jQuery).
 - Web server: Node.js `http` module.
 - OSC for external mixers: UDP through `dgram`.

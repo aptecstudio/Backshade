@@ -69,7 +69,7 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 
 ## Phase 3 - DMX and Art-Net
 
-Development order: the first block is 3.1, 3.2 and 3.3 together, so the Patch section is born working with real fixture definitions.
+Development order: the first block is 3.1, 3.2 and 3.3 together, so the Patch section is born working with real fixture definitions; the second block is 3.4, 3.5 and 3.6 together, so the output can be checked as soon as it is sent.
 
 - [x] 3.1 Fixture data model (channels, modes, attributes, optional physical data for the 3D stage)
 - [x] 3.2 Fixture library and custom fixture editor
@@ -78,9 +78,11 @@ Development order: the first block is 3.1, 3.2 and 3.3 together, so the Patch se
   - [x] 3.2.3 Missing definitions reported when a show is opened, with import from the same dialog
 - [x] 3.3 Multi-universe patch with address conflict checks
   - [x] 3.3.1 List view (tables per universe) and DMX map view (grid of the 512 channels), with fixture type icons
-- [ ] 3.4 Art-Net output (native UDP), node and universe configuration
-- [ ] 3.5 Output engine: frame rate, HTP/LTP merge, blackout, grand master
-- [ ] 3.6 DMX channel monitor per universe
+- [x] 3.4 Art-Net output (native UDP), node and universe configuration
+  - [x] 3.4.1 Broadcast or unicast per universe, Port-Address per universe (default universe - 1), search of the nodes with ArtPoll
+  - [x] 3.4.2 Network interface and output on or off per workstation
+- [x] 3.5 Output engine: frame rate, HTP/LTP merge, blackout, grand master
+- [x] 3.6 DMX channel monitor per universe
 - [ ] 3.7 USB DMX interfaces (to be evaluated, requires a native dependency)
 
 ## Phase 4 - Simple console (live and programming)
