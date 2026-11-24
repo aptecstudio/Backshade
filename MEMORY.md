@@ -101,7 +101,7 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Value input controls** (requested by the human on 2026-11-23), to be used everywhere:
   - **durations:** always a `TimeField`, a key showing the time ("2.5 s", "1:15.0") that opens the time picker: large readout, `JogWheel` turned by dragging around its center (one turn is 10 s, 1 s in fine mode), mouse wheel and arrow keys, step keys (-1, -0.1, +0.1, +1 s), zero key and direct entry of the seconds;
   - **RGB colors:** always a `ColorWheel`: hue around the wheel (red at the top, clockwise), saturation from the center, brightness on a `LinearSlider`, plus R, G, B (0 to 255) and hex fields;
-  - **fader and knob values:** every fader and every knob (trimmer), small or large, has a `RangeInput` under it, so the value can always be typed on the keyboard (displayed range configurable, for example 0 to 100 % or 0 to 255); control and field stay in sync also when the engine changes the value (`RangeControl.onRender`).
+  - **fader and knob values:** every fader and every knob (trimmer), small or large, has a `RangeInput` under it, so the value can always be typed on the keyboard (displayed range configurable, for example 0 to 100 % or 0 to 255); control and field stay in sync also when the engine changes the value (`RangeControl.onRender`). Exception (decided by the human on 2026-11-24): the faders of the preset surface of the simple console show their value only in the display above them, without a field under them, to avoid repeating it.
 - **Display of fader and knob values** (requested by the human on 2026-11-23): percentage (default) or 0 to 255, chosen in the Application settings separately for faders and for knobs (called "trimmer" in the Italian interface, at the human's request), saved per device (`localStorage`, keys `backshade.faderValues` and `backshade.knobValues`) and applied immediately, also to the other open windows. Every fader and knob of the interface is bound with `bindControlValue` (`src/renderer/preferences/control-values.ts`), which updates the typed field range, the value text of assistive technologies and the related displays.
 - **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC; they always start from the nearest existing folder of the proposed path, so a default folder not yet created (for example `Documents/Backshade/Shows`) never triggers a system warning (fixed on 2026-11-24 at the human's request).
 
@@ -210,6 +210,29 @@ Built in Phase 3.7 on 2026-11-24, with the native dependency chosen by the human
 - Verified: the Enttec message byte by byte on a virtual serial port; Open DMX needs real hardware to be verified (break and 250000 baud).
 
 Status: Confirmed (dependency), Proposed (settings on the workstation, supported types, reconnection).
+
+## Simple console
+
+Defined with the human on 2026-11-24 from the rendering `Backshade - console semplice` (artboard "Console a due preset A/B"), after the two-preset hardware desks. The grid console with free widgets is the virtual console of Phase 6. Reference products are not named in the project.
+
+- **Preset surface:** two rows of 12 faders, Preset A and Preset B, each with a LED (on above 0), its value and a flash key; a row of displays between them shows what each fader controls.
+- **Faders on raw DMX channels** (decided by the human): a fader controls one DMX channel of a universe; banks of 12 (or 24) channels move along the universe.
+- **Modes:** A/B 2 x 12 (two prepared scenes with crossfade between Master A and Master B, B reversed as on the hardware desks) and single 24 channels (the two rows are 24 consecutive channels).
+- **Masters and keys:** Master A, Master B, scene master (scenes and chasers recalled), grand master; fade time with the time field, chaser speed in bpm with tap; full on, blind (prepare without output), home (back to zero), record; blackout in the top bar.
+- **Attributes panel** (decided by the human): selecting a fixture puts its channels on the faders, named after the definition; pan and tilt move with two jog wheels X and Y (16 bit), RGB with the color wheel.
+- **Scenes and chasers:** three banks of 12 memories (S scene, C chaser); a scene records the output of the preset and attributes; recall with fade.
+- **Live cues** (confirmed by the human): a list of the recorded scenes in order, with Go, Back and Pause, current and next cue and the fade progress.
+
+Implementation of 4.1 (2026-11-24):
+
+- **Engine** (`src/main/console/preset-desk.ts`): the desk is the source `preset` of the mixer. It keeps the fader levels of every universe (rows A and B), so moving to another bank or universe never loses them. Output per channel: A/B mode the highest of A x Master A and B x (1 - Master B position); single mode the levels of row A x Master A (row B of the surface shows channels 13 to 24 of the bank, stored in row A); a held flash key gives 255 ignoring the masters. Only channels above 0 are written, so a fader at 0 never takes a channel from another source (scenes, the attributes panel).
+- **Blind:** the faders change but the output keeps the last result; turning blind off applies the faders at once.
+- **Full on:** applied by the output engine on every universe: intensity channels of the patched fixtures and every channel without a fixture at full; colors and movements of fixtures with a dimmer stay as they are; blackout still wins.
+- **Home:** every fader of every universe back to 0.
+- The state of the desk lives in the engine for the running session (like the physical faders of a desk) and is not saved in the show; every window follows `console.stateChanged`, `console.faderChanged` and `console.levelsChanged`. Universes controlled by a source are sent with Art-Net even when nothing is patched on them.
+- **Interface** (`src/renderer/sections/console/`): Console section with the preset surface (bank keys, universe, mode, two rows of strips with channel number, fixture and channel name from the patch, display with the value, compact fader, flash; no typed field under these faders) and the masters panel (A, B with reversed scale, scenes, grand master, full on, blind, home). Framework additions: `Fader` size `compact` (144 px), `SquareKey.onHold` for momentary keys.
+
+Status: Confirmed (2026-11-24).
 
 ## Brand
 

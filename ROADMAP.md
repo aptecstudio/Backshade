@@ -87,12 +87,16 @@ Development order: the first block is 3.1, 3.2 and 3.3 together, so the Patch se
 
 ## Phase 4 - Simple console (live and programming)
 
-- [ ] 4.1 Fixture and group selection
-- [ ] 4.2 Attribute control: intensity, color (color wheel for RGB), position, beam; every time with the time field
-- [ ] 4.3 Programmer: live editing and value capture
-- [ ] 4.4 Scenes: save, recall, fade in/out
-- [ ] 4.5 Chasers: steps, timing, BPM, tap tempo, playback modes
-- [ ] 4.6 Playback with faders and execution keys
+A two-preset console (A/B) like the classic hardware desks, defined with the human on 2026-11-24 (see `MEMORY.md`, Simple console). Development order: 4.1 first (the faders send light at once), then 4.2, then 4.3 and 4.4 together, then 4.5.
+
+- [x] 4.1 Preset surface: two rows of 12 faders (Preset A and B) on raw DMX channels, with flash keys
+  - [x] 4.1.1 Channel banks (channels 1-12, 13-24 and on) and universe choice
+  - [x] 4.1.2 Modes: A/B 2 x 12 (two scenes and crossfade) and single 24 channels
+  - [x] 4.1.3 Masters A and B in crossfade (B reversed), grand master, full on, home, blind
+- [ ] 4.2 Attributes panel: a selected fixture gets its channels on the faders, with names; X and Y jog wheels for pan and tilt (16 bit), color wheel for RGB
+- [ ] 4.3 Scenes: record the output of the preset and of the attributes, three banks of 12 memories, recall with fade (time field), scene master
+- [ ] 4.4 Chasers: steps from scenes, step and fade time, speed in bpm with tap tempo, loop, back and forth, random and one shot
+- [ ] 4.5 Live cues: a list of scenes in order with Go, Back and Pause, current and next cue, fade progress
 
 ## Phase 5 - LED matrices
 
