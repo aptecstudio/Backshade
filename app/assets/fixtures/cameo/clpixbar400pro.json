@@ -1,0 +1,689 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Cameo",
+  "model": "CLPIXBAR400PRO",
+  "category": "ledBar",
+  "physical": {
+    "width": 900,
+    "height": 117,
+    "depth": 70,
+    "weight": 6.7,
+    "source": "LED",
+    "power": 75
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Color off" },
+        { "from": 6, "to": 13, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 14, "to": 21, "label": "Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 22, "to": 29, "label": "Yellow warm", "kind": "color", "color": "#ffe24f" },
+        { "from": 30, "to": 37, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 38, "to": 45, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 46, "to": 53, "label": "Turquoise", "kind": "color", "color": "#7fe2dd" },
+        { "from": 54, "to": 61, "label": "Cyan", "kind": "color", "color": "#55ffff" },
+        { "from": 62, "to": 69, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 70, "to": 77, "label": "Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 78, "to": 85, "label": "Mauve", "kind": "color", "color": "#915f6d" },
+        { "from": 86, "to": 93, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 94, "to": 101, "label": "Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 102, "to": 109, "label": "Warm white", "kind": "color", "color": "#fff8f0" },
+        { "from": 110, "to": 117, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 118, "to": 125, "label": "Cold White", "kind": "color", "color": "#ebffff" },
+        { "from": 126, "to": 128, "label": "Color Jumping stop" },
+        { "from": 129, "to": 192, "label": "Color Jumping speed slow - > Fast/color 1 -> 12", "kind": "gobo" },
+        { "from": 193, "to": 255, "label": "Color Fading speed slow -> fast/Color 1->12", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "strobe3chMode1",
+      "name": "Strobe 3CH Mode 1",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Strobe open", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Strobe closed", "kind": "closed" },
+        { "from": 11, "to": 250, "label": "Strobe slow -> fast 0Hz - 20Hz", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Strobe open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorTemperature",
+      "name": "Color Temperature",
+      "attribute": "colorTemperature",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "off" },
+        { "from": 6, "to": 255, "label": "cold to warm" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Strobe open", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Strobe closed", "kind": "closed" },
+        { "from": 11, "to": 33, "label": "Pulse Random, slow -> fast", "kind": "pulse" },
+        { "from": 34, "to": 56, "label": "Ramp up Random, slow -> fast", "kind": "pulse" },
+        { "from": 57, "to": 79, "label": "Ramp down Random, slow -> fast", "kind": "pulse" },
+        { "from": 80, "to": 102, "label": "Random Strobe Effect, slow -> fast", "kind": "strobe" },
+        { "from": 103, "to": 127, "label": "Strobe Break Effect, 5s ...1s (Very short flash)" },
+        { "from": 128, "to": 250, "label": "Strobe slow -> fast 0Hz - 20Hz", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Strobe open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "autoMode",
+      "name": "Auto Mode",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 23, "label": "Dream" },
+        { "from": 24, "to": 41, "label": "Meteor" },
+        { "from": 42, "to": 59, "label": "Fade" },
+        { "from": 60, "to": 77, "label": "Jump" },
+        { "from": 78, "to": 95, "label": "Flow1" },
+        { "from": 96, "to": 113, "label": "Flow2" },
+        { "from": 114, "to": 131, "label": "Flow3" },
+        { "from": 132, "to": 149, "label": "Flow4" },
+        { "from": 150, "to": 167, "label": "Flow5" },
+        { "from": 168, "to": 185, "label": "Flow6" },
+        { "from": 186, "to": 203, "label": "Flow7" },
+        { "from": 204, "to": 221, "label": "Flow8" },
+        { "from": 222, "to": 239, "label": "Flow9" },
+        { "from": 240, "to": 255, "label": "Flow10" }
+      ]
+    },
+    {
+      "key": "sound",
+      "name": "Sound",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Sound Control OFF (Mic sensitivity)" },
+        { "from": 6, "to": 255, "label": "Sound Control ON Low -> High (Mic sensititvity)" }
+      ]
+    },
+    {
+      "key": "red1",
+      "name": "Red 1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "white1",
+      "name": "White 1",
+      "attribute": "white"
+    },
+    {
+      "key": "red2",
+      "name": "Red 2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "white2",
+      "name": "White 2",
+      "attribute": "white"
+    },
+    {
+      "key": "red3",
+      "name": "Red 3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "white3",
+      "name": "White 3",
+      "attribute": "white"
+    },
+    {
+      "key": "red4",
+      "name": "Red 4",
+      "attribute": "red"
+    },
+    {
+      "key": "green4",
+      "name": "Green 4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue4",
+      "name": "Blue 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "white4",
+      "name": "White 4",
+      "attribute": "white"
+    },
+    {
+      "key": "red5",
+      "name": "Red 5",
+      "attribute": "red"
+    },
+    {
+      "key": "green5",
+      "name": "Green 5",
+      "attribute": "green"
+    },
+    {
+      "key": "blue5",
+      "name": "Blue 5",
+      "attribute": "blue"
+    },
+    {
+      "key": "white5",
+      "name": "White 5",
+      "attribute": "white"
+    },
+    {
+      "key": "red6",
+      "name": "Red 6",
+      "attribute": "red"
+    },
+    {
+      "key": "green6",
+      "name": "Green 6",
+      "attribute": "green"
+    },
+    {
+      "key": "blue6",
+      "name": "Blue 6",
+      "attribute": "blue"
+    },
+    {
+      "key": "white6",
+      "name": "White 6",
+      "attribute": "white"
+    },
+    {
+      "key": "red7",
+      "name": "Red 7",
+      "attribute": "red"
+    },
+    {
+      "key": "green7",
+      "name": "Green 7",
+      "attribute": "green"
+    },
+    {
+      "key": "blue7",
+      "name": "Blue 7",
+      "attribute": "blue"
+    },
+    {
+      "key": "white7",
+      "name": "White 7",
+      "attribute": "white"
+    },
+    {
+      "key": "red8",
+      "name": "Red 8",
+      "attribute": "red"
+    },
+    {
+      "key": "green8",
+      "name": "Green 8",
+      "attribute": "green"
+    },
+    {
+      "key": "blue8",
+      "name": "Blue 8",
+      "attribute": "blue"
+    },
+    {
+      "key": "white8",
+      "name": "White 8",
+      "attribute": "white"
+    },
+    {
+      "key": "red9",
+      "name": "Red 9",
+      "attribute": "red"
+    },
+    {
+      "key": "green9",
+      "name": "Green 9",
+      "attribute": "green"
+    },
+    {
+      "key": "blue9",
+      "name": "Blue 9",
+      "attribute": "blue"
+    },
+    {
+      "key": "white9",
+      "name": "White 9",
+      "attribute": "white"
+    },
+    {
+      "key": "red10",
+      "name": "Red 10",
+      "attribute": "red"
+    },
+    {
+      "key": "green10",
+      "name": "Green 10",
+      "attribute": "green"
+    },
+    {
+      "key": "blue10",
+      "name": "Blue 10",
+      "attribute": "blue"
+    },
+    {
+      "key": "white10",
+      "name": "White 10",
+      "attribute": "white"
+    },
+    {
+      "key": "red11",
+      "name": "Red 11",
+      "attribute": "red"
+    },
+    {
+      "key": "green11",
+      "name": "Green 11",
+      "attribute": "green"
+    },
+    {
+      "key": "blue11",
+      "name": "Blue 11",
+      "attribute": "blue"
+    },
+    {
+      "key": "white11",
+      "name": "White 11",
+      "attribute": "white"
+    },
+    {
+      "key": "red12",
+      "name": "Red 12",
+      "attribute": "red"
+    },
+    {
+      "key": "green12",
+      "name": "Green 12",
+      "attribute": "green"
+    },
+    {
+      "key": "blue12",
+      "name": "Blue 12",
+      "attribute": "blue"
+    },
+    {
+      "key": "white12",
+      "name": "White 12",
+      "attribute": "white"
+    }
+  ],
+  "modes": [
+    {
+      "name": "2-CH",
+      "channels": [
+        "dimmer",
+        "colorMacro"
+      ]
+    },
+    {
+      "name": "4-CH 1",
+      "channels": [
+        "dimmer",
+        "colorMacro",
+        "strobe3chMode1",
+        "white"
+      ]
+    },
+    {
+      "name": "4-CH 2",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "name": "6-CH",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "name": "10-CH",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorMacro",
+        "colorTemperature",
+        "autoMode",
+        "sound"
+      ]
+    },
+    {
+      "name": "50-CH",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "red5",
+        "green5",
+        "blue5",
+        "white5",
+        "red6",
+        "green6",
+        "blue6",
+        "white6",
+        "red7",
+        "green7",
+        "blue7",
+        "white7",
+        "red8",
+        "green8",
+        "blue8",
+        "white8",
+        "red9",
+        "green9",
+        "blue9",
+        "white9",
+        "red10",
+        "green10",
+        "blue10",
+        "white10",
+        "red11",
+        "green11",
+        "blue11",
+        "white11",
+        "red12",
+        "green12",
+        "blue12",
+        "white12"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1",
+          "white1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "white4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5",
+          "white5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6",
+          "white6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7",
+          "white7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8",
+          "white8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9",
+          "white9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10",
+          "white10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11",
+          "white11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "white12"
+        ]
+      ]
+    },
+    {
+      "name": "54-CH",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "red5",
+        "green5",
+        "blue5",
+        "white5",
+        "red6",
+        "green6",
+        "blue6",
+        "white6",
+        "red7",
+        "green7",
+        "blue7",
+        "white7",
+        "red8",
+        "green8",
+        "blue8",
+        "white8",
+        "red9",
+        "green9",
+        "blue9",
+        "white9",
+        "red10",
+        "green10",
+        "blue10",
+        "white10",
+        "red11",
+        "green11",
+        "blue11",
+        "white11",
+        "red12",
+        "green12",
+        "blue12",
+        "white12",
+        "colorMacro",
+        "colorTemperature",
+        "autoMode",
+        "sound"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1",
+          "white1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "white4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5",
+          "white5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6",
+          "white6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7",
+          "white7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8",
+          "white8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9",
+          "white9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10",
+          "white10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11",
+          "white11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "white12"
+        ]
+      ]
+    }
+  ]
+}

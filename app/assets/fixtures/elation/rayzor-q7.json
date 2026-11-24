@@ -1,0 +1,360 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Elation",
+  "model": "Rayzor Q7",
+  "category": "movingHead",
+  "physical": {
+    "width": 235,
+    "height": 317,
+    "depth": 140,
+    "weight": 4.9,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 13
+    },
+    "panRange": 540,
+    "tiltRange": 265,
+    "power": 140
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "speedPanTiltMovement",
+      "name": "Speed Pan/Tilt movement",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 225, "label": "Max To Min Speed" },
+        { "from": 226, "to": 235, "label": "Blackout By Movement" },
+        { "from": 236, "to": 255, "label": "No function" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "red1",
+      "name": "Red 1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "white1",
+      "name": "White 1",
+      "attribute": "white"
+    },
+    {
+      "key": "red2",
+      "name": "Red 2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "white2",
+      "name": "White 2",
+      "attribute": "white"
+    },
+    {
+      "key": "red3",
+      "name": "Red 3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "white3",
+      "name": "White 3",
+      "attribute": "white"
+    },
+    {
+      "key": "red4",
+      "name": "Red 4",
+      "attribute": "red"
+    },
+    {
+      "key": "green4",
+      "name": "Green 4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue4",
+      "name": "Blue 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "white4",
+      "name": "White 4",
+      "attribute": "white"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Shutter Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Shutter Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe Slow to Fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Shutter Open", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Pulse effect in sequences", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Shutter Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobe Effect Slow to Fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 255, "label": "Color Macro Slow To Fast" }
+      ]
+    },
+    {
+      "key": "colorPresets",
+      "name": "Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 20, "label": "White 2700K" },
+        { "from": 21, "to": 30, "label": "White 3200K" },
+        { "from": 31, "to": 40, "label": "White 4300K" },
+        { "from": 41, "to": 50, "label": "White 5600K" },
+        { "from": 51, "to": 60, "label": "White 6500K" },
+        { "from": 61, "to": 70, "label": "White 8000K" },
+        { "from": 71, "to": 100, "label": "Blue [Group 1], Red [Groups 2,3,4]" },
+        { "from": 101, "to": 130, "label": "Blue [Group 1], Green [Groups 2,3,4]" },
+        { "from": 131, "to": 160, "label": "Green [Group 1], Red [Groups 2,3,4]" },
+        { "from": 161, "to": 190, "label": "Red [Group 1], Blue [Groups 2,3,4]" },
+        { "from": 191, "to": 220, "label": "Green [Group 1], Blue [Groups 2,3,4]" },
+        { "from": 221, "to": 255, "label": "Red [Group 1], Green [Groups 2,3,4]" }
+      ]
+    },
+    {
+      "key": "colorMode",
+      "name": "Color Mode",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 189, "label": "No function" },
+        { "from": 190, "to": 254, "label": "Edit A New White Balance" },
+        { "from": 255, "to": 255, "label": "Store A New White Balance" }
+      ]
+    },
+    {
+      "key": "chaseMacros",
+      "name": "Chase Macros",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "LED OFF" },
+        { "from": 11, "to": 46, "label": "Chase Macro 1" },
+        { "from": 47, "to": 70, "label": "Chase Macro 2" },
+        { "from": 71, "to": 100, "label": "Chase Macro 3" },
+        { "from": 101, "to": 130, "label": "Chase Macro 4" },
+        { "from": 131, "to": 160, "label": "Chase Macro 5" },
+        { "from": 161, "to": 190, "label": "Chase Macro 6" },
+        { "from": 191, "to": 223, "label": "Chase Macro 7" },
+        { "from": 224, "to": 255, "label": "Chase Macro 8" }
+      ]
+    },
+    {
+      "key": "chaseSpeed",
+      "name": "Chase Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "resetInternalPrograms",
+      "name": "Reset internal programs",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 79, "label": "Normal", "kind": "lampOn" },
+        { "from": 80, "to": 84, "label": "All Motor Reset", "kind": "reset" },
+        { "from": 85, "to": 87, "label": "No function" },
+        { "from": 88, "to": 90, "label": "No function" },
+        { "from": 91, "to": 93, "label": "Store White Balance Enabled" },
+        { "from": 94, "to": 96, "label": "No function" },
+        { "from": 97, "to": 99, "label": "No function", "kind": "open" },
+        { "from": 100, "to": 119, "label": "Internal Program 1 (Scene 1 - 8)" },
+        { "from": 120, "to": 139, "label": "Internal Program 2 (Scene 9 - 16)" },
+        { "from": 140, "to": 159, "label": "Internal Program 3 (Scene 17 - 24)" },
+        { "from": 160, "to": 179, "label": "Internal Program 4 (Scene 25 - 32)" },
+        { "from": 180, "to": 199, "label": "Internal Program 5 (Scene 33 - 40)" },
+        { "from": 200, "to": 219, "label": "Internal Program 6 (Scene 41 - 48)" },
+        { "from": 220, "to": 239, "label": "Internal Program 7 (Scene 49 - 56)" },
+        { "from": 240, "to": 255, "label": "Music Control (Scene Of Program 1)" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "Extended",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "speedPanTiltMovement",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "shutterStrobe",
+        "dimmer",
+        "colorMacro",
+        "colorPresets",
+        "colorMode",
+        "chaseMacros",
+        "chaseSpeed",
+        "resetInternalPrograms"
+      ],
+      "heads": [
+        [
+          "green1",
+          "blue1",
+          "red1",
+          "white1"
+        ],
+        [
+          "white2",
+          "green2",
+          "blue2",
+          "red2"
+        ],
+        [
+          "green3",
+          "blue3",
+          "red3",
+          "white3"
+        ],
+        [
+          "green4",
+          "blue4",
+          "red4",
+          "white4"
+        ]
+      ]
+    },
+    {
+      "name": "Basic",
+      "channels": [
+        "pan",
+        "tilt",
+        "speedPanTiltMovement",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "shutterStrobe",
+        "dimmer",
+        "colorMacro",
+        "colorPresets",
+        "colorMode",
+        "chaseMacros",
+        "chaseSpeed",
+        "resetInternalPrograms"
+      ]
+    },
+    {
+      "name": "Standard",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "speedPanTiltMovement",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "shutterStrobe",
+        "dimmer",
+        "colorMacro",
+        "colorPresets",
+        "colorMode",
+        "chaseMacros",
+        "chaseSpeed",
+        "resetInternalPrograms"
+      ]
+    }
+  ]
+}

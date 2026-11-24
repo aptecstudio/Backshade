@@ -1,4 +1,4 @@
-// Top bar: brand, navigation, displays and settings
+// Top bar: brand, displays, Start and Settings
 @use 'framework/scss/tokens' as *;
 
 .top-bar {
@@ -31,18 +31,4 @@
 
 .section-tabs {
     flex-shrink: 0;
-}
-
-// On narrow windows the displays leave room for the navigation:
-// the tempo is hidden first, then the timecode
-@media (max-width: 1279px) {
-    .top-bar__tempo {
-        display: none;
-    }
-}
-
-@media (max-width: 1199px) {
-    .top-bar__timecode {
-        display: none;
-    }
 }

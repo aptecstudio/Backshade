@@ -1,0 +1,240 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Shehds",
+  "model": "LED 230W Beam Moving Head",
+  "category": "movingHead",
+  "physical": {
+    "width": 343,
+    "height": 537,
+    "depth": 239,
+    "weight": 12.5,
+    "lumens": 20000,
+    "colorTemperature": 7500,
+    "source": "LED",
+    "beamAngle": {
+      "min": 8,
+      "max": 23
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 260
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "No function", "kind": "open" },
+        { "from": 5, "to": 250, "label": "Strobe from slow to fast", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Open light", "kind": "open" }
+      ]
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "Color macro presets" },
+        { "from": 5, "to": 13, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 14, "to": 22, "label": "White / Red", "kind": "color", "color": "#ffffff" },
+        { "from": 23, "to": 31, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 32, "to": 40, "label": "Red / Yellow", "kind": "color", "color": "#ff0000" },
+        { "from": 41, "to": 49, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 50, "to": 58, "label": "Yellow / Green", "kind": "color", "color": "#ffff00" },
+        { "from": 59, "to": 67, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 68, "to": 76, "label": "Green / Blue", "kind": "color", "color": "#00ff00" },
+        { "from": 77, "to": 85, "label": "Blue / Lemon yellow", "kind": "color", "color": "#0000ff" },
+        { "from": 86, "to": 94, "label": "Lemon yellow", "kind": "color", "color": "#fffb70" },
+        { "from": 95, "to": 103, "label": "Lemon yellow / Sky blue", "kind": "color", "color": "#fffb70" },
+        { "from": 104, "to": 112, "label": "Sky blue", "kind": "color", "color": "#87ceeb" },
+        { "from": 113, "to": 121, "label": "Sky blue / Pink", "kind": "color", "color": "#87ceeb" },
+        { "from": 122, "to": 130, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 131, "to": 139, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 140, "to": 195, "label": "Clockwise from slow to fast" },
+        { "from": 196, "to": 255, "label": "Counter-clockwise from slow to fast" }
+      ]
+    },
+    {
+      "key": "gobo1",
+      "name": "Gobo #1",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Solid", "kind": "gobo" },
+        { "from": 8, "to": 17, "label": "Wave", "kind": "gobo" },
+        { "from": 18, "to": 27, "label": "Woven square", "kind": "gobo" },
+        { "from": 28, "to": 37, "label": "Circle", "kind": "gobo" },
+        { "from": 38, "to": 47, "label": "Darts", "kind": "gobo" },
+        { "from": 48, "to": 57, "label": "Circular", "kind": "gobo" },
+        { "from": 58, "to": 67, "label": "Weaving circle", "kind": "gobo" },
+        { "from": 68, "to": 77, "label": "Snowflake", "kind": "gobo" },
+        { "from": 78, "to": 87, "label": "Wave shaking", "kind": "gobo" },
+        { "from": 88, "to": 97, "label": "Woven square shaking", "kind": "gobo" },
+        { "from": 98, "to": 107, "label": "Circle shaking", "kind": "gobo" },
+        { "from": 108, "to": 117, "label": "Darts shaking", "kind": "gobo" },
+        { "from": 118, "to": 127, "label": "Circular shaking", "kind": "gobo" },
+        { "from": 128, "to": 137, "label": "Weaving circle shaking", "kind": "gobo" },
+        { "from": 138, "to": 147, "label": "Snowflake shaking", "kind": "gobo" },
+        { "from": 148, "to": 200, "label": "Clockwise from slow to fast", "kind": "rotation" },
+        { "from": 201, "to": 255, "label": "Counter-clockwise from slow to fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "gobo2",
+      "name": "Gobo #2",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Solid", "kind": "gobo" },
+        { "from": 8, "to": 17, "label": "Knot", "kind": "gobo" },
+        { "from": 18, "to": 27, "label": "Machete", "kind": "gobo" },
+        { "from": 28, "to": 37, "label": "Sunshine", "kind": "gobo" },
+        { "from": 38, "to": 47, "label": "Star", "kind": "gobo" },
+        { "from": 48, "to": 57, "label": "Bar circle", "kind": "gobo" },
+        { "from": 58, "to": 67, "label": "Darts", "kind": "gobo" },
+        { "from": 68, "to": 77, "label": "Lollipop", "kind": "gobo" },
+        { "from": 78, "to": 87, "label": "Knot shaking", "kind": "gobo" },
+        { "from": 88, "to": 97, "label": "Machete shaking", "kind": "gobo" },
+        { "from": 98, "to": 107, "label": "Sunshine shaking", "kind": "gobo" },
+        { "from": 108, "to": 117, "label": "Star shaking", "kind": "gobo" },
+        { "from": 118, "to": 127, "label": "Bar circle shaking", "kind": "gobo" },
+        { "from": 128, "to": 137, "label": "Darts shaking", "kind": "gobo" },
+        { "from": 138, "to": 147, "label": "Lollipop shaking", "kind": "gobo" },
+        { "from": 148, "to": 199, "label": "Forward rotate", "kind": "rotation" },
+        { "from": 200, "to": 255, "label": "Reverse rotate", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "gobo2Rotation",
+      "name": "Gobo #2 rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 130, "label": "Forward flow", "kind": "rotation" },
+        { "from": 131, "to": 255, "label": "Reverse flow", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Off" },
+        { "from": 8, "to": 99, "label": "Insert circular prism" },
+        { "from": 100, "to": 255, "label": "Insert bar prism" }
+      ]
+    },
+    {
+      "key": "prismRotate",
+      "name": "Prism rotate",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 129, "label": "Slow to fast" },
+        { "from": 130, "to": 255, "label": "Reverse fast to slow" }
+      ]
+    },
+    {
+      "key": "macroFunction",
+      "name": "Macro function",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 255, "label": "Macro gobo and color auto run" }
+      ]
+    },
+    {
+      "key": "motorAuto",
+      "name": "Motor auto",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 255, "label": "Macro motor ato run" }
+      ]
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 249, "label": "No function" },
+        { "from": 250, "to": 255, "label": "Reset system" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "6 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "18 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "masterDimmer",
+        "strobe",
+        "color",
+        "gobo1",
+        "gobo2",
+        "gobo2Rotation",
+        "zoom",
+        "focus",
+        "prism",
+        "prismRotate",
+        "macroFunction",
+        "motorAuto",
+        "reset"
+      ]
+    }
+  ]
+}

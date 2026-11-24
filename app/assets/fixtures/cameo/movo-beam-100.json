@@ -1,0 +1,417 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Cameo",
+  "model": "Movo Beam 100",
+  "category": "movingHead",
+  "physical": {
+    "width": 210,
+    "height": 299,
+    "depth": 210,
+    "weight": 5.2,
+    "lumens": 1480,
+    "source": "LED",
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 130
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Strobe open", "kind": "open" },
+        { "from": 6, "to": 255, "label": "Strobe slow -> fast <1Hz - 20Hz", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "autoProgram",
+      "name": "Auto Program",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "off" },
+        { "from": 6, "to": 36, "label": "Auto Program 1" },
+        { "from": 37, "to": 67, "label": "Auto Program 2" },
+        { "from": 68, "to": 98, "label": "Auto Program 3" },
+        { "from": 99, "to": 129, "label": "Auto Program 4" },
+        { "from": 130, "to": 160, "label": "Auto Program 5" },
+        { "from": 161, "to": 191, "label": "Auto Program 6" },
+        { "from": 192, "to": 222, "label": "Auto Program 7" },
+        { "from": 223, "to": 255, "label": "Auto Program 8" }
+      ]
+    },
+    {
+      "key": "panTiltSpeedSetSpeedAutoPrograms",
+      "name": "Pan/Tilt Speed (Set Speed Auto Programs)",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "endlessPanRotation",
+      "name": "Endless Pan rotation",
+      "attribute": "pan",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 126, "label": "clockwise pan rotation (fast to slow)", "kind": "rotation" },
+        { "from": 127, "to": 128, "label": "no movement", "kind": "stop" },
+        { "from": 129, "to": 255, "label": "counter clockwise pan rotation (slow to fast)", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "endlessTiltRotation",
+      "name": "Endless Tilt rotation",
+      "attribute": "tilt",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 126, "label": "clockwise tilt rotation (fast to slow)", "kind": "rotation" },
+        { "from": 127, "to": 128, "label": "no movement", "kind": "stop" },
+        { "from": 129, "to": 255, "label": "counter clockwise tilt rotation (slow to fast)", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "strobeFunctions",
+      "name": "Strobe functions",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Strobe open", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Strobe closed", "kind": "closed" },
+        { "from": 11, "to": 33, "label": "Pulse Random, slow -> fast", "kind": "pulse" },
+        { "from": 34, "to": 56, "label": "Ramp up Random, slow -> fast", "kind": "pulse" },
+        { "from": 57, "to": 79, "label": "Ramp down Random, slow -> fast", "kind": "pulse" },
+        { "from": 80, "to": 102, "label": "Random Strobe Effect, slow -> fast", "kind": "strobe" },
+        { "from": 103, "to": 127, "label": "Strobe Break Effect, 5s.....1s (Short burst with break)" },
+        { "from": 128, "to": 250, "label": "Strobe slow -> fast <1Hz -20 Hz", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Strobe open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorMacroOverrideRgbw",
+      "name": "Color Macro (override RGBW)",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Color off" },
+        { "from": 6, "to": 13, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 14, "to": 21, "label": "Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 22, "to": 29, "label": "Yellow warm", "kind": "color", "color": "#ffd75c" },
+        { "from": 30, "to": 37, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 38, "to": 45, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 46, "to": 53, "label": "Turquoise", "kind": "color", "color": "#7effd9" },
+        { "from": 54, "to": 61, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 62, "to": 69, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 70, "to": 77, "label": "Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 78, "to": 85, "label": "Mauve", "kind": "color", "color": "#c28dab" },
+        { "from": 86, "to": 93, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 94, "to": 101, "label": "Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 102, "to": 109, "label": "Warm White", "kind": "color", "color": "#ffffee" },
+        { "from": 110, "to": 117, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 118, "to": 125, "label": "Cold White", "kind": "color", "color": "#edffff" },
+        { "from": 126, "to": 127, "label": "Color Jumping Stop" },
+        { "from": 128, "to": 191, "label": "Color Jumping Speed slow -> fast / Color 1 -> 12" },
+        { "from": 192, "to": 255, "label": "Color Fading Speed slow -> fast / Color 1 -> 12" }
+      ]
+    },
+    {
+      "key": "panTiltMacro",
+      "name": "Pan/Tilt Macro",
+      "attribute": "pan",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "off" },
+        { "from": 6, "to": 40, "label": "PAN \"small > big\"" },
+        { "from": 41, "to": 75, "label": "TILT \"small > big\"" },
+        { "from": 76, "to": 110, "label": "PAN / TILT \"small > big\"" },
+        { "from": 111, "to": 145, "label": "PAN / TILT (invers) \"small > big\"" },
+        { "from": 146, "to": 180, "label": "Circle \"small > big\"" },
+        { "from": 181, "to": 215, "label": "Circle (invers) \"small > big\"" },
+        { "from": 216, "to": 255, "label": "Random \"small > big\"" }
+      ]
+    },
+    {
+      "key": "setDimmerCurve",
+      "name": "Set dimmer curve",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 63, "label": "Linear Dimmer Curve" },
+        { "from": 64, "to": 127, "label": "Exponential Dimmer Curve" },
+        { "from": 128, "to": 191, "label": "Logarithmic Dimmer Curve" },
+        { "from": 192, "to": 255, "label": "S-Curve Dimmer Curve" }
+      ]
+    },
+    {
+      "key": "panTiltSpeedSetSpeedOfPanTiltAutoProgramsPanTiltMacros",
+      "name": "Pan/Tilt Speed (Set Speed of Pan&Tilt / Auto Programs / Pan&Tilt Macros)",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "deviceSettings",
+      "name": "Device settings",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 32, "label": "Blackout while Moving on (Hold 3s)" },
+        { "from": 33, "to": 59, "label": "Blackout while Moving off (Hold 5s)" },
+        { "from": 60, "to": 86, "label": "Invert Pan on (Hold 3s)" },
+        { "from": 87, "to": 113, "label": "Invert Pan off(Hold 5s)" },
+        { "from": 114, "to": 140, "label": "Invert Tilt on (Hold 3s)" },
+        { "from": 141, "to": 167, "label": "Invert Tilt off (Hold 5s)" },
+        { "from": 168, "to": 194, "label": "Silent Fan on (Hold 3s)" },
+        { "from": 195, "to": 221, "label": "Silent Fan off (Hold 5s)" },
+        { "from": 222, "to": 255, "label": "Reset All Functions (Hold 3s)" }
+      ]
+    },
+    {
+      "key": "dimmerColorRing",
+      "name": "Dimmer Color Ring",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobeColorRing",
+      "name": "Strobe Color Ring",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Strobe open" },
+        { "from": 6, "to": 255, "label": "Strobe slow -> fast <1Hz - 20 Hz" }
+      ]
+    },
+    {
+      "key": "red1",
+      "name": "Red1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue1",
+      "attribute": "blue"
+    },
+    {
+      "key": "red2",
+      "name": "Red2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue2",
+      "attribute": "blue"
+    },
+    {
+      "key": "red3",
+      "name": "Red3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue3",
+      "attribute": "blue"
+    },
+    {
+      "key": "red4",
+      "name": "Red4",
+      "attribute": "red"
+    },
+    {
+      "key": "green4",
+      "name": "Green4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue4",
+      "name": "Blue4",
+      "attribute": "blue"
+    },
+    {
+      "key": "colorRingMacroOverrideRgb",
+      "name": "Color Ring Macro (override RGB)",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Color off" },
+        { "from": 6, "to": 13, "label": "Color Macro 1 (Color Jump)" },
+        { "from": 14, "to": 21, "label": "Color Macro 2 (Red 1 Step)" },
+        { "from": 22, "to": 29, "label": "Color Macro 3 (Green 1 Step)" },
+        { "from": 30, "to": 37, "label": "Color Macro 4 (Blue 1 Step)" },
+        { "from": 38, "to": 45, "label": "Color Macro 5 (Yellow 1 Step)" },
+        { "from": 46, "to": 53, "label": "Color Macro 6 (Cyan 1 Step)" },
+        { "from": 54, "to": 61, "label": "Color Macro 7 (Magenta 1 Step)" },
+        { "from": 62, "to": 69, "label": "Color Macro 8 (2step Magenta Yellow)" },
+        { "from": 70, "to": 77, "label": "Color Macro 9 (2step Red Green)" },
+        { "from": 78, "to": 85, "label": "Color Macro 10 (2step Red Blue)" },
+        { "from": 86, "to": 93, "label": "Color Macro 11 (2step Blue Yellow)" },
+        { "from": 94, "to": 101, "label": "Color Macro 12 (2step Green Blue)" },
+        { "from": 102, "to": 109, "label": "Color Macro 13 (2step Magenta Blue)" },
+        { "from": 110, "to": 117, "label": "Color Macro 14 (2step Green Yellow)" },
+        { "from": 118, "to": 125, "label": "Color Macro 15 (2step Cyan Magenta)" },
+        { "from": 126, "to": 133, "label": "Color Macro 16 (2step Cyan Red)" },
+        { "from": 134, "to": 255, "label": "No function" }
+      ]
+    },
+    {
+      "key": "colorRingMacroSpeed",
+      "name": "Color Ring Macro Speed",
+      "attribute": "speed"
+    }
+  ],
+  "modes": [
+    {
+      "name": "4 Channel",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "autoProgram",
+        "panTiltSpeedSetSpeedAutoPrograms"
+      ]
+    },
+    {
+      "name": "15 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "endlessPanRotation",
+        "tilt",
+        "tiltFine",
+        "endlessTiltRotation",
+        "dimmer",
+        "strobeFunctions",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "deviceSettings",
+        "colorRingMacroOverrideRgb",
+        "colorRingMacroSpeed"
+      ]
+    },
+    {
+      "name": "35 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "endlessPanRotation",
+        "tilt",
+        "tiltFine",
+        "endlessTiltRotation",
+        "dimmer",
+        "dimmerFine",
+        "strobeFunctions",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorMacroOverrideRgbw",
+        "autoProgram",
+        "panTiltMacro",
+        "setDimmerCurve",
+        "panTiltSpeedSetSpeedOfPanTiltAutoProgramsPanTiltMacros",
+        "deviceSettings",
+        "dimmerColorRing",
+        "strobeColorRing",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "colorRingMacroOverrideRgb",
+        "colorRingMacroSpeed"
+      ],
+      "heads": [
+        [
+          "red",
+          "green",
+          "blue"
+        ],
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ]
+      ]
+    }
+  ]
+}

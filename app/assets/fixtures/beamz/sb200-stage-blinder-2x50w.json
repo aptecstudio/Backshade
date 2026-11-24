@@ -1,0 +1,67 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "beamZ",
+  "model": "SB200 Stage Blinder 2x50W",
+  "category": "par",
+  "physical": {
+    "width": 275,
+    "height": 275,
+    "depth": 125,
+    "weight": 2.85,
+    "source": "LED",
+    "power": 50
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 1, "label": "No function", "kind": "open" },
+        { "from": 2, "to": 255, "label": "Strobe", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "macro",
+      "name": "Macro",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 1, "label": "No function" },
+        { "from": 2, "to": 255, "label": "Macro Function" }
+      ]
+    },
+    {
+      "key": "macroSpeed",
+      "name": "Macro Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "led1Dimmer",
+      "name": "LED 1 dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "led2Dimmer",
+      "name": "LED 2 dimmer",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "6 Channel",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "macro",
+        "macroSpeed",
+        "led1Dimmer",
+        "led2Dimmer"
+      ]
+    }
+  ]
+}

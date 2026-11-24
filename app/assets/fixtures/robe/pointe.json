@@ -1,0 +1,499 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Pointe",
+  "category": "movingHead",
+  "physical": {
+    "width": 364,
+    "height": 575,
+    "depth": 260,
+    "weight": 15,
+    "beamAngle": {
+      "min": 5,
+      "max": 20
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 470
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt Speed",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Maximum Speed" },
+        { "from": 1, "to": 255, "label": "Speed" }
+      ]
+    },
+    {
+      "key": "specialFunctions",
+      "name": "Special functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Reserved" },
+        { "from": 10, "to": 14, "label": "Input: Wired DMX" },
+        { "from": 15, "to": 19, "label": "Input: Wireless DMX" },
+        { "from": 20, "to": 24, "label": "Eco Mode (230W)" },
+        { "from": 25, "to": 29, "label": "Standard Mode(280W)" },
+        { "from": 30, "to": 49, "label": "Reserved" },
+        { "from": 50, "to": 59, "label": "Pan/Tilt Speed Mode" },
+        { "from": 60, "to": 69, "label": "Pan/Tilt Time Mode" },
+        { "from": 70, "to": 79, "label": "Blackout while Pan/Tilt" },
+        { "from": 80, "to": 89, "label": "Disable Blackout while Pan/Tilt" },
+        { "from": 90, "to": 99, "label": "Blackout while color wheel moving" },
+        { "from": 100, "to": 109, "label": "Disabled Blackout while color wheel moving" },
+        { "from": 110, "to": 119, "label": "Blackout while Gobo wheel moving" },
+        { "from": 120, "to": 129, "label": "Disable Blackout while Gobo wheel moving" },
+        { "from": 130, "to": 139, "label": "Lamp On, reset" },
+        { "from": 140, "to": 149, "label": "Pan/Tilt Reset", "kind": "reset" },
+        { "from": 150, "to": 159, "label": "Color System reset", "kind": "reset" },
+        { "from": 160, "to": 169, "label": "Gobo wheels reset", "kind": "reset" },
+        { "from": 170, "to": 179, "label": "Dimmer/Shutter reset" },
+        { "from": 180, "to": 189, "label": "Zoom/Focus/Prism reset" },
+        { "from": 190, "to": 199, "label": "Reserved" },
+        { "from": 200, "to": 209, "label": "Total reset", "kind": "reset" },
+        { "from": 210, "to": 229, "label": "Reserved" },
+        { "from": 230, "to": 239, "label": "Lamp Off", "kind": "lampOff" },
+        { "from": 240, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 1, "to": 8, "label": "White/Deep Red", "kind": "color", "color": "#ffffff" },
+        { "from": 9, "to": 9, "label": "Deep Red", "kind": "color", "color": "#ff0004" },
+        { "from": 10, "to": 17, "label": "Deep Red/Deep Blue", "kind": "color", "color": "#ff0004" },
+        { "from": 18, "to": 18, "label": "Deep Blue", "kind": "color", "color": "#2600ff" },
+        { "from": 19, "to": 26, "label": "Deep Blue/Yellow", "kind": "color", "color": "#2600ff" },
+        { "from": 27, "to": 27, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 28, "to": 36, "label": "Yellow/Green", "kind": "color", "color": "#ffff00" },
+        { "from": 37, "to": 37, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 38, "to": 45, "label": "Green/Magenta", "kind": "color", "color": "#00ff00" },
+        { "from": 46, "to": 46, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 47, "to": 54, "label": "Magenta/Azure", "kind": "color", "color": "#ff00ff" },
+        { "from": 55, "to": 55, "label": "Azure", "kind": "color", "color": "#f0ffff" },
+        { "from": 56, "to": 63, "label": "Azure/Red", "kind": "color", "color": "#f0ffff" },
+        { "from": 64, "to": 64, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 65, "to": 72, "label": "Red/Dark Green", "kind": "color", "color": "#ff0000" },
+        { "from": 73, "to": 73, "label": "Dark Green", "kind": "color", "color": "#006400" },
+        { "from": 74, "to": 81, "label": "Dark Green/Amber", "kind": "color", "color": "#006400" },
+        { "from": 82, "to": 82, "label": "Amber", "kind": "color", "color": "#ffb339" },
+        { "from": 83, "to": 90, "label": "Amber/Blue", "kind": "color", "color": "#ffb339" },
+        { "from": 91, "to": 91, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 92, "to": 100, "label": "Blue/Orange", "kind": "color", "color": "#0000ff" },
+        { "from": 101, "to": 101, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 102, "to": 109, "label": "Orange/CTO", "kind": "color", "color": "#ffa500" },
+        { "from": 110, "to": 110, "label": "CTO", "kind": "color", "color": "#ffc800" },
+        { "from": 111, "to": 118, "label": "CTO/UV", "kind": "color", "color": "#ffc800" },
+        { "from": 119, "to": 119, "label": "UV", "kind": "color", "color": "#8800ff" },
+        { "from": 120, "to": 127, "label": "UV/White", "kind": "color", "color": "#8800ff" },
+        { "from": 128, "to": 129, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 130, "to": 134, "label": "Deep Red", "kind": "color", "color": "#ff0004" },
+        { "from": 135, "to": 138, "label": "Deep Blue", "kind": "color", "color": "#2600ff" },
+        { "from": 139, "to": 143, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 144, "to": 147, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 148, "to": 152, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 153, "to": 157, "label": "Azure", "kind": "color", "color": "#f0ffff" },
+        { "from": 158, "to": 161, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 162, "to": 166, "label": "Dark Green", "kind": "color", "color": "#006400" },
+        { "from": 167, "to": 171, "label": "Amber", "kind": "color", "color": "#ffb339" },
+        { "from": 172, "to": 176, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 177, "to": 180, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 181, "to": 185, "label": "CTO", "kind": "color", "color": "#ffffff" },
+        { "from": 186, "to": 189, "label": "UV", "kind": "color", "color": "#8800ff" },
+        { "from": 190, "to": 215, "label": "Forwards Rainbow" },
+        { "from": 216, "to": 217, "label": "No rotation" },
+        { "from": 218, "to": 243, "label": "Backwards Rainbow" },
+        { "from": 244, "to": 249, "label": "Audio Control" },
+        { "from": 250, "to": 255, "label": "Random" }
+      ]
+    },
+    {
+      "key": "colorWheelFine",
+      "name": "Color wheel fine",
+      "attribute": "colorWheel",
+      "fineOf": "colorWheel"
+    },
+    {
+      "key": "effectSpeed",
+      "name": "Effect Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "frostTime",
+      "name": "Frost time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Function is off" },
+        { "from": 1, "to": 255, "label": "Time of frost movement (0.1 sec. to 25.5 sec.)" }
+      ]
+    },
+    {
+      "key": "colorTime",
+      "name": "Color time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Function is off" },
+        { "from": 1, "to": 255, "label": "Time of color wheel movement (0.1 sec. to 25.5 sec.)" }
+      ]
+    },
+    {
+      "key": "staticGoboTime",
+      "name": "Static gobo time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Function is off" },
+        { "from": 1, "to": 255, "label": "Time of static gobo wheel movement (0.1 sec. to 25.5 sec.)" }
+      ]
+    },
+    {
+      "key": "prismTime",
+      "name": "Prism time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Function is off" },
+        { "from": 1, "to": 255, "label": "Time of prism movement (0.1 sec. to 25.5 sec.)" }
+      ]
+    },
+    {
+      "key": "focusTime",
+      "name": "Focus time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Function is off" },
+        { "from": 1, "to": 255, "label": "Time of focus movement (0.1 sec. to 25.5 sec.)" }
+      ]
+    },
+    {
+      "key": "zoomTime",
+      "name": "Zoom time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Function is off" },
+        { "from": 1, "to": 255, "label": "Time of zoom movement (0.1 sec. to 25.5 sec.)" }
+      ]
+    },
+    {
+      "key": "staticGoboWheel",
+      "name": "Static Gobo wheel",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Open", "kind": "gobo" },
+        { "from": 4, "to": 9, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 10, "to": 15, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 16, "to": 21, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 22, "to": 27, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 28, "to": 33, "label": "Gobo5", "kind": "gobo" },
+        { "from": 34, "to": 39, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 40, "to": 45, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 46, "to": 51, "label": "Gobo 8", "kind": "gobo" },
+        { "from": 52, "to": 57, "label": "Gobo 9", "kind": "gobo" },
+        { "from": 58, "to": 63, "label": "Gobo 10", "kind": "gobo" },
+        { "from": 64, "to": 69, "label": "Beam reducer 1" },
+        { "from": 70, "to": 75, "label": "Beam reducer 2" },
+        { "from": 76, "to": 81, "label": "Beam reducer 3" },
+        { "from": 82, "to": 87, "label": "Beam reducer 4" },
+        { "from": 88, "to": 95, "label": "Shaking Gobo 1", "kind": "gobo" },
+        { "from": 96, "to": 103, "label": "Shaking Gobo 2", "kind": "gobo" },
+        { "from": 104, "to": 111, "label": "Shaking Gobo 3", "kind": "gobo" },
+        { "from": 112, "to": 119, "label": "Shaking Gobo 4", "kind": "gobo" },
+        { "from": 120, "to": 127, "label": "Shaking Gobo 5", "kind": "gobo" },
+        { "from": 128, "to": 135, "label": "Shaking Gobo 6", "kind": "gobo" },
+        { "from": 136, "to": 143, "label": "Shaking Gobo 7", "kind": "gobo" },
+        { "from": 144, "to": 151, "label": "Shaking Gobo 8", "kind": "gobo" },
+        { "from": 152, "to": 159, "label": "Shaking Gobo 9", "kind": "gobo" },
+        { "from": 160, "to": 167, "label": "Shaking Gobo 10", "kind": "gobo" },
+        { "from": 168, "to": 175, "label": "Beam reducer 1" },
+        { "from": 176, "to": 183, "label": "Beam reducer 2" },
+        { "from": 184, "to": 191, "label": "Beam reducer 3" },
+        { "from": 192, "to": 199, "label": "Beam reducer 4" },
+        { "from": 200, "to": 201, "label": "Open/hole" },
+        { "from": 202, "to": 221, "label": "Forwards gobo wheel rotation from fast to slow" },
+        { "from": 222, "to": 223, "label": "No rotation" },
+        { "from": 224, "to": 243, "label": "Backwards gobo wheel rotation from slow to fast" },
+        { "from": 244, "to": 249, "label": "Random gobo selection by audio control" },
+        { "from": 250, "to": 255, "label": "Auto random gobo selection from fast to slow" }
+      ]
+    },
+    {
+      "key": "rotatingGoboWheel",
+      "name": "Rotating Gobo wheel",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Open" },
+        { "from": 1, "to": 4, "label": "Hole" },
+        { "from": 5, "to": 7, "label": "Gobo 1" },
+        { "from": 8, "to": 10, "label": "Gobo 2" },
+        { "from": 11, "to": 13, "label": "Gobo 3" },
+        { "from": 14, "to": 16, "label": "Gobo 4" },
+        { "from": 17, "to": 19, "label": "Gobo 5" },
+        { "from": 20, "to": 22, "label": "Gobo 6" },
+        { "from": 23, "to": 25, "label": "Gobo 7" },
+        { "from": 26, "to": 28, "label": "Gobo 8" },
+        { "from": 29, "to": 31, "label": "Gobo 9" },
+        { "from": 32, "to": 34, "label": "Rot. Gobo 1" },
+        { "from": 35, "to": 37, "label": "Rot. Gobo 2" },
+        { "from": 38, "to": 40, "label": "Rot. Gobo 3" },
+        { "from": 41, "to": 43, "label": "Rot. Gobo 4" },
+        { "from": 44, "to": 46, "label": "Rot. Gobo 5" },
+        { "from": 47, "to": 49, "label": "Rot. Gobo 6" },
+        { "from": 50, "to": 52, "label": "Rot. Gobo 7" },
+        { "from": 53, "to": 55, "label": "Rot. Gobo 8" },
+        { "from": 56, "to": 59, "label": "Rot. Gobo 9" },
+        { "from": 60, "to": 67, "label": "Shaking Index Gobo 1" },
+        { "from": 68, "to": 75, "label": "Shaking Index Gobo 2" },
+        { "from": 76, "to": 83, "label": "Shaking Index Gobo 3" },
+        { "from": 84, "to": 91, "label": "Shaking Index Gobo 4" },
+        { "from": 92, "to": 99, "label": "Shaking Index Gobo 5" },
+        { "from": 100, "to": 107, "label": "Shaking Index Gobo 6" },
+        { "from": 108, "to": 115, "label": "Shaking Index Gobo 7" },
+        { "from": 116, "to": 123, "label": "Shaking Index Gobo 8" },
+        { "from": 124, "to": 129, "label": "Shaking Index Gobo 9" },
+        { "from": 130, "to": 137, "label": "Shaking Rot. Gobo 1" },
+        { "from": 138, "to": 145, "label": "Shaking Rot. Gobo 2" },
+        { "from": 146, "to": 153, "label": "Shaking Rot. Gobo 3" },
+        { "from": 154, "to": 161, "label": "Shaking Rot. Gobo 4" },
+        { "from": 162, "to": 169, "label": "Shaking Rot. Gobo 5" },
+        { "from": 170, "to": 177, "label": "Shaking Rot. Gobo 6" },
+        { "from": 178, "to": 185, "label": "Shaking Rot. Gobo 7" },
+        { "from": 186, "to": 193, "label": "Shaking Rot. Gobo 8" },
+        { "from": 194, "to": 199, "label": "Shaking Rot. Gobo 9" },
+        { "from": 200, "to": 201, "label": "Open" },
+        { "from": 202, "to": 221, "label": "Forwards gobo wheel rotation from fast to slow" },
+        { "from": 222, "to": 223, "label": "No rotation" },
+        { "from": 224, "to": 243, "label": "Backwards gobo wheel rotation from slow to fast" },
+        { "from": 244, "to": 249, "label": "Random gobo selection by audio control" },
+        { "from": 250, "to": 255, "label": "Auto random gobo from fast to slow" }
+      ]
+    },
+    {
+      "key": "rotGoboIndexingAndRotation",
+      "name": "Rot. gobo indexing and rotation",
+      "attribute": "speed"
+    },
+    {
+      "key": "rotGoboIndexingAndRotationFine",
+      "name": "Rot. gobo indexing and rotation fine",
+      "attribute": "speed",
+      "fineOf": "rotGoboIndexingAndRotation"
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "Open" },
+        { "from": 20, "to": 49, "label": "6-facet linear rotating - indexing" },
+        { "from": 50, "to": 75, "label": "6-facet linear rotating - rotation" },
+        { "from": 76, "to": 105, "label": "8-facet circular rotating - indexing" },
+        { "from": 106, "to": 127, "label": "8-facet circular rotating - rotation" },
+        { "from": 128, "to": 135, "label": "Macro 1" },
+        { "from": 136, "to": 143, "label": "Macro 2" },
+        { "from": 144, "to": 151, "label": "Macro 3" },
+        { "from": 152, "to": 159, "label": "Macro 4" },
+        { "from": 160, "to": 167, "label": "Macro 5" },
+        { "from": 168, "to": 175, "label": "Macro 6" },
+        { "from": 176, "to": 183, "label": "Macro 7" },
+        { "from": 184, "to": 191, "label": "Macro 8" },
+        { "from": 192, "to": 199, "label": "Macro 9" },
+        { "from": 200, "to": 207, "label": "Macro 10" },
+        { "from": 208, "to": 215, "label": "Macro 11" },
+        { "from": 216, "to": 223, "label": "Macro 12" },
+        { "from": 224, "to": 231, "label": "Macro 13" },
+        { "from": 232, "to": 239, "label": "Macro 14" },
+        { "from": 240, "to": 247, "label": "Macro 15" },
+        { "from": 248, "to": 255, "label": "Macro 16" }
+      ]
+    },
+    {
+      "key": "prismRotationAndIndexing",
+      "name": "Prism rotation and indexing",
+      "attribute": "prismRotation"
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost",
+      "capabilities": [
+        { "from": 0, "to": 179, "label": "Frost from 0-100" },
+        { "from": 180, "to": 189, "label": "Frost 100%" },
+        { "from": 190, "to": 211, "label": "Pulse closing from slow to fast" },
+        { "from": 212, "to": 233, "label": "Pulse opening from slow to fast" },
+        { "from": 234, "to": 255, "label": "Raming from fast to slow" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "focusFine",
+      "name": "Focus fine",
+      "attribute": "focus",
+      "fineOf": "focus"
+    },
+    {
+      "key": "autofocus",
+      "name": "Autofocus",
+      "attribute": "focus",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Autofocus off" },
+        { "from": 1, "to": 63, "label": "Rotating gobos & hole from 10-45 metres" },
+        { "from": 64, "to": 127, "label": "Static gobos & Hole (default) from 10-Infinity metres" },
+        { "from": 128, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter/Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed (Lamp power reduced to 230W)", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Shutter open (Full Lamp power)", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe effect from slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Shutter open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Opening pulse from slow to fast", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulse from fast to slow" },
+        { "from": 160, "to": 191, "label": "Shutter open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random strobe effect from slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter open, Full lamp power", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Main",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "specialFunctions",
+        "colorWheel",
+        "colorWheelFine",
+        "effectSpeed",
+        "staticGoboWheel",
+        "rotatingGoboWheel",
+        "rotGoboIndexingAndRotation",
+        "rotGoboIndexingAndRotationFine",
+        "prism",
+        "prismRotationAndIndexing",
+        "frost",
+        "zoom",
+        "zoomFine",
+        "focus",
+        "focusFine",
+        "autofocus",
+        "shutterStrobe",
+        "dimmer",
+        "dimmerFine"
+      ]
+    },
+    {
+      "name": "16 channel",
+      "channels": [
+        "pan",
+        "tilt",
+        "panTiltSpeed",
+        "specialFunctions",
+        "colorWheel",
+        "effectSpeed",
+        "staticGoboWheel",
+        "rotatingGoboWheel",
+        "rotGoboIndexingAndRotation",
+        "prism",
+        "prismRotationAndIndexing",
+        "frost",
+        "zoom",
+        "focus",
+        "shutterStrobe",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "30 channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "specialFunctions",
+        "colorWheel",
+        "colorWheelFine",
+        "effectSpeed",
+        "frostTime",
+        "colorTime",
+        "staticGoboTime",
+        "prismTime",
+        "zoomTime",
+        "focusTime",
+        "staticGoboWheel",
+        "rotatingGoboWheel",
+        "rotGoboIndexingAndRotation",
+        "rotGoboIndexingAndRotationFine",
+        "prism",
+        "prismRotationAndIndexing",
+        "frost",
+        "zoom",
+        "zoomFine",
+        "focus",
+        "focusFine",
+        "autofocus",
+        "shutterStrobe",
+        "dimmer",
+        "dimmerFine"
+      ]
+    }
+  ]
+}

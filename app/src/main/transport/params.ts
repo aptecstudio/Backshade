@@ -53,3 +53,32 @@ export function optionalBoolean(params: Record<string, unknown>, field: string):
     }
     return value;
 }
+
+/**
+ * Returns a required integer field.
+ */
+export function requireInteger(params: Record<string, unknown>, field: string): number {
+    const value = params[field];
+    if (!Number.isInteger(value)) {
+        throw new EngineError('invalid-params', `Missing or invalid field "${field}"`);
+    }
+    return value as number;
+}
+
+/**
+ * Returns an optional integer field.
+ */
+export function optionalInteger(params: Record<string, unknown>, field: string): number | undefined {
+    return params[field] === undefined ? undefined : requireInteger(params, field);
+}
+
+/**
+ * Returns a required list of texts.
+ */
+export function requireStringArray(params: Record<string, unknown>, field: string): string[] {
+    const value = params[field];
+    if (!Array.isArray(value) || !value.every((item) => typeof item === 'string')) {
+        throw new EngineError('invalid-params', `Missing or invalid field "${field}"`);
+    }
+    return value as string[];
+}

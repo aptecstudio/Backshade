@@ -1,0 +1,161 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Martin",
+  "model": "Rush MH6 Wash",
+  "category": "movingHead",
+  "physical": {
+    "width": 418,
+    "height": 588,
+    "depth": 328,
+    "weight": 18,
+    "lumens": 7100,
+    "source": "LED",
+    "beamAngle": {
+      "min": 16,
+      "max": 16
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 300
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Closed", "kind": "closed" },
+        { "from": 8, "to": 15, "label": "Open", "kind": "open" },
+        { "from": 16, "to": 131, "label": "Strobe, slow-fast", "kind": "strobe" },
+        { "from": 132, "to": 139, "label": "Open", "kind": "open" },
+        { "from": 140, "to": 181, "label": "Fast close, slow open" },
+        { "from": 182, "to": 189, "label": "Open", "kind": "open" },
+        { "from": 190, "to": 231, "label": "Slow close, fast open" },
+        { "from": 232, "to": 239, "label": "Open", "kind": "open" },
+        { "from": 240, "to": 247, "label": "Random strobe", "kind": "strobe" },
+        { "from": 248, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorPresets",
+      "name": "Color presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "Open" },
+        { "from": 11, "to": 190, "label": "Color presets" },
+        { "from": 191, "to": 192, "label": "Open" },
+        { "from": 193, "to": 214, "label": "Color scroll fast-slow", "kind": "gobo" },
+        { "from": 215, "to": 221, "label": "Stop at current position" },
+        { "from": 222, "to": 243, "label": "Color scroll slow-fast", "kind": "gobo" },
+        { "from": 244, "to": 247, "label": "Random fast" },
+        { "from": 248, "to": 251, "label": "Random medium" },
+        { "from": 252, "to": 255, "label": "Random slow", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "fixtureControl",
+      "name": "Fixture control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function (disables calibration)" },
+        { "from": 10, "to": 14, "label": "Reset fixture", "kind": "reset" },
+        { "from": 15, "to": 54, "label": "No function" },
+        { "from": 55, "to": 59, "label": "Enable calibration" },
+        { "from": 60, "to": 74, "label": "No function" },
+        { "from": 75, "to": 79, "label": "Pan & Tilt Speed = Normal" },
+        { "from": 80, "to": 89, "label": "Pan & Tilt Speed = Fast (default)" },
+        { "from": 90, "to": 94, "label": "Pan & Tilt Speed = Slow" },
+        { "from": 95, "to": 144, "label": "No function" },
+        { "from": 145, "to": 149, "label": "Pan/tilt blackout = ON" },
+        { "from": 150, "to": 154, "label": "Pan/tilt blackout = OFF" },
+        { "from": 155, "to": 159, "label": "Illuminate display" },
+        { "from": 160, "to": 164, "label": "Display illumination off" },
+        { "from": 165, "to": 229, "label": "No function" },
+        { "from": 230, "to": 234, "label": "Store zoom calibration" },
+        { "from": 235, "to": 239, "label": "Store pan calibration" },
+        { "from": 240, "to": 244, "label": "Store tilt calibration" },
+        { "from": 245, "to": 249, "label": "Reset all calibrations to factory default", "kind": "reset" },
+        { "from": 250, "to": 255, "label": "No function" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "Standard",
+      "channels": [
+        "strobe",
+        "dimmer",
+        "dimmerFine",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorPresets",
+        "zoom",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "fixtureControl"
+      ]
+    }
+  ]
+}

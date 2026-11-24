@@ -6,33 +6,32 @@
 
 import path from 'node:path';
 import type { OpenShowResult } from '../../shared/transport/engine-api';
+import type { FixtureLibrary } from '../fixtures/fixture-library';
+import { missingFixtures } from '../patch/patch-editor';
 import { ARCHIVE_EXTENSIONS, packFolder, unpackArchive } from '../archive/backshade-archive';
 import { readSettings } from '../settings/app-settings';
 import { addRecentShow } from '../shows/recent-shows';
 import { isShowFolder, TRANSIENT_ENTRIES } from '../shows/show-files';
-import type { ShowSession } from '../shows/show-session';
+import type { SessionOpenResult, ShowSession } from '../shows/show-session';
 import { findTemplate, TEMPLATE_ONLY_ENTRIES } from '../templates/template-library';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { optionalBoolean, optionalString, requireObject, requireString } from '../transport/params';
 import { TIMECODE_RATES, type ShowSettings, type TimecodeRate } from '../../shared/show/show-settings';
-import type { RequestContext, RequestRouter } from '../transport/request-router';
+import type { RequestRouter } from '../transport/request-router';
+import { requireDesktop } from '../transport/require-desktop';
 import { chooseFile, chooseFolder, chooseSaveFile } from '../window/file-dialogs';
-
-function requireDesktop(context: RequestContext): void {
-    if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Available only in the desktop application');
-    }
-}
 
 /**
  * Registers the methods of the service.
  */
-export function registerShowService(router: RequestRouter, bus: EventBus, session: ShowSession): void {
-    const remember = (result: OpenShowResult): OpenShowResult => {
+export function registerShowService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): void {
+    // Opened shows go into the recent shows and report the definitions missing on this workstation
+    const remember = (result: SessionOpenResult): OpenShowResult => {
         addRecentShow(result.show.name, result.show.folder);
         bus.emit('recent.changed', {});
-        return result;
+        library.reload();
+        return { ...result, missingFixtures: missingFixtures(session.patch(), (id) => library.find(id)?.definition) };
     };
 
     router.register('show.getCurrent', () => session.summary());
@@ -65,7 +64,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         requireDesktop(context);
         const show = session.summary();
         if (show === null) {
-            throw new EngineError('no-show', 'Nessuno show aperto');
+            throw new EngineError('no-show', 'No show open');
         }
         if (show.dirty) {
             throw new EngineError('unsaved-changes', 'Save the show before exporting it');
@@ -96,14 +95,16 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
 
     router.register('show.save', () => {
         const summary = session.save();
-        remember({ show: summary, recoveryAvailable: false });
+        addRecentShow(summary.name, summary.folder);
+        bus.emit('recent.changed', {});
         return summary;
     });
 
     router.register('show.saveAs', (params) => {
         const input = requireObject(params);
         const summary = session.saveAs(requireString(input, 'name'), path.resolve(requireString(input, 'folder')));
-        remember({ show: summary, recoveryAvailable: false });
+        addRecentShow(summary.name, summary.folder);
+        bus.emit('recent.changed', {});
         return summary;
     });
 

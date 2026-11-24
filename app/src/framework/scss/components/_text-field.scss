@@ -67,3 +67,15 @@
     flex-wrap: wrap;
     gap: space(1);
 }
+
+// Select field: native list, same surface as the text fields
+.select-field__input {
+    min-width: 0;
+    padding-right: space(1);
+    cursor: pointer;
+
+    &:disabled {
+        color: color('text-secondary');
+        cursor: default;
+    }
+}

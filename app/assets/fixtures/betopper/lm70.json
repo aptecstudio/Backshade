@@ -1,0 +1,174 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Betopper",
+  "model": "LM70",
+  "category": "movingHead",
+  "physical": {
+    "width": 176,
+    "height": 245,
+    "depth": 180,
+    "weight": 3,
+    "source": "LED",
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 100
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "speed",
+      "name": "Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "effects",
+      "name": "Effects",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No Effect" },
+        { "from": 8, "to": 134, "label": "Dimming" },
+        { "from": 135, "to": 239, "label": "Strobe from slow to fast" },
+        { "from": 240, "to": 255, "label": "Light on" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorChoose",
+      "name": "Color Choose",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Nothing" },
+        { "from": 8, "to": 21, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 22, "to": 34, "label": "Amber", "kind": "color", "color": "#ffaa7f" },
+        { "from": 35, "to": 49, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 50, "to": 63, "label": "UV", "kind": "color", "color": "#aa55ff" },
+        { "from": 64, "to": 77, "label": "Indigo", "kind": "color", "color": "#00007f" },
+        { "from": 78, "to": 91, "label": "Violet", "kind": "color", "color": "#ee82ee" },
+        { "from": 92, "to": 105, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 106, "to": 119, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 120, "to": 134, "label": "Light blue", "kind": "color", "color": "#add8e6" },
+        { "from": 135, "to": 147, "label": "Lime", "kind": "color", "color": "#aaff00" },
+        { "from": 148, "to": 161, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 162, "to": 175, "label": "White RGB Dimming" },
+        { "from": 176, "to": 189, "label": "White RGB Dimming" },
+        { "from": 190, "to": 203, "label": "White RGB Dimming" },
+        { "from": 204, "to": 217, "label": "Indigo White White Dimming" },
+        { "from": 218, "to": 231, "label": "Indigo White White Dimming" },
+        { "from": 232, "to": 255, "label": "Color Saltus" }
+      ]
+    },
+    {
+      "key": "colorSpeed",
+      "name": "Color Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "movementAutoEffect",
+      "name": "Movement (Auto & Effect)",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Movement (Auto & Effect)" },
+        { "from": 8, "to": 22, "label": "Auto 1 Random spin fast" },
+        { "from": 23, "to": 37, "label": "Auto 2 Random spin fast" },
+        { "from": 38, "to": 53, "label": "Auto 3 Random spin fast" },
+        { "from": 54, "to": 67, "label": "Auto 4 Random spin fast" },
+        { "from": 68, "to": 82, "label": "Auto 5 Random spin slow" },
+        { "from": 83, "to": 97, "label": "Auto 6 Random spin slow" },
+        { "from": 98, "to": 112, "label": "Auto 7 Random spin slow" },
+        { "from": 113, "to": 127, "label": "Auto 8 Random spin slow" },
+        { "from": 128, "to": 142, "label": "Auto 9 Sound Color Random" },
+        { "from": 143, "to": 157, "label": "Auto 10 Sound Color Random" },
+        { "from": 158, "to": 172, "label": "Auto 11 Sound Color Random" },
+        { "from": 173, "to": 187, "label": "Auto 12 Sound Color Random" },
+        { "from": 188, "to": 202, "label": "Auto 13 Sound Color Random spin slow" },
+        { "from": 203, "to": 217, "label": "Auto 14 Sound Color Random spin slow" },
+        { "from": 218, "to": 232, "label": "Auto 15 Sound Color Random spin slow" },
+        { "from": 233, "to": 255, "label": "Auto 16 Sound Color Random spin slow" }
+      ]
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 149, "label": "Nothing" },
+        { "from": 150, "to": 255, "label": "Reset device", "kind": "reset" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "9 Channel",
+      "channels": [
+        "pan",
+        "tilt",
+        "effects",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "speed",
+        "reset"
+      ]
+    },
+    {
+      "name": "14 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "speed",
+        "effects",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorChoose",
+        "colorSpeed",
+        "movementAutoEffect",
+        "reset"
+      ]
+    }
+  ]
+}

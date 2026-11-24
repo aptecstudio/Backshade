@@ -1,0 +1,372 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Eurolite",
+  "model": "LED KLS-180",
+  "category": "par",
+  "physical": {
+    "width": 605,
+    "height": 230,
+    "depth": 140,
+    "weight": 4.5,
+    "source": "LED",
+    "power": 80
+  },
+  "channels": [
+    {
+      "key": "programsViaDmx",
+      "name": "Programs via DMX",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function" },
+        { "from": 10, "to": 129, "label": "Automatic mode increasing speed" },
+        { "from": 130, "to": 255, "label": "Sound mode increasing speed" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "spot1ColorPresets",
+      "name": "Spot 1 Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Off" },
+        { "from": 10, "to": 19, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 20, "to": 29, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 30, "to": 39, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 40, "to": 49, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 50, "to": 59, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 60, "to": 69, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 70, "to": 79, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 80, "to": 89, "label": "Dark orange", "kind": "color", "color": "#ff8c00" },
+        { "from": 90, "to": 109, "label": "Green yellow", "kind": "color", "color": "#adff2f" },
+        { "from": 110, "to": 119, "label": "Salmon", "kind": "color", "color": "#fa8072" },
+        { "from": 120, "to": 129, "label": "Turquoise", "kind": "color", "color": "#40e0d0" },
+        { "from": 130, "to": 139, "label": "Light green", "kind": "color", "color": "#90ee90" },
+        { "from": 140, "to": 149, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 150, "to": 159, "label": "Straw", "kind": "color", "color": "#aa5500" },
+        { "from": 160, "to": 169, "label": "Lavender", "kind": "color", "color": "#e6e6fa" },
+        { "from": 170, "to": 179, "label": "Light blue", "kind": "color", "color": "#add8e6" },
+        { "from": 180, "to": 189, "label": "Dark blue", "kind": "color", "color": "#00008b" },
+        { "from": 190, "to": 199, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 200, "to": 209, "label": "Cool white", "kind": "color", "color": "#eeffff" },
+        { "from": 210, "to": 219, "label": "Warm white", "kind": "color", "color": "#fffff0" },
+        { "from": 220, "to": 229, "label": "Color fade" },
+        { "from": 230, "to": 255, "label": "Color change" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "redSpot1",
+      "name": "Red (Spot 1)",
+      "attribute": "red"
+    },
+    {
+      "key": "redSpot2",
+      "name": "Red (Spot 2)",
+      "attribute": "red"
+    },
+    {
+      "key": "redSpot3",
+      "name": "Red (Spot 3)",
+      "attribute": "red"
+    },
+    {
+      "key": "redSpot4",
+      "name": "Red (Spot 4)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenSpot1",
+      "name": "Green (Spot 1)",
+      "attribute": "green"
+    },
+    {
+      "key": "greenSpot2",
+      "name": "Green (Spot 2)",
+      "attribute": "green"
+    },
+    {
+      "key": "greenSpot3",
+      "name": "Green (Spot 3)",
+      "attribute": "green"
+    },
+    {
+      "key": "greenSpot4",
+      "name": "Green (Spot 4)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueSpot1",
+      "name": "Blue (Spot 1)",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueSpot2",
+      "name": "Blue (Spot 2)",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueSpot3",
+      "name": "Blue (Spot 3)",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueSpot4",
+      "name": "Blue (Spot 4)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteSpot1",
+      "name": "White (Spot 1)",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteSpot2",
+      "name": "White (Spot 2)",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteSpot3",
+      "name": "White (Spot 3)",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteSpot4",
+      "name": "White (Spot 4)",
+      "attribute": "white"
+    },
+    {
+      "key": "programStrobeLeds",
+      "name": "Program Strobe LEDs",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function", "kind": "open" },
+        { "from": 10, "to": 255, "label": "Strobe with increasing speed", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "strobeLeds",
+      "name": "Strobe LEDs",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function", "kind": "open" },
+        { "from": 10, "to": 255, "label": "Strobe with increasing speed", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "strobeSpeedSpots",
+      "name": "Strobe speed Spots",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function", "kind": "open" },
+        { "from": 10, "to": 255, "label": "Strobe with increasing speed", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "internalProgramsViaDmx",
+      "name": "Internal Programs via DMX",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function", "kind": "open" },
+        { "from": 10, "to": 99, "label": "Automatic mode increasing speed" },
+        { "from": 100, "to": 255, "label": "Sound mode increasing speed" }
+      ]
+    },
+    {
+      "key": "spot2ColorPresets",
+      "name": "Spot 2 Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Off" },
+        { "from": 10, "to": 19, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 20, "to": 29, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 30, "to": 39, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 40, "to": 49, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 50, "to": 59, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 60, "to": 69, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 70, "to": 79, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 80, "to": 89, "label": "Dark orange", "kind": "color", "color": "#ff8c00" },
+        { "from": 90, "to": 109, "label": "Green yellow", "kind": "color", "color": "#adff2f" },
+        { "from": 110, "to": 119, "label": "Salmon", "kind": "color", "color": "#fa8072" },
+        { "from": 120, "to": 129, "label": "Turquoise", "kind": "color", "color": "#40e0d0" },
+        { "from": 130, "to": 139, "label": "Light green", "kind": "color", "color": "#90ee90" },
+        { "from": 140, "to": 149, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 150, "to": 159, "label": "Straw", "kind": "color", "color": "#aa5500" },
+        { "from": 160, "to": 169, "label": "Lavender", "kind": "color", "color": "#e6e6fa" },
+        { "from": 170, "to": 179, "label": "Light blue", "kind": "color", "color": "#add8e6" },
+        { "from": 180, "to": 189, "label": "Dark blue", "kind": "color", "color": "#00008b" },
+        { "from": 190, "to": 199, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 200, "to": 209, "label": "Cool white", "kind": "color", "color": "#eeffff" },
+        { "from": 210, "to": 219, "label": "Warm white", "kind": "color", "color": "#fffff0" },
+        { "from": 220, "to": 229, "label": "Color fade" },
+        { "from": 230, "to": 255, "label": "Color change" }
+      ]
+    },
+    {
+      "key": "spot3ColorPresets",
+      "name": "Spot 3 Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Off" },
+        { "from": 10, "to": 19, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 20, "to": 29, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 30, "to": 39, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 40, "to": 49, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 50, "to": 59, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 60, "to": 69, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 70, "to": 79, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 80, "to": 89, "label": "Dark orange", "kind": "color", "color": "#ff8c00" },
+        { "from": 90, "to": 109, "label": "Green yellow", "kind": "color", "color": "#adff2f" },
+        { "from": 110, "to": 119, "label": "Salmon", "kind": "color", "color": "#fa8072" },
+        { "from": 120, "to": 129, "label": "Turquoise", "kind": "color", "color": "#40e0d0" },
+        { "from": 130, "to": 139, "label": "Light green", "kind": "color", "color": "#90ee90" },
+        { "from": 140, "to": 149, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 150, "to": 159, "label": "Straw", "kind": "color", "color": "#aa5500" },
+        { "from": 160, "to": 169, "label": "Lavender", "kind": "color", "color": "#e6e6fa" },
+        { "from": 170, "to": 179, "label": "Light blue", "kind": "color", "color": "#add8e6" },
+        { "from": 180, "to": 189, "label": "Dark blue", "kind": "color", "color": "#00008b" },
+        { "from": 190, "to": 199, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 200, "to": 209, "label": "Cool white", "kind": "color", "color": "#eeffff" },
+        { "from": 210, "to": 219, "label": "Warm white", "kind": "color", "color": "#fffff0" },
+        { "from": 220, "to": 229, "label": "Color fade" },
+        { "from": 230, "to": 255, "label": "Color change" }
+      ]
+    },
+    {
+      "key": "spot4ColorPresets",
+      "name": "Spot 4 Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Off" },
+        { "from": 10, "to": 19, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 20, "to": 29, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 30, "to": 39, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 40, "to": 49, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 50, "to": 59, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 60, "to": 69, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 70, "to": 79, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 80, "to": 89, "label": "Dark orange", "kind": "color", "color": "#ff8c00" },
+        { "from": 90, "to": 109, "label": "Green yellow", "kind": "color", "color": "#adff2f" },
+        { "from": 110, "to": 119, "label": "Salmon", "kind": "color", "color": "#fa8072" },
+        { "from": 120, "to": 129, "label": "Turquoise", "kind": "color", "color": "#40e0d0" },
+        { "from": 130, "to": 139, "label": "Light green", "kind": "color", "color": "#90ee90" },
+        { "from": 140, "to": 149, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 150, "to": 159, "label": "Straw", "kind": "color", "color": "#aa5500" },
+        { "from": 160, "to": 169, "label": "Lavender", "kind": "color", "color": "#e6e6fa" },
+        { "from": 170, "to": 179, "label": "Light blue", "kind": "color", "color": "#add8e6" },
+        { "from": 180, "to": 189, "label": "Dark blue", "kind": "color", "color": "#00008b" },
+        { "from": 190, "to": 199, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 200, "to": 209, "label": "Cool white", "kind": "color", "color": "#eeffff" },
+        { "from": 210, "to": 219, "label": "Warm white", "kind": "color", "color": "#fffff0" },
+        { "from": 220, "to": 229, "label": "Color fade" },
+        { "from": 230, "to": 255, "label": "Color change" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "3 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "4 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "name": "8 Channel",
+      "channels": [
+        "dimmer",
+        "strobeSpeedSpots",
+        "spot1ColorPresets",
+        "spot2ColorPresets",
+        "spot3ColorPresets",
+        "spot4ColorPresets",
+        "strobeLeds",
+        "internalProgramsViaDmx"
+      ]
+    },
+    {
+      "name": "21 Channel",
+      "channels": [
+        "dimmer",
+        "strobeSpeedSpots",
+        "programStrobeLeds",
+        "strobeLeds",
+        "redSpot1",
+        "greenSpot1",
+        "blueSpot1",
+        "whiteSpot1",
+        "redSpot2",
+        "greenSpot2",
+        "blueSpot2",
+        "whiteSpot2",
+        "redSpot3",
+        "greenSpot3",
+        "blueSpot3",
+        "whiteSpot3",
+        "redSpot4",
+        "greenSpot4",
+        "blueSpot4",
+        "whiteSpot4",
+        "programsViaDmx"
+      ],
+      "heads": [
+        [
+          "redSpot1",
+          "greenSpot1",
+          "blueSpot1",
+          "whiteSpot1"
+        ],
+        [
+          "redSpot2",
+          "greenSpot2",
+          "blueSpot2",
+          "whiteSpot2"
+        ],
+        [
+          "redSpot3",
+          "greenSpot3",
+          "blueSpot3",
+          "whiteSpot3"
+        ],
+        [
+          "redSpot4",
+          "greenSpot4",
+          "blueSpot4",
+          "whiteSpot4"
+        ]
+      ]
+    }
+  ]
+}

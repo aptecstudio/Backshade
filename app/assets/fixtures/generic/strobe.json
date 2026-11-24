@@ -1,0 +1,27 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "Strobe",
+  "category": "strobe",
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "rate",
+      "name": "Flash rate",
+      "attribute": "speed"
+    }
+  ],
+  "modes": [
+    {
+      "name": "2 channels",
+      "channels": [
+        "dimmer",
+        "rate"
+      ]
+    }
+  ]
+}

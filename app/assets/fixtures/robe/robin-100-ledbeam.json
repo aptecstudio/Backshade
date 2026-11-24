@@ -1,0 +1,1047 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Robin 100 LEDBeam",
+  "category": "movingHead",
+  "physical": {
+    "width": 233,
+    "height": 314,
+    "depth": 149,
+    "weight": 4.5,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 40
+    },
+    "panRange": 450,
+    "tiltRange": 300,
+    "power": 200
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeedPanTiltTime",
+      "name": "Pan/Tilt speed, Pan/Tilt time",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Max. speed (tracking mode)" },
+        { "from": 1, "to": 255, "label": "Speed from max. to min. (vector mode)" }
+      ]
+    },
+    {
+      "key": "specialFunctions",
+      "name": "Special functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 29, "label": "Reserved" },
+        { "from": 30, "to": 39, "label": "RGBW color mixing mode" },
+        { "from": 40, "to": 49, "label": "CMY color mixing mode" },
+        { "from": 50, "to": 59, "label": "Pan/Tilt speed mode" },
+        { "from": 60, "to": 69, "label": "Pan/Tilt time mode" },
+        { "from": 70, "to": 79, "label": "Blackout while pan/tilt moving" },
+        { "from": 80, "to": 89, "label": "Disabled blackout while pan/tilt moving" },
+        { "from": 90, "to": 109, "label": "Reserved" },
+        { "from": 110, "to": 114, "label": "Color calibration mode On" },
+        { "from": 115, "to": 119, "label": "Color calibration mode Off" },
+        { "from": 120, "to": 124, "label": "Tilt movement reduction On" },
+        { "from": 125, "to": 129, "label": "Tilt movement reduction Off" },
+        { "from": 130, "to": 139, "label": "Reserved" },
+        { "from": 140, "to": 149, "label": "Pan/Tilt reset", "kind": "reset" },
+        { "from": 150, "to": 199, "label": "Reserved" },
+        { "from": 200, "to": 209, "label": "Total reset", "kind": "reset" },
+        { "from": 210, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "redAllZones",
+      "name": "Red - all zones",
+      "attribute": "red"
+    },
+    {
+      "key": "redFineAllZones",
+      "name": "Red fine - all zones",
+      "attribute": "red",
+      "fineOf": "redAllZones"
+    },
+    {
+      "key": "greenAllZones",
+      "name": "Green - all zones",
+      "attribute": "green"
+    },
+    {
+      "key": "greenFineAllZones",
+      "name": "Green fine - all zones",
+      "attribute": "green",
+      "fineOf": "greenAllZones"
+    },
+    {
+      "key": "blueAllZones",
+      "name": "Blue - all zones",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueFineAllZones",
+      "name": "Blue fine - all zones",
+      "attribute": "blue",
+      "fineOf": "blueAllZones"
+    },
+    {
+      "key": "whiteAllZones",
+      "name": "White - all zones",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFineAllZones",
+      "name": "White fine - all zones",
+      "attribute": "white",
+      "fineOf": "whiteAllZones"
+    },
+    {
+      "key": "redZone1",
+      "name": "Red - zone 1",
+      "attribute": "red"
+    },
+    {
+      "key": "redFineZone1",
+      "name": "Red fine - zone 1",
+      "attribute": "red",
+      "fineOf": "redZone1"
+    },
+    {
+      "key": "greenZone1",
+      "name": "Green - zone 1",
+      "attribute": "green"
+    },
+    {
+      "key": "greenFineZone1",
+      "name": "Green fine - zone 1",
+      "attribute": "green",
+      "fineOf": "greenZone1"
+    },
+    {
+      "key": "blueZone1",
+      "name": "Blue - zone 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueFineZone1",
+      "name": "Blue fine - zone 1",
+      "attribute": "blue",
+      "fineOf": "blueZone1"
+    },
+    {
+      "key": "whiteZone1",
+      "name": "White - zone 1",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFineZone1",
+      "name": "White fine - zone 1",
+      "attribute": "white",
+      "fineOf": "whiteZone1"
+    },
+    {
+      "key": "redZone2",
+      "name": "Red - zone 2",
+      "attribute": "red"
+    },
+    {
+      "key": "redFineZone2",
+      "name": "Red fine - zone 2",
+      "attribute": "red",
+      "fineOf": "redZone2"
+    },
+    {
+      "key": "greenZone2",
+      "name": "Green - zone 2",
+      "attribute": "green"
+    },
+    {
+      "key": "greenFineZone2",
+      "name": "Green fine - zone 2",
+      "attribute": "green",
+      "fineOf": "greenZone2"
+    },
+    {
+      "key": "blueZone2",
+      "name": "Blue - zone 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueFineZone2",
+      "name": "Blue fine - zone 2",
+      "attribute": "blue",
+      "fineOf": "blueZone2"
+    },
+    {
+      "key": "whiteZone2",
+      "name": "White - zone 2",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFineZone2",
+      "name": "White fine - zone 2",
+      "attribute": "white",
+      "fineOf": "whiteZone2"
+    },
+    {
+      "key": "redZone3",
+      "name": "Red - zone 3",
+      "attribute": "red"
+    },
+    {
+      "key": "redFineZone3",
+      "name": "Red fine - zone 3",
+      "attribute": "red",
+      "fineOf": "redZone3"
+    },
+    {
+      "key": "greenZone3",
+      "name": "Green - zone 3",
+      "attribute": "green"
+    },
+    {
+      "key": "greenFineZone3",
+      "name": "Green fine - zone 3",
+      "attribute": "green",
+      "fineOf": "greenZone3"
+    },
+    {
+      "key": "blueZone3",
+      "name": "Blue - zone 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueFineZone3",
+      "name": "Blue fine - zone 3",
+      "attribute": "blue",
+      "fineOf": "blueZone3"
+    },
+    {
+      "key": "whiteZone3",
+      "name": "White - zone 3",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFineZone3",
+      "name": "White fine - zone 3",
+      "attribute": "white",
+      "fineOf": "whiteZone3"
+    },
+    {
+      "key": "ctc",
+      "name": "CTC",
+      "attribute": "colorTemperature",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function" },
+        { "from": 1, "to": 255, "label": "Color temperature correction from 19000K to 2700K" }
+      ]
+    },
+    {
+      "key": "virtualColorWheel",
+      "name": "Virtual Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function", "kind": "color", "color": "#ffffff" },
+        { "from": 1, "to": 2, "label": "White 2700 K", "kind": "color", "color": "#edd4b1" },
+        { "from": 3, "to": 3, "label": "White 2700 K (Halogen lamp mode*)", "kind": "color", "color": "#efdbbb" },
+        { "from": 4, "to": 5, "label": "White 3200 K", "kind": "color", "color": "#f3e2c5" },
+        { "from": 6, "to": 6, "label": "White 3200 K (Halogen lamp mode*)", "kind": "color", "color": "#f3e2c5" },
+        { "from": 7, "to": 9, "label": "White 4200 K", "kind": "color", "color": "#f8efdf" },
+        { "from": 10, "to": 12, "label": "White 5600 K", "kind": "color", "color": "#faf6ed" },
+        { "from": 13, "to": 15, "label": "White 8000 K", "kind": "color", "color": "#fefcf9" },
+        { "from": 16, "to": 16, "label": "Blue (Blue=full, Red+Green+White=0)", "kind": "color", "color": "#137cc3" },
+        { "from": 17, "to": 55, "label": "Red=0, Green->up,Blue =full, White=0", "kind": "color", "color": "#1793c8" },
+        { "from": 56, "to": 56, "label": "Light Blue (Red=0, Green=full, Blue =full, White=0)", "kind": "color", "color": "#60afca" },
+        { "from": 57, "to": 95, "label": "Red=0, Green=full, Blue->down, White=0", "kind": "color", "color": "#b5dcc1" },
+        { "from": 96, "to": 96, "label": "Green (Red=0, Green=full, Blue =0, White=0)", "kind": "color", "color": "#87c326" },
+        { "from": 97, "to": 134, "label": "Red->up, Green=full, Blue=0, White=0", "kind": "color", "color": "#bad02c" },
+        { "from": 135, "to": 135, "label": "Yellow (Red=full, Green=full, Blue=0, White=0)", "kind": "color", "color": "#e8d72f" },
+        { "from": 136, "to": 174, "label": "Red=full, Green->down, Blue=0, White=0", "kind": "color", "color": "#e56a5c" },
+        { "from": 175, "to": 175, "label": "Red(Red=full, Green=0, Blue=0, White=0)", "kind": "color", "color": "#dc2b4e" },
+        { "from": 176, "to": 214, "label": "Red=full, Green=0, Blue->up, White=0", "kind": "color", "color": "#cc3d6b" },
+        { "from": 215, "to": 215, "label": "Magenta (Red=full, Green=0, Blue=full, White=0)", "kind": "color", "color": "#bb4e8b" },
+        { "from": 216, "to": 246, "label": "Red -> down, Green=0, Blue=full, White=0", "kind": "color", "color": "#9182b5" },
+        { "from": 247, "to": 247, "label": "Blue (Red=0, Green=0, Blue=full, White=0)", "kind": "color", "color": "#1793dc" },
+        { "from": 248, "to": 248, "label": "Rainbow effect (with fade time)", "kind": "gobo" },
+        { "from": 249, "to": 249, "label": "Rainbow effect", "kind": "gobo" },
+        { "from": 250, "to": 250, "label": "Zone effect 1" },
+        { "from": 251, "to": 251, "label": "Zone effect 2" },
+        { "from": 252, "to": 252, "label": "Zone effect 3" },
+        { "from": 253, "to": 253, "label": "Zone effect 4" },
+        { "from": 254, "to": 254, "label": "Zone effect 5" },
+        { "from": 255, "to": 255, "label": "Zone effect 6" }
+      ]
+    },
+    {
+      "key": "noFunction1",
+      "name": "No function 1",
+      "attribute": "none"
+    },
+    {
+      "key": "noFunction2",
+      "name": "No function 2",
+      "attribute": "none"
+    },
+    {
+      "key": "shutterStrobe1",
+      "name": "Shutter/Strobe 1",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Shutter closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Strobe effect from slow--> fast (zones 2,3 only)", "kind": "strobe" },
+        { "from": 64, "to": 95, "label": "Strobe effect from slow--> fast (All zones together)", "kind": "strobe" },
+        { "from": 96, "to": 111, "label": "Zone effects+rainbow effects speed control, slow--> fast" },
+        { "from": 112, "to": 127, "label": "Zone effects+rainbow effects speed control, fast--> slow" },
+        { "from": 128, "to": 143, "label": "Opening pulses in sequences from slow--> fast (All zones together)", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulses in sequences from fast--> slow (All zones together)" },
+        { "from": 160, "to": 175, "label": "Random strobe effect from slow--> fast (random zone)", "kind": "strobe" },
+        { "from": 176, "to": 191, "label": "Random strobe effect from slow--> fast (random zone + random strobe)", "kind": "strobe" },
+        { "from": 192, "to": 223, "label": "Random strobe effect from slow --> fast (All zones together)", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "cyanAllZones",
+      "name": "Cyan - all zones",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyanFineAllZones",
+      "name": "Cyan fine - all zones",
+      "attribute": "cyan",
+      "fineOf": "cyanAllZones"
+    },
+    {
+      "key": "magentaAllZones",
+      "name": "Magenta - all zones",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magentaFineAllZones",
+      "name": "Magenta fine - all zones",
+      "attribute": "magenta",
+      "fineOf": "magentaAllZones"
+    },
+    {
+      "key": "yellowAllZones",
+      "name": "Yellow - all zones",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellowFineAllZones",
+      "name": "Yellow fine - all zones",
+      "attribute": "yellow",
+      "fineOf": "yellowAllZones"
+    },
+    {
+      "key": "noFunctionAllZones",
+      "name": "No function - all zones",
+      "attribute": "none"
+    },
+    {
+      "key": "noFunctionBisAllZones",
+      "name": "No function bis - all zones",
+      "attribute": "none"
+    },
+    {
+      "key": "cyanZone1",
+      "name": "Cyan - zone 1",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyanFineZone1",
+      "name": "Cyan fine - zone 1",
+      "attribute": "cyan",
+      "fineOf": "cyanZone1"
+    },
+    {
+      "key": "magentaZone1",
+      "name": "Magenta - zone 1",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magentaFineZone1",
+      "name": "Magenta fine - zone 1",
+      "attribute": "magenta",
+      "fineOf": "magentaZone1"
+    },
+    {
+      "key": "yellowZone1",
+      "name": "Yellow - zone 1",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellowFineZone1",
+      "name": "Yellow fine - zone 1",
+      "attribute": "yellow",
+      "fineOf": "yellowZone1"
+    },
+    {
+      "key": "noFunctionZone1",
+      "name": "No function - zone 1",
+      "attribute": "none"
+    },
+    {
+      "key": "noFunctionBisZone1",
+      "name": "No function bis - zone 1",
+      "attribute": "none"
+    },
+    {
+      "key": "cyanZone2",
+      "name": "Cyan - zone 2",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyanFineZone2",
+      "name": "Cyan fine - zone 2",
+      "attribute": "cyan",
+      "fineOf": "cyanZone2"
+    },
+    {
+      "key": "magentaZone2",
+      "name": "Magenta - zone 2",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magentaFineZone2",
+      "name": "Magenta fine - zone 2",
+      "attribute": "magenta",
+      "fineOf": "magentaZone2"
+    },
+    {
+      "key": "yellowZone2",
+      "name": "Yellow - zone 2",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellowFineZone2",
+      "name": "Yellow fine - zone 2",
+      "attribute": "yellow",
+      "fineOf": "yellowZone2"
+    },
+    {
+      "key": "noFunctionZone2",
+      "name": "No function - zone 2",
+      "attribute": "none"
+    },
+    {
+      "key": "noFunctionBisZone2",
+      "name": "No function bis - zone 2",
+      "attribute": "none"
+    },
+    {
+      "key": "cyanZone3",
+      "name": "Cyan - zone 3",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyanFineZone3",
+      "name": "Cyan fine - zone 3",
+      "attribute": "cyan",
+      "fineOf": "cyanZone3"
+    },
+    {
+      "key": "magentaZone3",
+      "name": "Magenta - zone 3",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magentaFineZone3",
+      "name": "Magenta fine - zone 3",
+      "attribute": "magenta",
+      "fineOf": "magentaZone3"
+    },
+    {
+      "key": "yellowZone3",
+      "name": "Yellow - zone 3",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellowFineZone3",
+      "name": "Yellow fine - zone 3",
+      "attribute": "yellow",
+      "fineOf": "yellowZone3"
+    },
+    {
+      "key": "noFunctionZone3",
+      "name": "No function - zone 3",
+      "attribute": "none"
+    },
+    {
+      "key": "noFunctionBisZone3",
+      "name": "No function bis - zone 3",
+      "attribute": "none"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Mode 1 - RGBW",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "redZone1",
+        "redFineZone1",
+        "greenZone1",
+        "greenFineZone1",
+        "blueZone1",
+        "blueFineZone1",
+        "whiteZone1",
+        "whiteFineZone1",
+        "redZone2",
+        "redFineZone2",
+        "greenZone2",
+        "greenFineZone2",
+        "blueZone2",
+        "blueFineZone2",
+        "whiteZone2",
+        "whiteFineZone2",
+        "redZone3",
+        "redFineZone3",
+        "greenZone3",
+        "greenFineZone3",
+        "blueZone3",
+        "blueFineZone3",
+        "whiteZone3",
+        "whiteFineZone3",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "blueFineZone1",
+          "greenZone1",
+          "greenFineZone1",
+          "whiteZone1",
+          "whiteFineZone1",
+          "redZone1",
+          "redFineZone1",
+          "blueZone1"
+        ],
+        [
+          "redZone2",
+          "redFineZone2",
+          "blueZone2",
+          "blueFineZone2",
+          "greenZone2",
+          "greenFineZone2",
+          "whiteZone2",
+          "whiteFineZone2"
+        ],
+        [
+          "blueZone3",
+          "blueFineZone3",
+          "greenZone3",
+          "greenFineZone3",
+          "whiteZone3",
+          "whiteFineZone3",
+          "redZone3",
+          "redFineZone3"
+        ]
+      ]
+    },
+    {
+      "name": "Mode 2 - RGBW",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "redAllZones",
+        "redFineAllZones",
+        "greenAllZones",
+        "greenFineAllZones",
+        "blueAllZones",
+        "blueFineAllZones",
+        "whiteAllZones",
+        "whiteFineAllZones",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ]
+    },
+    {
+      "name": "Mode 3 - RGBW",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "redAllZones",
+        "greenAllZones",
+        "blueAllZones",
+        "whiteAllZones",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "Mode 4",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "Mode 5 - RGBW",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "redZone1",
+        "redFineZone1",
+        "greenZone1",
+        "greenFineZone1",
+        "blueZone1",
+        "blueFineZone1",
+        "whiteZone1",
+        "whiteFineZone1",
+        "redZone2",
+        "redFineZone2",
+        "greenZone2",
+        "greenFineZone2",
+        "blueZone2",
+        "blueFineZone2",
+        "whiteZone2",
+        "whiteFineZone2",
+        "redZone3",
+        "redFineZone3",
+        "greenZone3",
+        "greenFineZone3",
+        "blueZone3",
+        "blueFineZone3",
+        "whiteZone3",
+        "whiteFineZone3",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "blueFineZone1",
+          "greenZone1",
+          "greenFineZone1",
+          "whiteZone1",
+          "whiteFineZone1",
+          "redZone1",
+          "redFineZone1",
+          "blueZone1"
+        ],
+        [
+          "redZone2",
+          "redFineZone2",
+          "blueZone2",
+          "blueFineZone2",
+          "greenZone2",
+          "greenFineZone2",
+          "whiteZone2",
+          "whiteFineZone2"
+        ],
+        [
+          "blueZone3",
+          "blueFineZone3",
+          "greenZone3",
+          "greenFineZone3",
+          "whiteZone3",
+          "whiteFineZone3",
+          "redZone3",
+          "redFineZone3"
+        ]
+      ]
+    },
+    {
+      "name": "Mode 6 - RGBW",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "redZone1",
+        "redFineZone1",
+        "greenZone1",
+        "greenFineZone1",
+        "blueZone1",
+        "blueFineZone1",
+        "whiteZone1",
+        "whiteFineZone1",
+        "redZone2",
+        "redFineZone2",
+        "greenZone2",
+        "greenFineZone2",
+        "blueZone2",
+        "blueFineZone2",
+        "whiteZone2",
+        "whiteFineZone2",
+        "redZone3",
+        "redFineZone3",
+        "greenZone3",
+        "greenFineZone3",
+        "blueZone3",
+        "blueFineZone3",
+        "whiteZone3",
+        "whiteFineZone3",
+        "ctc",
+        "virtualColorWheel",
+        "noFunction1",
+        "noFunction2",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "blueFineZone1",
+          "greenZone1",
+          "greenFineZone1",
+          "whiteZone1",
+          "whiteFineZone1",
+          "redZone1",
+          "redFineZone1",
+          "blueZone1"
+        ],
+        [
+          "redZone2",
+          "redFineZone2",
+          "blueZone2",
+          "blueFineZone2",
+          "greenZone2",
+          "greenFineZone2",
+          "whiteZone2",
+          "whiteFineZone2"
+        ],
+        [
+          "blueZone3",
+          "blueFineZone3",
+          "greenZone3",
+          "greenFineZone3",
+          "whiteZone3",
+          "whiteFineZone3",
+          "redZone3",
+          "redFineZone3"
+        ]
+      ]
+    },
+    {
+      "name": "Mode 1 - CMY",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "cyanZone1",
+        "cyanFineZone1",
+        "magentaZone1",
+        "magentaFineZone1",
+        "yellowZone1",
+        "yellowFineZone1",
+        "noFunctionZone1",
+        "noFunctionBisZone1",
+        "cyanZone2",
+        "cyanFineZone2",
+        "magentaZone2",
+        "magentaFineZone2",
+        "yellowZone2",
+        "yellowFineZone2",
+        "noFunctionZone2",
+        "noFunctionBisZone2",
+        "cyanZone3",
+        "cyanFineZone3",
+        "magentaZone3",
+        "magentaFineZone3",
+        "yellowZone3",
+        "yellowFineZone3",
+        "noFunctionZone3",
+        "noFunctionBisZone3",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "yellowFineZone1",
+          "magentaZone1",
+          "magentaFineZone1",
+          "noFunctionZone1",
+          "noFunctionBisZone1",
+          "cyanZone1",
+          "cyanFineZone1",
+          "yellowZone1"
+        ],
+        [
+          "cyanZone2",
+          "cyanFineZone2",
+          "yellowZone2",
+          "yellowFineZone2",
+          "magentaZone2",
+          "magentaFineZone2",
+          "noFunctionZone2",
+          "noFunctionBisZone2"
+        ],
+        [
+          "yellowZone3",
+          "yellowFineZone3",
+          "magentaZone3",
+          "magentaFineZone3",
+          "noFunctionZone3",
+          "noFunctionBisZone3",
+          "cyanZone3",
+          "cyanFineZone3"
+        ]
+      ]
+    },
+    {
+      "name": "Mode 2 - CMY",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "cyanAllZones",
+        "cyanFineAllZones",
+        "magentaAllZones",
+        "magentaFineAllZones",
+        "yellowAllZones",
+        "yellowFineAllZones",
+        "noFunctionAllZones",
+        "noFunctionBisAllZones",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ]
+    },
+    {
+      "name": "Mode 3 - CMY",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "cyanAllZones",
+        "magentaAllZones",
+        "yellowAllZones",
+        "noFunctionAllZones",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "Mode 5 - CMY",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "cyanZone1",
+        "cyanFineZone1",
+        "magentaZone1",
+        "magentaFineZone1",
+        "yellowZone1",
+        "yellowFineZone1",
+        "noFunctionZone1",
+        "noFunctionBisZone1",
+        "cyanZone2",
+        "cyanFineZone2",
+        "magentaZone2",
+        "magentaFineZone2",
+        "yellowZone2",
+        "yellowFineZone2",
+        "noFunctionZone2",
+        "noFunctionBisZone2",
+        "cyanZone3",
+        "cyanFineZone3",
+        "magentaZone3",
+        "magentaFineZone3",
+        "yellowZone3",
+        "yellowFineZone3",
+        "noFunctionZone3",
+        "noFunctionBisZone3",
+        "ctc",
+        "virtualColorWheel",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "yellowFineZone1",
+          "magentaZone1",
+          "magentaFineZone1",
+          "noFunctionZone1",
+          "noFunctionBisZone1",
+          "cyanZone1",
+          "cyanFineZone1",
+          "yellowZone1"
+        ],
+        [
+          "cyanZone2",
+          "cyanFineZone2",
+          "yellowZone2",
+          "yellowFineZone2",
+          "magentaZone2",
+          "magentaFineZone2",
+          "noFunctionZone2",
+          "noFunctionBisZone2"
+        ],
+        [
+          "yellowZone3",
+          "yellowFineZone3",
+          "magentaZone3",
+          "magentaFineZone3",
+          "noFunctionZone3",
+          "noFunctionBisZone3",
+          "cyanZone3",
+          "cyanFineZone3"
+        ]
+      ]
+    },
+    {
+      "name": "Mode 6 - CMY",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "specialFunctions",
+        "cyanZone1",
+        "cyanFineZone1",
+        "magentaZone1",
+        "magentaFineZone1",
+        "yellowZone1",
+        "yellowFineZone1",
+        "noFunctionZone1",
+        "noFunctionBisZone1",
+        "cyanZone2",
+        "cyanFineZone2",
+        "magentaZone2",
+        "magentaFineZone2",
+        "yellowZone2",
+        "yellowFineZone2",
+        "noFunctionZone2",
+        "noFunctionBisZone2",
+        "cyanZone3",
+        "cyanFineZone3",
+        "magentaZone3",
+        "magentaFineZone3",
+        "yellowZone3",
+        "yellowFineZone3",
+        "noFunctionZone3",
+        "noFunctionBisZone3",
+        "ctc",
+        "virtualColorWheel",
+        "noFunction1",
+        "noFunction2",
+        "shutterStrobe1",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "yellowFineZone1",
+          "magentaZone1",
+          "magentaFineZone1",
+          "noFunctionZone1",
+          "noFunctionBisZone1",
+          "cyanZone1",
+          "cyanFineZone1",
+          "yellowZone1"
+        ],
+        [
+          "cyanZone2",
+          "cyanFineZone2",
+          "yellowZone2",
+          "yellowFineZone2",
+          "magentaZone2",
+          "magentaFineZone2",
+          "noFunctionZone2",
+          "noFunctionBisZone2"
+        ],
+        [
+          "yellowZone3",
+          "yellowFineZone3",
+          "magentaZone3",
+          "magentaFineZone3",
+          "noFunctionZone3",
+          "noFunctionBisZone3",
+          "cyanZone3",
+          "cyanFineZone3"
+        ]
+      ]
+    }
+  ]
+}

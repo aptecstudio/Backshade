@@ -4,18 +4,12 @@
  * to remote clients, because they would act on the workstation.
  */
 
-import { EngineError } from '../transport/engine-error';
 import { optionalString, requireObject } from '../transport/params';
-import type { RequestContext, RequestRouter } from '../transport/request-router';
+import type { RequestRouter } from '../transport/request-router';
+import { requireDesktop } from '../transport/require-desktop';
 import * as aboutWindow from '../window/about-window';
 import { chooseFolder } from '../window/file-dialogs';
 import * as mainWindow from '../window/main-window';
-
-function requireDesktop(context: RequestContext): void {
-    if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Available only in the desktop application');
-    }
-}
 
 /**
  * Registers the methods of the service.

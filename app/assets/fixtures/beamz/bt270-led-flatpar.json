@@ -1,0 +1,100 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "beamZ",
+  "model": "BT270 LED FlatPAR",
+  "category": "par",
+  "physical": {
+    "width": 210,
+    "height": 235,
+    "depth": 120,
+    "weight": 1.1,
+    "source": "LED",
+    "beamAngle": {
+      "min": 72,
+      "max": 72
+    },
+    "power": 30
+  },
+  "channels": [
+    {
+      "key": "dimming",
+      "name": "Dimming",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function" },
+        { "from": 10, "to": 29, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 30, "to": 49, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 50, "to": 69, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 70, "to": 89, "label": "Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 90, "to": 109, "label": "Red + Green", "kind": "color", "color": "#ff0000" },
+        { "from": 110, "to": 129, "label": "Red + Blue", "kind": "color", "color": "#ff0000" },
+        { "from": 130, "to": 149, "label": "Red + Amber", "kind": "color", "color": "#ff0000" },
+        { "from": 150, "to": 169, "label": "Green + Blue", "kind": "color", "color": "#00ff00" },
+        { "from": 170, "to": 189, "label": "Green + Amber", "kind": "color", "color": "#00ff00" },
+        { "from": 190, "to": 209, "label": "Blue + Amber", "kind": "color", "color": "#0000ff" },
+        { "from": 210, "to": 219, "label": "Red + Green + Blue" },
+        { "from": 220, "to": 229, "label": "Red + Green + Amber" },
+        { "from": 230, "to": 239, "label": "Red + Blue + Amber" },
+        { "from": 240, "to": 249, "label": "Green + Blue + Amber" },
+        { "from": 250, "to": 255, "label": "Red + Green + Blue + Amber" }
+      ]
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function" },
+        { "from": 10, "to": 69, "label": "Auto Color blending" },
+        { "from": 70, "to": 129, "label": "Auto Color change" },
+        { "from": 130, "to": 189, "label": "Sound Color blending" },
+        { "from": 190, "to": 255, "label": "Sound Color change" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "8 Channel",
+      "channels": [
+        "dimming",
+        "strobe",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "color",
+        "colorMacro"
+      ]
+    }
+  ]
+}

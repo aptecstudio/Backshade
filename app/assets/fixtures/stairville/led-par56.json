@@ -1,0 +1,65 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Stairville",
+  "model": "LED PAR56",
+  "category": "par",
+  "physical": {
+    "width": 220,
+    "height": 220,
+    "depth": 210,
+    "weight": 1.4,
+    "source": "LED",
+    "power": 16
+  },
+  "channels": [
+    {
+      "key": "mode",
+      "name": "Mode",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 63, "label": "RGB control" },
+        { "from": 64, "to": 127, "label": "7 color fades" },
+        { "from": 128, "to": 191, "label": "7 color changes" },
+        { "from": 192, "to": 255, "label": "3 color changes" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "speedControl",
+      "name": "Speed control",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 100, "label": "High to slow" },
+        { "from": 101, "to": 150, "label": "No function" },
+        { "from": 151, "to": 255, "label": "Speed control by the device or controller" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "Mode 1",
+      "channels": [
+        "mode",
+        "red",
+        "green",
+        "blue",
+        "speedControl"
+      ]
+    }
+  ]
+}

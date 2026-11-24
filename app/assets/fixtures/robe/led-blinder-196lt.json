@@ -1,0 +1,257 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "LED Blinder 196LT",
+  "category": "par",
+  "physical": {
+    "width": 433,
+    "height": 810,
+    "depth": 190,
+    "weight": 18,
+    "source": "LED",
+    "beamAngle": {
+      "min": 25,
+      "max": 25
+    },
+    "power": 140
+  },
+  "channels": [
+    {
+      "key": "redLedsZone1",
+      "name": "Red LEDs Zone 1",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedsZone1",
+      "name": "Green LEDs Zone 1",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedsZone2",
+      "name": "Green LEDs Zone 2",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedsZone3",
+      "name": "Green LEDs Zone 3",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedsZone4",
+      "name": "Green LEDs Zone 4",
+      "attribute": "green"
+    },
+    {
+      "key": "redLedsZone2",
+      "name": "Red LEDs Zone 2",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedsZone3",
+      "name": "Red LEDs Zone 3",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedsZone4",
+      "name": "Red LEDs Zone 4",
+      "attribute": "red"
+    },
+    {
+      "key": "blueLedsZone1",
+      "name": "Blue LEDs Zone 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedsZone2",
+      "name": "Blue LEDs Zone 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedsZone3",
+      "name": "Blue LEDs Zone 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedsZone4",
+      "name": "Blue LEDs Zone 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "redLeds",
+      "name": "Red Leds",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLeds",
+      "name": "Green LEDs",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLeds",
+      "name": "Blue LEDs",
+      "attribute": "blue"
+    },
+    {
+      "key": "macroSelection",
+      "name": "Macro Selection",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 15, "label": "Macro 1" },
+        { "from": 16, "to": 23, "label": "Macro 2" },
+        { "from": 24, "to": 31, "label": "Macro 3" },
+        { "from": 32, "to": 39, "label": "Macro 4" },
+        { "from": 40, "to": 47, "label": "Macro 5" },
+        { "from": 48, "to": 55, "label": "Macro 6" },
+        { "from": 56, "to": 63, "label": "Macro 7" },
+        { "from": 64, "to": 71, "label": "Macro 8" },
+        { "from": 72, "to": 79, "label": "Macro 9" },
+        { "from": 80, "to": 87, "label": "Macro 10" },
+        { "from": 88, "to": 95, "label": "Macro 11" },
+        { "from": 96, "to": 103, "label": "Macro 12" },
+        { "from": 104, "to": 111, "label": "Macro 13" },
+        { "from": 112, "to": 119, "label": "Macro 14" },
+        { "from": 120, "to": 127, "label": "Macro 15" },
+        { "from": 128, "to": 135, "label": "Macro 16" },
+        { "from": 136, "to": 143, "label": "Macro 17" },
+        { "from": 144, "to": 151, "label": "Macro 18" },
+        { "from": 152, "to": 159, "label": "Macro 19" },
+        { "from": 160, "to": 167, "label": "Macro 20" },
+        { "from": 168, "to": 175, "label": "Macro 21" },
+        { "from": 176, "to": 183, "label": "Macro 22" },
+        { "from": 184, "to": 191, "label": "Macro 23" },
+        { "from": 192, "to": 199, "label": "Macro 24" },
+        { "from": 200, "to": 207, "label": "Macro 25" },
+        { "from": 208, "to": 215, "label": "Macro 26" },
+        { "from": 216, "to": 223, "label": "Macro 27" },
+        { "from": 224, "to": 231, "label": "Macro 28" },
+        { "from": 232, "to": 239, "label": "Macro 29" },
+        { "from": 240, "to": 247, "label": "Macro 30" },
+        { "from": 248, "to": 255, "label": "Macro 31 Rainbow effect (Slow - Fast)" }
+      ]
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Shutter Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Shutter Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe (Slow - Fast)", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Shutter Open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Opening Pulses in sequences (Slow - Fast)", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing Pulses in sequences (Fast - Slow)" },
+        { "from": 160, "to": 191, "label": "Shutter Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobe effect (Slow - Fast)", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "15 Channel",
+      "channels": [
+        "redLedsZone1",
+        "greenLedsZone1",
+        "blueLedsZone1",
+        "redLedsZone2",
+        "greenLedsZone2",
+        "blueLedsZone2",
+        "redLedsZone3",
+        "greenLedsZone3",
+        "blueLedsZone3",
+        "redLedsZone4",
+        "greenLedsZone4",
+        "blueLedsZone4",
+        "macroSelection",
+        "shutterStrobe",
+        "dimmer"
+      ],
+      "heads": [
+        [
+          "blueLedsZone1",
+          "greenLedsZone1",
+          "redLedsZone1"
+        ],
+        [
+          "redLedsZone2",
+          "blueLedsZone2",
+          "greenLedsZone2"
+        ],
+        [
+          "greenLedsZone3",
+          "redLedsZone3",
+          "blueLedsZone3"
+        ],
+        [
+          "blueLedsZone4",
+          "greenLedsZone4",
+          "redLedsZone4"
+        ]
+      ]
+    },
+    {
+      "name": "12 Channels",
+      "channels": [
+        "redLedsZone1",
+        "greenLedsZone1",
+        "blueLedsZone1",
+        "redLedsZone2",
+        "greenLedsZone2",
+        "blueLedsZone2",
+        "redLedsZone3",
+        "greenLedsZone3",
+        "blueLedsZone3",
+        "redLedsZone4",
+        "greenLedsZone4",
+        "blueLedsZone4"
+      ],
+      "heads": [
+        [
+          "blueLedsZone1",
+          "greenLedsZone1",
+          "redLedsZone1"
+        ],
+        [
+          "redLedsZone2",
+          "blueLedsZone2",
+          "greenLedsZone2"
+        ],
+        [
+          "greenLedsZone3",
+          "redLedsZone3",
+          "blueLedsZone3"
+        ],
+        [
+          "blueLedsZone4",
+          "greenLedsZone4",
+          "redLedsZone4"
+        ]
+      ]
+    },
+    {
+      "name": "6 Channel",
+      "channels": [
+        "redLeds",
+        "greenLeds",
+        "blueLeds",
+        "macroSelection",
+        "shutterStrobe",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "redLeds",
+        "greenLeds",
+        "blueLeds"
+      ]
+    }
+  ]
+}

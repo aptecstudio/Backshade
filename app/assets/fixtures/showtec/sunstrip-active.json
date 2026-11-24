@@ -1,0 +1,163 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Showtec",
+  "model": "Sunstrip Active",
+  "category": "pixelBar",
+  "physical": {
+    "width": 1000,
+    "height": 130,
+    "depth": 80,
+    "weight": 5.3,
+    "source": "240V/75W GU10",
+    "power": 750
+  },
+  "channels": [
+    {
+      "key": "channel1",
+      "name": "Channel 1",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel2",
+      "name": "Channel 2",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel3",
+      "name": "Channel 3",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel4",
+      "name": "Channel 4",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel5",
+      "name": "Channel 5",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel6",
+      "name": "Channel 6",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel7",
+      "name": "Channel 7",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel8",
+      "name": "Channel 8",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel9",
+      "name": "Channel 9",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "channel10",
+      "name": "Channel 10",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 Channel Mode",
+      "channels": [
+        "channel1"
+      ]
+    },
+    {
+      "name": "2 Channels Mode",
+      "channels": [
+        "channel1",
+        "channel2"
+      ],
+      "heads": [
+        [
+          "channel1"
+        ],
+        [
+          "channel2"
+        ]
+      ]
+    },
+    {
+      "name": "5 Channels Mode",
+      "channels": [
+        "channel1",
+        "channel2",
+        "channel3",
+        "channel4",
+        "channel5"
+      ],
+      "heads": [
+        [
+          "channel1"
+        ],
+        [
+          "channel2"
+        ],
+        [
+          "channel3"
+        ],
+        [
+          "channel4"
+        ],
+        [
+          "channel5"
+        ]
+      ]
+    },
+    {
+      "name": "10 Channels Mode",
+      "channels": [
+        "channel1",
+        "channel2",
+        "channel3",
+        "channel4",
+        "channel5",
+        "channel6",
+        "channel7",
+        "channel8",
+        "channel9",
+        "channel10"
+      ],
+      "heads": [
+        [
+          "channel1"
+        ],
+        [
+          "channel2"
+        ],
+        [
+          "channel3"
+        ],
+        [
+          "channel4"
+        ],
+        [
+          "channel5"
+        ],
+        [
+          "channel6"
+        ],
+        [
+          "channel7"
+        ],
+        [
+          "channel8"
+        ],
+        [
+          "channel9"
+        ],
+        [
+          "channel10"
+        ]
+      ]
+    }
+  ]
+}

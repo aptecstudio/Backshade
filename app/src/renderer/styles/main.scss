@@ -7,5 +7,7 @@
 @use 'shell/status-bar';
 @use 'sections/sections';
 @use 'sections/start';
+@use 'sections/patch';
+@use 'sections/fixtures';
 @use 'pages/about';
 @use 'pages/catalog';

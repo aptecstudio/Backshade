@@ -1,0 +1,78 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Eurolite",
+  "model": "LED PAR64 RGBA",
+  "category": "par",
+  "physical": {
+    "width": 380,
+    "height": 260,
+    "depth": 280,
+    "weight": 2.4,
+    "source": "LED",
+    "beamAngle": {
+      "min": 36,
+      "max": 36
+    },
+    "power": 27
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "effect",
+      "name": "Effect",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "None" },
+        { "from": 1, "to": 5, "label": "Music 15 colors" },
+        { "from": 6, "to": 10, "label": "On" },
+        { "from": 11, "to": 255, "label": "Strobe slow to fast" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "4 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "amber"
+      ]
+    },
+    {
+      "name": "6 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "amber",
+        "dimmer",
+        "effect"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Stairville",
+  "model": "LED Blinder 2 COB 2x65W",
+  "category": "strobe",
+  "physical": {
+    "width": 530,
+    "height": 330,
+    "depth": 150,
+    "weight": 4.5,
+    "colorTemperature": 2700,
+    "source": "LED",
+    "beamAngle": {
+      "min": 70,
+      "max": 70
+    },
+    "power": 200
+  },
+  "channels": [
+    {
+      "key": "ledDimmer",
+      "name": "LED Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "led1Dimmer",
+      "name": "LED 1 Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "led2Dimmer",
+      "name": "LED 2 Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Open", "kind": "open" },
+        { "from": 6, "to": 123, "label": "Strobe effect, increasing frequency", "kind": "strobe" },
+        { "from": 124, "to": 127, "label": "Open", "kind": "open" },
+        { "from": 128, "to": 185, "label": "Strobe effect, random frequency, LED 1 and 2 synchronous" },
+        { "from": 186, "to": 190, "label": "Open", "kind": "open" },
+        { "from": 191, "to": 249, "label": "Strobe effect, random frequency, LED 1 and 2 asynchronous" },
+        { "from": 250, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 Channel",
+      "channels": [
+        "ledDimmer"
+      ]
+    },
+    {
+      "name": "2 Channel (2A)",
+      "channels": [
+        "led1Dimmer",
+        "led2Dimmer"
+      ]
+    },
+    {
+      "name": "2 Channel (2B)",
+      "channels": [
+        "ledDimmer",
+        "strobe"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "led1Dimmer",
+        "led2Dimmer",
+        "strobe"
+      ]
+    }
+  ]
+}

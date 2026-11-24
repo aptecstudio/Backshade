@@ -1,5 +1,9 @@
-// Text labels
+// Text labels: line breaks in the text are kept
 @use '../tokens' as *;
+
+.label {
+    white-space: pre-line;
+}
 
 .label--primary {
     color: color('text');

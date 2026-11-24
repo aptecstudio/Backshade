@@ -1,0 +1,490 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Martin",
+  "model": "MAC Viper Performance",
+  "category": "movingHead",
+  "physical": {
+    "width": 471,
+    "height": 730,
+    "depth": 565,
+    "weight": 38,
+    "colorTemperature": 6000,
+    "source": "HTI 1000W",
+    "beamAngle": {
+      "min": 10,
+      "max": 44
+    },
+    "panRange": 540,
+    "tiltRange": 268,
+    "power": 1200
+  },
+  "channels": [
+    {
+      "key": "strobeShutter",
+      "name": "Strobe/shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "Closed", "kind": "closed" },
+        { "from": 20, "to": 49, "label": "Open", "kind": "open" },
+        { "from": 50, "to": 200, "label": "Strobe, slow -> fast", "kind": "strobe" },
+        { "from": 201, "to": 210, "label": "Open", "kind": "open" },
+        { "from": 211, "to": 255, "label": "Random strobe, slow -> fast", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "dimmerFade",
+      "name": "Dimmer fade",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFadeFine",
+      "name": "Dimmer fade, fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmerFade"
+    },
+    {
+      "key": "cyan",
+      "name": "Cyan",
+      "attribute": "cyan"
+    },
+    {
+      "key": "magenta",
+      "name": "Magenta",
+      "attribute": "magenta"
+    },
+    {
+      "key": "yellow",
+      "name": "Yellow",
+      "attribute": "yellow"
+    },
+    {
+      "key": "cto",
+      "name": "CTO",
+      "attribute": "white"
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Open" },
+        { "from": 1, "to": 14, "label": "Open -> Slot 1" },
+        { "from": 15, "to": 15, "label": "Slot 1", "kind": "color", "color": "#494d9a" },
+        { "from": 16, "to": 29, "label": "Slot 1 -> Slot 2" },
+        { "from": 30, "to": 30, "label": "Slot 2", "kind": "color", "color": "#65bd55" },
+        { "from": 31, "to": 44, "label": "Slot 2 -> Slot 3" },
+        { "from": 45, "to": 45, "label": "Slot 3", "kind": "color", "color": "#ef9b57" },
+        { "from": 46, "to": 59, "label": "Slot 3 -> Slot 4" },
+        { "from": 60, "to": 60, "label": "Slot 4", "kind": "color", "color": "#f9e4ee" },
+        { "from": 61, "to": 74, "label": "Slot 4 -> Slot 5" },
+        { "from": 75, "to": 75, "label": "Slot 5", "kind": "color", "color": "#d59ac4" },
+        { "from": 76, "to": 89, "label": "Slot 5 -> Slot 6" },
+        { "from": 90, "to": 90, "label": "Slot 6", "kind": "color", "color": "#9f4d9d" },
+        { "from": 91, "to": 104, "label": "Slot 6 -> Slot 7" },
+        { "from": 105, "to": 105, "label": "Slot 7", "kind": "color", "color": "#d04f4e" },
+        { "from": 106, "to": 119, "label": "Slot 7 -> Open" },
+        { "from": 120, "to": 160, "label": "Open" },
+        { "from": 161, "to": 163, "label": "Slot 1", "kind": "color", "color": "#3e40c5" },
+        { "from": 164, "to": 166, "label": "Slot 2", "kind": "color", "color": "#65bd55" },
+        { "from": 167, "to": 169, "label": "Slot 3", "kind": "color", "color": "#ef9b57" },
+        { "from": 170, "to": 172, "label": "Slot 4", "kind": "color", "color": "#f9e4ee" },
+        { "from": 173, "to": 175, "label": "Slot 5", "kind": "color", "color": "#d59ac4" },
+        { "from": 176, "to": 178, "label": "Slot 6", "kind": "color", "color": "#9f4d9d" },
+        { "from": 179, "to": 181, "label": "Slot 7", "kind": "color", "color": "#d04f4e" },
+        { "from": 182, "to": 192, "label": "Open" },
+        { "from": 193, "to": 214, "label": "Continuous Rotation CW, Fast -> Slow" },
+        { "from": 215, "to": 221, "label": "Stop Rotate" },
+        { "from": 222, "to": 243, "label": "Continuous Rotation CCW, Slow -> Fast" },
+        { "from": 244, "to": 247, "label": "Random color Fast" },
+        { "from": 248, "to": 251, "label": "Random color Medium" },
+        { "from": 252, "to": 255, "label": "Random color Slow" }
+      ]
+    },
+    {
+      "key": "goboSelectionIndexingShakeRotation",
+      "name": "Gobo selection, indexing, shake, rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Open" },
+        { "from": 10, "to": 14, "label": "Indexed Gobo 1", "kind": "gobo" },
+        { "from": 15, "to": 19, "label": "Indexed Gobo 2", "kind": "gobo" },
+        { "from": 20, "to": 24, "label": "Indexed Gobo 3", "kind": "gobo" },
+        { "from": 25, "to": 29, "label": "Indexed Gobo 4", "kind": "gobo" },
+        { "from": 30, "to": 34, "label": "Indexed Gobo 5", "kind": "gobo" },
+        { "from": 35, "to": 39, "label": "Continuous Gobo 1", "kind": "gobo" },
+        { "from": 40, "to": 44, "label": "Continuous Gobo 2", "kind": "gobo" },
+        { "from": 45, "to": 49, "label": "Continuous Gobo 3", "kind": "gobo" },
+        { "from": 50, "to": 54, "label": "Continuous Gobo 4", "kind": "gobo" },
+        { "from": 55, "to": 59, "label": "Continuous Gobo 5", "kind": "gobo" },
+        { "from": 60, "to": 89, "label": "Shake Gobo 1", "kind": "gobo" },
+        { "from": 90, "to": 119, "label": "Shake Gobo 2", "kind": "gobo" },
+        { "from": 120, "to": 149, "label": "Shake Gobo 3", "kind": "gobo" },
+        { "from": 150, "to": 179, "label": "Shake Gobo 4", "kind": "gobo" },
+        { "from": 180, "to": 209, "label": "Shake Gobo 5", "kind": "gobo" },
+        { "from": 210, "to": 232, "label": "CW gobo wheel scroll, fast -> slow" },
+        { "from": 233, "to": 255, "label": "CCW gobo wheel scroll, slow* -> fast" }
+      ]
+    },
+    {
+      "key": "goboIndexing",
+      "name": "Gobo indexing",
+      "attribute": "goboRotation"
+    },
+    {
+      "key": "goboRotation",
+      "name": "Gobo Rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No gobo rotation, gobo indexed at 0 deg" },
+        { "from": 1, "to": 126, "label": "CW, fast -> slow" },
+        { "from": 127, "to": 127, "label": "Stop" },
+        { "from": 128, "to": 254, "label": "CCW, slow -> fast" },
+        { "from": 255, "to": 255, "label": "Stop" }
+      ]
+    },
+    {
+      "key": "animationWheelRotation",
+      "name": "Animation wheel rotation",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "Open" },
+        { "from": 11, "to": 20, "label": "Indexed" },
+        { "from": 21, "to": 30, "label": "Open" },
+        { "from": 31, "to": 40, "label": "Continuous rotation" },
+        { "from": 41, "to": 50, "label": "Position 1" },
+        { "from": 51, "to": 60, "label": "Position 2" },
+        { "from": 61, "to": 70, "label": "Position 3" },
+        { "from": 71, "to": 80, "label": "Position 4" },
+        { "from": 81, "to": 90, "label": "Position 5" },
+        { "from": 91, "to": 100, "label": "Position 6" },
+        { "from": 101, "to": 110, "label": "Position 7" },
+        { "from": 111, "to": 255, "label": "Open" }
+      ]
+    },
+    {
+      "key": "animationWheelIndexedAngleRotationSpeedAndDirection",
+      "name": "Animation wheel indexed angle, rotation speed and direction",
+      "attribute": "effectSpeed",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "Stop, indexed at 0 deg" },
+        { "from": 3, "to": 126, "label": "CW rotation, fast -> slow" },
+        { "from": 127, "to": 129, "label": "Stop, wheel stops at its current position" },
+        { "from": 130, "to": 253, "label": "CCW rotation, fast -> slow" },
+        { "from": 254, "to": 255, "label": "Stop, indexed at 90 deg" }
+      ]
+    },
+    {
+      "key": "framingBlade1Position",
+      "name": "Framing blade 1, position",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "framingBlade1Angle",
+      "name": "Framing blade 1, angle",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 126, "label": "Angle -" },
+        { "from": 127, "to": 128, "label": "Parallel" },
+        { "from": 129, "to": 255, "label": "Angle +" }
+      ]
+    },
+    {
+      "key": "framingBlade2Position",
+      "name": "Framing blade 2, position",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "framingBlade2Angle",
+      "name": "Framing blade 2, angle",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 126, "label": "Angle -" },
+        { "from": 127, "to": 128, "label": "Parallel" },
+        { "from": 129, "to": 255, "label": "Angle +" }
+      ]
+    },
+    {
+      "key": "framingBlade3Position",
+      "name": "Framing blade 3, position",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "framingBlade3Angle",
+      "name": "Framing blade 3, angle",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 126, "label": "Angle -" },
+        { "from": 127, "to": 128, "label": "Parallel" },
+        { "from": 129, "to": 255, "label": "Angle +" }
+      ]
+    },
+    {
+      "key": "framingBlade4Position",
+      "name": "Framing blade 4, position",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "framingBlade4Angle",
+      "name": "Framing blade 4, angle",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 126, "label": "Angle -" },
+        { "from": 127, "to": 128, "label": "Parallel" },
+        { "from": 129, "to": 255, "label": "Angle +" }
+      ]
+    },
+    {
+      "key": "frameIndexingAngle",
+      "name": "Frame indexing angle",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 126, "label": "Minimum (-55 deg)" },
+        { "from": 127, "to": 128, "label": "0 deg" },
+        { "from": 129, "to": 255, "label": "Maximum (+55 deg)" }
+      ]
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost"
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No Prism" },
+        { "from": 11, "to": 138, "label": "Prism indexing" },
+        { "from": 139, "to": 255, "label": "Prism rotation" }
+      ]
+    },
+    {
+      "key": "prismIndexingAngleRotationSpeedAndDirection",
+      "name": "Prism indexing angle, rotation speed and direction",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "Prism stop, indexed at 0 deg" },
+        { "from": 3, "to": 126, "label": "CW rotation, fast -> slow" },
+        { "from": 127, "to": 129, "label": "Prism stop at its current position" },
+        { "from": 130, "to": 253, "label": "CCW rotation, slow -> fast" },
+        { "from": 254, "to": 255, "label": "Prism stop, indexed at 45 deg" }
+      ]
+    },
+    {
+      "key": "iris",
+      "name": "Iris",
+      "attribute": "iris"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom Fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "focusFine",
+      "name": "Focus Fine",
+      "attribute": "focus",
+      "fineOf": "focus"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "controlSettings",
+      "name": "Control/Settings",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function" },
+        { "from": 10, "to": 14, "label": "Reset entire fixture - 5 sec", "kind": "reset" },
+        { "from": 15, "to": 19, "label": "Reset dimmer and shutter only - 5 sec", "kind": "reset" },
+        { "from": 20, "to": 24, "label": "Reset CMY, CTO and color wheel only - 5 sec" },
+        { "from": 25, "to": 29, "label": "Reset effects (gobo and animation wheels, iris, prism, frost, zoom, focus) only - 5 sec.", "kind": "reset" },
+        { "from": 30, "to": 34, "label": "Reset pan and tilt only - 5 sec.", "kind": "reset" },
+        { "from": 35, "to": 39, "label": "Reset framing - 5 sec" },
+        { "from": 40, "to": 44, "label": "Lamp on", "kind": "lampOn" },
+        { "from": 45, "to": 49, "label": "Lamp off - 5 sec.", "kind": "lampOff" },
+        { "from": 50, "to": 54, "label": "No function" },
+        { "from": 55, "to": 59, "label": "Enable calibration - 5 sec." },
+        { "from": 60, "to": 64, "label": "Linear dimming curve - 1 sec. (menu override, setting unaffected by power off/on)" },
+        { "from": 65, "to": 69, "label": "Square law dimming curve - 1 sec. (menu override, factory default setting, setting unaffected by power off/on)" },
+        { "from": 70, "to": 74, "label": "Inverse square law dimming curve - 1 sec" },
+        { "from": 75, "to": 79, "label": "S-curve dimming curve- 1 sec" },
+        { "from": 80, "to": 84, "label": "Normal pan and tilt speed - 1 sec" },
+        { "from": 85, "to": 89, "label": "Fast pan and tilt speed - 1 sec" },
+        { "from": 90, "to": 94, "label": "Slow pan and tilt speed - 1 sec" },
+        { "from": 95, "to": 99, "label": "Effect shortcuts = ON - 1 sec." },
+        { "from": 100, "to": 104, "label": "Effect shortcuts = OFF - 1 sec" },
+        { "from": 105, "to": 109, "label": "Disable zoom/focus linking- 1 sec." },
+        { "from": 110, "to": 114, "label": "Enable zoom/focus linking, near distance - 1 sec" },
+        { "from": 115, "to": 119, "label": "Enable zoom/focus linking, medium distance (default setting) - 1 sec." },
+        { "from": 120, "to": 124, "label": "Enable zoom/focus linking, far distance - 1 sec." },
+        { "from": 125, "to": 126, "label": "Ballast output full, set to 100% (default setting)" },
+        { "from": 127, "to": 128, "label": "Ballast output reduced to 90%" },
+        { "from": 129, "to": 130, "label": "Ballast output reduced to 80%" },
+        { "from": 131, "to": 132, "label": "Ballast output reduced to 70%" },
+        { "from": 133, "to": 134, "label": "Ballast output reduced to 60%" },
+        { "from": 135, "to": 144, "label": "No function" },
+        { "from": 145, "to": 149, "label": "Auto blackout = ON - 1 sec" },
+        { "from": 150, "to": 154, "label": "Auto blackout = OFF - 1 sec. (default setting)" },
+        { "from": 155, "to": 159, "label": "Turn on display - 1 sec." },
+        { "from": 160, "to": 164, "label": "Turn off display - 1 sec." },
+        { "from": 165, "to": 169, "label": "Store pan and tilt calibration - 5 sec." },
+        { "from": 170, "to": 174, "label": "Store dimmer calibration - 5 sec." },
+        { "from": 175, "to": 179, "label": "Store cyan calibration - 5 sec." },
+        { "from": 180, "to": 184, "label": "Store magenta calibration - 5 sec." },
+        { "from": 185, "to": 189, "label": "Store yellow calibration - 5 sec." },
+        { "from": 190, "to": 194, "label": "Store CTC calibration - 5 sec." },
+        { "from": 195, "to": 199, "label": "Store all CMY and CTC calibration - 5 sec." },
+        { "from": 200, "to": 204, "label": "Store gobo wheel current slot index calibration - 5 sec." },
+        { "from": 205, "to": 214, "label": "No function" },
+        { "from": 215, "to": 219, "label": "Store prism calibration - 5 sec" },
+        { "from": 220, "to": 224, "label": "Store iris calibration - 5 sec." },
+        { "from": 225, "to": 229, "label": "Store focus calibration - 5 sec." },
+        { "from": 230, "to": 234, "label": "Store zoom calibration - 5 sec." },
+        { "from": 235, "to": 239, "label": "Store pan calibration - 5 sec." },
+        { "from": 240, "to": 244, "label": "Store tilt calibration - 5 sec." },
+        { "from": 245, "to": 249, "label": "Reset all calibration values to factory defaults - 5 sec.", "kind": "reset" },
+        { "from": 250, "to": 255, "label": "No function" }
+      ]
+    },
+    {
+      "key": "reservedForFutureUse",
+      "name": "Reserved for future use",
+      "attribute": "none"
+    },
+    {
+      "key": "reservedForFutureUse1",
+      "name": "Reserved for future use 1",
+      "attribute": "none"
+    },
+    {
+      "key": "reservedForFutureUse2",
+      "name": "Reserved for future use 2",
+      "attribute": "none"
+    },
+    {
+      "key": "reservedForFutureUse3",
+      "name": "Reserved for future use 3",
+      "attribute": "none"
+    },
+    {
+      "key": "reservedForFutureUse4",
+      "name": "Reserved for future use 4",
+      "attribute": "none"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Extended",
+      "channels": [
+        "strobeShutter",
+        "dimmerFade",
+        "dimmerFadeFine",
+        "cyan",
+        "magenta",
+        "yellow",
+        "cto",
+        "colorWheel",
+        "goboSelectionIndexingShakeRotation",
+        "goboIndexing",
+        "goboRotation",
+        "animationWheelRotation",
+        "animationWheelIndexedAngleRotationSpeedAndDirection",
+        "framingBlade1Position",
+        "framingBlade1Angle",
+        "framingBlade2Position",
+        "framingBlade2Angle",
+        "framingBlade3Position",
+        "framingBlade3Angle",
+        "framingBlade4Position",
+        "framingBlade4Angle",
+        "frameIndexingAngle",
+        "frost",
+        "prism",
+        "prismIndexingAngleRotationSpeedAndDirection",
+        "iris",
+        "zoom",
+        "zoomFine",
+        "focus",
+        "focusFine",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "controlSettings",
+        "reservedForFutureUse",
+        "reservedForFutureUse1",
+        "reservedForFutureUse2",
+        "reservedForFutureUse3",
+        "reservedForFutureUse4"
+      ]
+    },
+    {
+      "name": "Basic",
+      "channels": [
+        "strobeShutter",
+        "dimmerFade",
+        "cyan",
+        "magenta",
+        "yellow",
+        "cto",
+        "colorWheel",
+        "goboSelectionIndexingShakeRotation",
+        "goboIndexing",
+        "goboRotation",
+        "animationWheelRotation",
+        "animationWheelIndexedAngleRotationSpeedAndDirection",
+        "framingBlade1Position",
+        "framingBlade1Angle",
+        "framingBlade2Position",
+        "framingBlade2Angle",
+        "framingBlade3Position",
+        "framingBlade3Angle",
+        "framingBlade4Position",
+        "framingBlade4Angle",
+        "frameIndexingAngle",
+        "frost",
+        "prism",
+        "prismIndexingAngleRotationSpeedAndDirection",
+        "iris",
+        "zoom",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "controlSettings"
+      ]
+    }
+  ]
+}

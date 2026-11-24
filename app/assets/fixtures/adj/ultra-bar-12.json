@@ -1,0 +1,536 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Ultra Bar 12",
+  "category": "ledBar",
+  "physical": {
+    "width": 1060,
+    "height": 90,
+    "depth": 63,
+    "weight": 2.7,
+    "source": "LED",
+    "power": 43
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "strobing",
+      "name": "Strobing",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function", "kind": "open" },
+        { "from": 16, "to": 255, "label": "Strobing (slow to fast)", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 6, "label": "Bastard amber", "kind": "color", "color": "#ffcf8f" },
+        { "from": 7, "to": 13, "label": "Medium amber", "kind": "color", "color": "#feb199" },
+        { "from": 14, "to": 20, "label": "Pale amber gold", "kind": "color", "color": "#fec08a" },
+        { "from": 21, "to": 27, "label": "Gallo gold", "kind": "color", "color": "#fea562" },
+        { "from": 28, "to": 34, "label": "Golden amber", "kind": "color", "color": "#fe7b00" },
+        { "from": 35, "to": 42, "label": "Light red", "kind": "color", "color": "#b01100" },
+        { "from": 43, "to": 49, "label": "Medium red", "kind": "color", "color": "#60000b" },
+        { "from": 50, "to": 56, "label": "Medium pink", "kind": "color", "color": "#ea8bab" },
+        { "from": 57, "to": 63, "label": "Broadway pink", "kind": "color", "color": "#e00561" },
+        { "from": 64, "to": 70, "label": "Follies pink", "kind": "color", "color": "#af4dad" },
+        { "from": 71, "to": 77, "label": "Light lavender", "kind": "color", "color": "#7782c7" },
+        { "from": 78, "to": 84, "label": "Special lavender", "kind": "color", "color": "#93a4d4" },
+        { "from": 85, "to": 91, "label": "Lavender", "kind": "color", "color": "#5802a3" },
+        { "from": 92, "to": 98, "label": "Indigo", "kind": "color", "color": "#002656" },
+        { "from": 99, "to": 105, "label": "Hemsley blue", "kind": "color", "color": "#008ed0" },
+        { "from": 106, "to": 112, "label": "Tipton blue", "kind": "color", "color": "#3494d1" },
+        { "from": 113, "to": 119, "label": "Light steel blue", "kind": "color", "color": "#0186c9" },
+        { "from": 120, "to": 126, "label": "Light sky blue", "kind": "color", "color": "#0091d4" },
+        { "from": 127, "to": 133, "label": "Sky blue", "kind": "color", "color": "#0079c0" },
+        { "from": 134, "to": 140, "label": "Brilliant blue", "kind": "color", "color": "#0081b8" },
+        { "from": 141, "to": 147, "label": "Light green blue", "kind": "color", "color": "#005373" },
+        { "from": 148, "to": 154, "label": "Bright blue", "kind": "color", "color": "#0061a6" },
+        { "from": 155, "to": 161, "label": "Primary blue", "kind": "color", "color": "#0164a7" },
+        { "from": 162, "to": 168, "label": "Congo blue", "kind": "color", "color": "#002856" },
+        { "from": 169, "to": 175, "label": "Pale yellow green", "kind": "color", "color": "#d1dbb6" },
+        { "from": 176, "to": 182, "label": "Moss green", "kind": "color", "color": "#2aa555" },
+        { "from": 183, "to": 189, "label": "Primary green", "kind": "color", "color": "#002e23" },
+        { "from": 190, "to": 196, "label": "Double CTB", "kind": "color", "color": "#006bde" },
+        { "from": 197, "to": 203, "label": "Full CTB", "kind": "color", "color": "#6b9ce7" },
+        { "from": 204, "to": 210, "label": "Half CTB", "kind": "color", "color": "#a5c6f7" },
+        { "from": 211, "to": 217, "label": "Dark blue", "kind": "color", "color": "#0000bd" },
+        { "from": 218, "to": 224, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 225, "to": 231, "label": "Full red", "kind": "color", "color": "#ff0000" },
+        { "from": 232, "to": 238, "label": "Full green", "kind": "color", "color": "#00ff00" },
+        { "from": 239, "to": 255, "label": "Full blue", "kind": "color", "color": "#0000ff" }
+      ]
+    },
+    {
+      "key": "dimmingColorMacroProgramModeSoundActive",
+      "name": "Dimming/Color macro/Program mode/Sound active",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "Dimmer mode" },
+        { "from": 52, "to": 102, "label": "Color macro mode" },
+        { "from": 103, "to": 204, "label": "Program mode" },
+        { "from": 205, "to": 255, "label": "Sound active mode" }
+      ]
+    },
+    {
+      "key": "strobingProgramSpeedSoundSensitivity",
+      "name": "Strobing/Program speed/Sound sensitivity",
+      "attribute": "effectSpeed"
+    },
+    {
+      "key": "programs",
+      "name": "Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 24, "label": "Program 1" },
+        { "from": 25, "to": 35, "label": "Program 2" },
+        { "from": 36, "to": 46, "label": "Program 3" },
+        { "from": 47, "to": 57, "label": "Program 4" },
+        { "from": 58, "to": 68, "label": "Program 5" },
+        { "from": 69, "to": 79, "label": "Program 6" },
+        { "from": 80, "to": 90, "label": "Program 7" },
+        { "from": 91, "to": 101, "label": "Program 8" },
+        { "from": 102, "to": 112, "label": "Program 9" },
+        { "from": 113, "to": 123, "label": "Program 10" },
+        { "from": 124, "to": 134, "label": "Program 11" },
+        { "from": 135, "to": 145, "label": "Program 12" },
+        { "from": 146, "to": 156, "label": "Program 13" },
+        { "from": 157, "to": 167, "label": "Program 14" },
+        { "from": 168, "to": 178, "label": "Program 15" },
+        { "from": 179, "to": 189, "label": "Program 16" },
+        { "from": 190, "to": 200, "label": "Program 17" },
+        { "from": 201, "to": 211, "label": "Program 18" },
+        { "from": 212, "to": 222, "label": "Program 19" },
+        { "from": 223, "to": 233, "label": "Program 20" },
+        { "from": 234, "to": 244, "label": "Program 21" },
+        { "from": 245, "to": 255, "label": "Program 22" }
+      ]
+    },
+    {
+      "key": "programs2",
+      "name": "Programs 2",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 25, "label": "Program 1" },
+        { "from": 26, "to": 35, "label": "Program 2" },
+        { "from": 36, "to": 45, "label": "Program 3" },
+        { "from": 46, "to": 55, "label": "Program 4" },
+        { "from": 56, "to": 65, "label": "Program 5" },
+        { "from": 66, "to": 75, "label": "Program 6" },
+        { "from": 76, "to": 85, "label": "Program 7" },
+        { "from": 86, "to": 95, "label": "Program 8" },
+        { "from": 96, "to": 105, "label": "Program 9" },
+        { "from": 106, "to": 115, "label": "Program 10" },
+        { "from": 116, "to": 125, "label": "Program 11" },
+        { "from": 126, "to": 135, "label": "Program 12" },
+        { "from": 136, "to": 145, "label": "Program 13" },
+        { "from": 146, "to": 155, "label": "Program 14" },
+        { "from": 156, "to": 165, "label": "Program 15" },
+        { "from": 166, "to": 175, "label": "Program 16" },
+        { "from": 176, "to": 185, "label": "Program 17" },
+        { "from": 186, "to": 195, "label": "Program 18" },
+        { "from": 196, "to": 205, "label": "Program 19" },
+        { "from": 206, "to": 215, "label": "Program 20" },
+        { "from": 216, "to": 225, "label": "Program 21" },
+        { "from": 226, "to": 235, "label": "Program 22" },
+        { "from": 236, "to": 245, "label": "Auto run" },
+        { "from": 246, "to": 255, "label": "Sound active" }
+      ]
+    },
+    {
+      "key": "red14",
+      "name": "Red 1-4",
+      "attribute": "red"
+    },
+    {
+      "key": "green14",
+      "name": "Green 1-4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue14",
+      "name": "Blue 1-4",
+      "attribute": "blue"
+    },
+    {
+      "key": "red58",
+      "name": "Red 5-8",
+      "attribute": "red"
+    },
+    {
+      "key": "green58",
+      "name": "Green 5-8",
+      "attribute": "green"
+    },
+    {
+      "key": "blue58",
+      "name": "Blue 5-8",
+      "attribute": "blue"
+    },
+    {
+      "key": "red912",
+      "name": "Red 9-12",
+      "attribute": "red"
+    },
+    {
+      "key": "green912",
+      "name": "Green 9-12",
+      "attribute": "green"
+    },
+    {
+      "key": "blue912",
+      "name": "Blue 9-12",
+      "attribute": "blue"
+    },
+    {
+      "key": "programSpeedSoundSensitive",
+      "name": "Program speed / Sound sensitive",
+      "attribute": "effectSpeed"
+    },
+    {
+      "key": "red12",
+      "name": "Red 1-2",
+      "attribute": "red"
+    },
+    {
+      "key": "green12",
+      "name": "Green 1-2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue12",
+      "name": "Blue 1-2",
+      "attribute": "blue"
+    },
+    {
+      "key": "red34",
+      "name": "Red 3-4",
+      "attribute": "red"
+    },
+    {
+      "key": "green34",
+      "name": "Green 3-4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue34",
+      "name": "Blue 3-4",
+      "attribute": "blue"
+    },
+    {
+      "key": "red56",
+      "name": "Red 5-6",
+      "attribute": "red"
+    },
+    {
+      "key": "green56",
+      "name": "Green 5-6",
+      "attribute": "green"
+    },
+    {
+      "key": "blue56",
+      "name": "Blue 5-6",
+      "attribute": "blue"
+    },
+    {
+      "key": "red78",
+      "name": "Red 7-8",
+      "attribute": "red"
+    },
+    {
+      "key": "green78",
+      "name": "Green 7-8",
+      "attribute": "green"
+    },
+    {
+      "key": "blue78",
+      "name": "Blue 7-8",
+      "attribute": "blue"
+    },
+    {
+      "key": "red910",
+      "name": "Red 9-10",
+      "attribute": "red"
+    },
+    {
+      "key": "green910",
+      "name": "Green 9-10",
+      "attribute": "green"
+    },
+    {
+      "key": "blue910",
+      "name": "Blue 9-10",
+      "attribute": "blue"
+    },
+    {
+      "key": "red1112",
+      "name": "Red 11-12",
+      "attribute": "red"
+    },
+    {
+      "key": "green1112",
+      "name": "Green 11-12",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1112",
+      "name": "Blue 11-12",
+      "attribute": "blue"
+    }
+  ],
+  "modes": [
+    {
+      "name": "3 Channels mode",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "5 Channels mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "strobing",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "6 Channels mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "colorMacros",
+        "strobing",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "7 Channels mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "masterDimmer",
+        "strobingProgramSpeedSoundSensitivity",
+        "dimmingColorMacroProgramModeSoundActive",
+        "programs"
+      ]
+    },
+    {
+      "name": "8 Channels mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "colorMacros",
+        "programs2",
+        "programSpeedSoundSensitive",
+        "strobing",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "9 Channels mode",
+      "channels": [
+        "red14",
+        "green14",
+        "blue14",
+        "red58",
+        "green58",
+        "blue58",
+        "red912",
+        "green912",
+        "blue912"
+      ],
+      "heads": [
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red58",
+          "green58",
+          "blue58"
+        ],
+        [
+          "red912",
+          "green912",
+          "blue912"
+        ]
+      ]
+    },
+    {
+      "name": "11 Channels mode",
+      "channels": [
+        "red14",
+        "green14",
+        "blue14",
+        "red58",
+        "green58",
+        "blue58",
+        "red912",
+        "green912",
+        "blue912",
+        "strobing",
+        "masterDimmer"
+      ],
+      "heads": [
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red58",
+          "green58",
+          "blue58"
+        ],
+        [
+          "red912",
+          "green912",
+          "blue912"
+        ]
+      ]
+    },
+    {
+      "name": "18 Channels mode",
+      "channels": [
+        "red12",
+        "green12",
+        "blue12",
+        "red34",
+        "green34",
+        "blue34",
+        "red56",
+        "green56",
+        "blue56",
+        "red78",
+        "green78",
+        "blue78",
+        "red910",
+        "green910",
+        "blue910",
+        "red1112",
+        "green1112",
+        "blue1112"
+      ],
+      "heads": [
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red34",
+          "green34",
+          "blue34"
+        ],
+        [
+          "red56",
+          "green56",
+          "blue56"
+        ],
+        [
+          "red78",
+          "green78",
+          "blue78"
+        ],
+        [
+          "red910",
+          "green910",
+          "blue910"
+        ],
+        [
+          "blue1112",
+          "red1112",
+          "green1112"
+        ]
+      ]
+    },
+    {
+      "name": "20 Channels mode",
+      "channels": [
+        "red12",
+        "green12",
+        "blue12",
+        "red34",
+        "green34",
+        "blue34",
+        "red56",
+        "green56",
+        "blue56",
+        "red78",
+        "green78",
+        "blue78",
+        "red910",
+        "green910",
+        "blue910",
+        "red1112",
+        "green1112",
+        "blue1112",
+        "strobing",
+        "masterDimmer"
+      ],
+      "heads": [
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red34",
+          "green34",
+          "blue34"
+        ],
+        [
+          "red56",
+          "green56",
+          "blue56"
+        ],
+        [
+          "red78",
+          "green78",
+          "blue78"
+        ],
+        [
+          "red910",
+          "green910",
+          "blue910"
+        ],
+        [
+          "blue1112",
+          "red1112",
+          "green1112"
+        ]
+      ]
+    }
+  ]
+}

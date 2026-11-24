@@ -1,0 +1,32 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "Hurricane 1800 Flex",
+  "category": "smoke",
+  "physical": {
+    "width": 347,
+    "height": 374,
+    "depth": 585,
+    "weight": 13,
+    "power": 1364
+  },
+  "channels": [
+    {
+      "key": "fogOutput",
+      "name": "Fog Output",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Off" },
+        { "from": 6, "to": 255, "label": "Fog Output 0% -> 100%" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "DMX Mode",
+      "channels": [
+        "fogOutput"
+      ]
+    }
+  ]
+}

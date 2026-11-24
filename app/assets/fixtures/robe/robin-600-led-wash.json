@@ -1,0 +1,538 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Robin 600 LED Wash",
+  "category": "movingHead",
+  "physical": {
+    "width": 343,
+    "height": 444,
+    "depth": 203,
+    "weight": 10.6,
+    "lumens": 37000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 15,
+      "max": 60
+    },
+    "panRange": 450,
+    "tiltRange": 300,
+    "power": 415
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "pTSpeedPTTime",
+      "name": "P/T Speed - P/T Time",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Max Speed (Tracking Mode)" },
+        { "from": 1, "to": 255, "label": "Speed Max to Min (Vector Mode)" }
+      ]
+    },
+    {
+      "key": "control",
+      "name": "Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 49, "label": "Reserved" },
+        { "from": 50, "to": 59, "label": "P/T speed mode" },
+        { "from": 60, "to": 69, "label": "P/T Time Mode" },
+        { "from": 70, "to": 79, "label": "BO P/T moving" },
+        { "from": 80, "to": 89, "label": "Disable BO P/T moving" },
+        { "from": 90, "to": 99, "label": "Theatre Mode ON" },
+        { "from": 100, "to": 109, "label": "Theatre Mode OFF" },
+        { "from": 110, "to": 139, "label": "Reserved" },
+        { "from": 140, "to": 149, "label": "P/T Reset", "kind": "reset" },
+        { "from": 150, "to": 179, "label": "Reseved" },
+        { "from": 180, "to": 189, "label": "Zoom Reset", "kind": "reset" },
+        { "from": 190, "to": 199, "label": "Reserved" },
+        { "from": 200, "to": 209, "label": "Total Reset", "kind": "reset" },
+        { "from": 210, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "redAllZones",
+      "name": "Red (All Zones)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenAllZones",
+      "name": "Green (All Zones)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueAllZones",
+      "name": "Blue (All Zones)",
+      "attribute": "blue"
+    },
+    {
+      "key": "ctc",
+      "name": "CTC",
+      "attribute": "colorTemperature"
+    },
+    {
+      "key": "colors",
+      "name": "Colors",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function", "kind": "color", "color": "#ffffff" },
+        { "from": 1, "to": 2, "label": "2700K White", "kind": "color", "color": "#ffc58f" },
+        { "from": 3, "to": 3, "label": "2700K White (Halogen)", "kind": "color", "color": "#ffc58f" },
+        { "from": 4, "to": 5, "label": "3200K White", "kind": "color", "color": "#fff1e0" },
+        { "from": 6, "to": 6, "label": "3200K White (Halogen)", "kind": "color", "color": "#fff1e0" },
+        { "from": 7, "to": 9, "label": "4200K White", "kind": "color", "color": "#fff9e0" },
+        { "from": 10, "to": 12, "label": "5600K White", "kind": "color", "color": "#fffffb" },
+        { "from": 13, "to": 15, "label": "8000K White", "kind": "color", "color": "#dce2ff" },
+        { "from": 16, "to": 16, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 17, "to": 55, "label": "Blue -> Cyan", "kind": "color", "color": "#0000ff" },
+        { "from": 56, "to": 56, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 57, "to": 95, "label": "Cyan -> Green", "kind": "color", "color": "#00ffff" },
+        { "from": 96, "to": 96, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 97, "to": 134, "label": "Green -> Yellow", "kind": "color", "color": "#00ff00" },
+        { "from": 135, "to": 135, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 136, "to": 174, "label": "Yellow -> Red", "kind": "color", "color": "#ffff00" },
+        { "from": 175, "to": 175, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 176, "to": 214, "label": "Red -> Magenta", "kind": "color", "color": "#ff0000" },
+        { "from": 215, "to": 215, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 216, "to": 246, "label": "Magenta -> Blue", "kind": "color", "color": "#ff00ff" },
+        { "from": 247, "to": 247, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 248, "to": 248, "label": "Rainbow (Fade)" },
+        { "from": 249, "to": 249, "label": "Rainbow" },
+        { "from": 250, "to": 255, "label": "Zone Effect" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom Fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Strobe >> (Z3)", "kind": "strobe" },
+        { "from": 64, "to": 95, "label": "Strobe >> (All Zones)", "kind": "strobe" },
+        { "from": 96, "to": 111, "label": "Effects >>" },
+        { "from": 112, "to": 127, "label": "Effects <<" },
+        { "from": 128, "to": 143, "label": "Opening Pulse >", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing Pulse <" },
+        { "from": 160, "to": 175, "label": "Rnd Strobe >> (Rndm Zone)", "kind": "strobe" },
+        { "from": 176, "to": 191, "label": "Random Strobe >> (Rndm Strb+Zone)", "kind": "strobe" },
+        { "from": 192, "to": 223, "label": "Random Strobe >> (All Zones)", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "whiteAllZones",
+      "name": "White (All Zones)",
+      "attribute": "white"
+    },
+    {
+      "key": "redFineAllZones",
+      "name": "Red Fine (All Zones)",
+      "attribute": "red",
+      "fineOf": "redAllZones"
+    },
+    {
+      "key": "greenFineAllZones",
+      "name": "Green Fine (All Zones)",
+      "attribute": "green",
+      "fineOf": "greenAllZones"
+    },
+    {
+      "key": "blueFineAllZones",
+      "name": "Blue Fine (All Zones)",
+      "attribute": "blue",
+      "fineOf": "blueAllZones"
+    },
+    {
+      "key": "whiteFineAllZones",
+      "name": "White Fine (All Zones)",
+      "attribute": "white",
+      "fineOf": "whiteAllZones"
+    },
+    {
+      "key": "redZ1",
+      "name": "Red (Z1)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenZ1",
+      "name": "Green (Z1)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueZ1",
+      "name": "Blue (Z1)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteZ1",
+      "name": "White (Z1)",
+      "attribute": "white"
+    },
+    {
+      "key": "redFineZ1",
+      "name": "Red Fine (Z1)",
+      "attribute": "red",
+      "fineOf": "redZ1"
+    },
+    {
+      "key": "greenFineZ1",
+      "name": "Green Fine (Z1)",
+      "attribute": "green",
+      "fineOf": "greenZ1"
+    },
+    {
+      "key": "blueFineZ1",
+      "name": "Blue Fine (Z1)",
+      "attribute": "blue",
+      "fineOf": "blueZ1"
+    },
+    {
+      "key": "whiteFineZ1",
+      "name": "White Fine (Z1)",
+      "attribute": "white",
+      "fineOf": "whiteZ1"
+    },
+    {
+      "key": "redZ2",
+      "name": "Red (Z2)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenZ2",
+      "name": "Green (Z2)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueZ2",
+      "name": "Blue (Z2)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteZ2",
+      "name": "White (Z2)",
+      "attribute": "white"
+    },
+    {
+      "key": "redFineZ2",
+      "name": "Red Fine (Z2)",
+      "attribute": "red",
+      "fineOf": "redZ2"
+    },
+    {
+      "key": "greenFineZ2",
+      "name": "Green Fine (Z2)",
+      "attribute": "green",
+      "fineOf": "greenZ2"
+    },
+    {
+      "key": "blueFineZ2",
+      "name": "Blue Fine (Z2)",
+      "attribute": "blue",
+      "fineOf": "blueZ2"
+    },
+    {
+      "key": "whiteFineZ2",
+      "name": "White Fine (Z2)",
+      "attribute": "white",
+      "fineOf": "whiteZ2"
+    },
+    {
+      "key": "redZ3",
+      "name": "Red (Z3)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenZ3",
+      "name": "Green (Z3)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueZ3",
+      "name": "Blue (Z3)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteZ3",
+      "name": "White (Z3)",
+      "attribute": "white"
+    },
+    {
+      "key": "redFineZ3",
+      "name": "Red Fine (Z3)",
+      "attribute": "red",
+      "fineOf": "redZ3"
+    },
+    {
+      "key": "greenFineZ3",
+      "name": "Green Fine (Z3)",
+      "attribute": "green",
+      "fineOf": "greenZ3"
+    },
+    {
+      "key": "blueFineZ3",
+      "name": "Blue Fine (Z3)",
+      "attribute": "blue",
+      "fineOf": "blueZ3"
+    },
+    {
+      "key": "whiteFineZ3",
+      "name": "White Fine (Z3)",
+      "attribute": "white",
+      "fineOf": "whiteZ3"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Mode 1",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "redZ1",
+        "redFineZ1",
+        "greenZ1",
+        "greenFineZ1",
+        "blueZ1",
+        "blueFineZ1",
+        "whiteZ1",
+        "whiteFineZ1",
+        "redZ2",
+        "redFineZ2",
+        "greenZ2",
+        "greenFineZ2",
+        "blueZ2",
+        "blueFineZ2",
+        "whiteZ2",
+        "whiteFineZ2",
+        "redZ3",
+        "redFineZ3",
+        "greenZ3",
+        "greenFineZ3",
+        "blueZ3",
+        "blueFineZ3",
+        "whiteZ3",
+        "whiteFineZ3",
+        "ctc",
+        "colors",
+        "zoom",
+        "zoomFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "redZ1",
+          "redFineZ1",
+          "greenZ1",
+          "greenFineZ1",
+          "blueZ1",
+          "blueFineZ1",
+          "whiteZ1",
+          "whiteFineZ1"
+        ],
+        [
+          "redZ2",
+          "redFineZ2",
+          "greenZ2",
+          "greenFineZ2",
+          "blueZ2",
+          "blueFineZ2",
+          "whiteZ2",
+          "whiteFineZ2"
+        ],
+        [
+          "redZ3",
+          "redFineZ3",
+          "greenZ3",
+          "greenFineZ3",
+          "blueZ3",
+          "blueFineZ3",
+          "whiteZ3",
+          "whiteFineZ3"
+        ]
+      ]
+    },
+    {
+      "name": "Mode 2",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "redAllZones",
+        "redFineAllZones",
+        "greenAllZones",
+        "greenFineAllZones",
+        "blueAllZones",
+        "blueFineAllZones",
+        "whiteAllZones",
+        "whiteFineAllZones",
+        "ctc",
+        "colors",
+        "zoom",
+        "zoomFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ]
+    },
+    {
+      "name": "Mode 3",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "redAllZones",
+        "greenAllZones",
+        "blueAllZones",
+        "whiteAllZones",
+        "ctc",
+        "colors",
+        "zoom",
+        "shutter",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "Mode 4",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "colors",
+        "zoom",
+        "shutter",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "Mode 5",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "zoom",
+        "zoomFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine",
+        "ctc",
+        "colors",
+        "redZ1",
+        "redFineZ1",
+        "greenZ1",
+        "greenFineZ1",
+        "blueZ1",
+        "blueFineZ1",
+        "whiteZ1",
+        "whiteFineZ1",
+        "redZ2",
+        "redFineZ2",
+        "greenZ2",
+        "greenFineZ2",
+        "blueZ2",
+        "blueFineZ2",
+        "whiteZ2",
+        "whiteFineZ2",
+        "redZ3",
+        "redFineZ3",
+        "greenZ3",
+        "greenFineZ3",
+        "blueZ3",
+        "blueFineZ3",
+        "whiteZ3",
+        "whiteFineZ3"
+      ],
+      "heads": [
+        [
+          "redZ1",
+          "redFineZ1",
+          "greenZ1",
+          "greenFineZ1",
+          "blueZ1",
+          "blueFineZ1",
+          "whiteZ1",
+          "whiteFineZ1"
+        ],
+        [
+          "redZ2",
+          "redFineZ2",
+          "greenZ2",
+          "greenFineZ2",
+          "blueZ2",
+          "blueFineZ2",
+          "whiteZ2",
+          "whiteFineZ2"
+        ],
+        [
+          "redZ3",
+          "redFineZ3",
+          "greenZ3",
+          "greenFineZ3",
+          "blueZ3",
+          "blueFineZ3",
+          "whiteZ3",
+          "whiteFineZ3"
+        ]
+      ]
+    }
+  ]
+}

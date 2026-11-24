@@ -1,0 +1,161 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "Freedom Par Hex 4",
+  "category": "par",
+  "physical": {
+    "width": 138,
+    "height": 145,
+    "depth": 184,
+    "weight": 2.9,
+    "lumens": 689,
+    "source": "LED",
+    "beamAngle": {
+      "min": 23,
+      "max": 23
+    },
+    "power": 35
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "uv",
+      "name": "UV",
+      "attribute": "uv"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 30, "label": "R: 100% G: 0-100% B: 0% A: 0%" },
+        { "from": 31, "to": 50, "label": "R: 100-0% G: 100% B: 0% A: 0%" },
+        { "from": 51, "to": 70, "label": "R: 0% G: 100% B: 0-100% A: 0%" },
+        { "from": 71, "to": 90, "label": "R: 0% G: 100-0% B: 0% A: 0%" },
+        { "from": 91, "to": 110, "label": "R: 0-100% G: 100% B: 100% A: 0%" },
+        { "from": 111, "to": 130, "label": "R: 100% G: 100% B: 100-0% A: 0%" },
+        { "from": 131, "to": 150, "label": "R: 100% G: 0-100% B: 0-100% A: 0%" },
+        { "from": 151, "to": 170, "label": "R: 100-0% G: 100-0% B: 100% A: 0%" },
+        { "from": 171, "to": 200, "label": "R: 100% G: 100% B: 100% A: 100%" },
+        { "from": 201, "to": 205, "label": "Color 1" },
+        { "from": 206, "to": 210, "label": "Color 2" },
+        { "from": 211, "to": 215, "label": "Color 3" },
+        { "from": 216, "to": 220, "label": "Color 4" },
+        { "from": 221, "to": 225, "label": "Color 5" },
+        { "from": 226, "to": 230, "label": "Color 6" },
+        { "from": 231, "to": 235, "label": "Color 7" },
+        { "from": 236, "to": 240, "label": "Color 8" },
+        { "from": 241, "to": 245, "label": "Color 9" },
+        { "from": 246, "to": 250, "label": "Color 10" },
+        { "from": 251, "to": 255, "label": "Color 11" }
+      ]
+    },
+    {
+      "key": "autoSoundActivePrograms",
+      "name": "Auto/Sound-Active Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No Fuction" },
+        { "from": 11, "to": 60, "label": "Auto Program 1" },
+        { "from": 61, "to": 120, "label": "Auto Program 2" },
+        { "from": 121, "to": 180, "label": "Auto Program 3" },
+        { "from": 181, "to": 240, "label": "Auto Program 4" }
+      ]
+    },
+    {
+      "key": "autoSpeed",
+      "name": "Auto Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "dimmerSpeedMode",
+      "name": "Dimmer Speed Mode",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "Preset Dimmer" },
+        { "from": 52, "to": 101, "label": "Dimmer Speed Mode Off" },
+        { "from": 102, "to": 152, "label": "Dimmer Speed Mode 1" },
+        { "from": 153, "to": 203, "label": "Dimmer Speed Mode 2" },
+        { "from": 204, "to": 255, "label": "Dimmer Speed Mode 3" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "6 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "amber",
+        "white",
+        "uv"
+      ]
+    },
+    {
+      "name": "8 Channel",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "amber",
+        "white",
+        "uv",
+        "strobe"
+      ]
+    },
+    {
+      "name": "12 Channel",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "amber",
+        "white",
+        "uv",
+        "strobe",
+        "colorMacro",
+        "autoSoundActivePrograms",
+        "autoSpeed",
+        "dimmerSpeedMode"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4149 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Spiider",
+  "category": "movingHead",
+  "physical": {
+    "width": 390,
+    "height": 477,
+    "depth": 286,
+    "weight": 13.3,
+    "lumens": 1000,
+    "colorTemperature": 8000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 4,
+      "max": 50
+    },
+    "panRange": 540,
+    "tiltRange": 220,
+    "power": 600
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeedOrTime",
+      "name": "Pan/Tilt speed or time",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "powerSpecialFunctionsHoldAtLeast3Seconds",
+      "name": "Power/Special functions (hold at least 3 seconds)",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Reserved" },
+        { "from": 10, "to": 14, "label": "DMX input: Wired DMX" },
+        { "from": 15, "to": 19, "label": "DMX input: Wireless DMX" },
+        { "from": 20, "to": 24, "label": "Graphic display: ON" },
+        { "from": 25, "to": 29, "label": "Graphic display: OFF" },
+        { "from": 30, "to": 34, "label": "RGBW color mixing mode" },
+        { "from": 35, "to": 39, "label": "CMY color mixing mode" },
+        { "from": 40, "to": 44, "label": "Pan/Tilt SPEED mode" },
+        { "from": 45, "to": 49, "label": "Pan/Tilt TIME mode" },
+        { "from": 50, "to": 54, "label": "Blackout on Pan/Tilt: ON" },
+        { "from": 55, "to": 59, "label": "Blackout on Pan/Tilt: OFF" },
+        { "from": 60, "to": 64, "label": "Dimmer curve: square law" },
+        { "from": 65, "to": 69, "label": "Dimmer curve: linear" },
+        { "from": 70, "to": 74, "label": "Fans mode: Auto" },
+        { "from": 75, "to": 79, "label": "Fans mode: High" },
+        { "from": 80, "to": 84, "label": "White point 8000K: ON" },
+        { "from": 85, "to": 89, "label": "White point 8000K: OFF" },
+        { "from": 90, "to": 109, "label": "Reserved" },
+        { "from": 110, "to": 114, "label": "Kling-Net: ON" },
+        { "from": 115, "to": 119, "label": "Kling-Net: OFF" },
+        { "from": 120, "to": 129, "label": "Reserved" },
+        { "from": 130, "to": 139, "label": "Fixture reset (except Pan/Tilt)" },
+        { "from": 140, "to": 149, "label": "Pan/Tilt reset", "kind": "reset" },
+        { "from": 150, "to": 159, "label": "Zoom reset", "kind": "reset" },
+        { "from": 160, "to": 169, "label": "Flower effect reset" },
+        { "from": 170, "to": 171, "label": "Tungsten-effect simulation: 750W" },
+        { "from": 172, "to": 173, "label": "Tungsten-effect simulation: 1000W" },
+        { "from": 174, "to": 175, "label": "Tungsten-effect simulation: 1200W" },
+        { "from": 176, "to": 177, "label": "Tungsten-effect simulation: 2000W" },
+        { "from": 178, "to": 179, "label": "Tungsten-effect simulation: 2500W" },
+        { "from": 180, "to": 181, "label": "Tungsten-effect simulation: OFF" },
+        { "from": 182, "to": 199, "label": "Reserved" },
+        { "from": 200, "to": 209, "label": "Total fixture reset", "kind": "reset" },
+        { "from": 210, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "virtualColorWheel",
+      "name": "Virtual color wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function" },
+        { "from": 1, "to": 2, "label": "Medium Bastard Amber", "kind": "color", "color": "#ff8924" },
+        { "from": 3, "to": 4, "label": "Sunset Red", "kind": "color", "color": "#ff3201" },
+        { "from": 5, "to": 6, "label": "Fire", "kind": "color", "color": "#ff0d00" },
+        { "from": 7, "to": 8, "label": "Bright Red", "kind": "color", "color": "#ff0000" },
+        { "from": 9, "to": 10, "label": "Lavender", "kind": "color", "color": "#e6e6fa" },
+        { "from": 11, "to": 12, "label": "Sky Blue", "kind": "color", "color": "#87ceeb" },
+        { "from": 13, "to": 14, "label": "Medium Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 15, "to": 16, "label": "Moss Green", "kind": "color", "color": "#45f501" },
+        { "from": 17, "to": 18, "label": "Lime Green", "kind": "color", "color": "#32cd32" },
+        { "from": 19, "to": 20, "label": "Dark Yellow Green", "kind": "color", "color": "#00ff01" },
+        { "from": 21, "to": 22, "label": "Medium Purple", "kind": "color", "color": "#9370db" },
+        { "from": 23, "to": 24, "label": "Light Lavender", "kind": "color", "color": "#e77338" },
+        { "from": 25, "to": 26, "label": "Light Amber", "kind": "color", "color": "#e9a400" },
+        { "from": 27, "to": 28, "label": "Straw", "kind": "color", "color": "#d18e0b" },
+        { "from": 29, "to": 30, "label": "Summer Blue", "kind": "color", "color": "#48bb4d" },
+        { "from": 31, "to": 32, "label": "Dark Green", "kind": "color", "color": "#006400" },
+        { "from": 33, "to": 34, "label": "Primary Red", "kind": "color", "color": "#f20101" },
+        { "from": 35, "to": 36, "label": "Dark Pink", "kind": "color", "color": "#ff4f1a" },
+        { "from": 37, "to": 38, "label": "Peacock Blue", "kind": "color", "color": "#0dff28" },
+        { "from": 39, "to": 40, "label": "Mauve", "kind": "color", "color": "#ff0027" },
+        { "from": 41, "to": 42, "label": "Steel Blue", "kind": "color", "color": "#4682b4" },
+        { "from": 43, "to": 44, "label": "Light Blue", "kind": "color", "color": "#add8e6" },
+        { "from": 45, "to": 46, "label": "Fern Green", "kind": "color", "color": "#62ff03" },
+        { "from": 47, "to": 48, "label": "Light Red", "kind": "color", "color": "#ff1002" },
+        { "from": 49, "to": 50, "label": "Filter Green", "kind": "color", "color": "#a5ff00" },
+        { "from": 51, "to": 52, "label": "Bright Pink", "kind": "color", "color": "#ff0a17" },
+        { "from": 53, "to": 54, "label": "Marine Blue", "kind": "color", "color": "#00007f" },
+        { "from": 55, "to": 56, "label": "Medium Blue", "kind": "color", "color": "#0000cd" },
+        { "from": 57, "to": 58, "label": "Golden Amber", "kind": "color", "color": "#bf5300" },
+        { "from": 59, "to": 60, "label": "Deep Golden Amber", "kind": "color", "color": "#ff3400" },
+        { "from": 61, "to": 62, "label": "Pale Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 63, "to": 64, "label": "Special Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 65, "to": 66, "label": "Pale Green", "kind": "color", "color": "#98fb98" },
+        { "from": 67, "to": 68, "label": "Crysalis Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 69, "to": 70, "label": "Bright Blue", "kind": "color", "color": "#00aaff" },
+        { "from": 71, "to": 72, "label": "Apricot", "kind": "color", "color": "#d76a05" },
+        { "from": 73, "to": 74, "label": "Bright Rose", "kind": "color", "color": "#ff0f0c" },
+        { "from": 75, "to": 76, "label": "Pale Gold", "kind": "color", "color": "#cc7a0d" },
+        { "from": 77, "to": 78, "label": "Pale Rose", "kind": "color", "color": "#d87410" },
+        { "from": 79, "to": 80, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 81, "to": 82, "label": "Pale Navy Blue", "kind": "color", "color": "#27517f" },
+        { "from": 83, "to": 84, "label": "Bastard Amber", "kind": "color", "color": "#e09e13" },
+        { "from": 85, "to": 86, "label": "Flame Red", "kind": "color", "color": "#ff1c01" },
+        { "from": 87, "to": 88, "label": "Daylight Blue", "kind": "color", "color": "#2fee68" },
+        { "from": 89, "to": 90, "label": "Lilac Tint", "kind": "color", "color": "#d58d24" },
+        { "from": 91, "to": 92, "label": "Deep Lavender", "kind": "color", "color": "#eb8032" },
+        { "from": 93, "to": 94, "label": "Lagoon Blue", "kind": "color", "color": "#00ff36" },
+        { "from": 95, "to": 96, "label": "Surprise Pink", "kind": "color", "color": "#9e5563" },
+        { "from": 97, "to": 98, "label": "Dark Lavender", "kind": "color", "color": "#9543bd" },
+        { "from": 99, "to": 100, "label": "Congo Blue", "kind": "color", "color": "#2500ff" },
+        { "from": 101, "to": 102, "label": "Alice Blue", "kind": "color", "color": "#f0f8ff" },
+        { "from": 103, "to": 104, "label": "Full C.T.B.", "kind": "color", "color": "#b6ff41" },
+        { "from": 105, "to": 106, "label": "Half C.T.B.", "kind": "color", "color": "#d9ff25" },
+        { "from": 107, "to": 108, "label": "Quarter C.T.B.", "kind": "color", "color": "#88ff1e" },
+        { "from": 109, "to": 110, "label": "Full C.T.O.", "kind": "color", "color": "#e67e05" },
+        { "from": 111, "to": 112, "label": "Fluorescent Green", "kind": "color", "color": "#6d9a1f" },
+        { "from": 113, "to": 114, "label": "Quarter C.T.O.", "kind": "color", "color": "#cf9413" },
+        { "from": 115, "to": 116, "label": "Filter Minus Green", "kind": "color", "color": "#ff7c40" },
+        { "from": 117, "to": 118, "label": "Half Minus Green", "kind": "color", "color": "#ffa32d" },
+        { "from": 119, "to": 120, "label": "Three Quarter C.T.B.", "kind": "color", "color": "#ffff6e" },
+        { "from": 121, "to": 122, "label": "Three Quarter C.T.O.", "kind": "color", "color": "#c87e05" },
+        { "from": 123, "to": 124, "label": "Glacier Blue", "kind": "color", "color": "#1eac57" },
+        { "from": 125, "to": 126, "label": "Lighter Blue", "kind": "color", "color": "#208440" },
+        { "from": 127, "to": 128, "label": "Madge", "kind": "color", "color": "#ff1f00" },
+        { "from": 129, "to": 130, "label": "Millennium Gold", "kind": "color", "color": "#ff4100" },
+        { "from": 131, "to": 132, "label": "Vaniti Fair", "kind": "color", "color": "#ff0512" },
+        { "from": 133, "to": 235, "label": "Raw DMX" },
+        { "from": 236, "to": 245, "label": "Rainbow Effect Faded (Slow to Fast)", "kind": "gobo" },
+        { "from": 246, "to": 255, "label": "Rainbow Effect Stepped (Slow to Fast)", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "redAllPixels",
+      "name": "Red (all pixels)",
+      "attribute": "red"
+    },
+    {
+      "key": "cyanAllPixels",
+      "name": "Cyan (all pixels)",
+      "attribute": "cyan"
+    },
+    {
+      "key": "redFineAllPixels",
+      "name": "Red fine (all pixels)",
+      "attribute": "red",
+      "fineOf": "redAllPixels"
+    },
+    {
+      "key": "cyanFineAllPixels",
+      "name": "Cyan fine (all pixels)",
+      "attribute": "cyan",
+      "fineOf": "cyanAllPixels"
+    },
+    {
+      "key": "greenAllPixels",
+      "name": "Green (all pixels)",
+      "attribute": "green"
+    },
+    {
+      "key": "magentaAllPixels",
+      "name": "Magenta (all pixels)",
+      "attribute": "magenta"
+    },
+    {
+      "key": "greenFineAllPixels",
+      "name": "Green fine (all pixels)",
+      "attribute": "green",
+      "fineOf": "greenAllPixels"
+    },
+    {
+      "key": "magentaFineAllPixels",
+      "name": "Magenta fine (all pixels)",
+      "attribute": "magenta",
+      "fineOf": "magentaAllPixels"
+    },
+    {
+      "key": "blueAllPixels",
+      "name": "Blue (all pixels)",
+      "attribute": "blue"
+    },
+    {
+      "key": "yellowAllPixels",
+      "name": "Yellow (all pixels)",
+      "attribute": "yellow"
+    },
+    {
+      "key": "blueFineAllPixels",
+      "name": "Blue fine (all pixels)",
+      "attribute": "blue",
+      "fineOf": "blueAllPixels"
+    },
+    {
+      "key": "yellowFineAllPixels",
+      "name": "Yellow fine (all pixels)",
+      "attribute": "yellow",
+      "fineOf": "yellowAllPixels"
+    },
+    {
+      "key": "whiteAllPixels",
+      "name": "White (all pixels)",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFineAllPixels",
+      "name": "White fine (all pixels)",
+      "attribute": "white",
+      "fineOf": "whiteAllPixels"
+    },
+    {
+      "key": "red1",
+      "name": "Red 1",
+      "attribute": "red"
+    },
+    {
+      "key": "red2",
+      "name": "Red 2",
+      "attribute": "red"
+    },
+    {
+      "key": "red3",
+      "name": "Red 3",
+      "attribute": "red"
+    },
+    {
+      "key": "red4",
+      "name": "Red 4",
+      "attribute": "red"
+    },
+    {
+      "key": "red5",
+      "name": "Red 5",
+      "attribute": "red"
+    },
+    {
+      "key": "red6",
+      "name": "Red 6",
+      "attribute": "red"
+    },
+    {
+      "key": "red7",
+      "name": "Red 7",
+      "attribute": "red"
+    },
+    {
+      "key": "red8",
+      "name": "Red 8",
+      "attribute": "red"
+    },
+    {
+      "key": "red9",
+      "name": "Red 9",
+      "attribute": "red"
+    },
+    {
+      "key": "red10",
+      "name": "Red 10",
+      "attribute": "red"
+    },
+    {
+      "key": "red11",
+      "name": "Red 11",
+      "attribute": "red"
+    },
+    {
+      "key": "red12",
+      "name": "Red 12",
+      "attribute": "red"
+    },
+    {
+      "key": "red13",
+      "name": "Red 13",
+      "attribute": "red"
+    },
+    {
+      "key": "red14",
+      "name": "Red 14",
+      "attribute": "red"
+    },
+    {
+      "key": "red15",
+      "name": "Red 15",
+      "attribute": "red"
+    },
+    {
+      "key": "red16",
+      "name": "Red 16",
+      "attribute": "red"
+    },
+    {
+      "key": "red17",
+      "name": "Red 17",
+      "attribute": "red"
+    },
+    {
+      "key": "red18",
+      "name": "Red 18",
+      "attribute": "red"
+    },
+    {
+      "key": "red19",
+      "name": "Red 19",
+      "attribute": "red"
+    },
+    {
+      "key": "redFine1",
+      "name": "Red fine 1",
+      "attribute": "red",
+      "fineOf": "red1"
+    },
+    {
+      "key": "redFine2",
+      "name": "Red fine 2",
+      "attribute": "red",
+      "fineOf": "red2"
+    },
+    {
+      "key": "redFine3",
+      "name": "Red fine 3",
+      "attribute": "red",
+      "fineOf": "red3"
+    },
+    {
+      "key": "cyan1",
+      "name": "Cyan 1",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyan2",
+      "name": "Cyan 2",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyan3",
+      "name": "Cyan 3",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyanFine1",
+      "name": "Cyan fine 1",
+      "attribute": "cyan",
+      "fineOf": "cyan1"
+    },
+    {
+      "key": "cyanFine2",
+      "name": "Cyan fine 2",
+      "attribute": "cyan",
+      "fineOf": "cyan2"
+    },
+    {
+      "key": "cyanFine3",
+      "name": "Cyan fine 3",
+      "attribute": "cyan",
+      "fineOf": "cyan3"
+    },
+    {
+      "key": "green1",
+      "name": "Green 1",
+      "attribute": "green"
+    },
+    {
+      "key": "green2",
+      "name": "Green 2",
+      "attribute": "green"
+    },
+    {
+      "key": "green3",
+      "name": "Green 3",
+      "attribute": "green"
+    },
+    {
+      "key": "green4",
+      "name": "Green 4",
+      "attribute": "green"
+    },
+    {
+      "key": "green5",
+      "name": "Green 5",
+      "attribute": "green"
+    },
+    {
+      "key": "green6",
+      "name": "Green 6",
+      "attribute": "green"
+    },
+    {
+      "key": "green7",
+      "name": "Green 7",
+      "attribute": "green"
+    },
+    {
+      "key": "green8",
+      "name": "Green 8",
+      "attribute": "green"
+    },
+    {
+      "key": "green9",
+      "name": "Green 9",
+      "attribute": "green"
+    },
+    {
+      "key": "green10",
+      "name": "Green 10",
+      "attribute": "green"
+    },
+    {
+      "key": "green11",
+      "name": "Green 11",
+      "attribute": "green"
+    },
+    {
+      "key": "green12",
+      "name": "Green 12",
+      "attribute": "green"
+    },
+    {
+      "key": "green13",
+      "name": "Green 13",
+      "attribute": "green"
+    },
+    {
+      "key": "green14",
+      "name": "Green 14",
+      "attribute": "green"
+    },
+    {
+      "key": "green15",
+      "name": "Green 15",
+      "attribute": "green"
+    },
+    {
+      "key": "green16",
+      "name": "Green 16",
+      "attribute": "green"
+    },
+    {
+      "key": "green17",
+      "name": "Green 17",
+      "attribute": "green"
+    },
+    {
+      "key": "green18",
+      "name": "Green 18",
+      "attribute": "green"
+    },
+    {
+      "key": "green19",
+      "name": "Green 19",
+      "attribute": "green"
+    },
+    {
+      "key": "greenFine1",
+      "name": "Green fine 1",
+      "attribute": "green",
+      "fineOf": "green1"
+    },
+    {
+      "key": "greenFine2",
+      "name": "Green fine 2",
+      "attribute": "green",
+      "fineOf": "green2"
+    },
+    {
+      "key": "greenFine3",
+      "name": "Green fine 3",
+      "attribute": "green",
+      "fineOf": "green3"
+    },
+    {
+      "key": "magenta1",
+      "name": "Magenta 1",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magenta2",
+      "name": "Magenta 2",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magenta3",
+      "name": "Magenta 3",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magentaFine1",
+      "name": "Magenta fine 1",
+      "attribute": "magenta",
+      "fineOf": "magenta1"
+    },
+    {
+      "key": "magentaFine2",
+      "name": "Magenta fine 2",
+      "attribute": "magenta",
+      "fineOf": "magenta2"
+    },
+    {
+      "key": "magentaFine3",
+      "name": "Magenta fine 3",
+      "attribute": "magenta",
+      "fineOf": "magenta3"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue4",
+      "name": "Blue 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue5",
+      "name": "Blue 5",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue6",
+      "name": "Blue 6",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue7",
+      "name": "Blue 7",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue8",
+      "name": "Blue 8",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue9",
+      "name": "Blue 9",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue10",
+      "name": "Blue 10",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue11",
+      "name": "Blue 11",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue12",
+      "name": "Blue 12",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue13",
+      "name": "Blue 13",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue14",
+      "name": "Blue 14",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue15",
+      "name": "Blue 15",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue16",
+      "name": "Blue 16",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue17",
+      "name": "Blue 17",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue18",
+      "name": "Blue 18",
+      "attribute": "blue"
+    },
+    {
+      "key": "blue19",
+      "name": "Blue 19",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueFine1",
+      "name": "Blue fine 1",
+      "attribute": "blue",
+      "fineOf": "blue1"
+    },
+    {
+      "key": "blueFine2",
+      "name": "Blue fine 2",
+      "attribute": "blue",
+      "fineOf": "blue2"
+    },
+    {
+      "key": "blueFine3",
+      "name": "Blue fine 3",
+      "attribute": "blue",
+      "fineOf": "blue3"
+    },
+    {
+      "key": "yellow1",
+      "name": "Yellow 1",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellow2",
+      "name": "Yellow 2",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellow3",
+      "name": "Yellow 3",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellowFine1",
+      "name": "Yellow fine 1",
+      "attribute": "yellow",
+      "fineOf": "yellow1"
+    },
+    {
+      "key": "yellowFine2",
+      "name": "Yellow fine 2",
+      "attribute": "yellow",
+      "fineOf": "yellow2"
+    },
+    {
+      "key": "yellowFine3",
+      "name": "Yellow fine 3",
+      "attribute": "yellow",
+      "fineOf": "yellow3"
+    },
+    {
+      "key": "white1",
+      "name": "White 1",
+      "attribute": "white"
+    },
+    {
+      "key": "white2",
+      "name": "White 2",
+      "attribute": "white"
+    },
+    {
+      "key": "white3",
+      "name": "White 3",
+      "attribute": "white"
+    },
+    {
+      "key": "white4",
+      "name": "White 4",
+      "attribute": "white"
+    },
+    {
+      "key": "white5",
+      "name": "White 5",
+      "attribute": "white"
+    },
+    {
+      "key": "white6",
+      "name": "White 6",
+      "attribute": "white"
+    },
+    {
+      "key": "white7",
+      "name": "White 7",
+      "attribute": "white"
+    },
+    {
+      "key": "white8",
+      "name": "White 8",
+      "attribute": "white"
+    },
+    {
+      "key": "white9",
+      "name": "White 9",
+      "attribute": "white"
+    },
+    {
+      "key": "white10",
+      "name": "White 10",
+      "attribute": "white"
+    },
+    {
+      "key": "white11",
+      "name": "White 11",
+      "attribute": "white"
+    },
+    {
+      "key": "white12",
+      "name": "White 12",
+      "attribute": "white"
+    },
+    {
+      "key": "white13",
+      "name": "White 13",
+      "attribute": "white"
+    },
+    {
+      "key": "white14",
+      "name": "White 14",
+      "attribute": "white"
+    },
+    {
+      "key": "white15",
+      "name": "White 15",
+      "attribute": "white"
+    },
+    {
+      "key": "white16",
+      "name": "White 16",
+      "attribute": "white"
+    },
+    {
+      "key": "white17",
+      "name": "White 17",
+      "attribute": "white"
+    },
+    {
+      "key": "white18",
+      "name": "White 18",
+      "attribute": "white"
+    },
+    {
+      "key": "white19",
+      "name": "White 19",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFine1",
+      "name": "White fine 1",
+      "attribute": "white",
+      "fineOf": "white1"
+    },
+    {
+      "key": "whiteFine2",
+      "name": "White fine 2",
+      "attribute": "white",
+      "fineOf": "white2"
+    },
+    {
+      "key": "whiteFine3",
+      "name": "White fine 3",
+      "attribute": "white",
+      "fineOf": "white3"
+    },
+    {
+      "key": "ctc",
+      "name": "CTC",
+      "attribute": "effect"
+    },
+    {
+      "key": "colorMixControl",
+      "name": "Color Mix Control",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Global has priority" },
+        { "from": 10, "to": 19, "label": "HTP" },
+        { "from": 20, "to": 29, "label": "Lowest takes priority" },
+        { "from": 30, "to": 39, "label": "Multiply global and pixel" },
+        { "from": 40, "to": 49, "label": "Global + pixel" },
+        { "from": 50, "to": 59, "label": "Global - pixel" },
+        { "from": 60, "to": 69, "label": "Pixel - global" },
+        { "from": 70, "to": 79, "label": "Colored background" },
+        { "from": 80, "to": 127, "label": "Raw DMX" },
+        { "from": 128, "to": 128, "label": "Global takes priority" },
+        { "from": 129, "to": 254, "label": "Crossfade between global and pixel" },
+        { "from": 255, "to": 255, "label": "Pixel takes priority" }
+      ]
+    },
+    {
+      "key": "pixelEffects",
+      "name": "Pixel effects",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "No function" },
+        { "from": 3, "to": 4, "label": "Effect 1" },
+        { "from": 5, "to": 6, "label": "Effect 2" },
+        { "from": 7, "to": 8, "label": "Effect 3" },
+        { "from": 9, "to": 10, "label": "Effect 4" },
+        { "from": 11, "to": 12, "label": "Effect 5" },
+        { "from": 13, "to": 14, "label": "Effect 6" },
+        { "from": 15, "to": 16, "label": "Effect 7" },
+        { "from": 17, "to": 18, "label": "Effect 8" },
+        { "from": 19, "to": 20, "label": "Effect 9" },
+        { "from": 21, "to": 22, "label": "Effect 10" },
+        { "from": 23, "to": 24, "label": "Effect 11" },
+        { "from": 25, "to": 26, "label": "Effect 12" },
+        { "from": 27, "to": 28, "label": "Effect 13" },
+        { "from": 29, "to": 30, "label": "Effect 14" },
+        { "from": 31, "to": 32, "label": "Effect 15" },
+        { "from": 33, "to": 34, "label": "Effect 16" },
+        { "from": 35, "to": 36, "label": "Effect 17" },
+        { "from": 37, "to": 38, "label": "Effect 18" },
+        { "from": 39, "to": 40, "label": "Effect 19" },
+        { "from": 41, "to": 42, "label": "Effect 20" },
+        { "from": 43, "to": 44, "label": "Effect 21" },
+        { "from": 45, "to": 46, "label": "Effect 22" },
+        { "from": 47, "to": 48, "label": "Effect 23" },
+        { "from": 49, "to": 50, "label": "Effect 24" },
+        { "from": 51, "to": 52, "label": "Effect 25" },
+        { "from": 53, "to": 54, "label": "Effect 26" },
+        { "from": 55, "to": 56, "label": "Effect 27" },
+        { "from": 57, "to": 58, "label": "Effect 28" },
+        { "from": 59, "to": 60, "label": "Effect 29" },
+        { "from": 61, "to": 62, "label": "Effect 30" },
+        { "from": 63, "to": 64, "label": "Effect 31" },
+        { "from": 65, "to": 66, "label": "Effect 32" },
+        { "from": 67, "to": 68, "label": "Effect 33" },
+        { "from": 69, "to": 70, "label": "Effect 34" },
+        { "from": 71, "to": 72, "label": "Effect 35" },
+        { "from": 73, "to": 74, "label": "Effect 36" },
+        { "from": 75, "to": 76, "label": "Effect 37" },
+        { "from": 77, "to": 78, "label": "Effect 38" },
+        { "from": 79, "to": 80, "label": "Effect 39" },
+        { "from": 81, "to": 82, "label": "Effect 40" },
+        { "from": 83, "to": 84, "label": "Effect 41" },
+        { "from": 85, "to": 86, "label": "Effect 42" },
+        { "from": 87, "to": 88, "label": "Effect 43" },
+        { "from": 89, "to": 90, "label": "Effect 44" },
+        { "from": 91, "to": 92, "label": "Effect 45" },
+        { "from": 93, "to": 94, "label": "Effect 46" },
+        { "from": 95, "to": 96, "label": "Effect 47" },
+        { "from": 97, "to": 98, "label": "Effect 48" },
+        { "from": 99, "to": 100, "label": "Effect 49" },
+        { "from": 101, "to": 102, "label": "Effect 50" },
+        { "from": 103, "to": 104, "label": "Effect 51" },
+        { "from": 105, "to": 106, "label": "Effect 52" },
+        { "from": 107, "to": 108, "label": "Effect 53" },
+        { "from": 109, "to": 110, "label": "Effect 54" },
+        { "from": 111, "to": 112, "label": "Effect 55" },
+        { "from": 113, "to": 114, "label": "Effect 56" },
+        { "from": 115, "to": 116, "label": "Effect 57" },
+        { "from": 117, "to": 118, "label": "Effect 58" },
+        { "from": 119, "to": 120, "label": "Effect 59" },
+        { "from": 121, "to": 122, "label": "Effect 60" },
+        { "from": 123, "to": 124, "label": "Effect 61" },
+        { "from": 125, "to": 126, "label": "Effect 62" },
+        { "from": 127, "to": 128, "label": "Effect 63" },
+        { "from": 129, "to": 130, "label": "Effect 64" },
+        { "from": 131, "to": 132, "label": "Effect 65" },
+        { "from": 133, "to": 134, "label": "Effect 66" },
+        { "from": 135, "to": 136, "label": "Effect 67" },
+        { "from": 137, "to": 138, "label": "Effect 68" },
+        { "from": 139, "to": 140, "label": "Effect 69" },
+        { "from": 141, "to": 142, "label": "Effect 70" },
+        { "from": 143, "to": 144, "label": "Effect 71" },
+        { "from": 145, "to": 146, "label": "Effect 72" },
+        { "from": 147, "to": 148, "label": "Effect 73" },
+        { "from": 149, "to": 150, "label": "Effect 74" },
+        { "from": 151, "to": 152, "label": "Effect 75" },
+        { "from": 153, "to": 154, "label": "Effect 76" },
+        { "from": 155, "to": 156, "label": "Effect 77" },
+        { "from": 157, "to": 158, "label": "Effect 78" },
+        { "from": 159, "to": 160, "label": "Effect 79" },
+        { "from": 161, "to": 162, "label": "Effect 80" },
+        { "from": 163, "to": 164, "label": "Effect 81" },
+        { "from": 165, "to": 166, "label": "Effect 82" },
+        { "from": 167, "to": 168, "label": "Effect 83" },
+        { "from": 169, "to": 170, "label": "Effect 84" },
+        { "from": 171, "to": 172, "label": "Effect 85" },
+        { "from": 173, "to": 174, "label": "Effect 86" },
+        { "from": 175, "to": 176, "label": "Effect 87" },
+        { "from": 177, "to": 178, "label": "Effect 88" },
+        { "from": 179, "to": 180, "label": "Effect 89" },
+        { "from": 181, "to": 182, "label": "Effect 90" },
+        { "from": 183, "to": 255, "label": "Raw DMX" }
+      ]
+    },
+    {
+      "key": "pixelEffectSpeed",
+      "name": "Pixel effect speed",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Speed from min to max" },
+        { "from": 128, "to": 255, "label": "Speed from max to min" }
+      ]
+    },
+    {
+      "key": "pixelEffectFade",
+      "name": "Pixel effect fade",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No fade" },
+        { "from": 1, "to": 255, "label": "Fade time from min to max" }
+      ]
+    },
+    {
+      "key": "flowerEffect",
+      "name": "Flower effect",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No flower effect" },
+        { "from": 1, "to": 127, "label": "Forward rotation from fast to slow", "kind": "rotation" },
+        { "from": 128, "to": 128, "label": "Flower effect with no rotation", "kind": "stop" },
+        { "from": 129, "to": 255, "label": "Backwards rotation from slow to fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "flowerEffectRed",
+      "name": "Flower effect - Red",
+      "attribute": "red"
+    },
+    {
+      "key": "flowerEffectGreen",
+      "name": "Flower effect - Green",
+      "attribute": "green"
+    },
+    {
+      "key": "flowerEffectBlue",
+      "name": "Flower effect - Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "flowerEffectWhite",
+      "name": "Flower effect - White",
+      "attribute": "white"
+    },
+    {
+      "key": "flowerEffectColorMacros",
+      "name": "Flower effect color macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No macro" },
+        { "from": 1, "to": 2, "label": "Macro 1" },
+        { "from": 3, "to": 4, "label": "Macro 2" },
+        { "from": 5, "to": 6, "label": "Macro 3" },
+        { "from": 7, "to": 8, "label": "Macro 4" },
+        { "from": 9, "to": 10, "label": "Macro 5" },
+        { "from": 11, "to": 12, "label": "Macro 6" },
+        { "from": 13, "to": 14, "label": "Macro 7" },
+        { "from": 15, "to": 16, "label": "Macro 8" },
+        { "from": 17, "to": 18, "label": "Macro 9" },
+        { "from": 19, "to": 20, "label": "Macro 10" },
+        { "from": 21, "to": 22, "label": "Macro 11" },
+        { "from": 23, "to": 24, "label": "Macro 12" },
+        { "from": 25, "to": 26, "label": "Macro 13" },
+        { "from": 27, "to": 28, "label": "Macro 14" },
+        { "from": 29, "to": 30, "label": "Macro 15" },
+        { "from": 31, "to": 32, "label": "Macro 16" },
+        { "from": 33, "to": 34, "label": "Macro 17" },
+        { "from": 35, "to": 36, "label": "Macro 18" },
+        { "from": 37, "to": 38, "label": "Macro 19" },
+        { "from": 39, "to": 40, "label": "Macro 20" },
+        { "from": 41, "to": 42, "label": "Macro 21" },
+        { "from": 43, "to": 44, "label": "Macro 22" },
+        { "from": 45, "to": 46, "label": "Macro 23" },
+        { "from": 47, "to": 48, "label": "Macro 24" },
+        { "from": 49, "to": 50, "label": "Macro 25" },
+        { "from": 51, "to": 52, "label": "Macro 26" },
+        { "from": 53, "to": 54, "label": "Macro 27" },
+        { "from": 55, "to": 56, "label": "Macro 28" },
+        { "from": 57, "to": 58, "label": "Macro 29" },
+        { "from": 59, "to": 60, "label": "Macro 30" },
+        { "from": 61, "to": 62, "label": "Macro 31" },
+        { "from": 63, "to": 64, "label": "Macro 32" },
+        { "from": 65, "to": 66, "label": "Macro 33" },
+        { "from": 67, "to": 68, "label": "Macro 34" },
+        { "from": 69, "to": 70, "label": "Macro 35" },
+        { "from": 71, "to": 72, "label": "Macro 36" },
+        { "from": 73, "to": 74, "label": "Macro 37" },
+        { "from": 75, "to": 76, "label": "Macro 38" },
+        { "from": 77, "to": 78, "label": "Macro 39" },
+        { "from": 79, "to": 80, "label": "Macro 40" },
+        { "from": 81, "to": 82, "label": "Macro 41" },
+        { "from": 83, "to": 84, "label": "Macro 42" },
+        { "from": 85, "to": 86, "label": "Macro 43" },
+        { "from": 87, "to": 88, "label": "Macro 44" },
+        { "from": 89, "to": 90, "label": "Macro 45" },
+        { "from": 91, "to": 92, "label": "Macro 46" },
+        { "from": 93, "to": 94, "label": "Macro 47" },
+        { "from": 95, "to": 96, "label": "Macro 48" },
+        { "from": 97, "to": 98, "label": "Macro 49" },
+        { "from": 99, "to": 100, "label": "Macro 50" },
+        { "from": 101, "to": 102, "label": "Macro 51" },
+        { "from": 103, "to": 104, "label": "Macro 52" },
+        { "from": 105, "to": 106, "label": "Macro 53" },
+        { "from": 107, "to": 108, "label": "Macro 54" },
+        { "from": 109, "to": 110, "label": "Macro 55" },
+        { "from": 111, "to": 112, "label": "Macro 56" },
+        { "from": 113, "to": 114, "label": "Macro 57" },
+        { "from": 115, "to": 116, "label": "Macro 58" },
+        { "from": 117, "to": 118, "label": "Macro 59" },
+        { "from": 119, "to": 120, "label": "Macro 60" },
+        { "from": 121, "to": 255, "label": "Raw DMX" }
+      ]
+    },
+    {
+      "key": "flowerEffectShutterStrobe",
+      "name": "Flower effect shutter/strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe from slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Opening pulse from slow to fast", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulse from fast to slow", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Strobe random from slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "flowerEffectDimmer",
+      "name": "Flower effect dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter/strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed" },
+        { "from": 32, "to": 63, "label": "Open" },
+        { "from": 64, "to": 95, "label": "Strobe from slow to fast" },
+        { "from": 96, "to": 127, "label": "Open" },
+        { "from": 128, "to": 143, "label": "Opening pulse from slow to fast" },
+        { "from": 144, "to": 159, "label": "Closing pulse from fast to slow" },
+        { "from": 160, "to": 191, "label": "Open" },
+        { "from": 192, "to": 223, "label": "Strobe random from slow to fast" },
+        { "from": 224, "to": 255, "label": "Open" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "masterDimmerFine",
+      "name": "Master dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "masterDimmer"
+    },
+    {
+      "key": "backgroundShutterStrobe",
+      "name": "Background shutter/strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe from slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Opening pulse from slow to fast", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulse from fast to slow", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Strobe random from slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "backgroundDimmer",
+      "name": "Background dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "backgroundDimmerFine",
+      "name": "Background dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "backgroundDimmer"
+    },
+    {
+      "key": "backgroundActiveZone",
+      "name": "Background active zone",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "All pixels" },
+        { "from": 3, "to": 4, "label": "Ring 1" },
+        { "from": 5, "to": 6, "label": "Ring 2" },
+        { "from": 7, "to": 8, "label": "Ring 3" },
+        { "from": 9, "to": 10, "label": "Ring 1 + Ring 2" },
+        { "from": 11, "to": 12, "label": "Ring 1 + Ring 3" },
+        { "from": 13, "to": 14, "label": "Ring 2 + Ring 3" },
+        { "from": 15, "to": 16, "label": "Sector 1" },
+        { "from": 17, "to": 18, "label": "Sector 2" },
+        { "from": 19, "to": 20, "label": "Sector 3" },
+        { "from": 21, "to": 22, "label": "Sector 4" },
+        { "from": 23, "to": 24, "label": "Sector 5" },
+        { "from": 25, "to": 26, "label": "Sector 6" },
+        { "from": 27, "to": 28, "label": "Sector 1+4" },
+        { "from": 29, "to": 30, "label": "Sector 1+4 + Ring 1" },
+        { "from": 31, "to": 32, "label": "Sector 2+5" },
+        { "from": 33, "to": 34, "label": "Sector 2+5 + Ring 1" },
+        { "from": 35, "to": 36, "label": "Sector 3+6" },
+        { "from": 37, "to": 38, "label": "Sector 3+6 + Ring 1" },
+        { "from": 39, "to": 40, "label": "Sector 1+3+5" },
+        { "from": 41, "to": 42, "label": "Sector 1+3+5 + Ring 1" },
+        { "from": 43, "to": 44, "label": "Sector 2+4+6" },
+        { "from": 45, "to": 46, "label": "Sector 2+4+6 + Ring 1" },
+        { "from": 47, "to": 48, "label": "Sector 1+2+3" },
+        { "from": 49, "to": 50, "label": "Sector 2+3+4" },
+        { "from": 51, "to": 52, "label": "Sector 3+4+5" },
+        { "from": 53, "to": 54, "label": "Sector 4+5+6" },
+        { "from": 55, "to": 56, "label": "Sector 5+6+1" },
+        { "from": 57, "to": 58, "label": "Sector 6+1+2" },
+        { "from": 59, "to": 255, "label": "Raw DMX" }
+      ]
+    },
+    {
+      "key": "patternSelection",
+      "name": "Pattern selection",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "No pattern" },
+        { "from": 3, "to": 4, "label": "Pattern 1" },
+        { "from": 5, "to": 6, "label": "Pattern 2" },
+        { "from": 7, "to": 8, "label": "Pattern 3" },
+        { "from": 9, "to": 10, "label": "Pattern 4" },
+        { "from": 11, "to": 12, "label": "Pattern 5" },
+        { "from": 13, "to": 14, "label": "Pattern 6" },
+        { "from": 15, "to": 16, "label": "Pattern 7" },
+        { "from": 17, "to": 18, "label": "Pattern 8" },
+        { "from": 19, "to": 20, "label": "Pattern 9" },
+        { "from": 21, "to": 22, "label": "Pattern 10" },
+        { "from": 23, "to": 24, "label": "Pattern 11" },
+        { "from": 25, "to": 255, "label": "Raw DMX" }
+      ]
+    },
+    {
+      "key": "patternRepeatSize",
+      "name": "Pattern - Repeat (Size)",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "Variant 1" },
+        { "from": 3, "to": 4, "label": "Variant 2" },
+        { "from": 5, "to": 6, "label": "Variant 3" },
+        { "from": 7, "to": 8, "label": "Variant 4" },
+        { "from": 9, "to": 10, "label": "Variant 5" },
+        { "from": 11, "to": 12, "label": "Variant 6" },
+        { "from": 13, "to": 14, "label": "Variant 7" },
+        { "from": 15, "to": 16, "label": "Variant 8" },
+        { "from": 17, "to": 18, "label": "Variant 9" },
+        { "from": 19, "to": 20, "label": "Variant 10" },
+        { "from": 21, "to": 22, "label": "Variant 11" },
+        { "from": 23, "to": 255, "label": "Raw DMX" }
+      ]
+    },
+    {
+      "key": "patternRotation",
+      "name": "Pattern rotation",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No rotation", "kind": "stop" },
+        { "from": 1, "to": 127, "label": "Pattern indexing", "kind": "index" },
+        { "from": 128, "to": 190, "label": "Forward rotation from fast to slow", "kind": "rotation" },
+        { "from": 191, "to": 192, "label": "No rotation", "kind": "stop" },
+        { "from": 193, "to": 255, "label": "Backward rotation from slow to fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "patternFade",
+      "name": "Pattern fade",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No fade" },
+        { "from": 1, "to": 255, "label": "Fade from min to max" }
+      ]
+    },
+    {
+      "key": "patternTransition",
+      "name": "Pattern transition",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No transition" },
+        { "from": 1, "to": 255, "label": "Transition from 100ms to 4s" }
+      ]
+    },
+    {
+      "key": "backgroundPatternCrossfade",
+      "name": "Background/Pattern crossfade",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Background" },
+        { "from": 1, "to": 255, "label": "From Background to Pattern" }
+      ]
+    },
+    {
+      "key": "patternRed",
+      "name": "Pattern - Red",
+      "attribute": "red"
+    },
+    {
+      "key": "patternGreen",
+      "name": "Pattern - Green",
+      "attribute": "green"
+    },
+    {
+      "key": "patternBlue",
+      "name": "Pattern - Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "patternWhite",
+      "name": "Pattern - White",
+      "attribute": "white"
+    },
+    {
+      "key": "patternColorMacro",
+      "name": "Pattern Color Macro",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "No macro" },
+        { "from": 3, "to": 8, "label": "Macro 1" },
+        { "from": 9, "to": 14, "label": "Macro 2" },
+        { "from": 15, "to": 20, "label": "Macro 3" },
+        { "from": 21, "to": 26, "label": "Macro 4" },
+        { "from": 27, "to": 32, "label": "Macro 5" },
+        { "from": 33, "to": 38, "label": "Macro 6" },
+        { "from": 39, "to": 44, "label": "Macro 7" },
+        { "from": 45, "to": 50, "label": "Macro 8" },
+        { "from": 51, "to": 56, "label": "Macro 9" },
+        { "from": 57, "to": 62, "label": "Macro 10" },
+        { "from": 63, "to": 68, "label": "Macro 11" },
+        { "from": 69, "to": 74, "label": "Macro 12" },
+        { "from": 75, "to": 80, "label": "Macro 13" },
+        { "from": 81, "to": 86, "label": "Macro 14" },
+        { "from": 87, "to": 92, "label": "Macro 15" },
+        { "from": 93, "to": 98, "label": "Macro 16" },
+        { "from": 99, "to": 104, "label": "Macro 17" },
+        { "from": 105, "to": 110, "label": "Macro 18" },
+        { "from": 111, "to": 255, "label": "Raw DMX" }
+      ]
+    },
+    {
+      "key": "patternShutterStrobe",
+      "name": "Pattern shutter/strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe from slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Opening pulse from slow to fast", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulse from fast to slow", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Strobe random from slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "patternDimmerIntensity",
+      "name": "Pattern dimmer intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "unused1",
+      "name": "Unused 1",
+      "attribute": "none"
+    },
+    {
+      "key": "unused2",
+      "name": "Unused 2",
+      "attribute": "none"
+    },
+    {
+      "key": "unused3",
+      "name": "Unused 3",
+      "attribute": "none"
+    },
+    {
+      "key": "unused4",
+      "name": "Unused 4",
+      "attribute": "none"
+    },
+    {
+      "key": "unused5",
+      "name": "Unused 5",
+      "attribute": "none"
+    },
+    {
+      "key": "unused6",
+      "name": "Unused 6",
+      "attribute": "none"
+    }
+  ],
+  "modes": [
+    {
+      "name": "(1) 3-zones [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "red1",
+        "redFine1",
+        "green1",
+        "greenFine1",
+        "blue1",
+        "blueFine1",
+        "white1",
+        "whiteFine1",
+        "red2",
+        "redFine2",
+        "green2",
+        "greenFine2",
+        "blue2",
+        "blueFine2",
+        "white2",
+        "whiteFine2",
+        "red3",
+        "redFine3",
+        "green3",
+        "greenFine3",
+        "blue3",
+        "blueFine3",
+        "white3",
+        "whiteFine3",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine"
+      ],
+      "heads": [
+        [
+          "red1",
+          "redFine1",
+          "green1",
+          "greenFine1",
+          "blue1",
+          "blueFine1",
+          "white1",
+          "whiteFine1"
+        ],
+        [
+          "red2",
+          "redFine2",
+          "green2",
+          "greenFine2",
+          "blue2",
+          "blueFine2",
+          "whiteFine2",
+          "white2"
+        ],
+        [
+          "redFine3",
+          "red3",
+          "green3",
+          "greenFine3",
+          "blueFine3",
+          "blue3",
+          "white3",
+          "whiteFine3"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(1) 3-zones [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyan1",
+        "cyanFine1",
+        "magenta1",
+        "magentaFine1",
+        "yellow1",
+        "yellowFine1",
+        "unused1",
+        "unused2",
+        "cyan2",
+        "cyanFine2",
+        "magenta2",
+        "magentaFine2",
+        "yellow2",
+        "yellowFine2",
+        "unused3",
+        "unused4",
+        "cyan3",
+        "cyanFine3",
+        "magenta3",
+        "magentaFine3",
+        "yellow3",
+        "yellowFine3",
+        "unused5",
+        "unused6",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine"
+      ],
+      "heads": [
+        [
+          "cyan1",
+          "cyanFine1",
+          "magenta1",
+          "magentaFine1",
+          "yellow1",
+          "yellowFine1"
+        ],
+        [
+          "cyan2",
+          "magenta2",
+          "cyanFine2",
+          "magentaFine2",
+          "yellow2",
+          "yellowFine2"
+        ],
+        [
+          "cyan3",
+          "cyanFine3",
+          "magenta3",
+          "magentaFine3",
+          "yellow3",
+          "yellowFine3"
+        ],
+        [
+          "flowerEffectGreen",
+          "flowerEffectRed",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(2) Basic [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "greenAllPixels",
+        "blueAllPixels",
+        "whiteAllPixels",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "shutterStrobe",
+        "masterDimmer"
+      ],
+      "heads": [
+        [
+          "redAllPixels",
+          "greenAllPixels",
+          "blueAllPixels",
+          "whiteAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(2) Basic [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "magentaAllPixels",
+        "yellowAllPixels",
+        "unused1",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "shutterStrobe",
+        "masterDimmer"
+      ],
+      "heads": [
+        [
+          "cyanAllPixels",
+          "magentaAllPixels",
+          "yellowAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(3) Advanced [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine"
+      ],
+      "heads": [
+        [
+          "redAllPixels",
+          "redFineAllPixels",
+          "greenAllPixels",
+          "greenFineAllPixels",
+          "blueAllPixels",
+          "blueFineAllPixels",
+          "whiteAllPixels",
+          "whiteFineAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(3) Advanced [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine"
+      ],
+      "heads": [
+        [
+          "cyanAllPixels",
+          "cyanFineAllPixels",
+          "magentaAllPixels",
+          "magentaFineAllPixels",
+          "yellowAllPixels",
+          "yellowFineAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(4) Full RGBW [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8",
+        "red9",
+        "green9",
+        "blue9",
+        "red10",
+        "green10",
+        "blue10",
+        "red11",
+        "green11",
+        "blue11",
+        "red12",
+        "green12",
+        "blue12",
+        "red13",
+        "green13",
+        "blue13",
+        "red14",
+        "green14",
+        "blue14",
+        "red15",
+        "green15",
+        "blue15",
+        "red16",
+        "green16",
+        "blue16",
+        "red17",
+        "green17",
+        "blue17",
+        "red18",
+        "green18",
+        "blue18",
+        "red19",
+        "green19",
+        "blue19"
+      ],
+      "heads": [
+        [
+          "redAllPixels",
+          "redFineAllPixels",
+          "greenAllPixels",
+          "greenFineAllPixels",
+          "blueAllPixels",
+          "blueFineAllPixels",
+          "whiteAllPixels",
+          "whiteFineAllPixels"
+        ],
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectWhite",
+          "flowerEffectBlue",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(4) Full RGBW [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "colorMixControl",
+        "pixelEffects",
+        "pixelEffectSpeed",
+        "pixelEffectFade",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8",
+        "red9",
+        "green9",
+        "blue9",
+        "red10",
+        "green10",
+        "blue10",
+        "red11",
+        "green11",
+        "blue11",
+        "red12",
+        "green12",
+        "blue12",
+        "red13",
+        "green13",
+        "blue13",
+        "red14",
+        "green14",
+        "blue14",
+        "red15",
+        "green15",
+        "blue15",
+        "red16",
+        "green16",
+        "blue16",
+        "red17",
+        "green17",
+        "blue17",
+        "red18",
+        "green18",
+        "blue18",
+        "red19",
+        "green19",
+        "blue19"
+      ],
+      "heads": [
+        [
+          "cyanAllPixels",
+          "cyanFineAllPixels",
+          "magentaAllPixels",
+          "magentaFineAllPixels",
+          "yellowAllPixels",
+          "yellowFineAllPixels"
+        ],
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectWhite",
+          "flowerEffectBlue",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(5) Wash [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "greenAllPixels",
+        "blueAllPixels",
+        "whiteAllPixels",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "shutterStrobe",
+        "masterDimmer"
+      ],
+      "heads": [
+        [
+          "redAllPixels",
+          "greenAllPixels",
+          "blueAllPixels",
+          "whiteAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(5) Wash [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "magentaAllPixels",
+        "yellowAllPixels",
+        "unused1",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "shutterStrobe",
+        "masterDimmer"
+      ],
+      "heads": [
+        [
+          "cyanAllPixels",
+          "magentaAllPixels",
+          "yellowAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectWhite",
+          "flowerEffectBlue",
+          "flowerEffectDimmer"
+        ]
+      ]
+    },
+    {
+      "name": "(6) Pattern [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "patternSelection",
+        "patternRepeatSize",
+        "patternRotation",
+        "patternFade",
+        "patternTransition",
+        "backgroundPatternCrossfade",
+        "patternRed",
+        "patternGreen",
+        "patternBlue",
+        "patternWhite",
+        "patternColorMacro",
+        "patternShutterStrobe",
+        "patternDimmerIntensity",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine"
+      ],
+      "heads": [
+        [
+          "redAllPixels",
+          "redFineAllPixels",
+          "greenAllPixels",
+          "greenFineAllPixels",
+          "blueAllPixels",
+          "blueFineAllPixels",
+          "whiteAllPixels",
+          "whiteFineAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ],
+        [
+          "patternRed",
+          "patternGreen",
+          "patternBlue",
+          "patternWhite",
+          "patternDimmerIntensity"
+        ]
+      ]
+    },
+    {
+      "name": "(6) Pattern [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "patternSelection",
+        "patternRepeatSize",
+        "patternRotation",
+        "patternFade",
+        "patternTransition",
+        "backgroundPatternCrossfade",
+        "patternRed",
+        "patternGreen",
+        "patternBlue",
+        "patternWhite",
+        "patternColorMacro",
+        "patternShutterStrobe",
+        "patternDimmerIntensity",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine"
+      ],
+      "heads": [
+        [
+          "cyanAllPixels",
+          "cyanFineAllPixels",
+          "magentaAllPixels",
+          "magentaFineAllPixels",
+          "yellowAllPixels",
+          "yellowFineAllPixels"
+        ],
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ],
+        [
+          "patternRed",
+          "patternGreen",
+          "patternBlue",
+          "patternWhite",
+          "patternDimmerIntensity"
+        ]
+      ]
+    },
+    {
+      "name": "(7) Pixel RGB [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8",
+        "red9",
+        "green9",
+        "blue9",
+        "red10",
+        "green10",
+        "blue10",
+        "red11",
+        "green11",
+        "blue11",
+        "red12",
+        "green12",
+        "blue12",
+        "red13",
+        "green13",
+        "blue13",
+        "red14",
+        "green14",
+        "blue14",
+        "red15",
+        "green15",
+        "blue15",
+        "red16",
+        "green16",
+        "blue16",
+        "red17",
+        "green17",
+        "blue17",
+        "red18",
+        "green18",
+        "blue18",
+        "red19",
+        "green19",
+        "blue19"
+      ],
+      "heads": [
+        [
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer",
+          "flowerEffectRed"
+        ],
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19"
+        ]
+      ]
+    },
+    {
+      "name": "(7) Pixel RGB [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8",
+        "red9",
+        "green9",
+        "blue9",
+        "red10",
+        "green10",
+        "blue10",
+        "red11",
+        "green11",
+        "blue11",
+        "red12",
+        "green12",
+        "blue12",
+        "red13",
+        "green13",
+        "blue13",
+        "red14",
+        "green14",
+        "blue14",
+        "red15",
+        "green15",
+        "blue15",
+        "red16",
+        "green16",
+        "blue16",
+        "red17",
+        "green17",
+        "blue17",
+        "red18",
+        "green18",
+        "blue18",
+        "red19",
+        "green19",
+        "blue19"
+      ],
+      "heads": [
+        [
+          "flowerEffectRed",
+          "flowerEffectGreen",
+          "flowerEffectBlue",
+          "flowerEffectWhite",
+          "flowerEffectDimmer"
+        ],
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19"
+        ]
+      ]
+    },
+    {
+      "name": "(8) Pixel RGBW [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "red5",
+        "green5",
+        "blue5",
+        "white5",
+        "red6",
+        "green6",
+        "blue6",
+        "white6",
+        "red7",
+        "green7",
+        "blue7",
+        "white7",
+        "red8",
+        "green8",
+        "blue8",
+        "white8",
+        "red9",
+        "green9",
+        "blue9",
+        "white9",
+        "red10",
+        "green10",
+        "blue10",
+        "white10",
+        "red11",
+        "green11",
+        "blue11",
+        "white11",
+        "red12",
+        "green12",
+        "blue12",
+        "white12",
+        "red13",
+        "green13",
+        "blue13",
+        "white13",
+        "red14",
+        "green14",
+        "blue14",
+        "white14",
+        "red15",
+        "green15",
+        "blue15",
+        "white15",
+        "red16",
+        "green16",
+        "blue16",
+        "white16",
+        "red17",
+        "green17",
+        "blue17",
+        "white17",
+        "red18",
+        "green18",
+        "blue18",
+        "white18",
+        "red19",
+        "green19",
+        "blue19",
+        "white19"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1",
+          "white1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "white4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5",
+          "white5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6",
+          "white6"
+        ],
+        [
+          "red7",
+          "green7",
+          "white7",
+          "blue7"
+        ],
+        [
+          "green8",
+          "red8",
+          "blue8",
+          "white8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9",
+          "white9"
+        ],
+        [
+          "red10",
+          "green10",
+          "white10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11",
+          "white11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "white12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13",
+          "white13"
+        ],
+        [
+          "red14",
+          "green14",
+          "white14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15",
+          "white15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16",
+          "white16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17",
+          "white17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18",
+          "white18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19",
+          "white19"
+        ]
+      ]
+    },
+    {
+      "name": "(8) Pixel RGBW [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "red5",
+        "green5",
+        "blue5",
+        "white5",
+        "red6",
+        "green6",
+        "blue6",
+        "white6",
+        "red7",
+        "green7",
+        "blue7",
+        "white7",
+        "red8",
+        "green8",
+        "blue8",
+        "white8",
+        "red9",
+        "green9",
+        "blue9",
+        "white9",
+        "red10",
+        "green10",
+        "blue10",
+        "white10",
+        "red11",
+        "green11",
+        "blue11",
+        "white11",
+        "red12",
+        "green12",
+        "blue12",
+        "white12",
+        "red13",
+        "green13",
+        "blue13",
+        "white13",
+        "red14",
+        "green14",
+        "blue14",
+        "white14",
+        "red15",
+        "green15",
+        "blue15",
+        "white15",
+        "red16",
+        "green16",
+        "blue16",
+        "white16",
+        "red17",
+        "green17",
+        "blue17",
+        "white17",
+        "red18",
+        "green18",
+        "blue18",
+        "white18",
+        "red19",
+        "green19",
+        "blue19",
+        "white19"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1",
+          "white1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "white4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5",
+          "white5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6",
+          "white6"
+        ],
+        [
+          "red7",
+          "green7",
+          "white7",
+          "blue7"
+        ],
+        [
+          "green8",
+          "red8",
+          "blue8",
+          "white8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9",
+          "white9"
+        ],
+        [
+          "red10",
+          "green10",
+          "white10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11",
+          "white11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "white12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13",
+          "white13"
+        ],
+        [
+          "red14",
+          "green14",
+          "white14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15",
+          "white15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16",
+          "white16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17",
+          "white17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18",
+          "white18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19",
+          "white19"
+        ]
+      ]
+    },
+    {
+      "name": "(9) Pattern Full RGB [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "patternSelection",
+        "patternRepeatSize",
+        "patternRotation",
+        "patternFade",
+        "patternTransition",
+        "backgroundPatternCrossfade",
+        "patternRed",
+        "patternGreen",
+        "patternBlue",
+        "patternWhite",
+        "patternColorMacro",
+        "patternShutterStrobe",
+        "patternDimmerIntensity",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8",
+        "red9",
+        "green9",
+        "blue9",
+        "red10",
+        "green10",
+        "blue10",
+        "red11",
+        "green11",
+        "blue11",
+        "red12",
+        "green12",
+        "blue12",
+        "red13",
+        "green13",
+        "blue13",
+        "red14",
+        "green14",
+        "blue14",
+        "red15",
+        "green15",
+        "blue15",
+        "red16",
+        "green16",
+        "blue16",
+        "red17",
+        "green17",
+        "blue17",
+        "red18",
+        "green18",
+        "blue18",
+        "red19",
+        "green19",
+        "blue19"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "green8",
+          "red8",
+          "blue8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19"
+        ]
+      ]
+    },
+    {
+      "name": "(9) Pattern Full RGB [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "patternSelection",
+        "patternRepeatSize",
+        "patternRotation",
+        "patternFade",
+        "patternTransition",
+        "backgroundPatternCrossfade",
+        "patternRed",
+        "patternGreen",
+        "patternBlue",
+        "patternWhite",
+        "patternColorMacro",
+        "patternShutterStrobe",
+        "patternDimmerIntensity",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8",
+        "red9",
+        "green9",
+        "blue9",
+        "red10",
+        "green10",
+        "blue10",
+        "red11",
+        "green11",
+        "blue11",
+        "red12",
+        "green12",
+        "blue12",
+        "red13",
+        "green13",
+        "blue13",
+        "red14",
+        "green14",
+        "blue14",
+        "red15",
+        "green15",
+        "blue15",
+        "red16",
+        "green16",
+        "blue16",
+        "red17",
+        "green17",
+        "blue17",
+        "red18",
+        "green18",
+        "blue18",
+        "red19",
+        "green19",
+        "blue19"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "green8",
+          "red8",
+          "blue8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14"
+        ],
+        [
+          "red15",
+          "green15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16"
+        ],
+        [
+          "red17",
+          "green17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18"
+        ],
+        [
+          "red19",
+          "green19",
+          "blue19"
+        ]
+      ]
+    },
+    {
+      "name": "(10) Pattern Full RGBW [RGBW]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "redAllPixels",
+        "redFineAllPixels",
+        "greenAllPixels",
+        "greenFineAllPixels",
+        "blueAllPixels",
+        "blueFineAllPixels",
+        "whiteAllPixels",
+        "whiteFineAllPixels",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "patternSelection",
+        "patternRepeatSize",
+        "patternRotation",
+        "patternFade",
+        "patternTransition",
+        "backgroundPatternCrossfade",
+        "patternRed",
+        "patternGreen",
+        "patternBlue",
+        "patternWhite",
+        "patternColorMacro",
+        "patternShutterStrobe",
+        "patternDimmerIntensity",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "red5",
+        "green5",
+        "blue5",
+        "white5",
+        "red6",
+        "green6",
+        "blue6",
+        "white6",
+        "red7",
+        "green7",
+        "blue7",
+        "white7",
+        "red8",
+        "green8",
+        "blue8",
+        "white8",
+        "red9",
+        "green9",
+        "blue9",
+        "white9",
+        "red10",
+        "green10",
+        "blue10",
+        "white10",
+        "red11",
+        "green11",
+        "blue11",
+        "white11",
+        "red12",
+        "green12",
+        "blue12",
+        "white12",
+        "red13",
+        "green13",
+        "blue13",
+        "white13",
+        "red14",
+        "green14",
+        "blue14",
+        "white14",
+        "red15",
+        "green15",
+        "blue15",
+        "white15",
+        "red16",
+        "green16",
+        "blue16",
+        "white16",
+        "red17",
+        "green17",
+        "blue17",
+        "white17",
+        "red18",
+        "green18",
+        "blue18",
+        "white18",
+        "red19",
+        "green19",
+        "blue19",
+        "white19"
+      ],
+      "heads": [
+        [
+          "red1",
+          "blue1",
+          "green1",
+          "white1"
+        ],
+        [
+          "red2",
+          "blue2",
+          "green2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "white4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5",
+          "white5"
+        ],
+        [
+          "red6",
+          "blue6",
+          "green6",
+          "white6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7",
+          "white7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8",
+          "white8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9",
+          "white9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10",
+          "white10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11",
+          "white11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "white12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13",
+          "white13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14",
+          "white14"
+        ],
+        [
+          "red15",
+          "green15",
+          "white15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16",
+          "white16"
+        ],
+        [
+          "red17",
+          "green17",
+          "white17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18",
+          "white18"
+        ],
+        [
+          "green19",
+          "red19",
+          "blue19",
+          "white19"
+        ]
+      ]
+    },
+    {
+      "name": "(10) Pattern Full RGBW [CMY]",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedOrTime",
+        "powerSpecialFunctionsHoldAtLeast3Seconds",
+        "virtualColorWheel",
+        "cyanAllPixels",
+        "cyanFineAllPixels",
+        "magentaAllPixels",
+        "magentaFineAllPixels",
+        "yellowAllPixels",
+        "yellowFineAllPixels",
+        "unused1",
+        "unused2",
+        "ctc",
+        "backgroundShutterStrobe",
+        "backgroundDimmer",
+        "backgroundDimmerFine",
+        "backgroundActiveZone",
+        "colorMixControl",
+        "flowerEffect",
+        "flowerEffectRed",
+        "flowerEffectGreen",
+        "flowerEffectBlue",
+        "flowerEffectWhite",
+        "flowerEffectColorMacros",
+        "flowerEffectShutterStrobe",
+        "flowerEffectDimmer",
+        "zoom",
+        "zoomFine",
+        "patternSelection",
+        "patternRepeatSize",
+        "patternRotation",
+        "patternFade",
+        "patternTransition",
+        "backgroundPatternCrossfade",
+        "patternRed",
+        "patternGreen",
+        "patternBlue",
+        "patternWhite",
+        "patternColorMacro",
+        "patternShutterStrobe",
+        "patternDimmerIntensity",
+        "shutterStrobe",
+        "masterDimmer",
+        "masterDimmerFine",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "red4",
+        "green4",
+        "blue4",
+        "white4",
+        "red5",
+        "green5",
+        "blue5",
+        "white5",
+        "red6",
+        "green6",
+        "blue6",
+        "white6",
+        "red7",
+        "green7",
+        "blue7",
+        "white7",
+        "red8",
+        "green8",
+        "blue8",
+        "white8",
+        "red9",
+        "green9",
+        "blue9",
+        "white9",
+        "red10",
+        "green10",
+        "blue10",
+        "white10",
+        "red11",
+        "green11",
+        "blue11",
+        "white11",
+        "red12",
+        "green12",
+        "blue12",
+        "white12",
+        "red13",
+        "green13",
+        "blue13",
+        "white13",
+        "red14",
+        "green14",
+        "blue14",
+        "white14",
+        "red15",
+        "green15",
+        "blue15",
+        "white15",
+        "red16",
+        "green16",
+        "blue16",
+        "white16",
+        "red17",
+        "green17",
+        "blue17",
+        "white17",
+        "red18",
+        "green18",
+        "blue18",
+        "white18",
+        "red19",
+        "green19",
+        "blue19",
+        "white19"
+      ],
+      "heads": [
+        [
+          "red1",
+          "blue1",
+          "green1",
+          "white1"
+        ],
+        [
+          "red2",
+          "blue2",
+          "green2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "white4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5",
+          "white5"
+        ],
+        [
+          "red6",
+          "blue6",
+          "green6",
+          "white6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7",
+          "white7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8",
+          "white8"
+        ],
+        [
+          "red9",
+          "green9",
+          "blue9",
+          "white9"
+        ],
+        [
+          "red10",
+          "green10",
+          "blue10",
+          "white10"
+        ],
+        [
+          "red11",
+          "green11",
+          "blue11",
+          "white11"
+        ],
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "white12"
+        ],
+        [
+          "red13",
+          "green13",
+          "blue13",
+          "white13"
+        ],
+        [
+          "red14",
+          "green14",
+          "blue14",
+          "white14"
+        ],
+        [
+          "red15",
+          "green15",
+          "white15",
+          "blue15"
+        ],
+        [
+          "red16",
+          "green16",
+          "blue16",
+          "white16"
+        ],
+        [
+          "red17",
+          "green17",
+          "white17",
+          "blue17"
+        ],
+        [
+          "red18",
+          "green18",
+          "blue18",
+          "white18"
+        ],
+        [
+          "green19",
+          "red19",
+          "blue19",
+          "white19"
+        ]
+      ]
+    }
+  ]
+}

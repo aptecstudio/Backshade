@@ -1,0 +1,32 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Antari",
+  "model": "Z-1000 MKII",
+  "category": "smoke",
+  "physical": {
+    "width": 198,
+    "height": 214,
+    "depth": 433,
+    "weight": 6.6,
+    "power": 1000
+  },
+  "channels": [
+    {
+      "key": "fog",
+      "name": "Fog",
+      "attribute": "dimmer",
+      "capabilities": [
+        { "from": 0, "to": 128, "label": "Off" },
+        { "from": 129, "to": 255, "label": "Volume output" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 Channel",
+      "channels": [
+        "fog"
+      ]
+    }
+  ]
+}

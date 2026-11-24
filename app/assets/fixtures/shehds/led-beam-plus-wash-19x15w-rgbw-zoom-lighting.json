@@ -1,0 +1,250 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Shehds",
+  "model": "LED Beam+Wash 19x15W RGBW Zoom Lighting",
+  "category": "movingHead",
+  "physical": {
+    "width": 310,
+    "height": 400,
+    "depth": 220,
+    "weight": 7.7,
+    "lumens": 8000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 8,
+      "max": 55
+    },
+    "panRange": 540,
+    "tiltRange": 180,
+    "power": 285
+  },
+  "channels": [
+    {
+      "key": "xAxisRotation",
+      "name": "X axis rotation",
+      "attribute": "pan"
+    },
+    {
+      "key": "xAxisFineTuning",
+      "name": "X-axis fine-tuning",
+      "attribute": "pan",
+      "fineOf": "xAxisRotation"
+    },
+    {
+      "key": "yAxisRotation",
+      "name": "Y axis rotation",
+      "attribute": "tilt"
+    },
+    {
+      "key": "yAxisFineTuning",
+      "name": "Y-axis fine-tuning",
+      "attribute": "tilt",
+      "fineOf": "yAxisRotation"
+    },
+    {
+      "key": "xySpeedAdjustment",
+      "name": "XY speed adjustment",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "red1Dimmer",
+      "name": "Red 1 Dimmer",
+      "attribute": "red"
+    },
+    {
+      "key": "green1Dimmer",
+      "name": "Green 1 Dimmer",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1Dimmer",
+      "name": "Blue 1 Dimmer",
+      "attribute": "blue"
+    },
+    {
+      "key": "white1Dimmer",
+      "name": "White 1 Dimmer",
+      "attribute": "white"
+    },
+    {
+      "key": "red2Dimmer",
+      "name": "Red 2 Dimmer",
+      "attribute": "red"
+    },
+    {
+      "key": "green2Dimmer",
+      "name": "Green 2 Dimmer",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2Dimmer",
+      "name": "Blue 2 Dimmer",
+      "attribute": "blue"
+    },
+    {
+      "key": "white2Dimmer",
+      "name": "White 2 Dimmer",
+      "attribute": "white"
+    },
+    {
+      "key": "red3Dimmer",
+      "name": "Red 3 Dimmer",
+      "attribute": "red"
+    },
+    {
+      "key": "green3Dimmer",
+      "name": "Green 3 Dimmer",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3Dimmer",
+      "name": "Blue 3 Dimmer",
+      "attribute": "blue"
+    },
+    {
+      "key": "white3Dimmer",
+      "name": "White 3 Dimmer",
+      "attribute": "white"
+    },
+    {
+      "key": "programSelection",
+      "name": "Program Selection",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 175, "label": "Preset Color" },
+        { "from": 176, "to": 200, "label": "Program Jump" },
+        { "from": 201, "to": 224, "label": "Program Gradient" },
+        { "from": 225, "to": 255, "label": "Program Pulse" }
+      ]
+    },
+    {
+      "key": "programSpeed",
+      "name": "Program Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "programActivation",
+      "name": "Program Activation",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 49, "label": "No Function" },
+        { "from": 50, "to": 99, "label": "Program Activation" },
+        { "from": 100, "to": 150, "label": "Self-propelled mode (1)" },
+        { "from": 151, "to": 199, "label": "Self-propelled mode (2)" },
+        { "from": 200, "to": 255, "label": "Audio control mode" }
+      ]
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control"
+    },
+    {
+      "key": "redDimmer",
+      "name": "Red Dimmer",
+      "attribute": "red"
+    },
+    {
+      "key": "greenDimmer",
+      "name": "Green Dimmer",
+      "attribute": "green"
+    },
+    {
+      "key": "blueDimmer",
+      "name": "Blue Dimmer",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteDimmer",
+      "name": "White Dimmer",
+      "attribute": "white"
+    }
+  ],
+  "modes": [
+    {
+      "name": "16 Channel",
+      "channels": [
+        "xAxisRotation",
+        "xAxisFineTuning",
+        "yAxisRotation",
+        "yAxisFineTuning",
+        "xySpeedAdjustment",
+        "masterDimmer",
+        "strobe",
+        "redDimmer",
+        "greenDimmer",
+        "blueDimmer",
+        "whiteDimmer",
+        "focus",
+        "programSelection",
+        "programSpeed",
+        "programActivation",
+        "reset"
+      ]
+    },
+    {
+      "name": "24 Channel",
+      "channels": [
+        "xAxisRotation",
+        "xAxisFineTuning",
+        "yAxisRotation",
+        "yAxisFineTuning",
+        "xySpeedAdjustment",
+        "focus",
+        "masterDimmer",
+        "strobe",
+        "red1Dimmer",
+        "green1Dimmer",
+        "blue1Dimmer",
+        "white1Dimmer",
+        "red2Dimmer",
+        "green2Dimmer",
+        "blue2Dimmer",
+        "white2Dimmer",
+        "red3Dimmer",
+        "green3Dimmer",
+        "blue3Dimmer",
+        "white3Dimmer",
+        "programSelection",
+        "programSpeed",
+        "programActivation",
+        "reset"
+      ],
+      "heads": [
+        [
+          "red1Dimmer",
+          "green1Dimmer",
+          "blue1Dimmer",
+          "white1Dimmer"
+        ],
+        [
+          "red2Dimmer",
+          "green2Dimmer",
+          "blue2Dimmer",
+          "white2Dimmer"
+        ],
+        [
+          "red3Dimmer",
+          "green3Dimmer",
+          "blue3Dimmer",
+          "white3Dimmer"
+        ]
+      ]
+    }
+  ]
+}

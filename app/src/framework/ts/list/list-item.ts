@@ -16,6 +16,8 @@ export interface ListItemOptions {
     label?: string;
     /** Muted row, for example for an unavailable item */
     muted?: boolean;
+    /** Additional CSS classes, for example to lay out the content as table cells */
+    classes?: string[];
 }
 
 export class ListItem extends Component<HTMLButtonElement> {
@@ -23,7 +25,7 @@ export class ListItem extends Component<HTMLButtonElement> {
 
     constructor(options: ListItemOptions = {}) {
         super(create('button', {
-            classes: ['list-item', ...(options.muted === true ? ['list-item--muted'] : [])],
+            classes: ['list-item', ...(options.muted === true ? ['list-item--muted'] : []), ...(options.classes ?? [])],
             attributes: { type: 'button' }
         }));
         if (options.label !== undefined) {

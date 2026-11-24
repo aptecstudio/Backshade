@@ -1,0 +1,137 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Showtec",
+  "model": "Compact Par 7 Tri",
+  "category": "par",
+  "physical": {
+    "width": 260,
+    "height": 92,
+    "depth": 272,
+    "weight": 2.14,
+    "lumens": 681,
+    "colorTemperature": 4000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 18,
+      "max": 18
+    },
+    "power": 32
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No Strobe", "kind": "open" },
+        { "from": 10, "to": 255, "label": "Strobe 0-20 Hz", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "colorPrograms",
+      "name": "Color programs",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function" }
+      ]
+    },
+    {
+      "key": "idAdress",
+      "name": "ID Adress",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "ID 1-66" },
+        { "from": 10, "to": 19, "label": "ID 1" },
+        { "from": 20, "to": 29, "label": "ID 2" },
+        { "from": 30, "to": 39, "label": "ID 3" },
+        { "from": 40, "to": 49, "label": "ID 4" },
+        { "from": 50, "to": 59, "label": "ID 5" },
+        { "from": 60, "to": 69, "label": "ID 6" },
+        { "from": 70, "to": 79, "label": "ID 7" },
+        { "from": 80, "to": 89, "label": "ID 8" },
+        { "from": 90, "to": 99, "label": "ID 9" },
+        { "from": 100, "to": 109, "label": "ID 10" },
+        { "from": 110, "to": 119, "label": "ID 11" },
+        { "from": 120, "to": 129, "label": "ID 12" },
+        { "from": 130, "to": 139, "label": "ID 13" },
+        { "from": 140, "to": 149, "label": "ID 14" },
+        { "from": 150, "to": 159, "label": "ID 15" },
+        { "from": 160, "to": 169, "label": "ID 16" },
+        { "from": 170, "to": 179, "label": "ID 17" },
+        { "from": 180, "to": 189, "label": "ID 18" },
+        { "from": 190, "to": 199, "label": "ID 19" },
+        { "from": 200, "to": 209, "label": "ID 20" },
+        { "from": 210, "to": 210, "label": "ID 21" },
+        { "from": 211, "to": 211, "label": "ID 22" },
+        { "from": 212, "to": 212, "label": "ID 23" },
+        { "from": 213, "to": 250, "label": "ID 63" },
+        { "from": 251, "to": 251, "label": "ID 62" },
+        { "from": 252, "to": 252, "label": "ID 63" },
+        { "from": 253, "to": 253, "label": "ID 64" },
+        { "from": 254, "to": 254, "label": "ID 65" },
+        { "from": 255, "to": 255, "label": "ID 66" }
+      ]
+    },
+    {
+      "key": "faderResponse",
+      "name": "Fader response",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 250, "label": "CH1-CH4 instant fader response" },
+        { "from": 251, "to": 255, "label": "CH1-CH4 delayed fader response" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "4 Channel",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "8 Channel",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "strobe",
+        "colorPrograms",
+        "idAdress",
+        "faderResponse"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  ]
+}

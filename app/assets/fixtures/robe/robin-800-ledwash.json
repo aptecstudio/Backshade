@@ -1,0 +1,644 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Robin 800 LEDWash",
+  "category": "movingHead",
+  "physical": {
+    "width": 343,
+    "height": 444,
+    "depth": 203,
+    "weight": 11,
+    "lumens": 5620,
+    "source": "LED",
+    "beamAngle": {
+      "min": 8,
+      "max": 63
+    },
+    "panRange": 450,
+    "tiltRange": 300,
+    "power": 430
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "pTSpeedPTTime",
+      "name": "P/T Speed - P/T Time",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Max Speed (Tracking Mode)" },
+        { "from": 1, "to": 255, "label": "Speed Max to Min (Vector Mode)" }
+      ]
+    },
+    {
+      "key": "specialFunctions",
+      "name": "Special functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Reserved" },
+        { "from": 10, "to": 14, "label": "DMX input: Wired DMX" },
+        { "from": 15, "to": 19, "label": "DMX input: Wireless DMX" },
+        { "from": 20, "to": 29, "label": "Reserved" },
+        { "from": 30, "to": 39, "label": "RGBW color mixing mode" },
+        { "from": 40, "to": 49, "label": "CMY color mixing mode" },
+        { "from": 50, "to": 59, "label": "Pan/Tilt speed mode" },
+        { "from": 60, "to": 69, "label": "Pan/Tilt Time Mode" },
+        { "from": 70, "to": 79, "label": "Blackout while pan/tilt moving" },
+        { "from": 80, "to": 89, "label": "Disabled blackout while pan/tilt moving" },
+        { "from": 90, "to": 99, "label": "Theatre Mode ON" },
+        { "from": 100, "to": 109, "label": "Theatre Mode OFF" },
+        { "from": 110, "to": 114, "label": "Zoom mode: Wash" },
+        { "from": 115, "to": 119, "label": "Zoom mode:Beam" },
+        { "from": 120, "to": 139, "label": "Reserved" },
+        { "from": 140, "to": 149, "label": "Pan/Tilt Reset", "kind": "reset" },
+        { "from": 150, "to": 179, "label": "Reseved" },
+        { "from": 180, "to": 189, "label": "Zoom/beam shaper Reset" },
+        { "from": 190, "to": 199, "label": "Reserved" },
+        { "from": 200, "to": 209, "label": "Total Reset", "kind": "reset" },
+        { "from": 210, "to": 239, "label": "Reserved" },
+        { "from": 240, "to": 240, "label": "Disable \"Silent mode\" of fan" },
+        { "from": 241, "to": 255, "label": "\"Silent mode of fans\":fans noise from min. to max." }
+      ]
+    },
+    {
+      "key": "redCyanAllZones",
+      "name": "Red/Cyan (All Zones)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenMagentaAllZones",
+      "name": "Green/Magenta (All Zones)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueYellowAllZones",
+      "name": "Blue/Yellow (All Zones)",
+      "attribute": "blue"
+    },
+    {
+      "key": "ctc",
+      "name": "CTC",
+      "attribute": "colorTemperature",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function" },
+        { "from": 1, "to": 255, "label": "Color temperature correction from 20000K to 2700K (menu item \"Color Calibration Mode\"=Off) Color temperature correction from 15500K to 2700K (menu item \"Color Calibration Mode\"=On)" }
+      ]
+    },
+    {
+      "key": "virtualColorWheel",
+      "name": "Virtual Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function", "kind": "color", "color": "#ffffff" },
+        { "from": 1, "to": 2, "label": "2700K White", "kind": "color", "color": "#ffc58f" },
+        { "from": 3, "to": 3, "label": "2700K White (Halogen)", "kind": "color", "color": "#ffc58f" },
+        { "from": 4, "to": 5, "label": "3200K White", "kind": "color", "color": "#fff1e0" },
+        { "from": 6, "to": 6, "label": "3200K White (Halogen)", "kind": "color", "color": "#fff1e0" },
+        { "from": 7, "to": 9, "label": "4200K White", "kind": "color", "color": "#fff9e0" },
+        { "from": 10, "to": 12, "label": "5600K White", "kind": "color", "color": "#fffffb" },
+        { "from": 13, "to": 15, "label": "8000K White", "kind": "color", "color": "#dce2ff" },
+        { "from": 16, "to": 16, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 17, "to": 55, "label": "Blue -> Cyan", "kind": "color", "color": "#0000ff" },
+        { "from": 56, "to": 56, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 57, "to": 95, "label": "Cyan -> Green", "kind": "color", "color": "#00ffff" },
+        { "from": 96, "to": 96, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 97, "to": 134, "label": "Green -> Yellow", "kind": "color", "color": "#00ff00" },
+        { "from": 135, "to": 135, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 136, "to": 174, "label": "Yellow -> Red", "kind": "color", "color": "#ffff00" },
+        { "from": 175, "to": 175, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 176, "to": 214, "label": "Red -> Magenta", "kind": "color", "color": "#ff0000" },
+        { "from": 215, "to": 215, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 216, "to": 246, "label": "Magenta -> Blue", "kind": "color", "color": "#ff00ff" },
+        { "from": 247, "to": 247, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 248, "to": 248, "label": "Rainbow effect (with Fadetime)" },
+        { "from": 249, "to": 249, "label": "Rainbow effect" },
+        { "from": 250, "to": 251, "label": "Zone Effect 1" },
+        { "from": 252, "to": 252, "label": "Zone Effect 2" },
+        { "from": 253, "to": 253, "label": "Zone Effect 3" },
+        { "from": 254, "to": 254, "label": "Zone Effect 4" },
+        { "from": 255, "to": 255, "label": "Zone Effect 5" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom Fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Strobe effect from slow--> fast (All zones together)", "kind": "strobe" },
+        { "from": 64, "to": 95, "label": "Strobe >> (All Zones)", "kind": "strobe" },
+        { "from": 96, "to": 111, "label": "Zone effects+rainbow effects speed control, slow--> fast" },
+        { "from": 112, "to": 127, "label": "Effects Zone effects+rainbow effects speed control, fast--> slow" },
+        { "from": 128, "to": 143, "label": "Opening pulses in sequences from slow--> fast (All zones together)", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulses in sequences from fast--> slow (All zones together)" },
+        { "from": 160, "to": 175, "label": "Random strobe effect from slow--> fast (random zone)", "kind": "strobe" },
+        { "from": 176, "to": 191, "label": "Random strobe effect from slow--> fast (random zone + random strobe)", "kind": "strobe" },
+        { "from": 192, "to": 223, "label": "Random strobe effect from slow --> fast (All zones together)", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "whiteAllZones",
+      "name": "White (All Zones)",
+      "attribute": "white"
+    },
+    {
+      "key": "redCyanFineAllZones",
+      "name": "Red/Cyan Fine (All Zones)",
+      "attribute": "red",
+      "fineOf": "redCyanAllZones"
+    },
+    {
+      "key": "greenMagentaFineAllZones",
+      "name": "Green/Magenta Fine (All Zones)",
+      "attribute": "green",
+      "fineOf": "greenMagentaAllZones"
+    },
+    {
+      "key": "blueYellowFineAllZones",
+      "name": "Blue/Yellow Fine (All Zones)",
+      "attribute": "blue",
+      "fineOf": "blueYellowAllZones"
+    },
+    {
+      "key": "whiteFineAllZones",
+      "name": "White Fine (All Zones)",
+      "attribute": "white",
+      "fineOf": "whiteAllZones"
+    },
+    {
+      "key": "redCyanZ1",
+      "name": "Red/Cyan (Z1)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenMagentaZ1",
+      "name": "Green/Magenta (Z1)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueYellowZ1",
+      "name": "Blue/Yellow (Z1)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteZ1",
+      "name": "White (Z1)",
+      "attribute": "white"
+    },
+    {
+      "key": "redCyanFineZ1",
+      "name": "Red/Cyan Fine (Z1)",
+      "attribute": "red",
+      "fineOf": "redCyanZ1"
+    },
+    {
+      "key": "greenMagentaFineZ1",
+      "name": "Green/Magenta Fine (Z1)",
+      "attribute": "green",
+      "fineOf": "greenMagentaZ1"
+    },
+    {
+      "key": "blueYellowFineZ1",
+      "name": "Blue/Yellow Fine (Z1)",
+      "attribute": "blue",
+      "fineOf": "blueYellowZ1"
+    },
+    {
+      "key": "whiteFineZ1",
+      "name": "White Fine (Z1)",
+      "attribute": "white",
+      "fineOf": "whiteZ1"
+    },
+    {
+      "key": "redCyanZ2",
+      "name": "Red/Cyan (Z2)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenMagentaZ2",
+      "name": "Green/Magenta (Z2)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueYellowZ2",
+      "name": "Blue/Yellow (Z2)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteZ2",
+      "name": "White (Z2)",
+      "attribute": "white"
+    },
+    {
+      "key": "redCyanFineZ2",
+      "name": "Red/Cyan Fine (Z2)",
+      "attribute": "red",
+      "fineOf": "redCyanZ2"
+    },
+    {
+      "key": "greenMagentaFineZ2",
+      "name": "Green/Magenta Fine (Z2)",
+      "attribute": "green",
+      "fineOf": "greenMagentaZ2"
+    },
+    {
+      "key": "blueYellowFineZ2",
+      "name": "Blue/Yellow Fine (Z2)",
+      "attribute": "blue",
+      "fineOf": "blueYellowZ2"
+    },
+    {
+      "key": "whiteFineZ2",
+      "name": "White Fine (Z2)",
+      "attribute": "white",
+      "fineOf": "whiteZ2"
+    },
+    {
+      "key": "redCyanZ3",
+      "name": "Red/Cyan (Z3)",
+      "attribute": "red"
+    },
+    {
+      "key": "greenMagentaZ3",
+      "name": "Green/Magenta (Z3)",
+      "attribute": "green"
+    },
+    {
+      "key": "blueYellowZ3",
+      "name": "Blue/Yellow (Z3)",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteZ3",
+      "name": "White (Z3)",
+      "attribute": "white"
+    },
+    {
+      "key": "redCyanFineZ3",
+      "name": "Red/Cyan Fine (Z3)",
+      "attribute": "red",
+      "fineOf": "redCyanZ3"
+    },
+    {
+      "key": "greenMagentaFineZ3",
+      "name": "Green/Magenta Fine (Z3)",
+      "attribute": "green",
+      "fineOf": "greenMagentaZ3"
+    },
+    {
+      "key": "blueYellowFineZ3",
+      "name": "Blue/Yellow Fine (Z3)",
+      "attribute": "blue",
+      "fineOf": "blueYellowZ3"
+    },
+    {
+      "key": "whiteFineZ3",
+      "name": "White Fine (Z3)",
+      "attribute": "white",
+      "fineOf": "whiteZ3"
+    },
+    {
+      "key": "beamShaper",
+      "name": "Beam shaper",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Beam shaper indexing 0 deg-180 deg" },
+        { "from": 128, "to": 191, "label": "Forwards rotation from fast to slow" },
+        { "from": 192, "to": 255, "label": "Backwards rotation from slow to fast" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "38 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "specialFunctions",
+        "redCyanZ1",
+        "greenMagentaZ1",
+        "blueYellowZ1",
+        "whiteZ1",
+        "redCyanFineZ1",
+        "greenMagentaFineZ1",
+        "blueYellowFineZ1",
+        "whiteFineZ1",
+        "redCyanZ2",
+        "greenMagentaZ2",
+        "blueYellowZ2",
+        "whiteZ2",
+        "redCyanFineZ2",
+        "greenMagentaFineZ2",
+        "blueYellowFineZ2",
+        "whiteFineZ2",
+        "redCyanZ3",
+        "greenMagentaZ3",
+        "blueYellowZ3",
+        "whiteZ3",
+        "redCyanFineZ3",
+        "greenMagentaFineZ3",
+        "blueYellowFineZ3",
+        "whiteFineZ3",
+        "ctc",
+        "virtualColorWheel",
+        "beamShaper",
+        "zoom",
+        "zoomFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "redCyanZ1",
+          "greenMagentaZ1",
+          "blueYellowZ1",
+          "whiteZ1",
+          "redCyanFineZ1",
+          "greenMagentaFineZ1",
+          "blueYellowFineZ1",
+          "whiteFineZ1"
+        ],
+        [
+          "redCyanZ2",
+          "greenMagentaZ2",
+          "blueYellowZ2",
+          "whiteZ2",
+          "redCyanFineZ2",
+          "greenMagentaFineZ2",
+          "blueYellowFineZ2",
+          "whiteFineZ2"
+        ],
+        [
+          "redCyanZ3",
+          "greenMagentaZ3",
+          "blueYellowZ3",
+          "whiteZ3",
+          "redCyanFineZ3",
+          "greenMagentaFineZ3",
+          "blueYellowFineZ3",
+          "whiteFineZ3"
+        ]
+      ]
+    },
+    {
+      "name": "22 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "specialFunctions",
+        "redCyanAllZones",
+        "greenMagentaAllZones",
+        "blueYellowAllZones",
+        "whiteAllZones",
+        "redCyanFineAllZones",
+        "greenMagentaFineAllZones",
+        "blueYellowFineAllZones",
+        "whiteFineAllZones",
+        "ctc",
+        "virtualColorWheel",
+        "beamShaper",
+        "zoom",
+        "zoomFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ]
+    },
+    {
+      "name": "16 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "specialFunctions",
+        "redCyanAllZones",
+        "greenMagentaAllZones",
+        "blueYellowAllZones",
+        "whiteAllZones",
+        "ctc",
+        "virtualColorWheel",
+        "beamShaper",
+        "zoom",
+        "shutter",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "11 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "specialFunctions",
+        "virtualColorWheel",
+        "beamShaper",
+        "zoom",
+        "shutter",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "38 Channel #2",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "specialFunctions",
+        "zoom",
+        "zoomFine",
+        "beamShaper",
+        "shutter",
+        "dimmer",
+        "dimmerFine",
+        "ctc",
+        "virtualColorWheel",
+        "redCyanZ1",
+        "greenMagentaZ1",
+        "blueYellowZ1",
+        "whiteZ1",
+        "redCyanFineZ1",
+        "greenMagentaFineZ1",
+        "blueYellowFineZ1",
+        "whiteFineZ1",
+        "redCyanZ2",
+        "greenMagentaZ2",
+        "blueYellowZ2",
+        "whiteZ2",
+        "redCyanFineZ2",
+        "greenMagentaFineZ2",
+        "blueYellowFineZ2",
+        "whiteFineZ2",
+        "redCyanZ3",
+        "greenMagentaZ3",
+        "blueYellowZ3",
+        "whiteZ3",
+        "redCyanFineZ3",
+        "greenMagentaFineZ3",
+        "blueYellowFineZ3",
+        "whiteFineZ3"
+      ],
+      "heads": [
+        [
+          "virtualColorWheel",
+          "redCyanZ1",
+          "greenMagentaZ1",
+          "blueYellowZ1",
+          "whiteZ1",
+          "redCyanFineZ1",
+          "greenMagentaFineZ1",
+          "blueYellowFineZ1"
+        ],
+        [
+          "whiteFineZ1",
+          "redCyanZ2",
+          "greenMagentaZ2",
+          "blueYellowZ2",
+          "whiteZ2",
+          "redCyanFineZ2",
+          "greenMagentaFineZ2",
+          "blueYellowFineZ2"
+        ],
+        [
+          "whiteFineZ2",
+          "redCyanZ3",
+          "greenMagentaZ3",
+          "blueYellowZ3",
+          "whiteZ3",
+          "redCyanFineZ3",
+          "greenMagentaFineZ3",
+          "blueYellowFineZ3"
+        ]
+      ]
+    },
+    {
+      "name": "37 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "specialFunctions",
+        "redCyanZ1",
+        "greenMagentaZ1",
+        "blueYellowZ1",
+        "whiteZ1",
+        "redCyanFineZ1",
+        "greenMagentaFineZ1",
+        "blueYellowFineZ1",
+        "whiteFineZ1",
+        "redCyanZ2",
+        "greenMagentaZ2",
+        "blueYellowZ2",
+        "whiteZ2",
+        "redCyanFineZ2",
+        "greenMagentaFineZ2",
+        "blueYellowFineZ2",
+        "whiteFineZ2",
+        "redCyanZ3",
+        "greenMagentaZ3",
+        "blueYellowZ3",
+        "whiteZ3",
+        "redCyanFineZ3",
+        "greenMagentaFineZ3",
+        "blueYellowFineZ3",
+        "whiteFineZ3",
+        "ctc",
+        "virtualColorWheel",
+        "zoom",
+        "zoomFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ],
+      "heads": [
+        [
+          "redCyanZ1",
+          "greenMagentaZ1",
+          "blueYellowZ1",
+          "whiteZ1",
+          "redCyanFineZ1",
+          "greenMagentaFineZ1",
+          "blueYellowFineZ1",
+          "whiteFineZ1"
+        ],
+        [
+          "redCyanZ2",
+          "greenMagentaZ2",
+          "blueYellowZ2",
+          "whiteZ2",
+          "redCyanFineZ2",
+          "greenMagentaFineZ2",
+          "blueYellowFineZ2",
+          "whiteFineZ2"
+        ],
+        [
+          "redCyanZ3",
+          "greenMagentaZ3",
+          "blueYellowZ3",
+          "whiteZ3",
+          "redCyanFineZ3",
+          "greenMagentaFineZ3",
+          "blueYellowFineZ3",
+          "whiteFineZ3"
+        ]
+      ]
+    }
+  ]
+}

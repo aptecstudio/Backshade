@@ -14,7 +14,7 @@ $scale: (
 /// @param {Number} $step - Scale step: 1, 2, 3, 4, 6 or 8
 @function space($step) {
     @if not map.has-key($scale, $step) {
-        @error 'Spaziatura "#{$step}" non presente nella scala: usa 1, 2, 3, 4, 6 o 8.';
+        @error 'Spacing "#{$step}" is not in the scale: use 1, 2, 3, 4, 6 or 8.';
     }
     @return map.get($scale, $step);
 }

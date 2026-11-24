@@ -1,0 +1,21 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "Blinder",
+  "category": "blinder",
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 channel",
+      "channels": [
+        "dimmer"
+      ]
+    }
+  ]
+}

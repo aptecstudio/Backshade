@@ -57,6 +57,7 @@ export { TextField, type TextFieldOptions } from './forms/text-field.js';
 export { TextArea, type TextAreaOptions } from './forms/text-area.js';
 export { NumberField, type NumberFieldOptions } from './forms/number-field.js';
 export { ChoiceKeys, type ChoiceKeysOptions, type ChoiceOption } from './forms/choice-keys.js';
+export { SelectField, type SelectFieldOptions, type SelectGroup, type SelectOption } from './forms/select-field.js';
 export { TimeField, type TimeFieldOptions } from './forms/time-field.js';
 export { pickTime, type TimePickerLabels, type TimePickerOptions } from './time/time-picker.js';
 export { formatDuration } from './time/format-duration.js';
@@ -70,6 +71,9 @@ export { onShortcut } from './keyboard/shortcuts.js';
 export { Key, type KeyOptions, type KeyState } from './keys/key.js';
 export { SquareKey, type SquareKeyOptions, type SquareKeyVariant } from './keys/square-key.js';
 export { FunctionKey, type FunctionKeyOptions } from './keys/function-key.js';
+
+// Tabs
+export { TabBar, type TabBarOptions, type TabOption } from './tabs/tab-bar.js';
 
 // Displays
 export { ChannelDisplay, type ChannelDisplayOptions } from './displays/channel-display.js';

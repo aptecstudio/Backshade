@@ -1,0 +1,398 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Vizi Hex Wash7",
+  "category": "movingHead",
+  "physical": {
+    "width": 300,
+    "height": 400,
+    "depth": 200,
+    "weight": 8.5,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 58
+    },
+    "panRange": 630,
+    "tiltRange": 270,
+    "power": 137
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "redCenterLed",
+      "name": "Red Center LED",
+      "attribute": "red"
+    },
+    {
+      "key": "greenCenterLed",
+      "name": "Green Center LED",
+      "attribute": "green"
+    },
+    {
+      "key": "blueCenterLed",
+      "name": "Blue Center LED",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteCenterLed",
+      "name": "White Center LED",
+      "attribute": "white"
+    },
+    {
+      "key": "amberCenterLed",
+      "name": "Amber Center LED",
+      "attribute": "amber"
+    },
+    {
+      "key": "uvCenterLed",
+      "name": "UV Center LED",
+      "attribute": "uv"
+    },
+    {
+      "key": "redOuterLedS",
+      "name": "Red Outer LED's",
+      "attribute": "red"
+    },
+    {
+      "key": "greenOuterLedS",
+      "name": "Green Outer LED's",
+      "attribute": "green"
+    },
+    {
+      "key": "blueOuterLedS",
+      "name": "Blue Outer LED's",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteOuterLedS",
+      "name": "White Outer LED's",
+      "attribute": "white"
+    },
+    {
+      "key": "amberOuterLedS",
+      "name": "Amber Outer LED's",
+      "attribute": "amber"
+    },
+    {
+      "key": "uvOuterLedS",
+      "name": "UV Outer LED's",
+      "attribute": "uv"
+    },
+    {
+      "key": "allRedLed",
+      "name": "All Red LED",
+      "attribute": "red"
+    },
+    {
+      "key": "allGreenLed",
+      "name": "All Green LED",
+      "attribute": "green"
+    },
+    {
+      "key": "allBlueLed",
+      "name": "All Blue LED",
+      "attribute": "blue"
+    },
+    {
+      "key": "allWhiteLed",
+      "name": "All White LED",
+      "attribute": "white"
+    },
+    {
+      "key": "allAmberLed",
+      "name": "All Amber LED",
+      "attribute": "amber"
+    },
+    {
+      "key": "allUvLed",
+      "name": "All UV LED",
+      "attribute": "uv"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Off", "kind": "color", "color": "#000000" },
+        { "from": 1, "to": 4, "label": "Color 1", "kind": "color", "color": "#50ffea" },
+        { "from": 5, "to": 8, "label": "Color 2", "kind": "color", "color": "#50ffa4" },
+        { "from": 9, "to": 12, "label": "Color 3", "kind": "color", "color": "#4dff70" },
+        { "from": 13, "to": 16, "label": "Color 4", "kind": "color", "color": "#75ff53" },
+        { "from": 17, "to": 20, "label": "Color 5", "kind": "color", "color": "#a0ff4d" },
+        { "from": 21, "to": 24, "label": "Color 6", "kind": "color", "color": "#dfff53" },
+        { "from": 25, "to": 28, "label": "Color 7", "kind": "color", "color": "#fff34d" },
+        { "from": 29, "to": 32, "label": "Color 8", "kind": "color", "color": "#ffc84a" },
+        { "from": 33, "to": 36, "label": "Color 9", "kind": "color", "color": "#ffa64d" },
+        { "from": 37, "to": 40, "label": "Color 10", "kind": "color", "color": "#ff7d4a" },
+        { "from": 41, "to": 44, "label": "Color 11", "kind": "color", "color": "#ff614d" },
+        { "from": 45, "to": 48, "label": "Color 12", "kind": "color", "color": "#ff474d" },
+        { "from": 49, "to": 52, "label": "Color 13", "kind": "color", "color": "#ff5386" },
+        { "from": 53, "to": 56, "label": "Color 14", "kind": "color", "color": "#ff5db6" },
+        { "from": 57, "to": 60, "label": "Color 15", "kind": "color", "color": "#ff60ec" },
+        { "from": 61, "to": 64, "label": "Color 16", "kind": "color", "color": "#ee5dff" },
+        { "from": 65, "to": 68, "label": "Color 17", "kind": "color", "color": "#c457ff" },
+        { "from": 69, "to": 72, "label": "Color 18", "kind": "color", "color": "#965aff" },
+        { "from": 73, "to": 76, "label": "Color 19", "kind": "color", "color": "#644dff" },
+        { "from": 77, "to": 80, "label": "Color 20", "kind": "color", "color": "#4d64ff" },
+        { "from": 81, "to": 84, "label": "Color 21", "kind": "color", "color": "#4394ff" },
+        { "from": 85, "to": 88, "label": "Color 22", "kind": "color", "color": "#4dc3ff" },
+        { "from": 89, "to": 92, "label": "Color 23", "kind": "color", "color": "#4deaff" },
+        { "from": 93, "to": 96, "label": "Color 24", "kind": "color", "color": "#9eff90" },
+        { "from": 97, "to": 100, "label": "Color 25", "kind": "color", "color": "#fffb99" },
+        { "from": 101, "to": 104, "label": "Color 26", "kind": "color", "color": "#ffaf93" },
+        { "from": 105, "to": 108, "label": "Color 27", "kind": "color", "color": "#ff8aba" },
+        { "from": 109, "to": 112, "label": "Color 28", "kind": "color", "color": "#ff93fb" },
+        { "from": 113, "to": 116, "label": "Color 29", "kind": "color", "color": "#978aff" },
+        { "from": 117, "to": 120, "label": "Color 30", "kind": "color", "color": "#978aff" },
+        { "from": 121, "to": 124, "label": "Color 31", "kind": "color", "color": "#8aa9ff" },
+        { "from": 125, "to": 128, "label": "Color 32 (RGBW on)", "kind": "color", "color": "#ffffff" },
+        { "from": 129, "to": 132, "label": "Color 33", "kind": "color", "color": "#ffce8f" },
+        { "from": 133, "to": 136, "label": "Color 34", "kind": "color", "color": "#feb199" },
+        { "from": 137, "to": 140, "label": "Color 35", "kind": "color", "color": "#fec08a" },
+        { "from": 141, "to": 144, "label": "Color 36", "kind": "color", "color": "#fea562" },
+        { "from": 145, "to": 148, "label": "Color 37", "kind": "color", "color": "#fe7900" },
+        { "from": 149, "to": 152, "label": "Color 38", "kind": "color", "color": "#b01100" },
+        { "from": 153, "to": 156, "label": "Color 39", "kind": "color", "color": "#60000b" },
+        { "from": 157, "to": 160, "label": "Color 40", "kind": "color", "color": "#ea8bab" },
+        { "from": 161, "to": 164, "label": "Color 41", "kind": "color", "color": "#e00561" },
+        { "from": 165, "to": 168, "label": "Color 42", "kind": "color", "color": "#af4dad" },
+        { "from": 169, "to": 172, "label": "Color 43", "kind": "color", "color": "#7782c7" },
+        { "from": 173, "to": 176, "label": "Color 44", "kind": "color", "color": "#93a4d4" },
+        { "from": 177, "to": 180, "label": "Color 45", "kind": "color", "color": "#5802a3" },
+        { "from": 181, "to": 184, "label": "Color 46", "kind": "color", "color": "#002656" },
+        { "from": 185, "to": 188, "label": "Color 47", "kind": "color", "color": "#008ed0" },
+        { "from": 189, "to": 192, "label": "Color 48", "kind": "color", "color": "#3494d1" },
+        { "from": 193, "to": 196, "label": "Color 49", "kind": "color", "color": "#002e23" },
+        { "from": 197, "to": 200, "label": "Color 50", "kind": "color", "color": "#086bde" },
+        { "from": 201, "to": 204, "label": "Color 51", "kind": "color", "color": "#6b9ce7" },
+        { "from": 205, "to": 208, "label": "Color 52", "kind": "color", "color": "#a5c6f7" },
+        { "from": 209, "to": 212, "label": "Color 53", "kind": "color", "color": "#005373" },
+        { "from": 213, "to": 216, "label": "Color 54", "kind": "color", "color": "#0061a6" },
+        { "from": 217, "to": 220, "label": "Color 55", "kind": "color", "color": "#0164a7" },
+        { "from": 221, "to": 224, "label": "Color 56", "kind": "color", "color": "#002856" },
+        { "from": 225, "to": 228, "label": "Color 57", "kind": "color", "color": "#d1dbb6" },
+        { "from": 229, "to": 232, "label": "Color 58", "kind": "color", "color": "#2aa555" },
+        { "from": 233, "to": 236, "label": "Color 59 (Red)", "kind": "color", "color": "#ff0000" },
+        { "from": 237, "to": 240, "label": "Color 60 (Green)", "kind": "color", "color": "#00ff00" },
+        { "from": 241, "to": 244, "label": "Color 61 (Blue)", "kind": "color", "color": "#0000ff" },
+        { "from": 245, "to": 248, "label": "Color 62 (White)", "kind": "color", "color": "#ffffff" },
+        { "from": 249, "to": 252, "label": "Color 63 (Amber)", "kind": "color", "color": "#ff5500" },
+        { "from": 253, "to": 255, "label": "Color 64 (UV)", "kind": "color", "color": "#5500ff" }
+      ]
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "LED Off", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "LED on", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobing Slow - Fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "LED on", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Strobe Pulse Slow - Fast", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "LED on", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobe Slow - Fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "LED on", "kind": "open" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "masterDimmer"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "autoPrograms",
+      "name": "Auto Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Off" },
+        { "from": 1, "to": 20, "label": "Program 1" },
+        { "from": 21, "to": 40, "label": "Program 2" },
+        { "from": 41, "to": 60, "label": "Program 3" },
+        { "from": 61, "to": 80, "label": "Program 4" },
+        { "from": 81, "to": 100, "label": "Program 5" },
+        { "from": 101, "to": 120, "label": "Program 6" },
+        { "from": 121, "to": 140, "label": "Program 7" },
+        { "from": 141, "to": 160, "label": "Program 8" },
+        { "from": 161, "to": 180, "label": "Program 9" },
+        { "from": 181, "to": 200, "label": "Program 10" },
+        { "from": 201, "to": 220, "label": "Program 11" },
+        { "from": 221, "to": 240, "label": "Program 12" },
+        { "from": 241, "to": 250, "label": "Program 13" },
+        { "from": 251, "to": 255, "label": "Program 14" }
+      ]
+    },
+    {
+      "key": "programSpeed",
+      "name": "Program Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "autoProgramFade",
+      "name": "Auto Program Fade",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Normal" },
+        { "from": 1, "to": 255, "label": "Slow - Fast" }
+      ]
+    },
+    {
+      "key": "dimmerMode",
+      "name": "Dimmer Mode",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Standard" },
+        { "from": 21, "to": 40, "label": "Stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "Architectural" },
+        { "from": 81, "to": 100, "label": "Theatre" },
+        { "from": 101, "to": 255, "label": "Default Dimmer Setting" }
+      ]
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan / Tilt Speed",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 225, "label": "Fast - Slow" },
+        { "from": 226, "to": 235, "label": "Blackout by Movement" },
+        { "from": 236, "to": 255, "label": "No function" }
+      ]
+    },
+    {
+      "key": "internalPrograms",
+      "name": "Internal Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 79, "label": "Normal" },
+        { "from": 80, "to": 84, "label": "All Motor Reset" },
+        { "from": 85, "to": 99, "label": "No function" },
+        { "from": 100, "to": 119, "label": "Internal Program 1" },
+        { "from": 120, "to": 139, "label": "Internal Program 2" },
+        { "from": 140, "to": 159, "label": "Internal Program 3" },
+        { "from": 160, "to": 179, "label": "Internal Program 4" },
+        { "from": 180, "to": 199, "label": "Internal Program 5" },
+        { "from": 200, "to": 219, "label": "Internal Program 6" },
+        { "from": 220, "to": 239, "label": "Internal Program 7" },
+        { "from": 240, "to": 255, "label": "No function" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "19 Channel",
+      "channels": [
+        "pan",
+        "tilt",
+        "allRedLed",
+        "allGreenLed",
+        "allBlueLed",
+        "allWhiteLed",
+        "allAmberLed",
+        "allUvLed",
+        "colorMacros",
+        "shutterStrobe",
+        "masterDimmer",
+        "dimmerFine",
+        "focus",
+        "autoPrograms",
+        "programSpeed",
+        "autoProgramFade",
+        "dimmerMode",
+        "panTiltSpeed",
+        "internalPrograms"
+      ]
+    },
+    {
+      "name": "21 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "allRedLed",
+        "allGreenLed",
+        "allBlueLed",
+        "allWhiteLed",
+        "allAmberLed",
+        "allUvLed",
+        "colorMacros",
+        "shutterStrobe",
+        "masterDimmer",
+        "dimmerFine",
+        "focus",
+        "autoPrograms",
+        "programSpeed",
+        "autoProgramFade",
+        "dimmerMode",
+        "panTiltSpeed",
+        "internalPrograms"
+      ]
+    },
+    {
+      "name": "27 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "redCenterLed",
+        "greenCenterLed",
+        "blueCenterLed",
+        "whiteCenterLed",
+        "amberCenterLed",
+        "uvCenterLed",
+        "redOuterLedS",
+        "greenOuterLedS",
+        "blueOuterLedS",
+        "whiteOuterLedS",
+        "amberOuterLedS",
+        "uvOuterLedS",
+        "colorMacros",
+        "shutterStrobe",
+        "masterDimmer",
+        "dimmerFine",
+        "focus",
+        "autoPrograms",
+        "programSpeed",
+        "autoProgramFade",
+        "dimmerMode",
+        "panTiltSpeed",
+        "internalPrograms"
+      ]
+    }
+  ]
+}

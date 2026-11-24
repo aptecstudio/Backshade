@@ -1,0 +1,173 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "beamZ",
+  "model": "Panther 70",
+  "category": "movingHead",
+  "physical": {
+    "width": 160,
+    "height": 200,
+    "depth": 190,
+    "weight": 3.2,
+    "lumens": 31700,
+    "source": "LED",
+    "beamAngle": {
+      "min": 10,
+      "max": 10
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 70
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "finePan",
+      "name": "Fine Pan",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "fineTilt",
+      "name": "Fine Tilt",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open", "kind": "color", "color": "#ffffff" },
+        { "from": 8, "to": 14, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 15, "to": 21, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 22, "to": 28, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 29, "to": 35, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 36, "to": 42, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 43, "to": 49, "label": "Deep Blue", "kind": "color", "color": "#00007f" },
+        { "from": 50, "to": 56, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 57, "to": 66, "label": "Open + Yellow", "kind": "color", "color": "#ffffff" },
+        { "from": 67, "to": 76, "label": "Yellow + Red", "kind": "color", "color": "#ffff00" },
+        { "from": 77, "to": 86, "label": "Red + Blue", "kind": "color", "color": "#ff0000" },
+        { "from": 87, "to": 96, "label": "Blue + Green", "kind": "color", "color": "#0000ff" },
+        { "from": 97, "to": 106, "label": "Green + Magenta", "kind": "color", "color": "#00ff00" },
+        { "from": 107, "to": 116, "label": "Magenta + Deep Blue", "kind": "color", "color": "#ff00ff" },
+        { "from": 117, "to": 127, "label": "Deep Blue + Orange", "kind": "color", "color": "#00007f" },
+        { "from": 128, "to": 189, "label": "Color Wheel rotation slow to fast CW", "kind": "rotation" },
+        { "from": 190, "to": 193, "label": "Color Wheel rotation stop", "kind": "stop" },
+        { "from": 194, "to": 255, "label": "Color Wheel rotation slow to fast CCW", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "gobos",
+      "name": "Gobos",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open" },
+        { "from": 8, "to": 15, "label": "Gobo 1" },
+        { "from": 16, "to": 23, "label": "Gobo 2" },
+        { "from": 24, "to": 31, "label": "Gobo 3" },
+        { "from": 32, "to": 39, "label": "Gobo 4" },
+        { "from": 40, "to": 47, "label": "Gobo 5" },
+        { "from": 48, "to": 55, "label": "Gobo 6" },
+        { "from": 56, "to": 63, "label": "Gobo 7" },
+        { "from": 64, "to": 71, "label": "Open" },
+        { "from": 72, "to": 79, "label": "Gobo Shake 1" },
+        { "from": 80, "to": 87, "label": "Gobo Shake 2" },
+        { "from": 88, "to": 95, "label": "Gobo Shake 3" },
+        { "from": 96, "to": 103, "label": "Gobo Shake 4" },
+        { "from": 104, "to": 111, "label": "Gobo Shake 5" },
+        { "from": 112, "to": 119, "label": "Gobo Shake 6" },
+        { "from": 120, "to": 127, "label": "Gobo Shake 7" },
+        { "from": 128, "to": 189, "label": "Gobo Whell Rotation Slow to Fast CW" },
+        { "from": 190, "to": 193, "label": "Gobo Whell Rotation Stop" },
+        { "from": 194, "to": 255, "label": "Gobo Whell Rotation Slow to Fast CCW" }
+      ]
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan-Tilt Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "functions",
+      "name": "Functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 69, "label": "No Function" },
+        { "from": 70, "to": 79, "label": "Black Out While Pan Tilt Move" },
+        { "from": 80, "to": 89, "label": "No Function" },
+        { "from": 90, "to": 99, "label": "Blackout While Color Change" },
+        { "from": 100, "to": 109, "label": "No Function" },
+        { "from": 110, "to": 119, "label": "Blackout When Gobo Change" },
+        { "from": 120, "to": 199, "label": "No Function" },
+        { "from": 200, "to": 209, "label": "Reset All", "kind": "reset" },
+        { "from": 210, "to": 249, "label": "No Function" },
+        { "from": 250, "to": 255, "label": "Sound Active" }
+      ]
+    },
+    {
+      "key": "dimMode",
+      "name": "Dim Mode",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Standard" },
+        { "from": 21, "to": 40, "label": "Stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "Architectural" },
+        { "from": 81, "to": 100, "label": "Théatre" },
+        { "from": 101, "to": 255, "label": "Standard" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "16 Bits",
+      "channels": [
+        "pan",
+        "finePan",
+        "tilt",
+        "fineTilt",
+        "color",
+        "gobos",
+        "shutter",
+        "dimmer",
+        "panTiltSpeed",
+        "functions",
+        "dimMode"
+      ]
+    },
+    {
+      "name": "8 Bits",
+      "channels": [
+        "pan",
+        "tilt",
+        "color",
+        "gobos",
+        "shutter",
+        "dimmer",
+        "panTiltSpeed",
+        "functions",
+        "dimMode"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "Fog machine",
+  "category": "smoke",
+  "channels": [
+    {
+      "key": "fog",
+      "name": "Fog output",
+      "attribute": "fog"
+    },
+    {
+      "key": "fan",
+      "name": "Fan",
+      "attribute": "fan"
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 channel",
+      "channels": [
+        "fog"
+      ]
+    },
+    {
+      "name": "2 channels",
+      "channels": [
+        "fog",
+        "fan"
+      ]
+    }
+  ]
+}

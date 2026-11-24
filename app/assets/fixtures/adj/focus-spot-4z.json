@@ -1,0 +1,307 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Focus Spot 4Z",
+  "category": "movingHead",
+  "physical": {
+    "width": 279,
+    "height": 457,
+    "depth": 182,
+    "weight": 10,
+    "source": "LED",
+    "beamAngle": {
+      "min": 11,
+      "max": 22
+    },
+    "panRange": 630,
+    "tiltRange": 270,
+    "power": 240
+  },
+  "channels": [
+    {
+      "key": "panMovement",
+      "name": "Pan Movement",
+      "attribute": "pan"
+    },
+    {
+      "key": "tiltMovement",
+      "name": "Tilt Movement",
+      "attribute": "tilt"
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 8, "to": 14, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 15, "to": 21, "label": "Orange", "kind": "color", "color": "#ffaa00" },
+        { "from": 22, "to": 28, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 29, "to": 35, "label": "Green", "kind": "color", "color": "#00aa00" },
+        { "from": 36, "to": 42, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 43, "to": 49, "label": "Pink", "kind": "color", "color": "#ff55ff" },
+        { "from": 50, "to": 56, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 57, "to": 63, "label": "Magenta", "kind": "color", "color": "#ffaaff" },
+        { "from": 64, "to": 127, "label": "Color Mixing" },
+        { "from": 128, "to": 189, "label": "Color Wheel Clockwise Rotation Fast-Slow", "kind": "rotation" },
+        { "from": 190, "to": 193, "label": "Nothing", "kind": "stop" },
+        { "from": 194, "to": 255, "label": "Color Wheel Counter Clockwise Rotation Slow-Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "goboWheel",
+      "name": "Gobo Wheel",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "Open", "kind": "gobo" },
+        { "from": 5, "to": 19, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 20, "to": 34, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 35, "to": 49, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 50, "to": 64, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 65, "to": 79, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 80, "to": 94, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 95, "to": 109, "label": "Gobo 1 Shake Slow-Fast", "kind": "gobo" },
+        { "from": 110, "to": 124, "label": "Gobo 2 Shake Slow-Fast", "kind": "gobo" },
+        { "from": 125, "to": 139, "label": "Gobo 3 Shake Slow-Fast", "kind": "gobo" },
+        { "from": 140, "to": 154, "label": "Gobo 4 Shake Slow-Fast", "kind": "gobo" },
+        { "from": 155, "to": 169, "label": "Gobo 5 Shake Slow-Fast", "kind": "gobo" },
+        { "from": 170, "to": 189, "label": "Gobo 6 Shake Slow-Fast", "kind": "gobo" },
+        { "from": 190, "to": 221, "label": "Gobo Wheel Clockwise Rotation Fast-Slow", "kind": "rotation" },
+        { "from": 222, "to": 223, "label": "Nothing", "kind": "stop" },
+        { "from": 224, "to": 255, "label": "Gobo Wheel Counter-Clockwise Rotation Slow-Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "goboRotation",
+      "name": "Gobo Rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Gobo Rotation Indexing", "kind": "index" },
+        { "from": 128, "to": 191, "label": "Gobo Rotation Clockwise Fast-Slow", "kind": "rotation" },
+        { "from": 192, "to": 255, "label": "Gobo Rotation Counter-Clockwise Slow-Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "shutterStrobing",
+      "name": "Shutter & Strobing",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Shutter Closed (Not Function)", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Shutter Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobing Fast-Slow", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Shutter Open", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Pulse Strobing Slow-Fast", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Shutter Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobing Slow-Fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "prism1",
+      "name": "Prism 1",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Open", "kind": "open" },
+        { "from": 32, "to": 255, "label": "6 Facet Circular Prism", "kind": "prism" }
+      ]
+    },
+    {
+      "key": "prism1IndexingRotation",
+      "name": "Prism 1 Indexing & Rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Prism 1 Indexing" },
+        { "from": 128, "to": 189, "label": "Clockwise Rotation Fast-Slow", "kind": "rotation" },
+        { "from": 190, "to": 193, "label": "No Rotation", "kind": "stop" },
+        { "from": 194, "to": 255, "label": "Counter-Clockwise Rotation Slow-Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "prism2",
+      "name": "Prism 2",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Open", "kind": "open" },
+        { "from": 32, "to": 255, "label": "5 Facet Linear Prism", "kind": "prism" }
+      ]
+    },
+    {
+      "key": "prism2IndexingRotation",
+      "name": "Prism 2 Indexing & Rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Prism 2 Indexing" },
+        { "from": 128, "to": 189, "label": "Clockwise Rotation Fast-Slow", "kind": "rotation" },
+        { "from": 190, "to": 193, "label": "No Rotation", "kind": "stop" },
+        { "from": 194, "to": 255, "label": "Counter-Clockwise Rotation Slow-Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "dimCurves",
+      "name": "Dim curves",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Standard" },
+        { "from": 21, "to": 40, "label": "Stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "Achitectural" },
+        { "from": 81, "to": 100, "label": "Theatre" },
+        { "from": 101, "to": 120, "label": "Stage 2" },
+        { "from": 121, "to": 255, "label": "Default tu Unit Setting" }
+      ]
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "functionResetInternalPrograms",
+      "name": "Function, reset, internal programs",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function" },
+        { "from": 10, "to": 19, "label": "Blackout with Pan/Tilt Movement" },
+        { "from": 20, "to": 29, "label": "Blackout with Color Wheel Movement" },
+        { "from": 30, "to": 39, "label": "Blackout with Gobo Wheel Movement" },
+        { "from": 40, "to": 59, "label": "Color and Gobo Motor Reset" },
+        { "from": 60, "to": 69, "label": "Prism Motor Reset" },
+        { "from": 70, "to": 79, "label": "Pan & Tilt Motor Reset" },
+        { "from": 80, "to": 89, "label": "Focus Motor Reset" },
+        { "from": 90, "to": 99, "label": "All Motors Reset" },
+        { "from": 100, "to": 119, "label": "Internal Program 1 (Scene 1-8 of EEPRO)" },
+        { "from": 120, "to": 139, "label": "Internal Program 2 (Scene 9-16 of EEPRO)" },
+        { "from": 140, "to": 159, "label": "Internal Program 3 (Scene 17-24 of EEPRO)" },
+        { "from": 160, "to": 179, "label": "Internal Program 4 (Scene 25-32 of EEPRO)" },
+        { "from": 180, "to": 199, "label": "Internal Program 5 (Scene 33-40 of EEPRO)" },
+        { "from": 200, "to": 219, "label": "Internal Program 6 (Scene 41-48 of EEPRO)" },
+        { "from": 220, "to": 239, "label": "Internal Program 7 (Scene 49-56 of EEPRO)" },
+        { "from": 240, "to": 255, "label": "No function" }
+      ]
+    },
+    {
+      "key": "panFine16Bit",
+      "name": "Pan Fine 16-bit",
+      "attribute": "pan",
+      "fineOf": "panMovement"
+    },
+    {
+      "key": "tiltFine16Bit",
+      "name": "Tilt Fine 16-bit",
+      "attribute": "tilt",
+      "fineOf": "tiltMovement"
+    },
+    {
+      "key": "dimmerFine16Bit",
+      "name": "Dimmer Fine 16-bit",
+      "attribute": "dimmer",
+      "fineOf": "masterDimmer"
+    },
+    {
+      "key": "prism1IndexingFine16Bit",
+      "name": "Prism 1 Indexing Fine 16-bit",
+      "attribute": "prism",
+      "fineOf": "prism1"
+    },
+    {
+      "key": "prism2IndexingFine16Bit",
+      "name": "Prism 2 Indexing Fine 16-bit",
+      "attribute": "prism",
+      "fineOf": "prism2"
+    },
+    {
+      "key": "zoomFine16Bit",
+      "name": "Zoom Fine 16-bit",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    }
+  ],
+  "modes": [
+    {
+      "name": "16 Channel",
+      "channels": [
+        "panMovement",
+        "tiltMovement",
+        "colorWheel",
+        "goboWheel",
+        "goboRotation",
+        "shutterStrobing",
+        "masterDimmer",
+        "prism1",
+        "prism1IndexingRotation",
+        "prism2",
+        "prism2IndexingRotation",
+        "focus",
+        "zoom",
+        "dimCurves",
+        "panTiltSpeed",
+        "functionResetInternalPrograms"
+      ]
+    },
+    {
+      "name": "18 Channel",
+      "channels": [
+        "panMovement",
+        "panFine16Bit",
+        "tiltMovement",
+        "tiltFine16Bit",
+        "colorWheel",
+        "goboWheel",
+        "goboRotation",
+        "shutterStrobing",
+        "masterDimmer",
+        "prism1",
+        "prism1IndexingRotation",
+        "prism2",
+        "prism2IndexingRotation",
+        "focus",
+        "zoom",
+        "dimCurves",
+        "panTiltSpeed",
+        "functionResetInternalPrograms"
+      ]
+    },
+    {
+      "name": "22 Channel",
+      "channels": [
+        "panMovement",
+        "panFine16Bit",
+        "tiltMovement",
+        "tiltFine16Bit",
+        "colorWheel",
+        "goboWheel",
+        "goboRotation",
+        "shutterStrobing",
+        "masterDimmer",
+        "dimmerFine16Bit",
+        "prism1",
+        "prism1IndexingRotation",
+        "prism1IndexingFine16Bit",
+        "prism2",
+        "prism2IndexingRotation",
+        "prism2IndexingFine16Bit",
+        "focus",
+        "zoom",
+        "zoomFine16Bit",
+        "dimCurves",
+        "panTiltSpeed",
+        "functionResetInternalPrograms"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "RGB",
+  "category": "par",
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    }
+  ],
+  "modes": [
+    {
+      "name": "3 channels",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  ]
+}

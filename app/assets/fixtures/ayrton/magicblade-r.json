@@ -1,0 +1,526 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Ayrton",
+  "model": "MagicBlade R",
+  "category": "ledBar",
+  "physical": {
+    "width": 571,
+    "height": 266,
+    "depth": 184,
+    "weight": 11.2,
+    "lumens": 3200,
+    "source": "LED",
+    "beamAngle": {
+      "min": 4.5,
+      "max": 4.5
+    },
+    "panRange": 630,
+    "tiltRange": 540,
+    "power": 200
+  },
+  "channels": [
+    {
+      "key": "panMovement",
+      "name": "Pan Movement",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "panMovement"
+    },
+    {
+      "key": "tiltMovement",
+      "name": "Tilt Movement",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tiltMovement"
+    },
+    {
+      "key": "speedPanTiltMovement",
+      "name": "Speed Pan/Tilt Movement",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 225, "label": "max to min speed" },
+        { "from": 226, "to": 235, "label": "blackout by movement" },
+        { "from": 236, "to": 255, "label": "no function" }
+      ]
+    },
+    {
+      "key": "panMotorContinuousRotation",
+      "name": "Pan motor continuous rotation",
+      "attribute": "pan",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "no function" },
+        { "from": 128, "to": 189, "label": "Forward Pan rotation from fast to slow" },
+        { "from": 190, "to": 193, "label": "no rotation" },
+        { "from": 194, "to": 255, "label": "Backward Tilt rotation from slow to fast" }
+      ]
+    },
+    {
+      "key": "tiltMotorContinuousRotation",
+      "name": "Tilt motor continuous rotation",
+      "attribute": "tilt",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "no function" },
+        { "from": 128, "to": 189, "label": "Forward Tilt rotation from fast to slow" },
+        { "from": 190, "to": 193, "label": "no rotation" },
+        { "from": 194, "to": 255, "label": "Backward Tilt rotation from slow to fast" }
+      ]
+    },
+    {
+      "key": "redLedAllArrays",
+      "name": "Red LED all arrays",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedAllArrays",
+      "name": "Green LED all arrays",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedAllArrays",
+      "name": "Blue LED all arrays",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedAllArrays",
+      "name": "White LED all arrays",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray1",
+      "name": "Red LED array 1",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedArray2",
+      "name": "Red LED array 2",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedArray3",
+      "name": "Red LED array 3",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedArray4",
+      "name": "Red LED array 4",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedArray5",
+      "name": "Red LED array 5",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedArray6",
+      "name": "Red LED array 6",
+      "attribute": "red"
+    },
+    {
+      "key": "redLedArray7",
+      "name": "Red LED array 7",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray1",
+      "name": "Green LED array 1",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedArray2",
+      "name": "Green LED array 2",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedArray3",
+      "name": "Green LED array 3",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedArray4",
+      "name": "Green LED array 4",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedArray5",
+      "name": "Green LED array 5",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedArray6",
+      "name": "Green LED array 6",
+      "attribute": "green"
+    },
+    {
+      "key": "greenLedArray7",
+      "name": "Green LED array 7",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray1",
+      "name": "Blue LED array 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedArray2",
+      "name": "Blue LED array 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedArray3",
+      "name": "Blue LED array 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedArray4",
+      "name": "Blue LED array 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedArray5",
+      "name": "Blue LED array 5",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedArray6",
+      "name": "Blue LED array 6",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueLedArray7",
+      "name": "Blue LED array 7",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray1",
+      "name": "White LED array 1",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteLedArray2",
+      "name": "White LED array 2",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteLedArray3",
+      "name": "White LED array 3",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteLedArray4",
+      "name": "White LED array 4",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteLedArray5",
+      "name": "White LED array 5",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteLedArray6",
+      "name": "White LED array 6",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteLedArray7",
+      "name": "White LED array 7",
+      "attribute": "white"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter, Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Led turn off", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Led turn on" },
+        { "from": 64, "to": 95, "label": "Strobe effect slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Led turn on", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Pulse-effect in sequence", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Led turn on", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random strobe effect slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Led turn on", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "no function" },
+        { "from": 8, "to": 39, "label": "red to yellow", "kind": "color", "color": "#ff0000" },
+        { "from": 40, "to": 71, "label": "yellow to green", "kind": "color", "color": "#ffff00" },
+        { "from": 72, "to": 103, "label": "green to cyan", "kind": "color", "color": "#55aa00" },
+        { "from": 104, "to": 135, "label": "cyan to blue", "kind": "color", "color": "#55ffff" },
+        { "from": 136, "to": 167, "label": "blue to magenta", "kind": "color", "color": "#0055ff" },
+        { "from": 168, "to": 199, "label": "magenta to red", "kind": "color", "color": "#aa55ff" },
+        { "from": 200, "to": 231, "label": "red to white", "kind": "color", "color": "#ff0000" },
+        { "from": 232, "to": 255, "label": "Crossfading colors from slow to fast" }
+      ]
+    },
+    {
+      "key": "colorPresets",
+      "name": "Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "no function" },
+        { "from": 5, "to": 9, "label": "White 2700k" },
+        { "from": 10, "to": 14, "label": "White 3200k" },
+        { "from": 15, "to": 19, "label": "White 4200k" },
+        { "from": 20, "to": 24, "label": "White 5600k" },
+        { "from": 25, "to": 29, "label": "White 6500k" },
+        { "from": 30, "to": 34, "label": "White 8000k" },
+        { "from": 35, "to": 39, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 40, "to": 44, "label": "Magenta", "kind": "color", "color": "#aa55ff" },
+        { "from": 45, "to": 49, "label": "Cyan", "kind": "color", "color": "#55ffff" },
+        { "from": 50, "to": 54, "label": "Salmon", "kind": "color", "color": "#f5b4d0" },
+        { "from": 55, "to": 59, "label": "Turquoise" },
+        { "from": 60, "to": 64, "label": "Light Green" },
+        { "from": 65, "to": 69, "label": "Steel Blue" },
+        { "from": 70, "to": 74, "label": "Orange" },
+        { "from": 75, "to": 79, "label": "Straw" },
+        { "from": 80, "to": 84, "label": "Pale Lavander" },
+        { "from": 85, "to": 89, "label": "Pink" },
+        { "from": 90, "to": 94, "label": "Red" },
+        { "from": 95, "to": 99, "label": "Green" },
+        { "from": 100, "to": 104, "label": "Blue" },
+        { "from": 105, "to": 109, "label": "Rainbow1" },
+        { "from": 110, "to": 114, "label": "Rainbow2" },
+        { "from": 115, "to": 119, "label": "Rainbow3" },
+        { "from": 120, "to": 124, "label": "Rainbow4" },
+        { "from": 125, "to": 129, "label": "Rainbow5" },
+        { "from": 130, "to": 134, "label": "Rainbow6" },
+        { "from": 135, "to": 139, "label": "Rainbow7" },
+        { "from": 140, "to": 144, "label": "Rainbow8" },
+        { "from": 145, "to": 149, "label": "Rainbow9" },
+        { "from": 150, "to": 154, "label": "Rainbow10" },
+        { "from": 155, "to": 159, "label": "Rainbow11" },
+        { "from": 160, "to": 164, "label": "Rainbow12" },
+        { "from": 165, "to": 169, "label": "Rainbow13" },
+        { "from": 170, "to": 174, "label": "Rainbow14" },
+        { "from": 175, "to": 179, "label": "Rainbow15" },
+        { "from": 180, "to": 184, "label": "Rainbow16" },
+        { "from": 185, "to": 189, "label": "Rainbow17" },
+        { "from": 190, "to": 194, "label": "Rainbow18" },
+        { "from": 195, "to": 199, "label": "Rainbow19" },
+        { "from": 200, "to": 255, "label": "reserved" }
+      ]
+    },
+    {
+      "key": "colorPresetsDimmer",
+      "name": "Color Presets Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "chasePatterns",
+      "name": "Chase Patterns",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 14, "label": "Led turn off" },
+        { "from": 15, "to": 30, "label": "Chase 1" },
+        { "from": 31, "to": 46, "label": "Chase 2" },
+        { "from": 47, "to": 62, "label": "Chase 3" },
+        { "from": 63, "to": 78, "label": "Chase 4" },
+        { "from": 79, "to": 94, "label": "Chase 5" },
+        { "from": 95, "to": 110, "label": "Chase 6" },
+        { "from": 111, "to": 126, "label": "Chase 7" },
+        { "from": 127, "to": 142, "label": "Chase 8" },
+        { "from": 143, "to": 158, "label": "Chase 9" },
+        { "from": 159, "to": 174, "label": "Chase 10" },
+        { "from": 175, "to": 190, "label": "Chase 11" },
+        { "from": 191, "to": 206, "label": "Chase 12" },
+        { "from": 207, "to": 222, "label": "Chase 13" },
+        { "from": 223, "to": 238, "label": "Chase 14" },
+        { "from": 239, "to": 255, "label": "Chase 15" }
+      ]
+    },
+    {
+      "key": "chaseSpeed",
+      "name": "Chase Speed",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 125, "label": "Fast to Slow Backward" },
+        { "from": 126, "to": 130, "label": "Stop (speed=0)" },
+        { "from": 131, "to": 255, "label": "Slow to Fast Forward" }
+      ]
+    },
+    {
+      "key": "chaseFade",
+      "name": "Chase Fade",
+      "attribute": "effect"
+    },
+    {
+      "key": "resetInternalPrograms",
+      "name": "Reset, internal programs",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 79, "label": "Normal" },
+        { "from": 80, "to": 84, "label": "All motor reset" },
+        { "from": 85, "to": 87, "label": "Scan motor reset" },
+        { "from": 88, "to": 99, "label": "no function" },
+        { "from": 100, "to": 119, "label": "Internal program 1" },
+        { "from": 120, "to": 139, "label": "Internal program 2" },
+        { "from": 140, "to": 159, "label": "Internal program 3" },
+        { "from": 160, "to": 179, "label": "Internal program 4" },
+        { "from": 180, "to": 199, "label": "Internal program 5" },
+        { "from": 200, "to": 219, "label": "Internal program 6" },
+        { "from": 220, "to": 239, "label": "Internal program 7" },
+        { "from": 240, "to": 255, "label": "Music Control" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "St (20ch)",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tiltMovement",
+        "tiltFine",
+        "speedPanTiltMovement",
+        "panMotorContinuousRotation",
+        "tiltMotorContinuousRotation",
+        "redLedAllArrays",
+        "greenLedAllArrays",
+        "blueLedAllArrays",
+        "whiteLedAllArrays",
+        "shutterStrobe",
+        "dimmer",
+        "colorMacro",
+        "colorPresets",
+        "chasePatterns",
+        "chaseSpeed",
+        "chaseFade",
+        "colorPresetsDimmer",
+        "resetInternalPrograms"
+      ]
+    },
+    {
+      "name": "Ba (18ch)",
+      "channels": [
+        "panMovement",
+        "tiltMovement",
+        "speedPanTiltMovement",
+        "panMotorContinuousRotation",
+        "tiltMotorContinuousRotation",
+        "redLedAllArrays",
+        "greenLedAllArrays",
+        "blueLedAllArrays",
+        "whiteLedAllArrays",
+        "shutterStrobe",
+        "dimmer",
+        "colorMacro",
+        "colorPresets",
+        "chasePatterns",
+        "chaseSpeed",
+        "chaseFade",
+        "colorPresetsDimmer",
+        "resetInternalPrograms"
+      ]
+    },
+    {
+      "name": "Ex (44ch)",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tiltMovement",
+        "tiltFine",
+        "speedPanTiltMovement",
+        "panMotorContinuousRotation",
+        "tiltMotorContinuousRotation",
+        "shutterStrobe",
+        "dimmer",
+        "colorMacro",
+        "colorPresets",
+        "chasePatterns",
+        "chaseSpeed",
+        "chaseFade",
+        "colorPresetsDimmer",
+        "resetInternalPrograms",
+        "redLedArray1",
+        "greenLedArray1",
+        "blueLedArray1",
+        "whiteLedArray1",
+        "redLedArray2",
+        "greenLedArray2",
+        "blueLedArray2",
+        "whiteLedArray2",
+        "redLedArray3",
+        "greenLedArray3",
+        "blueLedArray3",
+        "whiteLedArray3",
+        "redLedArray4",
+        "greenLedArray4",
+        "blueLedArray4",
+        "whiteLedArray4",
+        "redLedArray5",
+        "greenLedArray5",
+        "blueLedArray5",
+        "whiteLedArray5",
+        "redLedArray6",
+        "greenLedArray6",
+        "blueLedArray6",
+        "whiteLedArray6",
+        "redLedArray7",
+        "greenLedArray7",
+        "blueLedArray7",
+        "whiteLedArray7"
+      ],
+      "heads": [
+        [
+          "redLedArray1",
+          "greenLedArray1",
+          "blueLedArray1",
+          "whiteLedArray1"
+        ],
+        [
+          "redLedArray2",
+          "greenLedArray2",
+          "blueLedArray2",
+          "whiteLedArray2"
+        ],
+        [
+          "redLedArray3",
+          "greenLedArray3",
+          "blueLedArray3",
+          "whiteLedArray3"
+        ],
+        [
+          "redLedArray4",
+          "greenLedArray4",
+          "blueLedArray4",
+          "whiteLedArray4"
+        ],
+        [
+          "greenLedArray5",
+          "redLedArray5",
+          "blueLedArray5",
+          "whiteLedArray5"
+        ],
+        [
+          "redLedArray6",
+          "greenLedArray6",
+          "blueLedArray6",
+          "whiteLedArray6"
+        ],
+        [
+          "redLedArray7",
+          "greenLedArray7",
+          "blueLedArray7",
+          "whiteLedArray7"
+        ]
+      ]
+    }
+  ]
+}

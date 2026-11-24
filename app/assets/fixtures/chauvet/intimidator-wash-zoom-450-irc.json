@@ -1,0 +1,363 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "Intimidator Wash Zoom 450 IRC",
+  "category": "movingHead",
+  "physical": {
+    "width": 277,
+    "height": 363,
+    "depth": 194,
+    "weight": 7.2,
+    "lumens": 21560,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 34
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 207
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "red1",
+      "name": "Red 1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "white1",
+      "name": "White 1",
+      "attribute": "white"
+    },
+    {
+      "key": "red2",
+      "name": "Red 2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "white2",
+      "name": "White 2",
+      "attribute": "white"
+    },
+    {
+      "key": "red3",
+      "name": "Red 3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "white3",
+      "name": "White 3",
+      "attribute": "white"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "No function" },
+        { "from": 5, "to": 9, "label": "Color 1" },
+        { "from": 10, "to": 14, "label": "Color 2" },
+        { "from": 15, "to": 19, "label": "Color 3" },
+        { "from": 20, "to": 24, "label": "Color 4" },
+        { "from": 25, "to": 29, "label": "Color 5" },
+        { "from": 30, "to": 34, "label": "Color 6" },
+        { "from": 35, "to": 39, "label": "Color 7" },
+        { "from": 40, "to": 44, "label": "Color 8" },
+        { "from": 45, "to": 49, "label": "Color 9" },
+        { "from": 50, "to": 54, "label": "Color 10" },
+        { "from": 55, "to": 59, "label": "Color 11" },
+        { "from": 60, "to": 64, "label": "Color 12" },
+        { "from": 65, "to": 69, "label": "Color 13" },
+        { "from": 70, "to": 74, "label": "Color 14" },
+        { "from": 75, "to": 79, "label": "Color 15" },
+        { "from": 80, "to": 84, "label": "Color 16" },
+        { "from": 85, "to": 89, "label": "Color 17" },
+        { "from": 90, "to": 94, "label": "Color 18" },
+        { "from": 95, "to": 99, "label": "Color 19" },
+        { "from": 100, "to": 104, "label": "Color 20" },
+        { "from": 105, "to": 109, "label": "Color 21" },
+        { "from": 110, "to": 114, "label": "Color 22" },
+        { "from": 115, "to": 119, "label": "Color 23" },
+        { "from": 120, "to": 124, "label": "Color 24" },
+        { "from": 125, "to": 129, "label": "Color 25" },
+        { "from": 130, "to": 134, "label": "Color 26" },
+        { "from": 135, "to": 139, "label": "Color 27" },
+        { "from": 140, "to": 144, "label": "Color 28" },
+        { "from": 145, "to": 149, "label": "Color 29" },
+        { "from": 150, "to": 154, "label": "Color 30" },
+        { "from": 155, "to": 159, "label": "Color 31" },
+        { "from": 160, "to": 164, "label": "Color 32" },
+        { "from": 165, "to": 169, "label": "Color 33" },
+        { "from": 170, "to": 174, "label": "Color 34" },
+        { "from": 175, "to": 179, "label": "No function" },
+        { "from": 180, "to": 201, "label": "Clockwise color change (fast to slow)" },
+        { "from": 202, "to": 207, "label": "Stop (color stays in the current color)" },
+        { "from": 208, "to": 229, "label": "Counter-clockwise color change (fast to slow)" },
+        { "from": 230, "to": 234, "label": "No function" },
+        { "from": 235, "to": 249, "label": "Color jump (fast to slow)" },
+        { "from": 250, "to": 255, "label": "Sound-Active colors" }
+      ]
+    },
+    {
+      "key": "builtinControl",
+      "name": "Builtin Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "Nothing" },
+        { "from": 16, "to": 31, "label": "Zone macro 1" },
+        { "from": 32, "to": 47, "label": "Zone macro 2" },
+        { "from": 48, "to": 63, "label": "Zone macro 3" },
+        { "from": 64, "to": 79, "label": "Zone macro 4" },
+        { "from": 80, "to": 95, "label": "Zone macro 5" },
+        { "from": 96, "to": 111, "label": "Zone macro 6" },
+        { "from": 112, "to": 127, "label": "Zone macro 7 (macro 1-6)" },
+        { "from": 128, "to": 143, "label": "Built-in Auto 1" },
+        { "from": 144, "to": 159, "label": "Built-in Auto 2" },
+        { "from": 160, "to": 175, "label": "Built-in Auto 3" },
+        { "from": 176, "to": 191, "label": "Built-in Auto 4" },
+        { "from": 192, "to": 207, "label": "Built-in Auto 5" },
+        { "from": 208, "to": 223, "label": "Built-in Auto 6" },
+        { "from": 224, "to": 239, "label": "Built-in Auto 7" },
+        { "from": 240, "to": 255, "label": "Built-in Auto 8 (Built-in Auto 1-7)" }
+      ]
+    },
+    {
+      "key": "builtinSpeed",
+      "name": "Builtin Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "Closed", "kind": "closed" },
+        { "from": 20, "to": 24, "label": "Open", "kind": "open" },
+        { "from": 25, "to": 64, "label": "Strobe Fast-slow", "kind": "strobe" },
+        { "from": 65, "to": 69, "label": "Open", "kind": "open" },
+        { "from": 70, "to": 84, "label": "Fast on slow off (fast slow)" },
+        { "from": 85, "to": 89, "label": "Open", "kind": "open" },
+        { "from": 90, "to": 104, "label": "Slow on, Fast off (fast to slow)" },
+        { "from": 105, "to": 109, "label": "Open", "kind": "open" },
+        { "from": 110, "to": 124, "label": "Random shutter (fast to slow)", "kind": "strobe" },
+        { "from": 125, "to": 129, "label": "Open", "kind": "open" },
+        { "from": 130, "to": 144, "label": "Random fast on slow off (fast to slow)" },
+        { "from": 145, "to": 149, "label": "Open", "kind": "open" },
+        { "from": 150, "to": 164, "label": "Random slow on fast off (fast to slow)" },
+        { "from": 165, "to": 169, "label": "Open", "kind": "open" },
+        { "from": 170, "to": 184, "label": "pulse effect 1 (fast to slow)", "kind": "pulse" },
+        { "from": 185, "to": 189, "label": "Open", "kind": "open" },
+        { "from": 190, "to": 204, "label": "Pulse effect 2 (fast to slow)", "kind": "pulse" },
+        { "from": 205, "to": 209, "label": "Open", "kind": "open" },
+        { "from": 210, "to": 224, "label": "Gradually on and off (fast to slow)" },
+        { "from": 225, "to": 229, "label": "Open", "kind": "open" },
+        { "from": 230, "to": 244, "label": "pulse effect 3 (fast to slow)" },
+        { "from": 245, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "controlFunction",
+      "name": "Control function",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Nothing" },
+        { "from": 10, "to": 14, "label": "Blackout while panning/tilting" },
+        { "from": 15, "to": 19, "label": "Nothing" },
+        { "from": 20, "to": 49, "label": "Reserved for future use" },
+        { "from": 50, "to": 54, "label": "Reset pan" },
+        { "from": 55, "to": 59, "label": "Reset tilt" },
+        { "from": 60, "to": 64, "label": "Reset zoom", "kind": "reset" },
+        { "from": 65, "to": 69, "label": "Reset rotation", "kind": "reset" },
+        { "from": 70, "to": 74, "label": "Reset all", "kind": "reset" },
+        { "from": 75, "to": 79, "label": "Nothing" },
+        { "from": 80, "to": 84, "label": "Reverse pan/tilt" },
+        { "from": 85, "to": 89, "label": "Reverse pan" },
+        { "from": 90, "to": 94, "label": "Reverse tilt" },
+        { "from": 95, "to": 99, "label": "Cancel reverse pan" },
+        { "from": 100, "to": 104, "label": "Cancel reverse tilt" },
+        { "from": 105, "to": 109, "label": "Cancel reverse pan/tilt" },
+        { "from": 110, "to": 114, "label": "Pan/tilt normal speed" },
+        { "from": 115, "to": 119, "label": "Pan/tilt fast speed" },
+        { "from": 120, "to": 124, "label": "Pan/tilt slow speed" },
+        { "from": 125, "to": 129, "label": "Fan full speed" },
+        { "from": 130, "to": 134, "label": "Fan auto speed" },
+        { "from": 135, "to": 139, "label": "Dimmer fast" },
+        { "from": 140, "to": 144, "label": "Dimmer smooth" },
+        { "from": 145, "to": 255, "label": "Nothing" }
+      ]
+    },
+    {
+      "key": "noFunction",
+      "name": "No function",
+      "attribute": "none"
+    }
+  ],
+  "modes": [
+    {
+      "name": "29 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "red3",
+        "green3",
+        "blue3",
+        "white3",
+        "colorMacro",
+        "builtinControl",
+        "builtinSpeed",
+        "dimmer",
+        "shutter",
+        "zoom",
+        "controlFunction",
+        "noFunction"
+      ],
+      "heads": [
+        [
+          "red",
+          "green",
+          "blue",
+          "white"
+        ],
+        [
+          "red1",
+          "green1",
+          "blue1",
+          "white1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2",
+          "white2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "white3"
+        ]
+      ]
+    },
+    {
+      "name": "14 Channel",
+      "channels": [
+        "pan",
+        "tilt",
+        "panTiltSpeed",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "builtinControl",
+        "builtinSpeed",
+        "dimmer",
+        "shutter",
+        "zoom",
+        "controlFunction",
+        "noFunction"
+      ]
+    }
+  ]
+}

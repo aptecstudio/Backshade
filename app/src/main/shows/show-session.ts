@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { app } from 'electron';
 import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show-document';
+import type { ShowPatch } from '../../shared/patch/patch';
 import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
 import type { OpenShowResult, ShowSummary } from '../../shared/transport/engine-api';
 import { copyFolder } from '../storage/copy-folder';
@@ -27,13 +28,27 @@ interface OpenShow {
 /** Function called at every change of the open show */
 export type ShowChangeListener = (show: ShowSummary | null) => void;
 
+/** Result of opening a show, before the check of the missing resources */
+export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
+
+/** Function called when the patch may have changed (show opened, closed, recovered or patch edited) */
+export type PatchChangeListener = () => void;
+
 export class ShowSession {
     private current: OpenShow | null = null;
     private readonly listener: ShowChangeListener;
     private autosaveTimer: NodeJS.Timeout | null = null;
+    private readonly patchListeners: PatchChangeListener[] = [];
 
     constructor(listener: ShowChangeListener) {
         this.listener = listener;
+    }
+
+    /**
+     * Registers a listener for the changes of the patch.
+     */
+    onPatchChange(listener: PatchChangeListener): void {
+        this.patchListeners.push(listener);
     }
 
     /** Open show, or null */
@@ -60,7 +75,7 @@ export class ShowSession {
      * @param templateFolder - Template folder
      * @param exclude - Template entries not to copy (for example template.json)
      */
-    create(name: string, parentFolder: string, templateFolder: string, exclude: readonly string[]): OpenShowResult {
+    create(name: string, parentFolder: string, templateFolder: string, exclude: readonly string[]): SessionOpenResult {
         this.requireClosedOrSaved();
         fs.mkdirSync(parentFolder, { recursive: true });
         const folder = uniquePath(parentFolder, toFileName(name), SHOW_FOLDER_EXTENSION);
@@ -83,7 +98,7 @@ export class ShowSession {
     /**
      * Opens the show of a folder.
      */
-    open(folder: string): OpenShowResult {
+    open(folder: string): SessionOpenResult {
         this.requireClosedOrSaved();
         const document = showFiles.readShow(folder);
         const recoveryAvailable = showFiles.hasNewerAutosave(folder);
@@ -92,6 +107,7 @@ export class ShowSession {
         this.current = { folder, document, dirty: false };
         this.startAutosave();
         this.notify();
+        this.notifyPatch();
 
         return { show: this.requireSummary(), recoveryAvailable };
     }
@@ -174,6 +190,27 @@ export class ShowSession {
     }
 
     /**
+     * Patch of the open show.
+     */
+    patch(): ShowPatch {
+        return this.requireOpen().document.patch;
+    }
+
+    /**
+     * Replaces the patch of the open show; the change must be saved.
+     */
+    setPatch(patch: ShowPatch): void {
+        const show = this.requireOpen();
+        if (patch === show.document.patch) {
+            return;
+        }
+        show.document = { ...show.document, patch };
+        show.dirty = true;
+        this.notify();
+        this.notifyPatch();
+    }
+
+    /**
      * Loads the recovery copy in place of the saved data.
      */
     recover(): ShowSummary {
@@ -181,6 +218,7 @@ export class ShowSession {
         show.document = showFiles.readAutosave(show.folder);
         show.dirty = true;
         this.notify();
+        this.notifyPatch();
         return this.requireSummary();
     }
 
@@ -204,6 +242,7 @@ export class ShowSession {
         showFiles.removeAutosave(this.current.folder);
         this.closeQuietly();
         this.notify();
+        this.notifyPatch();
     }
 
     /**
@@ -255,7 +294,7 @@ export class ShowSession {
 
     private requireOpen(): OpenShow {
         if (this.current === null) {
-            throw new EngineError('no-show', 'Nessuno show aperto');
+            throw new EngineError('no-show', 'No show open');
         }
         return this.current;
     }
@@ -263,12 +302,18 @@ export class ShowSession {
     private requireSummary(): ShowSummary {
         const summary = this.summary();
         if (summary === null) {
-            throw new EngineError('no-show', 'Nessuno show aperto');
+            throw new EngineError('no-show', 'No show open');
         }
         return summary;
     }
 
     private notify(): void {
         this.listener(this.summary());
+    }
+
+    private notifyPatch(): void {
+        for (const listener of this.patchListeners) {
+            listener();
+        }
     }
 }

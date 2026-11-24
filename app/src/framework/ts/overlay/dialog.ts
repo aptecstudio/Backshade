@@ -13,11 +13,11 @@ import type { Unsubscribe } from '../dom/events.js';
 export interface DialogOptions {
     /** Title, already translated */
     title: string;
-    /** Width: normal (default) or wide */
-    size?: 'normal' | 'wide';
+    /** Width: normal (default), wide, or large for editors (also takes the window height) */
+    size?: 'normal' | 'wide' | 'large';
 }
 
-const FOCUSABLE = 'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"]), a[href]';
+const FOCUSABLE = 'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]), a[href]';
 let nextId = 1;
 
 export class Dialog extends Component<HTMLDivElement> {
@@ -33,7 +33,7 @@ export class Dialog extends Component<HTMLDivElement> {
         this.body = create('div', { classes: ['dialog__body'] });
         this.actions = create('div', { classes: ['dialog__actions'] });
         const panel = create('div', {
-            classes: ['dialog', ...(options.size === 'wide' ? ['dialog--wide'] : [])],
+            classes: ['dialog', ...(options.size === undefined || options.size === 'normal' ? [] : [`dialog--${options.size}`])],
             attributes: { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId },
             children: [
                 create('h2', { classes: ['dialog__title'], attributes: { id: titleId }, text: options.title }),

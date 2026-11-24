@@ -1,0 +1,190 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Pro-Lights",
+  "model": "CromoWash300",
+  "category": "movingHead",
+  "physical": {
+    "width": 340,
+    "height": 361,
+    "depth": 232,
+    "weight": 11,
+    "lumens": 4500,
+    "colorTemperature": 3200,
+    "source": "LED",
+    "beamAngle": {
+      "min": 8,
+      "max": 40
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 310
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "No function" },
+        { "from": 6, "to": 10, "label": "Full power" },
+        { "from": 11, "to": 30, "label": "R*: 100% / G*: Up / B*: 0%" },
+        { "from": 31, "to": 50, "label": "R: Down / G: 100% / B: 0%" },
+        { "from": 51, "to": 70, "label": "R: 0% / G: 100% / B: Up" },
+        { "from": 71, "to": 90, "label": "R: 0% / G: Down / B: 100%" },
+        { "from": 91, "to": 110, "label": "R: Up / G: 0% / B: 100%" },
+        { "from": 111, "to": 130, "label": "R: 100% / G: 0% / B: Down" },
+        { "from": 131, "to": 150, "label": "R: 100% / G: Up / B: Up" },
+        { "from": 151, "to": 170, "label": "R: Down / G: Down / B: 100% R: 100% / G: 100% / B: 100%" },
+        { "from": 171, "to": 200, "label": "W*: 100%" },
+        { "from": 201, "to": 205, "label": "White 1: 3200K" },
+        { "from": 206, "to": 210, "label": "White 2: 3400K" },
+        { "from": 211, "to": 215, "label": "White 3: 4200K" },
+        { "from": 216, "to": 220, "label": "White 4: 4900K" },
+        { "from": 221, "to": 225, "label": "White 5: 5600K" },
+        { "from": 226, "to": 230, "label": "White 6: 5900K" },
+        { "from": 231, "to": 235, "label": "White 7: 6500K" },
+        { "from": 236, "to": 240, "label": "White 8: 7200K" },
+        { "from": 241, "to": 245, "label": "White 9: 8000K" },
+        { "from": 246, "to": 250, "label": "White 10: 8500K" },
+        { "from": 251, "to": 255, "label": "White 11: 10000K" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function", "kind": "open" },
+        { "from": 10, "to": 255, "label": "Strobe 1-20Hz", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "control",
+      "name": "Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "No function" },
+        { "from": 20, "to": 39, "label": "Pan/tilt black activated (activated after 3 secs)" },
+        { "from": 40, "to": 59, "label": "Pan/tilt black deactivated (activated after 3 secs)" },
+        { "from": 60, "to": 79, "label": "Fan Auto" },
+        { "from": 80, "to": 99, "label": "Fan Slow" },
+        { "from": 100, "to": 119, "label": "Fan Normal" },
+        { "from": 120, "to": 139, "label": "Fan Fast" },
+        { "from": 140, "to": 149, "label": "Auto1 (activated after 3 secs)" },
+        { "from": 150, "to": 159, "label": "Auto2 (activated after 3 secs)" },
+        { "from": 160, "to": 169, "label": "Test (activated after 3 secs)" },
+        { "from": 170, "to": 179, "label": "Custom (activated after 3 secs)" },
+        { "from": 180, "to": 189, "label": "Sound 1" },
+        { "from": 190, "to": 199, "label": "Sound 2" },
+        { "from": 200, "to": 219, "label": "Reset (activated after 3 secs)" },
+        { "from": 220, "to": 235, "label": "No function" },
+        { "from": 236, "to": 239, "label": "Dim 0" },
+        { "from": 240, "to": 243, "label": "Dim 1" },
+        { "from": 244, "to": 247, "label": "Dim 2" },
+        { "from": 248, "to": 251, "label": "Dim 3" },
+        { "from": 252, "to": 255, "label": "Dim 4" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "Basic",
+      "channels": [
+        "pan",
+        "tilt",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "colorMacro",
+        "dimmer",
+        "strobe",
+        "zoom",
+        "control"
+      ]
+    },
+    {
+      "name": "Advanced",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "colorMacro",
+        "dimmer",
+        "strobe",
+        "zoom",
+        "control"
+      ]
+    }
+  ]
+}

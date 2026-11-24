@@ -20,7 +20,8 @@ import {
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { requireObject, requireString } from '../transport/params';
-import type { RequestContext, RequestRouter } from '../transport/request-router';
+import type { RequestRouter } from '../transport/request-router';
+import { requireDesktop } from '../transport/require-desktop';
 import { chooseFile, chooseSaveFile } from '../window/file-dialogs';
 
 /**
@@ -28,12 +29,6 @@ import { chooseFile, chooseSaveFile } from '../window/file-dialogs';
  */
 function toInfo({ id, name, description, source }: TemplateRecord): TemplateInfo {
     return { id, name, description, source };
-}
-
-function requireDesktop(context: RequestContext): void {
-    if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Available only in the desktop application');
-    }
 }
 
 /**
@@ -55,7 +50,7 @@ export function registerTemplateService(router: RequestRouter, bus: EventBus, se
         const input = requireObject(params);
         const show = session.summary();
         if (show === null) {
-            throw new EngineError('no-show', 'Nessuno show aperto');
+            throw new EngineError('no-show', 'No show open');
         }
         if (show.dirty) {
             throw new EngineError('unsaved-changes', 'Save the show before creating a template from it');

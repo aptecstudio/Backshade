@@ -1,6 +1,6 @@
 /**
- * Main structure of the application: top bar, area of the
- * open section and status bar. It follows the open show: without a show it shows
+ * Main structure of the application: top bar, area of the open
+ * section and status bar with the tabs of the working sections. It follows the open show: without a show it shows
  * the start page, when a show opens it restores the last working section.
  */
 
@@ -31,7 +31,7 @@ export class AppShell extends Stack {
             this.navigation.open(this.navigation.lastMainSection());
         }
         this.topBar = new TopBar(this.navigation);
-        this.statusBar = new StatusBar();
+        this.statusBar = new StatusBar(this.navigation);
 
         this.append(this.topBar, new SectionHost(this.navigation), this.statusBar);
 
@@ -49,6 +49,7 @@ export class AppShell extends Stack {
      */
     private applyShow(show: ShowSummary | null): void {
         this.topBar.setShow(show);
+        this.statusBar.setShowOpen(show !== null);
         document.title = show === null ? t('app.name') : `${show.name}${show.dirty ? ' *' : ''} - ${t('app.name')}`;
 
         const open = show !== null;

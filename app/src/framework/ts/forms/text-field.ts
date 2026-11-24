@@ -9,8 +9,10 @@ import type { Unsubscribe } from '../dom/events.js';
 
 /** Text field options */
 export interface TextFieldOptions {
-    /** Label above the field, already translated */
-    label: string;
+    /** Label above the field, already translated; without it, the field is compact */
+    label?: string;
+    /** Name for assistive technologies, for compact fields without a label */
+    ariaLabel?: string;
     /** Initial value */
     value?: string;
     /** Maximum length */
@@ -24,6 +26,7 @@ let nextId = 1;
 export class TextField extends Component<HTMLDivElement> {
     private readonly input: HTMLInputElement;
     private readonly changes = new Emitter<string>();
+    private readonly commits = new Emitter<string>();
 
     constructor(options: TextFieldOptions) {
         super(create('div', { classes: ['text-field'] }));
@@ -39,13 +42,19 @@ export class TextField extends Component<HTMLDivElement> {
         }
         this.input.readOnly = options.readOnly === true;
 
-        this.element.append(
-            create('label', { classes: ['text-field__label'], attributes: { for: id }, text: options.label }),
-            this.input
-        );
+        if (options.label !== undefined) {
+            this.element.append(create('label', { classes: ['text-field__label'], attributes: { for: id }, text: options.label }));
+        } else {
+            this.input.setAttribute('aria-label', options.ariaLabel ?? '');
+        }
+        this.element.append(this.input);
 
         this.listen(this.input, 'input', () => this.changes.emit(this.input.value));
-        this.track(() => this.changes.clear());
+        this.listen(this.input, 'change', () => this.commits.emit(this.input.value));
+        this.track(() => {
+            this.changes.clear();
+            this.commits.clear();
+        });
     }
 
     /** Current value */
@@ -66,6 +75,13 @@ export class TextField extends Component<HTMLDivElement> {
     focus(): void {
         this.input.focus();
         this.input.select();
+    }
+
+    /**
+     * Registers a listener for the values confirmed by the user (Enter or leaving the field).
+     */
+    onChange(listener: (value: string) => void): Unsubscribe {
+        return this.commits.subscribe(listener);
     }
 
     /**

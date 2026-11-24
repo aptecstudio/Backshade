@@ -1,0 +1,231 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Showtec",
+  "model": "Phantom 75 LED Spot V2",
+  "category": "movingHead",
+  "physical": {
+    "width": 338,
+    "height": 390,
+    "depth": 247,
+    "weight": 11,
+    "lumens": 24000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 17,
+      "max": 20
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 170
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 6, "label": "Open / White", "kind": "color", "color": "#ffffff" },
+        { "from": 7, "to": 13, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 14, "to": 20, "label": "Pink", "kind": "color", "color": "#ff007f" },
+        { "from": 21, "to": 27, "label": "Green", "kind": "color", "color": "#00aa00" },
+        { "from": 28, "to": 34, "label": "Red", "kind": "color", "color": "#aa0000" },
+        { "from": 35, "to": 41, "label": "Light Blue", "kind": "color", "color": "#0055ff" },
+        { "from": 42, "to": 48, "label": "Light Green", "kind": "color", "color": "#55ff00" },
+        { "from": 49, "to": 55, "label": "Orange", "kind": "color", "color": "#ffaa00" },
+        { "from": 56, "to": 63, "label": "Dark Blue", "kind": "color", "color": "#00007f" },
+        { "from": 64, "to": 70, "label": "White/Yellow", "kind": "color", "color": "#ffffff" },
+        { "from": 71, "to": 77, "label": "Yellow/Pink", "kind": "color", "color": "#ffff00" },
+        { "from": 78, "to": 84, "label": "Pink/Green", "kind": "color", "color": "#ff007f" },
+        { "from": 85, "to": 91, "label": "Green/Red", "kind": "color", "color": "#00aa00" },
+        { "from": 92, "to": 98, "label": "Red/Light Blue", "kind": "color", "color": "#aa0000" },
+        { "from": 99, "to": 105, "label": "Light Blue/Light Green", "kind": "color", "color": "#0055ff" },
+        { "from": 106, "to": 112, "label": "Light Green/Orange", "kind": "color", "color": "#55ff00" },
+        { "from": 113, "to": 119, "label": "Orange/Dark Blue", "kind": "color", "color": "#ffaa00" },
+        { "from": 120, "to": 127, "label": "Dark Blue/White" },
+        { "from": 128, "to": 191, "label": "Scroll CW slow to fast", "kind": "gobo" },
+        { "from": 192, "to": 255, "label": "Scroll CCW fast to slow", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Close", "kind": "closed" },
+        { "from": 4, "to": 7, "label": "Shutter Open", "kind": "open" },
+        { "from": 8, "to": 76, "label": "Strobe slow to fast", "kind": "strobe" },
+        { "from": 77, "to": 145, "label": "Pulse strobe effect", "kind": "pulse" },
+        { "from": 146, "to": 215, "label": "Random Strobe", "kind": "strobe" },
+        { "from": 216, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "goboWheel",
+      "name": "Gobo Wheel",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open", "kind": "gobo" },
+        { "from": 8, "to": 15, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 16, "to": 23, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 24, "to": 31, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 32, "to": 39, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 40, "to": 47, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 48, "to": 55, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 56, "to": 63, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 64, "to": 71, "label": "Gobo 7 Shake", "kind": "gobo" },
+        { "from": 72, "to": 79, "label": "Gobo 6 Shake", "kind": "gobo" },
+        { "from": 80, "to": 87, "label": "Gobo 5 Shake", "kind": "gobo" },
+        { "from": 88, "to": 95, "label": "Gobo 4 Shake", "kind": "gobo" },
+        { "from": 96, "to": 103, "label": "Gobo 3 Shake", "kind": "gobo" },
+        { "from": 104, "to": 111, "label": "Gobo 2 Shake", "kind": "gobo" },
+        { "from": 112, "to": 119, "label": "Gobo 1 Shake", "kind": "gobo" },
+        { "from": 120, "to": 127, "label": "Open" },
+        { "from": 128, "to": 191, "label": "Scroll CW slow to fast" },
+        { "from": 192, "to": 255, "label": "Scroll CCW fast to slow" }
+      ]
+    },
+    {
+      "key": "goboRotation",
+      "name": "Gobo Rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 63, "label": "Index" },
+        { "from": 64, "to": 147, "label": "CW slow to fast" },
+        { "from": 148, "to": 231, "label": "CCW fast to slow" },
+        { "from": 232, "to": 255, "label": "Gobo Bouncing" }
+      ]
+    },
+    {
+      "key": "channelFunctions",
+      "name": "Channel Functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 15, "label": "Blackout during Pan/Tilt" },
+        { "from": 16, "to": 23, "label": "Blackout during Color" },
+        { "from": 24, "to": 31, "label": "Blackout during Gobo" },
+        { "from": 32, "to": 39, "label": "Blackout during Pan/Tilt/Color" },
+        { "from": 40, "to": 47, "label": "Blackout during Pan/Tilt/Gobo" },
+        { "from": 48, "to": 55, "label": "Blackout during Pan/Tilt/Gobo/Color" },
+        { "from": 56, "to": 87, "label": "No function" },
+        { "from": 88, "to": 95, "label": "No function" },
+        { "from": 96, "to": 103, "label": "Reset Pan" },
+        { "from": 104, "to": 111, "label": "Reset Tilt" },
+        { "from": 112, "to": 119, "label": "Reset Color wheel", "kind": "reset" },
+        { "from": 120, "to": 127, "label": "Reset Gobo wheel", "kind": "reset" },
+        { "from": 128, "to": 135, "label": "Reset Gobo Rotation" },
+        { "from": 136, "to": 143, "label": "Reset Prism" },
+        { "from": 144, "to": 151, "label": "Reset Focus" },
+        { "from": 152, "to": 159, "label": "Reset All", "kind": "reset" },
+        { "from": 160, "to": 255, "label": "No function" }
+      ]
+    },
+    {
+      "key": "macros",
+      "name": "Macros",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 23, "label": "Macro 1" },
+        { "from": 24, "to": 39, "label": "Macro 2" },
+        { "from": 40, "to": 55, "label": "Macro 3" },
+        { "from": 56, "to": 71, "label": "Macro 4" },
+        { "from": 72, "to": 87, "label": "Macro 5" },
+        { "from": 88, "to": 103, "label": "Macro 6" },
+        { "from": 104, "to": 119, "label": "Macro 7" },
+        { "from": 120, "to": 135, "label": "Macro 8" },
+        { "from": 136, "to": 151, "label": "Sound 1" },
+        { "from": 152, "to": 167, "label": "Sound 2" },
+        { "from": 168, "to": 183, "label": "Sound 3" },
+        { "from": 184, "to": 199, "label": "Sound 4" },
+        { "from": 200, "to": 215, "label": "Sound 5" },
+        { "from": 216, "to": 231, "label": "Sound 6" },
+        { "from": 232, "to": 247, "label": "Sound 7" },
+        { "from": 248, "to": 255, "label": "Sound 8" }
+      ]
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open" },
+        { "from": 8, "to": 12, "label": "3-Facet Prism Effect" },
+        { "from": 13, "to": 130, "label": "CW slow to fast" },
+        { "from": 131, "to": 247, "label": "CCW fast to slow" },
+        { "from": 248, "to": 255, "label": "3-Facet Prism Effect" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    }
+  ],
+  "modes": [
+    {
+      "name": "14 Channels 16bit",
+      "channels": [
+        "pan",
+        "tilt",
+        "panFine",
+        "tiltFine",
+        "panTiltSpeed",
+        "colorWheel",
+        "shutterStrobe",
+        "dimmer",
+        "goboWheel",
+        "goboRotation",
+        "channelFunctions",
+        "macros",
+        "prism",
+        "focus"
+      ]
+    },
+    {
+      "name": "8 Channels 8bit",
+      "channels": [
+        "pan",
+        "tilt",
+        "colorWheel",
+        "shutterStrobe",
+        "dimmer",
+        "goboWheel",
+        "prism",
+        "focus"
+      ]
+    }
+  ]
+}

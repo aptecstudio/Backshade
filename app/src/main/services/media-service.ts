@@ -7,17 +7,11 @@ import { shell } from 'electron';
 import { MEDIA_EXTENSIONS } from '../../shared/show/media-kinds';
 import { importMedia, listMedia, removeMedia, resolveMediaPath } from '../shows/media-library';
 import type { ShowSession } from '../shows/show-session';
-import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { requireObject, requireString } from '../transport/params';
-import type { RequestContext, RequestRouter } from '../transport/request-router';
+import type { RequestRouter } from '../transport/request-router';
+import { requireDesktop } from '../transport/require-desktop';
 import { chooseFiles } from '../window/file-dialogs';
-
-function requireDesktop(context: RequestContext): void {
-    if (context.transport !== 'ipc') {
-        throw new EngineError('desktop-only', 'Available only in the desktop application');
-    }
-}
 
 /**
  * Registers the methods of the service.

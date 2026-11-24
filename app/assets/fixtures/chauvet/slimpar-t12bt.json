@@ -1,0 +1,86 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "SlimPAR T12BT",
+  "category": "par",
+  "physical": {
+    "width": 214,
+    "height": 77,
+    "depth": 264,
+    "weight": 1.2,
+    "lumens": 2850,
+    "source": "LED",
+    "beamAngle": {
+      "min": 21,
+      "max": 21
+    },
+    "power": 43
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "autoProgram",
+      "name": "Auto Program",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "No function" },
+        { "from": 6, "to": 55, "label": "Program 1" },
+        { "from": 56, "to": 106, "label": "Program 2" },
+        { "from": 107, "to": 157, "label": "Program 3" },
+        { "from": 158, "to": 208, "label": "Program 4" },
+        { "from": 209, "to": 255, "label": "Program 5" }
+      ]
+    },
+    {
+      "key": "autoProgramSpeed",
+      "name": "Auto Program Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "7 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "strobe",
+        "autoProgram",
+        "autoProgramSpeed",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  ]
+}

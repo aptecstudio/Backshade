@@ -1,0 +1,281 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Stairville",
+  "model": "MH-x200 Pro Spot",
+  "category": "movingHead",
+  "physical": {
+    "width": 495,
+    "height": 482,
+    "depth": 422,
+    "weight": 20.5,
+    "lumens": 2096,
+    "source": "LED",
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 200
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "panFine16Bit",
+      "name": "Pan Fine, 16 Bit",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tiltFine16Bit",
+      "name": "Tilt Fine, 16 Bit",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "speedRotationInclination",
+      "name": "Speed Rotation /Inclination",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 8, "to": 15, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 16, "to": 23, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 24, "to": 31, "label": "Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 32, "to": 39, "label": "Green", "kind": "color", "color": "#55ff00" },
+        { "from": 40, "to": 47, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 48, "to": 55, "label": "Light blue", "kind": "color", "color": "#00aaff" },
+        { "from": 56, "to": 63, "label": "Orange/Red", "kind": "color", "color": "#ff5500" },
+        { "from": 64, "to": 66, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 67, "to": 78, "label": "Stepwise transition from white to blue", "kind": "color", "color": "#ffffff" },
+        { "from": 79, "to": 92, "label": "Stepwise transition from blue to yellow", "kind": "color", "color": "#0000ff" },
+        { "from": 93, "to": 107, "label": "Stepwise transition from yellow to pink", "kind": "color", "color": "#ffff00" },
+        { "from": 108, "to": 120, "label": "Stepwise transition from pink to green", "kind": "color", "color": "#ffaaff" },
+        { "from": 121, "to": 136, "label": "Stepwise transition from green to red", "kind": "color", "color": "#00ff00" },
+        { "from": 137, "to": 152, "label": "Stepwise transition from red to light blue", "kind": "color", "color": "#ff0000" },
+        { "from": 153, "to": 170, "label": "Stepwise transition from light blue to orange red", "kind": "color", "color": "#00aaff" },
+        { "from": 171, "to": 212, "label": "Rotation clockwise, increasing speed" },
+        { "from": 213, "to": 255, "label": "Rotation counter-clockwise, increasing speed" }
+      ]
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Closed", "kind": "closed" },
+        { "from": 8, "to": 22, "label": "Open", "kind": "open" },
+        { "from": 23, "to": 85, "label": "Strobe light, increasing speed", "kind": "strobe" },
+        { "from": 86, "to": 100, "label": "Open", "kind": "open" },
+        { "from": 101, "to": 165, "label": "Triple strobe, increasing speed" },
+        { "from": 166, "to": 180, "label": "Open", "kind": "open" },
+        { "from": 181, "to": 245, "label": "Irregular strobe, increasing speed" },
+        { "from": 246, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "goboWheel1Movable",
+      "name": "Gobo Wheel 1, Movable",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Open", "kind": "gobo" },
+        { "from": 10, "to": 19, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 20, "to": 29, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 30, "to": 39, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 40, "to": 49, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 50, "to": 59, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 60, "to": 69, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 70, "to": 79, "label": "Gobo 8", "kind": "gobo" },
+        { "from": 80, "to": 99, "label": "Gobo 2 shake, increasing speed", "kind": "gobo" },
+        { "from": 100, "to": 119, "label": "Gobo 3 shake, increasing speed", "kind": "gobo" },
+        { "from": 120, "to": 139, "label": "Gobo 4 shake, increasing speed", "kind": "gobo" },
+        { "from": 140, "to": 159, "label": "Gobo 5 shake, increasing speed", "kind": "gobo" },
+        { "from": 160, "to": 179, "label": "Gobo 6 shake, increasing speed", "kind": "gobo" },
+        { "from": 180, "to": 199, "label": "Gobo 7 shake, increasing speed", "kind": "gobo" },
+        { "from": 200, "to": 219, "label": "Gobo 8 shake, increasing speed", "kind": "gobo" },
+        { "from": 220, "to": 237, "label": "Rotation clockwise, increasing speed" },
+        { "from": 238, "to": 255, "label": "Rotation counter-clockwise, increasing speed" }
+      ]
+    },
+    {
+      "key": "goboRotation",
+      "name": "Gobo Rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No rotation" },
+        { "from": 11, "to": 127, "label": "Fixed position from 0 deg to 360 deg" },
+        { "from": 128, "to": 191, "label": "Rotation clockwise, increasing speed" },
+        { "from": 192, "to": 255, "label": "Rotation counter-clockwise, increasing speed" }
+      ]
+    },
+    {
+      "key": "goboWheel2Static",
+      "name": "Gobo Wheel 2, Static",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Open", "kind": "gobo" },
+        { "from": 10, "to": 19, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 20, "to": 29, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 30, "to": 39, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 40, "to": 49, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 50, "to": 59, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 60, "to": 69, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 70, "to": 79, "label": "Gobo 8", "kind": "gobo" },
+        { "from": 80, "to": 89, "label": "Gobo 9", "kind": "gobo" },
+        { "from": 90, "to": 91, "label": "Open", "kind": "gobo" },
+        { "from": 92, "to": 107, "label": "Gobo 2 shake, increasing speed", "kind": "gobo" },
+        { "from": 108, "to": 123, "label": "Gobo 3 shake, increasing speed", "kind": "gobo" },
+        { "from": 124, "to": 139, "label": "Gobo 4 shake, increasing speed", "kind": "gobo" },
+        { "from": 140, "to": 155, "label": "Gobo 5 shake, increasing speed", "kind": "gobo" },
+        { "from": 156, "to": 171, "label": "Gobo 6 shake, increasing speed", "kind": "gobo" },
+        { "from": 172, "to": 187, "label": "Gobo 7 shake, increasing speed", "kind": "gobo" },
+        { "from": 188, "to": 203, "label": "Gobo 8 shake, increasing speed", "kind": "gobo" },
+        { "from": 204, "to": 219, "label": "Gobo 9 shake, increasing speed", "kind": "gobo" },
+        { "from": 220, "to": 237, "label": "Rotation clockwise, increasing speed" },
+        { "from": 238, "to": 255, "label": "Rotation counter-clockwise, increasing speed" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "aperture",
+      "name": "Aperture",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 63, "label": "Open / close iris diaphragm manually" },
+        { "from": 64, "to": 127, "label": "Automatic zoom, increasing speed" },
+        { "from": 128, "to": 191, "label": "Slow zooming in, fast zooming out" },
+        { "from": 192, "to": 255, "label": "Fast zooming in, slow zooming out" }
+      ]
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "White" },
+        { "from": 8, "to": 15, "label": "Static" },
+        { "from": 16, "to": 127, "label": "Clockwise rotating" },
+        { "from": 128, "to": 239, "label": "Counter-clockwise rotating" },
+        { "from": 240, "to": 255, "label": "Static" }
+      ]
+    },
+    {
+      "key": "functions",
+      "name": "Functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Free" },
+        { "from": 10, "to": 14, "label": "Blackout during rotation and inclination" },
+        { "from": 15, "to": 19, "label": "Blackout during color wheel movement" },
+        { "from": 20, "to": 24, "label": "No blackout during color wheel movement and during rotation and inclination" },
+        { "from": 25, "to": 29, "label": "Blackout during gobo wheel movement" },
+        { "from": 30, "to": 34, "label": "No blackout during gobo wheel movement and during rotation and inclination" },
+        { "from": 35, "to": 39, "label": "No blackout during color wheel or gobo wheel movement" },
+        { "from": 40, "to": 44, "label": "No blackout during color wheel or gobo wheel movement and during rotation and inclination" },
+        { "from": 45, "to": 49, "label": "Reset rotation" },
+        { "from": 50, "to": 54, "label": "Reset inclination" },
+        { "from": 55, "to": 59, "label": "Reset color wheel", "kind": "reset" },
+        { "from": 60, "to": 64, "label": "Reset aperture" },
+        { "from": 65, "to": 69, "label": "Reset gobo 1", "kind": "reset" },
+        { "from": 70, "to": 74, "label": "Reset gobo rotation" },
+        { "from": 75, "to": 79, "label": "Reset gobo 2" },
+        { "from": 80, "to": 84, "label": "Reset focus" },
+        { "from": 85, "to": 89, "label": "Reset prism" },
+        { "from": 90, "to": 99, "label": "Reset channels", "kind": "reset" },
+        { "from": 100, "to": 129, "label": "Free" },
+        { "from": 130, "to": 192, "label": "Random program sequence" },
+        { "from": 193, "to": 255, "label": "Sound-control" }
+      ]
+    },
+    {
+      "key": "effects",
+      "name": "Effects",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Free" },
+        { "from": 10, "to": 19, "label": "Effect 1" },
+        { "from": 20, "to": 29, "label": "Effect 2" },
+        { "from": 30, "to": 39, "label": "Effect 3" },
+        { "from": 40, "to": 49, "label": "Effect 4" },
+        { "from": 50, "to": 59, "label": "Effect 5" },
+        { "from": 60, "to": 69, "label": "Effect 6" },
+        { "from": 70, "to": 79, "label": "Effect 7" },
+        { "from": 80, "to": 89, "label": "Effect 8" },
+        { "from": 90, "to": 99, "label": "Effect 9" },
+        { "from": 100, "to": 109, "label": "Effect 10" },
+        { "from": 110, "to": 119, "label": "Effect 11" },
+        { "from": 120, "to": 129, "label": "Effect 12" },
+        { "from": 130, "to": 139, "label": "Effect 13" },
+        { "from": 140, "to": 149, "label": "Effect 14" },
+        { "from": 150, "to": 159, "label": "Effect 15" },
+        { "from": 160, "to": 169, "label": "Effect 16" },
+        { "from": 170, "to": 179, "label": "Effect 17" },
+        { "from": 180, "to": 189, "label": "Effect 18" },
+        { "from": 190, "to": 199, "label": "Effect 19" },
+        { "from": 200, "to": 209, "label": "Effect 20" },
+        { "from": 210, "to": 219, "label": "Effect 21" },
+        { "from": 220, "to": 229, "label": "Effect 22" },
+        { "from": 230, "to": 239, "label": "Effect 23" },
+        { "from": 240, "to": 249, "label": "Effect 24" },
+        { "from": 250, "to": 255, "label": "Effect 25" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "11 Channels",
+      "channels": [
+        "pan",
+        "tilt",
+        "colorWheel",
+        "shutter",
+        "dimmer",
+        "goboWheel1Movable",
+        "goboRotation",
+        "goboWheel2Static",
+        "focus",
+        "aperture",
+        "prism"
+      ]
+    },
+    {
+      "name": "16 Channels",
+      "channels": [
+        "pan",
+        "tilt",
+        "panFine16Bit",
+        "tiltFine16Bit",
+        "speedRotationInclination",
+        "colorWheel",
+        "shutter",
+        "dimmer",
+        "goboWheel1Movable",
+        "goboRotation",
+        "goboWheel2Static",
+        "focus",
+        "aperture",
+        "prism",
+        "functions",
+        "effects"
+      ]
+    }
+  ]
+}

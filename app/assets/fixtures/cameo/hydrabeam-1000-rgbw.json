@@ -1,0 +1,199 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Cameo",
+  "model": "Hydrabeam 1000 RGBW",
+  "category": "movingHead",
+  "physical": {
+    "width": 146,
+    "height": 255,
+    "depth": 156,
+    "weight": 2.6,
+    "lumens": 100,
+    "source": "LED",
+    "beamAngle": {
+      "min": 2.5,
+      "max": 2.5
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 65
+  },
+  "channels": [
+    {
+      "key": "autoSoundReset",
+      "name": "Auto / Sound / Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "no function" },
+        { "from": 8, "to": 30, "label": "show 1" },
+        { "from": 31, "to": 53, "label": "show 2" },
+        { "from": 54, "to": 76, "label": "show 3" },
+        { "from": 77, "to": 99, "label": "show 4" },
+        { "from": 100, "to": 122, "label": "sound control" },
+        { "from": 123, "to": 199, "label": "no function" },
+        { "from": 200, "to": 224, "label": "reset", "kind": "reset" },
+        { "from": 225, "to": 255, "label": "no function" }
+      ]
+    },
+    {
+      "key": "soundSensitivityAutoSpeed",
+      "name": "Sound sensitivity / Auto speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "no function", "kind": "open" },
+        { "from": 11, "to": 255, "label": "slow to fast", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 30, "label": "blackout", "kind": "color", "color": "#000000" },
+        { "from": 31, "to": 45, "label": "R (Red)", "kind": "color", "color": "#ff0000" },
+        { "from": 46, "to": 60, "label": "G (Green)", "kind": "color", "color": "#00ff00" },
+        { "from": 61, "to": 75, "label": "B (Blue)", "kind": "color", "color": "#0000ff" },
+        { "from": 76, "to": 90, "label": "W (White)", "kind": "color", "color": "#ffffff" },
+        { "from": 91, "to": 105, "label": "RG", "kind": "color", "color": "#ff0000" },
+        { "from": 106, "to": 120, "label": "RB", "kind": "color", "color": "#ff0000" },
+        { "from": 121, "to": 135, "label": "RW", "kind": "color", "color": "#ff0000" },
+        { "from": 136, "to": 150, "label": "GB", "kind": "color", "color": "#00ff00" },
+        { "from": 151, "to": 165, "label": "GW", "kind": "color", "color": "#00ff00" },
+        { "from": 166, "to": 180, "label": "BW", "kind": "color", "color": "#0000ff" },
+        { "from": 181, "to": 195, "label": "RGB" },
+        { "from": 196, "to": 210, "label": "RGW" },
+        { "from": 211, "to": 225, "label": "RBW" },
+        { "from": 226, "to": 240, "label": "GBW" },
+        { "from": 241, "to": 255, "label": "RGBW" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    }
+  ],
+  "modes": [
+    {
+      "name": "3-CH",
+      "channels": [
+        "autoSoundReset",
+        "soundSensitivityAutoSpeed",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "6-CH",
+      "channels": [
+        "pan",
+        "tilt",
+        "panTiltSpeed",
+        "dimmer",
+        "strobe",
+        "colorMacro"
+      ]
+    },
+    {
+      "name": "9-CH",
+      "channels": [
+        "pan",
+        "tilt",
+        "panTiltSpeed",
+        "dimmer",
+        "strobe",
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "name": "12-CH",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "dimmer",
+        "strobe",
+        "colorMacro",
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "name": "14-CH",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "dimmer",
+        "strobe",
+        "colorMacro",
+        "autoSoundReset",
+        "soundSensitivityAutoSpeed",
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    }
+  ]
+}

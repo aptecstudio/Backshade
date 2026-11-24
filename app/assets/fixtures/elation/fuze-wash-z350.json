@@ -1,0 +1,348 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Elation",
+  "model": "Fuze Wash Z350",
+  "category": "movingHead",
+  "physical": {
+    "width": 294,
+    "height": 461,
+    "depth": 414,
+    "weight": 19.5,
+    "source": "LED",
+    "beamAngle": {
+      "min": 6,
+      "max": 46
+    },
+    "panRange": 630,
+    "tiltRange": 270,
+    "power": 399
+  },
+  "channels": [
+    {
+      "key": "panMovement",
+      "name": "Pan movement",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "panMovement"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "LED OFF", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "LED ON", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe Effect SLOW to FAST", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "LED ON", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Pulse Effect in Sequences", "kind": "pulse" },
+        { "from": 160, "to": 223, "label": "Random Strobe Effect SLOW to FAST", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "LED ON", "kind": "open" }
+      ]
+    },
+    {
+      "key": "hue",
+      "name": "Hue",
+      "attribute": "hue"
+    },
+    {
+      "key": "saturation",
+      "name": "Saturation",
+      "attribute": "saturation"
+    },
+    {
+      "key": "intensity",
+      "name": "Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorPresets",
+      "name": "Color presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "off" },
+        { "from": 1, "to": 4, "label": "color preset 01" },
+        { "from": 5, "to": 8, "label": "color preset 02" },
+        { "from": 9, "to": 12, "label": "color preset 03" },
+        { "from": 13, "to": 16, "label": "color preset 04" },
+        { "from": 17, "to": 20, "label": "color preset 05" },
+        { "from": 21, "to": 24, "label": "color preset 06" },
+        { "from": 25, "to": 28, "label": "color preset 07" },
+        { "from": 29, "to": 32, "label": "color preset 08" },
+        { "from": 33, "to": 36, "label": "color preset 09" },
+        { "from": 37, "to": 40, "label": "color preset 10" },
+        { "from": 41, "to": 44, "label": "color preset 11" },
+        { "from": 45, "to": 48, "label": "color preset 12" },
+        { "from": 49, "to": 52, "label": "color preset 13" },
+        { "from": 53, "to": 56, "label": "color preset 14" },
+        { "from": 57, "to": 60, "label": "color preset 15" },
+        { "from": 61, "to": 64, "label": "color preset 16" },
+        { "from": 65, "to": 68, "label": "color preset 17" },
+        { "from": 69, "to": 72, "label": "color preset 18" },
+        { "from": 73, "to": 76, "label": "color preset 19" },
+        { "from": 77, "to": 80, "label": "color preset 20" },
+        { "from": 81, "to": 84, "label": "color preset 21" },
+        { "from": 85, "to": 88, "label": "color preset 22" },
+        { "from": 89, "to": 92, "label": "color preset 23" },
+        { "from": 93, "to": 96, "label": "color preset 24" },
+        { "from": 97, "to": 100, "label": "color preset 25" },
+        { "from": 101, "to": 104, "label": "color preset 26" },
+        { "from": 105, "to": 108, "label": "color preset 27" },
+        { "from": 109, "to": 112, "label": "color preset 28" },
+        { "from": 113, "to": 116, "label": "color preset 29" },
+        { "from": 117, "to": 120, "label": "color preset 30" },
+        { "from": 121, "to": 124, "label": "color preset 31" },
+        { "from": 125, "to": 128, "label": "color preset 32" },
+        { "from": 129, "to": 132, "label": "color preset 33" },
+        { "from": 133, "to": 136, "label": "color preset 34" },
+        { "from": 137, "to": 140, "label": "color preset 35" },
+        { "from": 141, "to": 144, "label": "color preset 36" },
+        { "from": 145, "to": 148, "label": "color preset 37" },
+        { "from": 149, "to": 152, "label": "color preset 38" },
+        { "from": 153, "to": 156, "label": "color preset 39" },
+        { "from": 157, "to": 160, "label": "color preset 40" },
+        { "from": 161, "to": 164, "label": "color preset 41" },
+        { "from": 165, "to": 168, "label": "color preset 42" },
+        { "from": 169, "to": 172, "label": "color preset 43" },
+        { "from": 173, "to": 176, "label": "color preset 44" },
+        { "from": 177, "to": 180, "label": "color preset 45" },
+        { "from": 181, "to": 184, "label": "color preset 46" },
+        { "from": 185, "to": 188, "label": "color preset 47" },
+        { "from": 189, "to": 192, "label": "color preset 48" },
+        { "from": 193, "to": 196, "label": "color preset 49" },
+        { "from": 197, "to": 200, "label": "color preset 50" },
+        { "from": 201, "to": 204, "label": "color preset 51" },
+        { "from": 205, "to": 208, "label": "color preset 52" },
+        { "from": 209, "to": 212, "label": "color preset 53" },
+        { "from": 213, "to": 216, "label": "color preset 54" },
+        { "from": 217, "to": 220, "label": "color preset 55" },
+        { "from": 221, "to": 224, "label": "color preset 56" },
+        { "from": 225, "to": 228, "label": "color preset 57" },
+        { "from": 229, "to": 232, "label": "color preset 58" },
+        { "from": 233, "to": 236, "label": "color preset 59" },
+        { "from": 237, "to": 240, "label": "color preset 60" },
+        { "from": 241, "to": 244, "label": "color preset 61" },
+        { "from": 245, "to": 248, "label": "color preset 62" },
+        { "from": 249, "to": 252, "label": "color preset 63" },
+        { "from": 253, "to": 255, "label": "color preset 64" }
+      ]
+    },
+    {
+      "key": "dimmerIntensity",
+      "name": "Dimmer intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerIntensityFine",
+      "name": "Dimmer intensity fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmerIntensity"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "programMacros",
+      "name": "Program macros",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "no function" },
+        { "from": 1, "to": 20, "label": "color macro 01" },
+        { "from": 21, "to": 40, "label": "color macro 02" },
+        { "from": 41, "to": 60, "label": "color macro 03" },
+        { "from": 61, "to": 80, "label": "color macro 04" },
+        { "from": 81, "to": 100, "label": "color macro 05" },
+        { "from": 101, "to": 120, "label": "color macro 06" },
+        { "from": 121, "to": 140, "label": "color macro 07" },
+        { "from": 141, "to": 160, "label": "color macro 08" },
+        { "from": 161, "to": 180, "label": "color macro 09" },
+        { "from": 181, "to": 200, "label": "color macro 10" },
+        { "from": 201, "to": 230, "label": "color macro 11" },
+        { "from": 231, "to": 240, "label": "color macro 12" },
+        { "from": 241, "to": 250, "label": "color macro 13" },
+        { "from": 251, "to": 255, "label": "gardient color macro" }
+      ]
+    },
+    {
+      "key": "programMacrosSpeed",
+      "name": "Program macros speed",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 125, "label": "Counter-Clockwise Movement FAST to SLOW" },
+        { "from": 126, "to": 130, "label": "STOP" },
+        { "from": 131, "to": 255, "label": "Clockwise Movement SLOW to FAST" }
+      ]
+    },
+    {
+      "key": "programMacroFade",
+      "name": "Program macro fade",
+      "attribute": "speed"
+    },
+    {
+      "key": "dimmingCurveModes",
+      "name": "Dimming curve modes",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "standard" },
+        { "from": 21, "to": 40, "label": "stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "architectural" },
+        { "from": 81, "to": 100, "label": "theatre" },
+        { "from": 101, "to": 255, "label": "default" }
+      ]
+    },
+    {
+      "key": "panTiltMovementSpeed",
+      "name": "Pan-tilt movement speed",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 225, "label": "max to min" },
+        { "from": 226, "to": 235, "label": "blackout by movement" },
+        { "from": 236, "to": 255, "label": "no function" }
+      ]
+    },
+    {
+      "key": "lampOnOffResetInternalPrograms",
+      "name": "Lamp on/off reset internal programs",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 79, "label": "normal" },
+        { "from": 80, "to": 84, "label": "all motors reset" },
+        { "from": 85, "to": 99, "label": "no function" },
+        { "from": 100, "to": 119, "label": "internal program 1" },
+        { "from": 120, "to": 139, "label": "internal program 2" },
+        { "from": 140, "to": 159, "label": "internal program 3" },
+        { "from": 160, "to": 179, "label": "internal program 4" },
+        { "from": 180, "to": 199, "label": "internal program 5" },
+        { "from": 200, "to": 219, "label": "internal program 6" },
+        { "from": 220, "to": 239, "label": "internal program 7" },
+        { "from": 240, "to": 255, "label": "no function" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "15 RGBW",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "shutterStrobe",
+        "dimmerIntensity",
+        "dimmerIntensityFine",
+        "programMacros",
+        "dimmingCurveModes",
+        "panTiltMovementSpeed",
+        "lampOnOffResetInternalPrograms"
+      ]
+    },
+    {
+      "name": "16 HSI",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "shutterStrobe",
+        "hue",
+        "saturation",
+        "intensity",
+        "colorPresets",
+        "zoom",
+        "programMacros",
+        "programMacrosSpeed",
+        "programMacroFade",
+        "dimmingCurveModes",
+        "panTiltMovementSpeed",
+        "lampOnOffResetInternalPrograms"
+      ]
+    },
+    {
+      "name": "17 RGBI",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "shutterStrobe",
+        "red",
+        "green",
+        "blue",
+        "intensity",
+        "colorPresets",
+        "zoom",
+        "programMacros",
+        "programMacrosSpeed",
+        "programMacroFade",
+        "dimmingCurveModes",
+        "panTiltMovementSpeed",
+        "lampOnOffResetInternalPrograms"
+      ]
+    },
+    {
+      "name": "19 RGBW",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorPresets",
+        "shutterStrobe",
+        "dimmerIntensity",
+        "dimmerIntensityFine",
+        "zoom",
+        "programMacros",
+        "programMacrosSpeed",
+        "programMacroFade",
+        "dimmingCurveModes",
+        "panTiltMovementSpeed",
+        "lampOnOffResetInternalPrograms"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Showtec",
+  "model": "Shark Beam FX One",
+  "category": "movingHead",
+  "physical": {
+    "width": 175,
+    "height": 355,
+    "depth": 255,
+    "weight": 5.8,
+    "source": "LED",
+    "beamAngle": {
+      "min": 4,
+      "max": 60
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 135
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "strobeShutter",
+      "name": "Strobe/Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Open", "kind": "open" },
+        { "from": 10, "to": 250, "label": "Strobe", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 20, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 21, "to": 30, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 31, "to": 40, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 41, "to": 50, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 51, "to": 60, "label": "Red + White", "kind": "color", "color": "#ff0000" },
+        { "from": 61, "to": 70, "label": "Green + White", "kind": "color", "color": "#00ff00" },
+        { "from": 71, "to": 80, "label": "Blue + White", "kind": "color", "color": "#0000ff" },
+        { "from": 81, "to": 90, "label": "Red + Green", "kind": "color", "color": "#ff0000" },
+        { "from": 91, "to": 100, "label": "Green + Blue", "kind": "color", "color": "#00ff00" },
+        { "from": 101, "to": 110, "label": "Red + Blue", "kind": "color", "color": "#ff0000" },
+        { "from": 111, "to": 120, "label": "Red + Green + Blue", "kind": "color", "color": "#ffffff" },
+        { "from": 121, "to": 130, "label": "Green + Blue + White", "kind": "color", "color": "#00ffff" },
+        { "from": 131, "to": 140, "label": "Red + Blue + White", "kind": "color", "color": "#ff00ff" },
+        { "from": 141, "to": 150, "label": "Red + Green + Blue + White", "kind": "color", "color": "#ffffff" },
+        { "from": 151, "to": 200, "label": "Switch, Slow to Fast" },
+        { "from": 201, "to": 255, "label": "Flow, Slow to Fast" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "beam",
+      "name": "Beam",
+      "attribute": "beamEffect",
+      "capabilities": [
+        { "from": 0, "to": 100, "label": "Effect, Closed to Open" },
+        { "from": 101, "to": 133, "label": "Bounce. Slow to Fast" },
+        { "from": 134, "to": 194, "label": "CCW, Fast to Slow" },
+        { "from": 195, "to": 255, "label": "CW, Slow to Fast" }
+      ]
+    },
+    {
+      "key": "functions",
+      "name": "Functions",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "Not functional" },
+        { "from": 11, "to": 20, "label": "Built-in program 1" },
+        { "from": 21, "to": 30, "label": "Built-in program 2" },
+        { "from": 31, "to": 40, "label": "Built-in program 3" },
+        { "from": 41, "to": 50, "label": "Built-in program 4" },
+        { "from": 51, "to": 60, "label": "Built-in program 5" },
+        { "from": 61, "to": 70, "label": "Built-in program 6" },
+        { "from": 71, "to": 80, "label": "Built-in program 7" },
+        { "from": 81, "to": 90, "label": "Built-in program 8" },
+        { "from": 91, "to": 230, "label": "Sound-controlled Off to High" },
+        { "from": 231, "to": 240, "label": "Reset after 3 seconds" },
+        { "from": 241, "to": 255, "label": "Not Functional" }
+      ]
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorTemperature",
+      "name": "Color Temperature",
+      "attribute": "white"
+    }
+  ],
+  "modes": [
+    {
+      "name": "8 Channel",
+      "channels": [
+        "pan",
+        "tilt",
+        "dimmer",
+        "strobeShutter",
+        "colorMacros",
+        "zoom",
+        "beam",
+        "functions"
+      ]
+    },
+    {
+      "name": "16 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "dimmer",
+        "strobeShutter",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorTemperature",
+        "colorMacros",
+        "zoom",
+        "beam",
+        "functions"
+      ]
+    }
+  ]
+}

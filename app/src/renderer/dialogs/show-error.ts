@@ -21,7 +21,18 @@ const MESSAGES: Record<string, TextKey> = {
     'invalid-archive': 'errors.invalidArchive',
     'wrong-archive-kind': 'errors.wrongArchiveKind',
     'media-not-found': 'errors.mediaNotFound',
-    'invalid-media-path': 'errors.invalidMediaPath'
+    'invalid-media-path': 'errors.invalidMediaPath',
+    'fixture-not-found': 'errors.fixtureNotFound',
+    'fixture-exists': 'errors.fixtureExists',
+    'fixture-read-only': 'errors.fixtureReadOnly',
+    'invalid-fixture': 'errors.invalidFixture',
+    'mode-not-found': 'errors.modeNotFound',
+    'address-conflict': 'errors.addressConflict',
+    'address-out-of-range': 'errors.addressOutOfRange',
+    'invalid-universe': 'errors.invalidUniverse',
+    'invalid-fixture-number': 'errors.invalidFixtureNumber',
+    'fixture-number-in-use': 'errors.fixtureNumberInUse',
+    'patch-fixture-not-found': 'errors.patchFixtureNotFound'
 };
 
 /**

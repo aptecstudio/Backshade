@@ -1,0 +1,431 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "GLP",
+  "model": "Impression X4",
+  "category": "movingHead",
+  "physical": {
+    "width": 341,
+    "height": 375,
+    "depth": 338,
+    "weight": 8,
+    "colorTemperature": 5600,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 50
+    },
+    "panRange": 623,
+    "tiltRange": 295,
+    "power": 350
+  },
+  "channels": [
+    {
+      "key": "panCoarse",
+      "name": "Pan coarse",
+      "attribute": "pan",
+      "defaultValue": 128
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "panCoarse"
+    },
+    {
+      "key": "tiltCoarse",
+      "name": "Tilt coarse",
+      "attribute": "tilt",
+      "defaultValue": 128
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tiltCoarse"
+    },
+    {
+      "key": "colorFixed",
+      "name": "Color (fixed)",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Colors adjustable via RGBW" },
+        { "from": 8, "to": 15, "label": "Color 01 - Red", "kind": "color", "color": "#ff0000" },
+        { "from": 16, "to": 23, "label": "Color 02 - Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 24, "to": 31, "label": "Color 03 - Warm Yellow", "kind": "color", "color": "#ffde63" },
+        { "from": 32, "to": 39, "label": "Color 04 - Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 40, "to": 47, "label": "Color 05 - Green", "kind": "color", "color": "#00ff00" },
+        { "from": 48, "to": 55, "label": "Color 06 - Turquoise", "kind": "color", "color": "#42eadd" },
+        { "from": 56, "to": 63, "label": "Color 07 - Cyan", "kind": "color", "color": "#55ffff" },
+        { "from": 64, "to": 71, "label": "Color 08 - Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 72, "to": 79, "label": "Color 09 - Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 80, "to": 87, "label": "Color 10 - Malve (Mauve)", "kind": "color", "color": "#9f7694" },
+        { "from": 88, "to": 95, "label": "Color 11 - Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 96, "to": 103, "label": "Color 12 - Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 104, "to": 111, "label": "White - CTO 3200K", "kind": "color", "color": "#fffaf2" },
+        { "from": 112, "to": 119, "label": "White 5600K", "kind": "color", "color": "#ffffff" },
+        { "from": 120, "to": 127, "label": "White - CTB 7200K", "kind": "color", "color": "#f3fbff" },
+        { "from": 128, "to": 128, "label": "Rainbow Effect Stop" },
+        { "from": 129, "to": 223, "label": "Rainbow Effect slow - fast", "kind": "gobo" },
+        { "from": 224, "to": 255, "label": "Random colors slow - fast" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "Shutter closed", "kind": "closed" },
+        { "from": 16, "to": 47, "label": "Random shutter pulse slow > fast", "kind": "pulse" },
+        { "from": 48, "to": 79, "label": "Up-dimming then Shutter closing (random patterns) slow > fast", "kind": "strobe" },
+        { "from": 80, "to": 111, "label": "Shutter open then down-dimming (random patterns) slow > fast", "kind": "strobe" },
+        { "from": 112, "to": 143, "label": "Up-dimming then down-dimming (random patterns) slow > fast", "kind": "strobe" },
+        { "from": 144, "to": 159, "label": "No function" },
+        { "from": 160, "to": 199, "label": "Strobe effect pause - 5s > 1s", "kind": "strobe" },
+        { "from": 200, "to": 239, "label": "Strobe effect slow > fast - 1 Hz > 10 Hz", "kind": "strobe" },
+        { "from": 240, "to": 249, "label": "Shutter open", "kind": "open" },
+        { "from": 250, "to": 255, "label": "Shutter open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "cto",
+      "name": "CTO",
+      "attribute": "colorTemperature",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No CTO" },
+        { "from": 8, "to": 255, "label": "Continuous color temperature correction (ALL colors)" }
+      ]
+    },
+    {
+      "key": "special",
+      "name": "Special",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Pattern Block 1 -> channel 17" },
+        { "from": 4, "to": 7, "label": "Pattern Block 2 -> channel 17" },
+        { "from": 8, "to": 99, "label": "No function" },
+        { "from": 100, "to": 149, "label": "PWM lower 582 Hz > 600 Hz", "kind": "reset" },
+        { "from": 150, "to": 150, "label": "PWM (default) 600 Hz" },
+        { "from": 151, "to": 200, "label": "PWM higher 600 Hz > 618 Hz" },
+        { "from": 201, "to": 249, "label": "No function" },
+        { "from": 250, "to": 255, "label": "RESET" }
+      ]
+    },
+    {
+      "key": "speedPanTilt",
+      "name": "Speed Pan / Tilt",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 1, "label": "Pan / Tilt movement speed from controller" },
+        { "from": 2, "to": 255, "label": "Pan / Tilt (slow - fast)" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "movementMacros",
+      "name": "Movement macros",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No macros" },
+        { "from": 1, "to": 1, "label": "PAN Size=1 Phase=0" },
+        { "from": 2, "to": 3, "label": "PAN Size=1 Phase=90" },
+        { "from": 4, "to": 5, "label": "PAN Size=1 Phase=180" },
+        { "from": 6, "to": 7, "label": "PAN Size=1 Phase=270" },
+        { "from": 8, "to": 9, "label": "PAN Size=2 Phase=0" },
+        { "from": 10, "to": 11, "label": "PAN Size=2 Phase=90" },
+        { "from": 12, "to": 13, "label": "PAN Size=2 Phase=180" },
+        { "from": 14, "to": 15, "label": "PAN Size=2 Phase=270" },
+        { "from": 16, "to": 17, "label": "PAN Size=3 Phase=0" },
+        { "from": 18, "to": 19, "label": "PAN Size=3 Phase=90" },
+        { "from": 20, "to": 21, "label": "PAN Size=3 Phase=180" },
+        { "from": 22, "to": 23, "label": "PAN Size=3 Phase=270" },
+        { "from": 24, "to": 25, "label": "PAN Size=4 Phase=0" },
+        { "from": 26, "to": 27, "label": "PAN Size=4 Phase=90" },
+        { "from": 28, "to": 29, "label": "PAN Size=4 Phase=180" },
+        { "from": 30, "to": 31, "label": "PAN Size=4 Phase=270" },
+        { "from": 32, "to": 33, "label": "TILT Size=1 Phase=0" },
+        { "from": 34, "to": 35, "label": "TILT Size=1 Phase=90" },
+        { "from": 36, "to": 37, "label": "TILT Size=1 Phase=180" },
+        { "from": 38, "to": 39, "label": "TILT Size=1 Phase=270" },
+        { "from": 40, "to": 41, "label": "TILT Size=2 Phase=0" },
+        { "from": 42, "to": 43, "label": "TILT Size=2 Phase=90" },
+        { "from": 44, "to": 45, "label": "TILT Size=2 Phase=180" },
+        { "from": 46, "to": 47, "label": "TILT Size=2 Phase=270" },
+        { "from": 48, "to": 49, "label": "TILT Size=3 Phase=0" },
+        { "from": 50, "to": 51, "label": "TILT Size=3 Phase=90" },
+        { "from": 52, "to": 53, "label": "TILT Size=3 Phase=180" },
+        { "from": 54, "to": 55, "label": "TILT Size=3 Phase=270" },
+        { "from": 56, "to": 57, "label": "TILT Size=4 Phase=0" },
+        { "from": 58, "to": 59, "label": "TILT Size=4 Phase=90" },
+        { "from": 60, "to": 61, "label": "TILT Size=4 Phase=180" },
+        { "from": 62, "to": 63, "label": "TILT Size=4 Phase=270" },
+        { "from": 64, "to": 65, "label": "PAN/TILT Size=1 Phase=0" },
+        { "from": 66, "to": 67, "label": "PAN/TILT Size=1 Phase=90" },
+        { "from": 68, "to": 69, "label": "PAN/TILT Size=1 Phase=180" },
+        { "from": 70, "to": 71, "label": "PAN/TILT Size=1 Phase=270" },
+        { "from": 72, "to": 73, "label": "PAN/TILT Size=2 Phase=0" },
+        { "from": 74, "to": 75, "label": "PAN/TILT Size=2 Phase=90" },
+        { "from": 76, "to": 77, "label": "PAN/TILT Size=2 Phase=180" },
+        { "from": 78, "to": 79, "label": "PAN/TILT Size=2 Phase=270" },
+        { "from": 80, "to": 81, "label": "PAN/TILT Size=3 Phase=0" },
+        { "from": 82, "to": 83, "label": "PAN/TILT Size=3 Phase=90" },
+        { "from": 84, "to": 85, "label": "PAN/TILT Size=3 Phase=180" },
+        { "from": 86, "to": 87, "label": "PAN/TILT Size=3 Phase=270" },
+        { "from": 88, "to": 89, "label": "PAN/TILT Size=4 Phase=0" },
+        { "from": 90, "to": 91, "label": "PAN/TILT Size=4 Phase=90" },
+        { "from": 92, "to": 93, "label": "PAN/TILT Size=4 Phase=180" },
+        { "from": 94, "to": 95, "label": "PAN/TILT Size=4 Phase=270" },
+        { "from": 96, "to": 97, "label": "PAN/TILT inverse Size=1 Phase=0" },
+        { "from": 98, "to": 99, "label": "PAN/TILT inverse Size=1 Phase=90" },
+        { "from": 100, "to": 101, "label": "PAN/TILT inverse Size=1 Phase=180" },
+        { "from": 102, "to": 103, "label": "PAN/TILT inverse Size=1 Phase=270" },
+        { "from": 104, "to": 105, "label": "PAN/TILT inverse Size=2 Phase=0" },
+        { "from": 106, "to": 107, "label": "PAN/TILT inverse Size=2 Phase=90" },
+        { "from": 108, "to": 109, "label": "PAN/TILT inverse Size=2 Phase=180" },
+        { "from": 110, "to": 111, "label": "PAN/TILT inverse Size=2 Phase=270" },
+        { "from": 112, "to": 113, "label": "PAN/TILT inverse Size=3 Phase=0" },
+        { "from": 114, "to": 115, "label": "PAN/TILT inverse Size=3 Phase=90" },
+        { "from": 116, "to": 117, "label": "PAN/TILT inverse Size=3 Phase=180" },
+        { "from": 118, "to": 119, "label": "PAN/TILT inverse Size=3 Phase=270" },
+        { "from": 120, "to": 121, "label": "PAN/TILT inverse Size=4 Phase=0" },
+        { "from": 122, "to": 123, "label": "PAN/TILT inverse Size=4 Phase=90" },
+        { "from": 124, "to": 125, "label": "PAN/TILT inverse Size=4 Phase=180" },
+        { "from": 126, "to": 127, "label": "PAN/TILT inverse Size=4 Phase=270" },
+        { "from": 128, "to": 129, "label": "CIRCLE Size=1 Phase=0" },
+        { "from": 130, "to": 131, "label": "CIRCLE Size=1 Phase=90" },
+        { "from": 132, "to": 133, "label": "CIRCLE Size=1 Phase=180" },
+        { "from": 134, "to": 135, "label": "CIRCLE Size=1 Phase=270" },
+        { "from": 136, "to": 137, "label": "CIRCLE Size=2 Phase=0" },
+        { "from": 138, "to": 139, "label": "CIRCLE Size=2 Phase=90" },
+        { "from": 140, "to": 141, "label": "CIRCLE Size=2 Phase=180" },
+        { "from": 142, "to": 143, "label": "CIRCLE Size=2 Phase=270" },
+        { "from": 144, "to": 145, "label": "CIRCLE Size=3 Phase=0" },
+        { "from": 146, "to": 147, "label": "CIRCLE Size=3 Phase=90" },
+        { "from": 148, "to": 149, "label": "CIRCLE Size=3 Phase=180" },
+        { "from": 150, "to": 151, "label": "CIRCLE Size=3 Phase=270" },
+        { "from": 152, "to": 153, "label": "CIRCLE Size=4 Phase=0" },
+        { "from": 154, "to": 155, "label": "CIRCLE Size=4 Phase=90" },
+        { "from": 156, "to": 157, "label": "CIRCLE Size=4 Phase=180" },
+        { "from": 158, "to": 159, "label": "CIRCLE Size=4 Phase=270" },
+        { "from": 160, "to": 161, "label": "CIRCLE inverse Size=1 Phase=0" },
+        { "from": 162, "to": 163, "label": "CIRCLE inverse Size=1 Phase=90" },
+        { "from": 164, "to": 165, "label": "CIRCLE inverse Size=1 Phase=180" },
+        { "from": 166, "to": 167, "label": "CIRCLE inverse Size=1 Phase=270" },
+        { "from": 168, "to": 169, "label": "CIRCLE inverse Size=2 Phase=0" },
+        { "from": 170, "to": 171, "label": "CIRCLE inverse Size=2 Phase=90" },
+        { "from": 172, "to": 173, "label": "CIRCLE inverse Size=2 Phase=180" },
+        { "from": 174, "to": 175, "label": "CIRCLE inverse Size=2 Phase=270" },
+        { "from": 176, "to": 177, "label": "CIRCLE inverse Size=3 Phase=0" },
+        { "from": 178, "to": 179, "label": "CIRCLE inverse Size=3 Phase=90" },
+        { "from": 180, "to": 181, "label": "CIRCLE inverse Size=3 Phase=180" },
+        { "from": 182, "to": 183, "label": "CIRCLE inverse Size=3 Phase=270" },
+        { "from": 184, "to": 185, "label": "CIRCLE inverse Size=4 Phase=0" },
+        { "from": 186, "to": 187, "label": "CIRCLE inverse Size=4 Phase=90" },
+        { "from": 188, "to": 189, "label": "CIRCLE inverse Size=4 Phase=180" },
+        { "from": 190, "to": 191, "label": "CIRCLE inverse Size=4 Phase=270" },
+        { "from": 192, "to": 193, "label": "LYING EIGHT Size=1 Phase=0" },
+        { "from": 194, "to": 195, "label": "LYING EIGHT Size=1 Phase=90" },
+        { "from": 196, "to": 197, "label": "LYING EIGHT Size=1 Phase=180" },
+        { "from": 198, "to": 199, "label": "LYING EIGHT Size=1 Phase=270" },
+        { "from": 200, "to": 201, "label": "LYING EIGHT Size=2 Phase=0" },
+        { "from": 202, "to": 203, "label": "LYING EIGHT Size=2 Phase=90" },
+        { "from": 204, "to": 205, "label": "LYING EIGHT Size=2 Phase=180" },
+        { "from": 206, "to": 207, "label": "LYING EIGHT Size=2 Phase=270" },
+        { "from": 208, "to": 209, "label": "LYING EIGHT Size=3 Phase=0" },
+        { "from": 210, "to": 211, "label": "LYING EIGHT Size=3 Phase=90" },
+        { "from": 212, "to": 213, "label": "LYING EIGHT Size=3 Phase=180" },
+        { "from": 214, "to": 215, "label": "LYING EIGHT Size=3 Phase=270" },
+        { "from": 216, "to": 217, "label": "LYING EIGHT Size=4 Phase=0" },
+        { "from": 218, "to": 219, "label": "LYING EIGHT Size=4 Phase=90" },
+        { "from": 220, "to": 221, "label": "LYING EIGHT Size=4 Phase=180" },
+        { "from": 222, "to": 223, "label": "LYING EIGHT Size=4 Phase=270" },
+        { "from": 224, "to": 225, "label": "RANDOM Size=1 Phase=0" },
+        { "from": 226, "to": 227, "label": "RANDOM Size=1 Phase=90" },
+        { "from": 228, "to": 229, "label": "RANDOM Size=1 Phase=180" },
+        { "from": 230, "to": 231, "label": "RANDOM Size=1 Phase=270" },
+        { "from": 232, "to": 233, "label": "RANDOM Size=2 Phase=0" },
+        { "from": 234, "to": 235, "label": "RANDOM Size=2 Phase=90" },
+        { "from": 236, "to": 237, "label": "RANDOM Size=2 Phase=180" },
+        { "from": 238, "to": 239, "label": "RANDOM Size=2 Phase=270" },
+        { "from": 240, "to": 241, "label": "RANDOM Size=3 Phase=0" },
+        { "from": 242, "to": 243, "label": "RANDOM Size=3 Phase=90" },
+        { "from": 244, "to": 245, "label": "RANDOM Size=3 Phase=180" },
+        { "from": 246, "to": 247, "label": "RANDOM Size=3 Phase=270" },
+        { "from": 248, "to": 249, "label": "RANDOM Size=4 Phase=0" },
+        { "from": 250, "to": 251, "label": "RANDOM Size=4 Phase=90" },
+        { "from": 252, "to": 253, "label": "RANDOM Size=4 Phase=180" },
+        { "from": 254, "to": 255, "label": "RANDOM Size=4 Phase=270" }
+      ]
+    },
+    {
+      "key": "pattern",
+      "name": "Pattern",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "No pattern" },
+        { "from": 3, "to": 253, "label": "250 pre-defined patterns" },
+        { "from": 254, "to": 255, "label": "Activate direct access to LED pattern" }
+      ]
+    },
+    {
+      "key": "patternByte1",
+      "name": "Pattern Byte 1",
+      "attribute": "effect"
+    },
+    {
+      "key": "redFine",
+      "name": "Red fine",
+      "attribute": "red",
+      "fineOf": "red"
+    },
+    {
+      "key": "greenFine",
+      "name": "Green fine",
+      "attribute": "green",
+      "fineOf": "green"
+    },
+    {
+      "key": "blueFine",
+      "name": "Blue fine",
+      "attribute": "blue",
+      "fineOf": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFine",
+      "name": "White fine",
+      "attribute": "white",
+      "fineOf": "white"
+    },
+    {
+      "key": "patternCompressMode",
+      "name": "Pattern (Compress-Mode)",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "No pattern" },
+        { "from": 3, "to": 253, "label": "Pre-defined patterns" },
+        { "from": 254, "to": 255, "label": "Direct pattern access" }
+      ]
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "zoomExtendedMode",
+      "name": "Zoom (Extended Mode)",
+      "attribute": "zoom"
+    },
+    {
+      "key": "patternByte2",
+      "name": "Pattern Byte 2",
+      "attribute": "effect"
+    },
+    {
+      "key": "patternByte3",
+      "name": "Pattern Byte 3",
+      "attribute": "effect"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Normal",
+      "channels": [
+        "panCoarse",
+        "panFine",
+        "tiltCoarse",
+        "tiltFine",
+        "colorFixed",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "shutter",
+        "dimmer",
+        "cto",
+        "special",
+        "movementMacros",
+        "speedPanTilt",
+        "zoom",
+        "pattern",
+        "patternByte1",
+        "patternByte2",
+        "patternByte3"
+      ]
+    },
+    {
+      "name": "Compress",
+      "channels": [
+        "panCoarse",
+        "panFine",
+        "tiltCoarse",
+        "tiltFine",
+        "colorFixed",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "shutter",
+        "dimmer",
+        "zoom",
+        "special",
+        "patternCompressMode"
+      ]
+    },
+    {
+      "name": "Extended",
+      "channels": [
+        "panCoarse",
+        "panFine",
+        "tiltCoarse",
+        "tiltFine",
+        "red",
+        "redFine",
+        "green",
+        "greenFine",
+        "blue",
+        "blueFine",
+        "white",
+        "whiteFine",
+        "shutter",
+        "dimmer",
+        "dimmerFine",
+        "zoomExtendedMode",
+        "special",
+        "pattern",
+        "patternByte1",
+        "patternByte2",
+        "patternByte3"
+      ]
+    }
+  ]
+}

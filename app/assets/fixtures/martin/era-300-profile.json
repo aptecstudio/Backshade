@@ -1,0 +1,262 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Martin",
+  "model": "ERA 300 Profile",
+  "category": "movingHead",
+  "physical": {
+    "width": 375,
+    "height": 564,
+    "depth": 217,
+    "weight": 17,
+    "lumens": 9500,
+    "colorTemperature": 6500,
+    "source": "LED",
+    "beamAngle": {
+      "min": 13,
+      "max": 28
+    },
+    "panRange": 540,
+    "tiltRange": 260,
+    "power": 362
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "cyan",
+      "name": "Cyan",
+      "attribute": "cyan"
+    },
+    {
+      "key": "magenta",
+      "name": "Magenta",
+      "attribute": "magenta"
+    },
+    {
+      "key": "yellow",
+      "name": "Yellow",
+      "attribute": "yellow"
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 6, "label": "Open" },
+        { "from": 7, "to": 12, "label": "Slot 1: Light Blue", "kind": "color", "color": "#00aaff" },
+        { "from": 13, "to": 18, "label": "Slot 2: Dark Green", "kind": "color", "color": "#005500" },
+        { "from": 19, "to": 25, "label": "Slot 3: Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 26, "to": 31, "label": "Slot 4: Orange", "kind": "color", "color": "#ffaa00" },
+        { "from": 32, "to": 37, "label": "Slot 5: Light Green", "kind": "color", "color": "#aaff00" },
+        { "from": 38, "to": 44, "label": "Slot 6: Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 45, "to": 50, "label": "Slot 7: Light Yellow", "kind": "color", "color": "#ffff7f" },
+        { "from": 51, "to": 56, "label": "Slot 8: Dark Blue", "kind": "color", "color": "#00007f" },
+        { "from": 57, "to": 63, "label": "Slot 9: Dark Red", "kind": "color", "color": "#aa0000" },
+        { "from": 64, "to": 127, "label": "Color Index" },
+        { "from": 128, "to": 190, "label": "Fast->Slow" },
+        { "from": 191, "to": 192, "label": "Stop" },
+        { "from": 193, "to": 255, "label": "Slow->Fast" }
+      ]
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "defaultValue": 255,
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "Blackout", "kind": "closed" },
+        { "from": 20, "to": 24, "label": "Shutter Open", "kind": "open" },
+        { "from": 25, "to": 64, "label": "Strobe 1: fast -> slow", "kind": "strobe" },
+        { "from": 65, "to": 69, "label": "Shutter Open", "kind": "open" },
+        { "from": 70, "to": 84, "label": "Strobe 2: opening pulse, fast -> slow", "kind": "pulse" },
+        { "from": 85, "to": 89, "label": "Shutter Open", "kind": "open" },
+        { "from": 90, "to": 104, "label": "Strobe 3: closing pulse, fast -> slow", "kind": "pulse" },
+        { "from": 105, "to": 109, "label": "Shutter Open", "kind": "open" },
+        { "from": 110, "to": 124, "label": "Strobe 4: random strobe, fast -> slow", "kind": "strobe" },
+        { "from": 125, "to": 129, "label": "Shutter Open", "kind": "open" },
+        { "from": 130, "to": 144, "label": "Strobe 5:random opening pulse, fast -> slow", "kind": "strobe" },
+        { "from": 145, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "gobo1Rotating",
+      "name": "Gobo 1 (rotating)",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open", "kind": "gobo" },
+        { "from": 8, "to": 15, "label": "Gobo1", "kind": "gobo" },
+        { "from": 16, "to": 23, "label": "Gobo2" },
+        { "from": 24, "to": 31, "label": "Gobo3" },
+        { "from": 32, "to": 39, "label": "Gobo4" },
+        { "from": 40, "to": 47, "label": "Gobo5" },
+        { "from": 48, "to": 55, "label": "Gobo6" },
+        { "from": 56, "to": 63, "label": "Gobo7" },
+        { "from": 64, "to": 72, "label": "Gobo1 Shaking", "kind": "gobo" },
+        { "from": 73, "to": 81, "label": "Gobo2 Shaking" },
+        { "from": 82, "to": 90, "label": "Gobo3 Shaking" },
+        { "from": 91, "to": 99, "label": "Gobo4 Shaking" },
+        { "from": 100, "to": 108, "label": "Gobo5 Shaking" },
+        { "from": 109, "to": 117, "label": "Gobo6 Shaking" },
+        { "from": 118, "to": 127, "label": "Gobo7 Shaking" },
+        { "from": 128, "to": 190, "label": "Fast->Slow" },
+        { "from": 191, "to": 192, "label": "Stop" },
+        { "from": 193, "to": 255, "label": "Slow->Fast" }
+      ]
+    },
+    {
+      "key": "gobo2Rotating",
+      "name": "Gobo 2 (rotating)",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open" },
+        { "from": 8, "to": 15, "label": "Gobo1" },
+        { "from": 16, "to": 23, "label": "Gobo2" },
+        { "from": 24, "to": 31, "label": "Gobo3" },
+        { "from": 32, "to": 39, "label": "Gobo4" },
+        { "from": 40, "to": 47, "label": "Gobo5" },
+        { "from": 48, "to": 55, "label": "Gobo6" },
+        { "from": 56, "to": 63, "label": "Gobo7" },
+        { "from": 64, "to": 72, "label": "Gobo1 Shaking" },
+        { "from": 73, "to": 81, "label": "Gobo2 Shaking" },
+        { "from": 82, "to": 90, "label": "Gobo3 Shaking" },
+        { "from": 91, "to": 99, "label": "Gobo4 Shaking" },
+        { "from": 100, "to": 108, "label": "Gobo5 Shaking" },
+        { "from": 109, "to": 117, "label": "Gobo6 Shaking" },
+        { "from": 118, "to": 127, "label": "Gobo7 Shaking" },
+        { "from": 128, "to": 190, "label": "Fast->Slow" },
+        { "from": 191, "to": 192, "label": "Stop" },
+        { "from": 193, "to": 255, "label": "Slow->Fast" }
+      ]
+    },
+    {
+      "key": "rotateGobo1",
+      "name": "Rotate Gobo 1",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Index 0 -> 360" },
+        { "from": 128, "to": 190, "label": "Fast->Slow" },
+        { "from": 191, "to": 192, "label": "Stop" },
+        { "from": 193, "to": 255, "label": "Slow->Fast" }
+      ]
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No Effect", "kind": "open" },
+        { "from": 11, "to": 127, "label": "Prism1 On", "kind": "prism" },
+        { "from": 128, "to": 255, "label": "Prism1 Macro1 - Macro32" }
+      ]
+    },
+    {
+      "key": "prismRotation",
+      "name": "Prism rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Index 0 -> 360", "kind": "index" },
+        { "from": 128, "to": 190, "label": "Fast->Slow", "kind": "rotation" },
+        { "from": 191, "to": 192, "label": "Stop", "kind": "stop" },
+        { "from": 193, "to": 255, "label": "Slow->Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "iris",
+      "name": "Iris",
+      "attribute": "iris"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "specialFunction",
+      "name": "Special Function",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 69, "label": "No Effect" },
+        { "from": 70, "to": 79, "label": "BlackOut Pan/Tilt Move Enable" },
+        { "from": 80, "to": 89, "label": "BlackOut Pan/Tilt Move Disable" },
+        { "from": 90, "to": 99, "label": "BlackOut Color Move Enable" },
+        { "from": 100, "to": 109, "label": "BlackOut Color Move Disable" },
+        { "from": 110, "to": 119, "label": "BlackOut Gobo Move Enable" },
+        { "from": 120, "to": 129, "label": "BlackOut Gobo Move Disable" },
+        { "from": 130, "to": 199, "label": "No function" },
+        { "from": 200, "to": 209, "label": "Reset All" },
+        { "from": 210, "to": 219, "label": "Reset Effect", "kind": "open" },
+        { "from": 220, "to": 229, "label": "Reset Pan/Tilt" },
+        { "from": 230, "to": 255, "label": "No Effect" }
+      ]
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "21 Channel",
+      "channels": [
+        "shutter",
+        "dimmer",
+        "dimmerFine",
+        "cyan",
+        "magenta",
+        "yellow",
+        "color",
+        "gobo1Rotating",
+        "rotateGobo1",
+        "gobo2Rotating",
+        "prism",
+        "prismRotation",
+        "iris",
+        "zoom",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "specialFunction"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ETC",
+  "model": "ColorSource PAR",
+  "category": "par",
+  "physical": {
+    "width": 203,
+    "height": 310,
+    "depth": 240,
+    "weight": 3.77,
+    "source": "LED",
+    "power": 120
+  },
+  "channels": [
+    {
+      "key": "intensity",
+      "name": "Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "lime",
+      "name": "Lime",
+      "attribute": "lime"
+    },
+    {
+      "key": "intensityOfPreset1",
+      "name": "Intensity of preset 1",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "5-channel",
+      "channels": [
+        "intensity",
+        "red",
+        "green",
+        "blue",
+        "strobe"
+      ]
+    },
+    {
+      "name": "6-channel (direct)",
+      "channels": [
+        "intensity",
+        "red",
+        "green",
+        "blue",
+        "lime",
+        "strobe"
+      ]
+    },
+    {
+      "name": "1-channel",
+      "channels": [
+        "intensityOfPreset1"
+      ]
+    },
+    {
+      "name": "3-channel (RGB)",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Inno Pocket Wash",
+  "category": "movingHead",
+  "physical": {
+    "width": 171,
+    "height": 214,
+    "depth": 149,
+    "weight": 7.2,
+    "source": "LED",
+    "beamAngle": {
+      "min": 28,
+      "max": 28
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 65
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "red1",
+      "name": "Red 1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "white1",
+      "name": "White 1",
+      "attribute": "white"
+    },
+    {
+      "key": "red2",
+      "name": "Red 2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "white2",
+      "name": "White 2",
+      "attribute": "white"
+    },
+    {
+      "key": "shutterStobe",
+      "name": "Shutter/Stobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Closed", "kind": "closed" },
+        { "from": 8, "to": 15, "label": "Open", "kind": "open" },
+        { "from": 16, "to": 131, "label": "Strobe slow < fast", "kind": "strobe" },
+        { "from": 132, "to": 139, "label": "Open", "kind": "open" },
+        { "from": 140, "to": 181, "label": "Slow open - Fast close" },
+        { "from": 182, "to": 189, "label": "Open", "kind": "open" },
+        { "from": 190, "to": 231, "label": "Fast open - Slow close" },
+        { "from": 232, "to": 239, "label": "Open", "kind": "open" },
+        { "from": 240, "to": 247, "label": "Random Strobe", "kind": "strobe" },
+        { "from": 248, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "programs",
+      "name": "Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Normal" },
+        { "from": 8, "to": 127, "label": "32 Color macros" },
+        { "from": 128, "to": 191, "label": "Color change" },
+        { "from": 192, "to": 255, "label": "Color fade" }
+      ]
+    },
+    {
+      "key": "programSpeed",
+      "name": "Program speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "panTiltMacros",
+      "name": "Pan/Tilt Macros",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 35, "label": "Macro 1" },
+        { "from": 36, "to": 55, "label": "Macro 2" },
+        { "from": 56, "to": 75, "label": "Macro 3" },
+        { "from": 76, "to": 115, "label": "Macro 4" },
+        { "from": 116, "to": 135, "label": "Macro 5" },
+        { "from": 136, "to": 155, "label": "Macro 6" },
+        { "from": 156, "to": 175, "label": "Macro 7" },
+        { "from": 176, "to": 195, "label": "Macro 8" },
+        { "from": 196, "to": 215, "label": "Macro 9" },
+        { "from": 216, "to": 235, "label": "Macro 10" },
+        { "from": 236, "to": 255, "label": "Macro 11" }
+      ]
+    },
+    {
+      "key": "panTiltMacrosSpeed",
+      "name": "Pan/Tilt Macros speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "panTiltMovementSpeed",
+      "name": "Pan/Tilt Movement speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "specialFunctions",
+      "name": "Special Functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 69, "label": "No function" },
+        { "from": 70, "to": 79, "label": "Blackout W/Pan/Tilt movement" },
+        { "from": 80, "to": 89, "label": "No function" },
+        { "from": 90, "to": 99, "label": "Blackout when RGBW values change" },
+        { "from": 100, "to": 199, "label": "No function" },
+        { "from": 200, "to": 209, "label": "Reset All", "kind": "reset" },
+        { "from": 210, "to": 249, "label": "No function" },
+        { "from": 250, "to": 255, "label": "Sound Active" }
+      ]
+    },
+    {
+      "key": "dimmerCurves",
+      "name": "Dimmer curves",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Standard" },
+        { "from": 21, "to": 40, "label": "Stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "Architectural" },
+        { "from": 81, "to": 100, "label": "Theatre" },
+        { "from": 101, "to": 255, "label": "Default" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "21 Channel Mode",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "shutterStobe",
+        "dimmer",
+        "programs",
+        "programSpeed",
+        "panTiltMacros",
+        "panTiltMacrosSpeed",
+        "panTiltMovementSpeed",
+        "specialFunctions",
+        "dimmerCurves"
+      ],
+      "heads": [
+        [
+          "white1",
+          "blue1",
+          "green1",
+          "red1"
+        ],
+        [
+          "white2",
+          "blue2",
+          "green2",
+          "red2"
+        ]
+      ]
+    },
+    {
+      "name": "19 Channel Mode",
+      "channels": [
+        "pan",
+        "tilt",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "red2",
+        "green2",
+        "blue2",
+        "white2",
+        "shutterStobe",
+        "dimmer",
+        "programs",
+        "programSpeed",
+        "panTiltMacros",
+        "panTiltMacrosSpeed",
+        "panTiltMovementSpeed",
+        "specialFunctions",
+        "dimmerCurves"
+      ],
+      "heads": [
+        [
+          "green1",
+          "red1",
+          "white1",
+          "blue1"
+        ],
+        [
+          "green2",
+          "red2",
+          "white2",
+          "blue2"
+        ]
+      ]
+    },
+    {
+      "name": "11 Channel Mode",
+      "channels": [
+        "pan",
+        "tilt",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "shutterStobe",
+        "dimmer",
+        "panTiltMacrosSpeed",
+        "specialFunctions",
+        "dimmerCurves"
+      ]
+    },
+    {
+      "name": "9 Channel Mode",
+      "channels": [
+        "pan",
+        "tilt",
+        "red1",
+        "green1",
+        "blue1",
+        "white1",
+        "shutterStobe",
+        "dimmer",
+        "specialFunctions"
+      ]
+    }
+  ]
+}

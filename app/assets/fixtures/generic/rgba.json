@@ -1,0 +1,39 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "RGBA",
+  "category": "par",
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    }
+  ],
+  "modes": [
+    {
+      "name": "4 channels",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "amber"
+      ]
+    }
+  ]
+}

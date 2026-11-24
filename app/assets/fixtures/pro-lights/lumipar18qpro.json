@@ -1,0 +1,148 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Pro-Lights",
+  "model": "LumiPAR18QPRO",
+  "category": "par",
+  "physical": {
+    "width": 302,
+    "height": 239,
+    "depth": 259,
+    "weight": 5,
+    "lumens": 3000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 33,
+      "max": 33
+    },
+    "power": 200
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 30, "label": "R:100%/G:100%/B:0%" },
+        { "from": 31, "to": 50, "label": "R:0-100%/G:100%/B:0%" },
+        { "from": 51, "to": 70, "label": "R:0%/G:100%/B:0-100%" },
+        { "from": 71, "to": 90, "label": "R:0%/G:100-0%/B:100%" },
+        { "from": 91, "to": 110, "label": "R:0-100%/G:0%/B:100%" },
+        { "from": 111, "to": 130, "label": "R:100%/G:0%/B:100-0%" },
+        { "from": 131, "to": 150, "label": "R:100%/G:0-100%/B:0-100%" },
+        { "from": 151, "to": 170, "label": "R:100-0%/G:100-0%/B:100%" },
+        { "from": 171, "to": 200, "label": "R:100%/G:100%/B:100%" },
+        { "from": 201, "to": 205, "label": "Color Temp 1" },
+        { "from": 206, "to": 210, "label": "Color Temp 2" },
+        { "from": 211, "to": 215, "label": "Color Temp 3" },
+        { "from": 216, "to": 220, "label": "Color Temp 4" },
+        { "from": 221, "to": 225, "label": "Color Temp 5" },
+        { "from": 226, "to": 230, "label": "Color Temp 6" },
+        { "from": 231, "to": 235, "label": "Color Temp 7" },
+        { "from": 236, "to": 240, "label": "Color Temp 8" },
+        { "from": 241, "to": 245, "label": "Color Temp 9" },
+        { "from": 246, "to": 250, "label": "Color Temp 10" },
+        { "from": 251, "to": 255, "label": "Color Temp 11" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No function" },
+        { "from": 10, "to": 255, "label": "1~20hz" }
+      ]
+    },
+    {
+      "key": "autoProgram",
+      "name": "Auto Program",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "No function" },
+        { "from": 52, "to": 101, "label": "Auto Program 1" },
+        { "from": 102, "to": 152, "label": "Auto Program 2" },
+        { "from": 153, "to": 203, "label": "Auto Program 3" },
+        { "from": 204, "to": 254, "label": "Auto Program 4" },
+        { "from": 255, "to": 255, "label": "Auto Program 5" }
+      ]
+    },
+    {
+      "key": "autoSpeedAdj",
+      "name": "Auto Speed Adj",
+      "attribute": "control"
+    },
+    {
+      "key": "dimmerSpeed",
+      "name": "Dimmer Speed",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "Build-in Dimmer" },
+        { "from": 52, "to": 152, "label": "Non-Lin Dimmer 1" },
+        { "from": 153, "to": 203, "label": "Non-Lin Dimmer 2" },
+        { "from": 204, "to": 255, "label": "Non-Lin Dimmer 3" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "10 Ch Mode",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorMacro",
+        "strobe",
+        "autoProgram",
+        "autoSpeedAdj",
+        "dimmerSpeed"
+      ]
+    },
+    {
+      "name": "5 Ch Mode",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "name": "4 Ch Mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    }
+  ]
+}

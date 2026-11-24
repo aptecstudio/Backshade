@@ -1,0 +1,125 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Cameo",
+  "model": "FLAT PRO 7",
+  "category": "par",
+  "physical": {
+    "width": 180,
+    "height": 180,
+    "depth": 133,
+    "weight": 3,
+    "source": "LED",
+    "beamAngle": {
+      "min": 30,
+      "max": 30
+    },
+    "power": 100
+  },
+  "channels": [
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 16, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 17, "to": 33, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 34, "to": 50, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 51, "to": 67, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 68, "to": 84, "label": "Amber", "kind": "color", "color": "#ffff7f" },
+        { "from": 85, "to": 101, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 102, "to": 118, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 119, "to": 135, "label": "Lavender", "kind": "color", "color": "#e6e6fa" },
+        { "from": 136, "to": 152, "label": "Pink", "kind": "color", "color": "#ffc0cb" },
+        { "from": 153, "to": 169, "label": "Light Green", "kind": "color", "color": "#90ee90" },
+        { "from": 170, "to": 186, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 187, "to": 203, "label": "Turquoise", "kind": "color", "color": "#40e0d0" },
+        { "from": 204, "to": 220, "label": "Orange", "kind": "color", "color": "#ffa500" },
+        { "from": 221, "to": 237, "label": "Cool White", "kind": "color", "color": "#d4ebff" },
+        { "from": 238, "to": 255, "label": "Warm White", "kind": "color", "color": "#ffff7f" }
+      ]
+    },
+    {
+      "key": "stroboscobe",
+      "name": "Stroboscobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    }
+  ],
+  "modes": [
+    {
+      "name": "2 Channel Macro",
+      "channels": [
+        "masterDimmer",
+        "colorMacros"
+      ]
+    },
+    {
+      "name": "3 Channel Macro",
+      "channels": [
+        "masterDimmer",
+        "stroboscobe",
+        "colorMacros"
+      ]
+    },
+    {
+      "name": "3 Channel RGB",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "5 Channel RGBWA",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber"
+      ]
+    },
+    {
+      "name": "8 Channel",
+      "channels": [
+        "masterDimmer",
+        "stroboscobe",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "colorMacros"
+      ]
+    }
+  ]
+}

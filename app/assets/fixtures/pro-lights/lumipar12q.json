@@ -1,0 +1,103 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Pro-Lights",
+  "model": "LumiPAR12Q",
+  "category": "par",
+  "physical": {
+    "width": 270,
+    "height": 205,
+    "depth": 210,
+    "weight": 2.4,
+    "lumens": 3000,
+    "source": "LED",
+    "beamAngle": {
+      "min": 34,
+      "max": 34
+    },
+    "power": 132
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 255, "label": "Color macros" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 255, "label": "Strobe Speed (Slow - Fast)" }
+      ]
+    },
+    {
+      "key": "mode",
+      "name": "Mode",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "No function" },
+        { "from": 32, "to": 63, "label": "Fading 0% - 100%" },
+        { "from": 64, "to": 95, "label": "Fading 100% - 0%" },
+        { "from": 96, "to": 127, "label": "Fading 100% - 0% - 100%" },
+        { "from": 128, "to": 159, "label": "Auto fading" },
+        { "from": 160, "to": 191, "label": "Auto RGBW 4 colors switching" },
+        { "from": 192, "to": 223, "label": "Auto 15 colors switching" },
+        { "from": 224, "to": 255, "label": "15 colors switching by sound" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "8 Ch Mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorMacros",
+        "strobe",
+        "mode",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "4 Ch Mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white"
+      ]
+    }
+  ]
+}

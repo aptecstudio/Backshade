@@ -1,0 +1,182 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Cameo",
+  "model": "Thunder Wash 100 RGB",
+  "category": "strobe",
+  "physical": {
+    "width": 310,
+    "height": 70,
+    "depth": 70,
+    "weight": 1,
+    "source": "LED",
+    "beamAngle": {
+      "min": 75,
+      "max": 75
+    },
+    "power": 35
+  },
+  "channels": [
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobeC",
+      "name": "Strobe C",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Shutter open (react to dimmer CH1)", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Shutter closed", "kind": "closed" },
+        { "from": 11, "to": 33, "label": "Pulse random slow...fast", "kind": "pulse" },
+        { "from": 34, "to": 56, "label": "Ramp up random slow...fast", "kind": "pulse" },
+        { "from": 57, "to": 79, "label": "Ramp down random slow...fast", "kind": "pulse" },
+        { "from": 80, "to": 102, "label": "Random strobe slow...fast", "kind": "strobe" },
+        { "from": 103, "to": 127, "label": "Strobe break effect 5...1s (very short flash)", "kind": "strobe" },
+        { "from": 128, "to": 250, "label": "Strobe 0...30Hz", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Shutter open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Color off", "kind": "color", "color": "#000000" },
+        { "from": 6, "to": 13, "label": "Red", "kind": "color", "color": "#fc0107" },
+        { "from": 14, "to": 21, "label": "Amber", "kind": "color", "color": "#fd8008" },
+        { "from": 22, "to": 29, "label": "Yellow Warm", "kind": "color", "color": "#fec409" },
+        { "from": 30, "to": 37, "label": "Yellow", "kind": "color", "color": "#ffff0a" },
+        { "from": 38, "to": 45, "label": "Green", "kind": "color", "color": "#21ff06" },
+        { "from": 46, "to": 53, "label": "Turqoise", "kind": "color", "color": "#1de183" },
+        { "from": 54, "to": 61, "label": "Cyan", "kind": "color", "color": "#20ffff" },
+        { "from": 62, "to": 69, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 70, "to": 77, "label": "Lavender", "kind": "color", "color": "#7100ff" },
+        { "from": 78, "to": 85, "label": "Mauve", "kind": "color", "color": "#a300ff" },
+        { "from": 86, "to": 93, "label": "Magente", "kind": "color", "color": "#fc02ff" },
+        { "from": 94, "to": 101, "label": "Pink", "kind": "color", "color": "#fc008c" },
+        { "from": 102, "to": 109, "label": "Warm White", "kind": "color", "color": "#fec8a2" },
+        { "from": 110, "to": 117, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 118, "to": 125, "label": "Cold White", "kind": "color", "color": "#dcf0ff" },
+        { "from": 126, "to": 128, "label": "Color Jumping Stop" },
+        { "from": 129, "to": 192, "label": "Color Jumping Speed slow -> fast / Color 1 -> 12" },
+        { "from": 193, "to": 255, "label": "Color Fading Speed slow -> fast / Color 1 -> 12" }
+      ]
+    },
+    {
+      "key": "sound",
+      "name": "Sound",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Sound Control OFF (Mic Sensitivity)" },
+        { "from": 6, "to": 255, "label": "Sound Control ON Low -> High (Mic Sensitivity)" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "duration",
+      "name": "Duration",
+      "attribute": "speed"
+    },
+    {
+      "key": "strobeB",
+      "name": "Strobe B",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Shutter open", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Shutter closed", "kind": "closed" },
+        { "from": 11, "to": 250, "label": "Strobe 0...30Hz", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Shutter open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "strobeA",
+      "name": "Strobe A",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "Shutter closed", "kind": "closed" },
+        { "from": 11, "to": 255, "label": "Strobe 0...30Hz", "kind": "strobe" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "1-CH",
+      "channels": [
+        "strobeA"
+      ]
+    },
+    {
+      "name": "2-CH option 1",
+      "channels": [
+        "masterDimmer",
+        "colorMacro"
+      ]
+    },
+    {
+      "name": "2-CH option 2",
+      "channels": [
+        "masterDimmer",
+        "strobeB"
+      ]
+    },
+    {
+      "name": "3-CH option 1",
+      "channels": [
+        "masterDimmer",
+        "strobeB",
+        "duration"
+      ]
+    },
+    {
+      "name": "3-CH option 2",
+      "channels": [
+        "masterDimmer",
+        "strobeB",
+        "colorMacro"
+      ]
+    },
+    {
+      "name": "3-CH option 3",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "4-CH",
+      "channels": [
+        "masterDimmer",
+        "strobeC",
+        "colorMacro",
+        "sound"
+      ]
+    },
+    {
+      "name": "6-CH",
+      "channels": [
+        "masterDimmer",
+        "strobeC",
+        "red",
+        "green",
+        "blue",
+        "sound"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1443 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Ayrton",
+  "model": "MagicPanel 602",
+  "category": "movingHead",
+  "physical": {
+    "width": 420,
+    "height": 545,
+    "depth": 370,
+    "weight": 18.2,
+    "lumens": 15000,
+    "colorTemperature": 6500,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7.5,
+      "max": 7.5
+    },
+    "panRange": 630,
+    "tiltRange": 540,
+    "power": 600
+  },
+  "channels": [
+    {
+      "key": "panMovement",
+      "name": "Pan Movement",
+      "attribute": "pan"
+    },
+    {
+      "key": "tiltMovement",
+      "name": "Tilt Movement",
+      "attribute": "tilt"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "panMovement"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tiltMovement"
+    },
+    {
+      "key": "speedPanTilt",
+      "name": "Speed PAN / TILT",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 225, "label": "max to min" },
+        { "from": 226, "to": 236, "label": "Blackout by movement" },
+        { "from": 237, "to": 255, "label": "no function" }
+      ]
+    },
+    {
+      "key": "panMotorContinuousRotation",
+      "name": "PAN Motor continuous rotation",
+      "attribute": "pan",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "no function" },
+        { "from": 128, "to": 189, "label": "Forwards Pan rotation from fast to slow" },
+        { "from": 190, "to": 193, "label": "no function" },
+        { "from": 194, "to": 255, "label": "Backwards Pan rotation from slow to fast" }
+      ]
+    },
+    {
+      "key": "tiltMotorContinuousRotation",
+      "name": "TILT Motor continuous rotation",
+      "attribute": "tilt",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "no function" },
+        { "from": 128, "to": 189, "label": "Forwards Tilt rotation from fast to slow" },
+        { "from": 190, "to": 193, "label": "no function" },
+        { "from": 194, "to": 255, "label": "Backwards Tilt rotation from slow to fast" }
+      ]
+    },
+    {
+      "key": "redLedAllArrays",
+      "name": "Red LED -all arrays",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedAllArrays",
+      "name": "Green LED -all arrays",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedAllArrays",
+      "name": "Blue LED -all arrays",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedAllArrays",
+      "name": "White LED -all arrays",
+      "attribute": "white"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter, strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Led turn off", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Led turn on", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe effect slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Led turn on", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Pulse-effect in sequences", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Led turn on", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random strobe effect slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Led turn on", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmerIntensity",
+      "name": "Dimmer Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No function" },
+        { "from": 8, "to": 39, "label": "red to yellow" },
+        { "from": 40, "to": 71, "label": "yellow to green" },
+        { "from": 72, "to": 103, "label": "green to cyan" },
+        { "from": 104, "to": 135, "label": "cyan to blue" },
+        { "from": 136, "to": 167, "label": "blue to magenta" },
+        { "from": 168, "to": 199, "label": "magenta to red" },
+        { "from": 200, "to": 231, "label": "red to white" },
+        { "from": 232, "to": 255, "label": "Crossfading colors from slow to fast" }
+      ]
+    },
+    {
+      "key": "colorPresets",
+      "name": "Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "No function" },
+        { "from": 5, "to": 9, "label": "White 2700k" },
+        { "from": 10, "to": 14, "label": "White 3200k" },
+        { "from": 15, "to": 19, "label": "White 4200k" },
+        { "from": 20, "to": 24, "label": "White 5600k" },
+        { "from": 25, "to": 29, "label": "White 6500k" },
+        { "from": 30, "to": 34, "label": "White 8000k" },
+        { "from": 35, "to": 39, "label": "Yellow" },
+        { "from": 40, "to": 44, "label": "Magenta" },
+        { "from": 45, "to": 49, "label": "Cyan" },
+        { "from": 50, "to": 54, "label": "Salmon" },
+        { "from": 55, "to": 59, "label": "Turquoise" },
+        { "from": 60, "to": 64, "label": "Light Green" },
+        { "from": 65, "to": 69, "label": "Steel Blue" },
+        { "from": 70, "to": 74, "label": "Orange" },
+        { "from": 75, "to": 79, "label": "Straw" },
+        { "from": 80, "to": 84, "label": "Pale Lavander" },
+        { "from": 85, "to": 89, "label": "Pink" },
+        { "from": 90, "to": 94, "label": "Red" },
+        { "from": 95, "to": 99, "label": "Green" },
+        { "from": 100, "to": 104, "label": "Blue" },
+        { "from": 105, "to": 109, "label": "Rainbow1" },
+        { "from": 110, "to": 114, "label": "Rainbow2" },
+        { "from": 115, "to": 119, "label": "Rainbow3" },
+        { "from": 120, "to": 124, "label": "Rainbow4" },
+        { "from": 125, "to": 129, "label": "Rainbow5" },
+        { "from": 130, "to": 134, "label": "Rainbow6" },
+        { "from": 135, "to": 139, "label": "Rainbow7" },
+        { "from": 140, "to": 144, "label": "Rainbow8" },
+        { "from": 145, "to": 149, "label": "Rainbow9" },
+        { "from": 150, "to": 154, "label": "Rainbow10" },
+        { "from": 155, "to": 159, "label": "Rainbow11" },
+        { "from": 160, "to": 164, "label": "Rainbow12" },
+        { "from": 165, "to": 169, "label": "Rainbow13" },
+        { "from": 170, "to": 174, "label": "Rainbow14" },
+        { "from": 175, "to": 179, "label": "Rainbow15" },
+        { "from": 180, "to": 184, "label": "Rainbow16" },
+        { "from": 185, "to": 189, "label": "Rainbow17" },
+        { "from": 190, "to": 194, "label": "Rainbow18" },
+        { "from": 195, "to": 199, "label": "Rainbow19" },
+        { "from": 200, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "colorPresetDimmer",
+      "name": "Color Preset Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "chasePatterns",
+      "name": "Chase Patterns",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Led Turn off" },
+        { "from": 10, "to": 13, "label": "Chase 1" },
+        { "from": 14, "to": 17, "label": "Chase 2" },
+        { "from": 18, "to": 21, "label": "Chase 3" },
+        { "from": 22, "to": 25, "label": "Chase 4" },
+        { "from": 26, "to": 29, "label": "Chase 5" },
+        { "from": 30, "to": 33, "label": "Chase 6" },
+        { "from": 34, "to": 37, "label": "Chase 7" },
+        { "from": 38, "to": 41, "label": "Chase 8" },
+        { "from": 42, "to": 45, "label": "Chase 9" },
+        { "from": 46, "to": 49, "label": "Chase 10" },
+        { "from": 50, "to": 53, "label": "Chase 11" },
+        { "from": 54, "to": 57, "label": "Chase 12" },
+        { "from": 58, "to": 61, "label": "Chase 13" },
+        { "from": 62, "to": 65, "label": "Chase 14" },
+        { "from": 66, "to": 69, "label": "Chase 15" },
+        { "from": 70, "to": 73, "label": "Chase 16" },
+        { "from": 74, "to": 77, "label": "Chase 17" },
+        { "from": 78, "to": 81, "label": "Chase 18" },
+        { "from": 82, "to": 85, "label": "Chase 19" },
+        { "from": 86, "to": 89, "label": "Chase 20" },
+        { "from": 90, "to": 93, "label": "Chase 21" },
+        { "from": 94, "to": 97, "label": "Chase 22" },
+        { "from": 98, "to": 101, "label": "Chase 23" },
+        { "from": 102, "to": 105, "label": "Chase 24" },
+        { "from": 106, "to": 109, "label": "Chase 25" },
+        { "from": 110, "to": 113, "label": "Chase 26" },
+        { "from": 114, "to": 117, "label": "Chase 27" },
+        { "from": 118, "to": 121, "label": "Chase 28" },
+        { "from": 122, "to": 125, "label": "Chase 29" },
+        { "from": 126, "to": 129, "label": "Chase 30" },
+        { "from": 130, "to": 133, "label": "Chase 31" },
+        { "from": 134, "to": 137, "label": "Chase 32" },
+        { "from": 138, "to": 141, "label": "Chase 33" },
+        { "from": 142, "to": 145, "label": "Chase 34" },
+        { "from": 146, "to": 149, "label": "Chase 35" },
+        { "from": 150, "to": 153, "label": "Chase 36" },
+        { "from": 154, "to": 157, "label": "Chase 37" },
+        { "from": 158, "to": 161, "label": "Chase 38" },
+        { "from": 162, "to": 165, "label": "Chase 39" },
+        { "from": 166, "to": 169, "label": "Chase 40" },
+        { "from": 170, "to": 173, "label": "Chase 41" },
+        { "from": 174, "to": 177, "label": "Chase 42" },
+        { "from": 178, "to": 181, "label": "Chase 43" },
+        { "from": 182, "to": 185, "label": "Chase 44" },
+        { "from": 186, "to": 189, "label": "Chase 45" },
+        { "from": 190, "to": 193, "label": "Chase 46" },
+        { "from": 194, "to": 197, "label": "Chase 47" },
+        { "from": 198, "to": 201, "label": "Chase 48" },
+        { "from": 202, "to": 205, "label": "Chase 49" },
+        { "from": 206, "to": 209, "label": "Chase 50" },
+        { "from": 210, "to": 213, "label": "Chase 51" },
+        { "from": 214, "to": 217, "label": "Chase 52" },
+        { "from": 218, "to": 221, "label": "Chase 53" },
+        { "from": 222, "to": 225, "label": "Chase 54" },
+        { "from": 226, "to": 229, "label": "Chase 55" },
+        { "from": 230, "to": 233, "label": "Chase 56" },
+        { "from": 234, "to": 237, "label": "Chase 57" },
+        { "from": 238, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "chaseSpeed",
+      "name": "Chase Speed",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 125, "label": "Fast to Slow Backward" },
+        { "from": 126, "to": 130, "label": "Stop" },
+        { "from": 131, "to": 255, "label": "Slow to Fast Forward" }
+      ]
+    },
+    {
+      "key": "chaseFade",
+      "name": "Chase Fade",
+      "attribute": "effect"
+    },
+    {
+      "key": "resetInternalPrograms",
+      "name": "Reset, Internal programs",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 79, "label": "Normal" },
+        { "from": 80, "to": 84, "label": "All motor reset" },
+        { "from": 85, "to": 87, "label": "Scan motor reset" },
+        { "from": 88, "to": 90, "label": "no function" },
+        { "from": 91, "to": 93, "label": "no function" },
+        { "from": 94, "to": 96, "label": "no function" },
+        { "from": 97, "to": 99, "label": "Others motor reset" },
+        { "from": 100, "to": 119, "label": "Internal Program 1" },
+        { "from": 120, "to": 139, "label": "Internal Program 2" },
+        { "from": 140, "to": 159, "label": "Internal Program 3" },
+        { "from": 160, "to": 179, "label": "Internal Program 4" },
+        { "from": 180, "to": 199, "label": "Internal Program 5" },
+        { "from": 200, "to": 219, "label": "Internal Program 6" },
+        { "from": 220, "to": 239, "label": "Internal Program 7" },
+        { "from": 240, "to": 255, "label": "Music Control" }
+      ]
+    },
+    {
+      "key": "redLedArray1",
+      "name": "Red LED -array 1",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray1",
+      "name": "Green LED -array 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray1",
+      "name": "Blue LED -array 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray1",
+      "name": "White LED -array 1",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray2",
+      "name": "Red LED -array 2",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray2",
+      "name": "Green LED -array 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray2",
+      "name": "Blue LED -array 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray2",
+      "name": "White LED -array 2",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray3",
+      "name": "Red LED -array 3",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray3",
+      "name": "Green LED -array 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray3",
+      "name": "Blue LED -array 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray3",
+      "name": "White LED -array 3",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray4",
+      "name": "Red LED -array 4",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray4",
+      "name": "Green LED -array 4",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray4",
+      "name": "Blue LED -array 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray4",
+      "name": "White LED -array 4",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray5",
+      "name": "Red LED -array 5",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray5",
+      "name": "Green LED -array 5",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray5",
+      "name": "Blue LED -array 5",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray5",
+      "name": "White LED -array 5",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray6",
+      "name": "Red LED -array 6",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray6",
+      "name": "Green LED -array 6",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray6",
+      "name": "Blue LED -array 6",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray6",
+      "name": "White LED -array 6",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray7",
+      "name": "Red LED -array 7",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray7",
+      "name": "Green LED -array 7",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray7",
+      "name": "Blue LED -array 7",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray7",
+      "name": "White LED -array 7",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray8",
+      "name": "Red LED -array 8",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray8",
+      "name": "Green LED -array 8",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray8",
+      "name": "Blue LED -array 8",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray8",
+      "name": "White LED -array 8",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray9",
+      "name": "Red LED -array 9",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray9",
+      "name": "Green LED -array 9",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray9",
+      "name": "Blue LED -array 9",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray9",
+      "name": "White LED -array 9",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray10",
+      "name": "Red LED -array 10",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray10",
+      "name": "Green LED -array 10",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray10",
+      "name": "Blue LED -array 10",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray10",
+      "name": "White LED -array 10",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray11",
+      "name": "Red LED -array 11",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray11",
+      "name": "Green LED -array 11",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray11",
+      "name": "Blue LED -array 11",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray11",
+      "name": "White LED -array 11",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray12",
+      "name": "Red LED -array 12",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray12",
+      "name": "Green LED -array 12",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray12",
+      "name": "Blue LED -array 12",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray12",
+      "name": "White LED -array 12",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray13",
+      "name": "Red LED -array 13",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray13",
+      "name": "Green LED -array 13",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray13",
+      "name": "Blue LED -array 13",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray13",
+      "name": "White LED -array 13",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray14",
+      "name": "Red LED -array 14",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray14",
+      "name": "Green LED -array 14",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray14",
+      "name": "Blue LED -array 14",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray14",
+      "name": "White LED -array 14",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray15",
+      "name": "Red LED -array 15",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray15",
+      "name": "Green LED -array 15",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray15",
+      "name": "Blue LED -array 15",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray15",
+      "name": "White LED -array 15",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray16",
+      "name": "Red LED -array 16",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray16",
+      "name": "Green LED -array 16",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray16",
+      "name": "Blue LED -array 16",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray16",
+      "name": "White LED -array 16",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray17",
+      "name": "Red LED -array 17",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray17",
+      "name": "Green LED -array 17",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray17",
+      "name": "Blue LED -array 17",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray17",
+      "name": "White LED -array 17",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray18",
+      "name": "Red LED -array 18",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray18",
+      "name": "Green LED -array 18",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray18",
+      "name": "Blue LED -array 18",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray18",
+      "name": "White LED -array 18",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray19",
+      "name": "Red LED -array 19",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray19",
+      "name": "Green LED -array 19",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray19",
+      "name": "Blue LED -array 19",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray19",
+      "name": "White LED -array 19",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray20",
+      "name": "Red LED -array 20",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray20",
+      "name": "Green LED -array 20",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray20",
+      "name": "Blue LED -array 20",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray20",
+      "name": "White LED -array 20",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray21",
+      "name": "Red LED -array 21",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray21",
+      "name": "Green LED -array 21",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray21",
+      "name": "Blue LED -array 21",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray21",
+      "name": "White LED -array 21",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray22",
+      "name": "Red LED -array 22",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray22",
+      "name": "Green LED -array 22",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray22",
+      "name": "Blue LED -array 22",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray22",
+      "name": "White LED -array 22",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray23",
+      "name": "Red LED -array 23",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray23",
+      "name": "Green LED -array 23",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray23",
+      "name": "Blue LED -array 23",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray23",
+      "name": "White LED -array 23",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray24",
+      "name": "Red LED -array 24",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray24",
+      "name": "Green LED -array 24",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray24",
+      "name": "Blue LED -array 24",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray24",
+      "name": "White LED -array 24",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray25",
+      "name": "Red LED -array 25",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray25",
+      "name": "Green LED -array 25",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray25",
+      "name": "Blue LED -array 25",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray25",
+      "name": "White LED -array 25",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray26",
+      "name": "Red LED -array 26",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray26",
+      "name": "Green LED -array 26",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray26",
+      "name": "Blue LED -array 26",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray26",
+      "name": "White LED -array 26",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray27",
+      "name": "Red LED -array 27",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray27",
+      "name": "Green LED -array 27",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray27",
+      "name": "Blue LED -array 27",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray27",
+      "name": "White LED -array 27",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray28",
+      "name": "Red LED -array 28",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray28",
+      "name": "Green LED -array 28",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray28",
+      "name": "Blue LED -array 28",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray28",
+      "name": "White LED -array 28",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray29",
+      "name": "Red LED -array 29",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray29",
+      "name": "Green LED -array 29",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray29",
+      "name": "Blue LED -array 29",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray29",
+      "name": "White LED -array 29",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray30",
+      "name": "Red LED -array 30",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray30",
+      "name": "Green LED -array 30",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray30",
+      "name": "Blue LED -array 30",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray30",
+      "name": "White LED -array 30",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray31",
+      "name": "Red LED -array 31",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray31",
+      "name": "Green LED -array 31",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray31",
+      "name": "Blue LED -array 31",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray31",
+      "name": "White LED -array 31",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray32",
+      "name": "Red LED -array 32",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray32",
+      "name": "Green LED -array 32",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray32",
+      "name": "Blue LED -array 32",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray32",
+      "name": "White LED -array 32",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray33",
+      "name": "Red LED -array 33",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray33",
+      "name": "Green LED -array 33",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray33",
+      "name": "Blue LED -array 33",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray33",
+      "name": "White LED -array 33",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray34",
+      "name": "Red LED -array 34",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray34",
+      "name": "Green LED -array 34",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray34",
+      "name": "Blue LED -array 34",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray34",
+      "name": "White LED -array 34",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray35",
+      "name": "Red LED -array 35",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray35",
+      "name": "Green LED -array 35",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray35",
+      "name": "Blue LED -array 35",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray35",
+      "name": "White LED -array 35",
+      "attribute": "white"
+    },
+    {
+      "key": "redLedArray36",
+      "name": "Red LED -array 36",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLedArray36",
+      "name": "Green LED -array 36",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLedArray36",
+      "name": "Blue LED -array 36",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLedArray36",
+      "name": "White LED -array 36",
+      "attribute": "white"
+    }
+  ],
+  "modes": [
+    {
+      "name": "20ch",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tiltMovement",
+        "tiltFine",
+        "speedPanTilt",
+        "panMotorContinuousRotation",
+        "tiltMotorContinuousRotation",
+        "redLedAllArrays",
+        "greenLedAllArrays",
+        "blueLedAllArrays",
+        "whiteLedAllArrays",
+        "shutterStrobe",
+        "dimmerIntensity",
+        "colorMacro",
+        "colorPresets",
+        "chasePatterns",
+        "chaseSpeed",
+        "chaseFade",
+        "colorPresetDimmer",
+        "resetInternalPrograms"
+      ]
+    },
+    {
+      "name": "18ch",
+      "channels": [
+        "panMovement",
+        "tiltMovement",
+        "speedPanTilt",
+        "panMotorContinuousRotation",
+        "tiltMotorContinuousRotation",
+        "redLedAllArrays",
+        "greenLedAllArrays",
+        "blueLedAllArrays",
+        "whiteLedAllArrays",
+        "shutterStrobe",
+        "dimmerIntensity",
+        "colorMacro",
+        "colorPresets",
+        "chasePatterns",
+        "chaseSpeed",
+        "chaseFade",
+        "colorPresetDimmer",
+        "resetInternalPrograms"
+      ]
+    },
+    {
+      "name": "160ch",
+      "channels": [
+        "panMovement",
+        "tiltMovement",
+        "panFine",
+        "tiltFine",
+        "speedPanTilt",
+        "panMotorContinuousRotation",
+        "tiltMotorContinuousRotation",
+        "shutterStrobe",
+        "dimmerIntensity",
+        "colorMacro",
+        "colorPresets",
+        "colorPresetDimmer",
+        "chasePatterns",
+        "chaseSpeed",
+        "chaseFade",
+        "resetInternalPrograms",
+        "redLedArray1",
+        "greenLedArray1",
+        "blueLedArray1",
+        "whiteLedArray1",
+        "redLedArray2",
+        "greenLedArray2",
+        "blueLedArray2",
+        "whiteLedArray2",
+        "redLedArray3",
+        "greenLedArray3",
+        "blueLedArray3",
+        "whiteLedArray3",
+        "redLedArray4",
+        "greenLedArray4",
+        "blueLedArray4",
+        "whiteLedArray4",
+        "redLedArray5",
+        "greenLedArray5",
+        "blueLedArray5",
+        "whiteLedArray5",
+        "redLedArray6",
+        "greenLedArray6",
+        "blueLedArray6",
+        "whiteLedArray6",
+        "redLedArray7",
+        "greenLedArray7",
+        "blueLedArray7",
+        "whiteLedArray7",
+        "redLedArray8",
+        "greenLedArray8",
+        "blueLedArray8",
+        "whiteLedArray8",
+        "redLedArray9",
+        "greenLedArray9",
+        "blueLedArray9",
+        "whiteLedArray9",
+        "redLedArray10",
+        "greenLedArray10",
+        "blueLedArray10",
+        "whiteLedArray10",
+        "redLedArray11",
+        "greenLedArray11",
+        "blueLedArray11",
+        "whiteLedArray11",
+        "redLedArray12",
+        "greenLedArray12",
+        "blueLedArray12",
+        "whiteLedArray12",
+        "redLedArray13",
+        "greenLedArray13",
+        "blueLedArray13",
+        "whiteLedArray13",
+        "redLedArray14",
+        "greenLedArray14",
+        "blueLedArray14",
+        "whiteLedArray14",
+        "redLedArray15",
+        "greenLedArray15",
+        "blueLedArray15",
+        "whiteLedArray15",
+        "redLedArray16",
+        "greenLedArray16",
+        "blueLedArray16",
+        "whiteLedArray16",
+        "redLedArray17",
+        "greenLedArray17",
+        "blueLedArray17",
+        "whiteLedArray17",
+        "redLedArray18",
+        "greenLedArray18",
+        "blueLedArray18",
+        "whiteLedArray18",
+        "redLedArray19",
+        "greenLedArray19",
+        "blueLedArray19",
+        "whiteLedArray19",
+        "redLedArray20",
+        "greenLedArray20",
+        "blueLedArray20",
+        "whiteLedArray20",
+        "redLedArray21",
+        "greenLedArray21",
+        "blueLedArray21",
+        "whiteLedArray21",
+        "redLedArray22",
+        "greenLedArray22",
+        "blueLedArray22",
+        "whiteLedArray22",
+        "redLedArray23",
+        "greenLedArray23",
+        "blueLedArray23",
+        "whiteLedArray23",
+        "redLedArray24",
+        "greenLedArray24",
+        "blueLedArray24",
+        "whiteLedArray24",
+        "redLedArray25",
+        "greenLedArray25",
+        "blueLedArray25",
+        "whiteLedArray25",
+        "redLedArray26",
+        "greenLedArray26",
+        "blueLedArray26",
+        "whiteLedArray26",
+        "redLedArray27",
+        "greenLedArray27",
+        "blueLedArray27",
+        "whiteLedArray27",
+        "redLedArray28",
+        "greenLedArray28",
+        "blueLedArray28",
+        "whiteLedArray28",
+        "redLedArray29",
+        "greenLedArray29",
+        "blueLedArray29",
+        "whiteLedArray29",
+        "redLedArray30",
+        "greenLedArray30",
+        "blueLedArray30",
+        "whiteLedArray30",
+        "redLedArray31",
+        "greenLedArray31",
+        "blueLedArray31",
+        "whiteLedArray31",
+        "redLedArray32",
+        "greenLedArray32",
+        "blueLedArray32",
+        "whiteLedArray32",
+        "redLedArray33",
+        "greenLedArray33",
+        "blueLedArray33",
+        "whiteLedArray33",
+        "redLedArray34",
+        "greenLedArray34",
+        "blueLedArray34",
+        "whiteLedArray34",
+        "redLedArray35",
+        "greenLedArray35",
+        "blueLedArray35",
+        "whiteLedArray35",
+        "redLedArray36",
+        "greenLedArray36",
+        "blueLedArray36",
+        "whiteLedArray36"
+      ],
+      "heads": [
+        [
+          "redLedArray1",
+          "greenLedArray1",
+          "blueLedArray1",
+          "whiteLedArray1"
+        ],
+        [
+          "redLedArray2",
+          "greenLedArray2",
+          "blueLedArray2",
+          "whiteLedArray2"
+        ],
+        [
+          "redLedArray3",
+          "greenLedArray3",
+          "whiteLedArray3",
+          "blueLedArray3"
+        ],
+        [
+          "redLedArray4",
+          "greenLedArray4",
+          "blueLedArray4",
+          "whiteLedArray4"
+        ],
+        [
+          "redLedArray5",
+          "greenLedArray5",
+          "blueLedArray5",
+          "whiteLedArray5"
+        ],
+        [
+          "redLedArray6",
+          "greenLedArray6",
+          "blueLedArray6",
+          "whiteLedArray6"
+        ],
+        [
+          "redLedArray7",
+          "greenLedArray7",
+          "blueLedArray7",
+          "whiteLedArray7"
+        ],
+        [
+          "redLedArray8",
+          "greenLedArray8",
+          "blueLedArray8",
+          "whiteLedArray8"
+        ],
+        [
+          "redLedArray9",
+          "greenLedArray9",
+          "blueLedArray9",
+          "whiteLedArray9"
+        ],
+        [
+          "redLedArray10",
+          "greenLedArray10",
+          "blueLedArray10",
+          "whiteLedArray10"
+        ],
+        [
+          "redLedArray11",
+          "greenLedArray11",
+          "blueLedArray11",
+          "whiteLedArray11"
+        ],
+        [
+          "redLedArray12",
+          "greenLedArray12",
+          "blueLedArray12",
+          "whiteLedArray12"
+        ],
+        [
+          "redLedArray13",
+          "blueLedArray13",
+          "greenLedArray13",
+          "whiteLedArray13"
+        ],
+        [
+          "redLedArray14",
+          "greenLedArray14",
+          "blueLedArray14",
+          "whiteLedArray14"
+        ],
+        [
+          "redLedArray15",
+          "greenLedArray15",
+          "blueLedArray15",
+          "whiteLedArray15"
+        ],
+        [
+          "redLedArray16",
+          "greenLedArray16",
+          "blueLedArray16",
+          "whiteLedArray16"
+        ],
+        [
+          "redLedArray17",
+          "greenLedArray17",
+          "blueLedArray17",
+          "whiteLedArray17"
+        ],
+        [
+          "redLedArray18",
+          "greenLedArray18",
+          "blueLedArray18",
+          "whiteLedArray18"
+        ],
+        [
+          "redLedArray19",
+          "greenLedArray19",
+          "blueLedArray19",
+          "whiteLedArray19"
+        ],
+        [
+          "redLedArray20",
+          "greenLedArray20",
+          "blueLedArray20",
+          "whiteLedArray20"
+        ],
+        [
+          "greenLedArray21",
+          "redLedArray21",
+          "blueLedArray21",
+          "whiteLedArray21"
+        ],
+        [
+          "redLedArray22",
+          "greenLedArray22",
+          "blueLedArray22",
+          "whiteLedArray22"
+        ],
+        [
+          "redLedArray23",
+          "greenLedArray23",
+          "blueLedArray23",
+          "whiteLedArray23"
+        ],
+        [
+          "redLedArray24",
+          "greenLedArray24",
+          "blueLedArray24",
+          "whiteLedArray24"
+        ],
+        [
+          "redLedArray25",
+          "greenLedArray25",
+          "blueLedArray25",
+          "whiteLedArray25"
+        ],
+        [
+          "redLedArray26",
+          "greenLedArray26",
+          "blueLedArray26",
+          "whiteLedArray26"
+        ],
+        [
+          "redLedArray27",
+          "greenLedArray27",
+          "blueLedArray27",
+          "whiteLedArray27"
+        ],
+        [
+          "redLedArray28",
+          "greenLedArray28",
+          "blueLedArray28",
+          "whiteLedArray28"
+        ],
+        [
+          "redLedArray29",
+          "greenLedArray29",
+          "blueLedArray29",
+          "whiteLedArray29"
+        ],
+        [
+          "redLedArray30",
+          "greenLedArray30",
+          "blueLedArray30",
+          "whiteLedArray30"
+        ],
+        [
+          "redLedArray31",
+          "greenLedArray31",
+          "blueLedArray31",
+          "whiteLedArray31"
+        ],
+        [
+          "redLedArray32",
+          "greenLedArray32",
+          "blueLedArray32",
+          "whiteLedArray32"
+        ],
+        [
+          "redLedArray33",
+          "greenLedArray33",
+          "blueLedArray33",
+          "whiteLedArray33"
+        ],
+        [
+          "redLedArray34",
+          "greenLedArray34",
+          "blueLedArray34",
+          "whiteLedArray34"
+        ],
+        [
+          "redLedArray35",
+          "greenLedArray35",
+          "blueLedArray35",
+          "whiteLedArray35"
+        ],
+        [
+          "redLedArray36",
+          "greenLedArray36",
+          "blueLedArray36",
+          "whiteLedArray36"
+        ]
+      ]
+    }
+  ]
+}

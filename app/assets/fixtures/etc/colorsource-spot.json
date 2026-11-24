@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ETC",
+  "model": "ColorSource Spot",
+  "category": "par",
+  "physical": {
+    "width": 339,
+    "height": 593,
+    "depth": 672,
+    "weight": 7.7,
+    "lumens": 6940,
+    "source": "LED",
+    "beamAngle": {
+      "min": 5,
+      "max": 90
+    },
+    "power": 160
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "intensity",
+      "name": "Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    }
+  ],
+  "modes": [
+    {
+      "name": "5-Channel",
+      "channels": [
+        "intensity",
+        "red",
+        "green",
+        "blue",
+        "strobe"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Vizi Beam 5RX",
+  "category": "movingHead",
+  "physical": {
+    "width": 325,
+    "height": 522,
+    "depth": 394,
+    "weight": 19,
+    "lumens": 8000,
+    "source": "Platinum 5R",
+    "beamAngle": {
+      "min": 5,
+      "max": 5
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 250
+  },
+  "channels": [
+    {
+      "key": "panMovement",
+      "name": "Pan Movement",
+      "attribute": "pan",
+      "defaultValue": 1
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "defaultValue": 2,
+      "fineOf": "panMovement"
+    },
+    {
+      "key": "tiltMovement",
+      "name": "Tilt Movement",
+      "attribute": "tilt",
+      "defaultValue": 3
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "defaultValue": 4,
+      "fineOf": "tiltMovement"
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "defaultValue": 5,
+      "capabilities": [
+        { "from": 0, "to": 2, "label": "White" },
+        { "from": 3, "to": 4, "label": "White & Color 1" },
+        { "from": 5, "to": 6, "label": "Color 1" },
+        { "from": 7, "to": 8, "label": "Color 1 & Color 2" },
+        { "from": 9, "to": 10, "label": "Color 2" },
+        { "from": 11, "to": 12, "label": "Color 2 & Color 3" },
+        { "from": 13, "to": 14, "label": "Color 3" },
+        { "from": 15, "to": 16, "label": "Color 3 & Color 4" },
+        { "from": 17, "to": 18, "label": "Color 4" },
+        { "from": 19, "to": 21, "label": "Color 4 & Color 5" },
+        { "from": 22, "to": 23, "label": "Color 5" },
+        { "from": 24, "to": 25, "label": "Color 5 & Color 6" },
+        { "from": 26, "to": 27, "label": "Color 6" },
+        { "from": 28, "to": 29, "label": "Color 6 & Color 7" },
+        { "from": 30, "to": 31, "label": "Color 7" },
+        { "from": 32, "to": 33, "label": "Color 7 & Color 8" },
+        { "from": 34, "to": 35, "label": "Color 8" },
+        { "from": 36, "to": 37, "label": "Color 8 & Color 9" },
+        { "from": 38, "to": 39, "label": "Color 9" },
+        { "from": 40, "to": 42, "label": "Color 9 & Color 10" },
+        { "from": 43, "to": 44, "label": "Color 10" },
+        { "from": 45, "to": 46, "label": "Color 10 & Color 11" },
+        { "from": 47, "to": 48, "label": "Color 11" },
+        { "from": 49, "to": 50, "label": "Color 11 & Color 12" },
+        { "from": 51, "to": 52, "label": "Color 12" },
+        { "from": 53, "to": 54, "label": "Color 12 & Color 13" },
+        { "from": 55, "to": 56, "label": "Color 13" },
+        { "from": 57, "to": 58, "label": "Color 13 & Color 14" },
+        { "from": 59, "to": 60, "label": "Color 14" },
+        { "from": 61, "to": 63, "label": "Color 14 & White" },
+        { "from": 64, "to": 127, "label": "Color Indexing" },
+        { "from": 128, "to": 189, "label": "Clockwise Rotation Fast - Slow" },
+        { "from": 190, "to": 193, "label": "No rotation" },
+        { "from": 194, "to": 255, "label": "Counter-Clockwise Rotation Slow - Fast" }
+      ]
+    },
+    {
+      "key": "gobos",
+      "name": "Gobos",
+      "attribute": "gobo",
+      "defaultValue": 6,
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Open" },
+        { "from": 4, "to": 6, "label": "Gobo 1" },
+        { "from": 7, "to": 9, "label": "Gobo 2" },
+        { "from": 10, "to": 12, "label": "Gobo 3" },
+        { "from": 13, "to": 15, "label": "Gobo 4" },
+        { "from": 16, "to": 18, "label": "Gobo 5" },
+        { "from": 19, "to": 21, "label": "Gobo 6" },
+        { "from": 22, "to": 24, "label": "Gobo 7" },
+        { "from": 25, "to": 27, "label": "Gobo 8" },
+        { "from": 28, "to": 30, "label": "Gobo 9" },
+        { "from": 31, "to": 33, "label": "Gobo 10" },
+        { "from": 34, "to": 36, "label": "Gobo 11" },
+        { "from": 37, "to": 39, "label": "Gobo 12" },
+        { "from": 40, "to": 42, "label": "Gobo 13" },
+        { "from": 43, "to": 45, "label": "Gobo 14" },
+        { "from": 46, "to": 48, "label": "Gobo 15" },
+        { "from": 49, "to": 51, "label": "Gobo 16" },
+        { "from": 52, "to": 55, "label": "Gobo 17" },
+        { "from": 56, "to": 59, "label": "Open shaking" },
+        { "from": 60, "to": 63, "label": "Gobo 1 Shaking" },
+        { "from": 64, "to": 67, "label": "Gobo 2 Shaking" },
+        { "from": 68, "to": 71, "label": "Gobo 3 Shaking" },
+        { "from": 72, "to": 75, "label": "Gobo 4 Shaking" },
+        { "from": 76, "to": 79, "label": "Gobo 5 Shaking" },
+        { "from": 80, "to": 83, "label": "Gobo 6 Shaking" },
+        { "from": 84, "to": 87, "label": "Gobo 7 Shaking" },
+        { "from": 88, "to": 91, "label": "Gobo 8 Shaking" },
+        { "from": 92, "to": 95, "label": "Gobo 9 Shaking" },
+        { "from": 96, "to": 99, "label": "Gobo 10 Shaking" },
+        { "from": 100, "to": 103, "label": "Gobo 11 Shaking" },
+        { "from": 104, "to": 107, "label": "Gobo 12 Shaking" },
+        { "from": 108, "to": 111, "label": "Gobo 13 Shaking" },
+        { "from": 112, "to": 115, "label": "Gobo 14 Shaking" },
+        { "from": 116, "to": 119, "label": "Gobo 15 Shaking" },
+        { "from": 120, "to": 123, "label": "Gobo 16 Shaking" },
+        { "from": 124, "to": 127, "label": "Gobo 17 Shaking" },
+        { "from": 128, "to": 189, "label": "Gobo Wheel CW Rotation Fast to Slow", "kind": "rotation" },
+        { "from": 190, "to": 193, "label": "Stop", "kind": "stop" },
+        { "from": 194, "to": 255, "label": "Gobo Wheel CCW Rotation Slow to Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "prismEffect",
+      "name": "Prism Effect",
+      "attribute": "prism",
+      "defaultValue": 7,
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Open", "kind": "open" },
+        { "from": 8, "to": 127, "label": "Prism", "kind": "prism" },
+        { "from": 128, "to": 132, "label": "Prism Rotation Effect 1" },
+        { "from": 133, "to": 137, "label": "Prism Rotation Effect 2" },
+        { "from": 138, "to": 141, "label": "Prism Rotation Effect 3" },
+        { "from": 142, "to": 146, "label": "Prism Rotation Effect 4" },
+        { "from": 147, "to": 150, "label": "Prism Rotation Effect 5" },
+        { "from": 151, "to": 155, "label": "Prism Rotation Effect 6" },
+        { "from": 156, "to": 159, "label": "Prism Rotation Effect 7" },
+        { "from": 160, "to": 164, "label": "Prism Rotation Effect 8" },
+        { "from": 165, "to": 168, "label": "Prism Rotation Effect 9" },
+        { "from": 169, "to": 173, "label": "Prism Rotation Effect 10" },
+        { "from": 174, "to": 177, "label": "Prism Rotation Effect 11" },
+        { "from": 178, "to": 182, "label": "Prism Rotation Effect 12" },
+        { "from": 183, "to": 187, "label": "Prism Rotation Effect 13" },
+        { "from": 188, "to": 191, "label": "Prism Rotation Effect 14" },
+        { "from": 192, "to": 196, "label": "Prism Rotation Effect 15" },
+        { "from": 197, "to": 200, "label": "Prism Rotation Effect 16" },
+        { "from": 201, "to": 205, "label": "Prism Rotation Effect 17" },
+        { "from": 206, "to": 209, "label": "Prism Rotation Effect 18" },
+        { "from": 210, "to": 214, "label": "Prism Rotation Effect 19" },
+        { "from": 215, "to": 218, "label": "Prism Rotation Effect 20" },
+        { "from": 219, "to": 223, "label": "Prism Rotation Effect 21" },
+        { "from": 224, "to": 227, "label": "Prism Rotation Effect 22" },
+        { "from": 228, "to": 232, "label": "Prism Rotation Effect 23" },
+        { "from": 233, "to": 236, "label": "Prism Rotation Effect 24" },
+        { "from": 237, "to": 241, "label": "Prism Rotation Effect 25" },
+        { "from": 242, "to": 246, "label": "Prism Rotation Effect 26" },
+        { "from": 247, "to": 250, "label": "Prism Rotation Effect 27" },
+        { "from": 251, "to": 255, "label": "Prism Rotation Effect 28" }
+      ]
+    },
+    {
+      "key": "prismRotation",
+      "name": "Prism Rotation",
+      "attribute": "prismRotation",
+      "defaultValue": 8,
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Index Rotation", "kind": "index" },
+        { "from": 128, "to": 190, "label": "Clockwise Rotation Fast-Slow", "kind": "rotation" },
+        { "from": 191, "to": 192, "label": "Stop", "kind": "stop" },
+        { "from": 193, "to": 255, "label": "Counter- Clockwise Rotation Slow-Fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus",
+      "defaultValue": 9
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost",
+      "defaultValue": 10
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter & Strobe",
+      "attribute": "shutter",
+      "defaultValue": 11,
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Shutter Closed", "kind": "closed" },
+        { "from": 8, "to": 15, "label": "Shutter Open", "kind": "open" },
+        { "from": 16, "to": 167, "label": "Linear Strobing Slow-Fast", "kind": "strobe" },
+        { "from": 168, "to": 203, "label": "Fast Close - Slow Open", "kind": "pulse" },
+        { "from": 204, "to": 239, "label": "Fast Open - Slow Close", "kind": "pulse" },
+        { "from": 240, "to": 247, "label": "Random Strobe", "kind": "strobe" },
+        { "from": 248, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer",
+      "defaultValue": 12
+    },
+    {
+      "key": "panTiltMacros",
+      "name": "Pan/Tilt Macros",
+      "attribute": "effect",
+      "defaultValue": 13,
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Off" },
+        { "from": 8, "to": 15, "label": "Macro 1" },
+        { "from": 16, "to": 23, "label": "Macro 2" },
+        { "from": 24, "to": 31, "label": "Macro 3" },
+        { "from": 32, "to": 39, "label": "Macro 4" },
+        { "from": 40, "to": 47, "label": "Macro 5" },
+        { "from": 48, "to": 55, "label": "Macro 6" },
+        { "from": 56, "to": 63, "label": "Macro 7" },
+        { "from": 64, "to": 71, "label": "Macro 8" },
+        { "from": 72, "to": 79, "label": "Macro 9" },
+        { "from": 80, "to": 87, "label": "Macro 10" },
+        { "from": 88, "to": 95, "label": "Macro 11" },
+        { "from": 96, "to": 103, "label": "Macro 12" },
+        { "from": 104, "to": 111, "label": "Macro 13" },
+        { "from": 112, "to": 119, "label": "Macro 14" },
+        { "from": 120, "to": 127, "label": "Macro 15" },
+        { "from": 128, "to": 135, "label": "Macro 16" },
+        { "from": 136, "to": 143, "label": "Macro 17" },
+        { "from": 144, "to": 151, "label": "Macro 18" },
+        { "from": 152, "to": 159, "label": "Macro 19" },
+        { "from": 160, "to": 167, "label": "Macro 20" },
+        { "from": 168, "to": 175, "label": "Macro 21" },
+        { "from": 176, "to": 183, "label": "Macro 22" },
+        { "from": 184, "to": 191, "label": "Macro 23" },
+        { "from": 192, "to": 199, "label": "Macro 24" },
+        { "from": 200, "to": 207, "label": "Macro 25" },
+        { "from": 208, "to": 215, "label": "Macro 26" },
+        { "from": 216, "to": 223, "label": "Macro 27" },
+        { "from": 224, "to": 231, "label": "Macro 28" },
+        { "from": 232, "to": 239, "label": "Macro 29" },
+        { "from": 240, "to": 247, "label": "Macro 30" },
+        { "from": 248, "to": 255, "label": "Macro 31" }
+      ]
+    },
+    {
+      "key": "panTiltMacroSpeed",
+      "name": "Pan/Tilt Macro Speed",
+      "attribute": "panTiltSpeed",
+      "defaultValue": 14
+    },
+    {
+      "key": "colorTime",
+      "name": "Color Time",
+      "attribute": "colorMacro",
+      "defaultValue": 15,
+      "capabilities": [
+        { "from": 0, "to": 254, "label": "Fast-Slow" },
+        { "from": 255, "to": 255, "label": "Fast" }
+      ]
+    },
+    {
+      "key": "beamTime",
+      "name": "Beam Time",
+      "attribute": "beamEffect",
+      "defaultValue": 16,
+      "capabilities": [
+        { "from": 0, "to": 254, "label": "Fast-Slow" },
+        { "from": 255, "to": 255, "label": "Fast" }
+      ]
+    },
+    {
+      "key": "goboTime",
+      "name": "Gobo Time",
+      "attribute": "gobo",
+      "defaultValue": 17,
+      "capabilities": [
+        { "from": 0, "to": 254, "label": "Fast-Slow" },
+        { "from": 255, "to": 255, "label": "Fast" }
+      ]
+    },
+    {
+      "key": "panTiltMovementSpeed",
+      "name": "Pan/Tilt Movement Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "specialFunctions",
+      "name": "Special Functions",
+      "attribute": "effect",
+      "defaultValue": 19,
+      "capabilities": [
+        { "from": 0, "to": 49, "label": "No function" },
+        { "from": 50, "to": 59, "label": "Pan/Tilt Fast Mode" },
+        { "from": 60, "to": 69, "label": "Pan/Tilt Normal Mode" },
+        { "from": 70, "to": 79, "label": "Blackout with Pan/Tilt Move Enabled" },
+        { "from": 80, "to": 89, "label": "Blackout with Pan/Tilt Move Disabled" },
+        { "from": 90, "to": 99, "label": "Blackout with Color Change Enabled" },
+        { "from": 100, "to": 109, "label": "Blackout with Color Change Disabled" },
+        { "from": 110, "to": 119, "label": "Blackout with Gobo Change Enabled" },
+        { "from": 120, "to": 129, "label": "Blackout with Gobo Change Disabled" },
+        { "from": 130, "to": 139, "label": "Lamp ON", "kind": "lampOn" },
+        { "from": 140, "to": 149, "label": "Pan/Tilt Reset" },
+        { "from": 150, "to": 159, "label": "Color Wheel Reset", "kind": "reset" },
+        { "from": 160, "to": 169, "label": "Gobo/Wheel Reset", "kind": "reset" },
+        { "from": 170, "to": 179, "label": "Shutter/Prism & Prism Rotation/Frost/Focus Reset", "kind": "reset" },
+        { "from": 180, "to": 199, "label": "No function" },
+        { "from": 200, "to": 209, "label": "Reset All", "kind": "reset" },
+        { "from": 210, "to": 219, "label": "Blackout with Pan/Tilt/Color/Gobo Change Enabled" },
+        { "from": 220, "to": 229, "label": "Blackout with Pan/Tilt/Color/Gobo Change Disabled" },
+        { "from": 230, "to": 239, "label": "Lamp OFF", "kind": "lampOff" },
+        { "from": 240, "to": 255, "label": "No function" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "19 Channel",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tiltMovement",
+        "tiltFine",
+        "colorWheel",
+        "gobos",
+        "prismEffect",
+        "prismRotation",
+        "focus",
+        "frost",
+        "shutterStrobe",
+        "masterDimmer",
+        "panTiltMacros",
+        "panTiltMacroSpeed",
+        "colorTime",
+        "beamTime",
+        "goboTime",
+        "panTiltMovementSpeed",
+        "specialFunctions"
+      ]
+    },
+    {
+      "name": "15 Channel",
+      "channels": [
+        "panMovement",
+        "panFine",
+        "tiltMovement",
+        "tiltFine",
+        "colorWheel",
+        "gobos",
+        "prismEffect",
+        "prismRotation",
+        "focus",
+        "frost",
+        "shutterStrobe",
+        "masterDimmer",
+        "panTiltMacros",
+        "panTiltMacroSpeed",
+        "panTiltMovementSpeed",
+        "specialFunctions"
+      ]
+    }
+  ]
+}

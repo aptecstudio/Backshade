@@ -1,8 +1,9 @@
 /**
  * Show operations requested by the user: new, open, save, save
  * as, save as template, rename, close. Every operation that
- * replaces the open show first asks to save the changes, and
- * on opening offers to recover the unsaved changes.
+ * replaces the open show first asks to save the changes; on opening
+ * the missing fixture definitions are reported and the recovery of the
+ * unsaved changes is offered.
  */
 
 import type { OpenShowResult } from '../../shared/transport/engine-api.js';
@@ -12,6 +13,7 @@ import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
 import { localized } from '../templates/template-text.js';
 import { engine } from '../transport/engine.js';
+import { showMissingFixtures } from './dialogs/missing-fixtures-dialog.js';
 import { askNewShow } from './dialogs/new-show-dialog.js';
 import { askSaveAs } from './dialogs/save-as-dialog.js';
 import { currentShow, update } from './show-store.js';
@@ -54,10 +56,14 @@ async function resolveUnsaved(): Promise<boolean> {
 }
 
 /**
- * After opening, offers to recover the unsaved changes.
+ * After opening, reports the missing fixture definitions and offers to
+ * recover the unsaved changes.
  */
 async function afterOpen(result: OpenShowResult): Promise<void> {
     update(result.show);
+    if (result.missingFixtures.length > 0) {
+        await showMissingFixtures(result.missingFixtures);
+    }
     if (!result.recoveryAvailable) {
         return;
     }

@@ -1,0 +1,27 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "Hazer",
+  "category": "hazer",
+  "channels": [
+    {
+      "key": "fog",
+      "name": "Fog output",
+      "attribute": "fog"
+    },
+    {
+      "key": "fan",
+      "name": "Fan",
+      "attribute": "fan"
+    }
+  ],
+  "modes": [
+    {
+      "name": "2 channels",
+      "channels": [
+        "fog",
+        "fan"
+      ]
+    }
+  ]
+}

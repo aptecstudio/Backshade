@@ -1,0 +1,358 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Cameo",
+  "model": "Auro Spot 300",
+  "category": "movingHead",
+  "physical": {
+    "width": 285,
+    "height": 485,
+    "depth": 180,
+    "weight": 8.75,
+    "lumens": 4371,
+    "colorTemperature": 9300,
+    "source": "LED",
+    "beamAngle": {
+      "min": 12,
+      "max": 12
+    },
+    "panRange": 540,
+    "tiltRange": 230,
+    "power": 320
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "Strobe open", "kind": "open" },
+        { "from": 11, "to": 255, "label": "Strobe slow -> fast <1Hz - 20Hz", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "autoProgram",
+      "name": "Auto Program",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 38, "label": "Program 1" },
+        { "from": 39, "to": 70, "label": "Program 2" },
+        { "from": 71, "to": 102, "label": "Program 3" },
+        { "from": 103, "to": 134, "label": "Program 4" },
+        { "from": 135, "to": 166, "label": "Program 5" },
+        { "from": 167, "to": 198, "label": "Program 6" },
+        { "from": 199, "to": 230, "label": "Program 7" },
+        { "from": 231, "to": 255, "label": "Program 8" }
+      ]
+    },
+    {
+      "key": "autoProgramSpeed",
+      "name": "Auto Program Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 127, "label": "Reset Pan / Tilt", "kind": "reset" },
+        { "from": 128, "to": 191, "label": "Reset Effects (Prism, Gobo...)", "kind": "reset" },
+        { "from": 192, "to": 255, "label": "Reset All Functions", "kind": "reset" }
+      ]
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "strobeFunctions",
+      "name": "Strobe functions",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Strobe open", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Strobe closed", "kind": "closed" },
+        { "from": 11, "to": 33, "label": "Pulse Random, slow -> fast", "kind": "pulse" },
+        { "from": 34, "to": 56, "label": "Ramp up Random, slow -> fast", "kind": "pulse" },
+        { "from": 57, "to": 79, "label": "Ramp down Random, slow -> fast", "kind": "pulse" },
+        { "from": 80, "to": 102, "label": "Random Strobe Effect, slow -> fast", "kind": "strobe" },
+        { "from": 103, "to": 127, "label": "Strobe Break Effect, 5s.....1s (Short burst with break)" },
+        { "from": 128, "to": 250, "label": "Strobe slow -> fast <1Hz - 20Hz", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Strobe open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Color off (open)", "kind": "color", "color": "#ffffff" },
+        { "from": 6, "to": 10, "label": "Split Color Open - Red", "kind": "color", "color": "#ffffff" },
+        { "from": 11, "to": 15, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 16, "to": 20, "label": "Split Color Red - Orange", "kind": "color", "color": "#ff0000" },
+        { "from": 21, "to": 28, "label": "Orange", "kind": "color", "color": "#ffaa00" },
+        { "from": 29, "to": 35, "label": "Split Color Orange - Yellow", "kind": "color", "color": "#ffaa00" },
+        { "from": 36, "to": 43, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 44, "to": 50, "label": "Split Color Yellow - Green", "kind": "color", "color": "#ffff00" },
+        { "from": 51, "to": 58, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 59, "to": 65, "label": "Split Color Green - Cyan", "kind": "color", "color": "#00ff00" },
+        { "from": 66, "to": 73, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 74, "to": 80, "label": "Split Color Cyan - Blue", "kind": "color", "color": "#00ffff" },
+        { "from": 81, "to": 88, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 89, "to": 95, "label": "Split Color Blue - Lavender", "kind": "color", "color": "#0000ff" },
+        { "from": 96, "to": 103, "label": "Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 104, "to": 110, "label": "Split Color Lavender - Magenta", "kind": "color", "color": "#aaaaff" },
+        { "from": 111, "to": 118, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 119, "to": 125, "label": "Split Color Magenta - Open", "kind": "color", "color": "#ff00ff" },
+        { "from": 126, "to": 128, "label": "Color Wheel Rotation Stop", "kind": "stop" },
+        { "from": 129, "to": 255, "label": "Color Wheel Rotation Speed slow -> fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "goboWheel1",
+      "name": "Gobo Wheel 1",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Gobo 0 (open)", "kind": "gobo" },
+        { "from": 6, "to": 25, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 26, "to": 45, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 46, "to": 65, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 66, "to": 85, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 86, "to": 105, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 106, "to": 127, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 128, "to": 128, "label": "Gobo Wheel Rotation Stop", "kind": "stop" },
+        { "from": 129, "to": 191, "label": "Gobo Wheel Rotation, Slow -> Fast, CW", "kind": "rotation" },
+        { "from": 192, "to": 255, "label": "Gobo Wheel Rotation, Fast -> Slow, CCW", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "goboWheel1Rotation",
+      "name": "Gobo Wheel 1 Rotation",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Gobo Rotation off", "kind": "stop" },
+        { "from": 6, "to": 127, "label": "Gobo Position 0 deg ... 360 deg", "kind": "index" },
+        { "from": 128, "to": 128, "label": "Gobo Rotation Stop", "kind": "stop" },
+        { "from": 129, "to": 191, "label": "Gobo Rotation, Slow -> Fast, CW", "kind": "rotation" },
+        { "from": 192, "to": 250, "label": "Gobo Rotation, Fast -> Slow, CCW", "kind": "rotation" },
+        { "from": 251, "to": 255, "label": "Gobo Rotation Stop", "kind": "stop" }
+      ]
+    },
+    {
+      "key": "goboWheel1Shake",
+      "name": "Gobo Wheel 1 Shake",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Gobo Shake for Gobo Wheel off" },
+        { "from": 6, "to": 37, "label": "Speed 1" },
+        { "from": 38, "to": 69, "label": "Speed 2" },
+        { "from": 70, "to": 101, "label": "Speed 3" },
+        { "from": 102, "to": 133, "label": "Speed 4" },
+        { "from": 134, "to": 165, "label": "Speed 5" },
+        { "from": 166, "to": 197, "label": "Speed 6" },
+        { "from": 198, "to": 229, "label": "Speed 7" },
+        { "from": 230, "to": 255, "label": "Speed 8" }
+      ]
+    },
+    {
+      "key": "goboWheel2",
+      "name": "Gobo Wheel 2",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Gobo 0 (open)", "kind": "gobo" },
+        { "from": 6, "to": 25, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 26, "to": 45, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 46, "to": 65, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 66, "to": 85, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 86, "to": 105, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 106, "to": 127, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 128, "to": 128, "label": "Gobo Wheel Rotation Stop", "kind": "stop" },
+        { "from": 129, "to": 191, "label": "Gobo Wheel Rotation, Slow -> Fast, CW", "kind": "rotation" },
+        { "from": 192, "to": 255, "label": "Gobo Wheel Rotation, Fast -> Slow, CCW", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "goboWheel2Shake",
+      "name": "Gobo Wheel 2 Shake",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Gobo Shake for Gobo Wheel off" },
+        { "from": 6, "to": 37, "label": "Speed 1" },
+        { "from": 38, "to": 69, "label": "Speed 2" },
+        { "from": 70, "to": 101, "label": "Speed 3" },
+        { "from": 102, "to": 133, "label": "Speed 4" },
+        { "from": 134, "to": 165, "label": "Speed 5" },
+        { "from": 166, "to": 197, "label": "Speed 6" },
+        { "from": 198, "to": 229, "label": "Speed 7" },
+        { "from": 230, "to": 255, "label": "Speed 8" }
+      ]
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Prism off", "kind": "open" },
+        { "from": 6, "to": 10, "label": "Prism in", "kind": "prism" },
+        { "from": 11, "to": 127, "label": "Prism Position 0 deg ... 360 deg", "kind": "index" },
+        { "from": 128, "to": 128, "label": "Prism Rotation Stop", "kind": "stop" },
+        { "from": 129, "to": 191, "label": "Prism Rotation, Slow -> Fast, CW", "kind": "rotation" },
+        { "from": 192, "to": 250, "label": "Prism Rotation, Fast -> Slow, CCW", "kind": "rotation" },
+        { "from": 251, "to": 255, "label": "Prism Rotation Stop", "kind": "stop" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "focusFine",
+      "name": "Focus fine",
+      "attribute": "focus",
+      "fineOf": "focus"
+    },
+    {
+      "key": "panTiltMacro",
+      "name": "Pan/Tilt Macro",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "off" },
+        { "from": 6, "to": 47, "label": "PAN small > big\"" },
+        { "from": 48, "to": 89, "label": "TILT small > big\"" },
+        { "from": 90, "to": 131, "label": "PAN / TILT small > big\"" },
+        { "from": 132, "to": 173, "label": "PAN / TILT (invers) small > big\"" },
+        { "from": 174, "to": 215, "label": "Ellipse small > big\"" },
+        { "from": 216, "to": 255, "label": "Random small > big\"" }
+      ]
+    },
+    {
+      "key": "panTiltMacroSpeed",
+      "name": "Pan/Tilt Macro Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "setDimmerCurve",
+      "name": "Set dimmer curve",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 63, "label": "Linear Dimmer Curve" },
+        { "from": 64, "to": 127, "label": "Exponential Dimmer Curve" },
+        { "from": 128, "to": 191, "label": "Logarithmic Dimmer Curve" },
+        { "from": 192, "to": 255, "label": "S-Curve Dimmer Curve" }
+      ]
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "deviceSettings",
+      "name": "Device settings",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "no function" },
+        { "from": 6, "to": 37, "label": "Blackout while Moving on (Hold 3s)" },
+        { "from": 38, "to": 69, "label": "Blackout while Moving off (Hold 5s)" },
+        { "from": 70, "to": 101, "label": "Invert Pan on (Hold 3s)" },
+        { "from": 102, "to": 133, "label": "Invert Pan off (Hold 5s)" },
+        { "from": 134, "to": 165, "label": "Invert Tilt on (Hold 3s)" },
+        { "from": 166, "to": 197, "label": "Invert Tilt off (Hold 5s)" },
+        { "from": 198, "to": 229, "label": "silent Fan on (Hold 3s)" },
+        { "from": 230, "to": 255, "label": "silent Fan off (Hold 5s)" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "5 Channel",
+      "channels": [
+        "dimmer",
+        "strobe",
+        "autoProgram",
+        "autoProgramSpeed",
+        "reset"
+      ]
+    },
+    {
+      "name": "15 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "dimmer",
+        "strobeFunctions",
+        "colorWheel",
+        "goboWheel1",
+        "goboWheel1Rotation",
+        "goboWheel1Shake",
+        "goboWheel2",
+        "goboWheel2Shake",
+        "prism",
+        "focus",
+        "reset"
+      ]
+    },
+    {
+      "name": "24 Channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "dimmer",
+        "dimmerFine",
+        "strobeFunctions",
+        "colorWheel",
+        "goboWheel1",
+        "goboWheel1Rotation",
+        "goboWheel1Shake",
+        "goboWheel2",
+        "goboWheel2Shake",
+        "prism",
+        "focus",
+        "focusFine",
+        "autoProgram",
+        "autoProgramSpeed",
+        "panTiltMacro",
+        "panTiltMacroSpeed",
+        "setDimmerCurve",
+        "panTiltSpeed",
+        "deviceSettings",
+        "reset"
+      ]
+    }
+  ]
+}

@@ -29,3 +29,9 @@ export const BUNDLED_TEMPLATES_DIR = path.join(appRoot, 'templates');
 
 /** Show templates created by the user */
 export const USER_TEMPLATES_DIR = path.join(app.getPath('userData'), 'templates');
+
+/** Fixture definitions included in the application */
+export const BUNDLED_FIXTURES_DIR = path.join(appRoot, 'assets', 'fixtures');
+
+/** Fixture definitions created or imported by the user */
+export const USER_FIXTURES_DIR = path.join(app.getPath('userData'), 'fixtures');

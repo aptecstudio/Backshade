@@ -5,6 +5,9 @@
  * can come from remote clients.
  */
 
+import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
+import type { FixtureIssue } from '../fixtures/validate-fixture.js';
+import type { PatchedFixture } from '../patch/patch.js';
 import type { MediaKind } from '../show/media-kinds.js';
 import type { ShowSettings } from '../show/show-settings.js';
 
@@ -35,11 +38,23 @@ export interface ShowSummary {
     dirty: boolean;
 }
 
+/** Fixture definition referenced by the patch but not found in the library */
+export interface MissingFixture {
+    /** Identifier of the definition, for example "clay-paky/sharpy" */
+    definition: string;
+    /** Modes used by the patch; for a definition found without some of its modes, only those */
+    modes: string[];
+    /** Number of patched fixtures concerned */
+    count: number;
+}
+
 /** Result of opening a show */
 export interface OpenShowResult {
     show: ShowSummary;
     /** There is a recovery copy newer than the last save */
     recoveryAvailable: boolean;
+    /** Resources used by the show and not available on this workstation */
+    missingFixtures: MissingFixture[];
 }
 
 /** Recent show */
@@ -75,6 +90,69 @@ export interface MediaItem {
     size: number;
     /** Date of the last change of the file, ISO 8601 */
     modifiedAt: string;
+}
+
+/** Mode of a definition in the library list */
+export interface FixtureModeSummary {
+    name: string;
+    channelCount: number;
+}
+
+/** Fixture definition in the library list */
+export interface FixtureSummary {
+    /** Identifier, for example "clay-paky/sharpy" */
+    id: string;
+    manufacturer: string;
+    model: string;
+    category: FixtureCategory;
+    /** Included in the application (read-only) or created or imported by the user */
+    source: 'bundled' | 'user';
+    /** User definition that replaces an included one with the same identifier */
+    replacesBundled: boolean;
+    modes: FixtureModeSummary[];
+}
+
+/** Fixture definition with its library data */
+export interface FixtureRecordInfo extends FixtureSummary {
+    definition: FixtureDefinition;
+}
+
+/** Patched fixture with the state of its definition */
+export interface PatchEntry extends PatchedFixture {
+    /** Manufacturer, model and category from the definition, null if it is missing */
+    manufacturer: string | null;
+    model: string | null;
+    category: FixtureCategory | null;
+    /** The definition or its mode is not in the library */
+    missing: boolean;
+    /** It shares addresses with another fixture */
+    conflict: boolean;
+}
+
+/** Fixtures to add to the patch */
+export interface PatchAddRequest {
+    /** Identifier of the definition */
+    definition: string;
+    mode: string;
+    /** Number of fixtures, placed on consecutive addresses */
+    count: number;
+    universe: number;
+    /** Start address of the first fixture */
+    address: number;
+    /** Number of the first fixture; the next ones get the following numbers */
+    number: number;
+    /** Name; with more fixtures, each one gets its number after the name */
+    name: string;
+}
+
+/** Changes to a patched fixture */
+export interface PatchUpdateRequest {
+    id: string;
+    name?: string;
+    number?: number;
+    universe?: number;
+    address?: number;
+    mode?: string;
 }
 
 /** Global application settings */
@@ -134,6 +212,35 @@ export interface EngineMethods {
     /** Shows a media file in the system folder (desktop application only) */
     'media.reveal': { params: { file: string }; result: undefined };
 
+    /** Fixture definitions of the library: included and from the user */
+    'fixtures.list': { params: undefined; result: FixtureSummary[] };
+    /** A definition of the library */
+    'fixtures.get': { params: { id: string }; result: FixtureRecordInfo };
+    /** Checks a definition without saving it */
+    'fixtures.validate': { params: { definition: unknown }; result: FixtureIssue[] };
+    /**
+     * Saves a user definition; previousId is the identifier it had before the
+     * change, so a renamed definition replaces the old file and the patch follows it
+     */
+    'fixtures.save': { params: { definition: FixtureDefinition; previousId?: string }; result: FixtureSummary };
+    /** Deletes a user definition */
+    'fixtures.delete': { params: { id: string }; result: undefined };
+    /** Lets the user choose definition files and copies them into the user library; returns the identifiers */
+    'fixtures.import': { params: undefined; result: string[] };
+    /** Exports a definition to a file; returns the file, or null if cancelled */
+    'fixtures.export': { params: { id: string }; result: string | null };
+
+    /** Patch of the open show */
+    'patch.get': { params: undefined; result: PatchEntry[] };
+    /** Definitions used by the open show and not found in the library */
+    'patch.missingFixtures': { params: undefined; result: MissingFixture[] };
+    /** Adds fixtures to the patch (unsaved change); returns the new ones */
+    'patch.add': { params: PatchAddRequest; result: PatchEntry[] };
+    /** Changes a patched fixture (unsaved change) */
+    'patch.update': { params: PatchUpdateRequest; result: PatchEntry };
+    /** Removes fixtures from the patch (unsaved change) */
+    'patch.remove': { params: { ids: string[] }; result: undefined };
+
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
     /** Removes a show from the recent shows */
@@ -168,6 +275,10 @@ export interface EngineEvents {
     'media.changed': Record<string, never>;
     /** The list of recent shows has changed */
     'recent.changed': Record<string, never>;
+    /** The fixture library has changed */
+    'fixtures.changed': Record<string, never>;
+    /** The patch of the open show has changed */
+    'patch.changed': Record<string, never>;
     /** The list of templates has changed */
     'templates.changed': Record<string, never>;
     /** The user wants to close the window with unsaved changes */

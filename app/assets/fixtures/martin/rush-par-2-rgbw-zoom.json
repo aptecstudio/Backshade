@@ -1,0 +1,154 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Martin",
+  "model": "RUSH Par 2 RGBW Zoom",
+  "category": "par",
+  "physical": {
+    "width": 287,
+    "height": 329,
+    "depth": 266,
+    "weight": 5.5,
+    "lumens": 2300,
+    "colorTemperature": 9300,
+    "source": "LED",
+    "beamAngle": {
+      "min": 10,
+      "max": 60
+    },
+    "power": 151
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom",
+      "defaultValue": 128
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "colorWheel",
+      "name": "Color wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "Open (white)" },
+        { "from": 11, "to": 15, "label": "Color 1" },
+        { "from": 16, "to": 20, "label": "Color 2" },
+        { "from": 21, "to": 25, "label": "Color 3" },
+        { "from": 26, "to": 30, "label": "Color 4" },
+        { "from": 31, "to": 35, "label": "Color 5" },
+        { "from": 36, "to": 40, "label": "Color 6" },
+        { "from": 41, "to": 45, "label": "Color 7" },
+        { "from": 46, "to": 50, "label": "Color 8" },
+        { "from": 51, "to": 55, "label": "Color 9" },
+        { "from": 56, "to": 60, "label": "Color 10" },
+        { "from": 61, "to": 65, "label": "Color 11" },
+        { "from": 66, "to": 70, "label": "Color 12" },
+        { "from": 71, "to": 75, "label": "Color 13" },
+        { "from": 76, "to": 80, "label": "Color 14" },
+        { "from": 81, "to": 85, "label": "Color 15" },
+        { "from": 86, "to": 90, "label": "Color 16" },
+        { "from": 91, "to": 95, "label": "Color 17" },
+        { "from": 96, "to": 100, "label": "Color 18" },
+        { "from": 101, "to": 105, "label": "Color 19" },
+        { "from": 106, "to": 110, "label": "Color 20" },
+        { "from": 111, "to": 115, "label": "Color 21" },
+        { "from": 116, "to": 120, "label": "Color 22" },
+        { "from": 121, "to": 125, "label": "Color 23" },
+        { "from": 126, "to": 130, "label": "Color 24" },
+        { "from": 131, "to": 135, "label": "Color 25" },
+        { "from": 136, "to": 140, "label": "Color 26" },
+        { "from": 141, "to": 145, "label": "Color 27" },
+        { "from": 146, "to": 150, "label": "Color 28" },
+        { "from": 151, "to": 155, "label": "Color 29" },
+        { "from": 156, "to": 160, "label": "Color 30" },
+        { "from": 161, "to": 165, "label": "Color 31" },
+        { "from": 166, "to": 170, "label": "Color 32" },
+        { "from": 171, "to": 175, "label": "Color 33" },
+        { "from": 176, "to": 180, "label": "Color 34" },
+        { "from": 181, "to": 185, "label": "Color 35" },
+        { "from": 186, "to": 190, "label": "Color 36" },
+        { "from": 191, "to": 192, "label": "Open (white)" },
+        { "from": 193, "to": 214, "label": "Color Scroll - Ascending, fast -> slow", "kind": "rotation" },
+        { "from": 215, "to": 221, "label": "Color Scroll - Stop (at current position)", "kind": "stop" },
+        { "from": 222, "to": 243, "label": "Color Scroll - Descending, slow -> fast", "kind": "rotation" },
+        { "from": 244, "to": 247, "label": "Random color, fast" },
+        { "from": 248, "to": 251, "label": "Random color, medium" },
+        { "from": 252, "to": 255, "label": "Random color, slow" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "defaultValue": 11,
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Off", "kind": "closed" },
+        { "from": 8, "to": 15, "label": "Open", "kind": "open" },
+        { "from": 16, "to": 131, "label": "Strobe - slow~fast", "kind": "strobe" },
+        { "from": 132, "to": 139, "label": "Open", "kind": "open" },
+        { "from": 140, "to": 181, "label": "Pulse - fast close & slow open" },
+        { "from": 182, "to": 189, "label": "Open", "kind": "open" },
+        { "from": 190, "to": 231, "label": "Pulse - slow close & fast open", "kind": "pulse" },
+        { "from": 232, "to": 239, "label": "Open", "kind": "open" },
+        { "from": 240, "to": 247, "label": "Random strobe", "kind": "strobe" },
+        { "from": 248, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "5 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "zoom"
+      ]
+    },
+    {
+      "name": "9 Channel",
+      "channels": [
+        "dimmer",
+        "dimmerFine",
+        "strobe",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "colorWheel",
+        "zoom"
+      ]
+    }
+  ]
+}

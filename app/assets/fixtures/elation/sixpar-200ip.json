@@ -1,0 +1,226 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Elation",
+  "model": "SIXPAR 200IP",
+  "category": "par",
+  "physical": {
+    "width": 157,
+    "height": 300,
+    "depth": 313,
+    "weight": 5.7,
+    "lumens": 2100,
+    "source": "LED",
+    "beamAngle": {
+      "min": 15,
+      "max": 25
+    },
+    "power": 150
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    },
+    {
+      "key": "uV",
+      "name": "U.V.",
+      "attribute": "uv"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "LED OFF (NO STROE)", "kind": "closed" },
+        { "from": 32, "to": 95, "label": "Strobe Effect SLOW to FAST", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "LED ON (NO STROBE)", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Strobe Pulse Effect In Sequences SLOW to FAST", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "LED ON (NO STROBE)", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobe Effect SLOW to FAST", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "LED ON (NO STROBE)", "kind": "open" }
+      ]
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "OFF" },
+        { "from": 4, "to": 7, "label": "RED", "kind": "color", "color": "#ff0000" },
+        { "from": 8, "to": 11, "label": "GREEN", "kind": "color", "color": "#00ff00" },
+        { "from": 12, "to": 15, "label": "BLUE", "kind": "color", "color": "#0000ff" },
+        { "from": 16, "to": 19, "label": "WHITE", "kind": "color", "color": "#ffffff" },
+        { "from": 20, "to": 23, "label": "AMBER", "kind": "color", "color": "#ce8900" },
+        { "from": 24, "to": 27, "label": "U.V.", "kind": "color", "color": "#7100aa" },
+        { "from": 28, "to": 31, "label": "RED+GREEN", "kind": "color", "color": "#ff0000" },
+        { "from": 32, "to": 35, "label": "RED+BLUE", "kind": "color", "color": "#ff0000" },
+        { "from": 36, "to": 39, "label": "RED+WHITE", "kind": "color", "color": "#ff0000" },
+        { "from": 40, "to": 43, "label": "RED+AMBER", "kind": "color", "color": "#ff0000" },
+        { "from": 44, "to": 47, "label": "RED+U.V.", "kind": "color", "color": "#ff0000" },
+        { "from": 48, "to": 51, "label": "GREEN+BLUE", "kind": "color", "color": "#00ff00" },
+        { "from": 52, "to": 55, "label": "GREEN+WHITE", "kind": "color", "color": "#00ff00" },
+        { "from": 56, "to": 59, "label": "GREEN+AMBER", "kind": "color", "color": "#00ff00" },
+        { "from": 60, "to": 63, "label": "GREEN+U.V.", "kind": "color", "color": "#00ff00" },
+        { "from": 64, "to": 67, "label": "BLUE+WHITE", "kind": "color", "color": "#0000ff" },
+        { "from": 68, "to": 71, "label": "BLUE+AMBER", "kind": "color", "color": "#0000ff" },
+        { "from": 72, "to": 75, "label": "BLUE+U.V.", "kind": "color", "color": "#0000ff" },
+        { "from": 76, "to": 79, "label": "WHITE+AMBER", "kind": "color", "color": "#ffffff" },
+        { "from": 80, "to": 83, "label": "WHITE+U.V.", "kind": "color", "color": "#ffffff" },
+        { "from": 84, "to": 87, "label": "AMBER+U.V.", "kind": "color", "color": "#ce8900" },
+        { "from": 88, "to": 91, "label": "RED+GREEN+BLUE" },
+        { "from": 92, "to": 95, "label": "RED+GREEN+WHITE" },
+        { "from": 96, "to": 99, "label": "RED+GREEN+AMBER" },
+        { "from": 100, "to": 103, "label": "RED+GREEN+U.V." },
+        { "from": 104, "to": 107, "label": "RED+BLUE+WHITE" },
+        { "from": 108, "to": 111, "label": "RED+BLUE+AMBER" },
+        { "from": 112, "to": 115, "label": "RED+BLUE+U.V." },
+        { "from": 116, "to": 119, "label": "RED+WHITE+AMBER" },
+        { "from": 120, "to": 123, "label": "RED+WHITE+U.V." },
+        { "from": 124, "to": 127, "label": "RED+AMBER+U.V." },
+        { "from": 128, "to": 131, "label": "GREEN+BLUE+WHITE" },
+        { "from": 132, "to": 135, "label": "GREEN+BLUE+AMBER" },
+        { "from": 136, "to": 139, "label": "GREEN+BLUE+U.V." },
+        { "from": 140, "to": 143, "label": "GREEN+WHITE+AMBER" },
+        { "from": 144, "to": 147, "label": "GREEN+WHITE+U.V." },
+        { "from": 148, "to": 151, "label": "GREEN+AMBER+U.V." },
+        { "from": 152, "to": 155, "label": "BLUE+WHITE+AMBER" },
+        { "from": 156, "to": 159, "label": "BLUE+WHITE+U.V." },
+        { "from": 160, "to": 163, "label": "BLUE+AMBER+U.V." },
+        { "from": 164, "to": 167, "label": "WHITE+AMBER+U.V." },
+        { "from": 168, "to": 171, "label": "RED+GREEN+BLUE+WHITE" },
+        { "from": 172, "to": 175, "label": "RED+GREEN+BLUE+AMBER" },
+        { "from": 176, "to": 179, "label": "RED+GREEN+BLUE+U.V." },
+        { "from": 180, "to": 183, "label": "RED+GREEN+WHITE+AMBER" },
+        { "from": 184, "to": 187, "label": "RED+GREEN+WHITE+U.V." },
+        { "from": 188, "to": 191, "label": "RED+GREEN+AMBER+U.V." },
+        { "from": 192, "to": 195, "label": "RED+BLUE+WHITE+AMBER" },
+        { "from": 196, "to": 199, "label": "RED+GREEN+WHITE+U.V." },
+        { "from": 200, "to": 203, "label": "RED+GREEN+AMBER+U.V." },
+        { "from": 204, "to": 207, "label": "RED+WHITE+AMBE+U.V." },
+        { "from": 208, "to": 211, "label": "GREEN+BLUE+WHITE+AMBER" },
+        { "from": 212, "to": 215, "label": "GREEN+BLUE+WHITE+U.V." },
+        { "from": 216, "to": 219, "label": "GREEN+BLUE+AMBER+U.V." },
+        { "from": 220, "to": 223, "label": "GREEN+WHITE+AMBER+U.V." },
+        { "from": 224, "to": 227, "label": "BLUE+WHITE+AMBER+U.V." },
+        { "from": 228, "to": 231, "label": "RED+GREEN+BLUE+WHITE+AMBER" },
+        { "from": 232, "to": 235, "label": "RED+GREEN+BLUE+WHITE+U.V." },
+        { "from": 236, "to": 239, "label": "RED+GREEN+BLUE+AMBER+U.V." },
+        { "from": 240, "to": 243, "label": "RED+GREEN+WHITE+AMBER+U.V." },
+        { "from": 244, "to": 247, "label": "RED+BLUE+WHITE+AMBER+U.V." },
+        { "from": 248, "to": 251, "label": "GREEN+BLUE+WHITE+AMBER+U.V." },
+        { "from": 252, "to": 255, "label": "RED+GREEN+BLUE+WHITE+AMBER+U.V." }
+      ]
+    },
+    {
+      "key": "colorChaseMacros",
+      "name": "Color Chase Macros",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "NO Function" },
+        { "from": 21, "to": 40, "label": "30 Color Chase" },
+        { "from": 41, "to": 60, "label": "6 Color Chase" },
+        { "from": 61, "to": 80, "label": "Color Fade Chase" },
+        { "from": 81, "to": 255, "label": "NO Function" }
+      ]
+    },
+    {
+      "key": "colorChaseMacrosSpeed",
+      "name": "Color Chase Macros Speed",
+      "attribute": "control"
+    },
+    {
+      "key": "dimmingModes",
+      "name": "Dimming Modes",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Standard" },
+        { "from": 21, "to": 40, "label": "Stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "Archictural" },
+        { "from": 81, "to": 100, "label": "Theater" },
+        { "from": 101, "to": 255, "label": "NO Function" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "12 channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "uV",
+        "dimmer",
+        "strobe",
+        "colorMacros",
+        "colorChaseMacros",
+        "colorChaseMacrosSpeed",
+        "dimmingModes"
+      ]
+    },
+    {
+      "name": "8 channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "uV",
+        "dimmer",
+        "strobe"
+      ]
+    },
+    {
+      "name": "7 channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "uV",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "6 channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "uV"
+      ]
+    }
+  ]
+}

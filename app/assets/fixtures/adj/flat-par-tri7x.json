@@ -1,0 +1,178 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Flat Par Tri7X",
+  "category": "par",
+  "physical": {
+    "width": 272,
+    "height": 230,
+    "depth": 115,
+    "weight": 2.4,
+    "lumens": 691,
+    "source": "LED",
+    "beamAngle": {
+      "min": 40,
+      "max": 40
+    },
+    "power": 27
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Bastard Amber", "kind": "color", "color": "#fece8f" },
+        { "from": 8, "to": 15, "label": "Medium Amber", "kind": "color", "color": "#ff8b00" },
+        { "from": 16, "to": 23, "label": "Pale Amber Gold", "kind": "color", "color": "#ffc08a" },
+        { "from": 24, "to": 31, "label": "Gallo Gold", "kind": "color", "color": "#ffa562" },
+        { "from": 32, "to": 39, "label": "Golden Amber", "kind": "color", "color": "#ff7900" },
+        { "from": 40, "to": 47, "label": "Light Red", "kind": "color", "color": "#b01100" },
+        { "from": 48, "to": 55, "label": "Medium Red", "kind": "color", "color": "#60000b" },
+        { "from": 56, "to": 63, "label": "Medium Pink", "kind": "color", "color": "#ea8bab" },
+        { "from": 64, "to": 71, "label": "Broadway Pink", "kind": "color", "color": "#e00561" },
+        { "from": 72, "to": 79, "label": "Follies Pink", "kind": "color", "color": "#af4dad" },
+        { "from": 80, "to": 87, "label": "Light Lavender", "kind": "color", "color": "#7782c7" },
+        { "from": 88, "to": 95, "label": "Special Lavender", "kind": "color", "color": "#93a4d4" },
+        { "from": 96, "to": 103, "label": "Lavender", "kind": "color", "color": "#5802a3" },
+        { "from": 104, "to": 111, "label": "Indigo", "kind": "color", "color": "#002656" },
+        { "from": 112, "to": 119, "label": "Hemsley Blue", "kind": "color", "color": "#669efd" },
+        { "from": 120, "to": 127, "label": "Tipton Blue", "kind": "color", "color": "#3494d1" },
+        { "from": 128, "to": 135, "label": "Light Steel Blue", "kind": "color", "color": "#0186c9" },
+        { "from": 136, "to": 143, "label": "Light Sky Blue", "kind": "color", "color": "#0091d4" },
+        { "from": 144, "to": 151, "label": "Sky Blue", "kind": "color", "color": "#0079c0" },
+        { "from": 152, "to": 159, "label": "Brilliant Blue", "kind": "color", "color": "#0081b8" },
+        { "from": 160, "to": 167, "label": "Light Green Blue", "kind": "color", "color": "#005373" },
+        { "from": 168, "to": 175, "label": "Bright Blue", "kind": "color", "color": "#0061a6" },
+        { "from": 176, "to": 183, "label": "Primary Blue", "kind": "color", "color": "#0164a7" },
+        { "from": 184, "to": 191, "label": "Congo Blue", "kind": "color", "color": "#002856" },
+        { "from": 192, "to": 199, "label": "Pale Yellow Green", "kind": "color", "color": "#d1dbb6" },
+        { "from": 200, "to": 207, "label": "Moss Green", "kind": "color", "color": "#2aa555" },
+        { "from": 208, "to": 215, "label": "Primary Green", "kind": "color", "color": "#002e23" },
+        { "from": 216, "to": 223, "label": "Double CTB", "kind": "color", "color": "#4155b8" },
+        { "from": 224, "to": 231, "label": "Full CTB", "kind": "color", "color": "#7897cd" },
+        { "from": 232, "to": 239, "label": "Half CTB", "kind": "color", "color": "#abbbd4" },
+        { "from": 240, "to": 247, "label": "Dark Blue", "kind": "color", "color": "#00008b" },
+        { "from": 248, "to": 255, "label": "White", "kind": "color", "color": "#ffffff" }
+      ]
+    },
+    {
+      "key": "strobing",
+      "name": "Strobing",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "None" },
+        { "from": 16, "to": 255, "label": "Slow - fast" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "programs",
+      "name": "Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Off" },
+        { "from": 128, "to": 135, "label": "Color dreaming 1" },
+        { "from": 136, "to": 143, "label": "Color dreaming 2" },
+        { "from": 144, "to": 151, "label": "Color dreaming 3" },
+        { "from": 152, "to": 159, "label": "Color dreaming 4" },
+        { "from": 160, "to": 167, "label": "Color dreaming 5" },
+        { "from": 168, "to": 175, "label": "Color dreaming 6" },
+        { "from": 176, "to": 183, "label": "Color dreaming 7" },
+        { "from": 184, "to": 191, "label": "Color dreaming 8" },
+        { "from": 192, "to": 199, "label": "Color change 1" },
+        { "from": 200, "to": 207, "label": "Color change 2" },
+        { "from": 208, "to": 215, "label": "Color change 3" },
+        { "from": 216, "to": 223, "label": "Color change 4" },
+        { "from": 224, "to": 231, "label": "Color change 5" },
+        { "from": 232, "to": 239, "label": "Color change 6" },
+        { "from": 240, "to": 247, "label": "Sound active mode 1" },
+        { "from": 248, "to": 255, "label": "Sound active mode 2" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 Channel",
+      "channels": [
+        "colorMacros"
+      ]
+    },
+    {
+      "name": "2 Channel",
+      "channels": [
+        "colorMacros",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "4 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "5 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "masterDimmer",
+        "colorMacros"
+      ]
+    },
+    {
+      "name": "6 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "colorMacros",
+        "strobing",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "7 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "colorMacros",
+        "strobing",
+        "programs",
+        "masterDimmer"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Stairville",
+  "model": "Beam Moving Head B5R",
+  "category": "movingHead",
+  "physical": {
+    "width": 390,
+    "height": 485,
+    "depth": 330,
+    "weight": 19,
+    "lumens": 7950,
+    "colorTemperature": 8000,
+    "source": "MSD 200W",
+    "beamAngle": {
+      "min": 3.8,
+      "max": 3.8
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 230
+  },
+  "channels": [
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 5, "to": 8, "label": "White + Red", "kind": "color", "color": "#ffffff" },
+        { "from": 9, "to": 12, "label": "Red", "kind": "color", "color": "#c41c1a" },
+        { "from": 13, "to": 17, "label": "Red + Orange", "kind": "color", "color": "#c41c1a" },
+        { "from": 18, "to": 21, "label": "Orange", "kind": "color", "color": "#ed8228" },
+        { "from": 22, "to": 25, "label": "Orange + Cyan", "kind": "color", "color": "#ed8228" },
+        { "from": 26, "to": 29, "label": "Cyan", "kind": "color", "color": "#5bbdbd" },
+        { "from": 30, "to": 34, "label": "Cyan + Green", "kind": "color", "color": "#39babd" },
+        { "from": 35, "to": 38, "label": "Green", "kind": "color", "color": "#05822b" },
+        { "from": 39, "to": 42, "label": "Green + Light Green", "kind": "color", "color": "#05822b" },
+        { "from": 43, "to": 46, "label": "Light Green", "kind": "color", "color": "#9ec233" },
+        { "from": 47, "to": 51, "label": "Light Green + Lavender", "kind": "color", "color": "#9ec233" },
+        { "from": 52, "to": 55, "label": "Lavender", "kind": "color", "color": "#8f73ad" },
+        { "from": 56, "to": 59, "label": "Lavender + light yellow", "kind": "color", "color": "#8f73ad" },
+        { "from": 60, "to": 63, "label": "Light yellow", "kind": "color", "color": "#eddc65" },
+        { "from": 64, "to": 68, "label": "Light yellow + Yellow", "kind": "color", "color": "#eddc65" },
+        { "from": 69, "to": 72, "label": "Yellow", "kind": "color", "color": "#ffed00" },
+        { "from": 73, "to": 76, "label": "Yellow + pink", "kind": "color", "color": "#ffed00" },
+        { "from": 77, "to": 81, "label": "Pink", "kind": "color", "color": "#e30082" },
+        { "from": 82, "to": 85, "label": "Pink + Blue", "kind": "color", "color": "#e30082" },
+        { "from": 86, "to": 89, "label": "Blue", "kind": "color", "color": "#00a6eb" },
+        { "from": 90, "to": 93, "label": "Blue + CTO 260", "kind": "color", "color": "#00a6eb" },
+        { "from": 94, "to": 98, "label": "CTO 260", "kind": "color", "color": "#f5c745" },
+        { "from": 99, "to": 102, "label": "CTO 260 + CTO 190", "kind": "color", "color": "#f5c745" },
+        { "from": 103, "to": 106, "label": "CTO 190", "kind": "color", "color": "#f5d985" },
+        { "from": 107, "to": 110, "label": "CTO 190 + CTB 8000", "kind": "color", "color": "#f5d985" },
+        { "from": 111, "to": 115, "label": "CTB 8000", "kind": "color", "color": "#96c7b8" },
+        { "from": 116, "to": 119, "label": "CTB 8000 + UV", "kind": "color", "color": "#96c7b8" },
+        { "from": 120, "to": 123, "label": "UV", "kind": "color", "color": "#3d06b0" },
+        { "from": 124, "to": 127, "label": "UV + White", "kind": "color", "color": "#3d06b0" },
+        { "from": 128, "to": 188, "label": "Rotation clockwise, decreasing speed", "kind": "gobo" },
+        { "from": 189, "to": 255, "label": "Rotation counterclockwise, decreasing speed", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "strobeEffect",
+      "name": "Strobe effect",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 1, "label": "No strobe effect, lamp off", "kind": "open" },
+        { "from": 2, "to": 7, "label": "No strobe effect, lamp on", "kind": "open" },
+        { "from": 8, "to": 63, "label": "Strobe effect (standard), increasing speed", "kind": "strobe" },
+        { "from": 64, "to": 71, "label": "No strobe effect, lamp on", "kind": "open" },
+        { "from": 72, "to": 127, "label": "Strobe effect (symmetrical), increasing speed", "kind": "strobe" },
+        { "from": 128, "to": 135, "label": "No strobe effect, lamp on", "kind": "open" },
+        { "from": 136, "to": 160, "label": "Strobe effect (fast shutter), increasing speed", "kind": "strobe" },
+        { "from": 161, "to": 166, "label": "No strobe effect, lamp on", "kind": "open" },
+        { "from": 167, "to": 191, "label": "Strobe effect, increasing speed", "kind": "strobe" },
+        { "from": 192, "to": 199, "label": "No strobe effect, lamp on", "kind": "open" },
+        { "from": 200, "to": 209, "label": "Effect 1" },
+        { "from": 210, "to": 219, "label": "Effect 2" },
+        { "from": 220, "to": 229, "label": "Random slow strobe effect", "kind": "strobe" },
+        { "from": 230, "to": 239, "label": "Random strobe effect with medium speed" },
+        { "from": 240, "to": 249, "label": "Random strobe effect with decreasing speed", "kind": "strobe" },
+        { "from": 250, "to": 255, "label": "No strobe effect, lamp on", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "gobos",
+      "name": "Gobos",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "White", "kind": "gobo" },
+        { "from": 4, "to": 7, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 8, "to": 11, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 12, "to": 15, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 16, "to": 19, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 20, "to": 23, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 24, "to": 27, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 28, "to": 31, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 32, "to": 35, "label": "Gobo 8", "kind": "gobo" },
+        { "from": 36, "to": 39, "label": "Gobo 9", "kind": "gobo" },
+        { "from": 40, "to": 43, "label": "Gobo 10", "kind": "gobo" },
+        { "from": 44, "to": 47, "label": "Gobo 11", "kind": "gobo" },
+        { "from": 48, "to": 51, "label": "Gobo 12", "kind": "gobo" },
+        { "from": 52, "to": 55, "label": "Gobo 13", "kind": "gobo" },
+        { "from": 56, "to": 59, "label": "Gobo 14", "kind": "gobo" },
+        { "from": 60, "to": 63, "label": "Gobo 15", "kind": "gobo" },
+        { "from": 64, "to": 67, "label": "Gobo 16", "kind": "gobo" },
+        { "from": 68, "to": 71, "label": "Gobo 17", "kind": "gobo" },
+        { "from": 72, "to": 113, "label": "Rotation (Fast 60rpm to slow 5rpm)" },
+        { "from": 114, "to": 117, "label": "Stop" },
+        { "from": 118, "to": 159, "label": "Rotation (Slow 5rpm to fast 60rpm)" },
+        { "from": 160, "to": 166, "label": "Gobo 2 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 167, "to": 172, "label": "Gobo 3 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 173, "to": 179, "label": "Gobo 4 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 180, "to": 185, "label": "Gobo 5 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 186, "to": 191, "label": "Gobo 6 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 192, "to": 198, "label": "Gobo 7 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 199, "to": 204, "label": "Gobo 8 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 205, "to": 211, "label": "Gobo 9 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 212, "to": 217, "label": "Gobo 10 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 218, "to": 223, "label": "Gobo 11 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 224, "to": 230, "label": "Gobo 12 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 231, "to": 236, "label": "Gobo 13 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 237, "to": 243, "label": "Gobo 14 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 244, "to": 249, "label": "Gobo 15 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 250, "to": 255, "label": "Gobo 16 Shake (Slow 24bpm to Fast 600bpm)", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "prismRotation",
+      "name": "Prism Rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Index position 0 deg to 540 deg" },
+        { "from": 128, "to": 190, "label": "Gobo wheel rotation clockwise, decreasing speed" },
+        { "from": 191, "to": 192, "label": "No rotation" },
+        { "from": 193, "to": 255, "label": "Rotation clockwise, increasing speed" }
+      ]
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Prism off" },
+        { "from": 128, "to": 255, "label": "Prism on" }
+      ]
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "Unused" },
+        { "from": 26, "to": 76, "label": "Effects Reset" },
+        { "from": 77, "to": 127, "label": "Pan/Tilt Reset", "kind": "reset" },
+        { "from": 128, "to": 255, "label": "Total Reset", "kind": "reset" }
+      ]
+    },
+    {
+      "key": "lampControl",
+      "name": "Lamp Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "Unused" },
+        { "from": 26, "to": 100, "label": "Lamp OFF after five seconds" },
+        { "from": 101, "to": 255, "label": "Lamp ON after five seconds" }
+      ]
+    },
+    {
+      "key": "panTiltTime",
+      "name": "Pan - Tilt Time",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Maximum speed" },
+        { "from": 1, "to": 250, "label": "Linear speed reduction" },
+        { "from": 251, "to": 255, "label": "Maximum speed" }
+      ]
+    },
+    {
+      "key": "prismZoom",
+      "name": "Prism zoom",
+      "attribute": "prism"
+    },
+    {
+      "key": "withoutFunction",
+      "name": "Without function",
+      "attribute": "control"
+    }
+  ],
+  "modes": [
+    {
+      "name": "17-channel",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltTime",
+        "colorWheel",
+        "strobeEffect",
+        "dimmer",
+        "gobos",
+        "frost",
+        "reset",
+        "focus",
+        "lampControl",
+        "prism",
+        "prismRotation",
+        "prismZoom",
+        "withoutFunction"
+      ]
+    },
+    {
+      "name": "16-channel",
+      "channels": [
+        "colorWheel",
+        "strobeEffect",
+        "dimmer",
+        "gobos",
+        "prism",
+        "prismRotation",
+        "prismZoom",
+        "frost",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "withoutFunction",
+        "reset",
+        "lampControl"
+      ]
+    }
+  ]
+}

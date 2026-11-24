@@ -1,0 +1,247 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "COLORband T3 USB",
+  "category": "ledBar",
+  "physical": {
+    "width": 987,
+    "height": 49,
+    "depth": 157,
+    "weight": 2.7,
+    "source": "LED",
+    "power": 27
+  },
+  "channels": [
+    {
+      "key": "red1",
+      "name": "Red 1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "red2",
+      "name": "Red 2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "red3",
+      "name": "Red 3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 255, "label": "Color Macros" }
+      ]
+    },
+    {
+      "key": "strobeAutoSpeedSoundSensitivity",
+      "name": "Strobe / Auto Speed / Sound Sensitivity",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 255, "label": "Strobe Speed" }
+      ]
+    },
+    {
+      "key": "autoPrograms",
+      "name": "Auto Programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "No function" },
+        { "from": 32, "to": 63, "label": "Pulse Effect 0-100%" },
+        { "from": 64, "to": 95, "label": "Pulse Effect 100%-0" },
+        { "from": 96, "to": 114, "label": "Pulse Effect 100%-0-100%" },
+        { "from": 115, "to": 122, "label": "Auto Program 1" },
+        { "from": 123, "to": 130, "label": "Auto Program 2" },
+        { "from": 131, "to": 138, "label": "Auto Program 3" },
+        { "from": 139, "to": 146, "label": "Auto Program 4" },
+        { "from": 147, "to": 154, "label": "Auto Program 5" },
+        { "from": 155, "to": 162, "label": "Auto Program 6" },
+        { "from": 163, "to": 170, "label": "Auto Program 7" },
+        { "from": 171, "to": 178, "label": "Auto Program 8" },
+        { "from": 179, "to": 186, "label": "Auto Program 9" },
+        { "from": 187, "to": 194, "label": "Auto Program 10" },
+        { "from": 195, "to": 202, "label": "Auto Program 11" },
+        { "from": 203, "to": 210, "label": "Auto Program 12" },
+        { "from": 211, "to": 218, "label": "Auto Program 13" },
+        { "from": 219, "to": 226, "label": "Auto Program 14" },
+        { "from": 227, "to": 255, "label": "Sound-Activated Program" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerSpeedMode",
+      "name": "Dimmer Speed Mode",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "Dimmer Speed Set From Display" },
+        { "from": 52, "to": 101, "label": "Dimmer Speed Mode Off" },
+        { "from": 102, "to": 152, "label": "Dimmer Speed Mode 1 Fast" },
+        { "from": 153, "to": 203, "label": "Dimmer Speed Mode 2 Medium" },
+        { "from": 204, "to": 255, "label": "Dimmer Speed Mode 3 Slow" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function", "kind": "open" },
+        { "from": 16, "to": 255, "label": "Strobe (slow to fast)", "kind": "strobe" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "14 Channel",
+      "channels": [
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "colorMacros",
+        "strobeAutoSpeedSoundSensitivity",
+        "autoPrograms",
+        "dimmer",
+        "dimmerSpeedMode"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "blue2",
+          "green2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ]
+      ]
+    },
+    {
+      "name": "9 Channel",
+      "channels": [
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "green2",
+          "red2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ]
+      ]
+    },
+    {
+      "name": "8 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "colorMacros",
+        "strobeAutoSpeedSoundSensitivity",
+        "autoPrograms",
+        "dimmer",
+        "dimmerSpeedMode"
+      ]
+    },
+    {
+      "name": "6 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "dimmer",
+        "strobe",
+        "dimmerSpeedMode"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  ]
+}

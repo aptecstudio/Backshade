@@ -1,0 +1,34 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Generic",
+  "model": "Dimmer",
+  "category": "dimmer",
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 channel",
+      "channels": [
+        "dimmer"
+      ]
+    },
+    {
+      "name": "16 bit",
+      "channels": [
+        "dimmer",
+        "dimmerFine"
+      ]
+    }
+  ]
+}

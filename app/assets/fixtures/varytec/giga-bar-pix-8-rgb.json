@@ -1,0 +1,268 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Varytec",
+  "model": "Giga Bar Pix 8 RGB",
+  "category": "pixelBar",
+  "physical": {
+    "width": 1020,
+    "height": 80,
+    "depth": 65,
+    "weight": 1.5,
+    "source": "LED",
+    "beamAngle": {
+      "min": 30,
+      "max": 30
+    },
+    "power": 25
+  },
+  "channels": [
+    {
+      "key": "function",
+      "name": "Function",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "LEDs off" },
+        { "from": 8, "to": 15, "label": "Constant unicolored pattern in red" },
+        { "from": 16, "to": 23, "label": "Constant unicolored pattern in red and green" },
+        { "from": 24, "to": 31, "label": "Constant unicolored pattern in green" },
+        { "from": 32, "to": 39, "label": "Constant unicolored pattern in blue and green" },
+        { "from": 40, "to": 47, "label": "Constant unicolored pattern in blue" },
+        { "from": 48, "to": 55, "label": "Constant unicolored pattern in blue and red" },
+        { "from": 56, "to": 63, "label": "Constant unicolored pattern in red, green and blue" }
+      ]
+    },
+    {
+      "key": "red1",
+      "name": "Red1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue1",
+      "attribute": "blue"
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    },
+    {
+      "key": "noFunction",
+      "name": "No function",
+      "attribute": "none"
+    },
+    {
+      "key": "red2",
+      "name": "Red2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue2",
+      "attribute": "blue"
+    },
+    {
+      "key": "red3",
+      "name": "Red3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue3",
+      "attribute": "blue"
+    },
+    {
+      "key": "red4",
+      "name": "Red4",
+      "attribute": "red"
+    },
+    {
+      "key": "green4",
+      "name": "Green4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue4",
+      "name": "Blue4",
+      "attribute": "blue"
+    },
+    {
+      "key": "red5",
+      "name": "Red5",
+      "attribute": "red"
+    },
+    {
+      "key": "green5",
+      "name": "Green5",
+      "attribute": "green"
+    },
+    {
+      "key": "blue5",
+      "name": "Blue5",
+      "attribute": "blue"
+    },
+    {
+      "key": "red6",
+      "name": "Red6",
+      "attribute": "red"
+    },
+    {
+      "key": "green6",
+      "name": "Green6",
+      "attribute": "green"
+    },
+    {
+      "key": "blue6",
+      "name": "Blue6",
+      "attribute": "blue"
+    },
+    {
+      "key": "red7",
+      "name": "Red7",
+      "attribute": "red"
+    },
+    {
+      "key": "green7",
+      "name": "Green7",
+      "attribute": "green"
+    },
+    {
+      "key": "blue7",
+      "name": "Blue7",
+      "attribute": "blue"
+    },
+    {
+      "key": "red8",
+      "name": "Red8",
+      "attribute": "red"
+    },
+    {
+      "key": "green8",
+      "name": "Green8",
+      "attribute": "green"
+    },
+    {
+      "key": "blue8",
+      "name": "Blue8",
+      "attribute": "blue"
+    }
+  ],
+  "modes": [
+    {
+      "name": "2 Channel",
+      "channels": [
+        "function",
+        "noFunction"
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "red1",
+        "green1",
+        "blue1"
+      ]
+    },
+    {
+      "name": "5 Channel",
+      "channels": [
+        "red1",
+        "green1",
+        "blue1",
+        "masterDimmer",
+        "strobe"
+      ]
+    },
+    {
+      "name": "24 Channel",
+      "channels": [
+        "red1",
+        "green1",
+        "blue1",
+        "red2",
+        "green2",
+        "blue2",
+        "red3",
+        "green3",
+        "blue3",
+        "red4",
+        "green4",
+        "blue4",
+        "red5",
+        "green5",
+        "blue5",
+        "red6",
+        "green6",
+        "blue6",
+        "red7",
+        "green7",
+        "blue7",
+        "red8",
+        "green8",
+        "blue8"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4"
+        ],
+        [
+          "red5",
+          "green5",
+          "blue5"
+        ],
+        [
+          "red6",
+          "green6",
+          "blue6"
+        ],
+        [
+          "red7",
+          "green7",
+          "blue7"
+        ],
+        [
+          "red8",
+          "green8",
+          "blue8"
+        ]
+      ]
+    }
+  ]
+}

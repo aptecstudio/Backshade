@@ -1,0 +1,127 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Shehds",
+  "model": "LED Flat Par 18x18W RGBWA+UV",
+  "category": "par",
+  "physical": {
+    "width": 200,
+    "height": 265,
+    "depth": 115,
+    "weight": 3.15,
+    "source": "LED",
+    "power": 324
+  },
+  "channels": [
+    {
+      "key": "masterDimmer",
+      "name": "Master dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    },
+    {
+      "key": "violet",
+      "name": "Violet",
+      "attribute": "uv"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "Shutter open", "kind": "open" },
+        { "from": 5, "to": 255, "label": "Strobe 0...20Hz", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "function",
+      "name": "Function",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 50, "label": "No function" },
+        { "from": 51, "to": 100, "label": "Static color" },
+        { "from": 251, "to": 255, "label": "Sound Mode (Static color flashing on beat)" }
+      ]
+    },
+    {
+      "key": "colorPresets",
+      "name": "Color Presets",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 32, "to": 63, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 64, "to": 95, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 96, "to": 127, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 128, "to": 159, "label": "Amber", "kind": "color", "color": "#ffbf00" },
+        { "from": 160, "to": 191, "label": "UV", "kind": "color", "color": "#8800ff" },
+        { "from": 192, "to": 223, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 224, "to": 255, "label": "Warm White", "kind": "color", "color": "#fff6da" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "6 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "violet"
+      ]
+    },
+    {
+      "name": "9 Channel",
+      "channels": [
+        "masterDimmer",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "violet",
+        "function",
+        "colorPresets"
+      ]
+    },
+    {
+      "name": "10 Channel",
+      "channels": [
+        "masterDimmer",
+        "red",
+        "green",
+        "blue",
+        "white",
+        "amber",
+        "violet",
+        "strobe",
+        "function",
+        "colorPresets"
+      ]
+    }
+  ]
+}

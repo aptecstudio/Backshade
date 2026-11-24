@@ -1,0 +1,119 @@
+// Fixture library, fixture editor, add fixtures and missing definitions dialogs
+@use 'framework/scss/tokens' as *;
+
+// Library list next to a side panel, filling the height of the dialog
+.fixture-library {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.fixture-picker {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: space(2);
+    min-width: 0;
+    min-height: 0;
+}
+
+.fixture-picker__filters > .text-field {
+    flex: 1 1 auto;
+}
+
+.fixture-picker__list {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: space(1);
+    min-height: space(8);
+    overflow: auto;
+}
+
+.fixture-picker__icon {
+    flex: 0 0 auto;
+    color: color('text-secondary');
+}
+
+.fixture-picker__text,
+.mode-channels__text {
+    min-width: 0;
+    gap: 0;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.fixture-details,
+.add-fixtures__form {
+    flex: 0 0 384px;
+    overflow: auto;
+}
+
+.fixture-details .label {
+    overflow-wrap: anywhere;
+}
+
+// Editor rows: the header uses the same columns as the rows
+.fixture-editor__fields > * {
+    flex: 1 1 0;
+}
+
+.channel-row {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr) auto minmax(0, 2fr) space(6);
+    gap: space(1);
+    align-items: center;
+}
+
+.channel-row .key {
+    min-width: 0;
+}
+
+.mode-row {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) auto auto;
+    gap: space(1);
+    align-items: center;
+}
+
+.mode-row__summary .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.capability-row {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 3fr) minmax(0, 2fr) space(6);
+    gap: space(1);
+    align-items: center;
+}
+
+// Header labels take the width of the number fields below them
+.capability-row--header > .label:nth-child(-n + 2) {
+    width: 96px;
+}
+
+.mode-channels > .panel {
+    flex: 1 1 0;
+}
+
+.mode-channels__list .panel__body {
+    gap: space(1);
+}
+
+.mode-channels__row {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.missing-fixture {
+    gap: 0;
+}

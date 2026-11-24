@@ -1,0 +1,71 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Eurolite",
+  "model": "LED PAR 56 RGB DMX",
+  "category": "par",
+  "physical": {
+    "width": 205,
+    "height": 240,
+    "depth": 165,
+    "weight": 1.5,
+    "source": "LED",
+    "beamAngle": {
+      "min": 21,
+      "max": 21
+    },
+    "power": 23
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "effects",
+      "name": "Effects",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "ON" },
+        { "from": 1, "to": 5, "label": "Sound control (7 colors)" },
+        { "from": 6, "to": 10, "label": "ON" },
+        { "from": 11, "to": 255, "label": "Strobe (increasing)" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "3 Channels",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "name": "5 Channels",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "dimmer",
+        "effects"
+      ]
+    }
+  ]
+}

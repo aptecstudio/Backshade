@@ -1,0 +1,273 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Betopper",
+  "model": "LB230",
+  "category": "movingHead",
+  "physical": {
+    "width": 228,
+    "height": 297,
+    "depth": 170,
+    "weight": 17.5,
+    "colorTemperature": 8000,
+    "source": "HTI 250W",
+    "beamAngle": {
+      "min": 8,
+      "max": 8
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 400
+  },
+  "channels": [
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "White" },
+        { "from": 1, "to": 5, "label": "White + Red" },
+        { "from": 6, "to": 10, "label": "Red" },
+        { "from": 11, "to": 15, "label": "Red + Yellow" },
+        { "from": 16, "to": 20, "label": "Yellow" },
+        { "from": 21, "to": 25, "label": "Yellow + Rose Red" },
+        { "from": 26, "to": 30, "label": "Rose Red" },
+        { "from": 31, "to": 35, "label": "Rose Red + Green" },
+        { "from": 36, "to": 40, "label": "Green" },
+        { "from": 41, "to": 45, "label": "Green + Blue" },
+        { "from": 46, "to": 50, "label": "Blue" },
+        { "from": 51, "to": 55, "label": "Blue + Gold" },
+        { "from": 56, "to": 60, "label": "Gold" },
+        { "from": 61, "to": 65, "label": "Gold Color + Light Blue Purple" },
+        { "from": 66, "to": 70, "label": "Light Blue Purple" },
+        { "from": 71, "to": 75, "label": "Light Blue Purple + Brown" },
+        { "from": 76, "to": 80, "label": "Brown" },
+        { "from": 81, "to": 85, "label": "Brown + Dark Yellow" },
+        { "from": 86, "to": 90, "label": "Dark Yellow" },
+        { "from": 91, "to": 95, "label": "Dark Yellow + Fluorescence" },
+        { "from": 96, "to": 100, "label": "Fluorescence" },
+        { "from": 101, "to": 105, "label": "Fluorescence + Blue Green" },
+        { "from": 106, "to": 110, "label": "Blue Green" },
+        { "from": 111, "to": 115, "label": "Blue Green + Clay Bank" },
+        { "from": 116, "to": 120, "label": "Clay Bank" },
+        { "from": 121, "to": 125, "label": "Clay Bank + Light Yellow" },
+        { "from": 126, "to": 130, "label": "Light Yellow" },
+        { "from": 131, "to": 135, "label": "Light Yellow + Amaranth" },
+        { "from": 136, "to": 140, "label": "Amaranth" },
+        { "from": 141, "to": 145, "label": "Amaranth +White" },
+        { "from": 146, "to": 150, "label": "Slow Rotation" },
+        { "from": 151, "to": 255, "label": "Fast Rotation" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Off", "kind": "closed" },
+        { "from": 4, "to": 207, "label": "Fast Sequence", "kind": "strobe" },
+        { "from": 208, "to": 212, "label": "Open Light", "kind": "open" },
+        { "from": 213, "to": 251, "label": "Strobe Accidental", "kind": "strobe" },
+        { "from": 252, "to": 255, "label": "Open Light", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "gobo",
+      "name": "Gobo",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Open" },
+        { "from": 1, "to": 5, "label": "Gobo 1" },
+        { "from": 6, "to": 10, "label": "Gobo 2" },
+        { "from": 11, "to": 15, "label": "Gobo 3" },
+        { "from": 16, "to": 20, "label": "Gobo 4" },
+        { "from": 21, "to": 25, "label": "Gobo 5" },
+        { "from": 26, "to": 30, "label": "Gobo 6" },
+        { "from": 31, "to": 35, "label": "Gobo 7" },
+        { "from": 36, "to": 40, "label": "Gobo 8" },
+        { "from": 41, "to": 45, "label": "Gobo 9" },
+        { "from": 46, "to": 50, "label": "Gobo 10" },
+        { "from": 51, "to": 55, "label": "Gobo 11" },
+        { "from": 56, "to": 60, "label": "Gobo 12" },
+        { "from": 61, "to": 65, "label": "Gobo 13" },
+        { "from": 66, "to": 70, "label": "Gobo 14" },
+        { "from": 71, "to": 75, "label": "Gobo 15" },
+        { "from": 76, "to": 80, "label": "Gobo 16" },
+        { "from": 81, "to": 85, "label": "Gobo 17" },
+        { "from": 86, "to": 90, "label": "Fast Alternation" },
+        { "from": 91, "to": 129, "label": "Slow Alternation" },
+        { "from": 130, "to": 134, "label": "Stop" },
+        { "from": 135, "to": 135, "label": "Slow Alternation" },
+        { "from": 136, "to": 170, "label": "Fast Alternation" },
+        { "from": 171, "to": 171, "label": "Gobo 1 Slow Swining" },
+        { "from": 172, "to": 175, "label": "Gobo 1 Fast Swining" },
+        { "from": 176, "to": 176, "label": "Gobo 2 Slow Swining" },
+        { "from": 177, "to": 180, "label": "Gobo 2 Fast Swining" },
+        { "from": 181, "to": 245, "label": "No Function" },
+        { "from": 246, "to": 249, "label": "Gobo 16 Slow Swining" },
+        { "from": 250, "to": 250, "label": "Gobo 16 Fast Swining" },
+        { "from": 251, "to": 251, "label": "Gobo 17 Slow Swining" },
+        { "from": 252, "to": 255, "label": "Gobo 17 Fast Swinig" }
+      ]
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Prism Off", "kind": "open" },
+        { "from": 128, "to": 255, "label": "Prism On", "kind": "prism" }
+      ]
+    },
+    {
+      "key": "prismRotation",
+      "name": "Prism rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 63, "label": "Angle Adjustment" },
+        { "from": 64, "to": 129, "label": "Hourly Rotation" },
+        { "from": 130, "to": 190, "label": "Against Rotation" },
+        { "from": 191, "to": 255, "label": "Prism Slow to fast" }
+      ]
+    },
+    {
+      "key": "noFunction",
+      "name": "No function",
+      "attribute": "none"
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Frost Off" },
+        { "from": 128, "to": 255, "label": "Frost On" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "macro",
+      "name": "Macro",
+      "attribute": "effect"
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "No Function" },
+        { "from": 26, "to": 76, "label": "Reset Effect", "kind": "reset" },
+        { "from": 77, "to": 127, "label": "Reset Pan/Tilt", "kind": "reset" },
+        { "from": 128, "to": 255, "label": "Reset All", "kind": "reset" }
+      ]
+    },
+    {
+      "key": "lampControl",
+      "name": "Lamp Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No Function" },
+        { "from": 10, "to": 100, "label": "Lamp Off", "kind": "lampOff" },
+        { "from": 101, "to": 255, "label": "Lamp On", "kind": "lampOn" }
+      ]
+    },
+    {
+      "key": "panSpeed",
+      "name": "Pan speed",
+      "attribute": "pan"
+    },
+    {
+      "key": "colorTime",
+      "name": "Color Time",
+      "attribute": "speed"
+    },
+    {
+      "key": "beamSpeed",
+      "name": "Beam Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "goboTime",
+      "name": "Gobo Time",
+      "attribute": "speed"
+    }
+  ],
+  "modes": [
+    {
+      "name": "20 Channel",
+      "channels": [
+        "color",
+        "strobe",
+        "dimmer",
+        "gobo",
+        "prism",
+        "prismRotation",
+        "noFunction",
+        "frost",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "macro",
+        "reset",
+        "lampControl",
+        "panSpeed",
+        "colorTime",
+        "beamSpeed",
+        "goboTime"
+      ]
+    },
+    {
+      "name": "16 Channel",
+      "channels": [
+        "color",
+        "strobe",
+        "dimmer",
+        "gobo",
+        "prism",
+        "prismRotation",
+        "noFunction",
+        "frost",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "macro",
+        "reset",
+        "lampControl"
+      ]
+    }
+  ]
+}

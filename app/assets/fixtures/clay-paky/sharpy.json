@@ -1,0 +1,291 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Clay Paky",
+  "model": "Sharpy",
+  "category": "movingHead",
+  "physical": {
+    "width": 405,
+    "height": 450,
+    "depth": 330,
+    "weight": 19,
+    "lumens": 7950,
+    "colorTemperature": 8000,
+    "source": "MSD 200W",
+    "beamAngle": {
+      "min": 3.8,
+      "max": 3.8
+    },
+    "panRange": 540,
+    "tiltRange": 250,
+    "power": 200
+  },
+  "channels": [
+    {
+      "key": "colorWheel",
+      "name": "Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 5, "to": 8, "label": "White + Red", "kind": "color", "color": "#ffffff" },
+        { "from": 9, "to": 12, "label": "Red", "kind": "color", "color": "#c41c1a" },
+        { "from": 13, "to": 17, "label": "Red + Orange", "kind": "color", "color": "#c41c1a" },
+        { "from": 18, "to": 21, "label": "Orange", "kind": "color", "color": "#ed8229" },
+        { "from": 22, "to": 25, "label": "Orange + Aquamarine", "kind": "color", "color": "#ed8229" },
+        { "from": 26, "to": 29, "label": "Aquamarine", "kind": "color", "color": "#7abd82" },
+        { "from": 30, "to": 34, "label": "Aquamarine + Green", "kind": "color", "color": "#7abd82" },
+        { "from": 35, "to": 38, "label": "Green", "kind": "color", "color": "#05822b" },
+        { "from": 39, "to": 42, "label": "Green + Light Green", "kind": "color", "color": "#05822b" },
+        { "from": 43, "to": 46, "label": "Light Green", "kind": "color", "color": "#9ec233" },
+        { "from": 47, "to": 51, "label": "Light Green + Lavender", "kind": "color", "color": "#9ec233" },
+        { "from": 52, "to": 55, "label": "Lavender", "kind": "color", "color": "#8f73ad" },
+        { "from": 56, "to": 59, "label": "Lavender + Pink", "kind": "color", "color": "#8f73ad" },
+        { "from": 60, "to": 63, "label": "Pink", "kind": "color", "color": "#ed8080" },
+        { "from": 64, "to": 68, "label": "Pink + Yellow", "kind": "color", "color": "#ed8080" },
+        { "from": 69, "to": 72, "label": "Yellow", "kind": "color", "color": "#ffed00" },
+        { "from": 73, "to": 76, "label": "Yellow + Magenta", "kind": "color", "color": "#ffed00" },
+        { "from": 77, "to": 81, "label": "Magenta", "kind": "color", "color": "#e30082" },
+        { "from": 82, "to": 85, "label": "Magenta + Cyan", "kind": "color", "color": "#e30082" },
+        { "from": 86, "to": 89, "label": "Cyan", "kind": "color", "color": "#00a6eb" },
+        { "from": 90, "to": 93, "label": "Cyan + CTO 260", "kind": "color", "color": "#00a6eb" },
+        { "from": 94, "to": 98, "label": "CTO 260", "kind": "color", "color": "#f5c745" },
+        { "from": 99, "to": 102, "label": "CTO 260 + CTO 190", "kind": "color", "color": "#f5c745" },
+        { "from": 103, "to": 106, "label": "CTO 190", "kind": "color", "color": "#f5d985" },
+        { "from": 107, "to": 110, "label": "CTO 190 + CTB 8000", "kind": "color", "color": "#f5d985" },
+        { "from": 111, "to": 115, "label": "CTB 8000", "kind": "color", "color": "#96c7b8" },
+        { "from": 116, "to": 119, "label": "CTB 8000 + Blue", "kind": "color", "color": "#96c7b8" },
+        { "from": 120, "to": 123, "label": "Blue", "kind": "color", "color": "#004f99" },
+        { "from": 124, "to": 127, "label": "Blue + White", "kind": "color", "color": "#004f99" },
+        { "from": 128, "to": 255, "label": "Rotation (Slow 0.2 rpm to Fast 160 rpm)" }
+      ]
+    },
+    {
+      "key": "stopStrobe",
+      "name": "Stop / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Closed", "kind": "closed" },
+        { "from": 4, "to": 103, "label": "Strobe (slow 1 flash/sec to fast 12 flashes/sec)", "kind": "strobe" },
+        { "from": 104, "to": 107, "label": "Open", "kind": "open" },
+        { "from": 108, "to": 207, "label": "Pulsation (Slow 30rpm to fast 360rpm)", "kind": "pulse" },
+        { "from": 208, "to": 212, "label": "Open", "kind": "open" },
+        { "from": 213, "to": 225, "label": "Random slow strobe", "kind": "strobe" },
+        { "from": 226, "to": 238, "label": "Random medium strobe", "kind": "strobe" },
+        { "from": 239, "to": 251, "label": "Random fast strobe", "kind": "strobe" },
+        { "from": 252, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "staticGoboChange",
+      "name": "Static Gobo Change",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "White", "kind": "gobo" },
+        { "from": 4, "to": 7, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 8, "to": 11, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 12, "to": 15, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 16, "to": 19, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 20, "to": 23, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 24, "to": 27, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 28, "to": 31, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 32, "to": 35, "label": "Gobo 8", "kind": "gobo" },
+        { "from": 36, "to": 39, "label": "Gobo 9", "kind": "gobo" },
+        { "from": 40, "to": 43, "label": "Gobo 10", "kind": "gobo" },
+        { "from": 44, "to": 47, "label": "Gobo 11", "kind": "gobo" },
+        { "from": 48, "to": 51, "label": "Gobo 12", "kind": "gobo" },
+        { "from": 52, "to": 55, "label": "Gobo 13", "kind": "gobo" },
+        { "from": 56, "to": 59, "label": "Gobo 14", "kind": "gobo" },
+        { "from": 60, "to": 63, "label": "Gobo 15", "kind": "gobo" },
+        { "from": 64, "to": 67, "label": "Gobo 16", "kind": "gobo" },
+        { "from": 68, "to": 71, "label": "Gobo 17", "kind": "gobo" },
+        { "from": 72, "to": 113, "label": "Rotation (Fast 60rpm to slow 5rpm)" },
+        { "from": 114, "to": 117, "label": "Stop" },
+        { "from": 118, "to": 159, "label": "Rotation (Slow 5rpm to fast 60rpm)" },
+        { "from": 160, "to": 166, "label": "Gobo 2 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 167, "to": 172, "label": "Gobo 3 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 173, "to": 179, "label": "Gobo 4 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 180, "to": 185, "label": "Gobo 5 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 186, "to": 191, "label": "Gobo 6 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 192, "to": 198, "label": "Gobo 7 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 199, "to": 204, "label": "Gobo 8 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 205, "to": 211, "label": "Gobo 9 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 212, "to": 217, "label": "Gobo 10 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 218, "to": 223, "label": "Gobo 11 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 224, "to": 230, "label": "Gobo 12 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 231, "to": 236, "label": "Gobo 13 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 237, "to": 243, "label": "Gobo 14 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 244, "to": 249, "label": "Gobo 15 Shake (Slow to Fast)", "kind": "gobo" },
+        { "from": 250, "to": 255, "label": "Gobo 16 Shake (Slow 24bpm to Fast 600bpm)", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "prismInsertion",
+      "name": "Prism Insertion",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Prism excluded" },
+        { "from": 128, "to": 255, "label": "Prism inserted (0%-100%: 0.36 sec)" }
+      ]
+    },
+    {
+      "key": "prismRotation",
+      "name": "Prism Rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Position 0 deg" },
+        { "from": 21, "to": 41, "label": "Position 90 deg" },
+        { "from": 42, "to": 62, "label": "Position 180 deg" },
+        { "from": 63, "to": 83, "label": "Position 270 deg" },
+        { "from": 84, "to": 104, "label": "Position 360 deg" },
+        { "from": 105, "to": 126, "label": "Position 450 deg" },
+        { "from": 127, "to": 127, "label": "Position 540 deg" },
+        { "from": 128, "to": 190, "label": "Rotation (Fast 43rpm to slow 1.1rph)" },
+        { "from": 191, "to": 192, "label": "Stop" },
+        { "from": 193, "to": 255, "label": "Rotation (Slow 1.1rph to fast 43rpm)" }
+      ]
+    },
+    {
+      "key": "effectsMovement",
+      "name": "Effects Movement",
+      "attribute": "effect"
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "function",
+      "name": "Function",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 11, "label": "Unused" },
+        { "from": 12, "to": 24, "label": "Pan-Tilt Function (Fast - Default)" },
+        { "from": 25, "to": 37, "label": "Pan-Tilt Function (Normal)" },
+        { "from": 38, "to": 50, "label": "Dimmer Curve Function (Conventional)" },
+        { "from": 51, "to": 62, "label": "Dimmer Curve Function (Linear - Default)" },
+        { "from": 63, "to": 255, "label": "Unused" }
+      ]
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "Unused" },
+        { "from": 26, "to": 76, "label": "Effects Reset", "kind": "reset" },
+        { "from": 77, "to": 127, "label": "Pan/Tilt Reset", "kind": "reset" },
+        { "from": 128, "to": 255, "label": "Complete Reset", "kind": "reset" }
+      ]
+    },
+    {
+      "key": "lampControl",
+      "name": "Lamp Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "Unused" },
+        { "from": 26, "to": 100, "label": "Lamp OFF", "kind": "lampOff" },
+        { "from": 101, "to": 255, "label": "Lamp ON", "kind": "lampOn" }
+      ]
+    },
+    {
+      "key": "panTiltTime",
+      "name": "Pan - Tilt Time",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "colorTime",
+      "name": "Color Time",
+      "attribute": "speed"
+    },
+    {
+      "key": "beamTime",
+      "name": "Beam Time",
+      "attribute": "speed"
+    },
+    {
+      "key": "goboTime",
+      "name": "Gobo Time",
+      "attribute": "speed"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Standard",
+      "channels": [
+        "colorWheel",
+        "stopStrobe",
+        "dimmer",
+        "staticGoboChange",
+        "prismInsertion",
+        "prismRotation",
+        "effectsMovement",
+        "frost",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "function",
+        "reset",
+        "lampControl"
+      ]
+    },
+    {
+      "name": "Vector",
+      "channels": [
+        "colorWheel",
+        "stopStrobe",
+        "dimmer",
+        "staticGoboChange",
+        "prismInsertion",
+        "prismRotation",
+        "effectsMovement",
+        "frost",
+        "focus",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "function",
+        "reset",
+        "lampControl",
+        "panTiltTime",
+        "colorTime",
+        "beamTime",
+        "goboTime"
+      ]
+    }
+  ]
+}

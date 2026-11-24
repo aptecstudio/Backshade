@@ -1,0 +1,107 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Showtec",
+  "model": "LED Blinder 2 COB",
+  "category": "dimmer",
+  "physical": {
+    "width": 393,
+    "height": 185,
+    "depth": 138,
+    "weight": 4.14,
+    "lumens": 2700,
+    "colorTemperature": 3200,
+    "source": "LED",
+    "beamAngle": {
+      "min": 35,
+      "max": 35
+    },
+    "power": 110
+  },
+  "channels": [
+    {
+      "key": "dimmerIntensityLeftCobLed",
+      "name": "Dimmer intensity (Left COB LED)",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerIntensityRightCobLed",
+      "name": "Dimmer intensity (Right COB LED)",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerIntensity",
+      "name": "Dimmer intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "masterDimmerIntensity",
+      "name": "Master dimmer intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "Not functional", "kind": "open" },
+        { "from": 16, "to": 255, "label": "Strobe flash frequency, from slow to fast", "kind": "strobe" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "1 Channel",
+      "channels": [
+        "dimmerIntensity"
+      ]
+    },
+    {
+      "name": "2 Channel",
+      "channels": [
+        "dimmerIntensityLeftCobLed",
+        "dimmerIntensityRightCobLed"
+      ],
+      "heads": [
+        [
+          "dimmerIntensityLeftCobLed"
+        ],
+        [
+          "dimmerIntensityRightCobLed"
+        ]
+      ]
+    },
+    {
+      "name": "3 Channel",
+      "channels": [
+        "dimmerIntensityLeftCobLed",
+        "dimmerIntensityRightCobLed",
+        "masterDimmerIntensity"
+      ],
+      "heads": [
+        [
+          "dimmerIntensityLeftCobLed"
+        ],
+        [
+          "dimmerIntensityRightCobLed"
+        ]
+      ]
+    },
+    {
+      "name": "4 Channel",
+      "channels": [
+        "dimmerIntensityLeftCobLed",
+        "dimmerIntensityRightCobLed",
+        "strobe",
+        "masterDimmerIntensity"
+      ],
+      "heads": [
+        [
+          "dimmerIntensityLeftCobLed"
+        ],
+        [
+          "dimmerIntensityRightCobLed"
+        ]
+      ]
+    }
+  ]
+}

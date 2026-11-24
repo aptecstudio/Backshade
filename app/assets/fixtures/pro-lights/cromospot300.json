@@ -1,0 +1,233 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Pro-Lights",
+  "model": "CromoSpot300",
+  "category": "movingHead",
+  "physical": {
+    "width": 330,
+    "height": 270,
+    "depth": 473,
+    "weight": 10,
+    "lumens": 1800,
+    "source": "LED",
+    "beamAngle": {
+      "min": 16,
+      "max": 16
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 120
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan/Tilt Speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "No", "kind": "color", "color": "#ffffff" },
+        { "from": 10, "to": 19, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 20, "to": 29, "label": "Green", "kind": "color", "color": "#18c700" },
+        { "from": 30, "to": 39, "label": "Yellow", "kind": "color", "color": "#f4ff12" },
+        { "from": 40, "to": 49, "label": "Blue", "kind": "color", "color": "#3db1ff" },
+        { "from": 50, "to": 59, "label": "Pink", "kind": "color", "color": "#f788c3" },
+        { "from": 60, "to": 69, "label": "Magenta", "kind": "color", "color": "#ec00d2" },
+        { "from": 70, "to": 79, "label": "Light Blue", "kind": "color", "color": "#83eeff" },
+        { "from": 80, "to": 99, "label": "Light Blue ---> Magenta", "kind": "color", "color": "#83eeff" },
+        { "from": 100, "to": 119, "label": "Magenta ---> Pink", "kind": "color", "color": "#ec00d2" },
+        { "from": 120, "to": 139, "label": "Pink ---> Blue", "kind": "color", "color": "#f788c3" },
+        { "from": 140, "to": 159, "label": "Blue ---> Yellow", "kind": "color", "color": "#3db1ff" },
+        { "from": 160, "to": 179, "label": "Yellow ---> Green", "kind": "color", "color": "#f4ff12" },
+        { "from": 180, "to": 199, "label": "Green ---> Red", "kind": "color", "color": "#18c700" },
+        { "from": 200, "to": 219, "label": "Red ---> White", "kind": "color", "color": "#e50300" },
+        { "from": 220, "to": 255, "label": "Rainbow & Linear Effect", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "gobo1",
+      "name": "Gobo 1",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No Gobo", "kind": "gobo" },
+        { "from": 11, "to": 20, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 21, "to": 30, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 31, "to": 40, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 41, "to": 50, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 51, "to": 60, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 61, "to": 70, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 71, "to": 80, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 81, "to": 90, "label": "Gobo 8", "kind": "gobo" },
+        { "from": 91, "to": 105, "label": "Shaking Gobo 8", "kind": "gobo" },
+        { "from": 106, "to": 120, "label": "Shaking Gobo 7", "kind": "gobo" },
+        { "from": 121, "to": 135, "label": "Shaking Gobo 6", "kind": "gobo" },
+        { "from": 136, "to": 150, "label": "Shaking Gobo 5", "kind": "gobo" },
+        { "from": 151, "to": 165, "label": "Shaking Gobo 4", "kind": "gobo" },
+        { "from": 166, "to": 180, "label": "Shaking Gobo 3", "kind": "gobo" },
+        { "from": 181, "to": 195, "label": "Shaking Gobo 2", "kind": "gobo" },
+        { "from": 196, "to": 210, "label": "Shaking Gobo 1", "kind": "gobo" },
+        { "from": 211, "to": 255, "label": "Flow Effect" }
+      ]
+    },
+    {
+      "key": "gobo2Rotation",
+      "name": "Gobo 2 Rotation",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 60, "label": "360 deg indexing" },
+        { "from": 61, "to": 150, "label": "Clockwise rotate from slow to fast" },
+        { "from": 151, "to": 165, "label": "No function" },
+        { "from": 166, "to": 255, "label": "Anti-clockwise rotate from slow to fast" }
+      ]
+    },
+    {
+      "key": "prismPrismRotation",
+      "name": "Prism & Prism Rotation",
+      "attribute": "prismRotation",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "White Light" },
+        { "from": 5, "to": 9, "label": "Prism but not turn" },
+        { "from": 10, "to": 127, "label": "Anti-clockwise rotate from slow to fast" },
+        { "from": 128, "to": 132, "label": "Prism but not turn" },
+        { "from": 133, "to": 255, "label": "Clockwise rotate from slow to fast" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Close", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe: Slow > Fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Open", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Pulse Strobe Effect: Slow > Fast", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobe Effect: Slow > Fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "control",
+      "name": "Control",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "No function" },
+        { "from": 20, "to": 39, "label": "Pan/Tilt Black Activated (after 3 sec.)" },
+        { "from": 40, "to": 59, "label": "Pan/Tilt Black Deactivated (after 3 sec.)" },
+        { "from": 60, "to": 79, "label": "Fan Automatic" },
+        { "from": 80, "to": 99, "label": "Fan Slow" },
+        { "from": 100, "to": 119, "label": "Fan Standard" },
+        { "from": 120, "to": 139, "label": "Fan High-Speed" },
+        { "from": 140, "to": 149, "label": "Auto 1 (activated after 3 sec.)" },
+        { "from": 150, "to": 159, "label": "Auto 2 (activated after 3 sec.)" },
+        { "from": 160, "to": 169, "label": "Test (activated after 3 sec.)" },
+        { "from": 170, "to": 179, "label": "Custom" },
+        { "from": 180, "to": 189, "label": "Sound 1 (activated after 3 sec.)" },
+        { "from": 190, "to": 199, "label": "Sound 2 (activated after 3 sec.)" },
+        { "from": 200, "to": 219, "label": "Reset (activated after 3 sec.)" },
+        { "from": 220, "to": 235, "label": "No function" },
+        { "from": 236, "to": 239, "label": "DIM 0" },
+        { "from": 240, "to": 243, "label": "DIM 1" },
+        { "from": 244, "to": 247, "label": "DIM 2" },
+        { "from": 248, "to": 251, "label": "DIM 3" },
+        { "from": 252, "to": 255, "label": "DIM 4" }
+      ]
+    },
+    {
+      "key": "gobo2",
+      "name": "Gobo 2",
+      "attribute": "gobo",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No Gobo", "kind": "gobo" },
+        { "from": 11, "to": 20, "label": "Gobo 1", "kind": "gobo" },
+        { "from": 21, "to": 30, "label": "Gobo 2", "kind": "gobo" },
+        { "from": 31, "to": 40, "label": "Gobo 3", "kind": "gobo" },
+        { "from": 41, "to": 50, "label": "Gobo 4", "kind": "gobo" },
+        { "from": 51, "to": 60, "label": "Gobo 5", "kind": "gobo" },
+        { "from": 61, "to": 70, "label": "Gobo 6", "kind": "gobo" },
+        { "from": 71, "to": 80, "label": "Gobo 7", "kind": "gobo" },
+        { "from": 81, "to": 95, "label": "Shaking Gobo 7", "kind": "gobo" },
+        { "from": 96, "to": 110, "label": "Shaking Gobo 6", "kind": "gobo" },
+        { "from": 111, "to": 125, "label": "Shaking Gobo 5", "kind": "gobo" },
+        { "from": 126, "to": 140, "label": "Shaking Gobo 4", "kind": "gobo" },
+        { "from": 141, "to": 155, "label": "Shaking Gobo 3", "kind": "gobo" },
+        { "from": 156, "to": 170, "label": "Shaking Gobo 2", "kind": "gobo" },
+        { "from": 171, "to": 185, "label": "Shaking Gobo 1", "kind": "gobo" },
+        { "from": 186, "to": 255, "label": "Flow Effect" }
+      ]
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Person2",
+      "channels": [
+        "pan",
+        "tilt",
+        "color",
+        "gobo1",
+        "gobo2",
+        "gobo2Rotation",
+        "prismPrismRotation",
+        "focus",
+        "dimmer",
+        "strobe",
+        "control"
+      ]
+    },
+    {
+      "name": "Person1",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeed",
+        "color",
+        "gobo1",
+        "gobo2",
+        "gobo2Rotation",
+        "prismPrismRotation",
+        "focus",
+        "dimmer",
+        "strobe",
+        "control"
+      ]
+    }
+  ]
+}

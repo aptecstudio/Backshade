@@ -1,0 +1,59 @@
+// Flat tabs: secondary label, accent label and top bar when active (no glow)
+@use '../tokens' as *;
+@use 'focus';
+
+.tab-bar {
+    display: flex;
+    align-items: stretch;
+    gap: space(1);
+}
+
+.tab-bar__tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: space(8);
+    height: space(6);
+    padding: 0 space(2);
+    border: 0;
+    border-radius: $radius-key;
+    background: none;
+    color: color('text-secondary');
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    user-select: none;
+
+    @include focus.focus-ring;
+
+    &:hover:not(:disabled) {
+        color: color('text');
+        background: color('key-bottom');
+    }
+
+    &:disabled {
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    // Accent bar on the top edge, as the state bar of the keys
+    &::before {
+        position: absolute;
+        top: 0;
+        right: space(2);
+        left: space(2);
+        display: none;
+        height: 4px;
+        border-radius: 0 0 2px 2px;
+        background: color('accent');
+        content: '';
+    }
+}
+
+.tab-bar__tab--active {
+    color: color('accent');
+
+    &::before {
+        display: block;
+    }
+}

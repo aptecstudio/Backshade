@@ -1,0 +1,133 @@
+// Patch section: one table per universe
+@use 'framework/scss/tokens' as *;
+
+// Columns: type icon, number, name, fixture, mode, addresses, channels, problem
+$patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr) space(8) minmax(0, 3fr);
+
+.patch-universe {
+    padding: space(2);
+
+    .panel__body {
+        gap: 0;
+    }
+}
+
+.patch-table__row {
+    display: grid;
+    grid-template-columns: $patch-columns;
+    gap: space(1);
+    align-items: center;
+}
+
+// The header has the same padding and border as the rows, so the columns line up
+.patch-table__row--header {
+    padding: space(1) space(2);
+    border: 1px solid transparent;
+    border-bottom-color: color('panel-border');
+}
+
+.patch-table__cell {
+    min-width: 0;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.patch-table__type {
+    color: color('text-secondary');
+}
+
+.patch-table__problem--conflict,
+.patch-table__problem--missing {
+    .label {
+        color: inherit;
+    }
+}
+
+.patch-table__problem--conflict {
+    color: color('warning');
+}
+
+.patch-table__problem--missing {
+    color: color('text-secondary');
+}
+
+// Grid of the 512 channels: cells of at least 48 px, so they work with touch
+.patch-grid {
+    padding: space(2);
+}
+
+.universe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(space(6), 1fr));
+    gap: 1px;
+    padding: 1px;
+    border-radius: $radius-square-key;
+    background: color('panel-border');
+}
+
+.universe-grid__cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    height: space(6);
+    padding: 0 space(1);
+    border: 0;
+    background: color('display');
+    color: color('text-secondary');
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+        background: color('key-bottom');
+    }
+
+    &:focus-visible {
+        z-index: 1;
+        outline: 2px solid color('accent');
+        outline-offset: -2px;
+    }
+}
+
+// Flat tint of the fixture color, stronger on the first address
+.universe-grid__cell--used {
+    background: color-mix(in srgb, var(--channel-color) 25%, color('display'));
+    color: color('text');
+
+    &:hover {
+        background: color-mix(in srgb, var(--channel-color) 40%, color('display'));
+    }
+}
+
+// Bar on the left edge of the first address of a fixture
+.universe-grid__cell--first::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--channel-color);
+    content: '';
+}
+
+.universe-grid__cell--conflict {
+    outline: 2px solid color('warning');
+    outline-offset: -2px;
+}
+
+.universe-grid__address {
+    font-family: $font-family-mono;
+    font-size: $font-size-micro;
+}
+
+.universe-grid__number {
+    overflow: hidden;
+    font-family: $font-family-mono;
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

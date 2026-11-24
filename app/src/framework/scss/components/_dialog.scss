@@ -29,6 +29,11 @@
     width: 720px;
 }
 
+.dialog--large {
+    width: 1024px;
+    height: 100%;
+}
+
 .dialog__title {
     margin: 0;
     font-size: $font-size-large;

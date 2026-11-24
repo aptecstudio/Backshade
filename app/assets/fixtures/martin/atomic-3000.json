@@ -1,0 +1,173 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Martin",
+  "model": "Atomic 3000",
+  "category": "strobe",
+  "physical": {
+    "width": 425,
+    "height": 245,
+    "depth": 240,
+    "weight": 8,
+    "colorTemperature": 5600,
+    "source": "Xenon 3000W",
+    "power": 3000
+  },
+  "channels": [
+    {
+      "key": "simple",
+      "name": "Simple",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Blackout", "kind": "closed" },
+        { "from": 6, "to": 249, "label": "Flash rate slow to fast", "kind": "strobe" },
+        { "from": 250, "to": 255, "label": "Blinder", "kind": "open" }
+      ]
+    },
+    {
+      "key": "intensity",
+      "name": "Intensity",
+      "attribute": "dimmer",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Blackout" },
+        { "from": 6, "to": 255, "label": "Flash intensity" }
+      ]
+    },
+    {
+      "key": "duration",
+      "name": "Duration",
+      "attribute": "speed"
+    },
+    {
+      "key": "rate",
+      "name": "Rate",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "Single flash" },
+        { "from": 6, "to": 255, "label": "0.5 to 25/30Hz" }
+      ]
+    },
+    {
+      "key": "effects",
+      "name": "Effects",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 5, "label": "No effect" },
+        { "from": 6, "to": 42, "label": "Ramp up" },
+        { "from": 43, "to": 85, "label": "Ramp down" },
+        { "from": 86, "to": 128, "label": "Ramp up-down" },
+        { "from": 129, "to": 171, "label": "Random" },
+        { "from": 172, "to": 214, "label": "Lightning" },
+        { "from": 215, "to": 255, "label": "Spikes" }
+      ]
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "White" },
+        { "from": 26, "to": 50, "label": "Straw" },
+        { "from": 51, "to": 76, "label": "Pale Amber Gold" },
+        { "from": 77, "to": 104, "label": "Orange" },
+        { "from": 105, "to": 129, "label": "Red" },
+        { "from": 130, "to": 155, "label": "Broadway pink" },
+        { "from": 156, "to": 180, "label": "Light lavender" },
+        { "from": 181, "to": 206, "label": "Aquamarine" },
+        { "from": 207, "to": 229, "label": "Green blue" },
+        { "from": 230, "to": 254, "label": "Light green" },
+        { "from": 255, "to": 255, "label": "Blue grass" }
+      ]
+    },
+    {
+      "key": "fan",
+      "name": "Fan",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 61, "label": "Fan level 4" },
+        { "from": 62, "to": 127, "label": "Fan level 3" },
+        { "from": 128, "to": 190, "label": "Fan level 2" },
+        { "from": 191, "to": 255, "label": "Fan level 1" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "Mode 1",
+      "channels": [
+        "simple"
+      ]
+    },
+    {
+      "name": "Mode 2",
+      "channels": [
+        "intensity",
+        "duration",
+        "rate"
+      ]
+    },
+    {
+      "name": "Mode 3",
+      "channels": [
+        "intensity",
+        "duration",
+        "rate",
+        "effects"
+      ]
+    },
+    {
+      "name": "Mode 1 with Color",
+      "channels": [
+        "simple",
+        "color"
+      ]
+    },
+    {
+      "name": "Mode 2 with Color",
+      "channels": [
+        "intensity",
+        "duration",
+        "rate",
+        "color"
+      ]
+    },
+    {
+      "name": "Mode 3 with Color",
+      "channels": [
+        "intensity",
+        "duration",
+        "rate",
+        "effects",
+        "color"
+      ]
+    },
+    {
+      "name": "Mode 1 with Color and Fan",
+      "channels": [
+        "simple",
+        "color",
+        "fan"
+      ]
+    },
+    {
+      "name": "Mode 2 with Color and Fan",
+      "channels": [
+        "intensity",
+        "duration",
+        "rate",
+        "color",
+        "fan"
+      ]
+    },
+    {
+      "name": "Mode 3 with Color and Fan",
+      "channels": [
+        "intensity",
+        "duration",
+        "rate",
+        "effects",
+        "color",
+        "fan"
+      ]
+    }
+  ]
+}

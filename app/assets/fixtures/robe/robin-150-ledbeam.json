@@ -1,0 +1,353 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Robin 150 LEDBeam",
+  "category": "movingHead",
+  "physical": {
+    "width": 244,
+    "height": 337,
+    "depth": 149,
+    "weight": 5.7,
+    "lumens": 2842,
+    "source": "LED",
+    "beamAngle": {
+      "min": 3.8,
+      "max": 60
+    },
+    "panRange": 450,
+    "tiltRange": 228,
+    "power": 220
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan",
+      "defaultValue": 128
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt",
+      "defaultValue": 128
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeedPanTiltTime",
+      "name": "Pan/Tilt Speed - Pan/Tilt Time",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Standard Mode" },
+        { "from": 1, "to": 1, "label": "Max. Speed Mode" },
+        { "from": 2, "to": 255, "label": "P/T Speed mode: Speed from max. to min. - P/T Time mode: Time from 0.2 sec to 25.5 sec" }
+      ]
+    },
+    {
+      "key": "powerSpecialFunctions",
+      "name": "Power/Special Functions",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "Reserved" },
+        { "from": 20, "to": 24, "label": "Display ON" },
+        { "from": 25, "to": 29, "label": "Display OFF" },
+        { "from": 30, "to": 34, "label": "RGBW color mixing mode" },
+        { "from": 35, "to": 39, "label": "CMY color mixing mode" },
+        { "from": 40, "to": 44, "label": "Pan/Tilt speed mode" },
+        { "from": 45, "to": 49, "label": "Pan/Tilt time mode" },
+        { "from": 50, "to": 54, "label": "Blackout while pan/tilt moving" },
+        { "from": 55, "to": 59, "label": "Disabled blackout while pan/tilt moving" },
+        { "from": 60, "to": 64, "label": "Dimmer curve - square law" },
+        { "from": 65, "to": 69, "label": "Dimmer curve - linear" },
+        { "from": 70, "to": 74, "label": "Fans mode: Auto" },
+        { "from": 75, "to": 79, "label": "Fans mode: High" },
+        { "from": 80, "to": 84, "label": "White point 8000K ON" },
+        { "from": 85, "to": 89, "label": "White point 8000K OFF" },
+        { "from": 90, "to": 94, "label": "Fans mode: Quiet" },
+        { "from": 95, "to": 129, "label": "Reserved" },
+        { "from": 130, "to": 139, "label": "Reserved" },
+        { "from": 140, "to": 149, "label": "Pan/Tilt reset", "kind": "reset" },
+        { "from": 150, "to": 159, "label": "Zoom reset", "kind": "reset" },
+        { "from": 160, "to": 169, "label": "Reserved" },
+        { "from": 170, "to": 171, "label": "Tungsten effect simulation (750W) On" },
+        { "from": 172, "to": 173, "label": "Tungsten effect simulation (1000W) On" },
+        { "from": 174, "to": 175, "label": "Tungsten effect simulation (1200W) On" },
+        { "from": 176, "to": 177, "label": "Tungsten effect simulation (2000W) On" },
+        { "from": 178, "to": 179, "label": "Tungsten effect simulation (2500W) On" },
+        { "from": 180, "to": 181, "label": "Tungsten effect simulation Off" },
+        { "from": 182, "to": 184, "label": "Reserved" },
+        { "from": 185, "to": 185, "label": "PWM output frequency of LEDs: Standard (300Hz)" },
+        { "from": 186, "to": 186, "label": "PWM output frequency of LEDs: High (1200Hz)" },
+        { "from": 187, "to": 187, "label": "LED Frequency (step -6)" },
+        { "from": 188, "to": 188, "label": "LED Frequency (step -5)" },
+        { "from": 189, "to": 189, "label": "LED Frequency (step -4)" },
+        { "from": 190, "to": 190, "label": "LED Frequency (step -3)" },
+        { "from": 191, "to": 191, "label": "LED Frequency (step -2)" },
+        { "from": 192, "to": 192, "label": "LED Frequency (step -1)" },
+        { "from": 193, "to": 193, "label": "LED Frequency (Standard or High)" },
+        { "from": 194, "to": 194, "label": "LED Frequency (step +1)" },
+        { "from": 195, "to": 195, "label": "LED Frequency (step +2)" },
+        { "from": 196, "to": 196, "label": "LED Frequency (step +3)" },
+        { "from": 197, "to": 197, "label": "LED Frequency (step +4)" },
+        { "from": 198, "to": 198, "label": "LED Frequency (step +5)" },
+        { "from": 199, "to": 199, "label": "LED Frequency (step +6)" },
+        { "from": 200, "to": 209, "label": "Total Fixture Reset", "kind": "reset" },
+        { "from": 210, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "virtualColorWheel",
+      "name": "Virtual Color Wheel",
+      "attribute": "colorWheel",
+      "defaultValue": 2,
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No function" },
+        { "from": 1, "to": 2, "label": "Filter 4 (Medium Bastard Amber)" },
+        { "from": 3, "to": 4, "label": "Filter 25 (Sunset Red)" },
+        { "from": 5, "to": 6, "label": "Filter 19 (Fire)" },
+        { "from": 7, "to": 8, "label": "Filter 26 (Bright Red)" },
+        { "from": 9, "to": 10, "label": "Filter 58 (Lavender)" },
+        { "from": 11, "to": 12, "label": "Filter 68 (Sky Blue)" },
+        { "from": 13, "to": 14, "label": "Filter 36 (Medium Pink)" },
+        { "from": 15, "to": 16, "label": "Filter 89 (Moss Green)" },
+        { "from": 17, "to": 18, "label": "Filter 88 (Lime Green)" },
+        { "from": 19, "to": 20, "label": "Filter 90 (Dark Yellow Green)" },
+        { "from": 21, "to": 22, "label": "Filter 49 (Medium Purple)" },
+        { "from": 23, "to": 24, "label": "Filter 52 (Light Lavender)" },
+        { "from": 25, "to": 26, "label": "Filter 102 (Light Amber)" },
+        { "from": 27, "to": 28, "label": "Filter 103 (Straw)" },
+        { "from": 29, "to": 30, "label": "Filter 140 (Summer Blue)" },
+        { "from": 31, "to": 32, "label": "Filter 124 (Dark Green)" },
+        { "from": 33, "to": 34, "label": "Filter 106 (Primary Red)" },
+        { "from": 35, "to": 36, "label": "Filter 111 (Dark Pink)" },
+        { "from": 37, "to": 38, "label": "Filter 115 (Peacock Blue)" },
+        { "from": 39, "to": 40, "label": "Filter 126 (Mauve)" },
+        { "from": 41, "to": 42, "label": "Filter 117 (Steel Blue)" },
+        { "from": 43, "to": 44, "label": "Filter 118 (Light Blue)" },
+        { "from": 45, "to": 46, "label": "Filter 122 (Fern Green)" },
+        { "from": 47, "to": 48, "label": "Filter 182 (Light Red)" },
+        { "from": 49, "to": 50, "label": "Filter 121 (Filter Green)" },
+        { "from": 51, "to": 52, "label": "Filter 128 (Bright Pink)" },
+        { "from": 53, "to": 54, "label": "Filter 131 (Marine Blue)" },
+        { "from": 55, "to": 56, "label": "Filter 132 (Medium Blue)" },
+        { "from": 57, "to": 58, "label": "Filter 134 (Golden Amber)" },
+        { "from": 59, "to": 60, "label": "Filter 135 (Deep Golden Amber)" },
+        { "from": 61, "to": 62, "label": "Filter 136 (Pale Lavender)" },
+        { "from": 63, "to": 64, "label": "Filter 137 (Special Lavender)" },
+        { "from": 65, "to": 66, "label": "Filter 138 (Pale Green)" },
+        { "from": 67, "to": 68, "label": "Filter 798 (Chrysalis Pink)" },
+        { "from": 69, "to": 70, "label": "Filter 141 (Bright Blue)" },
+        { "from": 71, "to": 72, "label": "Filter 147 (Apricot)" },
+        { "from": 73, "to": 74, "label": "Filter 148 (Bright Rose)" },
+        { "from": 75, "to": 76, "label": "Filter 152 (Pale Gold)" },
+        { "from": 77, "to": 78, "label": "Filter 154 (Pale Rose)" },
+        { "from": 79, "to": 80, "label": "Filter 157 (Pink)" },
+        { "from": 81, "to": 82, "label": "Filter 143 (Pale Navy Blue)" },
+        { "from": 83, "to": 84, "label": "Filter 162 (Bastard Amber)" },
+        { "from": 85, "to": 86, "label": "Filter 164 (Flame Red)" },
+        { "from": 87, "to": 88, "label": "Filter 165 (Daylight Blue)" },
+        { "from": 89, "to": 90, "label": "Filter 169 (Lilac Tint)" },
+        { "from": 91, "to": 92, "label": "Filter 170 (Deep Lavender)" },
+        { "from": 93, "to": 94, "label": "Filter 172 (Lagoon Blue)" },
+        { "from": 95, "to": 96, "label": "Filter 194 (Surprise Pink)" },
+        { "from": 97, "to": 98, "label": "Filter 180 (Dark Lavender)" },
+        { "from": 99, "to": 100, "label": "Filter 181 (Congo Blue)" },
+        { "from": 101, "to": 102, "label": "Filter 197 (Alice Blue)" },
+        { "from": 103, "to": 104, "label": "Filter 201 (Full C.T. Blue)" },
+        { "from": 105, "to": 106, "label": "Filter 202 (Half C.T. Blue)" },
+        { "from": 107, "to": 108, "label": "Filter 203 (Quarter C.T. Blue)" },
+        { "from": 109, "to": 110, "label": "Filter 204 (Full C.T. Orange)" },
+        { "from": 111, "to": 112, "label": "Filter 219 (Fluorescent Green)" },
+        { "from": 113, "to": 114, "label": "Filter 206 (Quarter C.T. Orange)" },
+        { "from": 115, "to": 116, "label": "Filter 247 (Filter Minus Green)" },
+        { "from": 117, "to": 118, "label": "Filter 248 (Half Minus Green)" },
+        { "from": 119, "to": 120, "label": "Filter 281 (Three Quarter C.T. Blue)" },
+        { "from": 121, "to": 122, "label": "Filter 285 (Three Quarter C.T. Orange)" },
+        { "from": 123, "to": 124, "label": "Filter 352 (Glacier Blue)" },
+        { "from": 125, "to": 126, "label": "Filter 353 (Lighter Blue)" },
+        { "from": 127, "to": 128, "label": "Filter 507 (Madge)" },
+        { "from": 129, "to": 130, "label": "Filter 778 (Millennium Gold)" },
+        { "from": 131, "to": 132, "label": "Filter 793 (Vanity Fair)" },
+        { "from": 133, "to": 235, "label": "Raw DMX" },
+        { "from": 236, "to": 245, "label": "Rainbow effect (with fade time) from slow -> fast" },
+        { "from": 246, "to": 255, "label": "Rainbow effect (without fade time) from slow -> fast" }
+      ]
+    },
+    {
+      "key": "dimmerIntensityFine",
+      "name": "Dimmer Intensity Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmerIntensity"
+    },
+    {
+      "key": "dimmerIntensity",
+      "name": "Dimmer Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter/Strobe",
+      "attribute": "shutter",
+      "defaultValue": 32,
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Shutter closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Shutter open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Stobe-effect from slow to fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Shutter open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Opening pulse in sequences from slow to fast", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Closing pulse in sequences from fast to slow" },
+        { "from": 160, "to": 191, "label": "Shutter open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random strobe-effect from slow to fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Shutter open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom",
+      "defaultValue": 128
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom Fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "redCyan",
+      "name": "Red/Cyan",
+      "attribute": "red",
+      "defaultValue": 255
+    },
+    {
+      "key": "colorMixControl",
+      "name": "Color Mix Control",
+      "attribute": "colorMacro",
+      "defaultValue": 45,
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Virtual colors (\"Virtual\" has priority)" },
+        { "from": 10, "to": 19, "label": "Maximum mode (highest values have priority)" },
+        { "from": 20, "to": 29, "label": "Minimum mode (lowest values have priority)" },
+        { "from": 30, "to": 39, "label": "Multiply mode (multiply Virtual and Color Mix)" },
+        { "from": 40, "to": 49, "label": "Addition mode (Virtual + Color mix)" },
+        { "from": 50, "to": 59, "label": "Subtraction mode (Virtual - Color mix)" },
+        { "from": 60, "to": 69, "label": "Inverted Subtration mode (Virtual - Color mix)" },
+        { "from": 70, "to": 128, "label": "Reserved" },
+        { "from": 129, "to": 129, "label": "Virtual colors (virtual has priority)" },
+        { "from": 130, "to": 254, "label": "Crossfade (crossfade between Virtual and Color mix)" },
+        { "from": 255, "to": 255, "label": "Color channels (\"Color mix\" has priority)" }
+      ]
+    },
+    {
+      "key": "ctc",
+      "name": "CTC",
+      "attribute": "colorTemperature"
+    },
+    {
+      "key": "whiteFine",
+      "name": "White Fine",
+      "attribute": "white",
+      "defaultValue": 255,
+      "fineOf": "white"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white",
+      "defaultValue": 255
+    },
+    {
+      "key": "blueYellowFine",
+      "name": "Blue/Yellow Fine",
+      "attribute": "blue",
+      "defaultValue": 255,
+      "fineOf": "blueYellow"
+    },
+    {
+      "key": "blueYellow",
+      "name": "Blue/Yellow",
+      "attribute": "blue",
+      "defaultValue": 255
+    },
+    {
+      "key": "greenMagentaFine",
+      "name": "Green/Magenta Fine",
+      "attribute": "green",
+      "defaultValue": 255,
+      "fineOf": "greenMagenta"
+    },
+    {
+      "key": "greenMagenta",
+      "name": "Green/Magenta",
+      "attribute": "green",
+      "defaultValue": 255
+    },
+    {
+      "key": "redCyanFine",
+      "name": "Red/Cyan Fine",
+      "attribute": "red",
+      "defaultValue": 255,
+      "fineOf": "redCyan"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Standard 16-Bit",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "powerSpecialFunctions",
+        "virtualColorWheel",
+        "redCyan",
+        "redCyanFine",
+        "greenMagenta",
+        "greenMagentaFine",
+        "blueYellow",
+        "blueYellowFine",
+        "white",
+        "whiteFine",
+        "ctc",
+        "colorMixControl",
+        "zoom",
+        "zoomFine",
+        "shutterStrobe",
+        "dimmerIntensity",
+        "dimmerIntensityFine"
+      ]
+    },
+    {
+      "name": "Reduced 8-Bit",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "panTiltSpeedPanTiltTime",
+        "powerSpecialFunctions",
+        "virtualColorWheel",
+        "redCyan",
+        "greenMagenta",
+        "blueYellow",
+        "white",
+        "ctc",
+        "colorMixControl",
+        "zoom",
+        "shutterStrobe",
+        "dimmerIntensity"
+      ]
+    }
+  ]
+}

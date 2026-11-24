@@ -1,0 +1,1086 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "GLP",
+  "model": "Impression X4 Bar 10",
+  "category": "other",
+  "physical": {
+    "width": 500,
+    "height": 240,
+    "depth": 100,
+    "weight": 8,
+    "colorTemperature": 5600,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 50
+    },
+    "tiltRange": 210,
+    "power": 230
+  },
+  "channels": [
+    {
+      "key": "tiltCoarse",
+      "name": "Tilt coarse",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tiltCoarse"
+    },
+    {
+      "key": "set1ColorFixed",
+      "name": "Set 1 Color (fixed)",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Colors adjustable via RGBW" },
+        { "from": 8, "to": 15, "label": "Color 01 - Red", "kind": "color", "color": "#ff0000" },
+        { "from": 16, "to": 23, "label": "Color 02 - Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 24, "to": 31, "label": "Color 03 - Warm Yellow", "kind": "color", "color": "#ffde63" },
+        { "from": 32, "to": 39, "label": "Color 04 - Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 40, "to": 47, "label": "Color 05 - Green", "kind": "color", "color": "#00ff00" },
+        { "from": 48, "to": 55, "label": "Color 06 - Turquoise", "kind": "color", "color": "#42eadd" },
+        { "from": 56, "to": 63, "label": "Color 07 - Cyan", "kind": "color", "color": "#55ffff" },
+        { "from": 64, "to": 71, "label": "Color 08 - Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 72, "to": 79, "label": "Color 09 - Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 80, "to": 87, "label": "Color 10 - Malve (Mauve)", "kind": "color", "color": "#9f7694" },
+        { "from": 88, "to": 95, "label": "Color 11 - Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 96, "to": 103, "label": "Color 12 - Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 104, "to": 111, "label": "White - CTO (3200K)", "kind": "color", "color": "#fffaf2" },
+        { "from": 112, "to": 119, "label": "White (5600K)", "kind": "color", "color": "#ffffff" },
+        { "from": 120, "to": 127, "label": "White - CTB (7200K)", "kind": "color", "color": "#f3fbff" },
+        { "from": 128, "to": 128, "label": "Rainbow Effect Stop", "kind": "stop" },
+        { "from": 129, "to": 223, "label": "Rainbow Effect (slow - fast)", "kind": "rotation" },
+        { "from": 224, "to": 255, "label": "Random colors (slow - fast)", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "Shutter closed", "kind": "closed" },
+        { "from": 16, "to": 47, "label": "Shutter pulse random", "kind": "pulse" },
+        { "from": 48, "to": 79, "label": "Fade on, snap off (random patterns)", "kind": "pulse" },
+        { "from": 80, "to": 111, "label": "Snap on, fade off (random patterns)", "kind": "pulse" },
+        { "from": 112, "to": 143, "label": "Fade on, fade off (random patterns)", "kind": "pulse" },
+        { "from": 144, "to": 199, "label": "Strobe Random (5s - 0,1s)", "kind": "strobe" },
+        { "from": 200, "to": 239, "label": "Strobe Effect slow - fast (1Hz to 10Hz)", "kind": "strobe" },
+        { "from": 240, "to": 255, "label": "Shutter Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "cto",
+      "name": "CTO",
+      "attribute": "colorTemperature",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No CTO" },
+        { "from": 8, "to": 255, "label": "Continuous color temperature correction" }
+      ]
+    },
+    {
+      "key": "intensity",
+      "name": "Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "crossfade",
+      "name": "Crossfade",
+      "attribute": "effect"
+    },
+    {
+      "key": "set1PatternMovement",
+      "name": "Set 1 Pattern Movement",
+      "attribute": "effect"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    },
+    {
+      "key": "set1PatternSelect",
+      "name": "Set 1 Pattern Select",
+      "attribute": "effect"
+    },
+    {
+      "key": "pixelSelect18",
+      "name": "Pixel Select 1-8",
+      "attribute": "effect"
+    },
+    {
+      "key": "pixelSelect910",
+      "name": "Pixel Select 9-10",
+      "attribute": "effect"
+    },
+    {
+      "key": "reserved",
+      "name": "Reserved",
+      "attribute": "none"
+    },
+    {
+      "key": "reserved1",
+      "name": "Reserved 1",
+      "attribute": "none"
+    },
+    {
+      "key": "specialChannel",
+      "name": "Special Channel",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "No Mirror" },
+        { "from": 4, "to": 7, "label": "Mirror color priority" },
+        { "from": 8, "to": 11, "label": "Mirror color mixing" },
+        { "from": 12, "to": 119, "label": "No function" },
+        { "from": 120, "to": 123, "label": "Tilt slow mode off" },
+        { "from": 124, "to": 127, "label": "Tilt slow mode on" },
+        { "from": 128, "to": 131, "label": "Tilt current off" },
+        { "from": 132, "to": 135, "label": "Tilt current on" },
+        { "from": 136, "to": 139, "label": "Tilt reset off" },
+        { "from": 140, "to": 143, "label": "Tilt reset on" },
+        { "from": 144, "to": 147, "label": "Display Flip off" },
+        { "from": 148, "to": 151, "label": "Display Flip on" },
+        { "from": 152, "to": 155, "label": "DMX Mode DPixH" },
+        { "from": 156, "to": 159, "label": "DMX Mode SPixH" },
+        { "from": 160, "to": 163, "label": "DMX Mode High Resolution" },
+        { "from": 164, "to": 167, "label": "DMX Mode Normal" },
+        { "from": 168, "to": 171, "label": "DMX Mode compressed" },
+        { "from": 172, "to": 175, "label": "DMX Mode DPix" },
+        { "from": 176, "to": 179, "label": "DMX Mode SPix" },
+        { "from": 180, "to": 183, "label": "Dimmer Curve ESoft" },
+        { "from": 184, "to": 187, "label": "Dimmer Curve Soft" },
+        { "from": 188, "to": 191, "label": "Dimmer Curve Lin" },
+        { "from": 192, "to": 195, "label": "X4 Compatibility off" },
+        { "from": 196, "to": 199, "label": "X4 Compatibility on" },
+        { "from": 200, "to": 203, "label": "Silent-Mode off" },
+        { "from": 204, "to": 207, "label": "Silent-Mode on" },
+        { "from": 208, "to": 211, "label": "Position Feedback off" },
+        { "from": 212, "to": 215, "label": "Position Feedback on" },
+        { "from": 216, "to": 219, "label": "DMX hold off" },
+        { "from": 220, "to": 223, "label": "DMX hold on" },
+        { "from": 224, "to": 227, "label": "Tilt inverse off" },
+        { "from": 228, "to": 231, "label": "Tilt inverse on" },
+        { "from": 232, "to": 235, "label": "Pixel inverse off" },
+        { "from": 236, "to": 239, "label": "Pixel inverse on" },
+        { "from": 240, "to": 243, "label": "Zoom inverse off" },
+        { "from": 244, "to": 247, "label": "Zoom inverse on" },
+        { "from": 248, "to": 251, "label": "Fixture default" },
+        { "from": 252, "to": 255, "label": "FIxture reset", "kind": "reset" }
+      ]
+    },
+    {
+      "key": "set1Red",
+      "name": "Set 1 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set1Green",
+      "name": "Set 1 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set1Blue",
+      "name": "Set 1 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set1White",
+      "name": "Set 1 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set2ColorFixed",
+      "name": "Set 2 Color (fixed)",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Colors adjustable via RGBW" },
+        { "from": 8, "to": 15, "label": "Color 01 - Red", "kind": "color", "color": "#ff0000" },
+        { "from": 16, "to": 23, "label": "Color 02 - Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 24, "to": 31, "label": "Color 03 - Warm Yellow", "kind": "color", "color": "#ffde63" },
+        { "from": 32, "to": 39, "label": "Color 04 - Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 40, "to": 47, "label": "Color 05 - Green", "kind": "color", "color": "#00ff00" },
+        { "from": 48, "to": 55, "label": "Color 06 - Turquoise", "kind": "color", "color": "#42eadd" },
+        { "from": 56, "to": 63, "label": "Color 07 - Cyan", "kind": "color", "color": "#55ffff" },
+        { "from": 64, "to": 71, "label": "Color 08 - Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 72, "to": 79, "label": "Color 09 - Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 80, "to": 87, "label": "Color 10 - Malve (Mauve)", "kind": "color", "color": "#9f7694" },
+        { "from": 88, "to": 95, "label": "Color 11 - Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 96, "to": 103, "label": "Color 12 - Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 104, "to": 111, "label": "White - CTO (3200K)", "kind": "color", "color": "#fffaf2" },
+        { "from": 112, "to": 119, "label": "White (5600K)", "kind": "color", "color": "#ffffff" },
+        { "from": 120, "to": 127, "label": "White - CTB (7200K)", "kind": "color", "color": "#f3fbff" },
+        { "from": 128, "to": 128, "label": "Rainbow Effect Stop", "kind": "stop" },
+        { "from": 129, "to": 223, "label": "Rainbow Effect (slow - fast)", "kind": "rotation" },
+        { "from": 224, "to": 255, "label": "Random colors (slow - fast)", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "set2Red",
+      "name": "Set 2 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set1Intensity",
+      "name": "Set 1 Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "set2Green",
+      "name": "Set 2 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set2Blue",
+      "name": "Set 2 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set2White",
+      "name": "Set 2 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set2Intensity",
+      "name": "Set 2 Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "set3ColorFixed",
+      "name": "Set 3 Color (fixed)",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Colors adjustable via RGBW" },
+        { "from": 8, "to": 15, "label": "Color 01 - Red", "kind": "color", "color": "#ff0000" },
+        { "from": 16, "to": 23, "label": "Color 02 - Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 24, "to": 31, "label": "Color 03 - Warm Yellow", "kind": "color", "color": "#ffde63" },
+        { "from": 32, "to": 39, "label": "Color 04 - Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 40, "to": 47, "label": "Color 05 - Green", "kind": "color", "color": "#00ff00" },
+        { "from": 48, "to": 55, "label": "Color 06 - Turquoise", "kind": "color", "color": "#42eadd" },
+        { "from": 56, "to": 63, "label": "Color 07 - Cyan", "kind": "color", "color": "#55ffff" },
+        { "from": 64, "to": 71, "label": "Color 08 - Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 72, "to": 79, "label": "Color 09 - Lavender", "kind": "color", "color": "#aaaaff" },
+        { "from": 80, "to": 87, "label": "Color 10 - Malve (Mauve)", "kind": "color", "color": "#9f7694" },
+        { "from": 88, "to": 95, "label": "Color 11 - Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 96, "to": 103, "label": "Color 12 - Pink", "kind": "color", "color": "#ffaaff" },
+        { "from": 104, "to": 111, "label": "White - CTO (3200K)", "kind": "color", "color": "#fffaf2" },
+        { "from": 112, "to": 119, "label": "White (5600K)", "kind": "color", "color": "#ffffff" },
+        { "from": 120, "to": 127, "label": "White - CTB (7200K)", "kind": "color", "color": "#f3fbff" },
+        { "from": 128, "to": 128, "label": "Rainbow Effect Stop", "kind": "stop" },
+        { "from": 129, "to": 223, "label": "Rainbow Effect (slow - fast)", "kind": "rotation" },
+        { "from": 224, "to": 255, "label": "Random colors (slow - fast)", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "set3Red",
+      "name": "Set 3 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set3Green",
+      "name": "Set 3 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set3Blue",
+      "name": "Set 3 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set3White",
+      "name": "Set 3 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set3Intensity",
+      "name": "Set 3 Intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "starEffect",
+      "name": "Star Effect",
+      "attribute": "effect"
+    },
+    {
+      "key": "set2PatternSelect",
+      "name": "Set 2 Pattern Select",
+      "attribute": "effect"
+    },
+    {
+      "key": "set2PatternMovement",
+      "name": "Set 2 Pattern Movement",
+      "attribute": "effect"
+    },
+    {
+      "key": "intensityFine",
+      "name": "Intensity - Fine",
+      "attribute": "dimmer",
+      "fineOf": "intensity"
+    },
+    {
+      "key": "set12Red",
+      "name": "Set 1&2 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set12Green",
+      "name": "Set 1&2 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set12Blue",
+      "name": "Set 1&2 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set12White",
+      "name": "Set 1&2 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set34Red",
+      "name": "Set 3&4 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set34Green",
+      "name": "Set 3&4 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set34Blue",
+      "name": "Set 3&4 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set34White",
+      "name": "Set 3&4 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set56Red",
+      "name": "Set 5&6 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set56Green",
+      "name": "Set 5&6 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set56Blue",
+      "name": "Set 5&6 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set56White",
+      "name": "Set 5&6 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set78Red",
+      "name": "Set 7&8 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set78Green",
+      "name": "Set 7&8 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set78Blue",
+      "name": "Set 7&8 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set78White",
+      "name": "Set 7&8 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set910Red",
+      "name": "Set 9&10 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set910Green",
+      "name": "Set 9&10 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set910Blue",
+      "name": "Set 9&10 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set910White",
+      "name": "Set 9&10 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set4Red",
+      "name": "Set 4 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set4Green",
+      "name": "Set 4 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set4Blue",
+      "name": "Set 4 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set4White",
+      "name": "Set 4 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set5Red",
+      "name": "Set 5 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set6Red",
+      "name": "Set 6 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set7Red",
+      "name": "Set 7 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set8Red",
+      "name": "Set 8 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set9Red",
+      "name": "Set 9 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set10Red",
+      "name": "Set 10 Red",
+      "attribute": "red"
+    },
+    {
+      "key": "set5Green",
+      "name": "Set 5 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set6Green",
+      "name": "Set 6 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set7Green",
+      "name": "Set 7 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set8Green",
+      "name": "Set 8 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set9Green",
+      "name": "Set 9 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set10Green",
+      "name": "Set 10 Green",
+      "attribute": "green"
+    },
+    {
+      "key": "set5Blue",
+      "name": "Set 5 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set6Blue",
+      "name": "Set 6 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set7Blue",
+      "name": "Set 7 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set8Blue",
+      "name": "Set 8 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set9Blue",
+      "name": "Set 9 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set10Blue",
+      "name": "Set 10 Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "set5White",
+      "name": "Set 5 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set6White",
+      "name": "Set 6 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set7White",
+      "name": "Set 7 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set8White",
+      "name": "Set 8 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set9White",
+      "name": "Set 9 White",
+      "attribute": "white"
+    },
+    {
+      "key": "set10White",
+      "name": "Set 10 White",
+      "attribute": "white"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Normal",
+      "channels": [
+        "tiltCoarse",
+        "tiltFine",
+        "zoom",
+        "cto",
+        "set1ColorFixed",
+        "set1Red",
+        "set1Green",
+        "set1Blue",
+        "set1White",
+        "set1Intensity",
+        "shutter",
+        "intensity",
+        "specialChannel",
+        "set2ColorFixed",
+        "set2Red",
+        "set2Green",
+        "set2Blue",
+        "set2White",
+        "set2Intensity",
+        "set3ColorFixed",
+        "set3Red",
+        "set3Green",
+        "set3Blue",
+        "set3White",
+        "set3Intensity",
+        "crossfade",
+        "starEffect",
+        "set1PatternSelect",
+        "set1PatternMovement",
+        "set2PatternSelect",
+        "set2PatternMovement",
+        "pixelSelect18",
+        "pixelSelect910"
+      ],
+      "heads": [
+        [
+          "set1ColorFixed",
+          "set1Red",
+          "set1Green",
+          "set1Blue",
+          "set1White",
+          "set1Intensity",
+          "set1PatternSelect",
+          "set1PatternMovement"
+        ],
+        [
+          "set2ColorFixed",
+          "set2Red",
+          "set2Green",
+          "set2Blue",
+          "set2White",
+          "set2Intensity",
+          "set2PatternSelect",
+          "set2PatternMovement"
+        ],
+        [
+          "set3ColorFixed",
+          "set3Red",
+          "set3Green",
+          "set3Blue",
+          "set3White",
+          "set3Intensity"
+        ]
+      ]
+    },
+    {
+      "name": "Compressed",
+      "channels": [
+        "reserved",
+        "reserved1",
+        "tiltCoarse",
+        "tiltFine",
+        "set1ColorFixed",
+        "set1Red",
+        "set1Green",
+        "set1Blue",
+        "set1White",
+        "shutter",
+        "intensity",
+        "cto",
+        "specialChannel",
+        "crossfade",
+        "set1PatternMovement",
+        "zoom",
+        "set1PatternSelect",
+        "pixelSelect18",
+        "pixelSelect910"
+      ]
+    },
+    {
+      "name": "High-Resolution (Extended)",
+      "channels": [
+        "tiltCoarse",
+        "tiltFine",
+        "zoom",
+        "cto",
+        "set1ColorFixed",
+        "set1Red",
+        "set1Green",
+        "set1Blue",
+        "set1White",
+        "set1Intensity",
+        "shutter",
+        "intensity",
+        "intensityFine",
+        "specialChannel",
+        "set2ColorFixed",
+        "set2Red",
+        "set2Green",
+        "set2Blue",
+        "set2White",
+        "set2Intensity",
+        "set3ColorFixed",
+        "set3Red",
+        "set3Green",
+        "set3Blue",
+        "set3White",
+        "set3Intensity",
+        "crossfade",
+        "starEffect",
+        "set1PatternSelect",
+        "set1PatternMovement",
+        "set2PatternSelect",
+        "set2PatternMovement",
+        "pixelSelect18",
+        "pixelSelect910"
+      ],
+      "heads": [
+        [
+          "set1ColorFixed",
+          "set1Red",
+          "set1Green",
+          "set1Blue",
+          "set1White",
+          "set1Intensity",
+          "set1PatternSelect",
+          "set1PatternMovement"
+        ],
+        [
+          "set2ColorFixed",
+          "set2Green",
+          "set2Red",
+          "set2Blue",
+          "set2White",
+          "set2Intensity",
+          "set2PatternSelect",
+          "set2PatternMovement"
+        ],
+        [
+          "set3ColorFixed",
+          "set3Red",
+          "set3Green",
+          "set3Blue",
+          "set3White",
+          "set3Intensity"
+        ]
+      ]
+    },
+    {
+      "name": "Dual Pixel",
+      "channels": [
+        "tiltCoarse",
+        "tiltFine",
+        "shutter",
+        "intensity",
+        "cto",
+        "specialChannel",
+        "crossfade",
+        "zoom",
+        "set12Red",
+        "set12Green",
+        "set12Blue",
+        "set12White",
+        "set34Red",
+        "set34Green",
+        "set34Blue",
+        "set34White",
+        "set56Red",
+        "set56Green",
+        "set56Blue",
+        "set56White",
+        "set78Red",
+        "set78Green",
+        "set78Blue",
+        "set78White",
+        "set910Red",
+        "set910Green",
+        "set910Blue",
+        "set910White"
+      ],
+      "heads": [
+        [
+          "set12Red",
+          "set12Green",
+          "set12Blue",
+          "set12White"
+        ],
+        [
+          "set34Red",
+          "set34Green",
+          "set34Blue",
+          "set34White"
+        ],
+        [
+          "set56Red",
+          "set56Green",
+          "set56Blue",
+          "set56White"
+        ],
+        [
+          "set78Red",
+          "set78Green",
+          "set78Blue",
+          "set78White"
+        ],
+        [
+          "set910Red",
+          "set910Green",
+          "set910Blue",
+          "set910White"
+        ]
+      ]
+    },
+    {
+      "name": "Dual Pixel High Resolution",
+      "channels": [
+        "tiltCoarse",
+        "tiltFine",
+        "shutter",
+        "intensity",
+        "intensityFine",
+        "cto",
+        "specialChannel",
+        "crossfade",
+        "zoom",
+        "set12Red",
+        "set12Green",
+        "set12Blue",
+        "set12White",
+        "set34Red",
+        "set34Green",
+        "set34Blue",
+        "set34White",
+        "set56Red",
+        "set56Green",
+        "set56Blue",
+        "set56White",
+        "set78Red",
+        "set78Green",
+        "set78Blue",
+        "set78White",
+        "set910Red",
+        "set910Green",
+        "set910Blue",
+        "set910White"
+      ],
+      "heads": [
+        [
+          "set12Red",
+          "set12Blue",
+          "set12Green",
+          "set12White"
+        ],
+        [
+          "set34Red",
+          "set34Green",
+          "set34Blue",
+          "set34White"
+        ],
+        [
+          "set56Red",
+          "set56Green",
+          "set56Blue",
+          "set56White"
+        ],
+        [
+          "set78Red",
+          "set78Green",
+          "set78Blue",
+          "set78White"
+        ],
+        [
+          "set910Red",
+          "set910Green",
+          "set910Blue",
+          "set910White"
+        ]
+      ]
+    },
+    {
+      "name": "Singel Pixel",
+      "channels": [
+        "tiltCoarse",
+        "tiltFine",
+        "shutter",
+        "intensity",
+        "cto",
+        "specialChannel",
+        "crossfade",
+        "zoom",
+        "set1Red",
+        "set1Green",
+        "set1Blue",
+        "set1White",
+        "set2Red",
+        "set2Green",
+        "set2Blue",
+        "set2White",
+        "set3Red",
+        "set3Green",
+        "set3Blue",
+        "set3White",
+        "set4Red",
+        "set4Green",
+        "set4Blue",
+        "set4White",
+        "set5Red",
+        "set5Green",
+        "set5Blue",
+        "set5White",
+        "set6Red",
+        "set6Green",
+        "set6Blue",
+        "set6White",
+        "set7Red",
+        "set7Green",
+        "set7Blue",
+        "set7White",
+        "set8Red",
+        "set8Green",
+        "set8Blue",
+        "set8White",
+        "set9Red",
+        "set9Green",
+        "set9Blue",
+        "set9White",
+        "set10Red",
+        "set10Green",
+        "set10Blue",
+        "set10White"
+      ],
+      "heads": [
+        [
+          "set1Red",
+          "set1Green",
+          "set1Blue",
+          "set1White"
+        ],
+        [
+          "set2Red",
+          "set2Green",
+          "set2Blue",
+          "set2White"
+        ],
+        [
+          "set3Red",
+          "set3Green",
+          "set3Blue",
+          "set3White"
+        ],
+        [
+          "set4Red",
+          "set4Green",
+          "set4Blue",
+          "set4White"
+        ],
+        [
+          "set5Red",
+          "set5Green",
+          "set5Blue",
+          "set5White"
+        ],
+        [
+          "set6Red",
+          "set6Green",
+          "set6Blue",
+          "set6White"
+        ],
+        [
+          "set7Red",
+          "set7Green",
+          "set7Blue",
+          "set7White"
+        ],
+        [
+          "set8Red",
+          "set8Green",
+          "set8Blue",
+          "set8White"
+        ],
+        [
+          "set9Green",
+          "set9Blue",
+          "set9Red",
+          "set9White"
+        ],
+        [
+          "set10Red",
+          "set10Green",
+          "set10Blue",
+          "set10White"
+        ]
+      ]
+    },
+    {
+      "name": "Singel Pixel High Resolution",
+      "channels": [
+        "tiltCoarse",
+        "tiltFine",
+        "shutter",
+        "intensity",
+        "intensityFine",
+        "cto",
+        "specialChannel",
+        "crossfade",
+        "zoom",
+        "set1Red",
+        "set1Green",
+        "set1Blue",
+        "set1White",
+        "set2Red",
+        "set2Green",
+        "set2Blue",
+        "set2White",
+        "set3Red",
+        "set3Green",
+        "set3Blue",
+        "set3White",
+        "set4Red",
+        "set4Green",
+        "set4Blue",
+        "set4White",
+        "set5Red",
+        "set5Green",
+        "set5Blue",
+        "set5White",
+        "set6Red",
+        "set6Green",
+        "set6Blue",
+        "set6White",
+        "set7Red",
+        "set7Green",
+        "set7Blue",
+        "set7White",
+        "set8Red",
+        "set8Green",
+        "set8Blue",
+        "set8White",
+        "set9Red",
+        "set9Green",
+        "set9Blue",
+        "set9White",
+        "set10Red",
+        "set10Green",
+        "set10Blue",
+        "set10White"
+      ],
+      "heads": [
+        [
+          "set1Red",
+          "set1Green",
+          "set1Blue",
+          "set1White"
+        ],
+        [
+          "set2Red",
+          "set2Green",
+          "set2White",
+          "set2Blue"
+        ],
+        [
+          "set3Red",
+          "set3Green",
+          "set3Blue",
+          "set3White"
+        ],
+        [
+          "set4Red",
+          "set4Green",
+          "set4Blue",
+          "set4White"
+        ],
+        [
+          "set5Red",
+          "set5Green",
+          "set5Blue",
+          "set5White"
+        ],
+        [
+          "set6Red",
+          "set6Green",
+          "set6Blue",
+          "set6White"
+        ],
+        [
+          "set7Red",
+          "set7Green",
+          "set7Blue",
+          "set7White"
+        ],
+        [
+          "set8Red",
+          "set8Green",
+          "set8Blue",
+          "set8White"
+        ],
+        [
+          "set9Red",
+          "set9Green",
+          "set9Blue",
+          "set9White"
+        ],
+        [
+          "set10Red",
+          "set10Green",
+          "set10Blue",
+          "set10White"
+        ]
+      ]
+    }
+  ]
+}

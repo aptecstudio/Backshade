@@ -1,0 +1,116 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "SlimPAR Q12 USB",
+  "category": "par",
+  "physical": {
+    "width": 247,
+    "height": 293,
+    "depth": 92,
+    "weight": 2.1,
+    "source": "LED 4W",
+    "beamAngle": {
+      "min": 15,
+      "max": 15
+    },
+    "power": 44
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber"
+    },
+    {
+      "key": "colorMacro",
+      "name": "Color Macro",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 255, "label": "Color macros" }
+      ]
+    },
+    {
+      "key": "strobeSpeedSensitivity",
+      "name": "Strobe/Speed/Sensitivity",
+      "attribute": "effectSpeed",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function/Slow to fast/Off" },
+        { "from": 11, "to": 15, "label": "No function/Slow to fast/Control the level" },
+        { "from": 16, "to": 255, "label": "Slow to fast/Slow to fast/Control the level" }
+      ]
+    },
+    {
+      "key": "mode",
+      "name": "Mode",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "No function" },
+        { "from": 32, "to": 63, "label": "Pulse effect 0-100%" },
+        { "from": 64, "to": 95, "label": "Pulse effect 100%-0" },
+        { "from": 96, "to": 127, "label": "Pulse effect 100%-0-100%" },
+        { "from": 128, "to": 159, "label": "Auto fade transition" },
+        { "from": 160, "to": 191, "label": "Auto snap transition (3 colors)" },
+        { "from": 192, "to": 223, "label": "Auto snap transition (7 colors)" },
+        { "from": 224, "to": 255, "label": "Sound-active" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerSpeed",
+      "name": "Dimmer Speed",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "Default set from menu" },
+        { "from": 52, "to": 101, "label": "Mode off" },
+        { "from": 102, "to": 152, "label": "Mode 1 (fast speed)" },
+        { "from": 153, "to": 203, "label": "Mode 2 (medium speed)" },
+        { "from": 204, "to": 255, "label": "Mode 3 (slow speed)" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "4 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "amber"
+      ]
+    },
+    {
+      "name": "9 Channel",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "amber",
+        "colorMacro",
+        "strobeSpeedSensitivity",
+        "mode",
+        "dimmer",
+        "dimmerSpeed"
+      ]
+    }
+  ]
+}

@@ -11,5 +11,8 @@
     "timecodeRate": "25",
     "fadeInSeconds": 0,
     "fadeOutSeconds": 0
+  },
+  "patch": {
+    "fixtures": []
   }
 }

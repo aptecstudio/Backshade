@@ -1,0 +1,1227 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Clay Paky",
+  "model": "A.LEDA Wash K10",
+  "category": "movingHead",
+  "physical": {
+    "width": 358,
+    "height": 479,
+    "depth": 253,
+    "weight": 14.1,
+    "lumens": 5500,
+    "source": "LED",
+    "beamAngle": {
+      "min": 14,
+      "max": 70
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 360
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "redFine",
+      "name": "Red fine",
+      "attribute": "red",
+      "fineOf": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "greenFine",
+      "name": "Green fine",
+      "attribute": "green",
+      "fineOf": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "blueFine",
+      "name": "Blue fine",
+      "attribute": "blue",
+      "fineOf": "blue"
+    },
+    {
+      "key": "white",
+      "name": "White",
+      "attribute": "white"
+    },
+    {
+      "key": "whiteFine",
+      "name": "White fine",
+      "attribute": "white",
+      "fineOf": "white"
+    },
+    {
+      "key": "cto",
+      "name": "CTO",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Unused" },
+        { "from": 10, "to": 13, "label": "8000" },
+        { "from": 14, "to": 18, "label": "7900" },
+        { "from": 19, "to": 22, "label": "7800" },
+        { "from": 23, "to": 27, "label": "7700" },
+        { "from": 28, "to": 31, "label": "7600" },
+        { "from": 32, "to": 36, "label": "7500" },
+        { "from": 37, "to": 40, "label": "7400" },
+        { "from": 41, "to": 45, "label": "7300" },
+        { "from": 46, "to": 49, "label": "7200" },
+        { "from": 50, "to": 53, "label": "7100" },
+        { "from": 54, "to": 58, "label": "7000" },
+        { "from": 59, "to": 62, "label": "6900" },
+        { "from": 63, "to": 67, "label": "6800" },
+        { "from": 68, "to": 71, "label": "6700" },
+        { "from": 72, "to": 76, "label": "6600" },
+        { "from": 77, "to": 80, "label": "6500" },
+        { "from": 81, "to": 85, "label": "6400" },
+        { "from": 86, "to": 89, "label": "6300" },
+        { "from": 90, "to": 94, "label": "6200" },
+        { "from": 95, "to": 98, "label": "6100" },
+        { "from": 99, "to": 102, "label": "6000" },
+        { "from": 103, "to": 107, "label": "5900" },
+        { "from": 108, "to": 111, "label": "5800" },
+        { "from": 112, "to": 116, "label": "5700" },
+        { "from": 117, "to": 120, "label": "5600" },
+        { "from": 121, "to": 125, "label": "5500" },
+        { "from": 126, "to": 129, "label": "5400" },
+        { "from": 130, "to": 134, "label": "5300" },
+        { "from": 135, "to": 138, "label": "5200" },
+        { "from": 139, "to": 143, "label": "5100" },
+        { "from": 144, "to": 147, "label": "5000" },
+        { "from": 148, "to": 151, "label": "4900" },
+        { "from": 152, "to": 156, "label": "4800" },
+        { "from": 157, "to": 160, "label": "4700" },
+        { "from": 161, "to": 165, "label": "4600" },
+        { "from": 166, "to": 169, "label": "4500" },
+        { "from": 170, "to": 174, "label": "4400" },
+        { "from": 175, "to": 178, "label": "4300" },
+        { "from": 179, "to": 183, "label": "4200" },
+        { "from": 184, "to": 187, "label": "4100" },
+        { "from": 188, "to": 191, "label": "4000" },
+        { "from": 192, "to": 196, "label": "3900" },
+        { "from": 197, "to": 200, "label": "3800" },
+        { "from": 201, "to": 205, "label": "3700" },
+        { "from": 206, "to": 209, "label": "3600" },
+        { "from": 210, "to": 214, "label": "3500" },
+        { "from": 215, "to": 218, "label": "3400" },
+        { "from": 219, "to": 223, "label": "3300" },
+        { "from": 224, "to": 227, "label": "3200" },
+        { "from": 228, "to": 232, "label": "3100" },
+        { "from": 233, "to": 236, "label": "3000" },
+        { "from": 237, "to": 241, "label": "2900" },
+        { "from": 242, "to": 245, "label": "2800" },
+        { "from": 246, "to": 249, "label": "2700" },
+        { "from": 250, "to": 254, "label": "2600" },
+        { "from": 255, "to": 255, "label": "2500" }
+      ]
+    },
+    {
+      "key": "macroColor",
+      "name": "Macro color",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Macro color OFF" },
+        { "from": 10, "to": 10, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 11, "to": 11, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 12, "to": 12, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 13, "to": 13, "label": "Cyan", "kind": "color", "color": "#00ffff" },
+        { "from": 14, "to": 14, "label": "Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 15, "to": 15, "label": "Magenta", "kind": "color", "color": "#ff00ff" },
+        { "from": 16, "to": 16, "label": "White 7000 degK", "kind": "color", "color": "#ffffff" },
+        { "from": 17, "to": 17, "label": "White 3700 degK", "kind": "color", "color": "#ffffff" },
+        { "from": 18, "to": 18, "label": "White 5000 degK", "kind": "color", "color": "#ffffff" },
+        { "from": 19, "to": 19, "label": "Black", "kind": "color", "color": "#000000" },
+        { "from": 20, "to": 22, "label": "Medium yellow", "kind": "color", "color": "#9c7d00" },
+        { "from": 23, "to": 26, "label": "Straw tint", "kind": "color", "color": "#987309" },
+        { "from": 27, "to": 28, "label": "Surprise peach", "kind": "color", "color": "#c67109" },
+        { "from": 29, "to": 29, "label": "Fire", "kind": "color", "color": "#ff3700" },
+        { "from": 30, "to": 30, "label": "Medium amber", "kind": "color", "color": "#ff8800" },
+        { "from": 31, "to": 31, "label": "Gold amber", "kind": "color", "color": "#ff6600" },
+        { "from": 32, "to": 34, "label": "Dark amber", "kind": "color", "color": "#ff4000" },
+        { "from": 35, "to": 44, "label": "Sunrise red", "kind": "color", "color": "#ff5202" },
+        { "from": 45, "to": 45, "label": "Light pink", "kind": "color", "color": "#ff70ff" },
+        { "from": 46, "to": 48, "label": "Medium pink", "kind": "color", "color": "#ff576b" },
+        { "from": 49, "to": 61, "label": "Pink carnation", "kind": "color", "color": "#ff6b81" },
+        { "from": 62, "to": 67, "label": "Light lavender", "kind": "color", "color": "#d265aa" },
+        { "from": 68, "to": 77, "label": "Lavender", "kind": "color", "color": "#a8518a" },
+        { "from": 78, "to": 88, "label": "Sky blue", "kind": "color", "color": "#00ff87" },
+        { "from": 89, "to": 99, "label": "Just blue", "kind": "color", "color": "#00c281" },
+        { "from": 100, "to": 109, "label": "Dark yellow green", "kind": "color", "color": "#28db00" },
+        { "from": 110, "to": 111, "label": "Spring yellow", "kind": "color", "color": "#f5c800" },
+        { "from": 112, "to": 112, "label": "Light amber", "kind": "color", "color": "#eda200" },
+        { "from": 113, "to": 113, "label": "Straw", "kind": "color", "color": "#e6ba51" },
+        { "from": 114, "to": 114, "label": "Deep amber", "kind": "color", "color": "#ffa600" },
+        { "from": 115, "to": 116, "label": "Orange", "kind": "color", "color": "#ff7b00" },
+        { "from": 117, "to": 117, "label": "Light rose", "kind": "color", "color": "#ff8b1f" },
+        { "from": 118, "to": 118, "label": "English rose", "kind": "color", "color": "#ff9317" },
+        { "from": 119, "to": 119, "label": "Light salmon", "kind": "color", "color": "#ff8b1f" },
+        { "from": 120, "to": 120, "label": "Middle rose", "kind": "color", "color": "#d9811c" },
+        { "from": 121, "to": 122, "label": "Dark pink", "kind": "color", "color": "#ff6f21" },
+        { "from": 123, "to": 124, "label": "Magenta", "kind": "color", "color": "#ff130f" },
+        { "from": 125, "to": 125, "label": "Peacock blue", "kind": "color", "color": "#33ff33" },
+        { "from": 126, "to": 126, "label": "Med blue green", "kind": "color", "color": "#ceff38" },
+        { "from": 127, "to": 127, "label": "Steel blue", "kind": "color", "color": "#ceff38" },
+        { "from": 128, "to": 128, "label": "Light blue", "kind": "color", "color": "#4aff53" },
+        { "from": 129, "to": 130, "label": "Dark blue", "kind": "color", "color": "#00bbff" },
+        { "from": 131, "to": 133, "label": "Leaf green", "kind": "color", "color": "#ccff00" },
+        { "from": 134, "to": 135, "label": "Dark green", "kind": "color", "color": "#55ff0d" },
+        { "from": 136, "to": 137, "label": "Mauve", "kind": "color", "color": "#e32938" },
+        { "from": 138, "to": 141, "label": "Bright pink", "kind": "color", "color": "#ff3624" },
+        { "from": 142, "to": 144, "label": "Medium blue", "kind": "color", "color": "#00ff91" },
+        { "from": 145, "to": 145, "label": "Deep golden amber", "kind": "color", "color": "#ff3b00" },
+        { "from": 146, "to": 146, "label": "Pale lavender", "kind": "color", "color": "#ffc53d" },
+        { "from": 147, "to": 148, "label": "Special lavender", "kind": "color", "color": "#dbc64f" },
+        { "from": 149, "to": 150, "label": "Primary green", "kind": "color", "color": "#4cff00" },
+        { "from": 151, "to": 156, "label": "Bright blue", "kind": "color", "color": "#00ff55" },
+        { "from": 157, "to": 161, "label": "Apricot", "kind": "color", "color": "#ff8e0d" },
+        { "from": 162, "to": 167, "label": "Pale gold", "kind": "color", "color": "#fdaa1a" },
+        { "from": 168, "to": 171, "label": "Deep orange", "kind": "color", "color": "#de5500" },
+        { "from": 172, "to": 173, "label": "Bastard amber", "kind": "color", "color": "#ffb41c" },
+        { "from": 174, "to": 174, "label": "Flame red", "kind": "color", "color": "#ff2c02" },
+        { "from": 175, "to": 178, "label": "Daylight blue", "kind": "color", "color": "#52d65b" },
+        { "from": 179, "to": 179, "label": "Lilac tint", "kind": "color", "color": "#ffc831" },
+        { "from": 180, "to": 183, "label": "Deep lavender", "kind": "color", "color": "#ffa940" },
+        { "from": 184, "to": 190, "label": "Dark steel blue", "kind": "color", "color": "#b5ff5f" },
+        { "from": 191, "to": 206, "label": "Congo blue", "kind": "color", "color": "#4c00ff" },
+        { "from": 207, "to": 255, "label": "Alice blue", "kind": "color", "color": "#80ff8f" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Closed", "kind": "closed" },
+        { "from": 4, "to": 103, "label": "Slow to fast strobe (1 to 25 flash/sec)", "kind": "strobe" },
+        { "from": 104, "to": 107, "label": "Open", "kind": "open" },
+        { "from": 108, "to": 207, "label": "Slow to fast pulsation (1 to 25 flash/sec)", "kind": "pulse" },
+        { "from": 208, "to": 212, "label": "Open", "kind": "open" },
+        { "from": 213, "to": 225, "label": "Random slow strobe", "kind": "strobe" },
+        { "from": 226, "to": 238, "label": "Random medium strobe", "kind": "strobe" },
+        { "from": 239, "to": 251, "label": "Random fast strobe", "kind": "strobe" },
+        { "from": 252, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine",
+      "name": "Pan fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "function",
+      "name": "Function",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 11, "label": "Function off" },
+        { "from": 12, "to": 24, "label": "Pan/Tilt fast (default)" },
+        { "from": 25, "to": 37, "label": "Pan/Tilt normal" },
+        { "from": 38, "to": 42, "label": "Dimmer curve 1" },
+        { "from": 43, "to": 47, "label": "Dimmer curve 2" },
+        { "from": 48, "to": 52, "label": "Dimmer curve 3 (default)" },
+        { "from": 53, "to": 57, "label": "Dimmer curve 4" },
+        { "from": 58, "to": 62, "label": "RGBW Gamma curve 1 - gamma = 1.0" },
+        { "from": 63, "to": 67, "label": "RGBW Gamma curve 2 - gamma = 1.5 (default)" },
+        { "from": 68, "to": 72, "label": "RGBW Gamma curve 3 - gamma = 2.0" },
+        { "from": 73, "to": 77, "label": "Halogen lamp simulation OFF (default)" },
+        { "from": 78, "to": 82, "label": "Halogen lamp simulation, type 1 (750W)" },
+        { "from": 83, "to": 87, "label": "Halogen lamp simulation, type 2 (1000W)" },
+        { "from": 88, "to": 92, "label": "Halogen lamp simulation, type 3 (1200W)" },
+        { "from": 93, "to": 97, "label": "Halogen lamp simulation, type 4 (2000W)" },
+        { "from": 98, "to": 102, "label": "Halogen lamp simulation, type 5 (2500W)" },
+        { "from": 103, "to": 250, "label": "Unused range" },
+        { "from": 251, "to": 255, "label": "Reset to default" }
+      ]
+    },
+    {
+      "key": "reset",
+      "name": "Reset",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 25, "label": "Unused range" },
+        { "from": 26, "to": 76, "label": "Zoom reset", "kind": "reset" },
+        { "from": 77, "to": 127, "label": "Pan/Tilt reset", "kind": "reset" },
+        { "from": 128, "to": 255, "label": "Complete reset", "kind": "reset" }
+      ]
+    },
+    {
+      "key": "shapeSelection",
+      "name": "Shape selection",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "Macro OFF" },
+        { "from": 8, "to": 8, "label": "Ring 1" },
+        { "from": 9, "to": 9, "label": "Ring 2" },
+        { "from": 10, "to": 10, "label": "Ring 3" },
+        { "from": 11, "to": 11, "label": "Ring 4" },
+        { "from": 12, "to": 12, "label": "Ring 1 + 2" },
+        { "from": 13, "to": 13, "label": "Ring 1 + 3" },
+        { "from": 14, "to": 14, "label": "Ring 1 + 4" },
+        { "from": 15, "to": 15, "label": "Ring opening (closing)" },
+        { "from": 16, "to": 16, "label": "Ring opening (closing) filled" },
+        { "from": 17, "to": 17, "label": "Ring open/close (close/open)" },
+        { "from": 18, "to": 18, "label": "Ring open/close (close/open) filled" },
+        { "from": 19, "to": 19, "label": "Ring with variable radius" },
+        { "from": 20, "to": 20, "label": "Ring with variable radius, filled" },
+        { "from": 21, "to": 21, "label": "Random pixels distributed on many fixtures" },
+        { "from": 22, "to": 22, "label": "Random pixels with variable density and speed" },
+        { "from": 23, "to": 23, "label": "Rainbow 1, variable speed" },
+        { "from": 24, "to": 24, "label": "Rainbow 2, fixed speed with variable color offset" },
+        { "from": 25, "to": 25, "label": "Fan (3 arms)" },
+        { "from": 26, "to": 26, "label": "Bar (2 arms)" },
+        { "from": 27, "to": 27, "label": "Half moon" },
+        { "from": 28, "to": 28, "label": "Triangle" },
+        { "from": 29, "to": 29, "label": "Two rotating bars of different colors" },
+        { "from": 30, "to": 30, "label": "Two rotating arcs of different colors" },
+        { "from": 31, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "shapeSpeed",
+      "name": "Shape speed",
+      "attribute": "effectSpeed",
+      "capabilities": [
+        { "from": 0, "to": 126, "label": "Max to min speed (c.cw rotation / Instant-on + Fade out / closing effect)" },
+        { "from": 127, "to": 128, "label": "Stop" },
+        { "from": 129, "to": 255, "label": "Min to max speed (cw rotation / Fade in + Fade out / Opening effect)" }
+      ]
+    },
+    {
+      "key": "shapeSmoothing",
+      "name": "Shape smoothing",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "Snap" },
+        { "from": 16, "to": 245, "label": "Smooth, fading curve gamma 0.5 to 2" },
+        { "from": 246, "to": 255, "label": "Smooth, fading curve with automatic gamma" }
+      ]
+    },
+    {
+      "key": "shapeRed",
+      "name": "Shape red",
+      "attribute": "red"
+    },
+    {
+      "key": "shapeGreen",
+      "name": "Shape green",
+      "attribute": "green"
+    },
+    {
+      "key": "shapeBlue",
+      "name": "Shape blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "shapeWhite",
+      "name": "Shape white",
+      "attribute": "white"
+    },
+    {
+      "key": "shapeIntensity",
+      "name": "Shape intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "backgroundIntensity",
+      "name": "Background intensity",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "shapeTransition",
+      "name": "Shape transition",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "No fade" },
+        { "from": 5, "to": 255, "label": "Fading time (100ms to 4000ms)" }
+      ]
+    },
+    {
+      "key": "shapeOffset",
+      "name": "Shape offset",
+      "attribute": "effect"
+    },
+    {
+      "key": "redLed1",
+      "name": "Red LED 1",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed1",
+      "name": "Green LED 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed1",
+      "name": "Blue LED 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed1",
+      "name": "White LED 1",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed2",
+      "name": "Red LED 2",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed2",
+      "name": "Green LED 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed2",
+      "name": "Blue LED 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed2",
+      "name": "White LED 2",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed3",
+      "name": "Red LED 3",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed3",
+      "name": "Green LED 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed3",
+      "name": "Blue LED 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed3",
+      "name": "White LED 3",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed4",
+      "name": "Red LED 4",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed4",
+      "name": "Green LED 4",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed4",
+      "name": "Blue LED 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed4",
+      "name": "White LED 4",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed5",
+      "name": "Red LED 5",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed5",
+      "name": "Green LED 5",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed5",
+      "name": "Blue LED 5",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed5",
+      "name": "White LED 5",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed6",
+      "name": "Red LED 6",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed6",
+      "name": "Green LED 6",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed6",
+      "name": "Blue LED 6",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed6",
+      "name": "White LED 6",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed7",
+      "name": "Red LED 7",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed7",
+      "name": "Green LED 7",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed7",
+      "name": "Blue LED 7",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed7",
+      "name": "White LED 7",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed8",
+      "name": "Red LED 8",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed8",
+      "name": "Green LED 8",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed8",
+      "name": "Blue LED 8",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed8",
+      "name": "White LED 8",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed9",
+      "name": "Red LED 9",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed9",
+      "name": "Green LED 9",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed9",
+      "name": "Blue LED 9",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed9",
+      "name": "White LED 9",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed10",
+      "name": "Red LED 10",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed10",
+      "name": "Green LED 10",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed10",
+      "name": "Blue LED 10",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed10",
+      "name": "White LED 10",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed11",
+      "name": "Red LED 11",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed11",
+      "name": "Green LED 11",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed11",
+      "name": "Blue LED 11",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed11",
+      "name": "White LED 11",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed12",
+      "name": "Red LED 12",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed12",
+      "name": "Green LED 12",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed12",
+      "name": "Blue LED 12",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed12",
+      "name": "White LED 12",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed13",
+      "name": "Red LED 13",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed13",
+      "name": "Green LED 13",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed13",
+      "name": "Blue LED 13",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed13",
+      "name": "White LED 13",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed14",
+      "name": "Red LED 14",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed14",
+      "name": "Green LED 14",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed14",
+      "name": "Blue LED 14",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed14",
+      "name": "White LED 14",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed15",
+      "name": "Red LED 15",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed15",
+      "name": "Green LED 15",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed15",
+      "name": "Blue LED 15",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed15",
+      "name": "White LED 15",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed16",
+      "name": "Red LED 16",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed16",
+      "name": "Green LED 16",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed16",
+      "name": "Blue LED 16",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed16",
+      "name": "White LED 16",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed17",
+      "name": "Red LED 17",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed17",
+      "name": "Green LED 17",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed17",
+      "name": "Blue LED 17",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed17",
+      "name": "White LED 17",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed18",
+      "name": "Red LED 18",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed18",
+      "name": "Green LED 18",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed18",
+      "name": "Blue LED 18",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed18",
+      "name": "White LED 18",
+      "attribute": "white"
+    },
+    {
+      "key": "redLed19",
+      "name": "Red LED 19",
+      "attribute": "red"
+    },
+    {
+      "key": "greenLed19",
+      "name": "Green LED 19",
+      "attribute": "green"
+    },
+    {
+      "key": "blueLed19",
+      "name": "Blue LED 19",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteLed19",
+      "name": "White LED 19",
+      "attribute": "white"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom"
+    }
+  ],
+  "modes": [
+    {
+      "name": "Standard",
+      "channels": [
+        "red",
+        "redFine",
+        "green",
+        "greenFine",
+        "blue",
+        "blueFine",
+        "white",
+        "whiteFine",
+        "cto",
+        "macroColor",
+        "strobe",
+        "dimmer",
+        "dimmerFine",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "function",
+        "reset",
+        "zoom"
+      ]
+    },
+    {
+      "name": "Shapes",
+      "channels": [
+        "red",
+        "redFine",
+        "green",
+        "greenFine",
+        "blue",
+        "blueFine",
+        "white",
+        "whiteFine",
+        "cto",
+        "macroColor",
+        "strobe",
+        "dimmer",
+        "dimmerFine",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "function",
+        "reset",
+        "zoom",
+        "shapeSelection",
+        "shapeSpeed",
+        "shapeSmoothing",
+        "shapeRed",
+        "shapeGreen",
+        "shapeBlue",
+        "shapeWhite",
+        "shapeIntensity",
+        "backgroundIntensity",
+        "shapeTransition",
+        "shapeOffset"
+      ]
+    },
+    {
+      "name": "Extended",
+      "channels": [
+        "red",
+        "redFine",
+        "green",
+        "greenFine",
+        "blue",
+        "blueFine",
+        "white",
+        "whiteFine",
+        "cto",
+        "macroColor",
+        "strobe",
+        "dimmer",
+        "dimmerFine",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "function",
+        "reset",
+        "redLed1",
+        "greenLed1",
+        "blueLed1",
+        "zoom",
+        "redLed2",
+        "greenLed2",
+        "blueLed2",
+        "redLed3",
+        "greenLed3",
+        "blueLed3",
+        "redLed4",
+        "greenLed4",
+        "blueLed4",
+        "redLed5",
+        "greenLed5",
+        "blueLed5",
+        "redLed6",
+        "greenLed6",
+        "blueLed6",
+        "redLed7",
+        "greenLed7",
+        "blueLed7",
+        "redLed8",
+        "greenLed8",
+        "blueLed8",
+        "redLed9",
+        "greenLed9",
+        "blueLed9",
+        "redLed10",
+        "greenLed10",
+        "blueLed10",
+        "redLed11",
+        "greenLed11",
+        "blueLed11",
+        "redLed12",
+        "greenLed12",
+        "blueLed12",
+        "redLed13",
+        "greenLed13",
+        "blueLed13",
+        "redLed14",
+        "greenLed14",
+        "blueLed14",
+        "redLed15",
+        "greenLed15",
+        "blueLed15",
+        "redLed16",
+        "greenLed16",
+        "blueLed16",
+        "redLed17",
+        "greenLed17",
+        "blueLed17",
+        "redLed18",
+        "greenLed18",
+        "blueLed18",
+        "redLed19",
+        "greenLed19",
+        "blueLed19"
+      ],
+      "heads": [
+        [
+          "redLed1",
+          "greenLed1",
+          "blueLed1"
+        ],
+        [
+          "redLed2",
+          "greenLed2",
+          "blueLed2"
+        ],
+        [
+          "redLed3",
+          "greenLed3",
+          "blueLed3"
+        ],
+        [
+          "redLed4",
+          "greenLed4",
+          "blueLed4"
+        ],
+        [
+          "blueLed5",
+          "redLed5",
+          "greenLed5"
+        ],
+        [
+          "redLed6",
+          "greenLed6",
+          "blueLed6"
+        ],
+        [
+          "redLed7",
+          "greenLed7",
+          "blueLed7"
+        ],
+        [
+          "redLed8",
+          "greenLed8",
+          "blueLed8"
+        ],
+        [
+          "redLed9",
+          "greenLed9",
+          "blueLed9"
+        ],
+        [
+          "redLed10",
+          "greenLed10",
+          "blueLed10"
+        ],
+        [
+          "greenLed11",
+          "blueLed11",
+          "redLed11"
+        ],
+        [
+          "redLed12",
+          "greenLed12",
+          "blueLed12"
+        ],
+        [
+          "redLed13",
+          "greenLed13",
+          "blueLed13"
+        ],
+        [
+          "redLed14",
+          "greenLed14",
+          "blueLed14"
+        ],
+        [
+          "redLed15",
+          "greenLed15",
+          "blueLed15"
+        ],
+        [
+          "redLed16",
+          "greenLed16",
+          "blueLed16"
+        ],
+        [
+          "redLed17",
+          "greenLed17",
+          "blueLed17"
+        ],
+        [
+          "redLed18",
+          "greenLed18",
+          "blueLed18"
+        ],
+        [
+          "redLed19",
+          "greenLed19",
+          "blueLed19"
+        ]
+      ]
+    },
+    {
+      "name": "Extended RGBW",
+      "channels": [
+        "red",
+        "redFine",
+        "green",
+        "greenFine",
+        "blue",
+        "blueFine",
+        "white",
+        "whiteFine",
+        "cto",
+        "macroColor",
+        "strobe",
+        "dimmer",
+        "dimmerFine",
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "function",
+        "reset",
+        "zoom",
+        "redLed1",
+        "greenLed1",
+        "blueLed1",
+        "whiteLed1",
+        "redLed2",
+        "greenLed2",
+        "blueLed2",
+        "whiteLed2",
+        "redLed3",
+        "greenLed3",
+        "blueLed3",
+        "whiteLed3",
+        "redLed4",
+        "greenLed4",
+        "blueLed4",
+        "whiteLed4",
+        "redLed5",
+        "greenLed5",
+        "blueLed5",
+        "whiteLed5",
+        "redLed6",
+        "greenLed6",
+        "blueLed6",
+        "whiteLed6",
+        "redLed7",
+        "greenLed7",
+        "blueLed7",
+        "whiteLed7",
+        "redLed8",
+        "greenLed8",
+        "blueLed8",
+        "whiteLed8",
+        "redLed9",
+        "greenLed9",
+        "blueLed9",
+        "whiteLed9",
+        "redLed10",
+        "greenLed10",
+        "blueLed10",
+        "whiteLed10",
+        "redLed11",
+        "greenLed11",
+        "blueLed11",
+        "whiteLed11",
+        "redLed12",
+        "greenLed12",
+        "blueLed12",
+        "whiteLed12",
+        "redLed13",
+        "greenLed13",
+        "blueLed13",
+        "whiteLed13",
+        "redLed14",
+        "greenLed14",
+        "blueLed14",
+        "whiteLed14",
+        "redLed15",
+        "greenLed15",
+        "blueLed15",
+        "whiteLed15",
+        "redLed16",
+        "greenLed16",
+        "blueLed16",
+        "whiteLed16",
+        "redLed17",
+        "greenLed17",
+        "blueLed17",
+        "whiteLed17",
+        "redLed18",
+        "greenLed18",
+        "blueLed18",
+        "whiteLed18",
+        "redLed19",
+        "greenLed19",
+        "blueLed19",
+        "whiteLed19"
+      ],
+      "heads": [
+        [
+          "redLed1",
+          "greenLed1",
+          "blueLed1",
+          "whiteLed1"
+        ],
+        [
+          "redLed2",
+          "greenLed2",
+          "blueLed2",
+          "whiteLed2"
+        ],
+        [
+          "redLed3",
+          "greenLed3",
+          "blueLed3",
+          "whiteLed3"
+        ],
+        [
+          "blueLed4",
+          "whiteLed4",
+          "redLed4",
+          "greenLed4"
+        ],
+        [
+          "redLed5",
+          "greenLed5",
+          "blueLed5",
+          "whiteLed5"
+        ],
+        [
+          "redLed6",
+          "greenLed6",
+          "blueLed6",
+          "whiteLed6"
+        ],
+        [
+          "redLed7",
+          "greenLed7",
+          "blueLed7",
+          "whiteLed7"
+        ],
+        [
+          "whiteLed8",
+          "redLed8",
+          "greenLed8",
+          "blueLed8"
+        ],
+        [
+          "redLed9",
+          "greenLed9",
+          "blueLed9",
+          "whiteLed9"
+        ],
+        [
+          "redLed10",
+          "greenLed10",
+          "blueLed10",
+          "whiteLed10"
+        ],
+        [
+          "redLed11",
+          "greenLed11",
+          "blueLed11",
+          "whiteLed11"
+        ],
+        [
+          "redLed12",
+          "greenLed12",
+          "blueLed12",
+          "whiteLed12"
+        ],
+        [
+          "redLed13",
+          "greenLed13",
+          "blueLed13",
+          "whiteLed13"
+        ],
+        [
+          "redLed14",
+          "greenLed14",
+          "blueLed14",
+          "whiteLed14"
+        ],
+        [
+          "redLed15",
+          "greenLed15",
+          "blueLed15",
+          "whiteLed15"
+        ],
+        [
+          "redLed16",
+          "greenLed16",
+          "blueLed16",
+          "whiteLed16"
+        ],
+        [
+          "greenLed17",
+          "blueLed17",
+          "whiteLed17",
+          "redLed17"
+        ],
+        [
+          "redLed18",
+          "greenLed18",
+          "blueLed18",
+          "whiteLed18"
+        ],
+        [
+          "redLed19",
+          "greenLed19",
+          "blueLed19",
+          "whiteLed19"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,936 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Robe",
+  "model": "Robin T1 Profile",
+  "category": "movingHead",
+  "physical": {
+    "width": 400,
+    "height": 726,
+    "depth": 258,
+    "weight": 24.3,
+    "lumens": 12600,
+    "source": "LED",
+    "beamAngle": {
+      "min": 7,
+      "max": 49
+    },
+    "panRange": 540,
+    "tiltRange": 265,
+    "power": 750
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan",
+      "defaultValue": 128
+    },
+    {
+      "key": "panFine",
+      "name": "Pan Fine",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt",
+      "defaultValue": 128
+    },
+    {
+      "key": "tiltFine",
+      "name": "Tilt Fine",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "pTSpeedPTTime",
+      "name": "P/T Speed, P/T Time",
+      "attribute": "panTiltSpeed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Standard mode" },
+        { "from": 1, "to": 255, "label": "Speed" }
+      ]
+    },
+    {
+      "key": "control",
+      "name": "Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Reserved" },
+        { "from": 10, "to": 14, "label": "Wired DMX" },
+        { "from": 15, "to": 19, "label": "Wireless DMX" },
+        { "from": 20, "to": 24, "label": "Display On" },
+        { "from": 25, "to": 29, "label": "Display Off" },
+        { "from": 30, "to": 39, "label": "Reserved" },
+        { "from": 40, "to": 44, "label": "P/T Speed Mode" },
+        { "from": 45, "to": 49, "label": "P/T Time Mode" },
+        { "from": 50, "to": 54, "label": "Move in Dark On" },
+        { "from": 55, "to": 59, "label": "Move in Dark Off" },
+        { "from": 60, "to": 64, "label": "Gobo in Dark On" },
+        { "from": 65, "to": 69, "label": "Gobo in Dark Off" },
+        { "from": 70, "to": 74, "label": "Fan Auto" },
+        { "from": 75, "to": 79, "label": "Fan High" },
+        { "from": 80, "to": 84, "label": "Quiet Mode: Fans On at B/O" },
+        { "from": 85, "to": 89, "label": "Quiet Mode: Fans Off at B/O" },
+        { "from": 90, "to": 119, "label": "Reserved" },
+        { "from": 120, "to": 124, "label": "Parking Pos On" },
+        { "from": 125, "to": 129, "label": "Parking Pos Off" },
+        { "from": 130, "to": 139, "label": "Reset no P/T" },
+        { "from": 140, "to": 149, "label": "Reset P/T" },
+        { "from": 150, "to": 159, "label": "Reserved" },
+        { "from": 160, "to": 169, "label": "Reset Gobo" },
+        { "from": 170, "to": 179, "label": "Reserved" },
+        { "from": 180, "to": 189, "label": "Reset Beam" },
+        { "from": 190, "to": 199, "label": "Reset Iris/Frames" },
+        { "from": 200, "to": 209, "label": "Reset All" },
+        { "from": 210, "to": 211, "label": "Green Correction Cal" },
+        { "from": 212, "to": 218, "label": "Reserved" },
+        { "from": 219, "to": 220, "label": "Gobo Rot: Max Spd+Shortcut" },
+        { "from": 221, "to": 222, "label": "Gobo Rot: Follow Spd+Direction" },
+        { "from": 223, "to": 224, "label": "Gobo Rot: Max Spd+Follow Direction" },
+        { "from": 225, "to": 229, "label": "RoboSpot Enabled" },
+        { "from": 230, "to": 234, "label": "RoboSpot (Handle Faders+P/T only)" },
+        { "from": 235, "to": 239, "label": "RoboSpot Disabled" },
+        { "from": 240, "to": 240, "label": "Quiet Mode Off" },
+        { "from": 241, "to": 255, "label": "Fan Speed" }
+      ]
+    },
+    {
+      "key": "virtualColorWheel",
+      "name": "Virtual Color Wheel",
+      "attribute": "colorWheel",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Open" },
+        { "from": 1, "to": 2, "label": "Filter 4 Med Bastard Amb", "kind": "color", "color": "#ffc8b4" },
+        { "from": 3, "to": 4, "label": "Filter 10 Med Yellow", "kind": "color", "color": "#ffff00" },
+        { "from": 5, "to": 6, "label": "Filter 19 Fire", "kind": "color", "color": "#ff4600" },
+        { "from": 7, "to": 8, "label": "Filter 26 Bright Red", "kind": "color", "color": "#e6003c" },
+        { "from": 9, "to": 10, "label": "Filter 58 Lavender", "kind": "color", "color": "#b46ef0" },
+        { "from": 11, "to": 12, "label": "Filter 68 Sky Blue", "kind": "color", "color": "#46b4f0" },
+        { "from": 13, "to": 14, "label": "Filter 71 Tokyo Blue", "kind": "color", "color": "#0000b4" },
+        { "from": 15, "to": 16, "label": "Filter 79 Just Blue", "kind": "color", "color": "#3c8cd2" },
+        { "from": 17, "to": 18, "label": "Filter 88 Lime Green", "kind": "color", "color": "#dcff64" },
+        { "from": 19, "to": 20, "label": "Filter 90 Dk Yellow Green", "kind": "color", "color": "#00be00" },
+        { "from": 21, "to": 22, "label": "Filter 100 Spring Yellow", "kind": "color", "color": "#f5ff00" },
+        { "from": 23, "to": 24, "label": "Filter 101 Yellow", "kind": "color", "color": "#fff500" },
+        { "from": 25, "to": 26, "label": "Filter 102 Light Amber", "kind": "color", "color": "#ffdc5f" },
+        { "from": 27, "to": 28, "label": "Filter 103 Straw", "kind": "color", "color": "#fceacc" },
+        { "from": 29, "to": 30, "label": "Filter 104 Deep Amber", "kind": "color", "color": "#ffdc00" },
+        { "from": 31, "to": 32, "label": "Filter 105 Orange", "kind": "color", "color": "#ffa000" },
+        { "from": 33, "to": 34, "label": "Filter 106 Primary Red", "kind": "color", "color": "#f00032" },
+        { "from": 35, "to": 36, "label": "Filter 111 Dark Pink", "kind": "color", "color": "#ff8cbe" },
+        { "from": 37, "to": 38, "label": "Filter 115 Peacock Blue", "kind": "color", "color": "#00ebc8" },
+        { "from": 39, "to": 40, "label": "Filter 116 Med Blue Green", "kind": "color", "color": "#00c8b9" },
+        { "from": 41, "to": 42, "label": "Filter 117 Steel Blue", "kind": "color", "color": "#b4faf5" },
+        { "from": 43, "to": 44, "label": "Filter 118 Light Blue", "kind": "color", "color": "#00e1eb" },
+        { "from": 45, "to": 46, "label": "Filter 119 Dark Blue", "kind": "color", "color": "#0078c8" },
+        { "from": 47, "to": 48, "label": "Filter 120 Deep Blue", "kind": "color", "color": "#005fbe" },
+        { "from": 49, "to": 50, "label": "Filter 121 Filter Green", "kind": "color", "color": "#b4ff64" },
+        { "from": 51, "to": 52, "label": "Filter 128 Bright Pink", "kind": "color", "color": "#ff50b4" },
+        { "from": 53, "to": 54, "label": "Filter 131 Marine Blue", "kind": "color", "color": "#64fad2" },
+        { "from": 55, "to": 56, "label": "Filter 132 Medium Blue", "kind": "color", "color": "#00a0dc" },
+        { "from": 57, "to": 58, "label": "Filter 134 Golden Amber", "kind": "color", "color": "#faa873" },
+        { "from": 59, "to": 60, "label": "Filter 135 Deep Golden Amber", "kind": "color", "color": "#ff5f00" },
+        { "from": 61, "to": 62, "label": "Filter 136 Pale Lavender", "kind": "color", "color": "#f0bee6" },
+        { "from": 63, "to": 64, "label": "Filter 137 Special Lavender", "kind": "color", "color": "#c8b4e6" },
+        { "from": 65, "to": 66, "label": "Filter 138 Pale Green", "kind": "color", "color": "#d9fc9e" },
+        { "from": 67, "to": 68, "label": "Filter 139 Primary Green", "kind": "color", "color": "#4bc300" },
+        { "from": 69, "to": 70, "label": "Filter 141 Bright Blue", "kind": "color", "color": "#00d2e6" },
+        { "from": 71, "to": 72, "label": "Filter 147 Apricot", "kind": "color", "color": "#fcb98c" },
+        { "from": 73, "to": 74, "label": "Filter 148 Bright Rose", "kind": "color", "color": "#fc4f7c" },
+        { "from": 75, "to": 76, "label": "Filter 152 Pale Gold", "kind": "color", "color": "#ffd2c1" },
+        { "from": 77, "to": 78, "label": "Filter 154 Pale Rose", "kind": "color", "color": "#ffd5cf" },
+        { "from": 79, "to": 80, "label": "Filter 157 Pink", "kind": "color", "color": "#ff92a3" },
+        { "from": 81, "to": 82, "label": "Filter 158 Deep Orange", "kind": "color", "color": "#ff8700" },
+        { "from": 83, "to": 84, "label": "Filter 162 Bastard Amber", "kind": "color", "color": "#fcded8" },
+        { "from": 85, "to": 86, "label": "Filter 164 Flame Red", "kind": "color", "color": "#ff3200" },
+        { "from": 87, "to": 88, "label": "Filter 165 Daylight Blue", "kind": "color", "color": "#5ac8eb" },
+        { "from": 89, "to": 90, "label": "Filter 169 Lilac Tint", "kind": "color", "color": "#fadcf0" },
+        { "from": 91, "to": 92, "label": "Filter 170 Deep Lavender", "kind": "color", "color": "#e6aadc" },
+        { "from": 93, "to": 94, "label": "Filter 172 Lagoon Blue", "kind": "color", "color": "#00dcdc" },
+        { "from": 95, "to": 96, "label": "Filter 179 Chrome Orange", "kind": "color", "color": "#ffbe00" },
+        { "from": 97, "to": 98, "label": "Filter 180 Dark Lavender", "kind": "color", "color": "#a064e6" },
+        { "from": 99, "to": 100, "label": "Filter 181 Congo Blue", "kind": "color", "color": "#5000aa" },
+        { "from": 101, "to": 102, "label": "Filter 197 Alice Blue", "kind": "color", "color": "#82aae6" },
+        { "from": 103, "to": 104, "label": "Filter 201 Full CT Blue", "kind": "color", "color": "#c3e1fa" },
+        { "from": 105, "to": 106, "label": "Filter 202 Half CT Blue", "kind": "color", "color": "#d7f0ff" },
+        { "from": 107, "to": 108, "label": "Filter 203 Quarter CT Blue", "kind": "color", "color": "#ebfcff" },
+        { "from": 109, "to": 110, "label": "Filter 204 Full CT Orange", "kind": "color", "color": "#fac387" },
+        { "from": 111, "to": 112, "label": "Filter 205 Half CT Orange", "kind": "color", "color": "#fcd9b1" },
+        { "from": 113, "to": 114, "label": "Filter 206 Quarter CT Orange", "kind": "color", "color": "#fcead6" },
+        { "from": 115, "to": 116, "label": "Filter 247 Filter Minus Green", "kind": "color", "color": "#fac3d7" },
+        { "from": 117, "to": 118, "label": "Filter 248 Half Minus Green", "kind": "color", "color": "#ffe2e4" },
+        { "from": 119, "to": 120, "label": "Filter 281 Three Quarter CT Blue", "kind": "color", "color": "#cde6fa" },
+        { "from": 121, "to": 122, "label": "Filter 285 Three Quarter CT Orange", "kind": "color", "color": "#fccd94" },
+        { "from": 123, "to": 124, "label": "Filter 352 Glacier Blue", "kind": "color", "color": "#5ac8e1" },
+        { "from": 125, "to": 126, "label": "Filter 353 Lighter Blue", "kind": "color", "color": "#61e8e3" },
+        { "from": 127, "to": 128, "label": "Filter 715 Cabana Blue", "kind": "color", "color": "#3c6edc" },
+        { "from": 129, "to": 130, "label": "Filter 778 Millennium Gold", "kind": "color", "color": "#ff7600" },
+        { "from": 131, "to": 132, "label": "Filter 793 Vanity Fair", "kind": "color", "color": "#ff3ca0" },
+        { "from": 133, "to": 133, "label": "Multicolor 1" },
+        { "from": 134, "to": 134, "label": "Multicolor 2" },
+        { "from": 135, "to": 135, "label": "Multicolor 3" },
+        { "from": 136, "to": 136, "label": "Multicolor 4" },
+        { "from": 137, "to": 137, "label": "Multicolor 5" },
+        { "from": 138, "to": 138, "label": "Multicolor 6" },
+        { "from": 139, "to": 139, "label": "Multicolor 7" },
+        { "from": 140, "to": 140, "label": "Multicolor 8" },
+        { "from": 141, "to": 141, "label": "Multicolor 9" },
+        { "from": 142, "to": 142, "label": "Multicolor 10" },
+        { "from": 143, "to": 143, "label": "Multicolor 11" },
+        { "from": 144, "to": 144, "label": "Multicolor 12" },
+        { "from": 145, "to": 145, "label": "Multicolor 13" },
+        { "from": 146, "to": 146, "label": "Multicolor 14" },
+        { "from": 147, "to": 147, "label": "Multicolor 15" },
+        { "from": 148, "to": 148, "label": "Multicolor 16" },
+        { "from": 149, "to": 149, "label": "Multicolor 17" },
+        { "from": 150, "to": 150, "label": "Multicolor 18" },
+        { "from": 151, "to": 151, "label": "Multicolor 19" },
+        { "from": 152, "to": 152, "label": "Multicolor 20" },
+        { "from": 153, "to": 153, "label": "Multicolor 21" },
+        { "from": 154, "to": 154, "label": "Multicolor 22" },
+        { "from": 155, "to": 155, "label": "Multicolor 23" },
+        { "from": 156, "to": 156, "label": "Multicolor 24" },
+        { "from": 157, "to": 157, "label": "Multicolor 25" },
+        { "from": 158, "to": 158, "label": "Multicolor 26" },
+        { "from": 159, "to": 159, "label": "Multicolor 27" },
+        { "from": 160, "to": 160, "label": "Multicolor 28" },
+        { "from": 161, "to": 161, "label": "Multicolor 29" },
+        { "from": 162, "to": 162, "label": "Multicolor 30" },
+        { "from": 163, "to": 163, "label": "Multicolor 31" },
+        { "from": 164, "to": 164, "label": "Multicolor 32" },
+        { "from": 165, "to": 165, "label": "Multicolor 33" },
+        { "from": 166, "to": 166, "label": "Multicolor 34" },
+        { "from": 167, "to": 167, "label": "Multicolor 35" },
+        { "from": 168, "to": 168, "label": "Multicolor 36" },
+        { "from": 169, "to": 169, "label": "Multicolor 37" },
+        { "from": 170, "to": 170, "label": "Multicolor 38" },
+        { "from": 171, "to": 171, "label": "Multicolor 39" },
+        { "from": 172, "to": 172, "label": "Multicolor 40" },
+        { "from": 173, "to": 173, "label": "Multicolor 41" },
+        { "from": 174, "to": 174, "label": "Multicolor 42" },
+        { "from": 175, "to": 175, "label": "Multicolor 43" },
+        { "from": 176, "to": 176, "label": "Multicolor 44" },
+        { "from": 177, "to": 177, "label": "Multicolor 45" },
+        { "from": 178, "to": 178, "label": "Multicolor 46" },
+        { "from": 179, "to": 179, "label": "Multicolor 47" },
+        { "from": 180, "to": 180, "label": "Multicolor 48" },
+        { "from": 181, "to": 181, "label": "Multicolor 49" },
+        { "from": 182, "to": 182, "label": "Multicolor 50" },
+        { "from": 183, "to": 183, "label": "Multicolor 51" },
+        { "from": 184, "to": 184, "label": "Multicolor 52" },
+        { "from": 185, "to": 185, "label": "Multicolor 53" },
+        { "from": 186, "to": 186, "label": "Multicolor 54" },
+        { "from": 187, "to": 187, "label": "Multicolor 55" },
+        { "from": 188, "to": 188, "label": "Multicolor 56" },
+        { "from": 189, "to": 189, "label": "Multicolor 57" },
+        { "from": 190, "to": 190, "label": "Multicolor 58" },
+        { "from": 191, "to": 191, "label": "Multicolor 59" },
+        { "from": 192, "to": 192, "label": "Multicolor 60" },
+        { "from": 193, "to": 193, "label": "Multicolor 61" },
+        { "from": 194, "to": 194, "label": "Multicolor 62" },
+        { "from": 195, "to": 195, "label": "Multicolor 63" },
+        { "from": 196, "to": 196, "label": "Multicolor 64" },
+        { "from": 197, "to": 197, "label": "Multicolor 65" },
+        { "from": 198, "to": 198, "label": "Multicolor 66" },
+        { "from": 199, "to": 199, "label": "Multicolor 67" },
+        { "from": 200, "to": 200, "label": "Multicolor 68" },
+        { "from": 201, "to": 201, "label": "Multicolor 69" },
+        { "from": 202, "to": 202, "label": "Multicolor 70" },
+        { "from": 203, "to": 215, "label": "Reserved" },
+        { "from": 216, "to": 217, "label": "User Col 1" },
+        { "from": 218, "to": 219, "label": "User Col 2" },
+        { "from": 220, "to": 221, "label": "User Col 3" },
+        { "from": 222, "to": 223, "label": "User Col 4" },
+        { "from": 224, "to": 225, "label": "User Col 5" },
+        { "from": 226, "to": 227, "label": "User Col 6" },
+        { "from": 228, "to": 229, "label": "User Col 7" },
+        { "from": 230, "to": 231, "label": "User Col 8" },
+        { "from": 232, "to": 233, "label": "User Col 9" },
+        { "from": 234, "to": 235, "label": "User Col 10" },
+        { "from": 236, "to": 245, "label": "Scroll w/Fade" },
+        { "from": 246, "to": 255, "label": "Scroll no Fade" }
+      ]
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red",
+      "defaultValue": 255
+    },
+    {
+      "key": "redFine",
+      "name": "Red Fine",
+      "attribute": "red",
+      "defaultValue": 255,
+      "fineOf": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green",
+      "defaultValue": 255
+    },
+    {
+      "key": "greenFine",
+      "name": "Green Fine",
+      "attribute": "green",
+      "defaultValue": 255,
+      "fineOf": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue",
+      "defaultValue": 255
+    },
+    {
+      "key": "blueFine",
+      "name": "Blue Fine",
+      "attribute": "blue",
+      "defaultValue": 255,
+      "fineOf": "blue"
+    },
+    {
+      "key": "cto",
+      "name": "CTO",
+      "attribute": "colorTemperature",
+      "defaultValue": 110
+    },
+    {
+      "key": "amber",
+      "name": "Amber",
+      "attribute": "amber",
+      "defaultValue": 255
+    },
+    {
+      "key": "amberFine",
+      "name": "Amber Fine",
+      "attribute": "amber",
+      "defaultValue": 255,
+      "fineOf": "amber"
+    },
+    {
+      "key": "lime",
+      "name": "Lime",
+      "attribute": "lime",
+      "defaultValue": 255
+    },
+    {
+      "key": "goboSpeed",
+      "name": "Gobo Speed",
+      "attribute": "speed"
+    },
+    {
+      "key": "beamTime",
+      "name": "Beam Time",
+      "attribute": "speed",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Off" },
+        { "from": 1, "to": 255, "label": "Speed" }
+      ]
+    },
+    {
+      "key": "animation",
+      "name": "Animation",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "No function" },
+        { "from": 20, "to": 127, "label": "Proportional indexing (73-center)" },
+        { "from": 128, "to": 170, "label": "Ramping from open to full position" },
+        { "from": 171, "to": 213, "label": "Ramping from open to half position" },
+        { "from": 214, "to": 255, "label": "Ramp. from half position to full position" }
+      ]
+    },
+    {
+      "key": "animationRot",
+      "name": "Animation Rot",
+      "attribute": "effect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No rotation", "kind": "stop" },
+        { "from": 1, "to": 127, "label": "Forwards rotation", "kind": "rotation" },
+        { "from": 128, "to": 128, "label": "No rotation", "kind": "stop" },
+        { "from": 129, "to": 255, "label": "Backwards rotation", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "animationMacro",
+      "name": "Animation Macro",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 7, "label": "No macro" },
+        { "from": 8, "to": 9, "label": "Macro 1" },
+        { "from": 10, "to": 11, "label": "Macro 2" },
+        { "from": 12, "to": 13, "label": "Macro 3" },
+        { "from": 14, "to": 15, "label": "Macro 4" },
+        { "from": 16, "to": 17, "label": "Macro 5" },
+        { "from": 18, "to": 19, "label": "Macro 6" },
+        { "from": 20, "to": 21, "label": "Macro 7" },
+        { "from": 22, "to": 23, "label": "Macro 8" },
+        { "from": 24, "to": 25, "label": "Macro 9" },
+        { "from": 26, "to": 27, "label": "Macro 10" },
+        { "from": 28, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "rotatingGoboWheel",
+      "name": "Rotating gobo wheel",
+      "attribute": "goboRotation",
+      "capabilities": [
+        { "from": 0, "to": 3, "label": "Open" },
+        { "from": 4, "to": 7, "label": "Gobo 1" },
+        { "from": 8, "to": 11, "label": "Gobo 2" },
+        { "from": 12, "to": 15, "label": "Gobo 3" },
+        { "from": 16, "to": 19, "label": "Gobo 4" },
+        { "from": 20, "to": 23, "label": "Gobo 5" },
+        { "from": 24, "to": 27, "label": "Gobo 6" },
+        { "from": 28, "to": 31, "label": "Gobo 7" },
+        { "from": 32, "to": 35, "label": "Gobo 1 rot" },
+        { "from": 36, "to": 39, "label": "Gobo 2 rot" },
+        { "from": 40, "to": 43, "label": "Gobo 3 rot" },
+        { "from": 44, "to": 47, "label": "Gobo 4 rot" },
+        { "from": 48, "to": 51, "label": "Gobo 5 rot" },
+        { "from": 52, "to": 55, "label": "Gobo 6 rot" },
+        { "from": 56, "to": 59, "label": "Gobo 7 rot" },
+        { "from": 60, "to": 69, "label": "Gobo 1 Shake" },
+        { "from": 70, "to": 79, "label": "Gobo 2 Shake" },
+        { "from": 80, "to": 89, "label": "Gobo 3 Shake" },
+        { "from": 90, "to": 99, "label": "Gobo 4 Shake" },
+        { "from": 100, "to": 109, "label": "Gobo 5 Shake" },
+        { "from": 110, "to": 119, "label": "Gobo 6 Shake" },
+        { "from": 120, "to": 129, "label": "Gobo 7 Shake" },
+        { "from": 130, "to": 139, "label": "Gobo 1 Shake" },
+        { "from": 140, "to": 149, "label": "Gobo 2 Shake" },
+        { "from": 150, "to": 159, "label": "Gobo 3 Shake" },
+        { "from": 160, "to": 169, "label": "Gobo 4 Shake" },
+        { "from": 170, "to": 179, "label": "Gobo 5 Shake" },
+        { "from": 180, "to": 189, "label": "Gobo 6 Shake" },
+        { "from": 190, "to": 199, "label": "Gobo 7 Shake" },
+        { "from": 200, "to": 201, "label": "Open" },
+        { "from": 202, "to": 222, "label": "Scroll CW", "kind": "rotation" },
+        { "from": 223, "to": 243, "label": "Scroll CCW", "kind": "rotation" },
+        { "from": 244, "to": 249, "label": "Audio Rand" },
+        { "from": 250, "to": 255, "label": "Auto Rand" }
+      ]
+    },
+    {
+      "key": "rotGoboIndexingAndRotation",
+      "name": "Rot. gobo indexing and rotation",
+      "attribute": "goboRotation",
+      "defaultValue": 128
+    },
+    {
+      "key": "rotGoboIndexingRotationFine",
+      "name": "Rot. gobo indexing/rotation - fine",
+      "attribute": "goboRotation",
+      "fineOf": "rotGoboIndexingAndRotation"
+    },
+    {
+      "key": "prism",
+      "name": "Prism",
+      "attribute": "prism",
+      "capabilities": [
+        { "from": 0, "to": 19, "label": "Open" },
+        { "from": 20, "to": 127, "label": "Prism" },
+        { "from": 128, "to": 135, "label": "Macro 1" },
+        { "from": 136, "to": 143, "label": "Macro 2" },
+        { "from": 144, "to": 151, "label": "Macro 3" },
+        { "from": 152, "to": 159, "label": "Macro 4" },
+        { "from": 160, "to": 167, "label": "Macro 5" },
+        { "from": 168, "to": 175, "label": "Macro 6" },
+        { "from": 176, "to": 183, "label": "Macro 7" },
+        { "from": 184, "to": 191, "label": "Macro 8" },
+        { "from": 192, "to": 199, "label": "Macro 9" },
+        { "from": 200, "to": 207, "label": "Macro 10" },
+        { "from": 208, "to": 215, "label": "Macro 11" },
+        { "from": 216, "to": 223, "label": "Macro 12" },
+        { "from": 224, "to": 231, "label": "Macro 13" },
+        { "from": 232, "to": 239, "label": "Macro 14" },
+        { "from": 240, "to": 247, "label": "Macro 15" },
+        { "from": 248, "to": 255, "label": "Macro 16" }
+      ]
+    },
+    {
+      "key": "prismRotation",
+      "name": "Prism Rotation",
+      "attribute": "prismRotation",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No rotation", "kind": "stop" },
+        { "from": 1, "to": 127, "label": "Forwards prism rotation from fast to slow", "kind": "rotation" },
+        { "from": 128, "to": 128, "label": "No rotation", "kind": "stop" },
+        { "from": 129, "to": 255, "label": "Backwards prism rotation from slow to fast", "kind": "rotation" }
+      ]
+    },
+    {
+      "key": "frost",
+      "name": "Frost",
+      "attribute": "frost",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Open" },
+        { "from": 1, "to": 50, "label": "Light Frost from 0% to 100%" },
+        { "from": 51, "to": 53, "label": "Light Frost 100%" },
+        { "from": 54, "to": 63, "label": "Close Pulse", "kind": "pulse" },
+        { "from": 64, "to": 73, "label": "Open Pulse", "kind": "pulse" },
+        { "from": 74, "to": 83, "label": "Pulse" },
+        { "from": 84, "to": 86, "label": "Open" },
+        { "from": 87, "to": 136, "label": "Medium Frost from 0% to 100%" },
+        { "from": 137, "to": 139, "label": "Medium Frost 100%" },
+        { "from": 140, "to": 149, "label": "Close Pulse", "kind": "pulse" },
+        { "from": 150, "to": 159, "label": "Open Pulse", "kind": "pulse" },
+        { "from": 160, "to": 169, "label": "Pulse" },
+        { "from": 170, "to": 172, "label": "Open" },
+        { "from": 173, "to": 222, "label": "Combined Frost from 0% to 100%" },
+        { "from": 223, "to": 225, "label": "Combined Frost 100%" },
+        { "from": 226, "to": 235, "label": "Close Pulse", "kind": "pulse" },
+        { "from": 236, "to": 245, "label": "Open Pulse", "kind": "pulse" },
+        { "from": 246, "to": 255, "label": "Pulse" }
+      ]
+    },
+    {
+      "key": "iris",
+      "name": "Iris",
+      "attribute": "iris",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Open" },
+        { "from": 1, "to": 179, "label": "From max diameter to min diameter" },
+        { "from": 180, "to": 191, "label": "Close" },
+        { "from": 192, "to": 219, "label": "Open Pulse", "kind": "pulse" },
+        { "from": 220, "to": 247, "label": "Close Pulse", "kind": "pulse" },
+        { "from": 248, "to": 249, "label": "Rnd Op Pls Fast" },
+        { "from": 250, "to": 251, "label": "Rnd Op Pls Slow" },
+        { "from": 252, "to": 253, "label": "Rnd Cl Pls Fast" },
+        { "from": 254, "to": 255, "label": "Rnd Cl Pls Slow" }
+      ]
+    },
+    {
+      "key": "irisFine",
+      "name": "Iris Fine",
+      "attribute": "iris",
+      "fineOf": "iris"
+    },
+    {
+      "key": "zoom",
+      "name": "Zoom",
+      "attribute": "zoom",
+      "defaultValue": 128
+    },
+    {
+      "key": "zoomFine",
+      "name": "Zoom Fine",
+      "attribute": "zoom",
+      "fineOf": "zoom"
+    },
+    {
+      "key": "focus",
+      "name": "Focus",
+      "attribute": "focus",
+      "defaultValue": 128
+    },
+    {
+      "key": "focusFine",
+      "name": "Focus Fine",
+      "attribute": "focus",
+      "fineOf": "focus"
+    },
+    {
+      "key": "frameAllRot",
+      "name": "Frame All Rot",
+      "attribute": "beamEffect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Rotation from right 0 deg to 60 deg" },
+        { "from": 128, "to": 128, "label": "Center" },
+        { "from": 129, "to": 255, "label": "Rotation from 60 deg to left 120 deg" }
+      ]
+    },
+    {
+      "key": "frameTPos",
+      "name": "Frame T Pos",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "frameTRot",
+      "name": "Frame T Rot",
+      "attribute": "beamEffect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Swivelling from -30 degrees towards 0 degrees" },
+        { "from": 128, "to": 128, "label": "0 degrees" },
+        { "from": 129, "to": 255, "label": "Swivelling from 0 degrees to +30 degrees" }
+      ]
+    },
+    {
+      "key": "frameLPos",
+      "name": "Frame L Pos",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "frameLRot",
+      "name": "Frame L Rot",
+      "attribute": "beamEffect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Swivelling from -30 degrees towards 0 degrees" },
+        { "from": 128, "to": 128, "label": "0 degrees" },
+        { "from": 129, "to": 255, "label": "Swivelling from 0 degrees to +30 degrees" }
+      ]
+    },
+    {
+      "key": "frameBPos",
+      "name": "Frame B Pos",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "frameBRot",
+      "name": "Frame B Rot",
+      "attribute": "beamEffect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Swivelling from -30 degrees towards 0 degrees" },
+        { "from": 128, "to": 128, "label": "0 degrees" },
+        { "from": 129, "to": 255, "label": "Swivelling from 0 degrees to +30 degrees" }
+      ]
+    },
+    {
+      "key": "frameRPos",
+      "name": "Frame R Pos",
+      "attribute": "beamEffect"
+    },
+    {
+      "key": "frameRRot",
+      "name": "Frame R Rot",
+      "attribute": "beamEffect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 127, "label": "Swivelling from -30 degrees towards 0 degrees" },
+        { "from": 128, "to": 128, "label": "0 degrees" },
+        { "from": 129, "to": 255, "label": "Swivelling from 0 degrees to +30 degrees" }
+      ]
+    },
+    {
+      "key": "shutter",
+      "name": "Shutter",
+      "attribute": "shutter",
+      "defaultValue": 32,
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "Closed", "kind": "closed" },
+        { "from": 32, "to": 63, "label": "Open", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobe %", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "Open", "kind": "open" },
+        { "from": 128, "to": 143, "label": "Open Pulse", "kind": "pulse" },
+        { "from": 144, "to": 159, "label": "Close Pulse", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "Open", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random Strobe", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "Open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "dimmerFine",
+      "name": "Dimmer Fine",
+      "attribute": "dimmer",
+      "fineOf": "dimmer"
+    },
+    {
+      "key": "colorFunc",
+      "name": "Color Func",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "No Function" },
+        { "from": 1, "to": 39, "label": "Reserved" },
+        { "from": 40, "to": 44, "label": "CMY Mode" },
+        { "from": 50, "to": 54, "label": "Dim Square" },
+        { "from": 55, "to": 59, "label": "Dim Linear" },
+        { "from": 60, "to": 79, "label": "Raw DMX" },
+        { "from": 80, "to": 84, "label": "Tungsten 750W" },
+        { "from": 85, "to": 89, "label": "Tungsten 1000W" },
+        { "from": 90, "to": 94, "label": "Tungsten 1200W" },
+        { "from": 95, "to": 99, "label": "Tungsten 2000W" },
+        { "from": 100, "to": 104, "label": "Tungsten 2500W" },
+        { "from": 105, "to": 109, "label": "Tungsten Off" },
+        { "from": 110, "to": 114, "label": "Save User Col" },
+        { "from": 115, "to": 119, "label": "Chromatic White On" },
+        { "from": 120, "to": 124, "label": "Chromatic White Off" },
+        { "from": 125, "to": 129, "label": "Light Output Stability On" },
+        { "from": 130, "to": 134, "label": "Light Output Stability Off" },
+        { "from": 135, "to": 139, "label": "Uniformity On" },
+        { "from": 140, "to": 144, "label": "Uniformity Off" },
+        { "from": 145, "to": 149, "label": "Green Correction 2700K/ CRI 70" },
+        { "from": 150, "to": 154, "label": "Green Correction 3200K/ CRI 70" },
+        { "from": 155, "to": 159, "label": "Green Correction 4200K/ CRI 70" },
+        { "from": 160, "to": 164, "label": "Green Correction 5600K/ CRI 70" },
+        { "from": 165, "to": 169, "label": "Green Correction 8000K/ CRI 70" },
+        { "from": 170, "to": 174, "label": "Green Correction 2700K/ CRI 90" },
+        { "from": 175, "to": 179, "label": "Green Correction 3200K/ CRI 90" },
+        { "from": 180, "to": 184, "label": "Green Correction 4200K/ CRI 90" },
+        { "from": 185, "to": 189, "label": "Green Correction 5600K/ CRI 90" },
+        { "from": 190, "to": 194, "label": "Green Correction 8000K/ CRI 90" },
+        { "from": 195, "to": 199, "label": "Save Green Correction" },
+        { "from": 200, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "colorMixControl",
+      "name": "Color Mix Control",
+      "attribute": "control",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "\"Virtual \" has priority over \"Color mix\"" },
+        { "from": 10, "to": 19, "label": "Maximum mode (highest values have priority)" },
+        { "from": 20, "to": 29, "label": "Minimum mode (lowest values have priority)" },
+        { "from": 30, "to": 39, "label": "Multiply mode (multiply \"Virtual\" and \"Color mix\")" },
+        { "from": 40, "to": 49, "label": "Addition mode (\"Virtual\" + \"Color mix\")" },
+        { "from": 50, "to": 59, "label": "Subtraction mode (\"Virtual\" - \"Color mix\")" },
+        { "from": 60, "to": 69, "label": "Inverted Subtraction mode (\"Color mix\"-\"Virtual\")" },
+        { "from": 70, "to": 79, "label": "White Point Off (CTC+Green Cor.+Virtual Color Wheel deactivated)" },
+        { "from": 80, "to": 128, "label": "Reserved" },
+        { "from": 129, "to": 129, "label": "Crossfade \"Virtual\" only" },
+        { "from": 130, "to": 254, "label": "Crossfade between \"Virtual\" and \"Color mix\"" },
+        { "from": 255, "to": 255, "label": "Crossfade \"Color mix\" only" }
+      ]
+    },
+    {
+      "key": "criSelection",
+      "name": "CRI Selection",
+      "attribute": "colorMacro"
+    },
+    {
+      "key": "ledFrequencySelection",
+      "name": "LED Frequency Selection",
+      "attribute": "control",
+      "defaultValue": 10,
+      "capabilities": [
+        { "from": 0, "to": 4, "label": "PWM Frequency by display" },
+        { "from": 5, "to": 9, "label": "300Hz" },
+        { "from": 10, "to": 14, "label": "600Hz" },
+        { "from": 15, "to": 19, "label": "1200Hz" },
+        { "from": 20, "to": 24, "label": "2400Hz" },
+        { "from": 25, "to": 255, "label": "Reserved" }
+      ]
+    },
+    {
+      "key": "ledFrequencyFineAdjusting",
+      "name": "LED frequency fine adjusting",
+      "attribute": "control",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 1, "label": "Selected LED Frequency" },
+        { "from": 2, "to": 127, "label": "-" },
+        { "from": 128, "to": 128, "label": "Selected" },
+        { "from": 129, "to": 254, "label": "+" },
+        { "from": 255, "to": 255, "label": "Selected" }
+      ]
+    },
+    {
+      "key": "greenCorrection",
+      "name": "Green Correction",
+      "attribute": "effect",
+      "defaultValue": 128,
+      "capabilities": [
+        { "from": 0, "to": 0, "label": "Uncorrected white" },
+        { "from": 1, "to": 127, "label": "Minus green --> uncorrected white" },
+        { "from": 128, "to": 128, "label": "Uncorrected white" },
+        { "from": 129, "to": 254, "label": "Uncorrected white --> Plus green" },
+        { "from": 255, "to": 255, "label": "Uncorrected white" }
+      ]
+    },
+    {
+      "key": "limeFine",
+      "name": "Lime fine",
+      "attribute": "lime",
+      "defaultValue": 255,
+      "fineOf": "lime"
+    },
+    {
+      "key": "cyan",
+      "name": "Cyan",
+      "attribute": "cyan"
+    },
+    {
+      "key": "cyanFine",
+      "name": "Cyan fine",
+      "attribute": "cyan",
+      "fineOf": "cyan"
+    },
+    {
+      "key": "magenta",
+      "name": "Magenta",
+      "attribute": "magenta"
+    },
+    {
+      "key": "magentaFine",
+      "name": "Magenta fine",
+      "attribute": "magenta",
+      "fineOf": "magenta"
+    },
+    {
+      "key": "yellow",
+      "name": "Yellow",
+      "attribute": "yellow"
+    },
+    {
+      "key": "yellowFine",
+      "name": "Yellow fine",
+      "attribute": "yellow",
+      "fineOf": "yellow"
+    }
+  ],
+  "modes": [
+    {
+      "name": "1",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "ledFrequencySelection",
+        "ledFrequencyFineAdjusting",
+        "colorFunc",
+        "criSelection",
+        "virtualColorWheel",
+        "cyan",
+        "cyanFine",
+        "magenta",
+        "magentaFine",
+        "yellow",
+        "yellowFine",
+        "cto",
+        "greenCorrection",
+        "colorMixControl",
+        "goboSpeed",
+        "beamTime",
+        "animation",
+        "animationRot",
+        "animationMacro",
+        "rotatingGoboWheel",
+        "rotGoboIndexingAndRotation",
+        "rotGoboIndexingRotationFine",
+        "prism",
+        "prismRotation",
+        "frost",
+        "iris",
+        "irisFine",
+        "zoom",
+        "zoomFine",
+        "focus",
+        "focusFine",
+        "frameAllRot",
+        "frameTPos",
+        "frameTRot",
+        "frameLPos",
+        "frameLRot",
+        "frameBPos",
+        "frameBRot",
+        "frameRPos",
+        "frameRRot",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ]
+    },
+    {
+      "name": "2",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "colorFunc",
+        "criSelection",
+        "cyan",
+        "magenta",
+        "yellow",
+        "cto",
+        "animation",
+        "animationRot",
+        "rotatingGoboWheel",
+        "rotGoboIndexingAndRotation",
+        "prism",
+        "prismRotation",
+        "frost",
+        "iris",
+        "zoom",
+        "focus",
+        "frameAllRot",
+        "frameTPos",
+        "frameTRot",
+        "frameLPos",
+        "frameLRot",
+        "frameBPos",
+        "frameBRot",
+        "frameRPos",
+        "frameRRot",
+        "shutter",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "3",
+      "channels": [
+        "pan",
+        "panFine",
+        "tilt",
+        "tiltFine",
+        "pTSpeedPTTime",
+        "control",
+        "ledFrequencySelection",
+        "ledFrequencyFineAdjusting",
+        "colorFunc",
+        "criSelection",
+        "virtualColorWheel",
+        "red",
+        "redFine",
+        "green",
+        "greenFine",
+        "blue",
+        "blueFine",
+        "amber",
+        "amberFine",
+        "lime",
+        "limeFine",
+        "cto",
+        "greenCorrection",
+        "colorMixControl",
+        "goboSpeed",
+        "beamTime",
+        "animation",
+        "animationRot",
+        "animationMacro",
+        "rotatingGoboWheel",
+        "rotGoboIndexingAndRotation",
+        "rotGoboIndexingRotationFine",
+        "prism",
+        "prismRotation",
+        "frost",
+        "iris",
+        "irisFine",
+        "zoom",
+        "zoomFine",
+        "focus",
+        "focusFine",
+        "frameAllRot",
+        "frameTPos",
+        "frameTRot",
+        "frameLPos",
+        "frameLRot",
+        "frameBPos",
+        "frameBRot",
+        "frameRPos",
+        "frameRRot",
+        "shutter",
+        "dimmer",
+        "dimmerFine"
+      ]
+    }
+  ]
+}

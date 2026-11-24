@@ -1,0 +1,185 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Showtec",
+  "model": "Shark Wash One",
+  "category": "movingHead",
+  "physical": {
+    "width": 145,
+    "height": 300,
+    "depth": 215,
+    "weight": 3.8,
+    "source": "LED",
+    "beamAngle": {
+      "min": 25,
+      "max": 25
+    },
+    "panRange": 540,
+    "tiltRange": 270,
+    "power": 100
+  },
+  "channels": [
+    {
+      "key": "pan",
+      "name": "Pan",
+      "attribute": "pan"
+    },
+    {
+      "key": "panFine16Bit",
+      "name": "Pan fine 16 bit",
+      "attribute": "pan",
+      "fineOf": "pan"
+    },
+    {
+      "key": "tilt",
+      "name": "Tilt",
+      "attribute": "tilt"
+    },
+    {
+      "key": "tiltFine16Bit",
+      "name": "Tilt fine 16 bit",
+      "attribute": "tilt",
+      "fineOf": "tilt"
+    },
+    {
+      "key": "panTiltSpeed",
+      "name": "Pan / Tilt speed",
+      "attribute": "panTiltSpeed"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter / Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 9, "label": "Shutter open", "kind": "open" },
+        { "from": 10, "to": 250, "label": "Linear strobe intensity, from slow to fast (0-20Hz)", "kind": "strobe" },
+        { "from": 251, "to": 255, "label": "Shutter open", "kind": "open" }
+      ]
+    },
+    {
+      "key": "redDimmerIntensity",
+      "name": "Red Dimmer intensity",
+      "attribute": "red"
+    },
+    {
+      "key": "greenDimmerIntensity",
+      "name": "Green Dimmer intensity",
+      "attribute": "green"
+    },
+    {
+      "key": "blueDimmerIntensity",
+      "name": "Blue Dimmer intensity",
+      "attribute": "blue"
+    },
+    {
+      "key": "whiteDimmerIntensity",
+      "name": "White Dimmer intensity",
+      "attribute": "white"
+    },
+    {
+      "key": "amberDimmerIntensity",
+      "name": "Amber Dimmer intensity",
+      "attribute": "amber"
+    },
+    {
+      "key": "uvDimmerIntensity",
+      "name": "UV Dimmer intensity",
+      "attribute": "uv"
+    },
+    {
+      "key": "colorTemperature",
+      "name": "Color Temperature",
+      "attribute": "colorTemperature"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 15, "label": "Red + 50% White", "kind": "color", "color": "#ff0000" },
+        { "from": 16, "to": 21, "label": "Red", "kind": "color", "color": "#ff0000" },
+        { "from": 22, "to": 27, "label": "Red+Amber", "kind": "color", "color": "#ff0000" },
+        { "from": 28, "to": 33, "label": "Amber", "kind": "color", "color": "#ffaa00" },
+        { "from": 34, "to": 39, "label": "Red + 75% Green + Amber" },
+        { "from": 40, "to": 45, "label": "Red+Green", "kind": "color", "color": "#ff0000" },
+        { "from": 46, "to": 51, "label": "Green", "kind": "color", "color": "#00ff00" },
+        { "from": 52, "to": 57, "label": "Green + White", "kind": "color", "color": "#00ff00" },
+        { "from": 58, "to": 63, "label": "Green + UV", "kind": "color", "color": "#00ff00" },
+        { "from": 64, "to": 69, "label": "Green + Blue", "kind": "color", "color": "#00ff00" },
+        { "from": 70, "to": 75, "label": "Blue + UV", "kind": "color", "color": "#0000ff" },
+        { "from": 76, "to": 81, "label": "Blue", "kind": "color", "color": "#0000ff" },
+        { "from": 82, "to": 89, "label": "UV", "kind": "color", "color": "#aa00ff" },
+        { "from": 90, "to": 95, "label": "UV + 50% Red", "kind": "color", "color": "#aa00ff" },
+        { "from": 96, "to": 101, "label": "UV + Amber", "kind": "color", "color": "#aa00ff" },
+        { "from": 102, "to": 107, "label": "UV + Amber + Red" },
+        { "from": 108, "to": 113, "label": "UV + Red", "kind": "color", "color": "#aa00ff" },
+        { "from": 114, "to": 119, "label": "Red + White + Amber" },
+        { "from": 120, "to": 125, "label": "White + Amber", "kind": "color", "color": "#ffffff" },
+        { "from": 126, "to": 131, "label": "White", "kind": "color", "color": "#ffffff" },
+        { "from": 132, "to": 137, "label": "White + Blue", "kind": "color", "color": "#ffffff" },
+        { "from": 138, "to": 143, "label": "Red + Green + Blue + White + Amber + UV" },
+        { "from": 144, "to": 199, "label": "Color step program increasing from slow to fast", "kind": "gobo" },
+        { "from": 200, "to": 255, "label": "Color fade program increasing from slow to fast", "kind": "gobo" }
+      ]
+    },
+    {
+      "key": "builtInPrograms",
+      "name": "Built-in programs",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 10, "label": "No function" },
+        { "from": 11, "to": 20, "label": "Program 1" },
+        { "from": 21, "to": 30, "label": "Program 2" },
+        { "from": 31, "to": 40, "label": "Program 3" },
+        { "from": 41, "to": 50, "label": "Program 4" },
+        { "from": 51, "to": 60, "label": "Program 5" },
+        { "from": 61, "to": 70, "label": "Program 6" },
+        { "from": 71, "to": 80, "label": "Program 7" },
+        { "from": 81, "to": 90, "label": "Program 8" },
+        { "from": 91, "to": 230, "label": "Sound-controlled mode, from OFF to high sound sensitivity" },
+        { "from": 231, "to": 240, "label": "Reset after 3 seconds" },
+        { "from": 241, "to": 255, "label": "No function" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "7 Channel",
+      "channels": [
+        "pan",
+        "tilt",
+        "shutterStrobe",
+        "panTiltSpeed",
+        "dimmer",
+        "colorMacros",
+        "builtInPrograms"
+      ]
+    },
+    {
+      "name": "16 Channel",
+      "channels": [
+        "pan",
+        "panFine16Bit",
+        "tilt",
+        "tiltFine16Bit",
+        "panTiltSpeed",
+        "dimmer",
+        "shutterStrobe",
+        "redDimmerIntensity",
+        "greenDimmerIntensity",
+        "blueDimmerIntensity",
+        "whiteDimmerIntensity",
+        "amberDimmerIntensity",
+        "uvDimmerIntensity",
+        "colorTemperature",
+        "colorMacros",
+        "builtInPrograms"
+      ]
+    }
+  ]
+}

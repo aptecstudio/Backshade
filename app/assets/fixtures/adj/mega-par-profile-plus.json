@@ -1,0 +1,170 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "ADJ",
+  "model": "Mega PAR Profile Plus",
+  "category": "par",
+  "physical": {
+    "width": 220,
+    "height": 225,
+    "depth": 85,
+    "weight": 1.1,
+    "source": "LED",
+    "power": 16
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "colorMacrosProgramsSoundActivity",
+      "name": "Color macros/programs/sound activity",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "Mode 1" },
+        { "from": 16, "to": 31, "label": "Mode 2" },
+        { "from": 32, "to": 47, "label": "Mode 3" },
+        { "from": 48, "to": 63, "label": "Mode 4" },
+        { "from": 64, "to": 79, "label": "Mode 5" },
+        { "from": 80, "to": 95, "label": "Mode 6" },
+        { "from": 96, "to": 111, "label": "Mode 7" },
+        { "from": 112, "to": 127, "label": "Mode 8" },
+        { "from": 128, "to": 143, "label": "Mode 9" },
+        { "from": 144, "to": 159, "label": "Mode 10" },
+        { "from": 160, "to": 175, "label": "Mode 11" },
+        { "from": 176, "to": 191, "label": "Mode 12" },
+        { "from": 192, "to": 207, "label": "Mode 13" },
+        { "from": 208, "to": 223, "label": "Mode 14" },
+        { "from": 224, "to": 239, "label": "Mode 15" },
+        { "from": 240, "to": 255, "label": "Mode 16" }
+      ]
+    },
+    {
+      "key": "programSelectionMode",
+      "name": "Program selection mode",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 51, "label": "Dimming mode" },
+        { "from": 52, "to": 102, "label": "Color macro mode" },
+        { "from": 103, "to": 153, "label": "Color change mode" },
+        { "from": 154, "to": 204, "label": "Color fade mode" },
+        { "from": 205, "to": 255, "label": "Sound active mode" }
+      ]
+    },
+    {
+      "key": "shutterStrobe",
+      "name": "Shutter/strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "LED off", "kind": "open" },
+        { "from": 32, "to": 63, "label": "LED on", "kind": "open" },
+        { "from": 64, "to": 95, "label": "Strobing slow - fast", "kind": "strobe" },
+        { "from": 96, "to": 127, "label": "LED on", "kind": "open" },
+        { "from": 128, "to": 159, "label": "Strobe pulse slow - fast", "kind": "pulse" },
+        { "from": 160, "to": 191, "label": "LED on", "kind": "open" },
+        { "from": 192, "to": 223, "label": "Random strobe slow - fast", "kind": "strobe" },
+        { "from": 224, "to": 255, "label": "LED on", "kind": "open" }
+      ]
+    },
+    {
+      "key": "masterDimmer",
+      "name": "Master dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "uv",
+      "name": "UV",
+      "attribute": "uv"
+    },
+    {
+      "key": "programSpeedSoundSensitive",
+      "name": "Program speed/sound sensitive",
+      "attribute": "effectSpeed"
+    },
+    {
+      "key": "dimmerCurves",
+      "name": "Dimmer curves",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 20, "label": "Standard" },
+        { "from": 21, "to": 40, "label": "Stage" },
+        { "from": 41, "to": 60, "label": "TV" },
+        { "from": 61, "to": 80, "label": "Architectural" },
+        { "from": 81, "to": 100, "label": "Theatre" },
+        { "from": 101, "to": 255, "label": "Default to unit setting" }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "name": "5 channel mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "uv",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "4 channel mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "uv"
+      ]
+    },
+    {
+      "name": "6 channel mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "uv",
+        "shutterStrobe",
+        "masterDimmer"
+      ]
+    },
+    {
+      "name": "9 channel mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "uv",
+        "shutterStrobe",
+        "masterDimmer",
+        "programSelectionMode",
+        "colorMacrosProgramsSoundActivity",
+        "programSpeedSoundSensitive"
+      ]
+    },
+    {
+      "name": "10 channel mode",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "uv",
+        "shutterStrobe",
+        "masterDimmer",
+        "programSelectionMode",
+        "colorMacrosProgramsSoundActivity",
+        "programSpeedSoundSensitive",
+        "dimmerCurves"
+      ]
+    }
+  ]
+}

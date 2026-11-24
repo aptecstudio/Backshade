@@ -1,0 +1,95 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Chauvet",
+  "model": "SlimPAR 56",
+  "category": "par",
+  "physical": {
+    "width": 224,
+    "height": 241,
+    "depth": 56,
+    "weight": 1.2,
+    "source": "LED",
+    "beamAngle": {
+      "min": 14,
+      "max": 14
+    },
+    "power": 27
+  },
+  "channels": [
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "colorMacros",
+      "name": "Color Macros",
+      "attribute": "colorMacro",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function" },
+        { "from": 16, "to": 255, "label": "Color macros" }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        { "from": 0, "to": 15, "label": "No function", "kind": "open" },
+        { "from": 16, "to": 255, "label": "Slow ~ fast", "kind": "strobe" }
+      ]
+    },
+    {
+      "key": "mode",
+      "name": "Mode",
+      "attribute": "effect",
+      "capabilities": [
+        { "from": 0, "to": 31, "label": "RGB" },
+        { "from": 32, "to": 63, "label": "Pulse effect 0%~100%" },
+        { "from": 64, "to": 95, "label": "Pulse effect 100%~0%" },
+        { "from": 96, "to": 127, "label": "Pulse effect 100%~0%~100%" },
+        { "from": 128, "to": 159, "label": "Auto fade transition" },
+        { "from": 160, "to": 191, "label": "Auto snap transition (3 color)" },
+        { "from": 192, "to": 223, "label": "Auto snap transition (7 color)" },
+        { "from": 224, "to": 255, "label": "Sound triggering mode" }
+      ]
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    }
+  ],
+  "modes": [
+    {
+      "name": "7-Ch",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "colorMacros",
+        "strobe",
+        "mode",
+        "dimmer"
+      ]
+    },
+    {
+      "name": "3-Ch",
+      "channels": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  ]
+}
