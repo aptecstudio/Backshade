@@ -10,6 +10,7 @@ import { startCloseGuard } from '../services/close-guard-service';
 import { FixtureLibrary } from '../fixtures/fixture-library';
 import { registerAppInfoService } from '../services/app-info-service';
 import { registerFixtureService } from '../services/fixture-service';
+import { registerOutputService } from '../services/output-service';
 import { registerPatchService } from '../services/patch-service';
 import { startLocaleService } from '../services/locale-service';
 import { registerMediaService } from '../services/media-service';
@@ -38,6 +39,7 @@ export function startEngine(): void {
     registerShowService(router, bus, session, library);
     registerFixtureService(router, bus, session, library);
     registerPatchService(router, bus, session, library);
+    const stopOutput = registerOutputService(router, bus, session, library);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);
@@ -50,5 +52,6 @@ export function startEngine(): void {
     app.on('before-quit', () => {
         session.autosave();
         session.dispose();
+        stopOutput();
     });
 }

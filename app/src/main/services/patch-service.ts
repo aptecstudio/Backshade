@@ -39,7 +39,11 @@ function toEntries(patch: ShowPatch, lookup: DefinitionLookup, only?: readonly P
  */
 export function registerPatchService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): void {
     const lookup: DefinitionLookup = (id) => library.find(id)?.definition;
-    session.onPatchChange(() => bus.emit('patch.changed', {}));
+    session.onContentChange((part) => {
+        if (part !== 'output') {
+            bus.emit('patch.changed', {});
+        }
+    });
 
     router.register('patch.get', () => toEntries(session.patch(), lookup));
 

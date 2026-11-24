@@ -13,10 +13,15 @@ function settingsFile(): string {
 }
 
 /**
- * Default values: new shows go to Documents/Backshade/Shows.
+ * Default values: new shows go to Documents/Backshade/Shows; DMX output
+ * is on, with Art-Net on all the network interfaces.
  */
 function defaults(): AppSettings {
-    return { defaultShowsFolder: path.join(app.getPath('documents'), 'Backshade', 'Shows') };
+    return {
+        defaultShowsFolder: path.join(app.getPath('documents'), 'Backshade', 'Shows'),
+        artNetInterface: '',
+        outputEnabled: true
+    };
 }
 
 /**
@@ -28,6 +33,12 @@ export function readSettings(): AppSettings {
         const data = readJsonFile(settingsFile()) as Partial<AppSettings> | undefined;
         if (typeof data?.defaultShowsFolder === 'string' && data.defaultShowsFolder !== '') {
             result.defaultShowsFolder = data.defaultShowsFolder;
+        }
+        if (typeof data?.artNetInterface === 'string') {
+            result.artNetInterface = data.artNetInterface;
+        }
+        if (typeof data?.outputEnabled === 'boolean') {
+            result.outputEnabled = data.outputEnabled;
         }
     } catch (error) {
         console.warn('Unreadable settings, using the default values', error);

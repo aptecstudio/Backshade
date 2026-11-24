@@ -8,12 +8,13 @@ import type { Component, IconName } from '../../framework/ts/index.js';
 import type { TextKey } from '../i18n/i18n.js';
 import { StartPage } from '../start/start-page.js';
 import { MediaSection } from './media/media-section.js';
+import { OutputSection } from './output/output-section.js';
 import { PatchSection } from './patch/patch-section.js';
 import { PlaceholderSection } from './placeholder-section.js';
 import { SettingsSection } from './settings/settings-section.js';
 
 /** Identifier of a section */
-export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'media' | 'settings';
+export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'output' | 'media' | 'settings';
 
 /** Section definition */
 export interface SectionDefinition {
@@ -32,6 +33,7 @@ export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'virtualConsole', labelKey: 'sections.virtualConsole', create: () => new PlaceholderSection('sections.virtualConsole') },
     { id: 'timeline', labelKey: 'sections.timeline', create: () => new PlaceholderSection('sections.timeline') },
     { id: 'patch', labelKey: 'sections.patch', create: () => new PatchSection() },
+    { id: 'output', labelKey: 'sections.output', create: () => new OutputSection() },
     { id: 'media', labelKey: 'sections.media', create: () => new MediaSection() }
 ];
 

@@ -7,6 +7,7 @@
 
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
+import type { OutputTransport, ShowOutput } from '../output/output-config.js';
 import type { PatchedFixture } from '../patch/patch.js';
 import type { MediaKind } from '../show/media-kinds.js';
 import type { ShowSettings } from '../show/show-settings.js';
@@ -159,6 +160,55 @@ export interface PatchUpdateRequest {
 export interface AppSettings {
     /** Default folder of new shows */
     defaultShowsFolder: string;
+    /** Address of the network interface used by Art-Net; empty for all the interfaces */
+    artNetInterface: string;
+    /** The workstation sends DMX output */
+    outputEnabled: boolean;
+}
+
+/** IPv4 network interface of the computer */
+export interface NetworkInterfaceInfo {
+    name: string;
+    address: string;
+    netmask: string;
+    broadcast: string;
+    /** Loopback interface (this computer only) */
+    internal: boolean;
+}
+
+/** Art-Net node found on the network */
+export interface ArtNetNodeInfo {
+    address: string;
+    shortName: string;
+    longName: string;
+    /** Port-Addresses of its output ports */
+    portAddresses: number[];
+}
+
+/** State of the DMX output */
+export interface OutputState {
+    /** Grand master, 0 to 1 */
+    grandMaster: number;
+    blackout: boolean;
+    /** The workstation sends DMX output */
+    enabled: boolean;
+    /** Network interface of Art-Net, empty for all */
+    artNetInterface: string;
+    /** Universes being sent */
+    universes: number[];
+    /** The search of the nodes is possible (the Art-Net port is free) */
+    canDiscover: boolean;
+    /** Last network error, or null */
+    error: string | null;
+}
+
+/** Changes to the Art-Net destination of a universe */
+export interface OutputUniverseUpdate {
+    universe: number;
+    enabled?: boolean;
+    portAddress?: number;
+    transport?: OutputTransport;
+    targets?: string[];
 }
 
 /** Engine methods: parameters and result */
@@ -241,6 +291,29 @@ export interface EngineMethods {
     /** Removes fixtures from the patch (unsaved change) */
     'patch.remove': { params: { ids: string[] }; result: undefined };
 
+    /** State of the DMX output */
+    'output.getState': { params: undefined; result: OutputState };
+    /** Changes the grand master, 0 to 1 */
+    'output.setGrandMaster': { params: { level: number }; result: OutputState };
+    /** Turns the blackout on or off */
+    'output.setBlackout': { params: { on: boolean }; result: OutputState };
+    /** Turns the output of this workstation on or off and chooses the network interface of Art-Net */
+    'output.setWorkstation': { params: { enabled?: boolean; artNetInterface?: string }; result: OutputState };
+    /** Output configuration of the open show */
+    'output.getConfig': { params: undefined; result: ShowOutput };
+    /** Changes the frame rate of the open show (unsaved change) */
+    'output.setFrameRate': { params: { frameRate: number }; result: ShowOutput };
+    /** Changes the Art-Net destination of a universe (unsaved change) */
+    'output.updateUniverse': { params: OutputUniverseUpdate; result: ShowOutput };
+    /** Brings the destination of a universe back to the default (unsaved change) */
+    'output.resetUniverse': { params: { universe: number }; result: ShowOutput };
+    /** The 512 values sent on a universe */
+    'output.getFrame': { params: { universe: number }; result: number[] };
+    /** IPv4 network interfaces of the computer */
+    'output.listInterfaces': { params: undefined; result: NetworkInterfaceInfo[] };
+    /** Searches the Art-Net nodes of the network */
+    'output.discover': { params: undefined; result: ArtNetNodeInfo[] };
+
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
     /** Removes a show from the recent shows */
@@ -279,6 +352,10 @@ export interface EngineEvents {
     'fixtures.changed': Record<string, never>;
     /** The patch of the open show has changed */
     'patch.changed': Record<string, never>;
+    /** The state of the DMX output has changed */
+    'output.stateChanged': { state: OutputState };
+    /** The output configuration of the open show has changed */
+    'output.configChanged': Record<string, never>;
     /** The list of templates has changed */
     'templates.changed': Record<string, never>;
     /** The user wants to close the window with unsaved changes */

@@ -14,5 +14,9 @@
   },
   "patch": {
     "fixtures": []
+  },
+  "output": {
+    "frameRate": 40,
+    "universes": []
   }
 }

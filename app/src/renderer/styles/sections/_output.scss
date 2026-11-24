@@ -1,0 +1,98 @@
+// Output section: master, Art-Net settings, universes and DMX monitor
+@use 'framework/scss/tokens' as *;
+
+.master-panel {
+    flex: 0 0 auto;
+}
+
+.output-section__main {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+// Universes table: universe, Art-Net, sending, fixtures
+.output-table__row {
+    display: grid;
+    grid-template-columns: space(8) minmax(0, 2fr) minmax(0, 4fr) space(8);
+    gap: space(1);
+    align-items: center;
+}
+
+.output-table__row--header {
+    padding: space(1) space(2);
+    border: 1px solid transparent;
+    border-bottom-color: color('panel-border');
+}
+
+.output-table__list,
+.artnet-node__text {
+    gap: 0;
+}
+
+.output-table__cell {
+    min-width: 0;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.artnet-nodes {
+    max-height: 240px;
+    overflow: auto;
+}
+
+// DMX monitor: like the DMX map, with the value and a level bar from the bottom
+.dmx-monitor {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(space(6), 1fr));
+    gap: 1px;
+    padding: 1px;
+    border-radius: $radius-square-key;
+    background: color('panel-border');
+}
+
+.dmx-monitor__cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    height: space(6);
+    padding: 0 space(1);
+    overflow: hidden;
+    background: color('display');
+    color: color('text-secondary');
+}
+
+.dmx-monitor__cell--used {
+    background: color-mix(in srgb, var(--channel-color) 15%, color('display'));
+}
+
+.dmx-monitor__level {
+    position: absolute;
+    inset: auto 0 0;
+    height: calc(var(--level, 0) * 100%);
+    background: color-mix(in srgb, var(--channel-color, #{color('text-secondary')}) 45%, transparent);
+}
+
+.dmx-monitor__address,
+.dmx-monitor__value {
+    position: relative;
+    font-family: $font-family-mono;
+}
+
+.dmx-monitor__address {
+    font-size: $font-size-micro;
+}
+
+.dmx-monitor__value {
+    font-size: $font-size-small;
+}
+
+.dmx-monitor__cell--on .dmx-monitor__value {
+    color: color('display-text');
+    font-weight: $font-weight-medium;
+}

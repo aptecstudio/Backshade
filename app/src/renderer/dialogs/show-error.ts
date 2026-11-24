@@ -32,7 +32,8 @@ const MESSAGES: Record<string, TextKey> = {
     'invalid-universe': 'errors.invalidUniverse',
     'invalid-fixture-number': 'errors.invalidFixtureNumber',
     'fixture-number-in-use': 'errors.fixtureNumberInUse',
-    'patch-fixture-not-found': 'errors.patchFixtureNotFound'
+    'patch-fixture-not-found': 'errors.patchFixtureNotFound',
+    'invalid-ip-address': 'errors.invalidIpAddress'
 };
 
 /**

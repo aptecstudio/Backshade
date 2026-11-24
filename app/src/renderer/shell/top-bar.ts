@@ -1,17 +1,17 @@
 /**
- * Top bar: brand and show, timecode and tempo displays, Start and
- * Settings keys. The keys of the working sections are in the navigation
- * bar at the bottom.
+ * Top bar: brand and show, timecode and tempo displays, blackout key,
+ * Start and Settings keys. The tabs of the working sections are in the
+ * status bar.
  *
  * The displays show neutral values until the engine provides them
- * (Phases 1.7 and 8). The blackout key will come with the output engine (Phase 3.5):
- * a safety key without effect would be misleading in a live show.
+ * (Phase 8).
  */
 
 import { Panel, ReadoutDisplay, Spacer, Stack } from '../../framework/ts/index.js';
 import type { ShowSummary } from '../../shared/transport/engine-api.js';
 import { t } from '../i18n/i18n.js';
 import { SETTINGS_SECTION, START_SECTION } from '../sections/section-definitions.js';
+import { BlackoutKey } from './blackout-key.js';
 import { BrandBlock } from './brand-block.js';
 import type { SectionNavigation } from './section-navigation.js';
 import { SectionTabs } from './section-tabs.js';
@@ -42,6 +42,7 @@ export class TopBar extends Panel {
                 new Spacer(),
                 this.timecode,
                 this.tempo,
+                new BlackoutKey(),
                 new SectionTabs([START_SECTION, SETTINGS_SECTION], navigation)
             ]
         }));

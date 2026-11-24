@@ -4,6 +4,7 @@
  * timeline); every incompatible change increases SHOW_FORMAT_VERSION.
  */
 
+import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
 import type { ShowSettings } from './show-settings.js';
 
@@ -31,4 +32,6 @@ export interface ShowDocument {
     settings: ShowSettings;
     /** Fixtures placed on the DMX universes; missing in older files, completed when reading */
     patch: ShowPatch;
+    /** Frame rate and Art-Net destinations of the universes; missing in older files, completed when reading */
+    output: ShowOutput;
 }

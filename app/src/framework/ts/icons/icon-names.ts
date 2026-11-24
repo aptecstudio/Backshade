@@ -35,6 +35,7 @@ export const ICON_NAMES = [
     'repeat',
     'save',
     'scan-line',
+    'search',
     'settings',
     'skip-back',
     'sparkles',

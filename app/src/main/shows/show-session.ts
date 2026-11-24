@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { app } from 'electron';
 import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show-document';
+import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
 import type { OpenShowResult, ShowSummary } from '../../shared/transport/engine-api';
@@ -31,24 +32,27 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 /** Result of opening a show, before the check of the missing resources */
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
-/** Function called when the patch may have changed (show opened, closed, recovered or patch edited) */
-export type PatchChangeListener = () => void;
+/** Part of the show content that changed; "all" when the show is opened, closed or recovered */
+export type ContentPart = 'patch' | 'output' | 'all';
+
+/** Function called when a part of the show content may have changed */
+export type ContentChangeListener = (part: ContentPart) => void;
 
 export class ShowSession {
     private current: OpenShow | null = null;
     private readonly listener: ShowChangeListener;
     private autosaveTimer: NodeJS.Timeout | null = null;
-    private readonly patchListeners: PatchChangeListener[] = [];
+    private readonly contentListeners: ContentChangeListener[] = [];
 
     constructor(listener: ShowChangeListener) {
         this.listener = listener;
     }
 
     /**
-     * Registers a listener for the changes of the patch.
+     * Registers a listener for the changes of the show content (patch, output).
      */
-    onPatchChange(listener: PatchChangeListener): void {
-        this.patchListeners.push(listener);
+    onContentChange(listener: ContentChangeListener): void {
+        this.contentListeners.push(listener);
     }
 
     /** Open show, or null */
@@ -107,7 +111,7 @@ export class ShowSession {
         this.current = { folder, document, dirty: false };
         this.startAutosave();
         this.notify();
-        this.notifyPatch();
+        this.notifyContent('all');
 
         return { show: this.requireSummary(), recoveryAvailable };
     }
@@ -207,7 +211,28 @@ export class ShowSession {
         show.document = { ...show.document, patch };
         show.dirty = true;
         this.notify();
-        this.notifyPatch();
+        this.notifyContent('patch');
+    }
+
+    /**
+     * Output configuration of the open show.
+     */
+    output(): ShowOutput {
+        return this.requireOpen().document.output;
+    }
+
+    /**
+     * Replaces the output configuration of the open show; the change must be saved.
+     */
+    setOutput(output: ShowOutput): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(output) === JSON.stringify(show.document.output)) {
+            return;
+        }
+        show.document = { ...show.document, output };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('output');
     }
 
     /**
@@ -218,7 +243,7 @@ export class ShowSession {
         show.document = showFiles.readAutosave(show.folder);
         show.dirty = true;
         this.notify();
-        this.notifyPatch();
+        this.notifyContent('all');
         return this.requireSummary();
     }
 
@@ -242,7 +267,7 @@ export class ShowSession {
         showFiles.removeAutosave(this.current.folder);
         this.closeQuietly();
         this.notify();
-        this.notifyPatch();
+        this.notifyContent('all');
     }
 
     /**
@@ -311,9 +336,9 @@ export class ShowSession {
         this.listener(this.summary());
     }
 
-    private notifyPatch(): void {
-        for (const listener of this.patchListeners) {
-            listener();
+    private notifyContent(part: ContentPart): void {
+        for (const listener of this.contentListeners) {
+            listener(part);
         }
     }
 }

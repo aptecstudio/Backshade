@@ -17,8 +17,10 @@ export interface ChoiceOption<T extends string> {
 
 /** Choice keys options */
 export interface ChoiceKeysOptions<T extends string> {
-    /** Label above the keys, already translated */
-    label: string;
+    /** Label above the keys, already translated; without it, the keys are compact */
+    label?: string;
+    /** Name for assistive technologies, for compact keys without a label */
+    ariaLabel?: string;
     options: readonly ChoiceOption<T>[];
     value: T;
 }
@@ -33,9 +35,11 @@ export class ChoiceKeys<T extends string> extends Component<HTMLDivElement> {
 
         this.current = options.value;
         const row = create('div', { classes: ['choice-keys__row'] });
-        const label = create('span', { classes: ['text-field__label'], text: options.label });
-        this.element.append(label, row);
-        this.element.setAttribute('aria-label', options.label);
+        if (options.label !== undefined) {
+            this.element.append(create('span', { classes: ['text-field__label'], text: options.label }));
+        }
+        this.element.append(row);
+        this.element.setAttribute('aria-label', options.label ?? options.ariaLabel ?? '');
 
         for (const option of options.options) {
             const key = new Key({ label: option.label });
@@ -51,6 +55,11 @@ export class ChoiceKeys<T extends string> extends Component<HTMLDivElement> {
         }
         this.setValue(options.value);
         this.track(() => this.changes.clear());
+    }
+
+    /** Chosen value */
+    get value(): T {
+        return this.current;
     }
 
     /**
