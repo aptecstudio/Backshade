@@ -95,13 +95,15 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Shortcuts:** Ctrl or Cmd + S save, + Shift + S save as, + N new show, + O open show.
 - **Window close:** with unsaved changes the main window does not close; the engine sends `app.closeRequested`, the interface asks the user and then calls `app.confirmClose`.
 - **Framework additions:** `TextField`, `TextArea`, `NumberField` (accepts comma or point as decimal separator, clamps to its limits), `ChoiceKeys`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules and set `color-scheme: dark` for native controls.
+- **Framework additions of Phase 3:** `SelectField` (native select styled as the text fields, with groups), compact `TextField` without a label (`ariaLabel`) and its `onChange` on confirmation, `Dialog` size `large` for editors, `TabBar` (flat tabs, 48 px high), `ListItem` `classes`, labels keep line breaks, palette color `warning` for functional indicators.
+- **Desktop-only methods:** `requireDesktop()` (`src/main/transport/require-desktop.ts`) is the single guard used by every service.
 - **Scrollbars** (`framework/scss/base/_scrollbar.scss`, requested by the human on 2026-11-23): themed like the console, 8 px (`space(1)`), transparent track, thumb in the key grey with the key border and a lighter tone on hover and drag, no arrow buttons; browsers without the webkit selectors get `scrollbar-color` with the same colors.
 - **Value input controls** (requested by the human on 2026-11-23), to be used everywhere:
   - **durations:** always a `TimeField`, a key showing the time ("2.5 s", "1:15.0") that opens the time picker: large readout, `JogWheel` turned by dragging around its center (one turn is 10 s, 1 s in fine mode), mouse wheel and arrow keys, step keys (-1, -0.1, +0.1, +1 s), zero key and direct entry of the seconds;
   - **RGB colors:** always a `ColorWheel`: hue around the wheel (red at the top, clockwise), saturation from the center, brightness on a `LinearSlider`, plus R, G, B (0 to 255) and hex fields;
   - **fader and knob values:** every fader and every knob (trimmer), small or large, has a `RangeInput` under it, so the value can always be typed on the keyboard (displayed range configurable, for example 0 to 100 % or 0 to 255); control and field stay in sync also when the engine changes the value (`RangeControl.onRender`).
 - **Display of fader and knob values** (requested by the human on 2026-11-23): percentage (default) or 0 to 255, chosen in the Application settings separately for faders and for knobs (called "trimmer" in the Italian interface, at the human's request), saved per device (`localStorage`, keys `backshade.faderValues` and `backshade.knobValues`) and applied immediately, also to the other open windows. Every fader and knob of the interface is bound with `bindControlValue` (`src/renderer/preferences/control-values.ts`), which updates the typed field range, the value text of assistive technologies and the related displays.
-- **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC.
+- **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC; they always start from the nearest existing folder of the proposed path, so a default folder not yet created (for example `Documents/Backshade/Shows`) never triggers a system warning (fixed on 2026-11-24 at the human's request).
 
 Status: Confirmed (2026-11-23).
 
@@ -152,6 +154,33 @@ Requested by the human on 2026-11-23 (Phase 2.9).
 - Template management screen (requested by the human on 2026-11-23), opened from the start page: it lists included and user templates; user templates can be renamed, have their description edited and be deleted (with confirmation); included templates are read-only.
 
 Status: Confirmed (2026-11-23).
+
+## Fixtures and patch
+
+Built in the first block of Phase 3 (3.1, 3.2, 3.3) on 2026-11-24.
+
+- **Definition format** (confirmed by the human on 2026-11-24): Backshade's own JSON (`src/shared/fixtures/fixture-definition.ts`), with `formatVersion` 1, `manufacturer`, `model`, `category`, optional `physical`, `channels` and `modes`.
+  - Channels have a `key` (letters and digits), a `name`, an `attribute` from a fixed list grouped as the console shows them (intensity, color, position, beam, effects, control), an optional `fineOf` (16-bit low byte of another channel), an optional `defaultValue` and optional `capabilities` (DMX ranges with a description, a known `kind` such as open, strobe, color, gobo, and a wheel `color`).
+  - Modes list the channel keys in DMX order; optional `heads` list the channel keys of each cell of bars and matrices (for Phase 5).
+  - Physical data (confirmed by the human on 2026-11-24, optional from the start so no migration is needed for the 3D stage): width, height, depth (mm), weight (kg), power (W), light source, lumens, color temperature (K), beam angle or zoom range, pan and tilt range (deg).
+  - Fixture data texts (channel names, mode names, range descriptions) are in English, as in the manufacturer manuals, and are not translated.
+- **Identifier:** `<manufacturer>/<model>` in slug form (`src/shared/fixtures/fixture-id.ts`), for example `clay-paky/sharpy`; it is also the file path in a library (`clay-paky/sharpy.json`).
+- **Validation:** `validateFixture()` (`src/shared/fixtures/validate-fixture.ts`) is shared by engine and editor; it returns a clean copy or a list of problems with stable codes, translated in `fixtureIssues.*`.
+- **Libraries** (`src/main/fixtures/fixture-library.ts`): included definitions in `app/assets/fixtures/` (read-only) and user definitions in `fixtures/` in the user data folder. A user definition with the same identifier replaces the included one, like the language packs; editing an included definition saves a user copy. Invalid files are ignored with a console warning.
+- **Included library:** generic fixtures written for Backshade and a curated selection of common models, written in Backshade's format from the public technical data of the manufacturers (channel layout, DMX ranges, physical data). Reference lists of other projects may be used only to choose models and find their data, never copied as they are (decided by the human on 2026-11-24).
+- **Shows reference definitions by identifier only** (confirmed by the human on 2026-11-24). A patched fixture also keeps the channel count of its mode, so its addresses stay reserved when the definition is missing. When a show is opened, the missing definitions are listed in a dialog, as the missing resources of Studio One, with import of definition files from the same dialog; the fixtures stay in the patch, marked as missing.
+- **Patch** (`src/shared/patch/patch.ts`): `show.json` has `patch.fixtures`, each with `id`, `number` (fixture number for selection, unique), `name`, `definition`, `mode`, `channelCount`, `universe` (1 to 32768) and `address` (1 to 512). Missing or invalid entries are dropped when reading, so a damaged entry never blocks a show.
+- **Address checks** (`src/shared/patch/address-map.ts`, shared): the engine refuses overlapping addresses, fixtures beyond channel 512 and duplicate fixture numbers; the interface suggests the first free address and number. Conflicts that can still appear (a definition edited to a longer mode, a file edited by hand) are shown in the patch.
+- **Editing a definition used by the open show:** the patch follows it (new identifier after a rename, new channel count); addresses are never moved automatically.
+- **Engine methods:** `fixtures.*` (list, get, validate, save, delete, import, export) and `patch.*` (get, missingFixtures, add, update, remove), events `fixtures.changed` and `patch.changed`. Show open results carry `missingFixtures`.
+- **Interface:** Patch section with one table per universe (`src/renderer/sections/patch/`), add fixtures dialog (library list with search and category filter, mode, quantity, universe, start address, first number, name), fixture dialog (name, number, universe, address, mode, remove); fixture library and editor in `src/renderer/fixtures/`; missing definitions dialog in `src/renderer/show/dialogs/`.
+- **Files:** definition files use the `.json` extension also for import and export.
+- **Patch views** (requested by the human on 2026-11-24, chosen with keys in the section bar, remembered per device with `localStorage` key `backshade.patchView`):
+  - **List:** one table per universe, as built first;
+  - **DMX map:** the grid of the 512 channels of a universe, as in many light controllers. Used cells take a color of the fixture (channel colors, by fixture number) with a bar and the fixture number on the first address; addresses used by more than one fixture are outlined in the warning color. A used cell opens its fixture, a free cell opens "Add fixtures" from that address. Cells are at least 48 px for touch. The view is called "DMX map" ("Mappa DMX") so it is not confused with the Grid section (virtual console).
+- **Fixture type icons** (requested by the human on 2026-11-24): every category has a Lucide icon (`src/renderer/fixtures/fixture-icons.ts`), shown in the patch list and in the library lists: dimmer `lightbulb`, PAR `cone`, LED bar `columns-4`, pixel bar `grid-3x2`, moving head `spotlight`, scanner `scan-line`, strobe `zap`, blinder `sun`, effect `sparkles`, laser `radar`, fog machine `cloud-fog`, hazer `haze`, other `circle-dot`; a missing definition shows `circle-help`.
+
+Status: Confirmed (format, physical data, references by identifier with missing resources dialog, library source), Proposed (attribute and category lists, file extension, user definitions replacing included ones).
 
 ## Brand
 
@@ -261,15 +290,16 @@ Status: Confirmed (2026-11-23).
 Built in Phase 1.5 after the console reference rendering (`docs/design/console.png`), entirely from components (`src/renderer/shell/`):
 
 - `AppShell`: top bar, section area and status bar; only the section area scrolls.
-- `TopBar`: `BrandBlock` (logo, "Backshade" in the accent color, name of the open show or "No show open"), `SectionTabs` with the main sections, timecode and tempo displays, settings key with the `settings` icon.
+- `TopBar`: `BrandBlock` (logo, "Backshade" in the accent color, name of the open show or "No show open"), timecode and tempo displays, Start and Settings keys.
+- Section navigation (moved into the status bar at the human's request on 2026-11-24): `SectionTabBar` shows the main sections (console, grid, timeline, patch, media) as flat tabs (framework `TabBar`) in the middle of the status bar; the active tab has the accent label and an accent bar on its top edge, as the states of the keys; disabled without an open show.
 - `SectionNavigation`: open section and change notifications; the last open section is remembered per device (`localStorage`, key `backshade.section`).
 - `SectionHost`: shows the open section; the previous section component is destroyed and the new one created when the section changes.
-- `StatusBar`: application status on the left, "A product by" with the Aptec Studio wordmark linking to the website on the right.
+- `StatusBar`: application status on the left, section tabs in the middle, "A product by" with the Aptec Studio wordmark linking to the website on the right.
 - Sections are declared in `src/renderer/sections/section-definitions.ts` (identifier, text, optional icon, factory). Main sections: console, grid (virtual console), timeline, patch, media; settings has its own key. Sections not yet developed show a placeholder panel.
 - Settings: `SettingsSection` collects one panel per setting; the first is `LanguageSettings`.
 - Timecode and tempo show neutral values (`00:00:00:00`, `---.-`) until the engine provides them.
 - The blackout key of the reference is added with the output engine (Phase 3.5): a safety key without effect would be misleading in a live show.
-- Narrow windows: below 1280 px the tempo display is hidden, below 1200 px the timecode display too; the show name is shortened with an ellipsis. Navigation and settings are always visible down to the minimum window width (1024 px).
+- Narrow windows: the show name is shortened with an ellipsis; with the navigation in the status bar the timecode and tempo displays always fit down to the minimum window width (1024 px).
 - Images used by the interface live in `app/assets/images/` (copied from `docs/logo` and `docs/brand`) and are served at `/assets/images/`.
 
 Status: Confirmed (2026-11-23).

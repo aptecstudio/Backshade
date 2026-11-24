@@ -69,9 +69,15 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
 
 ## Phase 3 - DMX and Art-Net
 
-- [ ] 3.1 Fixture data model (channels, modes, attributes)
-- [ ] 3.2 Fixture library and custom fixture editor
-- [ ] 3.3 Multi-universe patch with address conflict checks
+Development order: the first block is 3.1, 3.2 and 3.3 together, so the Patch section is born working with real fixture definitions.
+
+- [x] 3.1 Fixture data model (channels, modes, attributes, optional physical data for the 3D stage)
+- [x] 3.2 Fixture library and custom fixture editor
+  - [x] 3.2.1 Included library: generic fixtures and a selection of common models
+  - [x] 3.2.2 User library with editor (general data, channels, value ranges, modes, physical data), import and export
+  - [x] 3.2.3 Missing definitions reported when a show is opened, with import from the same dialog
+- [x] 3.3 Multi-universe patch with address conflict checks
+  - [x] 3.3.1 List view (tables per universe) and DMX map view (grid of the 512 channels), with fixture type icons
 - [ ] 3.4 Art-Net output (native UDP), node and universe configuration
 - [ ] 3.5 Output engine: frame rate, HTP/LTP merge, blackout, grand master
 - [ ] 3.6 DMX channel monitor per universe
