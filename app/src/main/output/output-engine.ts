@@ -39,6 +39,7 @@ export class OutputEngine {
     private timer: NodeJS.Timeout | null = null;
     private grandMaster = 1;
     private blackout = false;
+    private fullOn = false;
     private enabled: boolean;
     private artNetInterface: string;
     private broadcasts: string[] = [];
@@ -69,6 +70,14 @@ export class OutputEngine {
     }
 
     /**
+     * Puts every intensity channel, and every channel without a fixture, at
+     * full. The blackout still wins.
+     */
+    setFullOn(on: boolean): void {
+        this.fullOn = on;
+    }
+
+    /**
      * Turns the output of the workstation on or off and chooses the network interface.
      */
     setWorkstation(enabled: boolean, artNetInterface: string): void {
@@ -91,14 +100,14 @@ export class OutputEngine {
     }
 
     /**
-     * Universes sent with Art-Net: used by the patch or configured, and enabled.
+     * Universes sent with Art-Net: used by the patch, configured or controlled by a source, and enabled.
      */
     artNetUniverses(): number[] {
         if (this.content === null) {
             return [];
         }
         const output = this.content.output;
-        const numbers = new Set([...this.channelMap.keys(), ...output.universes.map((item) => item.universe)]);
+        const numbers = new Set([...this.channelMap.keys(), ...output.universes.map((item) => item.universe), ...this.mixer.universes()]);
         return [...numbers].filter((universe) => outputUniverse(output, universe).enabled).sort((a, b) => a - b);
     }
 
@@ -116,7 +125,19 @@ export class OutputEngine {
      * Frame of a universe as it is sent now.
      */
     frame(universe: number): Uint8Array {
-        return this.mixer.compose(universe, this.channelMap.get(universe), this.blackout ? 0 : this.grandMaster);
+        const map = this.channelMap.get(universe);
+        const frame = this.mixer.compose(universe, map, this.blackout ? 0 : this.grandMaster);
+        if (this.fullOn && !this.blackout) {
+            for (let index = 0; index < frame.length; index++) {
+                if (map === undefined || map.patched[index] === 0 || map.intensity[index] === 1) {
+                    frame[index] = 255;
+                }
+            }
+            for (const [, low] of map?.finePairs ?? []) {
+                frame[low] = 255;
+            }
+        }
+        return frame;
     }
 
     state(): OutputState {

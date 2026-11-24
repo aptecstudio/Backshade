@@ -38,6 +38,21 @@ export class DmxMixer {
     }
 
     /**
+     * Universes where at least one source writes levels.
+     */
+    universes(): number[] {
+        const numbers = new Set<number>();
+        for (const universes of this.sources.values()) {
+            for (const [universe, channels] of universes) {
+                if (channels.size > 0) {
+                    numbers.add(universe);
+                }
+            }
+        }
+        return [...numbers];
+    }
+
+    /**
      * Removes all the levels of a source.
      */
     clearSource(source: string): void {

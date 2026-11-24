@@ -9,6 +9,7 @@ import { app } from 'electron';
 import { startCloseGuard } from '../services/close-guard-service';
 import { FixtureLibrary } from '../fixtures/fixture-library';
 import { registerAppInfoService } from '../services/app-info-service';
+import { registerConsoleService } from '../services/console-service';
 import { registerFixtureService } from '../services/fixture-service';
 import { registerOutputService } from '../services/output-service';
 import { registerPatchService } from '../services/patch-service';
@@ -39,7 +40,8 @@ export function startEngine(): void {
     registerShowService(router, bus, session, library);
     registerFixtureService(router, bus, session, library);
     registerPatchService(router, bus, session, library);
-    const stopOutput = registerOutputService(router, bus, session, library);
+    const output = registerOutputService(router, bus, session, library);
+    registerConsoleService(router, bus, session, library, output.engine);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);
@@ -52,6 +54,6 @@ export function startEngine(): void {
     app.on('before-quit', () => {
         session.autosave();
         session.dispose();
-        stopOutput();
+        output.dispose();
     });
 }

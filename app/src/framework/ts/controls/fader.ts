@@ -13,6 +13,8 @@ import { RangeControl, type RangeControlOptions } from './range-control.js';
 export interface FaderOptions extends RangeControlOptions {
     /** Scale printed next to the slot; empty for no scale */
     scale?: readonly FaderTick[];
+    /** Length: normal (default) or compact, for rows of many faders */
+    size?: 'normal' | 'compact';
 }
 
 export class Fader extends RangeControl<HTMLDivElement> {
@@ -20,7 +22,10 @@ export class Fader extends RangeControl<HTMLDivElement> {
     private readonly cap: HTMLDivElement;
 
     constructor(options: FaderOptions) {
-        const element = create('div', { classes: ['fader'], attributes: { 'aria-orientation': 'vertical' } });
+        const element = create('div', {
+            classes: ['fader', ...(options.size === 'compact' ? ['fader--compact'] : [])],
+            attributes: { 'aria-orientation': 'vertical' }
+        });
         super(element, options);
 
         this.travel = create('div', { classes: ['fader__travel'] });

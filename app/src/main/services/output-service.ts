@@ -40,11 +40,17 @@ function requireUniverse(value: number): number {
     return value;
 }
 
+/** Output started by the service */
+export interface OutputRuntime {
+    engine: OutputEngine;
+    /** Stops the output, to call when the application quits */
+    dispose(): void;
+}
+
 /**
  * Starts the output and registers the methods of the service.
- * @returns the function that stops the output, to call when the application quits
  */
-export function registerOutputService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): () => void {
+export function registerOutputService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): OutputRuntime {
     const socket = new ArtNetSocket();
     const settings = readSettings();
     // The state is announced when a USB interface connects or disconnects
@@ -211,9 +217,12 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
     });
 
     follow();
-    return () => {
-        engine.dispose();
-        socket.close();
-        void usb.dispose();
+    return {
+        engine,
+        dispose: () => {
+            engine.dispose();
+            socket.close();
+            void usb.dispose();
+        }
     };
 }

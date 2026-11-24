@@ -29,6 +29,10 @@ $cap-shade: #7f8186;
     @include focus.focus-ring;
 }
 
+.fader--compact {
+    height: 144px;
+}
+
 .fader__hole {
     position: absolute;
     top: 0;

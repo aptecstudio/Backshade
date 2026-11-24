@@ -7,6 +7,7 @@
 import type { Component, IconName } from '../../framework/ts/index.js';
 import type { TextKey } from '../i18n/i18n.js';
 import { StartPage } from '../start/start-page.js';
+import { ConsoleSection } from './console/console-section.js';
 import { MediaSection } from './media/media-section.js';
 import { OutputSection } from './output/output-section.js';
 import { PatchSection } from './patch/patch-section.js';
@@ -29,7 +30,7 @@ export interface SectionDefinition {
 
 /** Working sections of the show, shown as keys in the top bar */
 export const MAIN_SECTIONS: readonly SectionDefinition[] = [
-    { id: 'console', labelKey: 'sections.console', create: () => new PlaceholderSection('sections.console') },
+    { id: 'console', labelKey: 'sections.console', create: () => new ConsoleSection() },
     { id: 'virtualConsole', labelKey: 'sections.virtualConsole', create: () => new PlaceholderSection('sections.virtualConsole') },
     { id: 'timeline', labelKey: 'sections.timeline', create: () => new PlaceholderSection('sections.timeline') },
     { id: 'patch', labelKey: 'sections.patch', create: () => new PatchSection() },

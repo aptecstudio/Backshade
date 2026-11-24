@@ -592,6 +592,31 @@
       "usbMissing": "Non collegata",
       "usbError": "Errore: {error}",
       "usbDisabled": "Non inviata"
+    },
+    "deskConsole": {
+      "presetA": "Preset A",
+      "presetB": "Preset B",
+      "bank": "Canali {first}-{last}",
+      "previousBank": "Canali precedenti",
+      "nextBank": "Canali successivi",
+      "universe": "Universo",
+      "mode": "Modo",
+      "modeAb": "A/B 2 x 12",
+      "modeSingle": "Singolo 24",
+      "channel": "Canale {channel}",
+      "free": "Libero",
+      "flash": "Flash canale {channel}",
+      "masters": "Master",
+      "masterA": "A",
+      "masterB": "B",
+      "masterScene": "Scene",
+      "grandMaster": "Grand",
+      "masterHint": "A e B in dissolvenza incrociata: B lavora al contrario, come sui banchi a due preset.",
+      "fullOn": "Full on",
+      "blind": "Blind",
+      "home": "Home",
+      "blindOn": "Blind: i fader cambiano senza arrivare all'uscita.",
+      "noShow": "Apri uno show per usare la console."
     }
   }
 }

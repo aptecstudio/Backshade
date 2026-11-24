@@ -1,0 +1,89 @@
+// Console section: two-preset desk and masters
+@use 'framework/scss/tokens' as *;
+
+.preset-surface {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.preset-surface--blind {
+    border-color: color('armed');
+}
+
+.preset-row {
+    align-items: stretch;
+}
+
+.preset-row__title {
+    flex: 0 0 space(3);
+    align-items: center;
+    justify-content: center;
+
+    .label {
+        color: color('accent');
+        white-space: nowrap;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+}
+
+.preset-row__title--continued .label {
+    color: color('text-secondary');
+}
+
+.preset-row__strips {
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    min-width: 0;
+}
+
+.preset-strip {
+    min-width: 0;
+
+    .display {
+        align-self: stretch;
+        min-width: 0;
+    }
+
+    .display__value {
+        white-space: nowrap;
+    }
+
+}
+
+.preset-strip__head {
+    align-self: stretch;
+    min-width: 0;
+}
+
+.preset-strip__head .label:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.preset-strip--free .display__name {
+    color: color('text-secondary');
+}
+
+// Channels beyond 512 keep their place in the grid but show nothing
+.preset-strip--empty > * {
+    visibility: hidden;
+}
+
+.desk-controls {
+    flex: 0 0 352px;
+
+    .number-field__unit {
+        display: none;
+    }
+}
+
+.desk-controls__masters {
+    justify-content: space-between;
+}
+
+.desk-controls__keys > .key {
+    flex: 1 1 0;
+}

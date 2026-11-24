@@ -29,6 +29,8 @@ export interface SquareKeyOptions {
 
 export class SquareKey extends Component<HTMLButtonElement> {
     private readonly presses = new Emitter<void>();
+    private readonly holds = new Emitter<boolean>();
+    private held = false;
 
     constructor(options: SquareKeyOptions) {
         super(create('button', {
@@ -47,7 +49,28 @@ export class SquareKey extends Component<HTMLButtonElement> {
         }
 
         this.listen(this.element, 'click', () => this.presses.emit());
-        this.track(() => this.presses.clear());
+        // Momentary use (flash): pressed while the pointer or the key is down
+        this.listen(this.element, 'pointerdown', (event) => {
+            this.element.setPointerCapture(event.pointerId);
+            this.hold(true);
+        });
+        this.listen(this.element, 'pointerup', () => this.hold(false));
+        this.listen(this.element, 'pointercancel', () => this.hold(false));
+        this.listen(this.element, 'keydown', (event) => {
+            if ((event.key === ' ' || event.key === 'Enter') && !event.repeat) {
+                this.hold(true);
+            }
+        });
+        this.listen(this.element, 'keyup', (event) => {
+            if (event.key === ' ' || event.key === 'Enter') {
+                this.hold(false);
+            }
+        });
+        this.listen(this.element, 'blur', () => this.hold(false));
+        this.track(() => {
+            this.presses.clear();
+            this.holds.clear();
+        });
 
         this.setOn(options.on ?? false);
     }
@@ -58,6 +81,20 @@ export class SquareKey extends Component<HTMLButtonElement> {
     setOn(on: boolean): void {
         this.element.classList.toggle('square-key--on', on);
         this.element.setAttribute('aria-pressed', String(on));
+    }
+
+    /**
+     * Registers a listener for momentary use: true when the key goes down, false when it is released.
+     */
+    onHold(listener: (down: boolean) => void): Unsubscribe {
+        return this.holds.subscribe(listener);
+    }
+
+    private hold(down: boolean): void {
+        if (down !== this.held) {
+            this.held = down;
+            this.holds.emit(down);
+        }
     }
 
     /**

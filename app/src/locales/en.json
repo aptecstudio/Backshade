@@ -592,6 +592,31 @@
       "usbMissing": "Not connected",
       "usbError": "Error: {error}",
       "usbDisabled": "Not sent"
+    },
+    "deskConsole": {
+      "presetA": "Preset A",
+      "presetB": "Preset B",
+      "bank": "Channels {first}-{last}",
+      "previousBank": "Previous channels",
+      "nextBank": "Next channels",
+      "universe": "Universe",
+      "mode": "Mode",
+      "modeAb": "A/B 2 x 12",
+      "modeSingle": "Single 24",
+      "channel": "Channel {channel}",
+      "free": "Free",
+      "flash": "Flash channel {channel}",
+      "masters": "Masters",
+      "masterA": "A",
+      "masterB": "B",
+      "masterScene": "Scenes",
+      "grandMaster": "Grand",
+      "masterHint": "A and B crossfade: B works reversed, as on the two-preset desks.",
+      "fullOn": "Full on",
+      "blind": "Blind",
+      "home": "Home",
+      "blindOn": "Blind: the faders change without reaching the output.",
+      "noShow": "Open a show to use the console."
     }
   }
 }

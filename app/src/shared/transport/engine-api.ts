@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
 import type { OutputTransport, ShowOutput } from '../output/output-config.js';
@@ -347,6 +348,29 @@ export interface EngineMethods {
     /** Removes a USB DMX interface of the workstation (desktop application only) */
     'output.removeUsbDevice': { params: { id: string }; result: OutputState };
 
+    /** State of the two-preset desk */
+    'console.getState': { params: undefined; result: PresetDeskState };
+    /** Fader levels of the desk on a universe */
+    'console.getLevels': { params: { universe: number }; result: PresetLevels };
+    /** Names of the patched channels of a universe, null for free channels */
+    'console.channelLabels': { params: { universe: number }; result: Array<ChannelLabel | null> };
+    /** Moves a fader of the desk, value 0 to 255 */
+    'console.setFader': { params: { row: PresetRow; universe: number; channel: number; value: number }; result: undefined };
+    /** Moves a master fader, position 0 to 1 */
+    'console.setMaster': { params: { master: PresetMaster; position: number }; result: undefined };
+    /** Presses or releases a flash key */
+    'console.setFlash': { params: { row: PresetRow; universe: number; channel: number; on: boolean }; result: undefined };
+    /** Chooses the mode of the desk */
+    'console.setMode': { params: { mode: PresetMode }; result: PresetDeskState };
+    /** Moves the faders to a bank of channels */
+    'console.setBank': { params: { universe: number; firstChannel: number }; result: PresetDeskState };
+    /** Turns blind on or off */
+    'console.setBlind': { params: { on: boolean }; result: PresetDeskState };
+    /** Turns full on on or off */
+    'console.setFullOn': { params: { on: boolean }; result: PresetDeskState };
+    /** Brings every fader of the desk back to 0 */
+    'console.home': { params: undefined; result: undefined };
+
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
     /** Removes a show from the recent shows */
@@ -389,6 +413,12 @@ export interface EngineEvents {
     'output.stateChanged': { state: OutputState };
     /** The output configuration of the open show has changed */
     'output.configChanged': Record<string, never>;
+    /** The state of the desk has changed (mode, bank, masters, blind, full on) */
+    'console.stateChanged': { state: PresetDeskState };
+    /** A fader of the desk has moved */
+    'console.faderChanged': { row: PresetRow; universe: number; channel: number; value: number };
+    /** Many faders have changed at once (home), the levels must be read again */
+    'console.levelsChanged': Record<string, never>;
     /** The list of templates has changed */
     'templates.changed': Record<string, never>;
     /** The user wants to close the window with unsaved changes */

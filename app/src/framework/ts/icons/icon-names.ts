@@ -7,6 +7,8 @@ export const ICON_NAMES = [
     'arrow-down',
     'arrow-up',
     'chevron-down',
+    'chevron-left',
+    'chevron-right',
     'circle',
     'circle-dot',
     'circle-help',

@@ -18,6 +18,8 @@ export interface UniverseMap {
     intensity: Uint8Array;
     /** Intensity channels with 16 bits: index of the high byte and of the low byte */
     finePairs: Array<[number, number]>;
+    /** 1 for the channels used by a fixture */
+    patched: Uint8Array;
 }
 
 // Color channels that give the intensity of fixtures without a dimmer channel
@@ -26,7 +28,12 @@ const ADDITIVE_COLORS: ReadonlySet<FixtureAttribute> = new Set([
 ]);
 
 function emptyUniverse(): UniverseMap {
-    return { defaults: new Uint8Array(UNIVERSE_SIZE), intensity: new Uint8Array(UNIVERSE_SIZE), finePairs: [] };
+    return {
+        defaults: new Uint8Array(UNIVERSE_SIZE),
+        intensity: new Uint8Array(UNIVERSE_SIZE),
+        finePairs: [],
+        patched: new Uint8Array(UNIVERSE_SIZE)
+    };
 }
 
 /**
@@ -38,6 +45,7 @@ export function buildChannelMap(patch: ShowPatch, lookup: (id: string) => Fixtur
         const map = universes.get(fixture.universe) ?? emptyUniverse();
         universes.set(fixture.universe, map);
 
+        map.patched.fill(1, fixture.address - 1, Math.min(UNIVERSE_SIZE, fixture.address - 1 + fixture.channelCount));
         const definition = lookup(fixture.definition);
         const mode = definition?.modes.find((item) => item.name === fixture.mode);
         if (definition === undefined || mode === undefined) {
