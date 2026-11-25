@@ -61,6 +61,13 @@ export class OutputEngine {
         this.restart();
     }
 
+    /**
+     * Channel map of a universe of the open show, undefined when nothing is patched on it.
+     */
+    universeMap(universe: number): UniverseMap | undefined {
+        return this.channelMap.get(universe);
+    }
+
     setGrandMaster(level: number): void {
         this.grandMaster = Math.max(0, Math.min(1, level));
     }

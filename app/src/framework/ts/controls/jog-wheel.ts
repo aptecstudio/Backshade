@@ -14,6 +14,8 @@ import { trackPointerDrag } from './pointer-drag.js';
 export interface JogWheelOptions {
     /** Name for assistive technologies, already translated */
     label: string;
+    /** Size: normal (default) or compact, for panels with several wheels */
+    size?: 'normal' | 'compact';
 }
 
 // Rotation of one mouse wheel notch and of one arrow key, in turns
@@ -26,7 +28,7 @@ export class JogWheel extends Component<HTMLDivElement> {
 
     constructor(options: JogWheelOptions) {
         super(create('div', {
-            classes: ['jog-wheel'],
+            classes: ['jog-wheel', ...(options.size === 'compact' ? ['jog-wheel--compact'] : [])],
             attributes: { role: 'slider', tabindex: '0', 'aria-label': options.label },
             children: [create('div', { classes: ['jog-wheel__dimple'] })]
         }));

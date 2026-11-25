@@ -9,6 +9,7 @@ $cap-top: #43454a;
 $cap-bottom: #2f3135;
 $outline: #0a0a0b;
 $size: 192px;
+$size-compact: 128px;
 
 .jog-wheel {
     position: relative;
@@ -39,6 +40,17 @@ $size: 192px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         content: '';
         transform: translate(-50%, -50%);
+    }
+}
+
+// Compact size, for panels with several wheels (attributes panel)
+.jog-wheel--compact {
+    width: $size-compact;
+    height: $size-compact;
+
+    .jog-wheel__dimple::before {
+        width: 24px;
+        height: 24px;
     }
 }
 

@@ -46,9 +46,22 @@ function requireUnit(input: Record<string, unknown>, field: string): number {
 
 /**
  * Registers the methods of the service.
+ * @returns the desk, also used by the attributes panel
  */
-export function registerConsoleService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary, output: OutputEngine): void {
-    const desk = new PresetDesk(output.mixer);
+export function registerConsoleService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary, output: OutputEngine): PresetDesk {
+    const desk = new PresetDesk(output.mixer, (universe) => output.universeMap(universe));
+    // The patch and the definitions decide which channels the masters scale;
+    // the output service is registered first, so its channel map is already updated
+    session.onContentChange((part) => {
+        if (part === 'patch') {
+            desk.refresh();
+        }
+    });
+    bus.addSink((message) => {
+        if (message.event === 'fixtures.changed') {
+            desk.refresh();
+        }
+    });
     const stateChanged = (): ReturnType<PresetDesk['getState']> => {
         const state = desk.getState();
         output.setFullOn(state.fullOn);
@@ -136,4 +149,6 @@ export function registerConsoleService(router: RequestRouter, bus: EventBus, ses
         bus.emit('console.levelsChanged', {});
         return undefined;
     });
+
+    return desk;
 }

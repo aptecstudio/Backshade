@@ -87,3 +87,46 @@
 .desk-controls__keys > .key {
     flex: 1 1 0;
 }
+
+.console-section__desk {
+    min-width: 0;
+}
+
+// Attributes panel: fixture selection, channel faders, pan and tilt wheels, color wheel
+.fixture-selector__keys {
+    max-height: space(8) * 2 + space(1);
+    overflow-y: auto;
+}
+
+.attributes-panel__controls {
+    flex-wrap: wrap;
+}
+
+.attributes-panel__strips {
+    display: grid;
+    grid-auto-columns: space(8) + space(2);
+    grid-auto-flow: column;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.attribute-strip {
+    min-width: 0;
+
+    .display {
+        align-self: stretch;
+        min-width: 0;
+    }
+
+    .display__name,
+    .display__value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.position-wheels .display {
+    align-self: stretch;
+}

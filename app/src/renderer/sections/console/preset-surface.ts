@@ -82,6 +82,14 @@ export class PresetSurface extends Panel {
                 this.render();
             }
         }));
+        this.track(engine().on('console.fadersChanged', ({ row, universe, channels }) => {
+            if (universe === this.state?.universe) {
+                for (const [channel, value] of channels) {
+                    this.levels[row][channel - 1] = value;
+                }
+                this.render();
+            }
+        }));
         this.track(engine().on('console.levelsChanged', () => void this.loadUniverse()));
         this.track(engine().on('patch.changed', () => void this.loadUniverse()));
         void engine().request('console.getState').then((state) => this.apply(state)).catch(showError);

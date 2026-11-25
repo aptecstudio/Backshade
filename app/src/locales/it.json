@@ -617,6 +617,19 @@
       "home": "Home",
       "blindOn": "Blind: i fader cambiano senza arrivare all'uscita.",
       "noShow": "Apri uno show per usare la console."
+    },
+    "attributesPanel": {
+      "title": "Attributi",
+      "fixtures": "Fixture",
+      "selected": "{count} selezionate",
+      "clear": "Annulla selezione",
+      "noFixtures": "Nessuna fixture nel patch: aggiungile nella sezione Patch.",
+      "noSelection": "Seleziona una o più fixture: i loro canali vanno sui fader qui sotto. La prima selezionata dà i valori mostrati e le altre la seguono.",
+      "missing": "Manca la definizione della prima fixture selezionata: i suoi canali non possono essere mostrati.",
+      "pan": "Pan",
+      "tilt": "Tilt",
+      "panWheel": "Ruota pan (X)",
+      "tiltWheel": "Ruota tilt (Y)"
     }
   }
 }

@@ -617,6 +617,19 @@
       "home": "Home",
       "blindOn": "Blind: the faders change without reaching the output.",
       "noShow": "Open a show to use the console."
+    },
+    "attributesPanel": {
+      "title": "Attributes",
+      "fixtures": "Fixtures",
+      "selected": "{count} selected",
+      "clear": "Clear selection",
+      "noFixtures": "No fixtures in the patch: add them in the Patch section.",
+      "noSelection": "Select one or more fixtures: their channels go on the faders below. The first one selected gives the values shown, and the others follow it.",
+      "missing": "The definition of the first selected fixture is missing: its channels cannot be shown.",
+      "pan": "Pan",
+      "tilt": "Tilt",
+      "panWheel": "Pan wheel (X)",
+      "tiltWheel": "Tilt wheel (Y)"
     }
   }
 }

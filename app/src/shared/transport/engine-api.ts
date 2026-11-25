@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { AttributeLayout } from '../console/fixture-attributes.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
@@ -370,6 +371,14 @@ export interface EngineMethods {
     'console.setFullOn': { params: { on: boolean }; result: PresetDeskState };
     /** Brings every fader of the desk back to 0 */
     'console.home': { params: undefined; result: undefined };
+    /** Channels of a patched fixture for the attributes panel, null when its definition is missing */
+    'console.attributeLayout': { params: { fixture: string }; result: AttributeLayout | null };
+    /**
+     * Sets channels of the selected fixtures in the levels of Preset A. The
+     * first fixture is the reference: values are keyed by its channel keys,
+     * from 0 to 1; other models get the channel with the same attribute.
+     */
+    'console.setAttributes': { params: { fixtures: string[]; values: Record<string, number> }; result: undefined };
 
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
@@ -417,6 +426,8 @@ export interface EngineEvents {
     'console.stateChanged': { state: PresetDeskState };
     /** A fader of the desk has moved */
     'console.faderChanged': { row: PresetRow; universe: number; channel: number; value: number };
+    /** Several faders of a row and universe have moved, as pairs of channel and value (attributes panel) */
+    'console.fadersChanged': { row: PresetRow; universe: number; channels: Array<[number, number]> };
     /** Many faders have changed at once (home), the levels must be read again */
     'console.levelsChanged': Record<string, never>;
     /** The list of templates has changed */
