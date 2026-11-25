@@ -225,7 +225,7 @@ Defined with the human on 2026-11-24 from the rendering `Backshade - console sem
 
 Implementation of 4.1 (2026-11-24):
 
-- **Engine** (`src/main/console/preset-desk.ts`): the desk is the source `preset` of the mixer. It keeps the fader levels of every universe (rows A and B), so moving to another bank or universe never loses them. Output per channel: A/B mode the highest of A x Master A and B x (1 - Master B position); single mode the levels of row A x Master A (row B of the surface shows channels 13 to 24 of the bank, stored in row A); a held flash key gives 255 ignoring the masters. Only channels above 0 are written, so a fader at 0 never takes a channel from another source (scenes, the attributes panel).
+- **Engine** (`src/main/console/preset-desk.ts`): the desk is the source `preset` of the mixer. It keeps the fader levels of every universe (rows A and B), so moving to another bank or universe never loses them. Output per channel: A/B mode the highest of A x Master A and B x (1 - Master B position); single mode the levels of row A x Master A (row B of the surface shows channels 13 to 24 of the bank, stored in row A); a held flash key gives 255 ignoring the masters. Only channels above 0 are written, so a fader at 0 never takes a channel from another source (scenes). Changed in 4.2: the masters scale only the intensity channels (see below).
 - **Blind:** the faders change but the output keeps the last result; turning blind off applies the faders at once.
 - **Full on:** applied by the output engine on every universe: intensity channels of the patched fixtures and every channel without a fixture at full; colors and movements of fixtures with a dimmer stay as they are; blackout still wins.
 - **Home:** every fader of every universe back to 0.
@@ -233,6 +233,17 @@ Implementation of 4.1 (2026-11-24):
 - **Interface** (`src/renderer/sections/console/`): Console section with the preset surface (bank keys, universe, mode, two rows of strips with channel number, fixture and channel name from the patch, display with the value, compact fader, flash; no typed field under these faders) and the masters panel (A, B with reversed scale, scenes, grand master, full on, blind, home). Framework additions: `Fader` size `compact` (144 px), `SquareKey.onHold` for momentary keys.
 
 Status: Confirmed (2026-11-24).
+
+Implementation of 4.2 (2026-11-25), choices confirmed by the human on 2026-11-25:
+
+- **Layout:** the attributes panel is a separate panel below the preset surface and the masters, which stay on the raw DMX channels.
+- **Selection:** several fixtures can be selected, one key per patched fixture in fixture number order (`fixture-selector.ts`). The order of selection is kept: the first fixture is the reference, and the panel shows its channels and values. The selection belongs to the window. Moves are applied by the engine to every selected fixture: the same channel key for the same model, otherwise the first channel with the same attribute (`generic`, `control` and `none` channels are not matched between models).
+- **Same levels as the preset** (decided by the human): values are written into the levels of Preset A (`console.setAttributes`), so a channel of the panel and the raw fader of the same DMX channel are the same fader. Blind and home apply to the panel too. Several channels moved at once are announced with `console.fadersChanged` (one event per universe).
+- **Masters only on intensity** (decided by the human, changes 4.1): Masters A and B and the crossfade scale only the intensity channels (as defined by the merge, `channel-map.ts`) and the channels without a fixture; 16-bit intensity pairs are scaled as one value. Every other channel (pan, tilt, gobo, colors of fixtures with a dimmer) is sent at the level of its fader: in A/B mode the row moved last wins (LTP). Non-intensity channels are written only after a fader moved them since the last home, so default values of the definition stay until then. The desk follows patch and definition changes (`PresetDesk.refresh`).
+- **Channels** (`src/main/console/attribute-layout.ts`, `src/shared/console/fixture-attributes.ts`): one entry per channel of the mode in DMX order; a low byte (`fineOf`) is shown with its high byte as one 16-bit value. Values travel as 0 to 1 and become 8 or 16-bit levels.
+- **Interface** (`attributes-panel.ts`, `attribute-strip.ts`, `position-wheels.ts`): a compact fader with display for each channel (display color by attribute group), except pan and tilt, which are on two jog wheels X and Y (one turn moves a quarter of the travel); the color wheel appears when the reference fixture has red, green and blue. Framework addition: `JogWheel` size `compact` (128 px).
+
+Status: Confirmed (layout, selection, same levels as the preset, masters only on intensity), Proposed (matching between models, jog travel per turn, display colors).
 
 ## Brand
 
