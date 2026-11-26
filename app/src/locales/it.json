@@ -146,7 +146,18 @@
       "invalidFixtureNumber": "Il numero della fixture non è valido.",
       "fixtureNumberInUse": "Il numero della fixture è già usato da un'altra fixture.",
       "patchFixtureNotFound": "La fixture non è più nel patch.",
-      "invalidIpAddress": "Inserisci indirizzi IPv4 validi."
+      "invalidIpAddress": "Inserisci indirizzi IPv4 validi.",
+      "operatorRequired": "Inserisci il PIN di un operatore per lavorare su questo show.",
+      "operatorNotAllowed": "Il tuo profilo operatore non permette questa operazione.",
+      "wrongPin": "PIN errato.",
+      "pinLocked": "Troppi PIN errati: aspetta 30 secondi e riprova.",
+      "invalidPin": "Il PIN deve avere 4 cifre.",
+      "pinInUse": "Un altro operatore ha già questo PIN.",
+      "lastAdmin": "Lo show deve avere almeno un amministratore.",
+      "operatorInUse": "Non puoi eliminare l'operatore con cui sei entrato.",
+      "operatorNotFound": "L'operatore non esiste più.",
+      "sameShow": "Scegli uno show diverso da quello aperto.",
+      "sourcePinRequired": "Lo show sorgente è protetto: serve il PIN di un suo amministratore."
     },
     "settings": {
       "language": "Lingua",
@@ -1131,6 +1142,92 @@
       "setTime": "Tempo",
       "followHint": "Con un tempo di follow, la cue successiva parte da sola quei secondi dopo il Go di questa cue.",
       "timesFollow": "{fades}, follow {follow}"
+    },
+    "operators": {
+      "title": "Operatori",
+      "hint": "Gli operatori entrano nello show con un PIN di 4 cifre su ogni postazione e vedono solo le sezioni del loro profilo. Gli amministratori modificano tutto e gestiscono gli operatori.",
+      "empty": "Lo show si apre senza PIN. Crea il tuo profilo amministratore per proteggerlo e aggiungere operatori.",
+      "protect": "Crea il mio profilo amministratore",
+      "add": "Aggiungi operatore",
+      "edit": "Modifica",
+      "newOperator": "Nuovo operatore",
+      "editOperator": "Modifica operatore",
+      "firstOperator": "Il tuo profilo amministratore",
+      "name": "Nome",
+      "pin": "PIN (4 cifre)",
+      "pinKeep": "Nuovo PIN (vuoto per tenerlo)",
+      "admin": "Amministratore",
+      "adminHint": "Un amministratore vede e modifica ogni sezione.",
+      "sections": "Sezioni",
+      "access": {
+        "hidden": "Nascosta",
+        "view": "Sola lettura",
+        "edit": "Modifica"
+      },
+      "administrator": "Amministratore",
+      "summary": "{shown} sezioni visibili, {edit} modificabili",
+      "you": "{name} (tu)",
+      "removeLast": "Eliminare il tuo profilo toglie la protezione: lo show si aprirà di nuovo senza PIN.",
+      "enterTitle": "Entra nello show",
+      "enterHint": "Digita il PIN del tuo profilo operatore.",
+      "closeShow": "Chiudi show",
+      "digit": "Cifra {digit}",
+      "backspace": "Cancella l'ultima cifra",
+      "switch": "Cambia operatore: {name}",
+      "readOnly": "Sola lettura: puoi vedere e mandare in onda questa sezione, non modificarla.",
+      "chooseOperator": "Più operatori hanno questo PIN: scegli il tuo."
+    },
+    "showImport": {
+      "title": "Importa da un altro show",
+      "open": "Importa",
+      "panelHint": "Porta in questo show scene, chaser, fixture, audio, video, immagini e operatori di un altro show.",
+      "hint": "Scegli lo show da cui importare.",
+      "recent": "Show recenti",
+      "noRecent": "Nessun altro show recente.",
+      "chooseFolder": "Scegli la cartella di uno show",
+      "pinHint": "Lo show è protetto: digita il PIN di un suo amministratore.",
+      "from": "Da \"{name}\"",
+      "items": "Mostra gli elementi",
+      "categoryCount": "{name} ({count} di {total})",
+      "import": "Importa",
+      "empty": "Lo show non ha nulla da importare.",
+      "neededBy": "Serve a {items}",
+      "done": "{imported} elementi importati, {skipped} saltati.",
+      "categories": {
+        "scenes": "Scene",
+        "chasers": "Chaser",
+        "fixtures": "Fixture",
+        "audio": "Audio",
+        "video": "Video",
+        "images": "Immagini",
+        "operators": "Operatori"
+      },
+      "kinds": {
+        "scene": "Scena",
+        "chaser": "Chaser",
+        "fixture": "Fixture",
+        "matrix": "Matrice",
+        "group": "Gruppo",
+        "audioItem": "Brano della playlist",
+        "audioFile": "File audio",
+        "videoOutput": "Uscita video",
+        "gobo": "Gobo testuale",
+        "timer": "Timer",
+        "videoFile": "File video",
+        "imageFile": "Immagine",
+        "operator": "Operatore"
+      },
+      "resolutions": {
+        "add": "Aggiungi",
+        "replace": "Sostituisci",
+        "skip": "Salta"
+      },
+      "conflicts": {
+        "slot": "Lo slot è occupato da \"{with}\"",
+        "address": "Gli indirizzi sono occupati da {with}",
+        "file": "Esiste già un file diverso {with}",
+        "name": "Esiste già un operatore di nome \"{with}\""
+      }
     }
   }
 }

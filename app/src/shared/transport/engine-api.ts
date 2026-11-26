@@ -24,6 +24,8 @@ import type { MatrixSegment, PatchedMatrix } from '../patch/matrix.js';
 import type { MatrixEffect } from '../patch/matrix-effect.js';
 import type { PatchedFixture } from '../patch/patch.js';
 import type { MediaKind } from '../show/media-kinds.js';
+import type { OperatorAccess, OperatorProfile, OperatorState } from '../show/operators.js';
+import type { ImportCatalog, ImportChoice, ImportResult } from '../show/show-import.js';
 import type { ShowSettings } from '../show/show-settings.js';
 
 /** Information about the application, for the About window */
@@ -578,6 +580,41 @@ export interface EngineMethods {
     'settings.get': { params: undefined; result: AppSettings };
     /** Changes the global settings */
     'settings.update': { params: Partial<AppSettings>; result: AppSettings };
+    /** Operator state of the open show */
+    'operators.getState': { params: undefined; result: OperatorState };
+    /**
+     * Enters with the PIN of an operator; a wrong PIN fails with "wrong-pin".
+     * When several operators have the PIN, nobody enters and the choices
+     * list them: the login is repeated with the chosen id.
+     */
+    'operators.login': { params: { pin: string; id?: string }; result: { state: OperatorState; choices: Array<{ id: string; name: string }> } };
+    /** Leaves: the show asks for a PIN again */
+    'operators.logout': { params: undefined; result: OperatorState };
+    /** Operators of the open show; administrators only, or anyone while the show has none */
+    'operators.list': { params: undefined; result: OperatorProfile[] };
+    /**
+     * Adds (without id) or changes an operator; administrators only. The PIN
+     * is needed for a new operator and changes the PIN when given. The first
+     * operator of a show is an administrator and enters at once.
+     */
+    'operators.save': {
+        params: { id?: string; name: string; admin: boolean; access: OperatorAccess; pin?: string };
+        result: OperatorProfile[];
+    };
+    /**
+     * Deletes an operator; administrators only. The operator who entered can
+     * delete only the last profile, and the show then opens without a PIN.
+     */
+    'operators.delete': { params: { id: string }; result: OperatorProfile[] };
+    /**
+     * Reads what can be imported from another show; administrators only.
+     * When the source has operators and the administrator who entered is not
+     * one of its administrators (same name and PIN), the PIN of a source
+     * administrator is needed: "source-pin-required", or "wrong-pin".
+     */
+    'showImport.inspect': { params: { folder: string; pin?: string }; result: ImportCatalog };
+    /** Imports the chosen items, with the items they need */
+    'showImport.apply': { params: { folder: string; pin?: string; items: ImportChoice[] }; result: ImportResult };
 }
 
 /** Engine events and their data */
@@ -634,6 +671,8 @@ export interface EngineEvents {
     'matrices.liveChanged': { effects: Record<string, MatrixEffect> };
     /** The playback state of the cue list has changed */
     'cues.stateChanged': { state: CueStackState };
+    /** The operators of the show or the operator who entered have changed */
+    'operators.changed': { state: OperatorState };
     /** The list of templates has changed */
     'templates.changed': Record<string, never>;
     /** The user wants to close the window with unsaved changes */

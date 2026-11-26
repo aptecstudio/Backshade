@@ -13,6 +13,12 @@ export interface RequestContext {
     transport: 'ipc' | 'remote';
 }
 
+/**
+ * Check run before every method; it throws an EngineError when the method
+ * is not allowed.
+ */
+export type RequestGuard = (method: EngineMethod, context: RequestContext) => void;
+
 /** Handler of a method */
 export type MethodHandler<M extends EngineMethod> = (
     params: unknown,
@@ -21,6 +27,14 @@ export type MethodHandler<M extends EngineMethod> = (
 
 export class RequestRouter {
     private readonly handlers = new Map<string, MethodHandler<EngineMethod>>();
+    private guard: RequestGuard | null = null;
+
+    /**
+     * Sets the check of the permissions run before every method.
+     */
+    setGuard(guard: RequestGuard): void {
+        this.guard = guard;
+    }
 
     /**
      * Registers the handler of a method. Parameters arrive as unknown:
@@ -52,6 +66,7 @@ export class RequestRouter {
         }
 
         try {
+            this.guard?.(message.method as EngineMethod, context);
             const result = await handler(message.params, context);
             return { type: 'response', id: message.id, ok: true, result };
         } catch (error) {

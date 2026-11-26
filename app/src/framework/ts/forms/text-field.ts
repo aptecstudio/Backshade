@@ -19,6 +19,10 @@ export interface TextFieldOptions {
     maxLength?: number;
     /** Read-only field, for example to show a path */
     readOnly?: boolean;
+    /** Hidden characters, for PINs and passwords */
+    secret?: boolean;
+    /** Keyboard offered on touch devices: numeric for PINs and codes */
+    inputMode?: 'text' | 'numeric';
 }
 
 let nextId = 1;
@@ -41,6 +45,13 @@ export class TextField extends Component<HTMLDivElement> {
             this.input.maxLength = options.maxLength;
         }
         this.input.readOnly = options.readOnly === true;
+        if (options.secret === true) {
+            this.input.type = 'password';
+            this.input.autocomplete = 'new-password';
+        }
+        if (options.inputMode !== undefined) {
+            this.input.inputMode = options.inputMode;
+        }
 
         if (options.label !== undefined) {
             this.element.append(create('label', { classes: ['text-field__label'], attributes: { for: id }, text: options.label }));

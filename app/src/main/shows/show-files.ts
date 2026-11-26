@@ -13,6 +13,7 @@ import { normalizeTimelines } from '../../shared/timeline/timeline';
 import { normalizeVideo } from '../../shared/video/video';
 import { normalizeOutput } from '../../shared/output/output-config';
 import { normalizePatch } from '../../shared/patch/patch';
+import { normalizeOperators } from '../../shared/show/operators';
 import { normalizeShowSettings } from '../../shared/show/show-settings';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
 import { EngineError } from '../transport/engine-error';
@@ -49,7 +50,8 @@ function toShowDocument(data: unknown, file: string): ShowDocument {
         grid: normalizeGrid(document.grid),
         audio: normalizeAudio(document.audio),
         video: normalizeVideo(document.video),
-        timelines: normalizeTimelines(document.timelines)
+        timelines: normalizeTimelines(document.timelines),
+        operators: normalizeOperators(document.operators)
     };
 }
 

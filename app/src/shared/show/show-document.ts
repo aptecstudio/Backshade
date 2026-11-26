@@ -11,6 +11,7 @@ import type { ShowTimelines } from '../timeline/timeline.js';
 import type { ShowVideo } from '../video/video.js';
 import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
+import type { ShowOperator } from './operators.js';
 import type { ShowSettings } from './show-settings.js';
 
 /** Format version of show.json */
@@ -49,4 +50,6 @@ export interface ShowDocument {
     video: ShowVideo;
     /** Timelines of tracks; missing in older files, completed when reading */
     timelines: ShowTimelines;
+    /** Operators with their PIN and sections; missing in older files, completed when reading */
+    operators: ShowOperator[];
 }

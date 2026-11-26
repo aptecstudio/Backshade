@@ -146,7 +146,18 @@
       "invalidFixtureNumber": "The fixture number is not valid.",
       "fixtureNumberInUse": "The fixture number is already used by another fixture.",
       "patchFixtureNotFound": "The fixture is no longer in the patch.",
-      "invalidIpAddress": "Enter valid IPv4 addresses."
+      "invalidIpAddress": "Enter valid IPv4 addresses.",
+      "operatorRequired": "Enter the PIN of an operator to work on this show.",
+      "operatorNotAllowed": "Your operator profile does not allow this operation.",
+      "wrongPin": "Wrong PIN.",
+      "pinLocked": "Too many wrong PINs: wait 30 seconds and try again.",
+      "invalidPin": "The PIN must have 4 digits.",
+      "pinInUse": "Another operator already has this PIN.",
+      "lastAdmin": "The show needs at least one administrator.",
+      "operatorInUse": "You cannot delete the operator you entered with.",
+      "operatorNotFound": "The operator does not exist anymore.",
+      "sameShow": "Choose a show other than the open one.",
+      "sourcePinRequired": "The source show is protected: the PIN of one of its administrators is needed."
     },
     "settings": {
       "language": "Language",
@@ -1131,6 +1142,92 @@
       "setTime": "Time",
       "followHint": "With a follow time, the next cue goes by itself that many seconds after the Go of this cue.",
       "timesFollow": "{fades}, follow {follow}"
+    },
+    "operators": {
+      "title": "Operators",
+      "hint": "Operators enter the show with a 4 digit PIN on every workstation and see only the sections of their profile. Administrators edit everything and manage the operators.",
+      "empty": "The show opens without a PIN. Create your administrator profile to protect it and to add operators.",
+      "protect": "Create my administrator profile",
+      "add": "Add operator",
+      "edit": "Change",
+      "newOperator": "New operator",
+      "editOperator": "Change operator",
+      "firstOperator": "Your administrator profile",
+      "name": "Name",
+      "pin": "PIN (4 digits)",
+      "pinKeep": "New PIN (empty to keep it)",
+      "admin": "Administrator",
+      "adminHint": "An administrator sees and edits every section.",
+      "sections": "Sections",
+      "access": {
+        "hidden": "Hidden",
+        "view": "Read only",
+        "edit": "Edit"
+      },
+      "administrator": "Administrator",
+      "summary": "{shown} sections shown, {edit} editable",
+      "you": "{name} (you)",
+      "removeLast": "Deleting your profile removes the protection: the show opens again without a PIN.",
+      "enterTitle": "Enter the show",
+      "enterHint": "Type the PIN of your operator profile.",
+      "closeShow": "Close show",
+      "digit": "Digit {digit}",
+      "backspace": "Delete the last digit",
+      "switch": "Change operator: {name}",
+      "readOnly": "Read only: you can see and play this section, not change it.",
+      "chooseOperator": "Several operators have this PIN: choose yours."
+    },
+    "showImport": {
+      "title": "Import from another show",
+      "open": "Import",
+      "panelHint": "Brings scenes, chasers, fixtures, audio, video, images and operators of another show into this one.",
+      "hint": "Choose the show to import from.",
+      "recent": "Recent shows",
+      "noRecent": "No other recent show.",
+      "chooseFolder": "Choose a show folder",
+      "pinHint": "The show is protected: type the PIN of one of its administrators.",
+      "from": "From \"{name}\"",
+      "items": "Show the items",
+      "categoryCount": "{name} ({count} of {total})",
+      "import": "Import",
+      "empty": "The show has nothing to import.",
+      "neededBy": "Needed by {items}",
+      "done": "{imported} items imported, {skipped} skipped.",
+      "categories": {
+        "scenes": "Scenes",
+        "chasers": "Chasers",
+        "fixtures": "Fixtures",
+        "audio": "Audio",
+        "video": "Video",
+        "images": "Images",
+        "operators": "Operators"
+      },
+      "kinds": {
+        "scene": "Scene",
+        "chaser": "Chaser",
+        "fixture": "Fixture",
+        "matrix": "Matrix",
+        "group": "Group",
+        "audioItem": "Playlist item",
+        "audioFile": "Audio file",
+        "videoOutput": "Video output",
+        "gobo": "Text gobo",
+        "timer": "Timer",
+        "videoFile": "Video file",
+        "imageFile": "Image",
+        "operator": "Operator"
+      },
+      "resolutions": {
+        "add": "Add",
+        "replace": "Replace",
+        "skip": "Skip"
+      },
+      "conflicts": {
+        "slot": "The slot is used by \"{with}\"",
+        "address": "The addresses are used by {with}",
+        "file": "A different file {with} already exists",
+        "name": "An operator named \"{with}\" already exists"
+      }
     }
   }
 }

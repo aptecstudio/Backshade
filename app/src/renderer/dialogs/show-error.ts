@@ -33,7 +33,18 @@ const MESSAGES: Record<string, TextKey> = {
     'invalid-fixture-number': 'errors.invalidFixtureNumber',
     'fixture-number-in-use': 'errors.fixtureNumberInUse',
     'patch-fixture-not-found': 'errors.patchFixtureNotFound',
-    'invalid-ip-address': 'errors.invalidIpAddress'
+    'invalid-ip-address': 'errors.invalidIpAddress',
+    'operator-required': 'errors.operatorRequired',
+    'operator-not-allowed': 'errors.operatorNotAllowed',
+    'wrong-pin': 'errors.wrongPin',
+    'pin-locked': 'errors.pinLocked',
+    'invalid-pin': 'errors.invalidPin',
+    'pin-in-use': 'errors.pinInUse',
+    'last-admin': 'errors.lastAdmin',
+    'operator-in-use': 'errors.operatorInUse',
+    'operator-not-found': 'errors.operatorNotFound',
+    'same-show': 'errors.sameShow',
+    'source-pin-required': 'errors.sourcePinRequired'
 };
 
 /**

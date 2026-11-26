@@ -65,6 +65,16 @@ export class TabBar<T extends string> extends Component<HTMLElement> {
     }
 
     /**
+     * Shows or hides one tab.
+     */
+    setHidden(value: T, hidden: boolean): void {
+        const button = this.buttons.get(value);
+        if (button !== undefined) {
+            button.hidden = hidden;
+        }
+    }
+
+    /**
      * Enables or disables all the tabs.
      */
     setDisabled(disabled: boolean): void {

@@ -23,9 +23,11 @@ import { registerPatchService } from '../services/patch-service';
 import { startLocaleService } from '../services/locale-service';
 import { registerMatrixService } from '../services/matrix-service';
 import { registerMediaService } from '../services/media-service';
+import { registerOperatorService } from '../services/operator-service';
 import { registerMemoryService } from '../services/memory-service';
 import { registerRecentService } from '../services/recent-service';
 import { registerSettingsService } from '../services/settings-service';
+import { registerShowImportService } from '../services/show-import-service';
 import { registerShowService } from '../services/show-service';
 import { registerTemplateService } from '../services/template-service';
 import { registerTimelineService } from '../services/timeline-service';
@@ -47,6 +49,7 @@ export function startEngine(): void {
     registerAppInfoService(router);
     registerWindowService(router, bus);
     registerSettingsService(router);
+    const operators = registerOperatorService(router, bus, session);
     registerShowService(router, bus, session, library);
     registerFixtureService(router, bus, session, library);
     registerPatchService(router, bus, session, library);
@@ -65,6 +68,7 @@ export function startEngine(): void {
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);
+    registerShowImportService(router, bus, session, operators);
     startLocaleService(bus);
     startCloseGuard(bus, session);
 

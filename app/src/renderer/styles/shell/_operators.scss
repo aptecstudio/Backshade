@@ -1,0 +1,66 @@
+// Operators: PIN keypad, read only notice of the sections, operator list in the show settings
+@use 'framework/scss/tokens' as *;
+
+.pin-pad__display,
+.pin-pad__keys {
+    align-self: center;
+}
+
+.pin-pad__keys {
+    .key,
+    .pin-pad__gap {
+        width: space(8);
+    }
+}
+
+.section-host__notice {
+    display: flex;
+    gap: space(1);
+    align-items: center;
+    margin: 0 0 space(2);
+    color: color('text-secondary');
+    font-size: $font-size-small;
+
+    &[hidden] {
+        display: none;
+    }
+
+    .icon {
+        width: space(2);
+        height: space(2);
+    }
+}
+
+.operator-row {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.operator-dialog__access {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: space(1) space(2);
+    align-items: center;
+}
+
+// Import from another show
+.show-import__category {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+}
+
+.show-import__items {
+    padding-left: space(6);
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.show-import__conflict[hidden] {
+    display: none;
+}

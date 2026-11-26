@@ -15,6 +15,7 @@ import type { ShowTimelines } from '../../shared/timeline/timeline';
 import type { ShowVideo } from '../../shared/video/video';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
+import type { ShowOperator } from '../../shared/show/operators';
 import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
 import type { OpenShowResult, ShowSummary } from '../../shared/transport/engine-api';
 import { copyFolder } from '../storage/copy-folder';
@@ -38,7 +39,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'timelines' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'timelines' | 'operators' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -97,7 +98,9 @@ export class ShowSession {
             name: name.trim(),
             createdAt: now,
             modifiedAt: now,
-            createdWith: app.getVersion()
+            createdWith: app.getVersion(),
+            // The operators of a template never pass to a new show: who creates it sets them up
+            operators: []
         };
         showFiles.writeShow(folder, document, false);
 
@@ -319,6 +322,32 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('timelines');
+    }
+
+    /**
+     * Folder and content of the open show.
+     */
+    snapshot(): { folder: string; document: ShowDocument } {
+        const show = this.requireOpen();
+        return { folder: show.folder, document: show.document };
+    }
+
+    /**
+     * Operators of the open show, or an empty list without a show.
+     */
+    operators(): ShowOperator[] {
+        return this.current?.document.operators ?? [];
+    }
+
+    /**
+     * Replaces the operators of the open show; the change must be saved.
+     */
+    setOperators(operators: ShowOperator[]): void {
+        const show = this.requireOpen();
+        show.document = { ...show.document, operators };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('operators');
     }
 
     /**

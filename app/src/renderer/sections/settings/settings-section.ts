@@ -1,11 +1,13 @@
 /**
  * Settings section, split into two tabs: application settings
  * (saved on the workstation) and show settings
- * (saved with the show, available only with an open show).
+ * (saved with the show, available only with an open show, to its
+ * administrators when the show has operators).
  */
 
 import { Key, Stack, type Component } from '../../../framework/ts/index.js';
 import { t } from '../../i18n/i18n.js';
+import { canManageShow, onOperatorChange } from '../../show/operator-store.js';
 import { currentShow, onShowChange } from '../../show/show-store.js';
 import { engine } from '../../transport/engine.js';
 import { AboutSettings } from './about-settings.js';
@@ -31,13 +33,15 @@ export class SettingsSection extends Stack {
         this.showKey.onPress(() => this.open('show'));
         this.append(new Stack({ direction: 'row', gap: 1, children: [this.applicationKey, this.showKey] }));
 
-        this.open(currentShow() === null ? 'application' : 'show');
-        this.track(onShowChange((show) => {
-            this.showKey.setDisabled(show === null);
-            if (show === null && this.tab === 'show') {
+        this.open(this.showAvailable() ? 'show' : 'application');
+        const follow = (): void => {
+            this.showKey.setDisabled(!this.showAvailable());
+            if (!this.showAvailable() && this.tab === 'show') {
                 this.open('application');
             }
-        }));
+        };
+        this.track(onShowChange(follow));
+        this.track(onOperatorChange(follow));
         this.track(() => this.content?.destroy());
     }
 
@@ -45,7 +49,7 @@ export class SettingsSection extends Stack {
         this.tab = tab;
         this.applicationKey.setState(tab === 'application' ? 'active' : 'normal');
         this.showKey.setState(tab === 'show' ? 'active' : 'normal');
-        this.showKey.setDisabled(currentShow() === null);
+        this.showKey.setDisabled(!this.showAvailable());
 
         this.content?.destroy();
         this.content = null;
@@ -58,6 +62,11 @@ export class SettingsSection extends Stack {
                 this.mountContent(new ShowSettingsPanels(settings));
             }
         });
+    }
+
+    /** The show tab can be opened: a show is open and the operator manages it */
+    private showAvailable(): boolean {
+        return currentShow() !== null && canManageShow();
     }
 
     private mountContent(content: Component): void {

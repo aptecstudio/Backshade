@@ -7,6 +7,7 @@
 import { TabBar } from '../../framework/ts/index.js';
 import { t } from '../i18n/i18n.js';
 import { isMainSectionId, MAIN_SECTIONS, type SectionId } from '../sections/section-definitions.js';
+import { isSectionVisible, onOperatorChange } from '../show/operator-store.js';
 import type { SectionNavigation } from './section-navigation.js';
 
 export class SectionTabBar extends TabBar<SectionId> {
@@ -18,5 +19,9 @@ export class SectionTabBar extends TabBar<SectionId> {
         });
         this.onChange((section) => navigation.open(section));
         this.track(navigation.onChange((section) => this.setValue(isMainSectionId(section) ? section : null)));
+        // Sections hidden to the operator have no tab
+        const showTabs = (): void => MAIN_SECTIONS.forEach((section) => this.setHidden(section.id, !isSectionVisible(section.id)));
+        this.track(onOperatorChange(showTabs));
+        showTabs();
     }
 }

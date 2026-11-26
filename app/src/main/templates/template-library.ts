@@ -9,7 +9,7 @@ import path from 'node:path';
 import { SHOW_FOLDER_EXTENSION } from '../../shared/show/show-document';
 import type { LocalizedText, TemplateInfo } from '../../shared/transport/engine-api';
 import { BUNDLED_TEMPLATES_DIR, USER_TEMPLATES_DIR } from '../paths';
-import { TRANSIENT_ENTRIES, isShowFolder } from '../shows/show-files';
+import { SHOW_FILE, TRANSIENT_ENTRIES, isShowFolder } from '../shows/show-files';
 import { copyFolder } from '../storage/copy-folder';
 import { toFileName, uniquePath } from '../storage/file-names';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
@@ -127,6 +127,9 @@ export function createTemplateFromShow(showFolder: string, name: string, descrip
     fs.mkdirSync(USER_TEMPLATES_DIR, { recursive: true });
     const folder = uniquePath(USER_TEMPLATES_DIR, toFileName(name), SHOW_FOLDER_EXTENSION);
     copyFolder(showFolder, folder, TRANSIENT_ENTRIES);
+    // A template never carries the operators and their PINs
+    const showFile = path.join(folder, SHOW_FILE);
+    writeJsonFileAtomic(showFile, { ...(readJsonFile(showFile) as object), operators: [] });
     writeJsonFileAtomic(path.join(folder, TEMPLATE_FILE), { name: name.trim(), description: description.trim() });
     return readTemplateFolder('user', folder);
 }

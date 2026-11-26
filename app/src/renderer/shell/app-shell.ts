@@ -11,6 +11,7 @@ import { confirmWindowClose, newShow, openShow, saveShow, saveShowAs } from '../
 import { currentShow, onShowChange } from '../show/show-store.js';
 import { engine } from '../transport/engine.js';
 import { SectionHost } from './section-host.js';
+import { startOperatorLock } from './operator-lock.js';
 import { SectionNavigation } from './section-navigation.js';
 import { StatusBar } from './status-bar.js';
 import { TopBar } from './top-bar.js';
@@ -36,6 +37,7 @@ export class AppShell extends Stack {
         this.append(this.topBar, new SectionHost(this.navigation), this.statusBar);
 
         this.applyShow(show);
+        startOperatorLock();
         this.track(onShowChange((next) => this.applyShow(next)));
         this.track(engine().on('app.closeRequested', () => void confirmWindowClose()));
         this.track(onShortcut('mod+s', () => void saveShow()));
