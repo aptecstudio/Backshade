@@ -4,7 +4,7 @@
  * Returns the channel keys, or null if cancelled.
  */
 
-import { Dialog, Key, Label, ListItem, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
+import { Dialog, Key, Label, ListItem, Panel, Spacer, Stack, makeSortable } from '../../../framework/ts/index.js';
 import type { FixtureChannel } from '../../../shared/fixtures/fixture-definition.js';
 import { t } from '../../i18n/i18n.js';
 import { attributeLabel } from '../fixture-text.js';
@@ -50,18 +50,7 @@ export function editModeChannels(modeName: string, channels: readonly FixtureCha
 
             const modeRows = working.map((key, index) => {
                 const channel = byKey.get(key) as FixtureChannel;
-                const up = new Key({ label: t('fixtureEditor.moveUp'), icon: 'arrow-up', iconOnly: true });
-                const down = new Key({ label: t('fixtureEditor.moveDown'), icon: 'arrow-down', iconOnly: true });
                 const remove = new Key({ label: t('fixtureEditor.removeFromMode'), icon: 'x', iconOnly: true });
-                up.setDisabled(index === 0);
-                down.setDisabled(index === working.length - 1);
-                const move = (offset: number): void => {
-                    working.splice(index, 1);
-                    working.splice(index + offset, 0, key);
-                    render();
-                };
-                up.onPress(() => move(-1));
-                down.onPress(() => move(1));
                 remove.onPress(() => {
                     working.splice(index, 1);
                     render();
@@ -71,12 +60,24 @@ export function editModeChannels(modeName: string, channels: readonly FixtureCha
                     gap: 1,
                     align: 'center',
                     classes: ['mode-channels__row'],
-                    children: [new Label({ text: String(index + 1), tone: 'secondary', size: 'small' }), channelText(channel), new Spacer(), up, down, remove]
+                    children: [new Label({ text: String(index + 1), tone: 'secondary', size: 'small' }), channelText(channel), new Spacer(), remove]
                 });
             });
             inMode.append(...modeRows);
             rows = [...freeRows, ...modeRows];
+            ordered = modeRows;
         };
+        let ordered: Stack[] = [];
+        // Channels of the mode are reordered by dragging them; the listener lives on the panel
+        makeSortable({
+            container: inMode.element,
+            items: () => ordered.map((row) => row.element),
+            onDrop: ({ from, to }) => {
+                const [moved] = working.splice(from, 1);
+                working.splice(to, 0, moved);
+                render();
+            }
+        });
 
         dialog.append(
             new Label({ text: t('fixtureEditor.modeHint'), tone: 'secondary', size: 'small' }),

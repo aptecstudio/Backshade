@@ -9,6 +9,7 @@ import { SHOW_FORMAT_VERSION, type ShowDocument } from '../../shared/show/show-d
 import { normalizeAudio } from '../../shared/audio/audio';
 import { normalizeMemories } from '../../shared/console/memories';
 import { normalizeGrid } from '../../shared/grid/grid';
+import { normalizeTimelines } from '../../shared/timeline/timeline';
 import { normalizeVideo } from '../../shared/video/video';
 import { normalizeOutput } from '../../shared/output/output-config';
 import { normalizePatch } from '../../shared/patch/patch';
@@ -47,7 +48,8 @@ function toShowDocument(data: unknown, file: string): ShowDocument {
         memories: normalizeMemories(document.memories),
         grid: normalizeGrid(document.grid),
         audio: normalizeAudio(document.audio),
-        video: normalizeVideo(document.video)
+        video: normalizeVideo(document.video),
+        timelines: normalizeTimelines(document.timelines)
     };
 }
 

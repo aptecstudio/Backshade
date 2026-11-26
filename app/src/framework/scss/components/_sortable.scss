@@ -1,0 +1,39 @@
+// Sortable lists: items move aside with an animation, the dragged one follows the pointer
+@use '../tokens' as *;
+
+.sortable-item {
+    position: relative;
+    transform: translateY(var(--sortable-y, 0));
+    transition: transform 150ms ease;
+}
+
+.sortable-item--dragging {
+    z-index: 10;
+    outline: 2px solid color('accent');
+    opacity: 0.9;
+    cursor: grabbing;
+    transition: none;
+}
+
+.sortable-item--settling {
+    z-index: 10;
+    transition: transform 150ms ease;
+}
+
+// No text selection while dragging
+body.sortable-active {
+    cursor: grabbing;
+    user-select: none;
+}
+
+// Item that receives the dragged one inside it (a folder)
+.sortable-item--target {
+    outline: 2px dashed color('accent');
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sortable-item,
+    .sortable-item--settling {
+        transition: none;
+    }
+}

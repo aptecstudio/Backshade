@@ -196,6 +196,12 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         return undefined;
     });
 
+    router.register('video.moveLayer', (params) => {
+        const input = requireObject(params);
+        engine.moveLayer(requireString(input, 'output'), requireChoice(input, 'target', ['program', 'preview'] as const), requireInteger(input, 'from'), requireInteger(input, 'to'));
+        return undefined;
+    });
+
     router.register('video.take', (params) => {
         const input = requireObject(params);
         const duration = requireNumber(input, 'duration');

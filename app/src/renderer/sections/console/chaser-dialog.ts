@@ -2,10 +2,10 @@
  * Creates or changes a chaser: name, steps chosen among the scenes,
  * speed, crossfade between steps and direction; an existing chaser can be
  * deleted. Steps reference the scenes, so recording a scene again
- * changes the chasers that use it.
+ * changes the chasers that use it; steps are reordered by dragging them.
  */
 
-import { Dialog, Key, Label, NumberField, Panel, SelectField, Spacer, Stack, TextField } from '../../../framework/ts/index.js';
+import { Dialog, Key, Label, NumberField, Panel, SelectField, Spacer, Stack, TextField, makeSortable } from '../../../framework/ts/index.js';
 import {
     BPM_LIMITS,
     DEFAULT_BPM,
@@ -61,18 +61,7 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
         rows.forEach((row) => row.destroy());
         rows = steps.map((id, index) => {
             const scene = sceneById.get(id) as SceneSummary;
-            const up = new Key({ label: t('memories.moveUp'), icon: 'arrow-up', iconOnly: true });
-            const down = new Key({ label: t('memories.moveDown'), icon: 'arrow-down', iconOnly: true });
             const remove = new Key({ label: t('memories.removeStep'), icon: 'x', iconOnly: true });
-            up.setDisabled(index === 0);
-            down.setDisabled(index === steps.length - 1);
-            const move = (offset: number): void => {
-                steps.splice(index, 1);
-                steps.splice(index + offset, 0, id);
-                render();
-            };
-            up.onPress(() => move(-1));
-            down.onPress(() => move(1));
             remove.onPress(() => {
                 steps.splice(index, 1);
                 render();
@@ -86,8 +75,6 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
                     new Label({ text: String(index + 1), tone: 'secondary', size: 'small' }),
                     new Label({ text: `${memoryCode('scene', scene.slot)} ${scene.name}` }),
                     new Spacer(),
-                    up,
-                    down,
                     remove
                 ]
             });
@@ -119,6 +106,16 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
         new Label({ text: scenes.length === 0 ? t('memories.noScenes') : t('memories.stepsHint'), tone: 'secondary', size: 'small' })
     );
     render();
+    // The listener lives on the list, removed with the dialog
+    makeSortable({
+        container: list.element,
+        items: () => rows.map((row) => row.element),
+        onDrop: ({ from, to }) => {
+            const [moved] = steps.splice(from, 1);
+            steps.splice(to, 0, moved);
+            render();
+        }
+    });
 
     const apply = async (): Promise<void> => {
         try {

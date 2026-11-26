@@ -17,6 +17,7 @@ import { FullScreenKey } from './fullscreen-key.js';
 import type { SectionNavigation } from './section-navigation.js';
 import { SectionTabs } from './section-tabs.js';
 import { followTempo } from './tempo-readout.js';
+import { followTimecode } from './timecode-readout.js';
 
 const EMPTY_TIMECODE = '00:00:00:00';
 const EMPTY_TEMPO = '---.-';
@@ -32,6 +33,7 @@ export class TopBar extends Panel {
         this.brand = new BrandBlock();
         this.timecode = new ReadoutDisplay({ text: EMPTY_TIMECODE, label: t('console.timecode') });
         this.timecode.element.classList.add('top-bar__timecode');
+        this.track(followTimecode(this.timecode));
         this.tempo = new ReadoutDisplay({ text: EMPTY_TEMPO, label: t('console.tempo') });
         this.tempo.element.classList.add('top-bar__tempo');
         this.track(followTempo(this.tempo, EMPTY_TEMPO));

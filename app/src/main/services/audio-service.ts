@@ -140,11 +140,11 @@ export function registerAudioService(router: RequestRouter, bus: EventBus, sessi
     router.register('audio.moveItem', (params) => {
         const input = requireObject(params);
         const id = requireItem(requireString(input, 'id')).id;
-        const offset = requireNumber(input, 'offset');
+        const position = requireNumber(input, 'to');
         return update((audio) => {
             const items = [...audio.items];
             const from = items.findIndex((entry) => entry.id === id);
-            const to = Math.max(0, Math.min(items.length - 1, from + Math.sign(offset)));
+            const to = Math.max(0, Math.min(items.length - 1, Math.round(position)));
             const [moved] = items.splice(from, 1);
             items.splice(to, 0, moved);
             return { ...audio, items };

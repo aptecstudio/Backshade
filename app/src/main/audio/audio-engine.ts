@@ -14,6 +14,9 @@ import { SHOW_MEDIA_ROUTE, type PlaybackStatus } from '../../shared/audio/playba
 import type { PlaybackWindow } from '../playback/playback-window';
 import * as appProtocol from '../protocol/app-protocol';
 
+/** Bus of the audio player in the playback window */
+export const PLAYER_BUS = 'player';
+
 // Least time between two position updates sent to the interface
 const STATE_INTERVAL_MS = 250;
 
@@ -95,7 +98,7 @@ export class AudioEngine {
      */
     applyOutput(): void {
         const audio = this.audio();
-        this.window.send({ type: 'output', device: audio?.device ?? '', volume: audio?.volume ?? 1 });
+        this.window.send({ type: 'output', bus: PLAYER_BUS, device: audio?.device ?? '', volume: audio?.volume ?? 1 });
     }
 
     /**
@@ -114,6 +117,7 @@ export class AudioEngine {
         this.window.send({
             type: 'play',
             voice: voice.id,
+            bus: PLAYER_BUS,
             url: appProtocol.pageUrl(SHOW_MEDIA_ROUTE.slice(1) + item.file.split('/').map(encodeURIComponent).join('/')),
             start: item.start,
             end: item.end,

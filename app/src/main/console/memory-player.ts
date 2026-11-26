@@ -47,6 +47,8 @@ export interface MemoryPlayerContext {
     memories: () => ShowMemories | null;
     /** LED matrices of the patch, for the matrix effects of the scenes */
     matrices: () => readonly PatchedMatrix[];
+    /** Scene or chaser played by a light clip of a timeline */
+    clipTarget?: (id: string) => { kind: MemoryKind; id: string } | null;
     /** Audio player and video outputs, for the scenes and cues that use them */
     media?: SceneMedia;
     /** Position of the scene master, 0 to 1 */
@@ -58,7 +60,7 @@ export interface MemoryPlayerContext {
 }
 
 /** What a playback plays: a memory key, or a cue of the cue list */
-type PlaybackKind = MemoryKind | 'cue';
+type PlaybackKind = MemoryKind | 'cue' | 'clip';
 
 interface Playback {
     kind: PlaybackKind;
@@ -75,6 +77,8 @@ interface Playback {
     stepStarted: number;
     /** Level set by a fader, 0 to 1, null when the fades decide */
     manual: number | null;
+    /** Level set by a timeline clip, as a fade of every channel; null for other playbacks */
+    driven: number | null;
     /** Time the playback was paused (cues only), null while running */
     pausedAt: number | null;
     /** Levels written at the last update */
@@ -95,6 +99,7 @@ export class MemoryPlayer {
     private readonly playbacks: Playback[] = [];
     private readonly values = new WeakMap<Scene, SceneValues>();
     private selected: string | null = null;
+    private clipResolver: ((id: string) => { kind: MemoryKind; id: string } | null) | null = null;
     private timer: NodeJS.Timeout | null = null;
 
     constructor(context: MemoryPlayerContext) {
@@ -105,7 +110,7 @@ export class MemoryPlayer {
     state(): MemoriesState {
         return {
             active: this.playbacks
-                .filter((playback): playback is Playback & { kind: MemoryKind } => playback.released === null && playback.kind !== 'cue')
+                .filter((playback): playback is Playback & { kind: MemoryKind } => playback.released === null && playback.kind !== 'cue' && playback.kind !== 'clip')
                 .map((playback) => ({
                     kind: playback.kind,
                     id: playback.id,
@@ -153,6 +158,35 @@ export class MemoryPlayer {
         }
         this.update();
         this.announce();
+    }
+
+    /**
+     * Sets how light clips find their scene or chaser (the timeline player).
+     */
+    setClipTarget(resolver: (id: string) => { kind: MemoryKind; id: string } | null): void {
+        this.clipResolver = resolver;
+    }
+
+    /**
+     * Level of a light clip of a timeline, with its fades: above zero its
+     * scene or chaser plays at that level, at zero it stops at once.
+     */
+    setClipLevel(id: string, level: number): void {
+        const value = Math.max(0, Math.min(1, level));
+        const existing = this.playbacks.find((playback) => playback.id === id && playback.kind === 'clip');
+        if (value <= 0) {
+            if (existing !== undefined) {
+                this.remove(existing);
+            }
+            return;
+        }
+        if (existing === undefined) {
+            this.add('clip', id, this.now());
+            this.playbacks[this.playbacks.length - 1].driven = value;
+            this.update();
+        } else {
+            existing.driven = value;
+        }
     }
 
     /**
@@ -234,7 +268,7 @@ export class MemoryPlayer {
     releaseAll(): void {
         const now = this.now();
         for (const playback of this.playbacks) {
-            if (playback.released === null && playback.kind !== 'cue') {
+            if (playback.released === null && playback.kind !== 'cue' && playback.kind !== 'clip') {
                 this.release(playback, now);
             }
         }
@@ -272,7 +306,9 @@ export class MemoryPlayer {
     }
 
     private add(kind: PlaybackKind, id: string, started: number, level: number | null = null): void {
-        const scene = kind === 'chaser' ? undefined : this.find(kind, id) as Scene | undefined;
+        // Timeline clips play lights only: audio and video have their own tracks
+        const memory = kind === 'chaser' || kind === 'clip' ? undefined : this.find(kind, id);
+        const scene = memory !== undefined && !('steps' in memory) ? memory : undefined;
         if (scene !== undefined) {
             this.context.media?.start(id, scene, level === null ? this.fadeIn(kind, id) / 1000 : 0, level ?? 1);
         }
@@ -286,6 +322,7 @@ export class MemoryPlayer {
             previous: null,
             stepStarted: this.now(),
             manual: null,
+            driven: null,
             pausedAt: null,
             written: new Map(),
             owned: null
@@ -319,6 +356,10 @@ export class MemoryPlayer {
      * What a playback plays: the scene (also for a cue) or the chaser.
      */
     private find(kind: PlaybackKind, id: string, memories = this.context.memories()): Scene | Chaser | undefined {
+        if (kind === 'clip') {
+            const target = (this.clipResolver ?? this.context.clipTarget)?.(id) ?? null;
+            return target === null ? undefined : this.find(target.kind, target.id, memories);
+        }
         if (kind === 'chaser') {
             return memories?.chasers.find((chaser) => chaser.id === id);
         }
@@ -331,7 +372,7 @@ export class MemoryPlayer {
      * its scene when the cue has none; chasers start and stop at once.
      */
     private fadeTime(kind: PlaybackKind, id: string, field: 'fadeIn' | 'fadeOut'): number {
-        if (kind === 'chaser') {
+        if (kind === 'chaser' || kind === 'clip') {
             return 0;
         }
         const scene = this.find(kind, id) as Scene | undefined;
@@ -353,6 +394,9 @@ export class MemoryPlayer {
     private level(playback: Playback, now: number): number {
         if (playback.manual !== null) {
             return playback.manual;
+        }
+        if (playback.driven !== null) {
+            return playback.driven;
         }
         if (playback.released !== null) {
             const fadeOut = this.fadeOut(playback.kind, playback.id);
@@ -387,7 +431,7 @@ export class MemoryPlayer {
                 continue;
             }
             let output: Map<number, Array<[number, number]>>;
-            if (playback.kind !== 'chaser') {
+            if (!('steps' in memory)) {
                 const values = this.valuesAt(memory as Scene, ((playback.pausedAt ?? now) - playback.started) / 1000);
                 // A fader moves the intensity only: the other channels are already at their values
                 const fade = level < 1 && playback.manual === null ? { source: MEMORY_SOURCE_PREFIX + playback.id, level } : null;

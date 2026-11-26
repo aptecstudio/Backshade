@@ -17,7 +17,8 @@ import {
     Spacer,
     Stack,
     create,
-    formatDuration
+    formatDuration,
+    makeSortable
 } from '../../../framework/ts/index.js';
 import type { AudioPlayback, ShowAudio } from '../../../shared/audio/audio.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -95,6 +96,17 @@ export class AudioSection extends Stack {
         playlist.append(new Stack({ direction: 'row', gap: 2, children: [add] }), this.empty, this.list);
 
         this.append(transport, playlist);
+        // Items of the playlist are reordered by dragging them
+        this.track(makeSortable({
+            container: this.list.element,
+            items: () => this.rows.map((row) => row.element),
+            onDrop: ({ from, to }) => {
+                const item = this.audio.items[from];
+                if (item !== undefined) {
+                    void engine().request('audio.moveItem', { id: item.id, to }).catch(showError);
+                }
+            }
+        }));
         this.track(engine().on('audio.changed', () => void this.load()));
         this.track(engine().on('audio.stateChanged', ({ state }) => this.applyState(state)));
         void this.load();
@@ -128,14 +140,8 @@ export class AudioSection extends Stack {
         this.rows.forEach((row) => row.destroy());
         this.rows = this.audio.items.map((item, index) => {
             const play = new Key({ label: t('audio.playItem', { name: item.name }), icon: 'play', iconOnly: true });
-            const up = new Key({ label: t('memories.moveUp'), icon: 'arrow-up', iconOnly: true });
-            const down = new Key({ label: t('memories.moveDown'), icon: 'arrow-down', iconOnly: true });
             const edit = new Key({ label: t('audio.editItem', { name: item.name }), icon: 'pencil', iconOnly: true });
-            up.setDisabled(index === 0);
-            down.setDisabled(index === this.audio.items.length - 1);
             play.onPress(() => void engine().request('audio.play', { id: item.id }).then((state) => this.applyState(state)).catch(showError));
-            up.onPress(() => void engine().request('audio.moveItem', { id: item.id, offset: -1 }).catch(showError));
-            down.onPress(() => void engine().request('audio.moveItem', { id: item.id, offset: 1 }).catch(showError));
             edit.onPress(() => openAudioItemDialog(item));
             const row = new Stack({
                 direction: 'row',
@@ -149,8 +155,6 @@ export class AudioSection extends Stack {
                     new Label({ text: itemRange(item), tone: 'secondary', size: 'small' }),
                     new Label({ text: itemDetails(item), tone: 'secondary', size: 'small' }),
                     new Spacer(),
-                    up,
-                    down,
                     edit
                 ]
             });

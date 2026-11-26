@@ -14,7 +14,7 @@ import { MatricesSection } from './matrices/matrices-section.js';
 import { MediaSection } from './media/media-section.js';
 import { OutputSection } from './output/output-section.js';
 import { PatchSection } from './patch/patch-section.js';
-import { PlaceholderSection } from './placeholder-section.js';
+import { TimelineSection } from './timeline/timeline-section.js';
 import { SettingsSection } from './settings/settings-section.js';
 import { VideoSection } from './video/video-section.js';
 
@@ -36,7 +36,7 @@ export interface SectionDefinition {
 export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'console', labelKey: 'sections.console', create: () => new ConsoleSection() },
     { id: 'virtualConsole', labelKey: 'sections.virtualConsole', create: () => new GridSection() },
-    { id: 'timeline', labelKey: 'sections.timeline', create: () => new PlaceholderSection('sections.timeline') },
+    { id: 'timeline', labelKey: 'sections.timeline', create: () => new TimelineSection() },
     { id: 'patch', labelKey: 'sections.patch', create: () => new PatchSection() },
     { id: 'matrices', labelKey: 'sections.matrices', create: () => new MatricesSection() },
     { id: 'audio', labelKey: 'sections.audio', create: () => new AudioSection() },

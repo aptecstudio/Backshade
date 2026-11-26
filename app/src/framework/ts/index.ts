@@ -64,6 +64,7 @@ export { formatDuration } from './time/format-duration.js';
 export { ColorWheel, type ColorWheelLabels, type ColorWheelOptions } from './color/color-wheel.js';
 export { hexToRgb, hsvToRgb, rgbToHex, rgbToHsv, type Hsv, type Rgb } from './theme/color-math.js';
 export { ListItem, type ListItemOptions } from './list/list-item.js';
+export { makeSortable, type SortableDrop, type SortableOptions } from './list/sortable.js';
 export { Dialog, type DialogOptions } from './overlay/dialog.js';
 export { onShortcut } from './keyboard/shortcuts.js';
 

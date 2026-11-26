@@ -11,6 +11,7 @@ import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show
 import type { ShowAudio } from '../../shared/audio/audio';
 import type { ShowMemories } from '../../shared/console/memories';
 import type { ShowGrid } from '../../shared/grid/grid';
+import type { ShowTimelines } from '../../shared/timeline/timeline';
 import type { ShowVideo } from '../../shared/video/video';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
@@ -37,7 +38,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'timelines' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -300,6 +301,24 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('video');
+    }
+
+    /**
+     * Timelines of the open show.
+     */
+    timelines(): ShowTimelines {
+        return this.requireOpen().document.timelines;
+    }
+
+    /**
+     * Replaces the timelines of the open show; the change must be saved.
+     */
+    setTimelines(timelines: ShowTimelines): void {
+        const show = this.requireOpen();
+        show.document = { ...show.document, timelines };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('timelines');
     }
 
     /**

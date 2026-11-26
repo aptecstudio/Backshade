@@ -4,7 +4,8 @@
  * goes out) and in preview (the next composition, prepared). Take brings the
  * preview to program with a transition, as on a vision mixer. Scenes and
  * cues put their recorded program on the outputs with their fades and, when
- * they turn off, bring back what was there before.
+ * they turn off, bring back what was there before. Video clips of a timeline
+ * take their layer while they play, over the program.
  */
 
 import {
@@ -33,6 +34,8 @@ export class VideoEngine {
     private readonly runtime = new Map<string, OutputRuntime>();
     private readonly windows = new Map<string, OutputWindow>();
     private context: GoboContext = { cue: '', song: '' };
+    /** Layers taken by the timeline: "output:index" -> layer */
+    private readonly timeline = new Map<string, LayerState>();
 
     /**
      * @param video - Video outputs of the open show, null when no show is open
@@ -87,7 +90,7 @@ export class VideoEngine {
             if (window === undefined) {
                 window = new OutputWindow(output);
                 this.windows.set(output.id, window);
-                window.compose(this.message(state.program, 0));
+                window.compose(this.message(this.withTimeline(output.id, state.program), 0));
             } else {
                 window.apply(output);
             }
@@ -112,6 +115,24 @@ export class VideoEngine {
         }
         const state = this.state(output);
         state[target][index] = layer;
+        if (target === 'program') {
+            state.owner = null;
+            this.send(output.id, 0.2);
+        }
+        this.announce();
+    }
+
+    /**
+     * Moves a layer of the program (at once) or of the preview to another place of the stack.
+     */
+    moveLayer(outputId: string, target: 'program' | 'preview', from: number, to: number): void {
+        const output = this.outputs().find((item) => item.id === outputId);
+        if (output === undefined || from < 0 || from >= output.layers || to < 0 || to >= output.layers || from === to) {
+            return;
+        }
+        const state = this.state(output);
+        const [moved] = state[target].splice(from, 1);
+        state[target].splice(to, 0, moved);
         if (target === 'program') {
             state.owner = null;
             this.send(output.id, 0.2);
@@ -171,6 +192,7 @@ export class VideoEngine {
         this.windows.forEach((window) => window.close());
         this.windows.clear();
         this.runtime.clear();
+        this.timeline.clear();
         this.announce();
     }
 
@@ -191,8 +213,29 @@ export class VideoEngine {
     private send(outputId: string, transition: number): void {
         const state = this.runtime.get(outputId);
         if (state !== undefined) {
-            this.windows.get(outputId)?.compose(this.message(state.program, transition));
+            this.windows.get(outputId)?.compose(this.message(this.withTimeline(outputId, state.program), transition));
         }
+    }
+
+    /**
+     * Puts a layer of the timeline over a layer of an output, or gives the
+     * layer back to the program with null.
+     */
+    setTimelineLayer(outputId: string, index: number, layer: LayerState | null): void {
+        const key = `${outputId}:${index}`;
+        const current = this.timeline.get(key);
+        if (layer === null) {
+            if (current === undefined) {
+                return;
+            }
+            this.timeline.delete(key);
+        } else {
+            if (current !== undefined && JSON.stringify(current) === JSON.stringify(layer)) {
+                return;
+            }
+            this.timeline.set(key, layer);
+        }
+        this.send(outputId, 0);
     }
 
     /**
@@ -213,6 +256,11 @@ export class VideoEngine {
         for (const id of this.windows.keys()) {
             this.send(id, 0);
         }
+    }
+
+    /** Program of an output with the layers taken by the timeline */
+    private withTimeline(outputId: string, program: LayerState[]): LayerState[] {
+        return program.map((layer, index) => this.timeline.get(`${outputId}:${index}`) ?? layer);
     }
 
     private message(layers: LayerState[], transition: number): ComposeMessage {

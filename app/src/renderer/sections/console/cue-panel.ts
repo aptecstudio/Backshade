@@ -3,10 +3,10 @@
  * left, and on the right the current and next cue, the progress of the
  * fade and of the follow wait, and the keys Go, Back, Pause and Release.
  * Pressing a cue in the list makes it the next one; its edit key opens its
- * dialog. Cues are added from the scenes of the show.
+ * dialog; dragging it moves it in the list. Cues are added from the scenes of the show.
  */
 
-import { Key, Label, ListItem, Panel, SelectField, Stack, ValueDisplay } from '../../../framework/ts/index.js';
+import { Key, Label, ListItem, Panel, SelectField, Stack, ValueDisplay, makeSortable } from '../../../framework/ts/index.js';
 import type { CueStackState } from '../../../shared/console/cue-stack.js';
 import type { Cue, MemoriesSummary } from '../../../shared/console/memories.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -89,6 +89,16 @@ export class CuePanel extends Panel {
             ]
         }));
 
+        this.track(makeSortable({
+            container: this.list.element,
+            items: () => this.rows.map((row) => row.element.element),
+            onDrop: ({ from, to }) => {
+                const cue = this.rows[from]?.cue;
+                if (cue !== undefined) {
+                    void engine().request('cues.move', { id: cue.id, to }).catch(showError);
+                }
+            }
+        }));
         this.track(engine().on('memories.changed', () => void this.load()));
         this.track(engine().on('cues.stateChanged', ({ state }) => this.applyState(state)));
         void this.load();
@@ -125,6 +135,8 @@ export class CuePanel extends Panel {
                 ]
             });
             item.onPress(() => void engine().request('cues.setNext', { id: cue.id }).then((state) => this.applyState(state)).catch(showError));
+            // The row is pressed to choose the next cue and dragged to move the cue
+            item.element.dataset.sortableHandle = '';
             const edit = new Key({ label: t('cues.edit', { number: formatCue(cue.number) }), icon: 'pencil', iconOnly: true });
             edit.onPress(() => openCueDialog(cue, this.memories.scenes));
             const element = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['cue-row'], children: [item, edit] });

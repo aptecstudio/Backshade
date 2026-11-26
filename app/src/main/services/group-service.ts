@@ -13,10 +13,14 @@ import type { EventBus } from '../transport/event-bus';
 import { requireNumber, requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
+/** Level of a group set by the engine (timeline automation) */
+export type GroupLevelSetter = (id: string, level: number) => void;
+
 /**
  * Registers the methods of the service.
+ * @returns the function that sets the level of a group, for the timeline automation
  */
-export function registerGroupService(router: RequestRouter, bus: EventBus, session: ShowSession, output: OutputEngine, desk: PresetDesk): void {
+export function registerGroupService(router: RequestRouter, bus: EventBus, session: ShowSession, output: OutputEngine, desk: PresetDesk): GroupLevelSetter {
     const groups = new GroupLevels(output.mixer, () => session.summary() === null ? null : session.patch(), (universe) => output.universeMap(universe));
     const announce = (): void => bus.emit('console.groupLevelsChanged', { levels: groups.get() });
     session.onContentChange((part) => {
@@ -46,4 +50,11 @@ export function registerGroupService(router: RequestRouter, bus: EventBus, sessi
         announce();
         return undefined;
     });
+
+    return (id, level) => {
+        if (session.summary() !== null && session.patch().groups.some((group) => group.id === id)) {
+            groups.set(id, level);
+            announce();
+        }
+    };
 }

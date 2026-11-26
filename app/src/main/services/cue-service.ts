@@ -99,6 +99,23 @@ export function registerCueService(router: RequestRouter, bus: EventBus, session
         });
     });
 
+    router.register('cues.move', (params) => {
+        const input = requireObject(params);
+        const cue = requireCue(requireString(input, 'id'));
+        const rest = session.memories().cues.filter((item) => item.id !== cue.id);
+        const to = Math.max(0, Math.min(rest.length, Math.round(requireNumber(input, 'to'))));
+        const previous = rest[to - 1]?.number ?? 0;
+        const next = rest[to]?.number ?? previous + 2;
+        // A number between the neighbours, with one decimal digit; otherwise every cue is numbered again
+        const between = roundCueNumber((previous + next) / 2);
+        if (between > previous && between < next && isCueNumber(between)) {
+            return saveCue({ ...cue, number: between });
+        }
+        const ordered = [...rest.slice(0, to), cue, ...rest.slice(to)];
+        update((memories) => ({ ...memories, cues: ordered.map((item, index) => ({ ...item, number: index + 1 })) }));
+        return session.memories().cues.find((item) => item.id === cue.id) as Cue;
+    });
+
     router.register('cues.delete', (params) => {
         const id = requireCue(requireString(requireObject(params), 'id')).id;
         update((memories) => ({ ...memories, cues: memories.cues.filter((item) => item.id !== id) }));

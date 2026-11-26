@@ -9,6 +9,7 @@ import type { AttributeLayout } from '../console/fixture-attributes.js';
 import type { AudioDevice, AudioPlayback, ShowAudio } from '../audio/audio.js';
 import type { CueStackState } from '../console/cue-stack.js';
 import type { ShowTimer, TimerAction, TimerState } from '../video/show-timer.js';
+import type { ShowTimelines, Timeline, TimelineState } from '../timeline/timeline.js';
 import type { TextGobo } from '../video/text-gobo.js';
 import type { LayerState, OutputComposition, ShowVideo, VideoDisplay, VideoInput, VideoOutputConfig } from '../video/video.js';
 import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
@@ -470,8 +471,8 @@ export interface EngineMethods {
     'audio.updateItem': { params: { id: string; name: string; start: number; end: number | null; fadeIn: number; fadeOut: number; volume: number; loop: boolean }; result: ShowAudio };
     /** Removes an item of the playlist (unsaved change) */
     'audio.removeItem': { params: { id: string }; result: ShowAudio };
-    /** Moves an item one place up (offset -1) or down (1) (unsaved change) */
-    'audio.moveItem': { params: { id: string; offset: number }; result: ShowAudio };
+    /** Moves an item of the playlist to a place, from 0 (unsaved change) */
+    'audio.moveItem': { params: { id: string; to: number }; result: ShowAudio };
     /** Plays an item; without id resumes after pause or starts the first item */
     'audio.play': { params: { id?: string } | undefined; result: AudioPlayback };
     /** Stops with the fade out of the item */
@@ -510,8 +511,26 @@ export interface EngineMethods {
     'video.timerCommand': { params: { id: string; action: TimerAction }; result: Record<string, TimerState> };
     /** Changes a layer in program (at once) or in preview */
     'video.setLayer': { params: { output: string; target: 'program' | 'preview'; index: number; layer: LayerState }; result: undefined };
+    /** Moves a layer of the program (at once) or of the preview to another place of the stack, from 0 at the bottom */
+    'video.moveLayer': { params: { output: string; target: 'program' | 'preview'; from: number; to: number }; result: undefined };
     /** Brings the preview of an output, or of all outputs, to program with a transition in seconds */
     'video.take': { params: { output?: string; duration: number }; result: undefined };
+    /** Timelines of the open show */
+    'timeline.list': { params: undefined; result: ShowTimelines };
+    /** Transport of the timeline player */
+    'timeline.getState': { params: undefined; result: TimelineState };
+    /** Adds an empty timeline and loads it (unsaved change) */
+    'timeline.create': { params: { name: string }; result: ShowTimelines };
+    /** Saves a whole timeline, checked by the engine (unsaved change) */
+    'timeline.save': { params: { timeline: Timeline }; result: ShowTimelines };
+    /** Deletes a timeline (unsaved change) */
+    'timeline.delete': { params: { id: string }; result: ShowTimelines };
+    /** Loads a timeline in the player, stopped at its start */
+    'timeline.load': { params: { id: string }; result: TimelineState };
+    /** Play, pause, play or pause, stop, or move the playhead to a time in seconds */
+    'timeline.transport': { params: { action: 'play' | 'pause' | 'toggle' | 'stop' | 'locate'; time?: number }; result: TimelineState };
+    /** Loop (null to turn it off), go mode and recording */
+    'timeline.setOptions': { params: { loop?: { start: number; end: number } | null; goMode?: boolean; recording?: boolean }; result: TimelineState };
     /** Pages of the virtual console of the open show */
     'grid.get': { params: undefined; result: ShowGrid };
     /** Replaces the pages of the virtual console (unsaved change); returns them as saved */
@@ -522,6 +541,8 @@ export interface EngineMethods {
     'cues.add': { params: { scene: string }; result: Cue };
     /** Changes a cue; null fades use the times of the scene, null follow is manual (unsaved change) */
     'cues.update': { params: { id: string; number: number; scene: string; note: string; fadeIn: number | null; fadeOut: number | null; follow: number | null }; result: Cue };
+    /** Moves a cue to a place of the list, from 0: it takes a number between its neighbours (unsaved change) */
+    'cues.move': { params: { id: string; to: number }; result: Cue };
     /** Deletes a cue (unsaved change) */
     'cues.delete': { params: { id: string }; result: undefined };
     /** Plays the next cue, or continues after Pause */
@@ -601,6 +622,10 @@ export interface EngineEvents {
     'video.timersChanged': { states: Record<string, TimerState> };
     /** Program or preview of the video outputs have changed */
     'video.stateChanged': { compositions: Record<string, OutputComposition> };
+    /** The timelines of the open show have changed */
+    'timeline.changed': Record<string, never>;
+    /** The transport of the timeline player has changed */
+    'timeline.stateChanged': { state: TimelineState };
     /** The pages of the virtual console have changed */
     'grid.changed': Record<string, never>;
     /** The intensity levels of the fixture groups have changed */

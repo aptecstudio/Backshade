@@ -2,7 +2,9 @@
  * Messages between the engine and the playback window, which plays the
  * sound. The engine decides what plays; the window plays it and reports
  * positions, ends and errors. A voice is one playing file: during a
- * crossfade two voices sound together.
+ * crossfade two voices sound together. Voices play on a bus, an audio output
+ * with its own volume: the bus "player" of the audio player, one bus per
+ * audio track of the timeline.
  */
 
 import type { VideoInput } from '../video/video.js';
@@ -13,6 +15,8 @@ export type PlaybackCommand =
     | {
         type: 'play';
         voice: string;
+        /** Bus of the voice */
+        bus: string;
         /** Address of the file, served by the app protocol */
         url: string;
         start: number;
@@ -28,7 +32,7 @@ export type PlaybackCommand =
     | { type: 'pause'; voice: string }
     | { type: 'resume'; voice: string }
     | { type: 'volume'; voice: string; volume: number; ramp: number }
-    | { type: 'output'; device: string; volume: number }
+    | { type: 'output'; bus: string; device: string; volume: number }
     | { type: 'listDevices'; request: number }
     | { type: 'listVideoInputs'; request: number };
 

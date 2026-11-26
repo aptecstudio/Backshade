@@ -6,7 +6,7 @@
  * time, on this output or on all.
  */
 
-import { Key, Label, NumberField, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
+import { Key, Label, NumberField, Panel, Spacer, Stack, makeSortable } from '../../../framework/ts/index.js';
 import type { MediaItem } from '../../../shared/transport/engine-api.js';
 import type { TimerState } from '../../../shared/video/show-timer.js';
 import type { GoboContext } from '../../../shared/video/text-gobo.js';
@@ -142,8 +142,17 @@ export class VideoSection extends Stack {
             view.setTimers(this.video.timers, this.timerStates);
             view.show(composition[target], 0);
             const rows = composition[target].map((layer, index) => new LayerRow(output.id, target, index, layer, this.media, this.inputs, this.video.gobos, this.video.timers));
-            // Top layer first, as they are stacked
-            panel.append(view, new Stack({ children: [...rows].reverse() }));
+            // Top layer first, as they are stacked; dragging a layer moves it in the stack
+            const list = new Stack({ children: [...rows].reverse() });
+            panel.append(view, list);
+            makeSortable({
+                container: list.element,
+                items: () => [...rows].reverse().map((row) => row.element),
+                onDrop: ({ from, to }) => {
+                    const count = rows.length;
+                    void engine().request('video.moveLayer', { output: output.id, target, from: count - 1 - from, to: count - 1 - to }).catch(showError);
+                }
+            });
             panels.push(panel);
             return { view, rows };
         };
