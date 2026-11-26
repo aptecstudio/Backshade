@@ -356,7 +356,8 @@
         "fire": "Fire",
         "pulse": "Pulse",
         "plasma": "Plasma",
-        "chase": "Chase"
+        "chase": "Chase",
+        "image": "Image"
       },
       "color": "Color {number}",
       "text": "Text",
@@ -373,7 +374,8 @@
         "solid": "Size",
         "gradient": "Size",
         "fire": "Size",
-        "pulse": "Size"
+        "pulse": "Size",
+        "image": "Size"
       },
       "direction": "Direction",
       "directions": {
@@ -384,7 +386,16 @@
       },
       "angle": "Angle",
       "degrees": "deg",
-      "recordHint": "The live effect is part of the desk: the Record key of the console stores it in a scene, Home turns it off."
+      "recordHint": "The live effect is part of the desk: the Record key of the console stores it in a scene, Home turns it off.",
+      "image": "Image",
+      "fit": "Fit",
+      "fits": {
+        "fill": "Fill",
+        "fit": "Whole",
+        "stretch": "Stretch"
+      },
+      "chooseImage": "Choose an image",
+      "noImages": "No images in the show media: import them in the Media section."
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

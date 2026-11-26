@@ -14,7 +14,9 @@ import {
     EFFECT_FONTS,
     EFFECT_SPECS,
     EFFECT_TEXT_MAX_LENGTH,
+    IMAGE_FITS,
     type EffectDirection,
+    type ImageFit,
     type MatrixEffect,
     type MatrixEffectKind
 } from '../../../shared/patch/matrix-effect.js';
@@ -23,6 +25,7 @@ import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { ColorSwatch } from './color-swatch.js';
+import { sampleImage } from './image-sampler.js';
 import { renderTextMask } from './text-mask.js';
 
 export class EffectPanel extends Panel {
@@ -113,6 +116,9 @@ export class EffectPanel extends Panel {
             font.onChange((value) => this.change((current) => this.withMask({ ...current, font: value })));
             parts.push(new Stack({ direction: 'row', gap: 2, wrap: true, children: [text, font] }));
         }
+        if (spec.image) {
+            parts.push(this.imageControls(effect));
+        }
         if (spec.speed) {
             parts.push(this.slider(t('matrices.speed'), effect.speed, (value) => this.change((current) => ({ ...current, speed: value }))));
         }
@@ -137,6 +143,38 @@ export class EffectPanel extends Panel {
         }
         this.paramParts = parts;
         this.params.append(...parts);
+    }
+
+    /**
+     * Choice of the image among the raster images of the show media, and its fit.
+     */
+    private imageControls(effect: MatrixEffect): Stack {
+        const file = new SelectField<string>({ label: t('matrices.image'), options: [], value: '' });
+        const fit = new ChoiceKeys<ImageFit>({
+            label: t('matrices.fit'),
+            options: IMAGE_FITS.map((item) => ({ value: item, label: t(`matrices.fits.${item}`) })),
+            value: effect.fit
+        });
+        const note = new Label({ text: '', tone: 'secondary', size: 'small' });
+        const sample = (media: string, mode: ImageFit): void => {
+            if (media === '') {
+                return;
+            }
+            void sampleImage(media, mode, this.matrix.width, this.matrix.height)
+                .then((image) => this.change((current) => ({ ...current, media, fit: mode, image })))
+                .catch(showError);
+        };
+        file.onChange((value) => sample(value, fit.value));
+        fit.onChange((value) => sample(file.value, value));
+        void engine().request('media.list').then((items) => {
+            const images = items.filter((item) => item.kind === 'image' && !item.file.toLowerCase().endsWith('.svg'));
+            file.setOptions(
+                [{ value: '', label: t('matrices.chooseImage') }, ...images.map((item) => ({ value: item.file, label: item.name }))],
+                images.some((item) => item.file === effect.media) ? effect.media : ''
+            );
+            note.setText(images.length === 0 ? t('matrices.noImages') : '');
+        }).catch(showError);
+        return new Stack({ gap: 1, children: [new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [file, fit] }), note] });
     }
 
     private slider(label: string, value: number, change: (value: number) => void): Stack {

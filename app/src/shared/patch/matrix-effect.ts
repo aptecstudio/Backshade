@@ -1,19 +1,19 @@
 /**
  * Effects of the LED matrices: what a matrix shows, set live in the
  * Matrices section, recorded in scenes and played by the engine frame by
- * frame. Basic effects (solid color, gradient, scroll, text) and preset
- * animations whose colors can be chosen. Every effect uses the same flat
+ * frame. Basic effects (solid color, gradient, scroll, text, image from
+ * the show media) and preset animations whose colors can be chosen. Every effect uses the same flat
  * set of parameters; each kind reads only the ones it needs (see
  * EFFECT_SPECS). Shared between engine and interface.
  */
 
 /** Kind of effect */
 export type MatrixEffectKind =
-    | 'solid' | 'gradient' | 'scroll' | 'text'
+    | 'solid' | 'gradient' | 'scroll' | 'text' | 'image'
     | 'rainbow' | 'wave' | 'sparkle' | 'fire' | 'pulse' | 'plasma' | 'chase';
 
 /** Basic effects, in presentation order */
-export const BASIC_EFFECTS: readonly MatrixEffectKind[] = ['solid', 'gradient', 'scroll', 'text'];
+export const BASIC_EFFECTS: readonly MatrixEffectKind[] = ['solid', 'gradient', 'scroll', 'text', 'image'];
 
 /** Preset animations, in presentation order */
 export const ANIMATION_EFFECTS: readonly MatrixEffectKind[] = ['rainbow', 'wave', 'sparkle', 'fire', 'pulse', 'plasma', 'chase'];
@@ -29,6 +29,22 @@ export const EFFECT_DIRECTIONS: readonly EffectDirection[] = ['left', 'right', '
  * matrix: one alpha value (0 to 255) per pixel, rows from the top, as base64.
  */
 export interface TextMask {
+    width: number;
+    height: number;
+    data: string;
+}
+
+/** How an image fills the matrix: cover and crop, fit whole with bars, or stretch */
+export type ImageFit = 'fill' | 'fit' | 'stretch';
+
+/** Fits in presentation order */
+export const IMAGE_FITS: readonly ImageFit[] = ['fill', 'fit', 'stretch'];
+
+/**
+ * Image of the show media sampled by the interface at the size of the
+ * matrix: three values (red, green, blue) per pixel, rows from the top, as base64.
+ */
+export interface PixelImage {
     width: number;
     height: number;
     data: string;
@@ -54,6 +70,10 @@ export interface MatrixEffect {
     text: string;
     font: string;
     mask: TextMask | null;
+    /** Image effect: file of the show media, fit and sampled pixels */
+    media: string;
+    fit: ImageFit;
+    image: PixelImage | null;
 }
 
 /** Parameters used by a kind of effect */
@@ -65,10 +85,11 @@ export interface EffectSpec {
     angle: boolean;
     size: boolean;
     text: boolean;
+    image: boolean;
 }
 
-const spec = (colors: string[], speed: boolean, direction: boolean, size: boolean, angle = false, text = false): EffectSpec =>
-    ({ colors, speed, direction, angle, size, text });
+const spec = (colors: string[], speed: boolean, direction: boolean, size: boolean, angle = false, text = false, image = false): EffectSpec =>
+    ({ colors, speed, direction, angle, size, text, image });
 
 /** Parameters of every kind of effect */
 export const EFFECT_SPECS: Readonly<Record<MatrixEffectKind, EffectSpec>> = {
@@ -76,6 +97,7 @@ export const EFFECT_SPECS: Readonly<Record<MatrixEffectKind, EffectSpec>> = {
     gradient: spec(['#e8b420', '#3a5bd9'], false, false, false, true),
     scroll: spec(['#e8b420', '#000000'], true, true, true),
     text: spec(['#ffffff', '#000000'], true, true, true, false, true),
+    image: spec([], true, true, false, false, false, true),
     rainbow: spec([], true, true, true),
     wave: spec(['#3a5bd9', '#39c6e6'], true, true, true),
     sparkle: spec(['#ffffff', '#000000'], true, false, true),
@@ -95,13 +117,17 @@ export function defaultEffect(kind: MatrixEffectKind): MatrixEffect {
     return {
         kind,
         colors: [...EFFECT_SPECS[kind].colors],
-        speed: 0.4,
+        // An image is still until the operator moves it
+        speed: kind === 'image' ? 0 : 0.4,
         direction: 'left',
         angle: 0,
         size: 0.5,
         text: kind === 'text' ? 'Backshade' : '',
         font: 'sans-serif',
-        mask: null
+        mask: null,
+        media: '',
+        fit: 'fill',
+        image: null
     };
 }
 
@@ -109,6 +135,14 @@ const HEX = /^#[0-9a-f]{6}$/;
 
 function unit(value: unknown, fallback: number): number {
     return typeof value === 'number' && Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : fallback;
+}
+
+function readImage(value: unknown): PixelImage | null {
+    const image = (typeof value === 'object' && value !== null ? value : {}) as Partial<Record<keyof PixelImage, unknown>>;
+    const valid = Number.isInteger(image.width) && (image.width as number) >= 1 && (image.width as number) <= 512
+        && Number.isInteger(image.height) && (image.height as number) >= 1 && (image.height as number) <= 512
+        && typeof image.data === 'string' && /^[A-Za-z0-9+/]*={0,2}$/.test(image.data);
+    return valid ? { width: image.width as number, height: image.height as number, data: image.data as string } : null;
 }
 
 function readMask(value: unknown): TextMask | null {
@@ -143,7 +177,10 @@ export function normalizeMatrixEffect(value: unknown): MatrixEffect | null {
         size: unit(input.size, base.size),
         text: typeof input.text === 'string' ? input.text.slice(0, EFFECT_TEXT_MAX_LENGTH) : base.text,
         font: typeof input.font === 'string' && input.font.length <= 100 ? input.font : base.font,
-        mask: kind === 'text' ? readMask(input.mask) : null
+        mask: kind === 'text' ? readMask(input.mask) : null,
+        media: typeof input.media === 'string' && input.media.length <= 500 ? input.media : '',
+        fit: IMAGE_FITS.includes(input.fit as ImageFit) ? input.fit as ImageFit : 'fill',
+        image: kind === 'image' ? readImage(input.image) : null
     };
 }
 

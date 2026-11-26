@@ -302,6 +302,8 @@ export interface EngineMethods {
     'media.import': { params: undefined; result: MediaItem[] };
     /** Deletes a media file from the show */
     'media.remove': { params: { file: string }; result: undefined };
+    /** Contents of a raster image of the show media, as base64 (for the image effect of the matrices) */
+    'media.readImage': { params: { file: string }; result: string };
     /** Shows a media file in the system folder (desktop application only) */
     'media.reveal': { params: { file: string }; result: undefined };
 

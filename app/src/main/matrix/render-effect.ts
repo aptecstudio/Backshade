@@ -9,6 +9,7 @@ import type { MatrixEffect, MatrixEffectKind } from '../../shared/patch/matrix-e
 import { drawSparkle, drawFire, drawPlasma, drawRainbow, drawWave } from './effects/animation-effects';
 import { drawChase, drawGradient, drawPulse, drawScroll, drawSolid } from './effects/basic-effects';
 import type { EffectDrawer, EffectFrame } from './effects/effect-tools';
+import { drawImage } from './effects/image-effect';
 import { drawText } from './effects/text-effect';
 
 const DRAWERS: Readonly<Record<MatrixEffectKind, EffectDrawer>> = {
@@ -16,6 +17,7 @@ const DRAWERS: Readonly<Record<MatrixEffectKind, EffectDrawer>> = {
     gradient: drawGradient,
     scroll: drawScroll,
     text: drawText,
+    image: drawImage,
     rainbow: drawRainbow,
     wave: drawWave,
     sparkle: drawSparkle,

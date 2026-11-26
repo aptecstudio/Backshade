@@ -356,7 +356,8 @@
         "fire": "Fuoco",
         "pulse": "Pulsazione",
         "plasma": "Plasma",
-        "chase": "Inseguimento"
+        "chase": "Inseguimento",
+        "image": "Immagine"
       },
       "color": "Colore {number}",
       "text": "Testo",
@@ -373,7 +374,8 @@
         "solid": "Dimensione",
         "gradient": "Dimensione",
         "fire": "Dimensione",
-        "pulse": "Dimensione"
+        "pulse": "Dimensione",
+        "image": "Dimensione"
       },
       "direction": "Direzione",
       "directions": {
@@ -384,7 +386,16 @@
       },
       "angle": "Angolo",
       "degrees": "gradi",
-      "recordHint": "L'effetto dal vivo fa parte del banco: il tasto Registra della console lo salva in una scena, Home lo spegne."
+      "recordHint": "L'effetto dal vivo fa parte del banco: il tasto Registra della console lo salva in una scena, Home lo spegne.",
+      "image": "Immagine",
+      "fit": "Adattamento",
+      "fits": {
+        "fill": "Riempi",
+        "fit": "Intera",
+        "stretch": "Allunga"
+      },
+      "chooseImage": "Scegli un'immagine",
+      "noImages": "Nessuna immagine nei Media dello show: importale nella sezione Media."
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",
