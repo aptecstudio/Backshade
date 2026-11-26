@@ -314,6 +314,21 @@ Defined with the human on 2026-11-26 (Phase 6), in the Grid section.
 
 Status: Confirmed (adaptive cells, groups, scene fader level, media with Phase 7), Proposed (widget sizes and limits, flash behavior of group and channel keys, monitor texts).
 
+## Audio and video
+
+Defined with the human on 2026-11-26 (Phase 7). Audio first, then video (decided by the human).
+
+- **Playback window** (decided by the human): a hidden window started by the main process (`src/main/playback/playback-window.ts`, page `renderer/playback.html`, preload `playback-preload.ts`) plays the sound and will drive the video outputs; playback continues whatever section is open. The engine sends commands and receives reports (`src/shared/audio/playback-protocol.ts`, own IPC channels); commands wait in a queue until the window is ready. Video outputs will be windows that can be smaller than the screen, with chosen display, position and size, or fullscreen, and an order of stacking between them (requested by the human).
+- **Show media for playback:** the app protocol serves the media of the open show at `/show-media/<path>`, with byte ranges for seeking (`src/main/protocol/show-media-route.ts`); nothing is served without an open show.
+- **Sections** (decided by the human): new main sections Audio and Video; Media stays the archive of the files.
+- **One audio player with a playlist** (decided by the human), saved in `show.json` under `audio` (`src/shared/audio/audio.ts`): output device (empty for the system output), volume, auto advance, items. Each item (requested by the human) plays a media file between a start and an end time (or the end of the file), with fade in, fade out, volume and repeat. One item plays at a time; a new one crossfades with the playing one (the old one fades out with its own fade).
+- **Audio in scenes** (decided by the human): the record key stores the item playing in the scene (`Scene.audio`); turning the scene or cue on plays the item with its settings but the fades of the scene or cue, turning it off fades it out and stops it if it is still playing; a scene fader sets its volume. Chasers do not start audio (proposed).
+- **Audio engine** (`src/main/audio/audio-engine.ts`): one voice per playing file; the playback window plays voices with Web Audio (element source, gain per voice, master gain, `AudioContext.setSinkId` for the output) and reports positions about four times per second. Audio outputs are listed by the playback window, the only one allowed the media permission (device names).
+- **Grid:** keys can play, pause, stop, go to the next or previous item; a monitor shows the item playing and the time left (media links of Phase 6.3).
+- **Interface** (`src/renderer/sections/audio/`): player panel (item, elapsed and remaining time, progress, transport keys, volume, output, auto advance) and playlist (play, move, change, add from the show media).
+
+Status: Confirmed (playback window, sections, one player with playlist, item settings, audio in scenes with the fades of the scene), Proposed (crossfade between items, chasers without audio, transport layout).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.

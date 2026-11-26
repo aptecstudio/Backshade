@@ -116,8 +116,8 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 
 ## Phase 7 - Audio and video
 
-- [ ] 7.1 Detection and selection of external audio and video devices
-- [ ] 7.2 Audio playback: playlist, volume, fades, per-device output
+- [ ] 7.1 Detection and selection of external audio and video devices (audio outputs done; displays and video inputs with 7.3 and 7.5)
+- [x] 7.2 Audio playback: playlist, volume, fades, per-device output; items with start and end time and repeat, recorded in scenes and recalled by memory keys, cues and grid keys
 - [ ] 7.3 Video direction: fullscreen outputs on external displays
 - [ ] 7.4 Layers: video, overlay images, opacity, transitions
 - [ ] 7.5 Video inputs (webcams and capture cards)
