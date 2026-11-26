@@ -260,6 +260,18 @@ Implementation of 4.3 and 4.4 (2026-11-26), choices confirmed by the human on 20
 
 Status: Confirmed (data shape, separate banks, record, fades in the scene, several memories on, steps by reference, speed per chaser), Proposed (one shot turning off, tap averaging, key labels).
 
+Implementation of 4.5 (2026-11-26), choices confirmed by the human on 2026-11-26:
+
+- **One cue list per show** (decided by the human): `memories.cues` in `show.json`, in number order. A cue has `id`, `number` (0.1 to 9999.9, one decimal digit, unique, to insert cues between others), `scene` (reference to a scene, like the chaser steps), `note`, `fadeIn` and `fadeOut` (null to use the times of the scene) and `follow` (seconds after its Go when the next cue goes by itself, null for manual). Deleting a scene removes its cues too, after the same warning as the chaser steps. New cues get the next whole number.
+- **Crossfade on Go** (decided by the human): the previous cue fades out with its fade out while the new one fades in; only one cue is on stage. Back plays the previous cue the same way. Pause stops the fades and the follow wait; Go after Pause continues them. Release fades out the current cue, and the next Go continues from the cue after it. Pressing a cue in the list makes it the next one.
+- **Follow with a wait** (decided by the human): the follow time counts from the Go of the cue and stops during Pause.
+- **Scene master** (decided by the human): cues are played by the memory player as their own playbacks (mixer source `memory:<cue id>`), with the same merge and fades as the scenes, scaled by the scene master; Release all of the memory keys does not touch the cue list.
+- **Engine** (`src/main/console/cue-stack.ts`, `src/main/services/cue-service.ts`): the state (`CueStackState`, `src/shared/console/cue-stack.ts`) gives the current and next cue, pause, and the fade and follow timings as elapsed and total milliseconds, so every window animates the progress with its own clock; `cues.stateChanged` is sent at every change and at the end of a fade.
+- **Interface** (`cue-panel.ts`, `cue-dialog.ts`, `cue-progress.ts`, `cue-text.ts`): Cues panel between the memories and the attributes panel, with the list (number, scene, note, times, edit key), the add row, the current and next cue displays, the fade and follow bars, Go (large), Back, Pause and Release. The cue dialog sets number, scene, note and the optional times ("From the scene" or "Manual", or a time).
+- **Attributes panel layout** (2026-11-26): the jog wheels and the color wheel stay on the row of the faders, and the faders scroll horizontally when they are many; the color wheel shows its fields beside the disc.
+
+Status: Confirmed (one list, crossfade, scene master, follow), Proposed (cue numbers with one decimal digit, Release behavior, panel layout).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.

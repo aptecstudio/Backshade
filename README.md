@@ -1,12 +1,46 @@
-# Backshade
+<p align="center">
+  <img src="docs/logo/png/icon-256.png" alt="Backshade" width="96">
+</p>
 
-Programming console for live shows: lights, audio and video in one simple application.
+<h1 align="center">Backshade</h1>
 
-A product by [Aptec Studio](https://www.aptecstudio.com).
+<p align="center">
+  Programming console for live shows: lights, audio and video in one simple application.
+</p>
+
+<p align="center">
+  A product by <a href="https://www.aptecstudio.com">Aptec Studio</a>.
+</p>
+
+---
 
 Backshade is a cross-platform desktop application (Windows, Linux, macOS) built on Electron, with a web interface that can also be used from other devices on the local network.
 
 ## Screenshots
+
+The simple console: a two-preset desk with Preset A and B rows of faders on DMX channels, named after the patched fixtures, and the masters with the A/B crossfade.
+
+![Console](docs/screenshots/console.png)
+
+Scenes recorded from the desk in two banks of 12, and chasers that play them at their own speed, with tap tempo.
+
+![Memories](docs/screenshots/console-memories.png)
+
+Live cues: Go, Back and Pause, with the current and next cue, the fade progress and an optional follow.
+
+![Cues](docs/screenshots/console-cues.png)
+
+The attributes panel: selected fixtures get their channels on faders, pan and tilt on two 16-bit jog wheels, RGB on the color wheel.
+
+![Attributes](docs/screenshots/console-attributes.png)
+
+The patch, on several universes, with a library of fixture definitions and a custom fixture editor.
+
+![Patch](docs/screenshots/patch.png)
+
+Output over Art-Net and USB DMX interfaces, with a live DMX monitor.
+
+![DMX monitor](docs/screenshots/dmx-monitor.png)
 
 The start page opens at launch, with the recent shows and the actions on the open show.
 
@@ -43,14 +77,16 @@ Available now:
 - Export and import of shows (`.bshow`) and templates (`.btemplate`) as single archives
 - Show media: audio, video and image files copied into the show folder
 - Show settings: description and notes, timecode frame rate, default fades
+- Fixture library with common models and a custom fixture editor, with import and export
+- Multi-universe patch with address conflict checks, as a list or as a DMX map
+- DMX output over Art-Net (broadcast or unicast, node search) and USB DMX interfaces (Enttec DMX USB Pro, Open DMX), with grand master, blackout and a DMX monitor
+- Simple console: two-preset desk (A/B crossfade or single 24 channels), attributes panel with jog wheels and color wheel, scenes, chasers with tap tempo, and live cues with Go, Back, Pause and follow
 - Multilingual interface (English and Italian), extensible with language packs installed by the user
-- Skeuomorphic console controls: keys, displays, knobs, faders, time picker, color wheel
+- Skeuomorphic console controls: keys, displays, knobs, faders, jog wheels, time picker, color wheel
 
 Planned (see [ROADMAP.md](ROADMAP.md)):
 
-- Multi-universe DMX and Art-Net fixtures
 - LED matrices
-- Simple console, a hybrid of live operation and programming, with scenes and chasers
 - Virtual console on a customizable grid for each show
 - Video direction, audio playback, overlay images and text gobos
 - Pre-programmed shows with a DAW-style track editor
@@ -131,7 +167,7 @@ Installers for Windows, macOS and Linux are planned in Phase 11 of the roadmap.
 
 ## Status
 
-Phases 1 and 2 of the [roadmap](ROADMAP.md) are complete: application base, design system, localization, transport layer between interface and engine, shows, templates, media and archives. The next phase is DMX and Art-Net. Version 1.0.0 will be the first release, when all the planned features are ready for distribution and testing.
+Phases 1 to 4 of the [roadmap](ROADMAP.md) are complete: application base, design system, localization, transport layer between interface and engine, shows, templates, media and archives, fixtures, patch, DMX output over Art-Net and USB, and the simple console with scenes, chasers and live cues. The next phase is LED matrices. Version 1.0.0 will be the first release, when all the planned features are ready for distribution and testing.
 
 ## Development documentation
 

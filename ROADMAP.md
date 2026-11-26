@@ -96,7 +96,7 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [x] 4.2 Attributes panel: a selected fixture gets its channels on the faders, with names; X and Y jog wheels for pan and tilt (16 bit), color wheel for RGB
 - [x] 4.3 Scenes: record the output of the preset and of the attributes, two banks of 12 scenes (decided by the human on 2026-11-26, replacing three banks of 12 memories), recall with fade (fade times saved in the scene), scene master
 - [x] 4.4 Chasers: one bank of 12 chasers, steps from scenes, step and fade time, speed in bpm with tap tempo, loop, back and forth, random and one shot
-- [ ] 4.5 Live cues: a list of scenes in order with Go, Back and Pause, current and next cue, fade progress
+- [x] 4.5 Live cues: a list of scenes in order with Go, Back and Pause, current and next cue, fade progress, optional follow time
 
 ## Phase 5 - LED matrices
 
