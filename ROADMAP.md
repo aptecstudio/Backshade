@@ -103,7 +103,7 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [x] 5.1 Matrix definition (size, pixel order, universe mapping), patched on as many universes as its channels need
 - [x] 5.2 Matrix preview, in the new Matrices section
 - [x] 5.3 Basic effects (solid color, gradient, scroll, text) and preset animations with chosen colors (rainbow, wave, sparkle, fire, pulse, plasma, chase), set live and recorded in scenes
-- [ ] 5.4 Pixel mapping from image and video
+- [x] 5.4 Pixel mapping from image (image effect from the show media); pixel mapping from video moved to 14.5, with the video outputs of Phase 7 (decided by the human on 2026-11-26)
 
 ## Phase 6 - Virtual console on a grid
 
