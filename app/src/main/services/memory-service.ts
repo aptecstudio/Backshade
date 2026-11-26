@@ -214,6 +214,19 @@ export function registerMemoryService(router: RequestRouter, bus: EventBus, sess
         return player.state();
     });
 
+    router.register('memories.setLevel', (params) => {
+        const input = requireObject(params);
+        const kind = requireChoice(input, 'kind', KINDS);
+        const id = requireString(input, 'id');
+        if (kind === 'scene') {
+            requireScene(id);
+        } else {
+            requireChaser(id);
+        }
+        player.setLevel(kind, id, requireNumber(input, 'level'));
+        return undefined;
+    });
+
     router.register('memories.selectChaser', (params) => {
         player.selectChaser(requireChaser(requireString(requireObject(params), 'id')).id);
         return player.state();

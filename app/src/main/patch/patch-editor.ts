@@ -87,14 +87,22 @@ export function updateFixture(patch: ShowPatch, request: PatchUpdateRequest, loo
 }
 
 /**
- * Removes fixtures and matrices; unknown identifiers are ignored.
+ * Removes fixtures and matrices, and the fixtures from their groups;
+ * unknown identifiers are ignored.
  * @returns The same patch object if nothing was removed
  */
 export function removeFixtures(patch: ShowPatch, ids: readonly string[]): ShowPatch {
     const remove = new Set(ids);
     const fixtures = patch.fixtures.filter((fixture) => !remove.has(fixture.id));
     const matrices = patch.matrices.filter((matrix) => !remove.has(matrix.id));
-    return fixtures.length === patch.fixtures.length && matrices.length === patch.matrices.length ? patch : { fixtures, matrices };
+    if (fixtures.length === patch.fixtures.length && matrices.length === patch.matrices.length) {
+        return patch;
+    }
+    // Removed fixtures leave their groups
+    const groups = patch.groups.map((group) => group.fixtures.some((id) => remove.has(id))
+        ? { ...group, fixtures: group.fixtures.filter((id) => !remove.has(id)) }
+        : group);
+    return { fixtures, matrices, groups };
 }
 
 /**

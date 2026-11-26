@@ -8,6 +8,7 @@ import { findConflicts, occupiedRanges } from '../../shared/patch/address-map';
 import { matrixSegments, PIXEL_DIRECTIONS, PIXEL_TYPES, START_CORNERS, type PatchedMatrix } from '../../shared/patch/matrix';
 import type { PatchedFixture, ShowPatch } from '../../shared/patch/patch';
 import type { MatrixEntry, PatchEntry } from '../../shared/transport/engine-api';
+import { deleteGroup, saveGroup } from '../patch/group-editor';
 import { addMatrix, updateMatrix, type MatrixData } from '../patch/matrix-editor';
 import type { FixtureLibrary } from '../fixtures/fixture-library';
 import { addFixtures, missingFixtures, removeFixtures, updateFixture, type DefinitionLookup } from '../patch/patch-editor';
@@ -132,6 +133,25 @@ export function registerPatchService(router: RequestRouter, bus: EventBus, sessi
         const result = updateMatrix(session.patch(), requireString(input, 'id'), matrixData(input));
         session.setPatch(result.patch);
         return toMatrixEntries(result.patch, [result.matrix])[0];
+    });
+
+    router.register('patch.getGroups', () => session.patch().groups);
+
+    router.register('patch.saveGroup', (params) => {
+        const input = requireObject(params);
+        const result = saveGroup(session.patch(), {
+            id: optionalString(input, 'id'),
+            number: requireInteger(input, 'number'),
+            name: requireString(input, 'name'),
+            fixtures: requireStringArray(input, 'fixtures')
+        });
+        session.setPatch(result.patch);
+        return result.group;
+    });
+
+    router.register('patch.deleteGroup', (params) => {
+        session.setPatch(deleteGroup(session.patch(), requireString(requireObject(params), 'id')));
+        return undefined;
     });
 
     router.register('patch.remove', (params) => {

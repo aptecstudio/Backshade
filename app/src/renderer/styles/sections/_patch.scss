@@ -131,3 +131,17 @@ $patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) m
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+// Fixture groups: list and editor
+.group-list__row {
+    display: grid;
+    grid-template-columns: space(6) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: space(2);
+    text-align: left;
+}
+
+.group-editor__fixtures {
+    max-height: space(8) * 5;
+    overflow-y: auto;
+}

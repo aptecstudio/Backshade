@@ -397,6 +397,89 @@
       "chooseImage": "Scegli un'immagine",
       "noImages": "Nessuna immagine nei Media dello show: importale nella sezione Media."
     },
+    "groups": {
+      "title": "Gruppi",
+      "short": "G",
+      "newTitle": "Nuovo gruppo",
+      "editTitle": "Gruppo",
+      "defaultName": "Gruppo",
+      "members": "{count} fixture",
+      "add": "Nuovo gruppo",
+      "empty": "Nessun gruppo.",
+      "deleteTitle": "Elimina il gruppo",
+      "deleteConfirm": "Eliminare \"{name}\"? Le fixture restano nel patch.",
+      "saveSelection": "Salva come gruppo"
+    },
+    "grid": {
+      "edit": "Modifica",
+      "addPage": "Aggiungi pagina",
+      "pageSettings": "Pagina",
+      "empty": "Nessuna pagina: aggiungi una pagina e disponi tasti, fader e altri widget sulla sua griglia.",
+      "defaultPageName": "Pagina {number}",
+      "columns": "Colonne",
+      "rows": "Righe",
+      "deletePageTitle": "Elimina la pagina",
+      "deletePageConfirm": "Eliminare \"{name}\" e i suoi widget?",
+      "addWidget": "Aggiungi widget",
+      "editWidget": "Widget",
+      "addAt": "Aggiungi un widget alla colonna {column}, riga {row}",
+      "add": "Aggiungi",
+      "widgetType": "Tipo",
+      "label": "Etichetta",
+      "link": "Comanda",
+      "target": "Quale",
+      "channel": "Canale",
+      "width": "Larghezza (celle)",
+      "height": "Altezza (celle)",
+      "types": {
+        "key": "Tasto",
+        "fader": "Fader",
+        "knob": "Manopola",
+        "colorPicker": "Colore",
+        "xyPad": "Pad XY",
+        "label": "Etichetta",
+        "monitor": "Monitor"
+      },
+      "links": {
+        "none": "Niente",
+        "scene": "Scena",
+        "chaser": "Chaser",
+        "cue": "Lista cue",
+        "master": "Master",
+        "group": "Gruppo",
+        "channel": "Canale DMX",
+        "desk": "Comando del banco"
+      },
+      "noTargets": {
+        "scene": "Non ci sono ancora scene: registrale nella sezione Console.",
+        "chaser": "Non ci sono ancora chaser: creali nella sezione Console.",
+        "group": "Non ci sono ancora gruppi: creali nella sezione Patch."
+      },
+      "cueActions": {
+        "go": "Go",
+        "back": "Indietro",
+        "pause": "Pausa",
+        "release": "Rilascia"
+      },
+      "masters": {
+        "a": "Master A",
+        "b": "Master B",
+        "scene": "Master scene",
+        "grand": "Grand master"
+      },
+      "deskActions": {
+        "blackout": "Blackout",
+        "fullOn": "Full on",
+        "blind": "Blind",
+        "home": "Home"
+      },
+      "channelName": "U{universe} {channel}",
+      "missing": "Mancante",
+      "off": "Spento",
+      "monitorCue": "{current} / poi {next}",
+      "monitorTempo": "{bpm} bpm",
+      "monitorStep": "{bpm} bpm, step {step} di {count}"
+    },
     "fixtures": {
       "libraryTitle": "Libreria fixture",
       "search": "Cerca produttore o modello",

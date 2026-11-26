@@ -4,10 +4,14 @@
  * removes the fixture; the order of selection is kept, because the first
  * fixture selected gives the channels and values shown by the panel.
  * The selection belongs to this window, like the selection keys of a desk.
+ * Group keys select the fixtures of a group; the selection can be saved as
+ * a new group.
  */
 
 import { Emitter, Key, Label, Stack, type Unsubscribe } from '../../../framework/ts/index.js';
+import type { FixtureGroup } from '../../../shared/patch/groups.js';
 import type { PatchEntry } from '../../../shared/transport/engine-api.js';
+import { askText } from '../../dialogs/ask-text.js';
 import { showError } from '../../dialogs/show-error.js';
 import { categoryIcon } from '../../fixtures/fixture-icons.js';
 import { t } from '../../i18n/i18n.js';
@@ -15,6 +19,10 @@ import { engine } from '../../transport/engine.js';
 
 export class FixtureSelector extends Stack {
     private readonly keysRow: Stack;
+    private readonly groupsRow: Stack;
+    private readonly saveGroup: Key;
+    private groupKeys: Key[] = [];
+    private groups: FixtureGroup[] = [];
     private readonly empty: Label;
     private readonly count: Label;
     private readonly clear: Key;
@@ -31,14 +39,18 @@ export class FixtureSelector extends Stack {
         this.clear.onPress(() => this.select([]));
         this.empty = new Label({ text: t('attributesPanel.noFixtures'), tone: 'secondary', size: 'small' });
         this.keysRow = new Stack({ direction: 'row', gap: 1, wrap: true, classes: ['fixture-selector__keys'] });
+        this.groupsRow = new Stack({ direction: 'row', gap: 1, wrap: true, classes: ['fixture-selector__groups'] });
+        this.saveGroup = new Key({ label: t('groups.saveSelection'), icon: 'plus' });
+        this.saveGroup.onPress(() => void this.saveAsGroup());
 
         this.append(
             new Stack({
                 direction: 'row',
                 gap: 2,
                 align: 'center',
-                children: [new Label({ text: t('attributesPanel.fixtures'), size: 'small', weight: 'medium' }), this.count, this.clear]
+                children: [new Label({ text: t('attributesPanel.fixtures'), size: 'small', weight: 'medium' }), this.count, this.clear, this.saveGroup]
             }),
+            this.groupsRow,
             this.empty,
             this.keysRow
         );
@@ -63,7 +75,9 @@ export class FixtureSelector extends Stack {
 
     private async load(): Promise<void> {
         try {
-            this.entries = [...await engine().request('patch.get')].sort((a, b) => a.number - b.number);
+            const [entries, groups] = await Promise.all([engine().request('patch.get'), engine().request('patch.getGroups')]);
+            this.entries = [...entries].sort((a, b) => a.number - b.number);
+            this.groups = groups;
         } catch (error) {
             await showError(error);
             return;
@@ -78,8 +92,36 @@ export class FixtureSelector extends Stack {
             this.keysRow.append(key);
         }
         this.empty.element.hidden = this.entries.length > 0;
+        this.groupKeys.forEach((key) => key.destroy());
+        this.groupKeys = this.groups.map((group) => {
+            const key = new Key({ label: `${t('groups.short')} ${group.number} ${group.name}`, icon: 'list' });
+            key.onPress(() => this.select(group.fixtures.filter((id) => this.keys.has(id))));
+            return key;
+        });
+        this.groupsRow.append(...this.groupKeys);
+        this.groupsRow.element.hidden = this.groups.length === 0;
         // Fixtures removed from the patch leave the selection
         this.select(this.selection.filter((id) => this.keys.has(id)), true);
+    }
+
+    /**
+     * Saves the selection as a new group, with the next free number.
+     */
+    private async saveAsGroup(): Promise<void> {
+        const used = new Set(this.groups.map((group) => group.number));
+        let number = 1;
+        while (used.has(number)) {
+            number++;
+        }
+        const answer = await askText(t('groups.saveSelection'), [{ label: t('patch.name'), value: t('groups.defaultName'), maxLength: 100 }], t('common.save'));
+        if (answer === null) {
+            return;
+        }
+        try {
+            await engine().request('patch.saveGroup', { number, name: answer[0], fixtures: [...this.selection] });
+        } catch (error) {
+            await showError(error);
+        }
     }
 
     private toggle(id: string): void {
@@ -102,6 +144,7 @@ export class FixtureSelector extends Stack {
         }
         this.count.setText(fixtures.length === 0 ? '' : t('attributesPanel.selected', { count: fixtures.length }));
         this.clear.element.disabled = fixtures.length === 0;
+        this.saveGroup.element.disabled = fixtures.length === 0;
         if (changed) {
             this.changes.emit([...fixtures]);
         }

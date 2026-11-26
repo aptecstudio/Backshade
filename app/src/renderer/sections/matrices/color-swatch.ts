@@ -9,7 +9,7 @@ import { colorWheelLabels } from '../../i18n/control-labels.js';
 import { t } from '../../i18n/i18n.js';
 
 export class ColorSwatch extends Component<HTMLButtonElement> {
-    private readonly label: string;
+    private label: string;
     private readonly changes = new Emitter<string>();
     private color: string;
 
@@ -24,6 +24,19 @@ export class ColorSwatch extends Component<HTMLButtonElement> {
         this.render();
         this.listen(this.element, 'click', () => this.open());
         this.track(() => this.changes.clear());
+    }
+
+    /**
+     * Changes the name shown on the key and used by the dialog.
+     */
+    setLabel(label: string): void {
+        this.label = label;
+        this.element.setAttribute('aria-label', label);
+        this.element.title = label;
+        const text = this.element.querySelector('.color-swatch__label');
+        if (text !== null) {
+            text.textContent = label;
+        }
     }
 
     get value(): string {

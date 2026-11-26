@@ -6,6 +6,7 @@
  */
 
 import { UNIVERSE_SIZE } from '../fixtures/fixture-definition.js';
+import { normalizeGroups, type FixtureGroup } from './groups.js';
 import { isValidMatrixShape, PIXEL_DIRECTIONS, PIXEL_TYPES, START_CORNERS, type PatchedMatrix } from './matrix.js';
 
 /** Highest universe number */
@@ -42,10 +43,12 @@ export interface ShowPatch {
     fixtures: PatchedFixture[];
     /** LED matrices driven directly on DMX channels; missing in older files */
     matrices: PatchedMatrix[];
+    /** Fixture groups; missing in older files */
+    groups: FixtureGroup[];
 }
 
 /** Empty patch of a new show */
-export const EMPTY_PATCH: ShowPatch = { fixtures: [], matrices: [] };
+export const EMPTY_PATCH: ShowPatch = { fixtures: [], matrices: [], groups: [] };
 
 function isInteger(value: unknown, min: number, max: number): value is number {
     return Number.isInteger(value) && (value as number) >= min && (value as number) <= max;
@@ -63,7 +66,7 @@ export function fitsUniverse(address: number, channelCount: number): boolean {
  * console warning, so a damaged entry never prevents opening the show.
  */
 export function normalizePatch(value: unknown): ShowPatch {
-    const input = typeof value === 'object' && value !== null ? value as { fixtures?: unknown; matrices?: unknown } : {};
+    const input = typeof value === 'object' && value !== null ? value as { fixtures?: unknown; matrices?: unknown; groups?: unknown } : {};
     const fixtures: PatchedFixture[] = [];
     const ids = new Set<string>();
     for (const item of Array.isArray(input.fixtures) ? input.fixtures : []) {
@@ -93,7 +96,9 @@ export function normalizePatch(value: unknown): ShowPatch {
             address: entry.address as number
         });
     }
-    return { fixtures, matrices: normalizeMatrices(input.matrices, ids, new Set(fixtures.map((fixture) => fixture.number))) };
+    const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
+    const matrices = normalizeMatrices(input.matrices, ids, new Set(fixtures.map((fixture) => fixture.number)));
+    return { fixtures, matrices, groups: normalizeGroups(input.groups, fixtureIds, ids) };
 }
 
 /**

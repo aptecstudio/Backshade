@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import { app } from 'electron';
 import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show-document';
 import type { ShowMemories } from '../../shared/console/memories';
+import type { ShowGrid } from '../../shared/grid/grid';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
@@ -34,7 +35,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -255,6 +256,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('memories');
+    }
+
+    /**
+     * Pages of the virtual console of the open show.
+     */
+    grid(): ShowGrid {
+        return this.requireOpen().document.grid;
+    }
+
+    /**
+     * Replaces the pages of the virtual console; the change must be saved.
+     */
+    setGrid(grid: ShowGrid): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(grid) === JSON.stringify(show.document.grid)) {
+            return;
+        }
+        show.document = { ...show.document, grid };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('grid');
     }
 
     /**

@@ -397,6 +397,89 @@
       "chooseImage": "Choose an image",
       "noImages": "No images in the show media: import them in the Media section."
     },
+    "groups": {
+      "title": "Groups",
+      "short": "G",
+      "newTitle": "New group",
+      "editTitle": "Group",
+      "defaultName": "Group",
+      "members": "{count} fixtures",
+      "add": "New group",
+      "empty": "No groups yet.",
+      "deleteTitle": "Delete the group",
+      "deleteConfirm": "Delete \"{name}\"? The fixtures stay in the patch.",
+      "saveSelection": "Save as group"
+    },
+    "grid": {
+      "edit": "Edit",
+      "addPage": "Add page",
+      "pageSettings": "Page",
+      "empty": "No pages yet: add a page and place keys, faders and other widgets on its grid.",
+      "defaultPageName": "Page {number}",
+      "columns": "Columns",
+      "rows": "Rows",
+      "deletePageTitle": "Delete the page",
+      "deletePageConfirm": "Delete \"{name}\" and its widgets?",
+      "addWidget": "Add widget",
+      "editWidget": "Widget",
+      "addAt": "Add a widget at column {column}, row {row}",
+      "add": "Add",
+      "widgetType": "Type",
+      "label": "Label",
+      "link": "Controls",
+      "target": "Which",
+      "channel": "Channel",
+      "width": "Width (cells)",
+      "height": "Height (cells)",
+      "types": {
+        "key": "Key",
+        "fader": "Fader",
+        "knob": "Knob",
+        "colorPicker": "Color",
+        "xyPad": "XY pad",
+        "label": "Label",
+        "monitor": "Monitor"
+      },
+      "links": {
+        "none": "Nothing",
+        "scene": "Scene",
+        "chaser": "Chaser",
+        "cue": "Cue list",
+        "master": "Master",
+        "group": "Group",
+        "channel": "DMX channel",
+        "desk": "Desk command"
+      },
+      "noTargets": {
+        "scene": "There are no scenes yet: record them in the Console section.",
+        "chaser": "There are no chasers yet: create them in the Console section.",
+        "group": "There are no groups yet: create them in the Patch section."
+      },
+      "cueActions": {
+        "go": "Go",
+        "back": "Back",
+        "pause": "Pause",
+        "release": "Release"
+      },
+      "masters": {
+        "a": "Master A",
+        "b": "Master B",
+        "scene": "Scene master",
+        "grand": "Grand master"
+      },
+      "deskActions": {
+        "blackout": "Blackout",
+        "fullOn": "Full on",
+        "blind": "Blind",
+        "home": "Home"
+      },
+      "channelName": "U{universe} {channel}",
+      "missing": "Missing",
+      "off": "Off",
+      "monitorCue": "{current} / next {next}",
+      "monitorTempo": "{bpm} bpm",
+      "monitorStep": "{bpm} bpm, step {step} of {count}"
+    },
     "fixtures": {
       "libraryTitle": "Fixture library",
       "search": "Search manufacturer or model",

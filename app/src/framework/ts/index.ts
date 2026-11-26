@@ -86,5 +86,6 @@ export { Knob, type KnobOptions } from './controls/knob.js';
 export { Fader, type FaderOptions } from './controls/fader.js';
 export { LinearSlider } from './controls/linear-slider.js';
 export { JogWheel, type JogWheelOptions } from './controls/jog-wheel.js';
+export { XyPad, type XyPadOptions, type XyValue } from './controls/xy-pad.js';
 export { RangeInput, type RangeInputOptions, type RangeInputRange } from './controls/range-input.js';
 export { LIGHT_SCALE, AUDIO_SCALE, type FaderTick } from './controls/fader-scales.js';

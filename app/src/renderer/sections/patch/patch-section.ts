@@ -12,6 +12,7 @@ import { openFixtureLibrary } from '../../fixtures/fixture-library-dialog.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { openAddFixtures } from './add-fixtures-dialog.js';
+import { openGroups } from './group-dialog.js';
 import { openMatrixDialog } from './matrix-dialog.js';
 import { PatchGridView } from './patch-grid-view.js';
 import { PatchListView } from './patch-list-view.js';
@@ -39,6 +40,8 @@ export class PatchSection extends Panel {
         const addMatrix = new Key({ label: t('matrix.add'), icon: 'grid-3x3' });
         addMatrix.onPress(() => openMatrixDialog(null, this.entries, this.targetUniverse()));
         const library = new Key({ label: t('patch.library'), icon: 'layout-template' });
+        const groups = new Key({ label: t('groups.title'), icon: 'list' });
+        groups.onPress(() => void openGroups());
         add.onPress(() => void openAddFixtures(this.entries, this.targetUniverse()));
         library.onPress(() => openFixtureLibrary());
         this.summary = new Label({ text: '', tone: 'secondary', size: 'small' });
@@ -53,7 +56,7 @@ export class PatchSection extends Panel {
             direction: 'row',
             gap: 2,
             align: 'center',
-            children: [add, addMatrix, library, this.summary, new Spacer(), new Stack({ direction: 'row', gap: 1, children: [this.listKey, this.gridKey] })]
+            children: [add, addMatrix, groups, library, this.summary, new Spacer(), new Stack({ direction: 'row', gap: 1, children: [this.listKey, this.gridKey] })]
         }));
 
         void this.load();

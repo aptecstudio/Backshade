@@ -8,7 +8,10 @@
  * other channels move between the output without the scene and their
  * values (decided by the human). A chaser plays its scenes one per beat, with a crossfade between
  * steps as a part of the step time. Cues of the cue list are played the
- * same way as scenes, with the fades of the cue, and can be paused.
+ * same way as scenes, with the fades of the cue, and can be paused. A
+ * fader of the grid can set the level of a scene or chaser by hand: the
+ * intensity follows the fader, the other channels take their values as
+ * soon as the fader leaves zero.
  */
 
 import type { CueTiming } from '../../shared/console/cue-stack';
@@ -58,6 +61,8 @@ interface Playback {
     position: SequencePosition;
     previous: number | null;
     stepStarted: number;
+    /** Level set by a fader, 0 to 1, null when the fades decide */
+    manual: number | null;
     /** Time the playback was paused (cues only), null while running */
     pausedAt: number | null;
     /** Levels written at the last update */
@@ -89,7 +94,12 @@ export class MemoryPlayer {
         return {
             active: this.playbacks
                 .filter((playback): playback is Playback & { kind: MemoryKind } => playback.released === null && playback.kind !== 'cue')
-                .map((playback) => ({ kind: playback.kind, id: playback.id, step: playback.kind === 'chaser' ? playback.position.step : null })),
+                .map((playback) => ({
+                    kind: playback.kind,
+                    id: playback.id,
+                    step: playback.kind === 'chaser' ? playback.position.step : null,
+                    level: playback.manual
+                })),
             selectedChaser: this.selected
         };
     }
@@ -102,6 +112,32 @@ export class MemoryPlayer {
             this.selected = id;
         }
         this.switch(kind, id, on);
+        this.update();
+        this.announce();
+    }
+
+    /**
+     * Sets the level of a scene or chaser from a fader: above zero it is on
+     * at that level, at zero it stops at once.
+     */
+    setLevel(kind: MemoryKind, id: string, level: number): void {
+        const value = Math.max(0, Math.min(1, level));
+        const existing = this.playbacks.find((playback) => playback.id === id);
+        if (value <= 0) {
+            if (existing !== undefined) {
+                this.remove(existing);
+            }
+        } else if (existing !== undefined) {
+            existing.manual = value;
+            existing.released = null;
+            existing.owned = null;
+        } else {
+            if (kind === 'chaser') {
+                this.selected = id;
+            }
+            this.add(kind, id, this.now());
+            this.playbacks[this.playbacks.length - 1].manual = value;
+        }
         this.update();
         this.announce();
     }
@@ -232,6 +268,7 @@ export class MemoryPlayer {
             position: { step: 0, heading: 1 },
             previous: null,
             stepStarted: this.now(),
+            manual: null,
             pausedAt: null,
             written: new Map(),
             owned: null
@@ -246,6 +283,7 @@ export class MemoryPlayer {
     private release(playback: Playback, now: number): void {
         playback.releaseLevel = this.level(playback, now);
         playback.released = now;
+        playback.manual = null;
         playback.owned = new Map();
         for (const [universe, levels] of playback.written) {
             const frame = this.context.mixer.compose(universe, this.context.mapOf(universe), 1);
@@ -294,6 +332,9 @@ export class MemoryPlayer {
      * Fade level of a memory, 0 to 1.
      */
     private level(playback: Playback, now: number): number {
+        if (playback.manual !== null) {
+            return playback.manual;
+        }
         if (playback.released !== null) {
             const fadeOut = this.fadeOut(playback.kind, playback.id);
             const progress = fadeOut <= 0 ? 1 : (now - playback.released) / fadeOut;
@@ -329,7 +370,9 @@ export class MemoryPlayer {
             let output: Map<number, Array<[number, number]>>;
             if (playback.kind !== 'chaser') {
                 const values = this.valuesAt(memory as Scene, ((playback.pausedAt ?? now) - playback.started) / 1000);
-                output = this.sceneOutput(values, null, 1, level * master, level < 1 ? { source: MEMORY_SOURCE_PREFIX + playback.id, level } : null);
+                // A fader moves the intensity only: the other channels are already at their values
+                const fade = level < 1 && playback.manual === null ? { source: MEMORY_SOURCE_PREFIX + playback.id, level } : null;
+                output = this.sceneOutput(values, null, 1, level * master, fade);
             } else {
                 const result = this.chaserOutput(playback, memory as Chaser, now, level * master);
                 changed ||= result.stepChanged;

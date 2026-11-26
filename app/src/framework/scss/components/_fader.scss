@@ -33,6 +33,12 @@ $cap-shade: #7f8186;
     height: 144px;
 }
 
+// Height of the container, for the cells of the grid
+.fader--fill {
+    height: 100%;
+    min-height: 96px;
+}
+
 .fader__hole {
     position: absolute;
     top: 0;

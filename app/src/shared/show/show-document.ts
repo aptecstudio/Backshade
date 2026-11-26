@@ -5,6 +5,7 @@
  */
 
 import type { ShowMemories } from '../console/memories.js';
+import type { ShowGrid } from '../grid/grid.js';
 import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
 import type { ShowSettings } from './show-settings.js';
@@ -37,4 +38,6 @@ export interface ShowDocument {
     output: ShowOutput;
     /** Scenes and chasers of the simple console; missing in older files, completed when reading */
     memories: ShowMemories;
+    /** Pages of the virtual console; missing in older files, completed when reading */
+    grid: ShowGrid;
 }

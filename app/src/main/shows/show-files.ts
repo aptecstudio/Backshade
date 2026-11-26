@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { SHOW_FORMAT_VERSION, type ShowDocument } from '../../shared/show/show-document';
 import { normalizeMemories } from '../../shared/console/memories';
+import { normalizeGrid } from '../../shared/grid/grid';
 import { normalizeOutput } from '../../shared/output/output-config';
 import { normalizePatch } from '../../shared/patch/patch';
 import { normalizeShowSettings } from '../../shared/show/show-settings';
@@ -41,7 +42,8 @@ function toShowDocument(data: unknown, file: string): ShowDocument {
         settings: normalizeShowSettings(document.settings),
         patch: normalizePatch(document.patch),
         output: normalizeOutput(document.output),
-        memories: normalizeMemories(document.memories)
+        memories: normalizeMemories(document.memories),
+        grid: normalizeGrid(document.grid)
     };
 }
 

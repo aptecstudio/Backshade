@@ -135,6 +135,8 @@ export interface MemoryPlayback {
     id: string;
     /** Step being played, for chasers: index in the steps */
     step: number | null;
+    /** Level set by a fader of the grid, null when the memory follows its fades */
+    level: number | null;
 }
 
 /** Playback state of the memories */

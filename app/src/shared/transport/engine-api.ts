@@ -13,6 +13,8 @@ import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-def
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
 import type { OutputTransport, ShowOutput } from '../output/output-config.js';
 import type { UsbDmxDevice, UsbDmxStatus } from '../output/usb-dmx.js';
+import type { ShowGrid } from '../grid/grid.js';
+import type { FixtureGroup } from '../patch/groups.js';
 import type { MatrixSegment, PatchedMatrix } from '../patch/matrix.js';
 import type { MatrixEffect } from '../patch/matrix-effect.js';
 import type { PatchedFixture } from '../patch/patch.js';
@@ -345,6 +347,12 @@ export interface EngineMethods {
     'matrices.getLive': { params: undefined; result: Record<string, MatrixEffect> };
     /** Sets the live effect of a matrix, or turns it off with null; part of the desk, recorded in scenes */
     'matrices.setLive': { params: { id: string; effect: MatrixEffect | null }; result: Record<string, MatrixEffect> };
+    /** Fixture groups, in number order */
+    'patch.getGroups': { params: undefined; result: FixtureGroup[] };
+    /** Adds (without id) or changes a fixture group (unsaved change) */
+    'patch.saveGroup': { params: { id?: string; number: number; name: string; fixtures: string[] }; result: FixtureGroup };
+    /** Deletes a fixture group (unsaved change) */
+    'patch.deleteGroup': { params: { id: string }; result: undefined };
     /** Removes fixtures and matrices from the patch (unsaved change) */
     'patch.remove': { params: { ids: string[] }; result: undefined };
 
@@ -399,6 +407,10 @@ export interface EngineMethods {
     'console.setFullOn': { params: { on: boolean }; result: PresetDeskState };
     /** Brings every fader of the desk back to 0 */
     'console.home': { params: undefined; result: undefined };
+    /** Intensity levels of the fixture groups above zero: group identifier -> level 0 to 1 */
+    'console.getGroupLevels': { params: undefined; result: Record<string, number> };
+    /** Sets the intensity level of a fixture group, 0 to 1 */
+    'console.setGroupLevel': { params: { id: string; level: number }; result: undefined };
     /** Channels of a patched fixture for the attributes panel, null when its definition is missing */
     'console.attributeLayout': { params: { fixture: string }; result: AttributeLayout | null };
     /**
@@ -429,11 +441,17 @@ export interface EngineMethods {
     'memories.setBpm': { params: { id: string; bpm: number }; result: Chaser };
     /** Turns a memory on or off, with its fades */
     'memories.setActive': { params: { kind: MemoryKind; id: string; on: boolean }; result: MemoriesState };
+    /** Sets the level of a scene or chaser from a fader, 0 to 1; zero stops it */
+    'memories.setLevel': { params: { kind: MemoryKind; id: string; level: number }; result: undefined };
     /** Chooses the chaser that the tempo controls act on */
     'memories.selectChaser': { params: { id: string }; result: MemoriesState };
     /** Turns every memory off with its fade out */
     'memories.releaseAll': { params: undefined; result: MemoriesState };
 
+    /** Pages of the virtual console of the open show */
+    'grid.get': { params: undefined; result: ShowGrid };
+    /** Replaces the pages of the virtual console (unsaved change); returns them as saved */
+    'grid.set': { params: { grid: ShowGrid }; result: ShowGrid };
     /** Playback state of the cue list */
     'cues.getState': { params: undefined; result: CueStackState };
     /** Adds a cue at the end of the list, playing a scene (unsaved change) */
@@ -507,6 +525,10 @@ export interface EngineEvents {
     'memories.changed': Record<string, never>;
     /** Memories turned on or off, a chaser step or the selected chaser changed */
     'memories.stateChanged': { state: MemoriesState };
+    /** The pages of the virtual console have changed */
+    'grid.changed': Record<string, never>;
+    /** The intensity levels of the fixture groups have changed */
+    'console.groupLevelsChanged': { levels: Record<string, number> };
     /** The live effects of the matrices have changed */
     'matrices.liveChanged': { effects: Record<string, MatrixEffect> };
     /** The playback state of the cue list has changed */
