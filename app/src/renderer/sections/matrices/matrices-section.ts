@@ -1,14 +1,16 @@
 /**
- * Matrices section: the LED matrices of the patch, one key each, and the
- * live preview of the chosen one with its size, pixel type and universes.
- * Matrices are added and changed in the Patch section.
+ * Matrices section: the LED matrices of the patch, one key each, the live
+ * preview of the chosen one with its size, pixel type and universes, and
+ * its live effect. Matrices are added and changed in the Patch section.
  */
 
 import { Key, Label, Panel, Stack } from '../../../framework/ts/index.js';
+import type { MatrixEffect } from '../../../shared/patch/matrix-effect.js';
 import type { MatrixEntry } from '../../../shared/transport/engine-api.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
+import { EffectPanel } from './effect-panel.js';
 import { MatrixPreview } from './matrix-preview.js';
 
 export class MatricesSection extends Panel {
@@ -16,6 +18,9 @@ export class MatricesSection extends Panel {
     private readonly info = new Label({ text: '', tone: 'secondary', size: 'small' });
     private readonly empty = new Label({ text: '', tone: 'secondary' });
     private readonly holder = new Stack({ classes: ['matrices-section__preview'] });
+    private readonly layout = new Stack({ direction: 'row', gap: 3, align: 'start', classes: ['matrices-section__body'] });
+    private effectPanel: EffectPanel | null = null;
+    private live: Record<string, MatrixEffect> = {};
     private keys: Key[] = [];
     private preview: MatrixPreview | null = null;
     private matrices: MatrixEntry[] = [];
@@ -24,14 +29,21 @@ export class MatricesSection extends Panel {
     constructor() {
         super({ title: t('sections.matrices'), classes: ['matrices-section'] });
         this.empty.setText(t('matrices.empty'));
-        this.append(this.keysRow, this.empty, this.info, this.holder);
+        this.layout.append(this.holder);
+        this.append(this.keysRow, this.empty, this.info, this.layout);
         this.track(engine().on('patch.changed', () => void this.load()));
+        this.track(engine().on('matrices.liveChanged', ({ effects }) => {
+            this.live = effects;
+            if (this.selected !== null) {
+                this.effectPanel?.follow(effects[this.selected] ?? null);
+            }
+        }));
         void this.load();
     }
 
     private async load(): Promise<void> {
         try {
-            this.matrices = await engine().request('patch.getMatrices');
+            [this.matrices, this.live] = await Promise.all([engine().request('patch.getMatrices'), engine().request('matrices.getLive')]);
         } catch (error) {
             await showError(error);
             return;
@@ -53,6 +65,8 @@ export class MatricesSection extends Panel {
 
         this.preview?.destroy();
         this.preview = null;
+        this.effectPanel?.destroy();
+        this.effectPanel = null;
         if (matrix === null) {
             this.info.setText('');
             return;
@@ -67,5 +81,7 @@ export class MatricesSection extends Panel {
         }));
         this.preview = new MatrixPreview(matrix);
         this.holder.append(this.preview);
+        this.effectPanel = new EffectPanel(matrix, this.live[matrix.id] ?? null);
+        this.layout.append(this.effectPanel);
     }
 }

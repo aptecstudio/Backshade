@@ -17,3 +17,37 @@
     border-radius: $radius-square-key;
     image-rendering: pixelated;
 }
+
+.matrices-section__body {
+    flex-wrap: wrap;
+}
+
+.effect-panel {
+    flex: 1 1 space(8) * 5;
+    min-width: space(8) * 5;
+}
+
+.effect-panel__slider .slider {
+    width: 100%;
+}
+
+// Color parameter: a chip of the color and its name
+.color-swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: space(1);
+    height: space(6);
+    padding: 0 space(2);
+    border: 1px solid color('panel-border');
+    border-radius: $radius-key;
+    background: color('display');
+    color: color('text');
+    cursor: pointer;
+}
+
+.color-swatch__chip {
+    width: space(3);
+    height: space(3);
+    border-radius: $radius-square-key;
+    background: var(--swatch-color);
+}

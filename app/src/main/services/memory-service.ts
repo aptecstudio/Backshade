@@ -1,7 +1,8 @@
 /**
  * memories.* methods: scenes and chasers of the simple console. Scenes
  * are recorded from the result of the desk (preset faders and attributes
- * panel, after Masters A and B, scenes on excluded) and saved in the show;
+ * panel, after Masters A and B, and the live effects of the matrices;
+ * scenes on excluded) and saved in the show;
  * playback state belongs to the running session. Every window follows
  * memories.changed (data) and memories.stateChanged (playback).
  */
@@ -24,6 +25,7 @@ import {
 import { FADE_LIMITS } from '../../shared/show/show-settings';
 import { MemoryPlayer } from '../console/memory-player';
 import type { PresetDesk } from '../console/preset-desk';
+import type { MatrixLive } from '../matrix/matrix-live';
 import type { OutputEngine } from '../output/output-engine';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
@@ -70,12 +72,13 @@ function requireBpm(input: Record<string, unknown>): number {
  * Registers the methods of the service.
  * @returns the player, also used by the cue list
  */
-export function registerMemoryService(router: RequestRouter, bus: EventBus, session: ShowSession, desk: PresetDesk, output: OutputEngine): MemoryPlayer {
+export function registerMemoryService(router: RequestRouter, bus: EventBus, session: ShowSession, desk: PresetDesk, output: OutputEngine, live: MatrixLive): MemoryPlayer {
     const memoriesOf = (): ShowMemories | null => session.summary() === null ? null : session.memories();
     const player = new MemoryPlayer({
         mixer: output.mixer,
         mapOf: (universe) => output.universeMap(universe),
         memories: memoriesOf,
+        matrices: () => session.summary() === null ? [] : session.patch().matrices,
         sceneMaster: () => desk.getState().masters.scene,
         onState: (state) => bus.emit('memories.stateChanged', { state })
     });
@@ -130,8 +133,8 @@ export function registerMemoryService(router: RequestRouter, bus: EventBus, sess
         const existing = session.memories().scenes.find((scene) => scene.slot === slot);
         const settings = session.settings();
         const scene: Scene = existing === undefined
-            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels }
-            : { ...existing, levels };
+            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects() }
+            : { ...existing, levels, matrices: live.effects() };
         update((memories) => ({ ...memories, scenes: [...memories.scenes.filter((item) => item.id !== scene.id), scene].sort((a, b) => a.slot - b.slot) }));
         return sceneSummary(scene);
     });

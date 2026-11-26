@@ -340,7 +340,51 @@
     },
     "matrices": {
       "empty": "No LED matrices: add them in the Patch section.",
-      "info": "{width} x {height} pixels, {type}, universes {first} to {last}"
+      "info": "{width} x {height} pixels, {type}, universes {first} to {last}",
+      "effect": "Live effect",
+      "basic": "Effects",
+      "animations": "Animations",
+      "kinds": {
+        "off": "Off",
+        "solid": "Color",
+        "gradient": "Gradient",
+        "scroll": "Scroll",
+        "text": "Text",
+        "rainbow": "Rainbow",
+        "wave": "Wave",
+        "sparkle": "Sparkle",
+        "fire": "Fire",
+        "pulse": "Pulse",
+        "plasma": "Plasma",
+        "chase": "Chase"
+      },
+      "color": "Color {number}",
+      "text": "Text",
+      "font": "Font",
+      "speed": "Speed",
+      "sizeOf": {
+        "scroll": "Bar width",
+        "text": "Letter size",
+        "rainbow": "Rainbows",
+        "wave": "Wavelength",
+        "sparkle": "Density",
+        "plasma": "Size",
+        "chase": "Bar length",
+        "solid": "Size",
+        "gradient": "Size",
+        "fire": "Size",
+        "pulse": "Size"
+      },
+      "direction": "Direction",
+      "directions": {
+        "left": "Left",
+        "right": "Right",
+        "up": "Up",
+        "down": "Down"
+      },
+      "angle": "Angle",
+      "degrees": "deg",
+      "recordHint": "The live effect is part of the desk: the Record key of the console stores it in a scene, Home turns it off."
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

@@ -13,6 +13,8 @@
 
 import type { CueTiming } from '../../shared/console/cue-stack';
 import type { Chaser, MemoriesState, MemoryKind, Scene, ShowMemories } from '../../shared/console/memories';
+import type { PatchedMatrix } from '../../shared/patch/matrix';
+import { renderMatrixEffect } from '../matrix/render-effect';
 import type { DmxMixer } from '../output/dmx-mixer';
 import { nextStep, type SequencePosition } from './chaser-sequence';
 import { IntensityMap, mixLevels, type ChannelValues } from './intensity-map';
@@ -30,6 +32,8 @@ export interface MemoryPlayerContext {
     mapOf: UniverseMapLookup;
     /** Memories of the open show, null when no show is open */
     memories: () => ShowMemories | null;
+    /** LED matrices of the patch, for the matrix effects of the scenes */
+    matrices: () => readonly PatchedMatrix[];
     /** Position of the scene master, 0 to 1 */
     sceneMaster: () => number;
     /** Called when memories turn on or off, a chaser changes step or the selected chaser changes */
@@ -324,7 +328,8 @@ export class MemoryPlayer {
             }
             let output: Map<number, Array<[number, number]>>;
             if (playback.kind !== 'chaser') {
-                output = this.sceneOutput(this.sceneValues(memory as Scene), null, 1, level * master, level < 1 ? { source: MEMORY_SOURCE_PREFIX + playback.id, level } : null);
+                const values = this.valuesAt(memory as Scene, ((playback.pausedAt ?? now) - playback.started) / 1000);
+                output = this.sceneOutput(values, null, 1, level * master, level < 1 ? { source: MEMORY_SOURCE_PREFIX + playback.id, level } : null);
             } else {
                 const result = this.chaserOutput(playback, memory as Chaser, now, level * master);
                 changed ||= result.stepChanged;
@@ -396,8 +401,9 @@ export class MemoryPlayer {
         }
         const fadeMs = chaser.fade * stepMs;
         const progress = playback.previous === null || fadeMs <= 0 ? 1 : Math.min(1, (now - playback.stepStarted) / fadeMs);
-        const target = this.sceneValues(scenes[playback.position.step]);
-        const source = playback.previous === null || progress >= 1 ? null : this.sceneValues(scenes[playback.previous]);
+        const time = (now - playback.started) / 1000;
+        const target = this.valuesAt(scenes[playback.position.step], time);
+        const source = playback.previous === null || progress >= 1 ? null : this.valuesAt(scenes[playback.previous], time);
         return { output: this.sceneOutput(target, source, progress, factor), stepChanged, finished: false };
     }
 
@@ -425,6 +431,34 @@ export class MemoryPlayer {
             }
         }
         return output;
+    }
+
+    /**
+     * Levels of a scene at a time: the recorded levels, with the matrix
+     * effects drawn over them.
+     * @param time - Seconds since the scene started
+     */
+    private valuesAt(scene: Scene, time: number): SceneValues {
+        const values = this.sceneValues(scene);
+        const ids = Object.keys(scene.matrices);
+        if (ids.length === 0) {
+            return values;
+        }
+        const result: SceneValues = new Map([...values].map(([universe, channels]) => [universe, new Map(channels)]));
+        for (const matrix of this.context.matrices()) {
+            const effect = scene.matrices[matrix.id];
+            if (effect === undefined) {
+                continue;
+            }
+            for (const [universe, levels] of renderMatrixEffect(matrix, effect, time)) {
+                const channels = (result.get(universe) ?? new Map<number, number>()) as Map<number, number>;
+                result.set(universe, channels);
+                for (const [address, value] of levels) {
+                    channels.set(address - 1, value);
+                }
+            }
+        }
+        return result;
     }
 
     private sceneValues(scene: Scene): SceneValues {

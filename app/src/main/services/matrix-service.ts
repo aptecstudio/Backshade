@@ -1,19 +1,59 @@
 /**
  * matrices.* methods: the LED matrices of the open show as they are sent,
- * pixel by pixel, for the preview of the Matrices section.
+ * pixel by pixel, for the preview of the Matrices section, and their live
+ * effects, part of the desk (matrices.liveChanged tells every window).
  */
 
-import { channelsPerPixel, pixelAddresses, pixelPosition, pixelToRgb } from '../../shared/patch/matrix';
+import { channelsPerPixel, pixelAddresses, pixelPosition, pixelToRgb, type PatchedMatrix } from '../../shared/patch/matrix';
+import { normalizeMatrixEffect } from '../../shared/patch/matrix-effect';
+import type { PresetDesk } from '../console/preset-desk';
+import { MatrixLive } from '../matrix/matrix-live';
 import type { OutputEngine } from '../output/output-engine';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
+import type { EventBus } from '../transport/event-bus';
 import { requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 /**
  * Registers the methods of the service.
+ * @returns the live effects, recorded in the scenes
  */
-export function registerMatrixService(router: RequestRouter, session: ShowSession, output: OutputEngine): void {
+export function registerMatrixService(router: RequestRouter, bus: EventBus, session: ShowSession, output: OutputEngine, desk: PresetDesk): MatrixLive {
+    const matricesOf = (): readonly PatchedMatrix[] => session.summary() === null ? [] : session.patch().matrices;
+    const live = new MatrixLive({ mixer: output.mixer, matrices: matricesOf, blind: () => desk.getState().blind });
+    const announce = (): void => bus.emit('matrices.liveChanged', { effects: live.effects() });
+    desk.onHome(() => {
+        live.clear();
+        announce();
+    });
+    session.onContentChange((part) => {
+        if (part === 'all') {
+            live.clear();
+            announce();
+        } else if (part === 'patch') {
+            live.patchChanged();
+            announce();
+        }
+    });
+
+    router.register('matrices.getLive', () => live.effects());
+
+    router.register('matrices.setLive', (params) => {
+        const input = requireObject(params);
+        const id = requireString(input, 'id');
+        if (!matricesOf().some((matrix) => matrix.id === id)) {
+            throw new EngineError('patch-fixture-not-found', `Matrix not found: ${id}`);
+        }
+        const effect = input.effect === null ? null : normalizeMatrixEffect(input.effect);
+        if (input.effect !== null && effect === null) {
+            throw new EngineError('invalid-params', 'Invalid matrix effect');
+        }
+        live.set(id, effect);
+        announce();
+        return live.effects();
+    });
+
     router.register('matrices.getPixels', (params) => {
         const id = requireString(requireObject(params), 'id');
         const matrix = session.summary() === null ? undefined : session.patch().matrices.find((item) => item.id === id);
@@ -39,4 +79,6 @@ export function registerMatrixService(router: RequestRouter, session: ShowSessio
         });
         return pixels;
     });
+
+    return live;
 }

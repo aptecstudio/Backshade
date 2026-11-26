@@ -340,7 +340,51 @@
     },
     "matrices": {
       "empty": "Nessuna matrice LED: aggiungile nella sezione Patch.",
-      "info": "{width} x {height} pixel, {type}, universi da {first} a {last}"
+      "info": "{width} x {height} pixel, {type}, universi da {first} a {last}",
+      "effect": "Effetto dal vivo",
+      "basic": "Effetti",
+      "animations": "Animazioni",
+      "kinds": {
+        "off": "Spento",
+        "solid": "Colore",
+        "gradient": "Sfumatura",
+        "scroll": "Scorrimento",
+        "text": "Testo",
+        "rainbow": "Arcobaleno",
+        "wave": "Onda",
+        "sparkle": "Scintille",
+        "fire": "Fuoco",
+        "pulse": "Pulsazione",
+        "plasma": "Plasma",
+        "chase": "Inseguimento"
+      },
+      "color": "Colore {number}",
+      "text": "Testo",
+      "font": "Carattere",
+      "speed": "Velocità",
+      "sizeOf": {
+        "scroll": "Larghezza barre",
+        "text": "Dimensione lettere",
+        "rainbow": "Arcobaleni",
+        "wave": "Lunghezza onda",
+        "sparkle": "Densità",
+        "plasma": "Dimensione",
+        "chase": "Lunghezza barra",
+        "solid": "Dimensione",
+        "gradient": "Dimensione",
+        "fire": "Dimensione",
+        "pulse": "Dimensione"
+      },
+      "direction": "Direzione",
+      "directions": {
+        "left": "Sinistra",
+        "right": "Destra",
+        "up": "Su",
+        "down": "Giù"
+      },
+      "angle": "Angolo",
+      "degrees": "gradi",
+      "recordHint": "L'effetto dal vivo fa parte del banco: il tasto Registra della console lo salva in una scena, Home lo spegne."
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

@@ -47,9 +47,9 @@ export function startEngine(): void {
     const output = registerOutputService(router, bus, session, library);
     const desk = registerConsoleService(router, bus, session, library, output.engine);
     registerAttributeService(router, bus, session, library, desk);
-    const player = registerMemoryService(router, bus, session, desk, output.engine);
+    const live = registerMatrixService(router, bus, session, output.engine, desk);
+    const player = registerMemoryService(router, bus, session, desk, output.engine, live);
     registerCueService(router, bus, session, player);
-    registerMatrixService(router, session, output.engine);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);

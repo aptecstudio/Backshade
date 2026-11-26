@@ -8,6 +8,7 @@
  */
 
 import { UNIVERSE_SIZE } from '../fixtures/fixture-definition.js';
+import { normalizeMatrixEffects, type MatrixEffect } from '../patch/matrix-effect.js';
 import { MAX_UNIVERSE } from '../patch/patch.js';
 import { FADE_LIMITS } from '../show/show-settings.js';
 
@@ -68,6 +69,8 @@ export interface Scene {
     fadeIn: number;
     fadeOut: number;
     levels: UniverseLevels[];
+    /** Effects of the LED matrices: matrix identifier -> effect; missing in older files */
+    matrices: Record<string, MatrixEffect>;
 }
 
 /** Chaser: scenes played one after the other */
@@ -111,10 +114,12 @@ export interface ShowMemories {
 /** Memories of a new show */
 export const EMPTY_MEMORIES: ShowMemories = { scenes: [], chasers: [], cues: [] };
 
-/** Scene without its levels, as the interface lists it */
-export interface SceneSummary extends Omit<Scene, 'levels'> {
+/** Scene without its levels and effects, as the interface lists it */
+export interface SceneSummary extends Omit<Scene, 'levels' | 'matrices'> {
     /** Channels recorded, on all the universes */
     channelCount: number;
+    /** Matrix effects recorded */
+    effectCount: number;
 }
 
 /** Memories as the interface lists them */
@@ -144,8 +149,8 @@ export interface MemoriesState {
  * Summary of a scene, without its levels.
  */
 export function sceneSummary(scene: Scene): SceneSummary {
-    const { levels, ...rest } = scene;
-    return { ...rest, channelCount: levels.reduce((count, item) => count + item.channels.length, 0) };
+    const { levels, matrices, ...rest } = scene;
+    return { ...rest, channelCount: levels.reduce((count, item) => count + item.channels.length, 0), effectCount: Object.keys(matrices).length };
 }
 
 function isInteger(value: unknown, min: number, max: number): value is number {
@@ -207,7 +212,8 @@ export function normalizeMemories(value: unknown): ShowMemories {
             name,
             fadeIn: clampNumber(entry.fadeIn, FADE_LIMITS.min, FADE_LIMITS.max, 0),
             fadeOut: clampNumber(entry.fadeOut, FADE_LIMITS.min, FADE_LIMITS.max, 0),
-            levels: readLevels(entry.levels)
+            levels: readLevels(entry.levels),
+            matrices: normalizeMatrixEffects(entry.matrices)
         });
     }
 

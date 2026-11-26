@@ -14,6 +14,7 @@ import type { FixtureIssue } from '../fixtures/validate-fixture.js';
 import type { OutputTransport, ShowOutput } from '../output/output-config.js';
 import type { UsbDmxDevice, UsbDmxStatus } from '../output/usb-dmx.js';
 import type { MatrixSegment, PatchedMatrix } from '../patch/matrix.js';
+import type { MatrixEffect } from '../patch/matrix-effect.js';
 import type { PatchedFixture } from '../patch/patch.js';
 import type { MediaKind } from '../show/media-kinds.js';
 import type { ShowSettings } from '../show/show-settings.js';
@@ -338,6 +339,10 @@ export interface EngineMethods {
     'patch.updateMatrix': { params: MatrixRequest & { id: string }; result: MatrixEntry };
     /** Colors of the pixels of a matrix as they are sent, in grid order (rows from the top), three values per pixel */
     'matrices.getPixels': { params: { id: string }; result: number[] };
+    /** Live effects of the matrices: matrix identifier -> effect */
+    'matrices.getLive': { params: undefined; result: Record<string, MatrixEffect> };
+    /** Sets the live effect of a matrix, or turns it off with null; part of the desk, recorded in scenes */
+    'matrices.setLive': { params: { id: string; effect: MatrixEffect | null }; result: Record<string, MatrixEffect> };
     /** Removes fixtures and matrices from the patch (unsaved change) */
     'patch.remove': { params: { ids: string[] }; result: undefined };
 
@@ -500,6 +505,8 @@ export interface EngineEvents {
     'memories.changed': Record<string, never>;
     /** Memories turned on or off, a chaser step or the selected chaser changed */
     'memories.stateChanged': { state: MemoriesState };
+    /** The live effects of the matrices have changed */
+    'matrices.liveChanged': { effects: Record<string, MatrixEffect> };
     /** The playback state of the cue list has changed */
     'cues.stateChanged': { state: CueStackState };
     /** The list of templates has changed */

@@ -44,6 +44,7 @@ export class PresetDesk {
     private readonly mapOf: UniverseMapLookup;
     private readonly levels = new Map<number, UniverseLevels>();
     private readonly flashes = new Set<string>();
+    private readonly homeListeners: Array<() => void> = [];
     private state: PresetDeskState = {
         mode: 'ab',
         universe: 1,
@@ -141,6 +142,17 @@ export class PresetDesk {
         }
         this.flashes.clear();
         this.apply();
+        for (const listener of this.homeListeners) {
+            listener();
+        }
+    }
+
+    /**
+     * Registers a listener called after home, for the parts of the desk kept
+     * elsewhere (the live effects of the matrices).
+     */
+    onHome(listener: () => void): void {
+        this.homeListeners.push(listener);
     }
 
     /**
