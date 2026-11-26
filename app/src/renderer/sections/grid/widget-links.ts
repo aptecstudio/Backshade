@@ -4,6 +4,7 @@
  * Every action goes to the engine; the widgets show what the engine sends back.
  */
 
+import { formatDuration } from '../../../framework/ts/index.js';
 import { formatCueNumber } from '../../../shared/console/memories.js';
 import type { WidgetLink } from '../../../shared/grid/grid.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -29,6 +30,7 @@ export function linkName(link: WidgetLink, store: GridStore): string {
         case 'master': return t(`grid.masters.${link.master}`);
         case 'desk': return t(`grid.deskActions.${link.action}`);
         case 'channel': return t('grid.channelName', { universe: link.universe, channel: link.channel });
+        case 'audio': return t(`grid.audioActions.${link.action}`);
         case 'none': return '';
     }
 }
@@ -95,6 +97,8 @@ export function linkActive(link: WidgetLink, store: GridStore): boolean {
                     : link.action === 'blind' ? store.desk?.blind === true : false;
         case 'cue':
             return link.action === 'pause' && store.cues.paused;
+        case 'audio':
+            return link.action === 'pause' ? store.audioPlayback.paused : link.action === 'play' && store.audioPlayback.item !== null && !store.audioPlayback.paused;
         case 'group':
         case 'channel':
             return (linkLevel(link, store) ?? 0) > 0;
@@ -153,6 +157,11 @@ export function pressLink(link: WidgetLink, store: GridStore, down: boolean): vo
                 report(engine().request('console.home'));
             }
             break;
+        case 'audio':
+            if (down) {
+                report(engine().request(`audio.${link.action}`));
+            }
+            break;
         case 'none':
             break;
     }
@@ -185,6 +194,15 @@ export function monitorText(link: WidgetLink, store: GridStore): string {
         }
         case 'scene':
             return linkActive(link, store) ? formatControlValue('fader', linkLevel(link, store) ?? 0) : t('grid.off');
+        case 'audio': {
+            const playing = store.audioPlayback;
+            const item = store.audio?.items.find((entry) => entry.id === playing.item);
+            if (item === undefined) {
+                return t('audio.stopped');
+            }
+            const end = item.end ?? playing.duration;
+            return t('grid.monitorAudio', { name: item.name, remaining: formatDuration(Math.max(0, end - playing.position)) });
+        }
         default: {
             const level = linkLevel(link, store);
             return level === null ? '' : formatControlValue('fader', level);

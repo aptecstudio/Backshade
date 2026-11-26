@@ -1,0 +1,50 @@
+// Audio section: transport and playlist
+@use 'framework/scss/tokens' as *;
+
+.audio-transport__progress {
+    flex: 1 1 space(8) * 4;
+}
+
+.audio-progress {
+    height: space(1);
+    border-radius: $radius-square-key;
+    background: color('display');
+    overflow: hidden;
+}
+
+.audio-progress__fill {
+    width: calc(var(--audio-progress, 0) * 100%);
+    height: 100%;
+    background: color('accent');
+}
+
+// The next key uses the previous icon, mirrored
+.audio-next svg {
+    transform: scaleX(-1);
+}
+
+.audio-volume {
+    width: space(8) * 3;
+}
+
+.audio-volume .slider {
+    width: 100%;
+}
+
+.audio-playlist__row {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.audio-playlist__row--current .label {
+    color: color('accent');
+}
+
+.audio-add__files {
+    max-height: space(8) * 5;
+    overflow-y: auto;
+}

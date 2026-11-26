@@ -8,7 +8,9 @@
 import { app } from 'electron';
 import { startCloseGuard } from '../services/close-guard-service';
 import { FixtureLibrary } from '../fixtures/fixture-library';
+import { PlaybackWindow } from '../playback/playback-window';
 import { registerAppInfoService } from '../services/app-info-service';
+import { registerAudioService } from '../services/audio-service';
 import { registerAttributeService } from '../services/attribute-service';
 import { registerConsoleService } from '../services/console-service';
 import { registerCueService } from '../services/cue-service';
@@ -50,8 +52,10 @@ export function startEngine(): void {
     const desk = registerConsoleService(router, bus, session, library, output.engine);
     registerAttributeService(router, bus, session, library, desk);
     registerGroupService(router, bus, session, output.engine, desk);
+    const playback = new PlaybackWindow();
+    const audio = registerAudioService(router, bus, session, playback);
     const live = registerMatrixService(router, bus, session, output.engine, desk);
-    const player = registerMemoryService(router, bus, session, desk, output.engine, live);
+    const player = registerMemoryService(router, bus, session, desk, output.engine, live, audio);
     registerCueService(router, bus, session, player);
     registerGridService(router, bus, session);
     registerRecentService(router, bus);
@@ -67,5 +71,6 @@ export function startEngine(): void {
         session.autosave();
         session.dispose();
         output.dispose();
+        playback.close();
     });
 }

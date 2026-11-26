@@ -4,6 +4,7 @@
  * timeline); every incompatible change increases SHOW_FORMAT_VERSION.
  */
 
+import type { ShowAudio } from '../audio/audio.js';
 import type { ShowMemories } from '../console/memories.js';
 import type { ShowGrid } from '../grid/grid.js';
 import type { ShowOutput } from '../output/output-config.js';
@@ -40,4 +41,6 @@ export interface ShowDocument {
     memories: ShowMemories;
     /** Pages of the virtual console; missing in older files, completed when reading */
     grid: ShowGrid;
+    /** Audio player and playlist; missing in older files, completed when reading */
+    audio: ShowAudio;
 }

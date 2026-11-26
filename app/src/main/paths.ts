@@ -15,6 +15,9 @@ export const WEB_ROOT = path.join(appRoot, 'dist', 'web');
 /** Compiled preload script */
 export const PRELOAD_FILE = path.join(appRoot, 'dist', 'node', 'preload', 'preload.js');
 
+/** Compiled preload script of the playback window */
+export const PLAYBACK_PRELOAD_FILE = path.join(appRoot, 'dist', 'node', 'preload', 'playback-preload.js');
+
 /** Window icon */
 export const ICON_FILE = path.join(appRoot, 'build', 'icon.png');
 

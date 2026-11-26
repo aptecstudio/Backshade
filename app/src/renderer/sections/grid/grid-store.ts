@@ -7,6 +7,7 @@
 
 import { Emitter, type Unsubscribe } from '../../../framework/ts/index.js';
 import type { PresetDeskState } from '../../../shared/console/preset-desk.js';
+import type { AudioPlayback, ShowAudio } from '../../../shared/audio/audio.js';
 import type { CueStackState } from '../../../shared/console/cue-stack.js';
 import type { MemoriesState, MemoriesSummary } from '../../../shared/console/memories.js';
 import type { FixtureGroup } from '../../../shared/patch/groups.js';
@@ -23,6 +24,8 @@ export class GridStore {
     cues: CueStackState = { current: null, next: null, paused: false, fade: null, follow: null };
     groups: FixtureGroup[] = [];
     groupLevels: Record<string, number> = {};
+    audio: ShowAudio | null = null;
+    audioPlayback: AudioPlayback = { item: null, paused: false, position: 0, duration: 0, fromScene: false };
     /** Levels of row A of the desk per universe, loaded for the channels in use */
     private readonly channelLevels = new Map<number, number[]>();
     private readonly changes = new Emitter<void>();
@@ -38,6 +41,8 @@ export class GridStore {
             on('cues.stateChanged', ({ state }) => this.set(() => { this.cues = state; })),
             on('console.groupLevelsChanged', ({ levels }) => this.set(() => { this.groupLevels = levels; })),
             on('patch.changed', () => void this.loadGroups()),
+            on('audio.changed', () => void engine().request('audio.get').then((audio) => this.set(() => { this.audio = audio; })).catch(showError)),
+            on('audio.stateChanged', ({ state }) => this.set(() => { this.audioPlayback = state; })),
             on('console.faderChanged', ({ row, universe, channel, value }) => this.setChannel(row, universe, [[channel, value]])),
             on('console.fadersChanged', ({ row, universe, channels }) => this.setChannel(row, universe, channels)),
             on('console.levelsChanged', () => this.reloadChannels())
@@ -116,16 +121,18 @@ export class GridStore {
 
     private async load(): Promise<void> {
         try {
-            const [desk, memories, playback, cues, groups, groupLevels, output] = await Promise.all([
+            const [desk, memories, playback, cues, groups, groupLevels, output, audio, audioPlayback] = await Promise.all([
                 engine().request('console.getState'),
                 engine().request('memories.get'),
                 engine().request('memories.getState'),
                 engine().request('cues.getState'),
                 engine().request('patch.getGroups'),
                 engine().request('console.getGroupLevels'),
-                engine().request('output.getState')
+                engine().request('output.getState'),
+                engine().request('audio.get'),
+                engine().request('audio.getState')
             ]);
-            this.set(() => Object.assign(this, { desk, memories, playback, cues, groups, groupLevels, output }));
+            this.set(() => Object.assign(this, { desk, memories, playback, cues, groups, groupLevels, output, audio, audioPlayback }));
         } catch (error) {
             await showError(error);
         }

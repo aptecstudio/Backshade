@@ -75,7 +75,7 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
     };
     session.onContentChange((part) => {
         // Scenes and chasers do not change the channels or the destinations
-        if (part === 'memories' || part === 'grid') {
+        if (part === 'memories' || part === 'grid' || part === 'audio') {
             return;
         }
         follow();

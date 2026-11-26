@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { app } from 'electron';
 import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show-document';
+import type { ShowAudio } from '../../shared/audio/audio';
 import type { ShowMemories } from '../../shared/console/memories';
 import type { ShowGrid } from '../../shared/grid/grid';
 import type { ShowOutput } from '../../shared/output/output-config';
@@ -35,7 +36,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -256,6 +257,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('memories');
+    }
+
+    /**
+     * Audio player and playlist of the open show.
+     */
+    audio(): ShowAudio {
+        return this.requireOpen().document.audio;
+    }
+
+    /**
+     * Replaces the audio player and playlist; the change must be saved.
+     */
+    setAudio(audio: ShowAudio): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(audio) === JSON.stringify(show.document.audio)) {
+            return;
+        }
+        show.document = { ...show.document, audio };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('audio');
     }
 
     /**

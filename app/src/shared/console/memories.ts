@@ -71,6 +71,8 @@ export interface Scene {
     levels: UniverseLevels[];
     /** Effects of the LED matrices: matrix identifier -> effect; missing in older files */
     matrices: Record<string, MatrixEffect>;
+    /** Item of the audio playlist started by the scene, null for none; missing in older files */
+    audio: string | null;
 }
 
 /** Chaser: scenes played one after the other */
@@ -215,7 +217,8 @@ export function normalizeMemories(value: unknown): ShowMemories {
             fadeIn: clampNumber(entry.fadeIn, FADE_LIMITS.min, FADE_LIMITS.max, 0),
             fadeOut: clampNumber(entry.fadeOut, FADE_LIMITS.min, FADE_LIMITS.max, 0),
             levels: readLevels(entry.levels),
-            matrices: normalizeMatrixEffects(entry.matrices)
+            matrices: normalizeMatrixEffects(entry.matrices),
+            audio: typeof entry.audio === 'string' && entry.audio !== '' ? entry.audio : null
         });
     }
 

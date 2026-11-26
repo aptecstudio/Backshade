@@ -6,6 +6,7 @@
  */
 
 import type { AttributeLayout } from '../console/fixture-attributes.js';
+import type { AudioDevice, AudioPlayback, ShowAudio } from '../audio/audio.js';
 import type { CueStackState } from '../console/cue-stack.js';
 import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
@@ -448,6 +449,32 @@ export interface EngineMethods {
     /** Turns every memory off with its fade out */
     'memories.releaseAll': { params: undefined; result: MemoriesState };
 
+    /** Audio player and playlist of the open show */
+    'audio.get': { params: undefined; result: ShowAudio };
+    /** Playback of the audio player */
+    'audio.getState': { params: undefined; result: AudioPlayback };
+    /** Audio outputs of the computer */
+    'audio.listDevices': { params: undefined; result: AudioDevice[] };
+    /** Changes output, volume or auto advance of the player (unsaved change) */
+    'audio.setPlayer': { params: { device?: string; volume?: number; autoAdvance?: boolean }; result: ShowAudio };
+    /** Adds audio files of the show media at the end of the playlist (unsaved change) */
+    'audio.addItems': { params: { files: string[] }; result: ShowAudio };
+    /** Changes an item of the playlist (unsaved change) */
+    'audio.updateItem': { params: { id: string; name: string; start: number; end: number | null; fadeIn: number; fadeOut: number; volume: number; loop: boolean }; result: ShowAudio };
+    /** Removes an item of the playlist (unsaved change) */
+    'audio.removeItem': { params: { id: string }; result: ShowAudio };
+    /** Moves an item one place up (offset -1) or down (1) (unsaved change) */
+    'audio.moveItem': { params: { id: string; offset: number }; result: ShowAudio };
+    /** Plays an item; without id resumes after pause or starts the first item */
+    'audio.play': { params: { id?: string } | undefined; result: AudioPlayback };
+    /** Stops with the fade out of the item */
+    'audio.stop': { params: undefined; result: AudioPlayback };
+    /** Pauses or resumes */
+    'audio.pause': { params: undefined; result: AudioPlayback };
+    /** Plays the next item */
+    'audio.next': { params: undefined; result: AudioPlayback };
+    /** Plays the previous item */
+    'audio.previous': { params: undefined; result: AudioPlayback };
     /** Pages of the virtual console of the open show */
     'grid.get': { params: undefined; result: ShowGrid };
     /** Replaces the pages of the virtual console (unsaved change); returns them as saved */
@@ -525,6 +552,10 @@ export interface EngineEvents {
     'memories.changed': Record<string, never>;
     /** Memories turned on or off, a chaser step or the selected chaser changed */
     'memories.stateChanged': { state: MemoriesState };
+    /** The audio player or playlist of the open show has changed */
+    'audio.changed': Record<string, never>;
+    /** The playback of the audio player has changed, or its position moved */
+    'audio.stateChanged': { state: AudioPlayback };
     /** The pages of the virtual console have changed */
     'grid.changed': Record<string, never>;
     /** The intensity levels of the fixture groups have changed */

@@ -23,6 +23,7 @@
       "timeline": "Timeline",
       "patch": "Patch",
       "matrices": "Matrici",
+      "audio": "Audio",
       "media": "Media",
       "stage": "Palco 3D",
       "settings": "Impostazioni",
@@ -448,7 +449,8 @@
         "master": "Master",
         "group": "Gruppo",
         "channel": "Canale DMX",
-        "desk": "Comando del banco"
+        "desk": "Comando del banco",
+        "audio": "Lettore audio"
       },
       "noTargets": {
         "scene": "Non ci sono ancora scene: registrale nella sezione Console.",
@@ -478,7 +480,47 @@
       "off": "Spento",
       "monitorCue": "{current} / poi {next}",
       "monitorTempo": "{bpm} bpm",
-      "monitorStep": "{bpm} bpm, step {step} di {count}"
+      "monitorStep": "{bpm} bpm, step {step} di {count}",
+      "audioActions": {
+        "play": "Play",
+        "pause": "Pausa",
+        "stop": "Stop",
+        "next": "Successivo",
+        "previous": "Precedente"
+      },
+      "monitorAudio": "{name}, -{remaining}"
+    },
+    "audio": {
+      "player": "Lettore",
+      "playlist": "Playlist",
+      "stopped": "Fermo",
+      "elapsed": "Trascorso",
+      "remaining": "Rimanente",
+      "previous": "Precedente",
+      "play": "Play",
+      "pause": "Pausa",
+      "stop": "Stop",
+      "next": "Successivo",
+      "volume": "Volume",
+      "output": "Uscita audio",
+      "defaultOutput": "Uscita di sistema",
+      "autoAdvance": "Suona il brano successivo",
+      "addFromMedia": "Aggiungi dai Media",
+      "empty": "La playlist è vuota: aggiungi file audio dai Media dello show.",
+      "playItem": "Suona {name}",
+      "editItem": "Modifica {name}",
+      "itemTitle": "Brano della playlist",
+      "start": "Inizio",
+      "end": "Fine",
+      "fileEnd": "fine",
+      "endTime": "Tempo di fine",
+      "loop": "Ripeti",
+      "remove": "Togli dalla playlist",
+      "fades": "fade {fadeIn} / {fadeOut}",
+      "itemHint": "Quando una scena o una cue avvia questo brano, si usano i fade della scena o della cue.",
+      "addTitle": "Aggiungi file audio",
+      "add": "Aggiungi",
+      "noFiles": "Nessun file audio nei Media dello show: importali nella sezione Media."
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

@@ -6,12 +6,14 @@
 
 import { Dialog, Key, Label, NumberField, SelectField, Stack, TextField, type SelectOption } from '../../../framework/ts/index.js';
 import {
+    AUDIO_ACTIONS,
     CUE_ACTIONS,
     DESK_ACTIONS,
     GRID_MASTERS,
     WIDGET_LINKS,
     WIDGET_SIZES,
     WIDGET_TYPES,
+    type AudioAction,
     type CueAction,
     type DeskAction,
     type GridMaster,
@@ -61,6 +63,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
                 case 'cue': return CUE_ACTIONS.map((action) => ({ value: action, label: t(`grid.cueActions.${action}`) }));
                 case 'master': return GRID_MASTERS.map((master) => ({ value: master, label: t(`grid.masters.${master}`) }));
                 case 'desk': return DESK_ACTIONS.map((action) => ({ value: action, label: t(`grid.deskActions.${action}`) }));
+                case 'audio': return AUDIO_ACTIONS.map((action) => ({ value: action, label: t(`grid.audioActions.${action}`) }));
                 default: return [];
             }
         };
@@ -68,7 +71,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
             const link = widget.link;
             switch (link.kind) {
                 case 'scene': case 'chaser': case 'group': return link.id;
-                case 'cue': case 'desk': return link.action;
+                case 'cue': case 'desk': case 'audio': return link.action;
                 case 'master': return link.master;
                 default: return '';
             }
@@ -119,6 +122,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
                 case 'cue': return { kind: 'cue', action: value as CueAction };
                 case 'master': return { kind: 'master', master: value as GridMaster };
                 case 'desk': return { kind: 'desk', action: value as DeskAction };
+                case 'audio': return { kind: 'audio', action: value as AudioAction };
                 case 'channel': return { kind: 'channel', universe: universe.value, channel: channel.value };
                 default: return { kind: 'none' };
             }

@@ -9,6 +9,7 @@ import { pathToFileURL } from 'node:url';
 import { net, protocol } from 'electron';
 import { WEB_ROOT } from '../paths';
 import { handleLocaleRequest } from './locale-routes';
+import { handleShowMediaRequest } from './show-media-route';
 
 const SCHEME = 'app';
 const HOST = 'backshade';
@@ -23,7 +24,9 @@ export function registerScheme(): void {
             privileges: {
                 standard: true,
                 secure: true,
-                supportFetchAPI: true
+                supportFetchAPI: true,
+                // Audio and video of the show media are streamed by the playback window
+                stream: true
             }
         }
     ]);
@@ -53,6 +56,11 @@ export function handle(): void {
 
         if (url.host !== HOST) {
             return new Response(null, { status: 404 });
+        }
+
+        const mediaResponse = handleShowMediaRequest(url.pathname, request);
+        if (mediaResponse !== null) {
+            return mediaResponse;
         }
 
         const localeResponse = handleLocaleRequest(url.pathname);

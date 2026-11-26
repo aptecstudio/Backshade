@@ -24,6 +24,10 @@ export const GRID_MASTERS: readonly GridMaster[] = ['a', 'b', 'scene', 'grand'];
 export type DeskAction = 'blackout' | 'fullOn' | 'blind' | 'home';
 export const DESK_ACTIONS: readonly DeskAction[] = ['blackout', 'fullOn', 'blind', 'home'];
 
+/** Actions of the audio player */
+export type AudioAction = 'play' | 'pause' | 'stop' | 'next' | 'previous';
+export const AUDIO_ACTIONS: readonly AudioAction[] = ['play', 'pause', 'stop', 'next', 'previous'];
+
 /** What a widget controls or shows */
 export type WidgetLink =
     | { kind: 'none' }
@@ -33,20 +37,21 @@ export type WidgetLink =
     | { kind: 'master'; master: GridMaster }
     | { kind: 'group'; id: string }
     | { kind: 'channel'; universe: number; channel: number }
-    | { kind: 'desk'; action: DeskAction };
+    | { kind: 'desk'; action: DeskAction }
+    | { kind: 'audio'; action: AudioAction };
 
 /** Kind of link */
 export type LinkKind = WidgetLink['kind'];
 
 /** Links each widget type accepts */
 export const WIDGET_LINKS: Readonly<Record<WidgetType, readonly LinkKind[]>> = {
-    key: ['scene', 'chaser', 'cue', 'group', 'channel', 'desk', 'none'],
+    key: ['scene', 'chaser', 'cue', 'group', 'channel', 'desk', 'audio', 'none'],
     fader: ['scene', 'chaser', 'master', 'group', 'channel', 'none'],
     knob: ['scene', 'chaser', 'master', 'group', 'channel', 'none'],
     colorPicker: ['group'],
     xyPad: ['group'],
     label: ['none'],
-    monitor: ['cue', 'scene', 'chaser', 'master', 'group', 'channel']
+    monitor: ['cue', 'scene', 'chaser', 'master', 'group', 'channel', 'audio']
 };
 
 /** Widget placed on a page */
@@ -114,6 +119,8 @@ export function normalizeLink(value: unknown): WidgetLink {
             return isInt(input.universe, 1, 32768) && isInt(input.channel, 1, 512) ? { kind: 'channel', universe: input.universe, channel: input.channel } : { kind: 'none' };
         case 'desk':
             return DESK_ACTIONS.includes(input.action as DeskAction) ? { kind: 'desk', action: input.action as DeskAction } : { kind: 'none' };
+        case 'audio':
+            return AUDIO_ACTIONS.includes(input.action as AudioAction) ? { kind: 'audio', action: input.action as AudioAction } : { kind: 'none' };
         default:
             return { kind: 'none' };
     }

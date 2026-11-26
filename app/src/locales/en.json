@@ -23,6 +23,7 @@
       "timeline": "Timeline",
       "patch": "Patch",
       "matrices": "Matrices",
+      "audio": "Audio",
       "media": "Media",
       "stage": "3D stage",
       "settings": "Settings",
@@ -448,7 +449,8 @@
         "master": "Master",
         "group": "Group",
         "channel": "DMX channel",
-        "desk": "Desk command"
+        "desk": "Desk command",
+        "audio": "Audio player"
       },
       "noTargets": {
         "scene": "There are no scenes yet: record them in the Console section.",
@@ -478,7 +480,47 @@
       "off": "Off",
       "monitorCue": "{current} / next {next}",
       "monitorTempo": "{bpm} bpm",
-      "monitorStep": "{bpm} bpm, step {step} of {count}"
+      "monitorStep": "{bpm} bpm, step {step} of {count}",
+      "audioActions": {
+        "play": "Play",
+        "pause": "Pause",
+        "stop": "Stop",
+        "next": "Next",
+        "previous": "Previous"
+      },
+      "monitorAudio": "{name}, -{remaining}"
+    },
+    "audio": {
+      "player": "Player",
+      "playlist": "Playlist",
+      "stopped": "Stopped",
+      "elapsed": "Elapsed",
+      "remaining": "Remaining",
+      "previous": "Previous",
+      "play": "Play",
+      "pause": "Pause",
+      "stop": "Stop",
+      "next": "Next",
+      "volume": "Volume",
+      "output": "Audio output",
+      "defaultOutput": "System output",
+      "autoAdvance": "Play the next item",
+      "addFromMedia": "Add from media",
+      "empty": "The playlist is empty: add audio files of the show media.",
+      "playItem": "Play {name}",
+      "editItem": "Change {name}",
+      "itemTitle": "Playlist item",
+      "start": "Start",
+      "end": "End",
+      "fileEnd": "end",
+      "endTime": "End time",
+      "loop": "Repeat",
+      "remove": "Remove from the playlist",
+      "fades": "fade {fadeIn} / {fadeOut}",
+      "itemHint": "When a scene or a cue starts this item, the fades of the scene or cue are used.",
+      "addTitle": "Add audio files",
+      "add": "Add",
+      "noFiles": "No audio files in the show media: import them in the Media section."
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

@@ -7,6 +7,7 @@
 import type { Component, IconName } from '../../framework/ts/index.js';
 import type { TextKey } from '../i18n/i18n.js';
 import { StartPage } from '../start/start-page.js';
+import { AudioSection } from './audio/audio-section.js';
 import { ConsoleSection } from './console/console-section.js';
 import { GridSection } from './grid/grid-section.js';
 import { MatricesSection } from './matrices/matrices-section.js';
@@ -17,7 +18,7 @@ import { PlaceholderSection } from './placeholder-section.js';
 import { SettingsSection } from './settings/settings-section.js';
 
 /** Identifier of a section */
-export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'matrices' | 'output' | 'media' | 'settings';
+export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'matrices' | 'audio' | 'output' | 'media' | 'settings';
 
 /** Section definition */
 export interface SectionDefinition {
@@ -37,6 +38,7 @@ export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'timeline', labelKey: 'sections.timeline', create: () => new PlaceholderSection('sections.timeline') },
     { id: 'patch', labelKey: 'sections.patch', create: () => new PatchSection() },
     { id: 'matrices', labelKey: 'sections.matrices', create: () => new MatricesSection() },
+    { id: 'audio', labelKey: 'sections.audio', create: () => new AudioSection() },
     { id: 'output', labelKey: 'sections.output', create: () => new OutputSection() },
     { id: 'media', labelKey: 'sections.media', create: () => new MediaSection() }
 ];

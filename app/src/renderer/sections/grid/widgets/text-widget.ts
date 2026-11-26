@@ -24,8 +24,8 @@ export class TextWidget extends GridWidgetView {
 
     /** A monitor of the cue list is named after the list, not after an action */
     protected get name(): string {
-        if (this.widget.type === 'monitor' && this.widget.label === '' && this.widget.link.kind === 'cue') {
-            return t('grid.links.cue');
+        if (this.widget.type === 'monitor' && this.widget.label === '' && (this.widget.link.kind === 'cue' || this.widget.link.kind === 'audio')) {
+            return t(`grid.links.${this.widget.link.kind}`);
         }
         return super.name;
     }
