@@ -78,6 +78,19 @@ export class Key extends Component<HTMLButtonElement> {
     }
 
     /**
+     * Changes the icon of the key, or adds one.
+     */
+    setIcon(name: IconName): void {
+        const next = icon(name);
+        const current = this.element.querySelector('svg');
+        if (current === null) {
+            this.element.prepend(next);
+        } else {
+            current.replaceWith(next);
+        }
+    }
+
+    /**
      * Changes the visual state of the key.
      */
     setState(state: KeyState): void {

@@ -24,6 +24,7 @@ import {
     type WidgetType
 } from '../../../shared/grid/grid.js';
 import { MAX_UNIVERSE } from '../../../shared/patch/patch.js';
+import { TIMER_ACTIONS, type TimerAction } from '../../../shared/video/show-timer.js';
 import { t } from '../../i18n/i18n.js';
 import type { GridStore } from './grid-store.js';
 
@@ -54,12 +55,18 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
         const height = new NumberField({ label: t('grid.height'), value: widget.h, min: 1, max: page.rows - widget.y });
         const hint = new Label({ text: '', tone: 'secondary', size: 'small' });
         const channelRow = new Stack({ direction: 'row', gap: 2, children: [universe, channel] });
+        const timerAction = new SelectField<TimerAction>({
+            label: t('grid.timerAction'),
+            options: TIMER_ACTIONS.map((action) => ({ value: action, label: t(`grid.timerActions.${action}`) })),
+            value: widget.link.kind === 'timer' ? widget.link.action : 'toggle'
+        });
 
         const targetOptions = (kind: LinkKind): Array<SelectOption<string>> => {
             switch (kind) {
                 case 'scene': return store.memories.scenes.map((scene) => ({ value: scene.id, label: `S${scene.slot} ${scene.name}` }));
                 case 'chaser': return store.memories.chasers.map((chaser) => ({ value: chaser.id, label: `C${chaser.slot} ${chaser.name}` }));
                 case 'group': return store.groups.map((group) => ({ value: group.id, label: `${group.number} ${group.name}` }));
+                case 'timer': return store.timers.map((timer) => ({ value: timer.id, label: timer.name }));
                 case 'cue': return CUE_ACTIONS.map((action) => ({ value: action, label: t(`grid.cueActions.${action}`) }));
                 case 'master': return GRID_MASTERS.map((master) => ({ value: master, label: t(`grid.masters.${master}`) }));
                 case 'desk': return DESK_ACTIONS.map((action) => ({ value: action, label: t(`grid.deskActions.${action}`) }));
@@ -70,7 +77,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
         const currentTarget = (): string => {
             const link = widget.link;
             switch (link.kind) {
-                case 'scene': case 'chaser': case 'group': return link.id;
+                case 'scene': case 'chaser': case 'group': case 'timer': return link.id;
                 case 'cue': case 'desk': case 'audio': return link.action;
                 case 'master': return link.master;
                 default: return '';
@@ -83,8 +90,9 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
             target.setOptions(options, keep);
             target.element.hidden = options.length === 0 && kind !== 'scene' && kind !== 'chaser' && kind !== 'group';
             channelRow.element.hidden = kind !== 'channel';
-            const empty = (kind === 'scene' || kind === 'chaser' || kind === 'group') && options.length === 0;
-            hint.setText(empty ? t(`grid.noTargets.${kind}`) : '');
+            timerAction.element.hidden = kind !== 'timer' || type !== 'key';
+            const empty = (kind === 'scene' || kind === 'chaser' || kind === 'group' || kind === 'timer') && options.length === 0;
+            hint.setText(empty ? t(`grid.noTargets.${kind as 'scene' | 'chaser' | 'group' | 'timer'}`) : '');
         };
         // The select starts empty: the kind of the widget is kept here until the options exist
         let chosenKind: LinkKind = widget.link.kind;
@@ -110,6 +118,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
             new Stack({ direction: 'row', gap: 2, wrap: true, children: [typeField, label] }),
             new Stack({ direction: 'row', gap: 2, wrap: true, children: [linkKind, target] }),
             channelRow,
+            timerAction,
             hint,
             new Stack({ direction: 'row', gap: 2, children: [width, height] })
         );
@@ -123,6 +132,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
                 case 'master': return { kind: 'master', master: value as GridMaster };
                 case 'desk': return { kind: 'desk', action: value as DeskAction };
                 case 'audio': return { kind: 'audio', action: value as AudioAction };
+                case 'timer': return value === '' ? { kind: 'none' } : { kind: 'timer', id: value, action: timerAction.value };
                 case 'channel': return { kind: 'channel', universe: universe.value, channel: channel.value };
                 default: return { kind: 'none' };
             }

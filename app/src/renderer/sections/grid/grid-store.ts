@@ -8,6 +8,7 @@
 import { Emitter, type Unsubscribe } from '../../../framework/ts/index.js';
 import type { PresetDeskState } from '../../../shared/console/preset-desk.js';
 import type { AudioPlayback, ShowAudio } from '../../../shared/audio/audio.js';
+import type { ShowTimer, TimerState } from '../../../shared/video/show-timer.js';
 import type { CueStackState } from '../../../shared/console/cue-stack.js';
 import type { MemoriesState, MemoriesSummary } from '../../../shared/console/memories.js';
 import type { FixtureGroup } from '../../../shared/patch/groups.js';
@@ -26,6 +27,8 @@ export class GridStore {
     groupLevels: Record<string, number> = {};
     audio: ShowAudio | null = null;
     audioPlayback: AudioPlayback = { item: null, paused: false, position: 0, duration: 0, fromScene: false };
+    timers: ShowTimer[] = [];
+    timerStates: Record<string, TimerState> = {};
     /** Levels of row A of the desk per universe, loaded for the channels in use */
     private readonly channelLevels = new Map<number, number[]>();
     private readonly changes = new Emitter<void>();
@@ -43,11 +46,20 @@ export class GridStore {
             on('patch.changed', () => void this.loadGroups()),
             on('audio.changed', () => void engine().request('audio.get').then((audio) => this.set(() => { this.audio = audio; })).catch(showError)),
             on('audio.stateChanged', ({ state }) => this.set(() => { this.audioPlayback = state; })),
+            on('video.changed', () => void engine().request('video.get').then((video) => this.set(() => { this.timers = video.timers; })).catch(showError)),
+            on('video.timersChanged', ({ states }) => this.set(() => { this.timerStates = states; })),
             on('console.faderChanged', ({ row, universe, channel, value }) => this.setChannel(row, universe, [[channel, value]])),
             on('console.fadersChanged', ({ row, universe, channels }) => this.setChannel(row, universe, channels)),
             on('console.levelsChanged', () => this.reloadChannels())
         );
         void this.load();
+        // Timer monitors move on by themselves
+        const ticker = window.setInterval(() => {
+            if (this.timers.length > 0) {
+                this.changes.emit();
+            }
+        }, 500);
+        this.stops.push(() => window.clearInterval(ticker));
     }
 
     /** Registers a listener for every change */
@@ -121,7 +133,7 @@ export class GridStore {
 
     private async load(): Promise<void> {
         try {
-            const [desk, memories, playback, cues, groups, groupLevels, output, audio, audioPlayback] = await Promise.all([
+            const [desk, memories, playback, cues, groups, groupLevels, output, audio, audioPlayback, video, timerStates] = await Promise.all([
                 engine().request('console.getState'),
                 engine().request('memories.get'),
                 engine().request('memories.getState'),
@@ -130,9 +142,11 @@ export class GridStore {
                 engine().request('console.getGroupLevels'),
                 engine().request('output.getState'),
                 engine().request('audio.get'),
-                engine().request('audio.getState')
+                engine().request('audio.getState'),
+                engine().request('video.get'),
+                engine().request('video.getTimers')
             ]);
-            this.set(() => Object.assign(this, { desk, memories, playback, cues, groups, groupLevels, output, audio, audioPlayback }));
+            this.set(() => Object.assign(this, { desk, memories, playback, cues, groups, groupLevels, output, audio, audioPlayback, timers: video.timers, timerStates }));
         } catch (error) {
             await showError(error);
         }

@@ -15,6 +15,8 @@ let instance: BrowserWindow | null = null;
 let closeGuard: () => boolean = () => true;
 // The close has been confirmed by the user
 let closeAllowed = false;
+// Called when the window enters or leaves fullscreen
+const fullScreenListeners: Array<(on: boolean) => void> = [];
 
 /**
  * Creates the main window, if it is not already open.
@@ -52,6 +54,9 @@ export function create(page: string): BrowserWindow {
         }
     });
 
+    window.on('enter-full-screen', () => fullScreenListeners.forEach((listener) => listener(true)));
+    window.on('leave-full-screen', () => fullScreenListeners.forEach((listener) => listener(false)));
+
     window.on('closed', () => {
         instance = null;
         closeAllowed = false;
@@ -74,6 +79,30 @@ export function focus(): void {
         instance.restore();
     }
     instance.focus();
+}
+
+/**
+ * Puts the main window in fullscreen or brings it back; returns the new state.
+ */
+export function toggleFullScreen(): boolean {
+    if (instance === null) {
+        return false;
+    }
+    const on = !instance.isFullScreen();
+    instance.setFullScreen(on);
+    return on;
+}
+
+/** The main window is fullscreen */
+export function isFullScreen(): boolean {
+    return instance?.isFullScreen() === true;
+}
+
+/**
+ * Registers a listener for the fullscreen changes (key, menu or system).
+ */
+export function onFullScreen(listener: (on: boolean) => void): void {
+    fullScreenListeners.push(listener);
 }
 
 /**

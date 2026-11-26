@@ -15,7 +15,9 @@
     "shell": {
       "noShow": "No show open",
       "navigation": "Sections",
-      "logo": "Backshade"
+      "logo": "Backshade",
+      "fullScreen": "Fullscreen",
+      "leaveFullScreen": "Leave fullscreen"
     },
     "sections": {
       "console": "Console",
@@ -451,12 +453,14 @@
         "group": "Group",
         "channel": "DMX channel",
         "desk": "Desk command",
-        "audio": "Audio player"
+        "audio": "Audio player",
+        "timer": "Timer"
       },
       "noTargets": {
         "scene": "There are no scenes yet: record them in the Console section.",
         "chaser": "There are no chasers yet: create them in the Console section.",
-        "group": "There are no groups yet: create them in the Patch section."
+        "group": "There are no groups yet: create them in the Patch section.",
+        "timer": "There are no timers yet: create them in the Video section."
       },
       "cueActions": {
         "go": "Go",
@@ -489,7 +493,16 @@
         "next": "Next",
         "previous": "Previous"
       },
-      "monitorAudio": "{name}, -{remaining}"
+      "monitorAudio": "{name}, -{remaining}",
+      "timerActions": {
+        "toggle": "Start / pause",
+        "start": "Start",
+        "pause": "Pause",
+        "reset": "Reset",
+        "plus": "+1 min",
+        "minus": "-1 min"
+      },
+      "timerAction": "Command"
     },
     "audio": {
       "player": "Player",
@@ -555,7 +568,102 @@
       "inputName": "Input: {name}",
       "quality": "Quality",
       "frameRate": "Frame rate",
-      "fps": "{rate} fps"
+      "fps": "{rate} fps",
+      "goboName": "Gobo: {name}",
+      "timerName": "Timer: {name}"
+    },
+    "gobos": {
+      "title": "Text gobos",
+      "add": "New gobo",
+      "defaultName": "Gobo {number}",
+      "text": "Text",
+      "placeholders": "Live texts: {list}",
+      "sampleCue": "Chorus",
+      "sampleSong": "Walk in",
+      "style": "Letters",
+      "weight": "Weight",
+      "weights": {
+        "regular": "Regular",
+        "bold": "Bold"
+      },
+      "size": "Size",
+      "color": "Color",
+      "outlineColor": "Outline color",
+      "outline": "Outline",
+      "align": "Alignment",
+      "aligns": {
+        "left": "Left",
+        "center": "Center",
+        "right": "Right"
+      },
+      "position": "Position",
+      "x": "Horizontal",
+      "y": "Vertical",
+      "rotation": "Rotation",
+      "look": "Gobo look",
+      "mask": "Shape",
+      "masks": {
+        "none": "None",
+        "circle": "Circle",
+        "image": "Image"
+      },
+      "maskImage": "Shape image",
+      "maskSize": "Shape size",
+      "softness": "Soft edge",
+      "focus": "Focus",
+      "prism": "Prism",
+      "noPrism": "None",
+      "facets": "{count} facets",
+      "prismSpread": "Prism spread",
+      "motion": "Animation",
+      "animation": "Animation",
+      "animations": {
+        "none": "None",
+        "scroll": "Scroll",
+        "rotate": "Rotation",
+        "fade": "Fade",
+        "typeOn": "Type-on"
+      },
+      "countdown": "Countdown",
+      "countdownModes": {
+        "duration": "Duration",
+        "time": "To a time"
+      },
+      "countdownDuration": "Duration",
+      "countdownTime": "Time (HH:MM)",
+      "deleteTitle": "Delete the gobo",
+      "deleteConfirm": "Delete \"{name}\"? Layers using it become empty."
+    },
+    "timers": {
+      "title": "Timer screens",
+      "add": "New timer",
+      "modes": {
+        "clock": "Current time",
+        "countdown": "Countdown",
+        "countdownTo": "Countdown to a time",
+        "stopwatch": "Stopwatch"
+      },
+      "label": "Label",
+      "duration": "Duration",
+      "warning": "Warning before the end",
+      "atZero": "At zero",
+      "negative": "Count on with minus",
+      "stop": "Stop at zero",
+      "flash": "Flash at zero",
+      "warningColor": "Warning color",
+      "endColor": "End color",
+      "background": "Background",
+      "backgroundColor": "Background color",
+      "transparent": "Transparent",
+      "showSeconds": "Seconds",
+      "showDate": "Date",
+      "start": "Start",
+      "pause": "Pause",
+      "reset": "Reset",
+      "plus": "+1 min",
+      "minus": "-1 min",
+      "deleteTitle": "Delete the timer",
+      "deleteConfirm": "Delete \"{name}\"? Layers using it become empty."
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

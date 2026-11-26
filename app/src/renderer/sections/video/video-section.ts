@@ -8,12 +8,16 @@
 
 import { Key, Label, NumberField, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
 import type { MediaItem } from '../../../shared/transport/engine-api.js';
+import type { TimerState } from '../../../shared/video/show-timer.js';
+import type { GoboContext } from '../../../shared/video/text-gobo.js';
 import type { OutputComposition, ShowVideo, VideoInput, VideoOutputConfig } from '../../../shared/video/video.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
+import { GoboPanel } from './gobo-panel.js';
 import { LayerRow } from './layer-row.js';
+import { TimerPanel } from './timer-panel.js';
 import { openOutputDialog } from './output-dialog.js';
 
 interface Monitor {
@@ -30,7 +34,11 @@ export class VideoSection extends Stack {
     private keys: Key[] = [];
     private monitors: { preview: Monitor; program: Monitor } | null = null;
     private grid: Stack | null = null;
-    private video: ShowVideo = { outputs: [] };
+    private video: ShowVideo = { outputs: [], gobos: [], timers: [] };
+    private timerStates: Record<string, TimerState> = {};
+    private timerPanel: TimerPanel | null = null;
+    private context: GoboContext = { cue: '', song: '' };
+    private goboPanel: GoboPanel | null = null;
     private compositions: Record<string, OutputComposition> = {};
     private media: MediaItem[] = [];
     private inputs: VideoInput[] = [];
@@ -63,6 +71,15 @@ export class VideoSection extends Stack {
             children: [this.outputKeys, add, this.settings, new Spacer(), new Label({ text: t('video.transition'), size: 'small' }), this.transition, takeAll, take]
         }), this.empty);
         this.append(header, this.body);
+        this.timerPanel = new TimerPanel();
+        this.goboPanel = new GoboPanel();
+        this.append(this.timerPanel, this.goboPanel);
+        this.track(engine().on('video.timersChanged', ({ states }) => {
+            this.timerStates = states;
+            this.monitors?.preview.view.setTimers(this.video.timers, states);
+            this.monitors?.program.view.setTimers(this.video.timers, states);
+            this.timerPanel?.applyStates(states);
+        }));
 
         this.track(engine().on('video.changed', () => void this.load()));
         this.track(engine().on('video.stateChanged', ({ compositions }) => this.applyState(compositions)));
@@ -76,11 +93,12 @@ export class VideoSection extends Stack {
 
     private async load(): Promise<void> {
         try {
-            [this.video, this.compositions, this.media, this.inputs] = await Promise.all([
+            [this.video, this.compositions, this.media, this.inputs, this.timerStates] = await Promise.all([
                 engine().request('video.get'),
                 engine().request('video.getState'),
                 engine().request('media.list'),
-                engine().request('video.listInputs')
+                engine().request('video.listInputs'),
+                engine().request('video.getTimers')
             ]);
         } catch (error) {
             await showError(error);
@@ -103,6 +121,8 @@ export class VideoSection extends Stack {
             return key;
         });
         this.outputKeys.append(...this.keys);
+        this.goboPanel?.show(this.video.gobos, this.media);
+        this.timerPanel?.show(this.video.timers, this.timerStates);
         this.settings.element.hidden = output === null;
         this.empty.element.hidden = output !== null;
 
@@ -118,8 +138,10 @@ export class VideoSection extends Stack {
             const panel = new Panel({ title: t(`video.${target}`), classes: ['video-monitor', `video-monitor--${target}`] });
             const view = new CompositionView();
             view.element.style.setProperty('--output-ratio', `${output.width} / ${output.height}`);
+            view.setGobos(this.video.gobos, this.context);
+            view.setTimers(this.video.timers, this.timerStates);
             view.show(composition[target], 0);
-            const rows = composition[target].map((layer, index) => new LayerRow(output.id, target, index, layer, this.media, this.inputs));
+            const rows = composition[target].map((layer, index) => new LayerRow(output.id, target, index, layer, this.media, this.inputs, this.video.gobos, this.video.timers));
             // Top layer first, as they are stacked
             panel.append(view, new Stack({ children: [...rows].reverse() }));
             panels.push(panel);

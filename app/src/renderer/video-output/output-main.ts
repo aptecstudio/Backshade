@@ -12,6 +12,12 @@ declare global {
     }
 }
 
+// The dates of the timers follow the language chosen in the interface (same origin, same storage)
+document.documentElement.lang = localStorage.getItem('backshade.locale') ?? navigator.language;
 const view = new CompositionView(['composition--output']);
 view.mount(document.body);
-window.backshadeVideoOutput.onCompose((message) => view.show(message.layers, message.transition));
+window.backshadeVideoOutput.onCompose((message) => {
+    view.setGobos(message.gobos, message.context);
+    view.setTimers(message.timers, message.timerStates);
+    view.show(message.layers, message.transition);
+});

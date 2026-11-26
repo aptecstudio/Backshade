@@ -6,6 +6,8 @@
  * engine and interface.
  */
 
+import { TIMER_ACTIONS, type TimerAction } from '../video/show-timer.js';
+
 /** Kind of widget */
 export type WidgetType = 'key' | 'fader' | 'knob' | 'colorPicker' | 'xyPad' | 'label' | 'monitor';
 
@@ -38,20 +40,21 @@ export type WidgetLink =
     | { kind: 'group'; id: string }
     | { kind: 'channel'; universe: number; channel: number }
     | { kind: 'desk'; action: DeskAction }
-    | { kind: 'audio'; action: AudioAction };
+    | { kind: 'audio'; action: AudioAction }
+    | { kind: 'timer'; id: string; action: TimerAction };
 
 /** Kind of link */
 export type LinkKind = WidgetLink['kind'];
 
 /** Links each widget type accepts */
 export const WIDGET_LINKS: Readonly<Record<WidgetType, readonly LinkKind[]>> = {
-    key: ['scene', 'chaser', 'cue', 'group', 'channel', 'desk', 'audio', 'none'],
+    key: ['scene', 'chaser', 'cue', 'group', 'channel', 'desk', 'audio', 'timer', 'none'],
     fader: ['scene', 'chaser', 'master', 'group', 'channel', 'none'],
     knob: ['scene', 'chaser', 'master', 'group', 'channel', 'none'],
     colorPicker: ['group'],
     xyPad: ['group'],
     label: ['none'],
-    monitor: ['cue', 'scene', 'chaser', 'master', 'group', 'channel', 'audio']
+    monitor: ['cue', 'scene', 'chaser', 'master', 'group', 'channel', 'audio', 'timer']
 };
 
 /** Widget placed on a page */
@@ -121,6 +124,10 @@ export function normalizeLink(value: unknown): WidgetLink {
             return DESK_ACTIONS.includes(input.action as DeskAction) ? { kind: 'desk', action: input.action as DeskAction } : { kind: 'none' };
         case 'audio':
             return AUDIO_ACTIONS.includes(input.action as AudioAction) ? { kind: 'audio', action: input.action as AudioAction } : { kind: 'none' };
+        case 'timer':
+            return typeof input.id === 'string' && input.id !== ''
+                ? { kind: 'timer', id: input.id, action: TIMER_ACTIONS.includes(input.action as TimerAction) ? input.action as TimerAction : 'toggle' }
+                : { kind: 'none' };
         default:
             return { kind: 'none' };
     }

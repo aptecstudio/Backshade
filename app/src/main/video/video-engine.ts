@@ -15,6 +15,9 @@ import {
     type ShowVideo,
     type VideoOutputConfig
 } from '../../shared/video/video';
+import type { TimerState } from '../../shared/video/show-timer';
+import type { GoboContext } from '../../shared/video/text-gobo';
+import type { ComposeMessage } from '../../shared/video/video-output-protocol';
 import { OutputWindow } from './output-window';
 
 interface OutputRuntime {
@@ -29,14 +32,21 @@ export class VideoEngine {
     private readonly onState: (compositions: Record<string, OutputComposition>) => void;
     private readonly runtime = new Map<string, OutputRuntime>();
     private readonly windows = new Map<string, OutputWindow>();
+    private context: GoboContext = { cue: '', song: '' };
 
     /**
      * @param video - Video outputs of the open show, null when no show is open
      * @param onState - Called when program or preview change
      */
-    constructor(video: () => ShowVideo | null, onState: (compositions: Record<string, OutputComposition>) => void) {
+    private readonly timerStates: () => Record<string, TimerState>;
+
+    /**
+     * @param timerStates - Live states of the timer screens
+     */
+    constructor(video: () => ShowVideo | null, onState: (compositions: Record<string, OutputComposition>) => void, timerStates: () => Record<string, TimerState>) {
         this.video = video;
         this.onState = onState;
+        this.timerStates = timerStates;
     }
 
     /** Program and preview of every output */
@@ -77,7 +87,7 @@ export class VideoEngine {
             if (window === undefined) {
                 window = new OutputWindow(output);
                 this.windows.set(output.id, window);
-                window.compose({ layers: state.program, transition: 0 });
+                window.compose(this.message(state.program, 0));
             } else {
                 window.apply(output);
             }
@@ -181,8 +191,32 @@ export class VideoEngine {
     private send(outputId: string, transition: number): void {
         const state = this.runtime.get(outputId);
         if (state !== undefined) {
-            this.windows.get(outputId)?.compose({ layers: state.program, transition });
+            this.windows.get(outputId)?.compose(this.message(state.program, transition));
         }
+    }
+
+    /**
+     * Changes the live data of the dynamic texts and sends it to the outputs.
+     */
+    setContext(context: GoboContext): void {
+        if (context.cue === this.context.cue && context.song === this.context.song) {
+            return;
+        }
+        this.context = context;
+        this.refresh();
+    }
+
+    /**
+     * Sends again the program of every output, after a change of the gobo presets.
+     */
+    refresh(): void {
+        for (const id of this.windows.keys()) {
+            this.send(id, 0);
+        }
+    }
+
+    private message(layers: LayerState[], transition: number): ComposeMessage {
+        return { layers, transition, gobos: this.video()?.gobos ?? [], context: this.context, timers: this.video()?.timers ?? [], timerStates: this.timerStates() };
     }
 
     private announce(): void {

@@ -6,6 +6,9 @@
 
 import { randomUUID } from 'node:crypto';
 import { MAX_VIDEO_LAYERS, MAX_VIDEO_OUTPUTS, normalizeLayer, type ShowVideo, type VideoInput, type VideoOutputConfig } from '../../shared/video/video';
+import { MAX_TIMERS, normalizeTimer, TIMER_ACTIONS, type TimerState } from '../../shared/video/show-timer';
+import { MAX_GOBOS, normalizeGobo } from '../../shared/video/text-gobo';
+import { TimerClock } from '../video/timer-clock';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
@@ -20,16 +23,54 @@ import { VideoEngine } from '../video/video-engine';
  */
 export function registerVideoService(router: RequestRouter, bus: EventBus, session: ShowSession, inputs: () => Promise<VideoInput[]>): VideoEngine {
     const videoOf = (): ShowVideo | null => session.summary() === null ? null : session.video();
-    const engine = new VideoEngine(videoOf, (compositions) => bus.emit('video.stateChanged', { compositions }));
+    const clock = new TimerClock();
+    const engine = new VideoEngine(videoOf, (compositions) => bus.emit('video.stateChanged', { compositions }), () => clock.snapshot());
+    const timersChanged = (): Record<string, TimerState> => {
+        const states = clock.snapshot();
+        bus.emit('video.timersChanged', { states });
+        engine.refresh();
+        return states;
+    };
 
     session.onContentChange((part) => {
         if (part === 'all') {
+            clock.clear();
             engine.reset();
             engine.sync();
             bus.emit('video.changed', {});
         } else if (part === 'video') {
+            clock.keep(new Set(session.video().timers.map((timer) => timer.id)));
             engine.sync();
+            engine.refresh();
             bus.emit('video.changed', {});
+        }
+    });
+
+    // Live data of the dynamic texts: current cue and song playing
+    let cueId: string | null = null;
+    let songId: string | null = null;
+    const updateContext = (): void => {
+        if (session.summary() === null) {
+            engine.setContext({ cue: '', song: '' });
+            return;
+        }
+        const memories = session.memories();
+        const cue = memories.cues.find((item) => item.id === cueId);
+        const scene = memories.scenes.find((item) => item.id === cue?.scene);
+        engine.setContext({
+            cue: cue === undefined ? '' : cue.note !== '' ? cue.note : scene?.name ?? '',
+            song: session.audio().items.find((item) => item.id === songId)?.name ?? ''
+        });
+    };
+    bus.addSink((message) => {
+        if (message.event === 'cues.stateChanged') {
+            cueId = (message.payload as { state: { current: string | null } }).state.current;
+            updateContext();
+        } else if (message.event === 'audio.stateChanged') {
+            songId = (message.payload as { state: { item: string | null } }).state.item;
+            updateContext();
+        } else if (message.event === 'memories.changed' || message.event === 'audio.changed') {
+            updateContext();
         }
     });
 
@@ -79,7 +120,7 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
             x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3
         };
         const output = outputData(input, base);
-        return update((video) => ({ outputs: [...video.outputs, output] }));
+        return update((video) => ({ ...video, outputs: [...video.outputs, output] }));
     });
 
     router.register('video.updateOutput', (params) => {
@@ -90,12 +131,63 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
             throw new EngineError('video-output-not-found', `Video output not found: ${id}`);
         }
         const output = outputData(input, current);
-        return update((video) => ({ outputs: video.outputs.map((item) => item.id === id ? output : item) }));
+        return update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? output : item) }));
     });
 
     router.register('video.removeOutput', (params) => {
         const id = requireString(requireObject(params), 'id');
-        return update((video) => ({ outputs: video.outputs.filter((output) => output.id !== id) }));
+        return update((video) => ({ ...video, outputs: video.outputs.filter((output) => output.id !== id) }));
+    });
+
+    router.register('video.saveGobo', (params) => {
+        const input = requireObject(params);
+        const gobo = normalizeGobo(input.gobo);
+        if (gobo === null) {
+            throw new EngineError('invalid-params', 'Invalid text gobo');
+        }
+        return update((video) => {
+            const exists = video.gobos.some((item) => item.id === gobo.id);
+            if (!exists && video.gobos.length >= MAX_GOBOS) {
+                throw new EngineError('too-many-gobos', 'No more text gobos');
+            }
+            return { ...video, gobos: exists ? video.gobos.map((item) => item.id === gobo.id ? gobo : item) : [...video.gobos, gobo] };
+        });
+    });
+
+    router.register('video.deleteGobo', (params) => {
+        const id = requireString(requireObject(params), 'id');
+        return update((video) => ({ ...video, gobos: video.gobos.filter((item) => item.id !== id) }));
+    });
+
+    router.register('video.saveTimer', (params) => {
+        const timer = normalizeTimer(requireObject(params).timer);
+        if (timer === null) {
+            throw new EngineError('invalid-params', 'Invalid timer');
+        }
+        return update((video) => {
+            const exists = video.timers.some((item) => item.id === timer.id);
+            if (!exists && video.timers.length >= MAX_TIMERS) {
+                throw new EngineError('too-many-timers', 'No more timers');
+            }
+            return { ...video, timers: exists ? video.timers.map((item) => item.id === timer.id ? timer : item) : [...video.timers, timer] };
+        });
+    });
+
+    router.register('video.deleteTimer', (params) => {
+        const id = requireString(requireObject(params), 'id');
+        return update((video) => ({ ...video, timers: video.timers.filter((item) => item.id !== id) }));
+    });
+
+    router.register('video.getTimers', () => clock.snapshot());
+
+    router.register('video.timerCommand', (params) => {
+        const input = requireObject(params);
+        const id = requireString(input, 'id');
+        if (!session.video().timers.some((timer) => timer.id === id)) {
+            throw new EngineError('timer-not-found', `Timer not found: ${id}`);
+        }
+        clock.command(id, requireChoice(input, 'action', TIMER_ACTIONS));
+        return timersChanged();
     });
 
     router.register('video.setLayer', (params) => {

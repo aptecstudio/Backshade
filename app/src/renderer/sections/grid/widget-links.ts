@@ -6,6 +6,7 @@
 
 import { formatDuration } from '../../../framework/ts/index.js';
 import { formatCueNumber } from '../../../shared/console/memories.js';
+import { IDLE_TIMER, timerDisplay } from '../../../shared/video/show-timer.js';
 import type { WidgetLink } from '../../../shared/grid/grid.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
@@ -31,6 +32,7 @@ export function linkName(link: WidgetLink, store: GridStore): string {
         case 'desk': return t(`grid.deskActions.${link.action}`);
         case 'channel': return t('grid.channelName', { universe: link.universe, channel: link.channel });
         case 'audio': return t(`grid.audioActions.${link.action}`);
+        case 'timer': return store.timers.find((timer) => timer.id === link.id)?.name ?? t('grid.missing');
         case 'none': return '';
     }
 }
@@ -97,6 +99,8 @@ export function linkActive(link: WidgetLink, store: GridStore): boolean {
                     : link.action === 'blind' ? store.desk?.blind === true : false;
         case 'cue':
             return link.action === 'pause' && store.cues.paused;
+        case 'timer':
+            return (link.action === 'toggle' || link.action === 'start') && store.timerStates[link.id]?.running === true;
         case 'audio':
             return link.action === 'pause' ? store.audioPlayback.paused : link.action === 'play' && store.audioPlayback.item !== null && !store.audioPlayback.paused;
         case 'group':
@@ -162,6 +166,11 @@ export function pressLink(link: WidgetLink, store: GridStore, down: boolean): vo
                 report(engine().request(`audio.${link.action}`));
             }
             break;
+        case 'timer':
+            if (down) {
+                report(engine().request('video.timerCommand', { id: link.id, action: link.action }));
+            }
+            break;
         case 'none':
             break;
     }
@@ -194,6 +203,10 @@ export function monitorText(link: WidgetLink, store: GridStore): string {
         }
         case 'scene':
             return linkActive(link, store) ? formatControlValue('fader', linkLevel(link, store) ?? 0) : t('grid.off');
+        case 'timer': {
+            const timer = store.timers.find((item) => item.id === link.id);
+            return timer === undefined ? t('grid.missing') : timerDisplay(timer, store.timerStates[link.id] ?? IDLE_TIMER, Date.now(), document.documentElement.lang).text;
+        }
         case 'audio': {
             const playing = store.audioPlayback;
             const item = store.audio?.items.find((entry) => entry.id === playing.item);

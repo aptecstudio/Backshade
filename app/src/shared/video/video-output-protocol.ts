@@ -3,6 +3,8 @@
  * show and the time of the transition to them.
  */
 
+import type { ShowTimer, TimerState } from './show-timer.js';
+import type { GoboContext, TextGobo } from './text-gobo.js';
 import type { LayerState } from './video.js';
 
 /** Composition to show */
@@ -10,6 +12,13 @@ export interface ComposeMessage {
     layers: LayerState[];
     /** Transition time in seconds; zero is a cut */
     transition: number;
+    /** Text gobo presets of the show, for the gobo layers */
+    gobos: TextGobo[];
+    /** Live data of the dynamic texts */
+    context: GoboContext;
+    /** Timer presets of the show and their live states */
+    timers: ShowTimer[];
+    timerStates: Record<string, TimerState>;
 }
 
 /** IPC channel of the video output windows */

@@ -44,7 +44,7 @@ export function startEngine(): void {
     const library = new FixtureLibrary();
 
     registerAppInfoService(router);
-    registerWindowService(router);
+    registerWindowService(router, bus);
     registerSettingsService(router);
     registerShowService(router, bus, session, library);
     registerFixtureService(router, bus, session, library);

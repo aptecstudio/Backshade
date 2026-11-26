@@ -27,6 +27,8 @@ export const ICON_NAMES = [
     'layout-template',
     'lightbulb',
     'list',
+    'maximize',
+    'minimize',
     'music',
     'package',
     'package-open',

@@ -15,7 +15,9 @@
     "shell": {
       "noShow": "Nessuno show aperto",
       "navigation": "Sezioni",
-      "logo": "Backshade"
+      "logo": "Backshade",
+      "fullScreen": "Schermo intero",
+      "leaveFullScreen": "Esci da schermo intero"
     },
     "sections": {
       "console": "Console",
@@ -451,12 +453,14 @@
         "group": "Gruppo",
         "channel": "Canale DMX",
         "desk": "Comando del banco",
-        "audio": "Lettore audio"
+        "audio": "Lettore audio",
+        "timer": "Timer"
       },
       "noTargets": {
         "scene": "Non ci sono ancora scene: registrale nella sezione Console.",
         "chaser": "Non ci sono ancora chaser: creali nella sezione Console.",
-        "group": "Non ci sono ancora gruppi: creali nella sezione Patch."
+        "group": "Non ci sono ancora gruppi: creali nella sezione Patch.",
+        "timer": "Non ci sono ancora timer: creali nella sezione Video."
       },
       "cueActions": {
         "go": "Go",
@@ -489,7 +493,16 @@
         "next": "Successivo",
         "previous": "Precedente"
       },
-      "monitorAudio": "{name}, -{remaining}"
+      "monitorAudio": "{name}, -{remaining}",
+      "timerActions": {
+        "toggle": "Start / pausa",
+        "start": "Start",
+        "pause": "Pausa",
+        "reset": "Azzera",
+        "plus": "+1 min",
+        "minus": "-1 min"
+      },
+      "timerAction": "Comando"
     },
     "audio": {
       "player": "Lettore",
@@ -555,7 +568,102 @@
       "inputName": "Ingresso: {name}",
       "quality": "Qualità",
       "frameRate": "Fotogrammi",
-      "fps": "{rate} fps"
+      "fps": "{rate} fps",
+      "goboName": "Gobo: {name}",
+      "timerName": "Timer: {name}"
+    },
+    "gobos": {
+      "title": "Gobo di testo",
+      "add": "Nuovo gobo",
+      "defaultName": "Gobo {number}",
+      "text": "Testo",
+      "placeholders": "Testi dal vivo: {list}",
+      "sampleCue": "Ritornello",
+      "sampleSong": "Walk in",
+      "style": "Lettere",
+      "weight": "Peso",
+      "weights": {
+        "regular": "Normale",
+        "bold": "Grassetto"
+      },
+      "size": "Dimensione",
+      "color": "Colore",
+      "outlineColor": "Colore contorno",
+      "outline": "Contorno",
+      "align": "Allineamento",
+      "aligns": {
+        "left": "Sinistra",
+        "center": "Centro",
+        "right": "Destra"
+      },
+      "position": "Posizione",
+      "x": "Orizzontale",
+      "y": "Verticale",
+      "rotation": "Rotazione",
+      "look": "Aspetto da gobo",
+      "mask": "Forma",
+      "masks": {
+        "none": "Nessuna",
+        "circle": "Cerchio",
+        "image": "Immagine"
+      },
+      "maskImage": "Immagine della forma",
+      "maskSize": "Dimensione forma",
+      "softness": "Bordo morbido",
+      "focus": "Fuoco",
+      "prism": "Prisma",
+      "noPrism": "Nessuno",
+      "facets": "{count} facce",
+      "prismSpread": "Apertura prisma",
+      "motion": "Animazione",
+      "animation": "Animazione",
+      "animations": {
+        "none": "Nessuna",
+        "scroll": "Scorrimento",
+        "rotate": "Rotazione",
+        "fade": "Dissolvenza",
+        "typeOn": "Scrittura"
+      },
+      "countdown": "Conto alla rovescia",
+      "countdownModes": {
+        "duration": "Durata",
+        "time": "Fino a un'ora"
+      },
+      "countdownDuration": "Durata",
+      "countdownTime": "Ora (HH:MM)",
+      "deleteTitle": "Elimina il gobo",
+      "deleteConfirm": "Eliminare \"{name}\"? I layer che lo usano restano vuoti."
+    },
+    "timers": {
+      "title": "Schermate timer",
+      "add": "Nuovo timer",
+      "modes": {
+        "clock": "Ora attuale",
+        "countdown": "Countdown",
+        "countdownTo": "Countdown a un orario",
+        "stopwatch": "Cronometro"
+      },
+      "label": "Etichetta",
+      "duration": "Durata",
+      "warning": "Avviso prima della fine",
+      "atZero": "Allo zero",
+      "negative": "Continua con il meno",
+      "stop": "Si ferma a zero",
+      "flash": "Lampeggia allo zero",
+      "warningColor": "Colore avviso",
+      "endColor": "Colore fine",
+      "background": "Sfondo",
+      "backgroundColor": "Colore sfondo",
+      "transparent": "Trasparente",
+      "showSeconds": "Secondi",
+      "showDate": "Data",
+      "start": "Start",
+      "pause": "Pausa",
+      "reset": "Azzera",
+      "plus": "+1 min",
+      "minus": "-1 min",
+      "deleteTitle": "Elimina il timer",
+      "deleteConfirm": "Eliminare \"{name}\"? I layer che lo usano restano vuoti."
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

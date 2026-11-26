@@ -6,6 +6,9 @@
  * Shared between engine and interface.
  */
 
+import { MAX_TIMERS, normalizeTimer, type ShowTimer } from './show-timer.js';
+import { MAX_GOBOS, normalizeGobo, type TextGobo } from './text-gobo.js';
+
 /** Most outputs, and most layers of an output */
 export const MAX_VIDEO_OUTPUTS = 8;
 export const MAX_VIDEO_LAYERS = 8;
@@ -34,10 +37,14 @@ export interface VideoOutputConfig {
 /** Video section of show.json */
 export interface ShowVideo {
     outputs: VideoOutputConfig[];
+    /** Text gobo presets; missing in older files */
+    gobos: TextGobo[];
+    /** Timer screen presets; missing in older files */
+    timers: ShowTimer[];
 }
 
 /** Video of a new show */
-export const EMPTY_VIDEO: ShowVideo = { outputs: [] };
+export const EMPTY_VIDEO: ShowVideo = { outputs: [], gobos: [], timers: [] };
 
 /** Resolution asked to a video input */
 export type InputQuality = '720p' | '1080p' | '2160p';
@@ -61,7 +68,9 @@ export const INPUT_FRAME_RATES: readonly number[] = [25, 30, 50, 60];
 export type LayerSource =
     | { kind: 'video'; file: string }
     | { kind: 'image'; file: string }
-    | { kind: 'input'; device: string; label: string; quality: InputQuality; frameRate: number };
+    | { kind: 'input'; device: string; label: string; quality: InputQuality; frameRate: number }
+    | { kind: 'gobo'; gobo: string }
+    | { kind: 'timer'; timer: string };
 
 /** Video input of the computer */
 export interface VideoInput {
@@ -132,6 +141,12 @@ function normalizeSource(value: unknown): LayerSource | null {
     if ((source.kind === 'video' || source.kind === 'image') && typeof source.file === 'string' && source.file !== '') {
         return { kind: source.kind, file: source.file };
     }
+    if (source.kind === 'timer' && typeof source.timer === 'string' && source.timer !== '') {
+        return { kind: 'timer', timer: source.timer };
+    }
+    if (source.kind === 'gobo' && typeof source.gobo === 'string' && source.gobo !== '') {
+        return { kind: 'gobo', gobo: source.gobo };
+    }
     if (source.kind === 'input' && typeof source.device === 'string' && source.device !== '') {
         return {
             kind: 'input',
@@ -156,7 +171,7 @@ export function normalizeLayers(value: unknown, count: number): LayerState[] {
  * Reads the video of a file: invalid outputs are dropped, values kept in their limits.
  */
 export function normalizeVideo(value: unknown): ShowVideo {
-    const input = (typeof value === 'object' && value !== null ? value : {}) as { outputs?: unknown };
+    const input = (typeof value === 'object' && value !== null ? value : {}) as { outputs?: unknown; gobos?: unknown; timers?: unknown };
     const ids = new Set<string>();
     const outputs: VideoOutputConfig[] = [];
     for (const raw of Array.isArray(input.outputs) ? input.outputs.slice(0, MAX_VIDEO_OUTPUTS) : []) {
@@ -179,5 +194,21 @@ export function normalizeVideo(value: unknown): ShowVideo {
             layers: int(output.layers, 1, MAX_VIDEO_LAYERS, 3)
         });
     }
-    return { outputs };
+    const gobos: TextGobo[] = [];
+    for (const raw of Array.isArray(input.gobos) ? input.gobos.slice(0, MAX_GOBOS) : []) {
+        const gobo = normalizeGobo(raw);
+        if (gobo !== null && !ids.has(gobo.id)) {
+            ids.add(gobo.id);
+            gobos.push(gobo);
+        }
+    }
+    const timers: ShowTimer[] = [];
+    for (const raw of Array.isArray(input.timers) ? input.timers.slice(0, MAX_TIMERS) : []) {
+        const timer = normalizeTimer(raw);
+        if (timer !== null && !ids.has(timer.id)) {
+            ids.add(timer.id);
+            timers.push(timer);
+        }
+    }
+    return { outputs, gobos, timers };
 }

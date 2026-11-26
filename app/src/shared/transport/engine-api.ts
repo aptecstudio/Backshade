@@ -8,6 +8,8 @@
 import type { AttributeLayout } from '../console/fixture-attributes.js';
 import type { AudioDevice, AudioPlayback, ShowAudio } from '../audio/audio.js';
 import type { CueStackState } from '../console/cue-stack.js';
+import type { ShowTimer, TimerAction, TimerState } from '../video/show-timer.js';
+import type { TextGobo } from '../video/text-gobo.js';
 import type { LayerState, OutputComposition, ShowVideo, VideoDisplay, VideoInput, VideoOutputConfig } from '../video/video.js';
 import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
@@ -266,6 +268,10 @@ export interface EngineMethods {
     'app.confirmClose': { params: undefined; result: undefined };
     /** Opens the About window (desktop application only) */
     'window.openAbout': { params: undefined; result: undefined };
+    /** The main window is fullscreen (desktop application only) */
+    'window.isFullScreen': { params: undefined; result: boolean };
+    /** Puts the main window in fullscreen or brings it back; returns the new state (desktop application only) */
+    'window.toggleFullScreen': { params: undefined; result: boolean };
     /** Lets the user choose a folder (desktop application only) */
     'dialog.chooseFolder': { params: { defaultPath?: string }; result: string | null };
 
@@ -490,6 +496,18 @@ export interface EngineMethods {
     'video.updateOutput': { params: Partial<Omit<VideoOutputConfig, 'id'>> & { id: string }; result: ShowVideo };
     /** Removes a video output (unsaved change) */
     'video.removeOutput': { params: { id: string }; result: ShowVideo };
+    /** Adds or changes a text gobo preset (unsaved change) */
+    'video.saveGobo': { params: { gobo: TextGobo }; result: ShowVideo };
+    /** Deletes a text gobo preset (unsaved change) */
+    'video.deleteGobo': { params: { id: string }; result: ShowVideo };
+    /** Adds or changes a timer screen preset (unsaved change) */
+    'video.saveTimer': { params: { timer: ShowTimer }; result: ShowVideo };
+    /** Deletes a timer screen preset (unsaved change) */
+    'video.deleteTimer': { params: { id: string }; result: ShowVideo };
+    /** Live states of the timers */
+    'video.getTimers': { params: undefined; result: Record<string, TimerState> };
+    /** Starts, pauses, resets or changes a timer by a minute */
+    'video.timerCommand': { params: { id: string; action: TimerAction }; result: Record<string, TimerState> };
     /** Changes a layer in program (at once) or in preview */
     'video.setLayer': { params: { output: string; target: 'program' | 'preview'; index: number; layer: LayerState }; result: undefined };
     /** Brings the preview of an output, or of all outputs, to program with a transition in seconds */
@@ -543,6 +561,8 @@ export interface EngineMethods {
 
 /** Engine events and their data */
 export interface EngineEvents {
+    /** The main window entered or left fullscreen */
+    'window.fullScreenChanged': { on: boolean };
     /** The list of available languages has changed (pack added or removed) */
     'locales.changed': { codes: string[] };
     /** The open show has changed (opened, saved, modified, closed) */
@@ -577,6 +597,8 @@ export interface EngineEvents {
     'audio.stateChanged': { state: AudioPlayback };
     /** The video outputs of the open show have changed */
     'video.changed': Record<string, never>;
+    /** A timer was started, paused, reset or changed */
+    'video.timersChanged': { states: Record<string, TimerState> };
     /** Program or preview of the video outputs have changed */
     'video.stateChanged': { compositions: Record<string, OutputComposition> };
     /** The pages of the virtual console have changed */

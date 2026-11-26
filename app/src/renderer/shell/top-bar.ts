@@ -13,6 +13,7 @@ import { t } from '../i18n/i18n.js';
 import { SETTINGS_SECTION, START_SECTION } from '../sections/section-definitions.js';
 import { BlackoutKey } from './blackout-key.js';
 import { BrandBlock } from './brand-block.js';
+import { FullScreenKey } from './fullscreen-key.js';
 import type { SectionNavigation } from './section-navigation.js';
 import { SectionTabs } from './section-tabs.js';
 import { followTempo } from './tempo-readout.js';
@@ -45,7 +46,8 @@ export class TopBar extends Panel {
                 this.timecode,
                 this.tempo,
                 new BlackoutKey(),
-                new SectionTabs([START_SECTION, SETTINGS_SECTION], navigation)
+                new SectionTabs([START_SECTION, SETTINGS_SECTION], navigation),
+                new FullScreenKey()
             ]
         }));
     }
