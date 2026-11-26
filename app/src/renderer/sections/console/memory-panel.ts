@@ -47,7 +47,7 @@ export class MemoryPanel extends Panel {
     private readonly tap: Key;
     private readonly step: Label;
     private readonly tapTempo = new TapTempo();
-    private memories: MemoriesSummary = { scenes: [], chasers: [] };
+    private memories: MemoriesSummary = { scenes: [], chasers: [], cues: [] };
     private state: MemoriesState = { active: [], selectedChaser: null };
     private mode: KeyMode = 'play';
     private firstScene = 1;
@@ -199,7 +199,8 @@ export class MemoryPanel extends Panel {
             await this.recordScene(slot, scene);
         } else if (mode === 'edit') {
             if (scene !== undefined) {
-                openSceneDialog(scene, this.memories.chasers.filter((chaser) => chaser.steps.includes(scene.id)).length);
+                openSceneDialog(scene, this.memories.chasers.filter((chaser) => chaser.steps.includes(scene.id)).length
+                    + this.memories.cues.filter((cue) => cue.scene === scene.id).length);
             }
         } else if (scene !== undefined) {
             this.toggle('scene', scene.id);

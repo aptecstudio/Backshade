@@ -7,9 +7,11 @@
  * channels fade from and to zero and are scaled by the scene master, the
  * other channels move between the output without the scene and their
  * values (decided by the human). A chaser plays its scenes one per beat, with a crossfade between
- * steps as a part of the step time.
+ * steps as a part of the step time. Cues of the cue list are played the
+ * same way as scenes, with the fades of the cue, and can be paused.
  */
 
+import type { CueTiming } from '../../shared/console/cue-stack';
 import type { Chaser, MemoriesState, MemoryKind, Scene, ShowMemories } from '../../shared/console/memories';
 import type { DmxMixer } from '../output/dmx-mixer';
 import { nextStep, type SequencePosition } from './chaser-sequence';
@@ -36,8 +38,11 @@ export interface MemoryPlayerContext {
     now?: () => number;
 }
 
+/** What a playback plays: a memory key, or a cue of the cue list */
+type PlaybackKind = MemoryKind | 'cue';
+
 interface Playback {
-    kind: MemoryKind;
+    kind: PlaybackKind;
     id: string;
     /** Time it was turned on */
     started: number;
@@ -49,6 +54,8 @@ interface Playback {
     position: SequencePosition;
     previous: number | null;
     stepStarted: number;
+    /** Time the playback was paused (cues only), null while running */
+    pausedAt: number | null;
     /** Levels written at the last update */
     written: Map<number, Array<[number, number]>>;
     /**
@@ -77,7 +84,7 @@ export class MemoryPlayer {
     state(): MemoriesState {
         return {
             active: this.playbacks
-                .filter((playback) => playback.released === null)
+                .filter((playback): playback is Playback & { kind: MemoryKind } => playback.released === null && playback.kind !== 'cue')
                 .map((playback) => ({ kind: playback.kind, id: playback.id, step: playback.kind === 'chaser' ? playback.position.step : null })),
             selectedChaser: this.selected
         };
@@ -87,30 +94,77 @@ export class MemoryPlayer {
      * Turns a memory on (with its fade in) or off (with its fade out).
      */
     setActive(kind: MemoryKind, id: string, on: boolean): void {
+        if (on && kind === 'chaser') {
+            this.selected = id;
+        }
+        this.switch(kind, id, on);
+        this.update();
+        this.announce();
+    }
+
+    /**
+     * Plays a cue with its fade in, or fades it out.
+     */
+    setCue(id: string, on: boolean): void {
+        this.switch('cue', id, on);
+        this.update();
+    }
+
+    /**
+     * Stops or restarts the fades of the cues.
+     */
+    setCuesPaused(paused: boolean): void {
+        const now = this.now();
+        for (const playback of this.playbacks) {
+            if (playback.kind !== 'cue') {
+                continue;
+            }
+            if (paused && playback.pausedAt === null) {
+                playback.pausedAt = now;
+            } else if (!paused && playback.pausedAt !== null) {
+                // The fades go on from where they stopped
+                const pause = now - playback.pausedAt;
+                playback.started += pause;
+                if (playback.released !== null) {
+                    playback.released += pause;
+                }
+                playback.pausedAt = null;
+            }
+        }
+        this.update();
+    }
+
+    /**
+     * Fade in of a cue being played, null when it is complete or the cue is not on.
+     */
+    cueFade(id: string): CueTiming | null {
+        const playback = this.playbacks.find((item) => item.id === id && item.kind === 'cue' && item.released === null);
+        if (playback === undefined) {
+            return null;
+        }
+        const duration = this.fadeIn('cue', id);
+        const elapsed = (playback.pausedAt ?? this.now()) - playback.started;
+        return elapsed >= duration ? null : { elapsed: Math.max(0, elapsed), duration };
+    }
+
+    private switch(kind: PlaybackKind, id: string, on: boolean): void {
         const now = this.now();
         const existing = this.playbacks.find((playback) => playback.id === id);
         if (on) {
-            if (kind === 'chaser') {
-                this.selected = id;
-            }
             if (existing !== undefined && existing.released === null) {
-                this.announce();
                 return;
             }
             if (existing !== undefined) {
                 // Turned on again during its fade out: the fade in continues from the current level
                 const level = this.level(existing, now);
                 this.remove(existing);
-                const fadeIn = this.fadeIn(kind, id);
-                this.add(kind, id, now - level * fadeIn);
+                this.add(kind, id, now - level * this.fadeIn(kind, id));
             } else {
                 this.add(kind, id, now);
             }
         } else if (existing !== undefined && existing.released === null) {
             this.release(existing, now);
         }
-        this.update();
-        this.announce();
     }
 
     /**
@@ -122,12 +176,12 @@ export class MemoryPlayer {
     }
 
     /**
-     * Turns every memory off with its fade out.
+     * Turns every memory key off with its fade out; the cue list keeps its cue.
      */
     releaseAll(): void {
         const now = this.now();
         for (const playback of this.playbacks) {
-            if (playback.released === null) {
+            if (playback.released === null && playback.kind !== 'cue') {
                 this.release(playback, now);
             }
         }
@@ -164,7 +218,7 @@ export class MemoryPlayer {
         this.announce();
     }
 
-    private add(kind: MemoryKind, id: string, started: number): void {
+    private add(kind: PlaybackKind, id: string, started: number): void {
         this.playbacks.push({
             kind,
             id,
@@ -174,6 +228,7 @@ export class MemoryPlayer {
             position: { step: 0, heading: 1 },
             previous: null,
             stepStarted: this.now(),
+            pausedAt: null,
             written: new Map(),
             owned: null
         });
@@ -199,21 +254,36 @@ export class MemoryPlayer {
         this.context.mixer.clearSource(MEMORY_SOURCE_PREFIX + playback.id);
     }
 
-    private find(kind: MemoryKind, id: string, memories = this.context.memories()): Scene | Chaser | undefined {
-        return kind === 'scene'
-            ? memories?.scenes.find((scene) => scene.id === id)
-            : memories?.chasers.find((chaser) => chaser.id === id);
+    /**
+     * What a playback plays: the scene (also for a cue) or the chaser.
+     */
+    private find(kind: PlaybackKind, id: string, memories = this.context.memories()): Scene | Chaser | undefined {
+        if (kind === 'chaser') {
+            return memories?.chasers.find((chaser) => chaser.id === id);
+        }
+        const sceneId = kind === 'cue' ? memories?.cues.find((cue) => cue.id === id)?.scene : id;
+        return memories?.scenes.find((scene) => scene.id === sceneId);
     }
 
-    /** Fade in of a memory in milliseconds; chasers start at once */
-    private fadeIn(kind: MemoryKind, id: string): number {
-        const memory = this.find(kind, id);
-        return kind === 'scene' && memory !== undefined ? (memory as Scene).fadeIn * 1000 : 0;
+    /**
+     * Fade time of a playback in milliseconds: the time of the cue, or of
+     * its scene when the cue has none; chasers start and stop at once.
+     */
+    private fadeTime(kind: PlaybackKind, id: string, field: 'fadeIn' | 'fadeOut'): number {
+        if (kind === 'chaser') {
+            return 0;
+        }
+        const scene = this.find(kind, id) as Scene | undefined;
+        const cue = kind === 'cue' ? this.context.memories()?.cues.find((item) => item.id === id) : undefined;
+        return (cue?.[field] ?? scene?.[field] ?? 0) * 1000;
     }
 
-    private fadeOut(kind: MemoryKind, id: string): number {
-        const memory = this.find(kind, id);
-        return kind === 'scene' && memory !== undefined ? (memory as Scene).fadeOut * 1000 : 0;
+    private fadeIn(kind: PlaybackKind, id: string): number {
+        return this.fadeTime(kind, id, 'fadeIn');
+    }
+
+    private fadeOut(kind: PlaybackKind, id: string): number {
+        return this.fadeTime(kind, id, 'fadeOut');
     }
 
     /**
@@ -246,14 +316,14 @@ export class MemoryPlayer {
         };
         let changed = false;
         for (const playback of [...this.playbacks]) {
-            const level = this.level(playback, now);
+            const level = this.level(playback, playback.pausedAt ?? now);
             const memory = this.find(playback.kind, playback.id);
             if (memory === undefined || (playback.released !== null && level <= 0)) {
                 this.remove(playback);
                 continue;
             }
             let output: Map<number, Array<[number, number]>>;
-            if (playback.kind === 'scene') {
+            if (playback.kind !== 'chaser') {
                 output = this.sceneOutput(this.sceneValues(memory as Scene), null, 1, level * master, level < 1 ? { source: MEMORY_SOURCE_PREFIX + playback.id, level } : null);
             } else {
                 const result = this.chaserOutput(playback, memory as Chaser, now, level * master);

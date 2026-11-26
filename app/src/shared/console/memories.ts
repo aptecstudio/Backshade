@@ -1,9 +1,10 @@
 /**
- * Memories of the simple console: scenes and chasers, saved in show.json
- * under "memories". Scenes live in two banks of 12 places, chasers in one
- * bank of 12 (decided by the human). A scene stores DMX levels recorded
- * from the desk, with its own fade times; a chaser plays scenes in steps,
- * referencing them, at its own speed. Shared between engine and interface.
+ * Memories of the simple console: scenes, chasers and the cue list, saved
+ * in show.json under "memories". Scenes live in two banks of 12 places,
+ * chasers in one bank of 12 (decided by the human). A scene stores DMX
+ * levels recorded from the desk, with its own fade times; a chaser plays
+ * scenes in steps, referencing them, at its own speed; the cue list plays
+ * scenes in order with Go and Back. Shared between engine and interface.
  */
 
 import { UNIVERSE_SIZE } from '../fixtures/fixture-definition.js';
@@ -30,10 +31,19 @@ export const DEFAULT_BPM = 120;
 /** Most steps in a chaser */
 export const MAX_CHASER_STEPS = 256;
 
+/** Most cues in the cue list */
+export const MAX_CUES = 999;
+
+/** Limits of the cue numbers; one decimal digit, to insert cues between others */
+export const CUE_NUMBER_LIMITS = { min: 0.1, max: 9999.9 } as const;
+
+/** Longest note of a cue */
+export const CUE_NOTE_MAX_LENGTH = 200;
+
 /** Longest name of a memory */
 export const MEMORY_NAME_MAX_LENGTH = 60;
 
-/** Kind of memory */
+/** Kind of memory played by the memory keys */
 export type MemoryKind = 'scene' | 'chaser';
 
 /** Order of the steps of a chaser */
@@ -75,14 +85,31 @@ export interface Chaser {
     direction: ChaserDirection;
 }
 
+/** Cue of the cue list: a scene played with Go */
+export interface Cue {
+    id: string;
+    /** Number shown to the operator, unique, with one decimal digit; the list is in number order */
+    number: number;
+    /** Identifier of the scene */
+    scene: string;
+    note: string;
+    /** Fade in and fade out in seconds; null to use the times of the scene */
+    fadeIn: number | null;
+    fadeOut: number | null;
+    /** Seconds after the Go of this cue when the next cue goes by itself; null for manual */
+    follow: number | null;
+}
+
 /** Memories section of show.json */
 export interface ShowMemories {
     scenes: Scene[];
     chasers: Chaser[];
+    /** Cue list, in number order */
+    cues: Cue[];
 }
 
 /** Memories of a new show */
-export const EMPTY_MEMORIES: ShowMemories = { scenes: [], chasers: [] };
+export const EMPTY_MEMORIES: ShowMemories = { scenes: [], chasers: [], cues: [] };
 
 /** Scene without its levels, as the interface lists it */
 export interface SceneSummary extends Omit<Scene, 'levels'> {
@@ -94,6 +121,7 @@ export interface SceneSummary extends Omit<Scene, 'levels'> {
 export interface MemoriesSummary {
     scenes: SceneSummary[];
     chasers: Chaser[];
+    cues: Cue[];
 }
 
 /** A memory being played */
@@ -208,5 +236,53 @@ export function normalizeMemories(value: unknown): ShowMemories {
             direction: CHASER_DIRECTIONS.includes(entry.direction as ChaserDirection) ? entry.direction as ChaserDirection : 'loop'
         });
     }
-    return { scenes, chasers };
+
+    const numbers = new Set<number>();
+    const cues: Cue[] = [];
+    for (const item of Array.isArray((input as { cues?: unknown }).cues) ? (input as { cues: unknown[] }).cues : []) {
+        const entry = (typeof item === 'object' && item !== null ? item : {}) as Partial<Record<keyof Cue, unknown>>;
+        const number = typeof entry.number === 'number' ? roundCueNumber(entry.number) : NaN;
+        if (typeof entry.id !== 'string' || entry.id === '' || ids.has(entry.id) || !isCueNumber(number) || numbers.has(number)
+            || typeof entry.scene !== 'string' || !sceneIds.has(entry.scene) || cues.length >= MAX_CUES) {
+            console.warn('Cue ignored, invalid data', item);
+            continue;
+        }
+        ids.add(entry.id);
+        numbers.add(number);
+        const optionalSeconds = (value: unknown): number | null => typeof value === 'number' && Number.isFinite(value)
+            ? Math.min(FADE_LIMITS.max, Math.max(FADE_LIMITS.min, value))
+            : null;
+        cues.push({
+            id: entry.id,
+            number,
+            scene: entry.scene,
+            note: typeof entry.note === 'string' ? entry.note.slice(0, CUE_NOTE_MAX_LENGTH) : '',
+            fadeIn: optionalSeconds(entry.fadeIn),
+            fadeOut: optionalSeconds(entry.fadeOut),
+            follow: optionalSeconds(entry.follow)
+        });
+    }
+    cues.sort((a, b) => a.number - b.number);
+    return { scenes, chasers, cues };
+}
+
+/**
+ * Cue number with one decimal digit.
+ */
+export function roundCueNumber(value: number): number {
+    return Math.round(value * 10) / 10;
+}
+
+/**
+ * Tells whether a number can be a cue number.
+ */
+export function isCueNumber(value: number): boolean {
+    return Number.isFinite(value) && value >= CUE_NUMBER_LIMITS.min && value <= CUE_NUMBER_LIMITS.max;
+}
+
+/**
+ * Cue number as shown to the operator: "3" or "3.5".
+ */
+export function formatCueNumber(value: number): string {
+    return Number.isInteger(value) ? String(value) : value.toFixed(1);
 }

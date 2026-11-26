@@ -1,6 +1,6 @@
 /**
  * Changes a scene: name, fade in and fade out, or deletes it. Deleting a
- * scene also removes it from the chasers that use it.
+ * scene also removes it from the chasers and cues that use it.
  */
 
 import { Dialog, Key, Label, Stack, TextField, TimeField } from '../../../framework/ts/index.js';
@@ -35,7 +35,7 @@ async function removeScene(scene: SceneSummary, usedBy: number): Promise<boolean
 
 /**
  * Opens the dialog of a scene.
- * @param usedBy - Number of chasers that use the scene
+ * @param usedBy - Number of chasers and cues that use the scene
  */
 export function openSceneDialog(scene: SceneSummary, usedBy: number): void {
     const dialog = new Dialog({ title: t('memories.sceneTitle', { code: memoryCode('scene', scene.slot) }) });

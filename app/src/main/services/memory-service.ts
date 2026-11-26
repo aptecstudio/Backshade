@@ -68,8 +68,9 @@ function requireBpm(input: Record<string, unknown>): number {
 
 /**
  * Registers the methods of the service.
+ * @returns the player, also used by the cue list
  */
-export function registerMemoryService(router: RequestRouter, bus: EventBus, session: ShowSession, desk: PresetDesk, output: OutputEngine): void {
+export function registerMemoryService(router: RequestRouter, bus: EventBus, session: ShowSession, desk: PresetDesk, output: OutputEngine): MemoryPlayer {
     const memoriesOf = (): ShowMemories | null => session.summary() === null ? null : session.memories();
     const player = new MemoryPlayer({
         mixer: output.mixer,
@@ -113,7 +114,7 @@ export function registerMemoryService(router: RequestRouter, bus: EventBus, sess
 
     router.register('memories.get', () => {
         const memories = session.memories();
-        return { scenes: memories.scenes.map(sceneSummary), chasers: memories.chasers };
+        return { scenes: memories.scenes.map(sceneSummary), chasers: memories.chasers, cues: memories.cues };
     });
 
     router.register('memories.getState', () => player.state());
@@ -144,10 +145,11 @@ export function registerMemoryService(router: RequestRouter, bus: EventBus, sess
 
     router.register('memories.deleteScene', (params) => {
         const id = requireScene(requireString(requireObject(params), 'id')).id;
-        // The steps that used the scene are removed from the chasers
+        // The steps and cues that used the scene are removed
         update((memories) => ({
             scenes: memories.scenes.filter((item) => item.id !== id),
-            chasers: memories.chasers.map((chaser) => chaser.steps.includes(id) ? { ...chaser, steps: chaser.steps.filter((step) => step !== id) } : chaser)
+            chasers: memories.chasers.map((chaser) => chaser.steps.includes(id) ? { ...chaser, steps: chaser.steps.filter((step) => step !== id) } : chaser),
+            cues: memories.cues.filter((cue) => cue.scene !== id)
         }));
         return undefined;
     });
@@ -218,4 +220,6 @@ export function registerMemoryService(router: RequestRouter, bus: EventBus, sess
         player.releaseAll();
         return player.state();
     });
+
+    return player;
 }

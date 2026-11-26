@@ -98,16 +98,13 @@
     overflow-y: auto;
 }
 
-.attributes-panel__controls {
-    flex-wrap: wrap;
-}
-
+// Wheels stay beside the faders; with many channels the faders scroll
 .attributes-panel__strips {
     display: grid;
     grid-auto-columns: space(8) + space(2);
     grid-auto-flow: column;
-    flex: 0 1 auto;
-    min-width: 0;
+    flex: 1 1 0;
+    min-width: space(8) * 4;
     overflow-x: auto;
 }
 
@@ -125,6 +122,16 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+}
+
+.position-wheels,
+.attributes-panel__controls > .color-wheel {
+    flex-shrink: 0;
+}
+
+// Disc and fields side by side, so the panel stays low
+.attributes-panel__controls > .color-wheel {
+    flex-wrap: nowrap;
 }
 
 .position-wheels .display {
@@ -177,4 +184,82 @@
     &:last-child {
         border-bottom: 0;
     }
+}
+
+// Live cues: list on the left, playback on the right
+.cue-panel__left {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.cue-panel__list {
+    max-height: space(8) * 4;
+    overflow-y: auto;
+}
+
+.cue-panel__controls {
+    flex: 0 0 space(8) * 5;
+}
+
+.cue-panel__go,
+.cue-panel__keys > .key {
+    width: 100%;
+}
+
+.cue-panel__keys > .key {
+    flex: 1 1 0;
+}
+
+.cue-row {
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.cue-row__item {
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: space(6) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 2fr);
+    align-items: center;
+    gap: space(2);
+    min-width: 0;
+    text-align: left;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+// The next cue has the red bar of the selected keys, the current one the accent color
+.cue-row__item {
+    border-left: 2px solid transparent;
+}
+
+.cue-row--next .cue-row__item {
+    border-left-color: color('armed');
+}
+
+.cue-row--current .cue-row__item .label {
+    color: color('accent');
+}
+
+.cue-progress__head {
+    justify-content: space-between;
+}
+
+.cue-progress__track {
+    height: space(1);
+    border-radius: $radius-square-key;
+    background: color('display');
+    overflow: hidden;
+}
+
+.cue-progress__fill {
+    width: calc(var(--cue-progress, 0) * 100%);
+    height: 100%;
+    background: color('accent');
 }

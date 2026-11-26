@@ -11,6 +11,7 @@ import { FixtureLibrary } from '../fixtures/fixture-library';
 import { registerAppInfoService } from '../services/app-info-service';
 import { registerAttributeService } from '../services/attribute-service';
 import { registerConsoleService } from '../services/console-service';
+import { registerCueService } from '../services/cue-service';
 import { registerFixtureService } from '../services/fixture-service';
 import { registerOutputService } from '../services/output-service';
 import { registerPatchService } from '../services/patch-service';
@@ -45,7 +46,8 @@ export function startEngine(): void {
     const output = registerOutputService(router, bus, session, library);
     const desk = registerConsoleService(router, bus, session, library, output.engine);
     registerAttributeService(router, bus, session, library, desk);
-    registerMemoryService(router, bus, session, desk, output.engine);
+    const player = registerMemoryService(router, bus, session, desk, output.engine);
+    registerCueService(router, bus, session, player);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);

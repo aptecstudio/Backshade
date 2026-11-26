@@ -6,7 +6,8 @@
  */
 
 import type { AttributeLayout } from '../console/fixture-attributes.js';
-import type { Chaser, ChaserDirection, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
+import type { CueStackState } from '../console/cue-stack.js';
+import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
@@ -407,6 +408,25 @@ export interface EngineMethods {
     /** Turns every memory off with its fade out */
     'memories.releaseAll': { params: undefined; result: MemoriesState };
 
+    /** Playback state of the cue list */
+    'cues.getState': { params: undefined; result: CueStackState };
+    /** Adds a cue at the end of the list, playing a scene (unsaved change) */
+    'cues.add': { params: { scene: string }; result: Cue };
+    /** Changes a cue; null fades use the times of the scene, null follow is manual (unsaved change) */
+    'cues.update': { params: { id: string; number: number; scene: string; note: string; fadeIn: number | null; fadeOut: number | null; follow: number | null }; result: Cue };
+    /** Deletes a cue (unsaved change) */
+    'cues.delete': { params: { id: string }; result: undefined };
+    /** Plays the next cue, or continues after Pause */
+    'cues.go': { params: undefined; result: CueStackState };
+    /** Plays the previous cue */
+    'cues.back': { params: undefined; result: CueStackState };
+    /** Stops or continues the fades and the follow wait */
+    'cues.pause': { params: undefined; result: CueStackState };
+    /** Fades out the current cue */
+    'cues.release': { params: undefined; result: CueStackState };
+    /** Chooses the cue played by the next Go */
+    'cues.setNext': { params: { id: string }; result: CueStackState };
+
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
     /** Removes a show from the recent shows */
@@ -461,6 +481,8 @@ export interface EngineEvents {
     'memories.changed': Record<string, never>;
     /** Memories turned on or off, a chaser step or the selected chaser changed */
     'memories.stateChanged': { state: MemoriesState };
+    /** The playback state of the cue list has changed */
+    'cues.stateChanged': { state: CueStackState };
     /** The list of templates has changed */
     'templates.changed': Record<string, never>;
     /** The user wants to close the window with unsaved changes */
