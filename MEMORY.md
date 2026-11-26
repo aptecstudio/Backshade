@@ -142,6 +142,37 @@ Built in Phases 2.6 and 2.9.4 (2026-11-23).
 
 Status: Confirmed (2026-11-23).
 
+## Show operators
+
+Requested by the human on 2026-11-26, in view of the multi-device work: every show can have its operators with a 4 digit PIN, each one with the working sections enabled or not. It replaces a first per-workstation setting of hidden sections, removed on the human's request: everything goes through the operators.
+
+- **Saved in the show** (`operators` in `show.json`: `id`, `name`, `admin`, `access`, `pinSalt`, `pinHash`). The PIN is never saved in clear: scrypt with a random salt (Node.js `crypto`). A new show and a saved template never carry operators. (Confirmed)
+- **Access per working section:** `hidden`, `view` (read only: the section is seen and played, not changed) or `edit`. (Confirmed)
+- **Administrators** edit every section and manage the operators. Who creates the first profile of a show (the creator of the protection) is an administrator; more administrators are allowed; the last administrator cannot lose the role. (Confirmed)
+- **Entering:** a show with operators asks for the PIN when it opens, on every workstation, the main one included; the operator key in the top bar leaves, so another operator can enter. A show without operators opens without a PIN. (Confirmed)
+- **PIN rules:** login by PIN only, so PINs are unique in the show; 400 ms wait after a wrong PIN and 30 s lock after 5 wrong PINs in a row. (Proposed)
+- **Engine check:** `RequestRouter.setGuard` runs before every method; `src/main/operators/method-rules.ts` gives every method a rule: `free` (application, windows, opening, saving and closing shows, PIN), `play` (allowed when one of its sections is shown, for example the grid keys play scenes and cues), `edit` (needs the section editable), `admin` (show settings, rename, save as template); unlisted methods only read and need an operator who entered. Errors: `operator-required`, `operator-not-allowed`. (Proposed)
+- **Interface:** hidden sections lose their tab and are never opened (the requested section opens as soon as it becomes visible, for example after the PIN); a read-only section carries a notice above it; the show settings tab, with the Operators panel, is available only to administrators. Disabling the editing controls of read-only sections is a follow-up (ROADMAP 2.10.4). (Proposed)
+- **Same PIN for several operators:** possible after an import (PIN hashes cannot be compared); the login then offers the names of the operators with that PIN. (Proposed)
+- **Scope:** the operator who entered belongs to the instance and is forgotten when a show opens or closes; the remote interface (Phase 10) and the nodes (Phase 15) will have one operator per connection. Deleting the own and last profile removes the protection. (Proposed)
+
+Status: Confirmed (request and polls of the human, 2026-11-26), Proposed (marked points).
+
+## Import from another show
+
+Requested by the human on 2026-11-26, with polls on the same day.
+
+- **Where:** Settings > Show > "Import from another show", administrators only (method rule `admin`). The source is chosen among the recent shows or as a show folder. (Confirmed)
+- **What:** categories and single items, each with a toggle (confirmed): scenes, chasers, fixtures (with LED matrices and groups), audio (playlist items and audio files), video (outputs, text gobos, timers and video files), images, operators. Audio, video and images mean the files and their configuration. (Confirmed)
+- **Dependencies:** every item lists the items it needs, imported with it and marked "needed" in the dialog: chaser -> scenes; scene -> fixtures and matrices of its channels and effects, playlist item, video outputs, gobos, timers and media of its program; playlist item -> audio file; gobo -> mask image; group -> fixtures. Grid pages, cues and timelines are not imported. (Proposed)
+- **Conflicts, chosen in the dialog** (confirmed): an occupied scene or chaser slot, overlapping DMX addresses, a media file with the same path and another content, an operator name already used. Add puts the item elsewhere: first free slot, first free address (same universe, then the next ones; a matrix goes to the first universe after the used ones), "name 2.ext", "Name 2". Replace takes the place, keeping the identifier of the replaced scene or chaser so references keep working; the operator who entered cannot be replaced. Skip leaves the item out; a skipped file uses the file of the open show. Fixture and group numbers in use are renumbered without asking; identical files are not copied again. (Proposed)
+- **Rewriting:** imported items get new identifiers; references, media paths and the DMX channels of scenes follow moved fixtures and matrices. (Proposed)
+- **PIN of the source** (confirmed): a source with operators asks for the PIN of one of its administrators, unless the administrator who entered the open show is one of them, with the same name and the same PIN (the PIN typed to enter is kept only in memory). A source without operators needs no PIN.
+- **Operators into a show without operators:** the show becomes protected, so who imports enters as the source administrator of the PIN typed, imported with them when not chosen. (Proposed)
+- Code: `src/shared/show/show-import.ts` (model), `src/main/show-import/` (catalog and plan), `src/main/services/show-import-service.ts`, `src/renderer/sections/settings/show-import-dialog.ts`.
+
+Status: Confirmed (request and polls of the human), Proposed (marked points).
+
 ## Show templates
 
 Requested by the human on 2026-11-23 (Phase 2.9).

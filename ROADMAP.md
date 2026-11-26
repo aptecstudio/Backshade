@@ -66,6 +66,16 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
   - [x] 2.9.3 Save as template from the open show, with name and description, in the user data folder
   - [x] 2.9.4 Export and import of a template as a single archive, with the same format as the show export (2.6)
   - [x] 2.9.5 Template management screen, opened from the start page: list of included and user templates; rename, edit the description and delete user templates; included templates are read-only
+- [x] 2.10 Show operators with a 4 digit PIN (see `MEMORY.md`, Show operators)
+  - [x] 2.10.1 Operators saved in the show, PIN kept as a salted hash; the creator of the protection is an administrator, more administrators allowed
+  - [x] 2.10.2 Access per working section: hidden, read only (see and play) or editable; checked by the engine before every method
+  - [x] 2.10.3 PIN keypad when a show with operators opens, on every workstation; operator key in the top bar to change operator
+  - [ ] 2.10.4 Read-only sections disable their editing controls (today the engine refuses the change and a notice marks the section)
+- [x] 2.11 Import from another show (see `MEMORY.md`, Import from another show)
+  - [x] 2.11.1 Dialog in the show settings: source among the recent shows or from a folder; categories (scenes, chasers, fixtures, audio, video, images, operators) and single items with toggles
+  - [x] 2.11.2 Dependencies imported with the items that need them (chaser -> scenes -> fixtures, matrices, audio, video, media)
+  - [x] 2.11.3 Conflicts solved in the dialog: add elsewhere, replace or skip
+  - [x] 2.11.4 PIN of a source administrator, unless the administrator who entered is one of them (same name and PIN)
 
 ## Phase 3 - DMX and Art-Net
 
@@ -153,7 +163,7 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [ ] 10.1 Web server on the local network (native `http` module)
 - [ ] 10.2 WebSocket transport with the same protocol as IPC
 - [ ] 10.3 Responsive layout for desktop and mobile
-- [ ] 10.4 PIN-protected access and role permissions (run only or edit)
+- [ ] 10.4 PIN-protected access with the show operators (2.10), one operator per connection
 - [ ] 10.5 Connection address and QR code shown in the application
 
 ## Phase 11 - Distribution
