@@ -11,6 +11,7 @@ import { installAppMenu } from './menu/app-menu';
 import * as appProtocol from './protocol/app-protocol';
 import * as mediaPermissions from './security/media-permissions';
 import * as navigationGuard from './security/navigation-guard';
+import * as keepAwake from './system/keep-awake';
 import * as mainWindow from './window/main-window';
 
 // The internal protocol must be registered before the app is ready
@@ -33,6 +34,7 @@ if (!app.requestSingleInstanceLock()) {
         appProtocol.handle();
         mediaPermissions.install();
         installAppMenu();
+        keepAwake.start();
         startEngine();
         mainWindow.create(startPage());
 
