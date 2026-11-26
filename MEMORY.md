@@ -329,6 +329,18 @@ Defined with the human on 2026-11-26 (Phase 7). Audio first, then video (decided
 
 Status: Confirmed (playback window, sections, one player with playlist, item settings, audio in scenes with the fades of the scene), Proposed (crossfade between items, chasers without audio, transport layout).
 
+Video outputs (7.3, 7.4, 7.6), defined with the human on 2026-11-26:
+
+- **Outputs** (`src/shared/video/video.ts`, `video` in `show.json`): each output has a name, on or off (window open), display, fullscreen or a window at a position and size from the top left corner of the display, an order of stacking (higher above; windows are raised in order) and a number of layers (1 to 8). Displays are listed by the main process (`screen`).
+- **Layers per output** (decided by the human): bottom to top; each layer shows a video or an image of the show media, or nothing, with opacity, fit (fill, whole, stretch) and repeat for videos. Videos of the outputs are muted (proposed).
+- **Preview and program as on a vision mixer** (decided by the human): program is what goes out, preview the next composition; Take brings the preview to program with a transition time (zero is a cut), on one output or on all; layers can also be changed directly in program. Program and preview belong to the running session.
+- **Scenes record the program** (decided by the human): the program of the outputs that show something (`Scene.video`); turning the scene or cue on puts it on the outputs with its fade in, turning it off brings back the program it replaced, where it is still its own, with its fade out. Videos start again from the beginning.
+- **Output windows** (`src/main/video/output-window.ts`, page `renderer/video-output.html`, preload `video-output-preload.ts`): frameless windows sent the composition and the transition time by the engine (`src/main/video/video-engine.ts`).
+- **Composition** (`src/renderer/video/composition-view.ts`, proposed): layers are stacked video and image elements; a new source fades in over the old one with CSS opacity transitions. The same component shows preview and program in the Video section. WebGL comes with the videomapping of Phase 14.
+- **Interface** (`src/renderer/sections/video/`): output keys (red bar when the window is open), output settings dialog, preview and program side by side with the aspect ratio of the output and their layers (top layer first), transition time, Take and Take all. New color token `video-black` (true black of the outputs).
+
+Status: Confirmed (layers per output, preview and program with Take, scenes record the program, window position, size, fullscreen and stacking), Proposed (CSS composition, muted videos, recording only outputs that show something).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.

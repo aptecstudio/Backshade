@@ -116,12 +116,12 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 
 ## Phase 7 - Audio and video
 
-- [ ] 7.1 Detection and selection of external audio and video devices (audio outputs done; displays and video inputs with 7.3 and 7.5)
+- [ ] 7.1 Detection and selection of external audio and video devices (audio outputs and displays done; video inputs with 7.5)
 - [x] 7.2 Audio playback: playlist, volume, fades, per-device output; items with start and end time and repeat, recorded in scenes and recalled by memory keys, cues and grid keys
-- [ ] 7.3 Video direction: fullscreen outputs on external displays
-- [ ] 7.4 Layers: video, overlay images, opacity, transitions
+- [x] 7.3 Video direction: outputs on external displays, fullscreen or windows with position and size, with an order of stacking
+- [x] 7.4 Layers: video, overlay images, opacity, transitions
 - [ ] 7.5 Video inputs (webcams and capture cards)
-- [ ] 7.6 Preview and program
+- [x] 7.6 Preview and program, with Take and transition time; the program of the outputs is recorded in scenes
 - [ ] 7.7 Text gobos: text layers on the video outputs and LED walls, with a gobo look
   - [ ] 7.7.1 Text, font, size, weight, color, outline, alignment and position
   - [ ] 7.7.2 Gobo look: shape mask (circle or custom) with soft edge, focus (blur), rotation, prism repeat
