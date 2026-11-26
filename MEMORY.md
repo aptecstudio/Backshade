@@ -469,6 +469,7 @@ Built in Phase 1.5 after the console reference rendering (`docs/design/console.p
 - Settings: `SettingsSection` collects one panel per setting; the first is `LanguageSettings`.
 - Timecode and tempo show neutral values (`00:00:00:00`, `---.-`) until the engine provides them.
 - The blackout key of the reference is in the top bar since the output engine (Phase 3.5).
+- Fullscreen key (requested by the human on 2026-11-26): last key of the top bar, icon only (Lucide `maximize`, `minimize` when fullscreen, active state while fullscreen); it follows fullscreen changes made by the system too (`window.fullScreenChanged`) and is hidden outside the desktop application. Framework addition: `Key.setIcon`.
 - Narrow windows: the show name is shortened with an ellipsis; with the navigation in the status bar the timecode and tempo displays always fit down to the minimum window width (1024 px).
 - Images used by the interface live in `app/assets/images/` (copied from `docs/logo` and `docs/brand`) and are served at `/assets/images/`.
 
@@ -692,13 +693,29 @@ Status: Confirmed (requirements), Proposed (details).
 
 ## Text gobos
 
-Requested by the human on 2026-11-23 (Phase 7.7): text layers for the video outputs and LED walls with a gobo look.
+Requested by the human on 2026-11-23 (Phase 7.7), defined on 2026-11-26.
 
-- Text with font, size, weight, color, outline, alignment and position; gobo look with a shape mask and soft edge, focus (blur), rotation and prism repeat; animations (scroll, rotation, fade, type-on); dynamic texts (cue or song name, timecode, clock, countdown).
-- Recallable from scenes, cues and the timeline, saved in `show.json` with presets; shown in the 3D stage (screens, LED walls, virtual projectors) and usable in the pixel mapping.
-- Rendering in the output windows with WebGL or canvas, without new dependencies; fonts are the system fonts or font files copied into the show `media/` folder, so the show stays portable.
+- **Presets of the show** (decided by the human): text gobos are saved in `video.gobos` (`src/shared/video/text-gobo.ts`); a layer uses a preset as its source (`{ kind: 'gobo', gobo }`), so a change of the preset shows on every layer and in the recorded scenes. Deleting a preset leaves its layers empty.
+- **Settings:** text (several lines), font (generic families and common fonts), weight (regular or bold), size and outline as parts of the output height, colors, alignment, position, rotation; gobo look: shape mask (none, circle, or an image of the show media whose brightness lets the text through) with size and soft edge, focus (blur), prism of 3, 5, 6 or 8 facets with spread; animations: scroll, rotation, fade, type-on, with speed and direction; countdown for a duration (from when the gobo appears) or to a time of the day.
+- **Dynamic texts as placeholders** (decided by the human): `{cue}` (current cue, its note or scene name), `{song}` (audio item playing), `{clock}`, `{timecode}` (shows its empty value until the shared clock of Phase 8.5), `{countdown}`. The engine sends the live data to the output windows with the composition.
+- **Drawing** (`src/renderer/video/gobo-renderer.ts`): a canvas per gobo layer drawn every frame at the size of the composition, with a transparent background over the layers below; fonts are the system fonts, so the look can differ between computers (fonts in the show media can come later).
+- **Editor in the Video section** (decided by the human): Text gobos panel with one key per preset and the editor with an animated preview (sample cue and song names); changes are saved a moment after the last one. The monitors of the Video section show `{cue}` and `{song}` empty (proposed).
+- Shown in the 3D stage and in the pixel mapping with Phases 13 and 14.
 
-Status: Confirmed (feature), Proposed (technical choices).
+Status: Confirmed (presets, editor in the Video section, placeholders), Proposed (canvas drawing, prism and animation formulas, system fonts only, empty live texts in the monitors).
+
+## Timer screens
+
+Requested by the human on 2026-11-26 (Phase 7.8): screens of the current time and countdowns, useful in live shows.
+
+- **Kinds** (decided by the human): current time (seconds and date optional), countdown for a duration, countdown to a time of the day, stopwatch.
+- **Presets of the show** (`src/shared/video/show-timer.ts`, `video.timers`), used by layers like the text gobos (`{ kind: 'timer', timer }`): label above the digits, font, colors normal, warning (a number of seconds before the end) and end, background color or transparent.
+- **At zero** (decided by the human: a choice per timer): count on with a minus sign or stop at zero; the digits can flash after zero.
+- **Live state** (`src/main/video/timer-clock.ts`): countdowns and stopwatches are started, paused, reset and changed by one minute; the state (running, time counted, change, wall clock time of the state) is sent to the output windows, which move the digits on with their own clock. States belong to the running session. Countdowns to a time and clocks follow the wall clock.
+- **Controls** (decided by the human): the Timer screens panel of the Video section (preset keys, new timer by kind, editor with live preview, start or pause, reset, plus and minus one minute) and the grid (keys with a timer command, monitors showing the time).
+- **Drawing** (`src/renderer/video/timer-renderer.ts`): large digits fitted to the width, label above, date below; the date follows the interface language (output windows read it from the same storage).
+
+Status: Confirmed (kinds, choice at zero, controls in the Video section and the grid), Proposed (one minute changes, colors and layout, flashing every half second).
 
 ## Localization
 

@@ -122,13 +122,14 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [x] 7.4 Layers: video, overlay images, opacity, transitions
 - [x] 7.5 Video inputs (webcams and capture cards) as layer sources, with quality and frame rate per layer, without sound
 - [x] 7.6 Preview and program, with Take and transition time; the program of the outputs is recorded in scenes
-- [ ] 7.7 Text gobos: text layers on the video outputs and LED walls, with a gobo look
-  - [ ] 7.7.1 Text, font, size, weight, color, outline, alignment and position
-  - [ ] 7.7.2 Gobo look: shape mask (circle or custom) with soft edge, focus (blur), rotation, prism repeat
-  - [ ] 7.7.3 Animations: scroll, rotation, fade, type-on; speed and direction
-  - [ ] 7.7.4 Dynamic texts: cue or song name, timecode, clock, countdown
-  - [ ] 7.7.5 Text gobos recallable from scenes, cues and the timeline, saved in `show.json` with their own presets
+- [ ] 7.7 Text gobos: text layers on the video outputs and LED walls, with a gobo look (done on the video outputs; 3D stage and pixel mapping with Phases 13 and 14)
+  - [x] 7.7.1 Text, font, size, weight, color, outline, alignment and position
+  - [x] 7.7.2 Gobo look: shape mask (circle or custom) with soft edge, focus (blur), rotation, prism repeat
+  - [x] 7.7.3 Animations: scroll, rotation, fade, type-on; speed and direction
+  - [x] 7.7.4 Dynamic texts: cue or song name, timecode, clock, countdown (the timecode follows the shared clock of Phase 8.5)
+  - [x] 7.7.5 Text gobos recallable from scenes, cues and the timeline, saved in `show.json` with their own presets (timeline with Phase 8)
   - [ ] 7.7.6 Shown in the 3D stage on screens, LED walls and virtual projectors (13.9), and usable in the pixel mapping (5.4, 14.5)
+- [x] 7.8 Timer screens for live shows (requested by the human on 2026-11-26): current time, countdown for a duration, countdown to a time, stopwatch; controlled from the Video section and the grid
 
 ## Phase 8 - Pre-programmed shows (track timeline)
 
