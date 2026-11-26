@@ -130,3 +130,51 @@
 .position-wheels .display {
     align-self: stretch;
 }
+
+// Memories: rows of 12 scene and chaser keys
+.memory-row {
+    align-items: stretch;
+}
+
+.memory-row__title {
+    flex: 0 0 space(8);
+    justify-content: center;
+
+    .label {
+        color: color('accent');
+    }
+}
+
+.memory-row__keys {
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    min-width: 0;
+
+    > .key {
+        min-width: 0;
+        padding: 0 space(1);
+    }
+
+    .key__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+// Chaser dialog: list of steps
+.chaser-steps .panel__body {
+    gap: 0;
+    max-height: space(8) * 4;
+    overflow-y: auto;
+}
+
+.chaser-steps__row {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}

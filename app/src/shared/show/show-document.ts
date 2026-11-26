@@ -4,6 +4,7 @@
  * timeline); every incompatible change increases SHOW_FORMAT_VERSION.
  */
 
+import type { ShowMemories } from '../console/memories.js';
 import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
 import type { ShowSettings } from './show-settings.js';
@@ -34,4 +35,6 @@ export interface ShowDocument {
     patch: ShowPatch;
     /** Frame rate and Art-Net destinations of the universes; missing in older files, completed when reading */
     output: ShowOutput;
+    /** Scenes and chasers of the simple console; missing in older files, completed when reading */
+    memories: ShowMemories;
 }

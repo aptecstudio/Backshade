@@ -158,13 +158,22 @@ export class PresetDesk {
         if (this.state.blind) {
             return;
         }
-        this.mixer.clearSource(PRESET_SOURCE);
+        this.mixer.replaceSource(PRESET_SOURCE, this.result());
+    }
+
+    /**
+     * Result of the desk on every universe, as pairs of channel and value,
+     * also while blind is on: it is what the record key stores in a scene.
+     */
+    result(): Map<number, Array<[number, number]>> {
+        const result = new Map<number, Array<[number, number]>>();
         for (const [universe, levels] of this.levels) {
-            const result = this.compose(universe, levels, this.mapOf(universe));
-            if (result.length > 0) {
-                this.mixer.setLevels(PRESET_SOURCE, universe, result);
+            const channels = this.compose(universe, levels, this.mapOf(universe));
+            if (channels.length > 0) {
+                result.set(universe, channels);
             }
         }
+        return result;
     }
 
     /**

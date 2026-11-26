@@ -11,38 +11,13 @@ import { PresetDesk } from '../console/preset-desk';
 import type { FixtureLibrary } from '../fixtures/fixture-library';
 import type { OutputEngine } from '../output/output-engine';
 import type { ShowSession } from '../shows/show-session';
-import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
-import { optionalBoolean, requireInteger, requireObject, requireString } from '../transport/params';
+import { optionalBoolean, requireChoice, requireNumber, requireObject, requireRange } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 const ROWS: readonly PresetRow[] = ['a', 'b'];
 const MASTERS: readonly PresetMaster[] = ['a', 'b', 'scene'];
 const MODES: readonly PresetMode[] = ['ab', 'single'];
-
-function requireChoice<T extends string>(input: Record<string, unknown>, field: string, choices: readonly T[]): T {
-    const value = requireString(input, field);
-    if (!choices.includes(value as T)) {
-        throw new EngineError('invalid-params', `Invalid field "${field}"`);
-    }
-    return value as T;
-}
-
-function requireRange(input: Record<string, unknown>, field: string, min: number, max: number, code = 'invalid-params'): number {
-    const value = requireInteger(input, field);
-    if (value < min || value > max) {
-        throw new EngineError(code, `Invalid field "${field}"`);
-    }
-    return value;
-}
-
-function requireUnit(input: Record<string, unknown>, field: string): number {
-    const value = input[field];
-    if (typeof value !== 'number' || !Number.isFinite(value)) {
-        throw new EngineError('invalid-params', `Invalid field "${field}"`);
-    }
-    return value;
-}
 
 /**
  * Registers the methods of the service.
@@ -112,7 +87,7 @@ export function registerConsoleService(router: RequestRouter, bus: EventBus, ses
 
     router.register('console.setMaster', (params) => {
         const input = requireObject(params);
-        desk.setMaster(requireChoice(input, 'master', MASTERS), requireUnit(input, 'position'));
+        desk.setMaster(requireChoice(input, 'master', MASTERS), requireNumber(input, 'position'));
         stateChanged();
         return undefined;
     });

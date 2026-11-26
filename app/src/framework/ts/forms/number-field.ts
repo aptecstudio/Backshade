@@ -94,6 +94,13 @@ export class NumberField extends Component<HTMLDivElement> {
     }
 
     /**
+     * Enables or disables the field.
+     */
+    setDisabled(disabled: boolean): void {
+        this.input.disabled = disabled;
+    }
+
+    /**
      * Registers a listener for the values confirmed by the user.
      */
     onChange(listener: (value: number) => void): Unsubscribe {

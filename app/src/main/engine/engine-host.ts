@@ -16,6 +16,7 @@ import { registerOutputService } from '../services/output-service';
 import { registerPatchService } from '../services/patch-service';
 import { startLocaleService } from '../services/locale-service';
 import { registerMediaService } from '../services/media-service';
+import { registerMemoryService } from '../services/memory-service';
 import { registerRecentService } from '../services/recent-service';
 import { registerSettingsService } from '../services/settings-service';
 import { registerShowService } from '../services/show-service';
@@ -44,6 +45,7 @@ export function startEngine(): void {
     const output = registerOutputService(router, bus, session, library);
     const desk = registerConsoleService(router, bus, session, library, output.engine);
     registerAttributeService(router, bus, session, library, desk);
+    registerMemoryService(router, bus, session, desk, output.engine);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);

@@ -15,6 +15,7 @@ import { BlackoutKey } from './blackout-key.js';
 import { BrandBlock } from './brand-block.js';
 import type { SectionNavigation } from './section-navigation.js';
 import { SectionTabs } from './section-tabs.js';
+import { followTempo } from './tempo-readout.js';
 
 const EMPTY_TIMECODE = '00:00:00:00';
 const EMPTY_TEMPO = '---.-';
@@ -32,6 +33,7 @@ export class TopBar extends Panel {
         this.timecode.element.classList.add('top-bar__timecode');
         this.tempo = new ReadoutDisplay({ text: EMPTY_TEMPO, label: t('console.tempo') });
         this.tempo.element.classList.add('top-bar__tempo');
+        this.track(followTempo(this.tempo, EMPTY_TEMPO));
 
         this.append(new Stack({
             direction: 'row',

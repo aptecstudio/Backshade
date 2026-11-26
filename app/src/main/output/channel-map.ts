@@ -18,6 +18,8 @@ export interface UniverseMap {
     intensity: Uint8Array;
     /** Intensity channels with 16 bits: index of the high byte and of the low byte */
     finePairs: Array<[number, number]>;
+    /** Every 16-bit channel (intensity or not): index of the high byte and of the low byte */
+    widePairs: Array<[number, number]>;
     /** 1 for the channels used by a fixture */
     patched: Uint8Array;
 }
@@ -32,6 +34,7 @@ function emptyUniverse(): UniverseMap {
         defaults: new Uint8Array(UNIVERSE_SIZE),
         intensity: new Uint8Array(UNIVERSE_SIZE),
         finePairs: [],
+        widePairs: [],
         patched: new Uint8Array(UNIVERSE_SIZE)
     };
 }
@@ -73,7 +76,11 @@ export function buildChannelMap(patch: ShowPatch, lookup: (id: string) => Fixtur
         for (const channel of definition.channels) {
             const fine = indexOf.get(channel.key);
             const coarse = channel.fineOf === undefined ? undefined : indexOf.get(channel.fineOf);
-            if (fine !== undefined && coarse !== undefined && map.intensity[coarse] === 1) {
+            if (fine === undefined || coarse === undefined) {
+                continue;
+            }
+            map.widePairs.push([coarse, fine]);
+            if (map.intensity[coarse] === 1) {
                 map.finePairs.push([coarse, fine]);
             }
         }

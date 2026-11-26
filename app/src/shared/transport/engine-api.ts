@@ -6,6 +6,7 @@
  */
 
 import type { AttributeLayout } from '../console/fixture-attributes.js';
+import type { Chaser, ChaserDirection, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
@@ -380,6 +381,32 @@ export interface EngineMethods {
      */
     'console.setAttributes': { params: { fixtures: string[]; values: Record<string, number> }; result: undefined };
 
+    /** Scenes and chasers of the open show */
+    'memories.get': { params: undefined; result: MemoriesSummary };
+    /** Memories being played */
+    'memories.getState': { params: undefined; result: MemoriesState };
+    /**
+     * Records the result of the desk in a scene place (unsaved change). A
+     * place already used keeps its scene, name and fades: only the levels change.
+     */
+    'memories.recordScene': { params: { slot: number; name: string }; result: SceneSummary };
+    /** Changes the name and fades of a scene (unsaved change) */
+    'memories.updateScene': { params: { id: string; name: string; fadeIn: number; fadeOut: number }; result: SceneSummary };
+    /** Deletes a scene and removes it from the chaser steps (unsaved change) */
+    'memories.deleteScene': { params: { id: string }; result: undefined };
+    /** Creates (without id) or changes a chaser (unsaved change) */
+    'memories.saveChaser': { params: { id?: string; slot: number; name: string; steps: string[]; bpm: number; fade: number; direction: ChaserDirection }; result: Chaser };
+    /** Deletes a chaser (unsaved change) */
+    'memories.deleteChaser': { params: { id: string }; result: undefined };
+    /** Changes the speed of a chaser and selects it (unsaved change) */
+    'memories.setBpm': { params: { id: string; bpm: number }; result: Chaser };
+    /** Turns a memory on or off, with its fades */
+    'memories.setActive': { params: { kind: MemoryKind; id: string; on: boolean }; result: MemoriesState };
+    /** Chooses the chaser that the tempo controls act on */
+    'memories.selectChaser': { params: { id: string }; result: MemoriesState };
+    /** Turns every memory off with its fade out */
+    'memories.releaseAll': { params: undefined; result: MemoriesState };
+
     /** Recent shows, most recent first */
     'recent.list': { params: undefined; result: RecentShow[] };
     /** Removes a show from the recent shows */
@@ -430,6 +457,10 @@ export interface EngineEvents {
     'console.fadersChanged': { row: PresetRow; universe: number; channels: Array<[number, number]> };
     /** Many faders have changed at once (home), the levels must be read again */
     'console.levelsChanged': Record<string, never>;
+    /** Scenes or chasers of the open show have changed */
+    'memories.changed': Record<string, never>;
+    /** Memories turned on or off, a chaser step or the selected chaser changed */
+    'memories.stateChanged': { state: MemoriesState };
     /** The list of templates has changed */
     'templates.changed': Record<string, never>;
     /** The user wants to close the window with unsaved changes */

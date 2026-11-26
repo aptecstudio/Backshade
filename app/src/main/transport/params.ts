@@ -82,3 +82,37 @@ export function requireStringArray(params: Record<string, unknown>, field: strin
     }
     return value as string[];
 }
+
+/**
+ * Returns a required text field that must be one of the given values.
+ */
+export function requireChoice<T extends string>(params: Record<string, unknown>, field: string, choices: readonly T[]): T {
+    const value = requireString(params, field);
+    if (!choices.includes(value as T)) {
+        throw new EngineError('invalid-params', `Invalid field "${field}"`);
+    }
+    return value as T;
+}
+
+/**
+ * Returns a required integer field within limits.
+ * @param code - Error code when the value is out of the limits
+ */
+export function requireRange(params: Record<string, unknown>, field: string, min: number, max: number, code = 'invalid-params'): number {
+    const value = requireInteger(params, field);
+    if (value < min || value > max) {
+        throw new EngineError(code, `Invalid field "${field}"`);
+    }
+    return value;
+}
+
+/**
+ * Returns a required finite number field.
+ */
+export function requireNumber(params: Record<string, unknown>, field: string): number {
+    const value = params[field];
+    if (typeof value !== 'number' || !Number.isFinite(value)) {
+        throw new EngineError('invalid-params', `Missing or invalid field "${field}"`);
+    }
+    return value;
+}

@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { app } from 'electron';
 import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show-document';
+import type { ShowMemories } from '../../shared/console/memories';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
@@ -33,7 +34,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -233,6 +234,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('output');
+    }
+
+    /**
+     * Scenes and chasers of the open show.
+     */
+    memories(): ShowMemories {
+        return this.requireOpen().document.memories;
+    }
+
+    /**
+     * Replaces the scenes and chasers of the open show; the change must be saved.
+     */
+    setMemories(memories: ShowMemories): void {
+        const show = this.requireOpen();
+        if (memories === show.document.memories) {
+            return;
+        }
+        show.document = { ...show.document, memories };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('memories');
     }
 
     /**

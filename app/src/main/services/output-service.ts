@@ -74,6 +74,10 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
         stateChanged();
     };
     session.onContentChange((part) => {
+        // Scenes and chasers do not change the channels or the destinations
+        if (part === 'memories') {
+            return;
+        }
         follow();
         if (part !== 'patch') {
             bus.emit('output.configChanged', {});
