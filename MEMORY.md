@@ -16,6 +16,8 @@ Log of Backshade's technical decisions and conventions. Each entry shows its sta
 | Runtime | Electron | Confirmed |
 | Interface | HTML, TypeScript, SCSS, internal TypeScript and SCSS frameworks | Confirmed (TypeScript and SCSS replace JavaScript, jQuery and Tailwind on 2026-11-23) |
 | Versioning | SemVer; 1.0.0 is the first release, when all planned features are implemented and the application is ready for distribution and testing; no versions before it (`app/package.json` stays at `0.0.0`) | Confirmed (changed on 2026-11-23, it was the first runnable version) |
+| Live tests | `TESTING.md`: checklist of the final tests to run live with real hardware; the agent adds the new features to it at the end of every phase or sub-phase | Confirmed (requested by the human on 2026-11-26) |
+| README screenshots | Only 5 screenshots in `README.md`, showing the most interesting features; updated when better features arrive | Confirmed (requested by the human on 2026-11-26) |
 
 ## Language
 
@@ -178,7 +180,7 @@ Status: Confirmed (request and polls of the human), Proposed (marked points).
 Requested by the human on 2026-11-23 (Phase 2.9).
 
 - A template is a **complete show folder**, with the same format as a show (`show.json`, `media/`): creating a show from a template copies the folder and assigns a new name and identifier. There is no second format.
-- Included templates live in the application; for now only "Empty show". More included templates come after the fixtures and the console (Phases 3 and 4).
+- Included templates live in the application (`app/templates`): "Empty show" and "Demo show". The demo (requested by the human on 2026-11-26, so that anyone can try the application) is a complete show: 20 fixtures of the included library in 3 groups, a 32 x 16 LED wall, 8 scenes (one with an LED effect, one with a video program), 3 chasers, 5 cues, a grid page for the show and one for media, an audio playlist, a video output (off by default, so no window opens by surprise), a text gobo, two timers and a timeline with light, automation, audio and video tracks. Its media files are generated for the project (synthesized audio, drawn images, a canvas video) and the Backshade logo. The demo is updated when new features deserve to be shown. (Proposed)
 - User templates live in `templates/` in the user data folder (`app.getPath('userData')`), like the language packs: no administrator rights, they survive updates.
 - The user creates a template with "Save as template" from the open show (name and description), and can export and import a template as a single archive, with the same format as the show export (2.6).
 - Files: a template folder is `<name>.backshade/` with `show.json` and `template.json` (`name` and `description`, either a text or an object with one text per language code, used by the included templates). Template identifiers are `bundled:<folder name>` and `user:<folder name>`. Included templates live in `app/templates/`.

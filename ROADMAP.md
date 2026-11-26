@@ -62,7 +62,7 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
   - [x] 2.8.4 Choice of the template for a new show, among the included templates and those created by the user
 - [x] 2.9 Show templates (see `MEMORY.md`, Show templates)
   - [x] 2.9.1 A template is a complete show folder; a new show is a copy with a new name and identifier
-  - [x] 2.9.2 Included template: "Empty show" (more included templates after Phases 3 and 4)
+  - [x] 2.9.2 Included templates: "Empty show" and "Demo show", a complete show to try every feature (requested by the human on 2026-11-26)
   - [x] 2.9.3 Save as template from the open show, with name and description, in the user data folder
   - [x] 2.9.4 Export and import of a template as a single archive, with the same format as the show export (2.6)
   - [x] 2.9.5 Template management screen, opened from the start page: list of included and user templates; rename, edit the description and delete user templates; included templates are read-only

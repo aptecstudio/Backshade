@@ -18,82 +18,49 @@ Backshade is a cross-platform desktop application (Windows, Linux, macOS) built 
 
 ## Screenshots
 
-The simple console: a two-preset desk with Preset A and B rows of faders on DMX channels, named after the patched fixtures, and the masters with the A/B crossfade.
+Pre-programmed shows on a timeline of tracks: light, automation, audio and video clips on a shared clock, with folders, fades and snap to the beat.
+
+![Timeline](docs/screenshots/timeline.png)
+
+The virtual console: a grid of faders, keys, an XY pad, a color picker, knobs and monitors, linked to groups, scenes, chasers and the cue list, for touch screens too.
+
+![Virtual console](docs/screenshots/virtual-console.png)
+
+Video direction with preview and program: layers of videos, images, text gobos and timer screens, taken to the outputs with a transition.
+
+![Video](docs/screenshots/video.png)
+
+LED matrices patched over several universes, with live effects and animations whose colors can be chosen.
+
+![LED matrix](docs/screenshots/led-matrix.png)
+
+The simple console: a two-preset desk with Preset A and B rows of faders named after the patched fixtures, and the masters with the A/B crossfade.
 
 ![Console](docs/screenshots/console.png)
-
-Scenes recorded from the desk in two banks of 12, and chasers that play them at their own speed, with tap tempo.
-
-![Memories](docs/screenshots/console-memories.png)
-
-Live cues: Go, Back and Pause, with the current and next cue, the fade progress and an optional follow.
-
-![Cues](docs/screenshots/console-cues.png)
-
-The attributes panel: selected fixtures get their channels on faders, pan and tilt on two 16-bit jog wheels, RGB on the color wheel.
-
-![Attributes](docs/screenshots/console-attributes.png)
-
-The patch, on several universes, with a library of fixture definitions and a custom fixture editor.
-
-![Patch](docs/screenshots/patch.png)
-
-Output over Art-Net and USB DMX interfaces, with a live DMX monitor.
-
-![DMX monitor](docs/screenshots/dmx-monitor.png)
-
-The start page opens at launch, with the recent shows and the actions on the open show.
-
-![Start page](docs/screenshots/start-page.png)
-
-New shows start from a template: the included "Empty show" or one saved by the user.
-
-![New show](docs/screenshots/new-show.png)
-
-Every show keeps its audio, video and image files in its own folder.
-
-![Media](docs/screenshots/media.png)
-
-Times are set with a time picker and a jog wheel, which works with mouse, pen and touch.
-
-![Time picker](docs/screenshots/time-picker.png)
-
-Application settings: language, display of fader and knob values, default shows folder.
-
-![Settings](docs/screenshots/settings.png)
-
-Console controls from the component catalog: channel displays, knobs, square keys, long faders and typed values.
-
-![Console controls](docs/screenshots/catalog-controls.png)
 
 ## Features
 
 Available now:
 
-- Start page with recent shows, as the entry point of the application
-- Shows saved as portable folders: new, open, save, save as, rename, close
-- Autosave with recovery after an unexpected exit, and history of the saved versions
-- Show templates: included and created by the user, with a management screen
-- Export and import of shows (`.bshow`) and templates (`.btemplate`) as single archives
-- Show media: audio, video and image files copied into the show folder
-- Show settings: description and notes, timecode frame rate, default fades
-- Fixture library with common models and a custom fixture editor, with import and export
-- Multi-universe patch with address conflict checks, as a list or as a DMX map
-- DMX output over Art-Net (broadcast or unicast, node search) and USB DMX interfaces (Enttec DMX USB Pro, Open DMX), with grand master, blackout and a DMX monitor
-- Simple console: two-preset desk (A/B crossfade or single 24 channels), attributes panel with jog wheels and color wheel, scenes, chasers with tap tempo, and live cues with Go, Back, Pause and follow
-- Multilingual interface (English and Italian), extensible with language packs installed by the user
-- Skeuomorphic console controls: keys, displays, knobs, faders, jog wheels, time picker, color wheel
+- Start page with recent shows; shows saved as portable folders, with autosave, recovery and history of the saved versions
+- Show templates, with a complete "Demo show" to try every feature; export and import of shows and templates as single archives, show media in the show folder
+- Show operators with a 4 digit PIN: each operator sees the sections of the profile, hidden, read only or editable
+- Import from another show: scenes, chasers, fixtures, audio, video, images and operators, with their dependencies and the choice of how to solve conflicts
+- Fixture library with a custom fixture editor; multi-universe patch with groups and LED matrices
+- DMX output over Art-Net and USB DMX interfaces, with grand master, blackout and a DMX monitor
+- Simple console: two-preset desk, attributes panel with jog wheels and color wheel, scenes, chasers with tap tempo, live cues
+- LED matrices with effects, animations and image mapping, recorded in scenes
+- Virtual console on a customizable grid for each show, with multi-touch
+- Audio player with playlist, fades and output device; video outputs on external displays with layers, inputs from cameras, preview and program, text gobos and timer screens
+- Timelines of tracks with lights, audio, video and automation clips, edited as in a DAW, with drag and drop everywhere
+- Multilingual interface (English and Italian), extensible with language packs
 
 Planned (see [ROADMAP.md](ROADMAP.md)):
 
-- LED matrices
-- Virtual console on a customizable grid for each show
-- Video direction, audio playback, overlay images and text gobos
-- Pre-programmed shows with a DAW-style track editor
-- Integration between lights, audio, video and external audio mixers
+- Waveforms, markers and go mode in the timeline
+- Integration with external audio mixers and MIDI controllers
 - Remote control from desktop or mobile through the built-in web server
 - 3D stage, videomapping, several synchronized machines
-- Touch screens and external MIDI controllers
 
 ## Requirements
 
@@ -167,13 +134,14 @@ Installers for Windows, macOS and Linux are planned in Phase 11 of the roadmap.
 
 ## Status
 
-Phases 1 to 4 of the [roadmap](ROADMAP.md) are complete: application base, design system, localization, transport layer between interface and engine, shows, templates, media and archives, fixtures, patch, DMX output over Art-Net and USB, and the simple console with scenes, chasers and live cues. The next phase is LED matrices. Version 1.0.0 will be the first release, when all the planned features are ready for distribution and testing.
+Phases 1 to 7 of the [roadmap](ROADMAP.md) are complete, with the first part of Phase 8: shows, operators and import between shows, fixtures and patch, DMX output, the simple console, LED matrices, the virtual console, audio and video, and the track timeline. Version 1.0.0 will be the first release, when all the planned features are ready for distribution and testing; the live tests to run before it are listed in [TESTING.md](TESTING.md).
 
 ## Development documentation
 
 - [AGENTS.md](AGENTS.md): rules for AI agents
 - [ROADMAP.md](ROADMAP.md): phases and progress
 - [MEMORY.md](MEMORY.md): choices and conventions
+- [TESTING.md](TESTING.md): final live tests with real hardware
 - [docs/design](docs/design/README.md): design reference
 - [docs/brand](docs/brand/README.md): brand assets
 - [docs/localization](docs/localization/README.md): languages and language packs
