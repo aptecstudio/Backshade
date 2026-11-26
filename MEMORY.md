@@ -272,6 +272,19 @@ Implementation of 4.5 (2026-11-26), choices confirmed by the human on 2026-11-26
 
 Status: Confirmed (one list, crossfade, scene master, follow), Proposed (cue numbers with one decimal digit, Release behavior, panel layout).
 
+## LED matrices
+
+Defined with the human on 2026-11-26 (Phase 5).
+
+- **Pixels driven directly on DMX** (decided by the human): a matrix is its own object in the patch (`patch.matrices` in `show.json`, `src/shared/patch/matrix.ts`), not built from fixture definitions. It has `id`, `number` (shared with the fixture numbers), `name`, `width` and `height` (1 to 512, at most 16384 pixels), `pixelType` (`rgb`, `rbg`, `grb`, `gbr`, `brg`, `bgr`, `rgbw`, `grbw`, `w`), `startCorner`, `direction` (`rows` or `columns`), `snake` (zigzag) and the `universe` and `address` of the first pixel.
+- **Several universes** (decided by the human): the matrix continues by itself on the next universes, each from address 1; a pixel is never split between two universes, so a universe holds as many whole pixels as fit (170 RGB, 128 RGBW). The parts on each universe (`matrixSegments`) are address ranges like fixtures: conflict checks, free address and number search work on fixtures and matrix parts together (`occupiedRanges`, `src/main/patch/patch-checks.ts`).
+- **Merge:** matrix channels are intensity channels (additive colors without a dimmer): HTP, grand master and blackout.
+- **Patch section** (decided by the human): "Add matrix" key and matrix dialog (`matrix-dialog.ts`) with the summary of pixels, channels and universes; every matrix part is a row of the universe tables and takes its cells in the DMX map (`patch-rows.ts`); the raw faders of the desk name matrix channels by pixel and color, for example "12 R".
+- **Matrices section** (decided by the human): new main section after Patch, with one key per matrix and the live preview (`matrix-preview.ts`, canvas, about 15 readings per second of `matrices.getPixels`, colors in grid order; the white channel adds to the colors on screen).
+- **Effects in the scenes** (decided by the human): matrix effects are recorded in scenes and recalled by memory keys and cues (Phase 5.3).
+
+Status: Confirmed (pixels on DMX, several universes, Patch and Matrices sections, effects in scenes), Proposed (pixel types, limits, preview).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.

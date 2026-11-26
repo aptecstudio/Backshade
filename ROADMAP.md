@@ -100,8 +100,8 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 
 ## Phase 5 - LED matrices
 
-- [ ] 5.1 Matrix definition (size, pixel order, universe mapping)
-- [ ] 5.2 Matrix preview
+- [x] 5.1 Matrix definition (size, pixel order, universe mapping), patched on as many universes as its channels need
+- [x] 5.2 Matrix preview, in the new Matrices section
 - [ ] 5.3 Basic effects (solid color, gradient, scroll, text)
 - [ ] 5.4 Pixel mapping from image and video
 
