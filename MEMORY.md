@@ -18,6 +18,7 @@ Log of Backshade's technical decisions and conventions. Each entry shows its sta
 | Versioning | SemVer; 1.0.0 is the first release, when all planned features are implemented and the application is ready for distribution and testing; no versions before it (`app/package.json` stays at `0.0.0`) | Confirmed (changed on 2026-11-23, it was the first runnable version) |
 | Live tests | `TESTING.md`: checklist of the final tests to run live with real hardware; the agent adds the new features to it at the end of every phase or sub-phase | Confirmed (requested by the human on 2026-11-26) |
 | README screenshots | Only 5 screenshots in `README.md`, showing the most interesting features; updated when better features arrive | Confirmed (requested by the human on 2026-11-26) |
+| Demo show | The included "Demo show" template (`app/templates/demo.backshade`) is updated with every new feature and committed and pushed with it | Confirmed (requested by the human on 2026-11-26) |
 
 ## Language
 
@@ -72,6 +73,13 @@ Status: Confirmed (2026-11-23).
 - The application name and version shown in the interface come from `app/package.json` (`productName`, `version`).
 
 Status: Confirmed (2026-11-23).
+
+### Screen and sleep
+
+Requested by the human on 2026-11-26: with the application open the screen must not turn off and the system must not go to sleep.
+
+- `src/main/system/keep-awake.ts` starts `powerSaveBlocker.start('prevent-display-sleep')` when the application is ready and stops it at quit: native Electron API, no dependency. It prevents both the screen sleep and the system sleep (on Linux it registers an idle inhibitor with the session, checked on GNOME). (Confirmed)
+- Always on while the application is open, with no setting. (Proposed)
 
 ## Start page
 

@@ -43,6 +43,7 @@ Versioning rules (see `AGENTS.md`):
 - [x] 1.6 Localization system: English default, Italian included, language packs installable by the user
 - [x] 1.7 Single transport layer between interface and engine (IPC), with typed contract and shared protocol
 - [x] 1.8 About window: version, license and Aptec Studio credit with the wordmark
+- [x] 1.9 While the application is open the screen does not turn off and the system does not go to sleep (requested by the human on 2026-11-26)
 
 ## Phase 2 - Shows and projects
 

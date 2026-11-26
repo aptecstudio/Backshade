@@ -24,6 +24,7 @@ How to use it:
 - [ ] A language pack installed by the user appears in the settings and is applied.
 - [ ] The About window shows version, license and the Aptec Studio credit.
 - [ ] The fullscreen key of the top bar enters and leaves fullscreen; the icon follows the system shortcut too.
+- [ ] With the application open and no input for longer than the screen and sleep timeouts of the system, the screen stays on and the computer does not sleep, on Windows, macOS and Linux (also on battery); after quitting, the timeouts work again.
 
 ## 2. Shows, templates and media
 
