@@ -10,6 +10,7 @@
 import { UNIVERSE_SIZE } from '../fixtures/fixture-definition.js';
 import { normalizeMatrixEffects, type MatrixEffect } from '../patch/matrix-effect.js';
 import { MAX_UNIVERSE } from '../patch/patch.js';
+import { normalizeLayers, type LayerState } from '../video/video.js';
 import { FADE_LIMITS } from '../show/show-settings.js';
 
 /** Memory places in a bank */
@@ -73,6 +74,8 @@ export interface Scene {
     matrices: Record<string, MatrixEffect>;
     /** Item of the audio playlist started by the scene, null for none; missing in older files */
     audio: string | null;
+    /** Program of the video outputs that had something on: output identifier -> layers; missing in older files */
+    video: Record<string, LayerState[]>;
 }
 
 /** Chaser: scenes played one after the other */
@@ -117,7 +120,7 @@ export interface ShowMemories {
 export const EMPTY_MEMORIES: ShowMemories = { scenes: [], chasers: [], cues: [] };
 
 /** Scene without its levels and effects, as the interface lists it */
-export interface SceneSummary extends Omit<Scene, 'levels' | 'matrices'> {
+export interface SceneSummary extends Omit<Scene, 'levels' | 'matrices' | 'video'> {
     /** Channels recorded, on all the universes */
     channelCount: number;
     /** Matrix effects recorded */
@@ -153,7 +156,7 @@ export interface MemoriesState {
  * Summary of a scene, without its levels.
  */
 export function sceneSummary(scene: Scene): SceneSummary {
-    const { levels, matrices, ...rest } = scene;
+    const { levels, matrices, video, ...rest } = scene;
     return { ...rest, channelCount: levels.reduce((count, item) => count + item.channels.length, 0), effectCount: Object.keys(matrices).length };
 }
 
@@ -167,6 +170,19 @@ function clampNumber(value: unknown, min: number, max: number, fallback: number)
 
 function readName(value: unknown): string | null {
     return typeof value === 'string' ? value.slice(0, MEMORY_NAME_MAX_LENGTH) : null;
+}
+
+function readVideo(value: unknown): Record<string, LayerState[]> {
+    const result: Record<string, LayerState[]> = {};
+    if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+        return result;
+    }
+    for (const [id, layers] of Object.entries(value)) {
+        if (id !== '' && Array.isArray(layers)) {
+            result[id] = normalizeLayers(layers, Math.min(layers.length, 8));
+        }
+    }
+    return result;
 }
 
 function readLevels(value: unknown): UniverseLevels[] {
@@ -218,7 +234,8 @@ export function normalizeMemories(value: unknown): ShowMemories {
             fadeOut: clampNumber(entry.fadeOut, FADE_LIMITS.min, FADE_LIMITS.max, 0),
             levels: readLevels(entry.levels),
             matrices: normalizeMatrixEffects(entry.matrices),
-            audio: typeof entry.audio === 'string' && entry.audio !== '' ? entry.audio : null
+            audio: typeof entry.audio === 'string' && entry.audio !== '' ? entry.audio : null,
+            video: readVideo(entry.video)
         });
     }
 

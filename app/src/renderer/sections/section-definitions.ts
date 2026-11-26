@@ -16,9 +16,10 @@ import { OutputSection } from './output/output-section.js';
 import { PatchSection } from './patch/patch-section.js';
 import { PlaceholderSection } from './placeholder-section.js';
 import { SettingsSection } from './settings/settings-section.js';
+import { VideoSection } from './video/video-section.js';
 
 /** Identifier of a section */
-export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'matrices' | 'audio' | 'output' | 'media' | 'settings';
+export type SectionId = 'start' | 'console' | 'virtualConsole' | 'timeline' | 'patch' | 'matrices' | 'audio' | 'video' | 'output' | 'media' | 'settings';
 
 /** Section definition */
 export interface SectionDefinition {
@@ -39,6 +40,7 @@ export const MAIN_SECTIONS: readonly SectionDefinition[] = [
     { id: 'patch', labelKey: 'sections.patch', create: () => new PatchSection() },
     { id: 'matrices', labelKey: 'sections.matrices', create: () => new MatricesSection() },
     { id: 'audio', labelKey: 'sections.audio', create: () => new AudioSection() },
+    { id: 'video', labelKey: 'sections.video', create: () => new VideoSection() },
     { id: 'output', labelKey: 'sections.output', create: () => new OutputSection() },
     { id: 'media', labelKey: 'sections.media', create: () => new MediaSection() }
 ];

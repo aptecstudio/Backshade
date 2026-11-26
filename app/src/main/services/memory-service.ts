@@ -27,6 +27,7 @@ import { MemoryPlayer } from '../console/memory-player';
 import type { PresetDesk } from '../console/preset-desk';
 import type { AudioEngine } from '../audio/audio-engine';
 import type { MatrixLive } from '../matrix/matrix-live';
+import type { VideoEngine } from '../video/video-engine';
 import type { OutputEngine } from '../output/output-engine';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
@@ -80,7 +81,8 @@ export function registerMemoryService(
     desk: PresetDesk,
     output: OutputEngine,
     live: MatrixLive,
-    audio: AudioEngine
+    audio: AudioEngine,
+    video: VideoEngine
 ): MemoryPlayer {
     const memoriesOf = (): ShowMemories | null => session.summary() === null ? null : session.memories();
     const player = new MemoryPlayer({
@@ -88,9 +90,19 @@ export function registerMemoryService(
         mapOf: (universe) => output.universeMap(universe),
         memories: memoriesOf,
         matrices: () => session.summary() === null ? [] : session.patch().matrices,
-        audio: {
-            start: (key, item, fadeIn, level) => audio.startFromScene(key, item, fadeIn, level),
-            stop: (key, fadeOut) => audio.stopFromScene(key, fadeOut),
+        media: {
+            start: (key, scene, fadeIn, level) => {
+                if (scene.audio !== null) {
+                    audio.startFromScene(key, scene.audio, fadeIn, level);
+                }
+                if (Object.keys(scene.video).length > 0) {
+                    video.startFromScene(key, scene.video, fadeIn);
+                }
+            },
+            stop: (key, fadeOut) => {
+                audio.stopFromScene(key, fadeOut);
+                video.stopFromScene(key, fadeOut);
+            },
             level: (key, level) => audio.levelFromScene(key, level)
         },
         sceneMaster: () => desk.getState().masters.scene,
@@ -146,9 +158,11 @@ export function registerMemoryService(
         // Recording again on a place keeps the scene, so chasers using it follow
         const existing = session.memories().scenes.find((scene) => scene.slot === slot);
         const settings = session.settings();
+        // Only the outputs that show something are recorded, so a scene never blanks the others
+        const videoPrograms = Object.fromEntries(Object.entries(video.programs()).filter(([, layers]) => layers.some((layer) => layer.source !== null)));
         const scene: Scene = existing === undefined
-            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects(), audio: audio.state().item }
-            : { ...existing, levels, matrices: live.effects(), audio: audio.state().item };
+            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms }
+            : { ...existing, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms };
         update((memories) => ({ ...memories, scenes: [...memories.scenes.filter((item) => item.id !== scene.id), scene].sort((a, b) => a.slot - b.slot) }));
         return sceneSummary(scene);
     });

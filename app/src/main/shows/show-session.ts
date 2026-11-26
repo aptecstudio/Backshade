@@ -11,6 +11,7 @@ import { SHOW_FOLDER_EXTENSION, type ShowDocument } from '../../shared/show/show
 import type { ShowAudio } from '../../shared/audio/audio';
 import type { ShowMemories } from '../../shared/console/memories';
 import type { ShowGrid } from '../../shared/grid/grid';
+import type { ShowVideo } from '../../shared/video/video';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import { normalizeShowSettings, type ShowSettings } from '../../shared/show/show-settings';
@@ -36,7 +37,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -278,6 +279,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('audio');
+    }
+
+    /**
+     * Video outputs of the open show.
+     */
+    video(): ShowVideo {
+        return this.requireOpen().document.video;
+    }
+
+    /**
+     * Replaces the video outputs; the change must be saved.
+     */
+    setVideo(video: ShowVideo): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(video) === JSON.stringify(show.document.video)) {
+            return;
+        }
+        show.document = { ...show.document, video };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('video');
     }
 
     /**

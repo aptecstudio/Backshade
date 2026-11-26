@@ -7,6 +7,7 @@
 import type { ShowAudio } from '../audio/audio.js';
 import type { ShowMemories } from '../console/memories.js';
 import type { ShowGrid } from '../grid/grid.js';
+import type { ShowVideo } from '../video/video.js';
 import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
 import type { ShowSettings } from './show-settings.js';
@@ -43,4 +44,6 @@ export interface ShowDocument {
     grid: ShowGrid;
     /** Audio player and playlist; missing in older files, completed when reading */
     audio: ShowAudio;
+    /** Video outputs; missing in older files, completed when reading */
+    video: ShowVideo;
 }

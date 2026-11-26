@@ -23,13 +23,13 @@ import { nextStep, type SequencePosition } from './chaser-sequence';
 import { IntensityMap, mixLevels, type ChannelValues } from './intensity-map';
 import type { UniverseMapLookup } from './preset-desk';
 
-/** What the scenes and cues do with the audio player */
-export interface SceneAudio {
-    /** Scene or cue on: plays the item with its fade in (seconds) */
-    start(key: string, item: string, fadeIn: number, level: number): void;
-    /** Scene or cue off: stops its item with its fade out (seconds) */
+/** What the scenes and cues do with the audio player and the video outputs */
+export interface SceneMedia {
+    /** Scene or cue on: its audio item and video program, with its fade in (seconds) */
+    start(key: string, scene: Scene, fadeIn: number, level: number): void;
+    /** Scene or cue off: its media fade out (seconds) */
     stop(key: string, fadeOut: number): void;
-    /** Fader of the scene: volume of its item */
+    /** Fader of the scene: volume of its audio item */
     level(key: string, level: number): void;
 }
 
@@ -47,8 +47,8 @@ export interface MemoryPlayerContext {
     memories: () => ShowMemories | null;
     /** LED matrices of the patch, for the matrix effects of the scenes */
     matrices: () => readonly PatchedMatrix[];
-    /** Audio player, for the scenes and cues that start an audio item */
-    audio?: SceneAudio;
+    /** Audio player and video outputs, for the scenes and cues that use them */
+    media?: SceneMedia;
     /** Position of the scene master, 0 to 1 */
     sceneMaster: () => number;
     /** Called when memories turn on or off, a chaser changes step or the selected chaser changes */
@@ -140,7 +140,7 @@ export class MemoryPlayer {
                 this.remove(existing);
             }
         } else if (existing !== undefined) {
-            this.context.audio?.level(id, value);
+            this.context.media?.level(id, value);
             existing.manual = value;
             existing.released = null;
             existing.owned = null;
@@ -272,9 +272,9 @@ export class MemoryPlayer {
     }
 
     private add(kind: PlaybackKind, id: string, started: number, level: number | null = null): void {
-        const item = this.audioItem(kind, id);
-        if (item !== null) {
-            this.context.audio?.start(id, item, level === null ? this.fadeIn(kind, id) / 1000 : 0, level ?? 1);
+        const scene = kind === 'chaser' ? undefined : this.find(kind, id) as Scene | undefined;
+        if (scene !== undefined) {
+            this.context.media?.start(id, scene, level === null ? this.fadeIn(kind, id) / 1000 : 0, level ?? 1);
         }
         this.playbacks.push({
             kind,
@@ -301,7 +301,7 @@ export class MemoryPlayer {
         playback.releaseLevel = this.level(playback, now);
         playback.released = now;
         playback.manual = null;
-        this.context.audio?.stop(playback.id, this.fadeOut(playback.kind, playback.id) / 1000);
+        this.context.media?.stop(playback.id, this.fadeOut(playback.kind, playback.id) / 1000);
         playback.owned = new Map();
         for (const [universe, levels] of playback.written) {
             const frame = this.context.mixer.compose(universe, this.context.mapOf(universe), 1);
@@ -310,7 +310,7 @@ export class MemoryPlayer {
     }
 
     private remove(playback: Playback): void {
-        this.context.audio?.stop(playback.id, 0);
+        this.context.media?.stop(playback.id, 0);
         this.playbacks.splice(this.playbacks.indexOf(playback), 1);
         this.context.mixer.clearSource(MEMORY_SOURCE_PREFIX + playback.id);
     }
@@ -324,16 +324,6 @@ export class MemoryPlayer {
         }
         const sceneId = kind === 'cue' ? memories?.cues.find((cue) => cue.id === id)?.scene : id;
         return memories?.scenes.find((scene) => scene.id === sceneId);
-    }
-
-    /**
-     * Audio item started by a scene or cue, null for none (chasers never start audio).
-     */
-    private audioItem(kind: PlaybackKind, id: string): string | null {
-        if (kind === 'chaser') {
-            return null;
-        }
-        return (this.find(kind, id) as Scene | undefined)?.audio ?? null;
     }
 
     /**

@@ -8,6 +8,7 @@
 import type { AttributeLayout } from '../console/fixture-attributes.js';
 import type { AudioDevice, AudioPlayback, ShowAudio } from '../audio/audio.js';
 import type { CueStackState } from '../console/cue-stack.js';
+import type { LayerState, OutputComposition, ShowVideo, VideoDisplay, VideoOutputConfig } from '../video/video.js';
 import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
@@ -475,6 +476,22 @@ export interface EngineMethods {
     'audio.next': { params: undefined; result: AudioPlayback };
     /** Plays the previous item */
     'audio.previous': { params: undefined; result: AudioPlayback };
+    /** Video outputs of the open show */
+    'video.get': { params: undefined; result: ShowVideo };
+    /** Program and preview of every video output */
+    'video.getState': { params: undefined; result: Record<string, OutputComposition> };
+    /** Displays of the computer */
+    'video.listDisplays': { params: undefined; result: VideoDisplay[] };
+    /** Adds a video output (unsaved change) */
+    'video.addOutput': { params: { name: string }; result: ShowVideo };
+    /** Changes a video output: window, display, size, stack, layers (unsaved change) */
+    'video.updateOutput': { params: Partial<Omit<VideoOutputConfig, 'id'>> & { id: string }; result: ShowVideo };
+    /** Removes a video output (unsaved change) */
+    'video.removeOutput': { params: { id: string }; result: ShowVideo };
+    /** Changes a layer in program (at once) or in preview */
+    'video.setLayer': { params: { output: string; target: 'program' | 'preview'; index: number; layer: LayerState }; result: undefined };
+    /** Brings the preview of an output, or of all outputs, to program with a transition in seconds */
+    'video.take': { params: { output?: string; duration: number }; result: undefined };
     /** Pages of the virtual console of the open show */
     'grid.get': { params: undefined; result: ShowGrid };
     /** Replaces the pages of the virtual console (unsaved change); returns them as saved */
@@ -556,6 +573,10 @@ export interface EngineEvents {
     'audio.changed': Record<string, never>;
     /** The playback of the audio player has changed, or its position moved */
     'audio.stateChanged': { state: AudioPlayback };
+    /** The video outputs of the open show have changed */
+    'video.changed': Record<string, never>;
+    /** Program or preview of the video outputs have changed */
+    'video.stateChanged': { compositions: Record<string, OutputComposition> };
     /** The pages of the virtual console have changed */
     'grid.changed': Record<string, never>;
     /** The intensity levels of the fixture groups have changed */

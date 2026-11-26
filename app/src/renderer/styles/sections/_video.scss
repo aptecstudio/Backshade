@@ -1,0 +1,76 @@
+// Video: compositions of layers, output windows and the Video section
+@use 'framework/scss/tokens' as *;
+
+.composition {
+    position: relative;
+    overflow: hidden;
+    background: color('video-black');
+}
+
+.composition__layer {
+    position: absolute;
+    inset: 0;
+}
+
+.composition__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: var(--layer-opacity, 1);
+    transition: opacity var(--layer-transition, 0s) linear;
+
+    &[data-fit='fill'] {
+        object-fit: cover;
+    }
+
+    &[data-fit='fit'] {
+        object-fit: contain;
+    }
+
+    &[data-fit='stretch'] {
+        object-fit: fill;
+    }
+}
+
+// Output window: the composition covers the whole window
+body.video-output {
+    margin: 0;
+    background: color('video-black');
+    overflow: hidden;
+}
+
+.composition--output {
+    position: fixed;
+    inset: 0;
+}
+
+// Video section: preview and program monitors
+.video-monitors {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: space(2);
+}
+
+.video-monitor .composition {
+    width: 100%;
+    aspect-ratio: var(--output-ratio, 16 / 9);
+    border-radius: $radius-square-key;
+}
+
+.video-monitor--program .composition {
+    outline: 2px solid color('armed');
+}
+
+.video-layer {
+    padding: space(1) 0;
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.video-layer .slider {
+    width: space(8) * 2;
+}

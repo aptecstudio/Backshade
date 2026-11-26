@@ -11,6 +11,7 @@ import { FixtureLibrary } from '../fixtures/fixture-library';
 import { PlaybackWindow } from '../playback/playback-window';
 import { registerAppInfoService } from '../services/app-info-service';
 import { registerAudioService } from '../services/audio-service';
+import { registerVideoService } from '../services/video-service';
 import { registerAttributeService } from '../services/attribute-service';
 import { registerConsoleService } from '../services/console-service';
 import { registerCueService } from '../services/cue-service';
@@ -54,8 +55,9 @@ export function startEngine(): void {
     registerGroupService(router, bus, session, output.engine, desk);
     const playback = new PlaybackWindow();
     const audio = registerAudioService(router, bus, session, playback);
+    const video = registerVideoService(router, bus, session);
     const live = registerMatrixService(router, bus, session, output.engine, desk);
-    const player = registerMemoryService(router, bus, session, desk, output.engine, live, audio);
+    const player = registerMemoryService(router, bus, session, desk, output.engine, live, audio, video);
     registerCueService(router, bus, session, player);
     registerGridService(router, bus, session);
     registerRecentService(router, bus);
