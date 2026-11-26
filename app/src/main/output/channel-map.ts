@@ -4,10 +4,11 @@
  * takes precedence, the intensity channels) and channels scaled by the
  * grand master and blackout. Every other channel is merged with LTP
  * (latest takes precedence). Fixtures without definition keep their
- * channels at 0.
+ * channels at 0. Channels of LED matrices are intensity channels.
  */
 
 import { UNIVERSE_SIZE, type FixtureAttribute, type FixtureDefinition } from '../../shared/fixtures/fixture-definition';
+import { matrixSegments } from '../../shared/patch/matrix';
 import type { ShowPatch } from '../../shared/patch/patch';
 
 /** Channels of one universe; indexes are addresses - 1 */
@@ -83,6 +84,16 @@ export function buildChannelMap(patch: ShowPatch, lookup: (id: string) => Fixtur
             if (map.intensity[coarse] === 1) {
                 map.finePairs.push([coarse, fine]);
             }
+        }
+    }
+    // Matrix pixels are additive colors without a dimmer: intensity channels
+    for (const matrix of patch.matrices) {
+        for (const segment of matrixSegments(matrix)) {
+            const map = universes.get(segment.universe) ?? emptyUniverse();
+            universes.set(segment.universe, map);
+            const end = segment.address - 1 + segment.channelCount;
+            map.patched.fill(1, segment.address - 1, end);
+            map.intensity.fill(1, segment.address - 1, end);
         }
     }
     return universes;

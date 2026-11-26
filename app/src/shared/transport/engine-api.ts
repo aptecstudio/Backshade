@@ -13,6 +13,7 @@ import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-def
 import type { FixtureIssue } from '../fixtures/validate-fixture.js';
 import type { OutputTransport, ShowOutput } from '../output/output-config.js';
 import type { UsbDmxDevice, UsbDmxStatus } from '../output/usb-dmx.js';
+import type { MatrixSegment, PatchedMatrix } from '../patch/matrix.js';
 import type { PatchedFixture } from '../patch/patch.js';
 import type { MediaKind } from '../show/media-kinds.js';
 import type { ShowSettings } from '../show/show-settings.js';
@@ -134,6 +135,16 @@ export interface PatchEntry extends PatchedFixture {
     /** It shares addresses with another fixture */
     conflict: boolean;
 }
+
+/** LED matrix of the patch, with its parts on the universes */
+export interface MatrixEntry extends PatchedMatrix {
+    segments: MatrixSegment[];
+    /** It shares addresses with a fixture or another matrix */
+    conflict: boolean;
+}
+
+/** Data of a matrix to add or change */
+export type MatrixRequest = Omit<PatchedMatrix, 'id'>;
 
 /** Fixtures to add to the patch */
 export interface PatchAddRequest {
@@ -319,7 +330,15 @@ export interface EngineMethods {
     'patch.add': { params: PatchAddRequest; result: PatchEntry[] };
     /** Changes a patched fixture (unsaved change) */
     'patch.update': { params: PatchUpdateRequest; result: PatchEntry };
-    /** Removes fixtures from the patch (unsaved change) */
+    /** LED matrices of the patch */
+    'patch.getMatrices': { params: undefined; result: MatrixEntry[] };
+    /** Adds an LED matrix (unsaved change) */
+    'patch.addMatrix': { params: MatrixRequest; result: MatrixEntry };
+    /** Changes an LED matrix (unsaved change) */
+    'patch.updateMatrix': { params: MatrixRequest & { id: string }; result: MatrixEntry };
+    /** Colors of the pixels of a matrix as they are sent, in grid order (rows from the top), three values per pixel */
+    'matrices.getPixels': { params: { id: string }; result: number[] };
+    /** Removes fixtures and matrices from the patch (unsaved change) */
     'patch.remove': { params: { ids: string[] }; result: undefined };
 
     /** State of the DMX output */

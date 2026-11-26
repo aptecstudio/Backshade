@@ -1,31 +1,19 @@
 /**
  * Operations on the patch of a show: add, change and remove fixtures,
- * with the checks on universes, addresses and fixture numbers. The
+ * with the checks on universes, addresses and fixture numbers (shared
+ * with the matrices, see patch-checks.ts). The
  * functions never change the patch they receive: they return a new one.
  */
 
 import { randomUUID } from 'node:crypto';
 import { UNIVERSE_SIZE, type FixtureDefinition } from '../../shared/fixtures/fixture-definition';
-import { fixturesInRange } from '../../shared/patch/address-map';
-import {
-    fitsUniverse,
-    MAX_FIXTURE_NUMBER,
-    MAX_FIXTURES_PER_ADD,
-    MAX_UNIVERSE,
-    type PatchedFixture,
-    type ShowPatch
-} from '../../shared/patch/patch';
+import { MAX_FIXTURES_PER_ADD, type PatchedFixture, type ShowPatch } from '../../shared/patch/patch';
 import type { MissingFixture, PatchAddRequest, PatchUpdateRequest } from '../../shared/transport/engine-api';
 import { EngineError } from '../transport/engine-error';
+import { checkNumbers, checkPlacement, cleanName, requireInteger } from './patch-checks';
 
 /** Finds a definition by identifier */
 export type DefinitionLookup = (id: string) => FixtureDefinition | undefined;
-
-function requireInteger(value: number, min: number, max: number, code: string, field: string): void {
-    if (!Number.isInteger(value) || value < min || value > max) {
-        throw new EngineError(code, `Invalid ${field}: ${value}`);
-    }
-}
 
 function channelCount(definition: FixtureDefinition, modeName: string): number {
     const mode = definition.modes.find((item) => item.name === modeName);
@@ -33,46 +21,6 @@ function channelCount(definition: FixtureDefinition, modeName: string): number {
         throw new EngineError('mode-not-found', `Mode not found: ${modeName}`);
     }
     return mode.channels.length;
-}
-
-/**
- * Checks that a fixture fits its universe and does not use the addresses of other fixtures.
- */
-function checkPlacement(fixtures: readonly PatchedFixture[], placed: readonly PatchedFixture[]): void {
-    const ids = new Set(placed.map((fixture) => fixture.id));
-    for (const fixture of placed) {
-        requireInteger(fixture.universe, 1, MAX_UNIVERSE, 'invalid-universe', 'universe');
-        if (!fitsUniverse(fixture.address, fixture.channelCount)) {
-            throw new EngineError('address-out-of-range', `Fixture beyond the end of the universe: ${fixture.address}`);
-        }
-        const others = fixturesInRange(fixtures, fixture, ids);
-        if (others.length > 0) {
-            throw new EngineError('address-conflict', `Addresses already used by: ${others.map((other) => other.name).join(', ')}`);
-        }
-    }
-}
-
-/**
- * Checks that fixture numbers are valid and not used by other fixtures.
- */
-function checkNumbers(fixtures: readonly PatchedFixture[], placed: readonly PatchedFixture[]): void {
-    const ids = new Set(placed.map((fixture) => fixture.id));
-    const used = new Set(fixtures.filter((fixture) => !ids.has(fixture.id)).map((fixture) => fixture.number));
-    for (const fixture of placed) {
-        requireInteger(fixture.number, 1, MAX_FIXTURE_NUMBER, 'invalid-fixture-number', 'fixture number');
-        if (used.has(fixture.number)) {
-            throw new EngineError('fixture-number-in-use', `Fixture number already used: ${fixture.number}`);
-        }
-        used.add(fixture.number);
-    }
-}
-
-function cleanName(name: string): string {
-    const trimmed = name.trim();
-    if (trimmed === '') {
-        throw new EngineError('invalid-name', 'Empty name');
-    }
-    return trimmed.slice(0, 100);
 }
 
 /**
@@ -97,9 +45,9 @@ export function addFixtures(patch: ShowPatch, definition: FixtureDefinition, req
             address: request.address + index * channels
         });
     }
-    checkPlacement(patch.fixtures, added);
-    checkNumbers(patch.fixtures, added);
-    return { patch: { fixtures: [...patch.fixtures, ...added] }, added };
+    checkPlacement(patch, added);
+    checkNumbers(patch, added);
+    return { patch: { ...patch, fixtures: [...patch.fixtures, ...added] }, added };
 }
 
 /**
@@ -133,19 +81,20 @@ export function updateFixture(patch: ShowPatch, request: PatchUpdateRequest, loo
         next.mode = request.mode;
         next.channelCount = channelCount(definition, request.mode);
     }
-    checkPlacement(patch.fixtures, [next]);
-    checkNumbers(patch.fixtures, [next]);
-    return { patch: { fixtures: patch.fixtures.map((fixture) => fixture.id === next.id ? next : fixture) }, fixture: next };
+    checkPlacement(patch, [next]);
+    checkNumbers(patch, [next]);
+    return { patch: { ...patch, fixtures: patch.fixtures.map((fixture) => fixture.id === next.id ? next : fixture) }, fixture: next };
 }
 
 /**
- * Removes fixtures; unknown identifiers are ignored.
+ * Removes fixtures and matrices; unknown identifiers are ignored.
  * @returns The same patch object if nothing was removed
  */
 export function removeFixtures(patch: ShowPatch, ids: readonly string[]): ShowPatch {
     const remove = new Set(ids);
     const fixtures = patch.fixtures.filter((fixture) => !remove.has(fixture.id));
-    return fixtures.length === patch.fixtures.length ? patch : { fixtures };
+    const matrices = patch.matrices.filter((matrix) => !remove.has(matrix.id));
+    return fixtures.length === patch.fixtures.length && matrices.length === patch.matrices.length ? patch : { fixtures, matrices };
 }
 
 /**
@@ -169,7 +118,7 @@ export function followDefinition(patch: ShowPatch, previousId: string, id: strin
         changed = true;
         return { ...fixture, definition: id, channelCount: channels };
     });
-    return changed ? { fixtures } : patch;
+    return changed ? { ...patch, fixtures } : patch;
 }
 
 /**

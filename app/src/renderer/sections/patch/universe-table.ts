@@ -6,10 +6,10 @@
 
 import { Component, Emitter, Label, ListItem, Panel, Stack, icon, type Unsubscribe } from '../../../framework/ts/index.js';
 import { UNIVERSE_SIZE } from '../../../shared/fixtures/fixture-definition.js';
-import type { PatchEntry } from '../../../shared/transport/engine-api.js';
 import { categoryIcon } from '../../fixtures/fixture-icons.js';
 import { categoryLabel } from '../../fixtures/fixture-text.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
+import type { PatchRow } from './patch-rows.js';
 import { entryAddresses, entryFixture, entryProblem } from './patch-text.js';
 
 const COLUMNS: readonly TextKey[] = [
@@ -31,8 +31,13 @@ function cell(text: string, tone: 'primary' | 'secondary' = 'primary'): Stack {
 /**
  * Cell with the icon of the fixture type, named for assistive technologies.
  */
-function typeCell(entry: PatchEntry): Stack {
+function typeCell(entry: PatchRow): Stack {
     const stack = new Stack({ direction: 'row', align: 'center', classes: ['patch-table__cell', 'patch-table__type'] });
+    if (entry.matrix !== undefined) {
+        stack.element.append(icon('grid-3x3', { label: t('matrix.kind') }));
+        stack.element.title = t('matrix.kind');
+        return stack;
+    }
     const label = entry.category === null ? t('patch.missing') : categoryLabel(entry.category);
     stack.element.append(icon(categoryIcon(entry.category), { label }));
     stack.element.title = label;
@@ -42,7 +47,7 @@ function typeCell(entry: PatchEntry): Stack {
 /**
  * Cell with the problem of a fixture, empty when there is none.
  */
-function problemCell(entry: PatchEntry): Stack {
+function problemCell(entry: PatchRow): Stack {
     const problem = entryProblem(entry);
     const stack = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['patch-table__cell', 'patch-table__problem'] });
     if (problem !== null) {
@@ -54,9 +59,9 @@ function problemCell(entry: PatchEntry): Stack {
 }
 
 export class UniverseTable extends Panel {
-    private readonly presses = new Emitter<PatchEntry>();
+    private readonly presses = new Emitter<PatchRow>();
 
-    constructor(universe: number, entries: readonly PatchEntry[]) {
+    constructor(universe: number, entries: readonly PatchRow[]) {
         super({ title: t('patch.universe', { number: universe }), classes: ['patch-universe'] });
 
         const sorted = [...entries].sort((a, b) => a.address - b.address || a.number - b.number);
@@ -84,11 +89,11 @@ export class UniverseTable extends Panel {
     /**
      * Registers a listener for the rows pressed by the user.
      */
-    onOpen(listener: (entry: PatchEntry) => void): Unsubscribe {
+    onOpen(listener: (entry: PatchRow) => void): Unsubscribe {
         return this.presses.subscribe(listener);
     }
 
-    private row(entry: PatchEntry): Component {
+    private row(entry: PatchRow): Component {
         const row = new ListItem({
             label: `${entry.number} ${entry.name}`,
             muted: entry.missing,

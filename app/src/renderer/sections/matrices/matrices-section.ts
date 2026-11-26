@@ -1,0 +1,71 @@
+/**
+ * Matrices section: the LED matrices of the patch, one key each, and the
+ * live preview of the chosen one with its size, pixel type and universes.
+ * Matrices are added and changed in the Patch section.
+ */
+
+import { Key, Label, Panel, Stack } from '../../../framework/ts/index.js';
+import type { MatrixEntry } from '../../../shared/transport/engine-api.js';
+import { showError } from '../../dialogs/show-error.js';
+import { t } from '../../i18n/i18n.js';
+import { engine } from '../../transport/engine.js';
+import { MatrixPreview } from './matrix-preview.js';
+
+export class MatricesSection extends Panel {
+    private readonly keysRow = new Stack({ direction: 'row', gap: 1, wrap: true });
+    private readonly info = new Label({ text: '', tone: 'secondary', size: 'small' });
+    private readonly empty = new Label({ text: '', tone: 'secondary' });
+    private readonly holder = new Stack({ classes: ['matrices-section__preview'] });
+    private keys: Key[] = [];
+    private preview: MatrixPreview | null = null;
+    private matrices: MatrixEntry[] = [];
+    private selected: string | null = null;
+
+    constructor() {
+        super({ title: t('sections.matrices'), classes: ['matrices-section'] });
+        this.empty.setText(t('matrices.empty'));
+        this.append(this.keysRow, this.empty, this.info, this.holder);
+        this.track(engine().on('patch.changed', () => void this.load()));
+        void this.load();
+    }
+
+    private async load(): Promise<void> {
+        try {
+            this.matrices = await engine().request('patch.getMatrices');
+        } catch (error) {
+            await showError(error);
+            return;
+        }
+        const current = this.matrices.find((matrix) => matrix.id === this.selected) ?? this.matrices[0] ?? null;
+        this.select(current);
+    }
+
+    private select(matrix: MatrixEntry | null): void {
+        this.selected = matrix?.id ?? null;
+        this.keys.forEach((key) => key.destroy());
+        this.keys = this.matrices.map((item) => {
+            const key = new Key({ label: `${item.number} ${item.name}`, icon: 'grid-3x3', state: item.id === this.selected ? 'active' : 'normal' });
+            key.onPress(() => this.select(item));
+            return key;
+        });
+        this.keysRow.append(...this.keys);
+        this.empty.element.hidden = matrix !== null;
+
+        this.preview?.destroy();
+        this.preview = null;
+        if (matrix === null) {
+            this.info.setText('');
+            return;
+        }
+        const segments = matrix.segments;
+        this.info.setText(t('matrices.info', {
+            width: matrix.width,
+            height: matrix.height,
+            type: matrix.pixelType.toUpperCase(),
+            first: segments[0]?.universe ?? matrix.universe,
+            last: segments[segments.length - 1]?.universe ?? matrix.universe
+        }));
+        this.preview = new MatrixPreview(matrix);
+        this.holder.append(this.preview);
+    }
+}

@@ -22,6 +22,7 @@
       "virtualConsole": "Griglia",
       "timeline": "Timeline",
       "patch": "Patch",
+      "matrices": "Matrici",
       "media": "Media",
       "stage": "Palco 3D",
       "settings": "Impostazioni",
@@ -303,7 +304,43 @@
       "modeChangeNote": "Un modo con un numero di canali diverso può sovrapporsi alle fixture successive.",
       "viewList": "Elenco",
       "viewGrid": "Mappa DMX",
-      "freeAddress": "Indirizzo {address}, libero"
+      "freeAddress": "Indirizzo {address}, libero",
+      "summaryMatrices": "{count} fixture, {matrices} matrici, {universes} universi"
+    },
+    "matrix": {
+      "kind": "Matrice LED",
+      "add": "Aggiungi matrice",
+      "addTitle": "Aggiungi matrice LED",
+      "editTitle": "Matrice LED",
+      "defaultName": "Matrice",
+      "width": "Larghezza (pixel)",
+      "height": "Altezza (pixel)",
+      "pixelType": "Tipo di pixel",
+      "startCorner": "Primo pixel",
+      "corner": {
+        "topLeft": "In alto a sinistra",
+        "topRight": "In alto a destra",
+        "bottomLeft": "In basso a sinistra",
+        "bottomRight": "In basso a destra"
+      },
+      "direction": "Cablaggio",
+      "directions": {
+        "rows": "Lungo le righe",
+        "columns": "Lungo le colonne"
+      },
+      "snake": "A serpentina",
+      "snakeNo": "No",
+      "snakeYes": "Sì",
+      "summary": "{pixels} pixel, {channels} canali, universi da {first} a {last}",
+      "invalid": "La matrice non ci sta: controlla dimensioni, tipo di pixel e indirizzo iniziale.",
+      "hint": "La matrice prosegue da sola sugli universi successivi; un pixel non viene mai diviso fra due universi.",
+      "part": "{type}, parte {part} di {count}",
+      "removeTitle": "Rimuovi la matrice",
+      "removeConfirm": "Rimuovere \"{name}\" dal patch?"
+    },
+    "matrices": {
+      "empty": "Nessuna matrice LED: aggiungile nella sezione Patch.",
+      "info": "{width} x {height} pixel, {type}, universi da {first} a {last}"
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

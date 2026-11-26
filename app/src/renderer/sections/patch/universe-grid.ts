@@ -9,22 +9,22 @@
 import { CHANNEL_COLORS, Component, Emitter, channelColorClass, create, delegate, type Unsubscribe } from '../../../framework/ts/index.js';
 import { UNIVERSE_SIZE } from '../../../shared/fixtures/fixture-definition.js';
 import { lastAddress } from '../../../shared/patch/address-map.js';
-import type { PatchEntry } from '../../../shared/transport/engine-api.js';
 import { t } from '../../i18n/i18n.js';
+import type { PatchRow } from './patch-rows.js';
 import { entryAddresses, entryFixture } from './patch-text.js';
 
 export class UniverseGrid extends Component<HTMLDivElement> {
-    private readonly opens = new Emitter<PatchEntry>();
+    private readonly opens = new Emitter<PatchRow>();
     private readonly frees = new Emitter<number>();
 
     /**
      * @param entries - Fixtures of the universe
      */
-    constructor(entries: readonly PatchEntry[]) {
+    constructor(entries: readonly PatchRow[]) {
         super(create('div', { classes: ['universe-grid'], attributes: { role: 'grid' } }));
 
         // Fixtures of every address, in address order
-        const owners: PatchEntry[][] = Array.from({ length: UNIVERSE_SIZE + 1 }, () => []);
+        const owners: PatchRow[][] = Array.from({ length: UNIVERSE_SIZE + 1 }, () => []);
         for (const entry of [...entries].sort((a, b) => a.address - b.address)) {
             for (let address = entry.address; address <= Math.min(lastAddress(entry), UNIVERSE_SIZE); address++) {
                 owners[address].push(entry);
@@ -55,7 +55,7 @@ export class UniverseGrid extends Component<HTMLDivElement> {
     /**
      * Registers a listener for the used cells pressed by the user.
      */
-    onOpen(listener: (entry: PatchEntry) => void): Unsubscribe {
+    onOpen(listener: (entry: PatchRow) => void): Unsubscribe {
         return this.opens.subscribe(listener);
     }
 
@@ -66,7 +66,7 @@ export class UniverseGrid extends Component<HTMLDivElement> {
         return this.frees.subscribe(listener);
     }
 
-    private cell(address: number, owners: readonly PatchEntry[]): HTMLButtonElement {
+    private cell(address: number, owners: readonly PatchRow[]): HTMLButtonElement {
         const cell = create('button', {
             classes: ['universe-grid__cell'],
             attributes: { type: 'button', 'data-address': String(address) },

@@ -6,6 +6,7 @@
 
 import { UNIVERSE_SIZE } from '../../shared/fixtures/fixture-definition';
 import type { ChannelLabel, PresetMaster, PresetMode, PresetRow } from '../../shared/console/preset-desk';
+import { matrixSegments } from '../../shared/patch/matrix';
 import { MAX_UNIVERSE } from '../../shared/patch/patch';
 import { PresetDesk } from '../console/preset-desk';
 import type { FixtureLibrary } from '../fixtures/fixture-library';
@@ -69,6 +70,19 @@ export function registerConsoleService(router: RequestRouter, bus: EventBus, ses
                 const key = mode?.channels[offset];
                 const channel = definition?.channels.find((item) => item.key === key);
                 labels[index] = { number: fixture.number, fixture: fixture.name, channel: channel?.name ?? String(offset + 1) };
+            }
+        }
+        // Matrix channels: pixel number and color, for example "Pixel 12 R"
+        for (const matrix of session.patch().matrices) {
+            const colors = matrix.pixelType.toUpperCase();
+            for (const segment of matrixSegments(matrix)) {
+                if (segment.universe !== universe) {
+                    continue;
+                }
+                for (let offset = 0; offset < segment.channelCount; offset++) {
+                    const pixel = segment.firstPixel + Math.floor(offset / colors.length) + 1;
+                    labels[segment.address - 1 + offset] = { number: matrix.number, fixture: matrix.name, channel: `${pixel} ${colors[offset % colors.length]}` };
+                }
             }
         }
         return labels;

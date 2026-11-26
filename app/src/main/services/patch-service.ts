@@ -4,21 +4,32 @@
  * the patch.changed event.
  */
 
-import { findConflicts } from '../../shared/patch/address-map';
+import { findConflicts, occupiedRanges } from '../../shared/patch/address-map';
+import { matrixSegments, PIXEL_DIRECTIONS, PIXEL_TYPES, START_CORNERS, type PatchedMatrix } from '../../shared/patch/matrix';
 import type { PatchedFixture, ShowPatch } from '../../shared/patch/patch';
-import type { PatchEntry } from '../../shared/transport/engine-api';
+import type { MatrixEntry, PatchEntry } from '../../shared/transport/engine-api';
+import { addMatrix, updateMatrix, type MatrixData } from '../patch/matrix-editor';
 import type { FixtureLibrary } from '../fixtures/fixture-library';
 import { addFixtures, missingFixtures, removeFixtures, updateFixture, type DefinitionLookup } from '../patch/patch-editor';
 import type { ShowSession } from '../shows/show-session';
 import type { EventBus } from '../transport/event-bus';
-import { optionalInteger, optionalString, requireInteger, requireObject, requireString, requireStringArray } from '../transport/params';
+import {
+    optionalBoolean,
+    optionalInteger,
+    optionalString,
+    requireChoice,
+    requireInteger,
+    requireObject,
+    requireString,
+    requireStringArray
+} from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 /**
  * Adds the definition data and the state of each fixture.
  */
 function toEntries(patch: ShowPatch, lookup: DefinitionLookup, only?: readonly PatchedFixture[]): PatchEntry[] {
-    const conflicts = findConflicts(patch.fixtures);
+    const conflicts = findConflicts(occupiedRanges(patch));
     return (only ?? patch.fixtures).map((fixture) => {
         const definition = lookup(fixture.definition);
         const mode = definition?.modes.find((item) => item.name === fixture.mode);
@@ -32,6 +43,32 @@ function toEntries(patch: ShowPatch, lookup: DefinitionLookup, only?: readonly P
             conflict: conflicts.has(fixture.id) || (mode !== undefined && mode.channels.length !== fixture.channelCount)
         };
     });
+}
+
+/**
+ * Adds the parts on the universes and the state of each matrix.
+ */
+function toMatrixEntries(patch: ShowPatch, only?: readonly PatchedMatrix[]): MatrixEntry[] {
+    const conflicts = findConflicts(occupiedRanges(patch));
+    return (only ?? patch.matrices).map((matrix) => ({ ...matrix, segments: matrixSegments(matrix), conflict: conflicts.has(matrix.id) }));
+}
+
+/**
+ * Reads the data of a matrix from the parameters of a request.
+ */
+function matrixData(input: Record<string, unknown>): MatrixData {
+    return {
+        number: requireInteger(input, 'number'),
+        name: requireString(input, 'name'),
+        width: requireInteger(input, 'width'),
+        height: requireInteger(input, 'height'),
+        pixelType: requireChoice(input, 'pixelType', PIXEL_TYPES),
+        startCorner: requireChoice(input, 'startCorner', START_CORNERS),
+        direction: requireChoice(input, 'direction', PIXEL_DIRECTIONS),
+        snake: optionalBoolean(input, 'snake') === true,
+        universe: requireInteger(input, 'universe'),
+        address: requireInteger(input, 'address')
+    };
 }
 
 /**
@@ -80,6 +117,21 @@ export function registerPatchService(router: RequestRouter, bus: EventBus, sessi
         }, lookup);
         session.setPatch(result.patch);
         return toEntries(result.patch, lookup, [result.fixture])[0];
+    });
+
+    router.register('patch.getMatrices', () => toMatrixEntries(session.patch()));
+
+    router.register('patch.addMatrix', (params) => {
+        const result = addMatrix(session.patch(), matrixData(requireObject(params)));
+        session.setPatch(result.patch);
+        return toMatrixEntries(result.patch, [result.matrix])[0];
+    });
+
+    router.register('patch.updateMatrix', (params) => {
+        const input = requireObject(params);
+        const result = updateMatrix(session.patch(), requireString(input, 'id'), matrixData(input));
+        session.setPatch(result.patch);
+        return toMatrixEntries(result.patch, [result.matrix])[0];
     });
 
     router.register('patch.remove', (params) => {

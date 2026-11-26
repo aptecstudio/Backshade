@@ -4,3 +4,16 @@
 .settings-section {
     max-width: 720px;
 }
+
+// Matrices section: live preview of the chosen matrix
+.matrices-section__preview {
+    align-items: flex-start;
+    overflow: auto;
+}
+
+.matrix-preview {
+    max-width: 100%;
+    background: color('display');
+    border-radius: $radius-square-key;
+    image-rendering: pixelated;
+}

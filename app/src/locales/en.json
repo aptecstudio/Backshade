@@ -22,6 +22,7 @@
       "virtualConsole": "Grid",
       "timeline": "Timeline",
       "patch": "Patch",
+      "matrices": "Matrices",
       "media": "Media",
       "stage": "3D stage",
       "settings": "Settings",
@@ -303,7 +304,43 @@
       "modeChangeNote": "A mode with a different number of channels can overlap the next fixtures.",
       "viewList": "List",
       "viewGrid": "DMX map",
-      "freeAddress": "Address {address}, free"
+      "freeAddress": "Address {address}, free",
+      "summaryMatrices": "{count} fixtures, {matrices} matrices, {universes} universes"
+    },
+    "matrix": {
+      "kind": "LED matrix",
+      "add": "Add matrix",
+      "addTitle": "Add LED matrix",
+      "editTitle": "LED matrix",
+      "defaultName": "Matrix",
+      "width": "Width (pixels)",
+      "height": "Height (pixels)",
+      "pixelType": "Pixel type",
+      "startCorner": "First pixel",
+      "corner": {
+        "topLeft": "Top left",
+        "topRight": "Top right",
+        "bottomLeft": "Bottom left",
+        "bottomRight": "Bottom right"
+      },
+      "direction": "Wiring",
+      "directions": {
+        "rows": "Along the rows",
+        "columns": "Along the columns"
+      },
+      "snake": "Zigzag",
+      "snakeNo": "No",
+      "snakeYes": "Yes",
+      "summary": "{pixels} pixels, {channels} channels, universes {first} to {last}",
+      "invalid": "The matrix does not fit: check size, pixel type and start address.",
+      "hint": "The matrix continues by itself on the next universes; a pixel is never split between two universes.",
+      "part": "{type}, part {part} of {count}",
+      "removeTitle": "Remove the matrix",
+      "removeConfirm": "Remove \"{name}\" from the patch?"
+    },
+    "matrices": {
+      "empty": "No LED matrices: add them in the Patch section.",
+      "info": "{width} x {height} pixels, {type}, universes {first} to {last}"
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

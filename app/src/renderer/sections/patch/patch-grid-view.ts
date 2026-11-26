@@ -5,14 +5,14 @@
 
 import { Key, Label, NumberField, Panel, Stack } from '../../../framework/ts/index.js';
 import { MAX_UNIVERSE } from '../../../shared/patch/patch.js';
-import type { PatchEntry } from '../../../shared/transport/engine-api.js';
 import { t } from '../../i18n/i18n.js';
 import { openAddFixtures } from './add-fixtures-dialog.js';
-import { openEditFixture } from './edit-fixture-dialog.js';
+import { openRow } from './open-row.js';
+import type { PatchRow } from './patch-rows.js';
 import { UniverseGrid } from './universe-grid.js';
 
 export class PatchGridView extends Panel {
-    private readonly entries: readonly PatchEntry[];
+    private readonly entries: readonly PatchRow[];
     private readonly universeKeys = new Stack({ direction: 'row', gap: 1, wrap: true });
     private readonly universeField: NumberField;
     private readonly usage = new Label({ text: '', tone: 'secondary', size: 'small' });
@@ -23,7 +23,7 @@ export class PatchGridView extends Panel {
     /**
      * @param universe - Universe shown first
      */
-    constructor(entries: readonly PatchEntry[], universe: number) {
+    constructor(entries: readonly PatchRow[], universe: number) {
         super({ classes: ['patch-grid'] });
         this.entries = entries;
         this.universe = universe;
@@ -62,7 +62,7 @@ export class PatchGridView extends Panel {
 
         this.grid?.destroy();
         this.grid = new UniverseGrid(entries);
-        this.grid.onOpen((entry) => void openEditFixture(entry));
+        this.grid.onOpen((entry) => openRow(entry, this.entries));
         this.grid.onFree((address) => void openAddFixtures(this.entries, universe, address));
         this.append(this.grid);
     }

@@ -1,19 +1,21 @@
 /**
- * Patch section: the fixtures of the open show, as a list of tables per
- * universe or as the grid of the 512 channels of a universe, with the
- * keys to add fixtures and to open the fixture library. The chosen view
+ * Patch section: the fixtures and LED matrices of the open show, as a list
+ * of tables per universe or as the grid of the 512 channels of a universe,
+ * with the keys to add fixtures and matrices and to open the fixture library. The chosen view
  * is remembered per device. It updates with the patch.changed event.
  */
 
 import { Key, Label, LocalPreference, Panel, Spacer, Stack, type Component } from '../../../framework/ts/index.js';
-import type { PatchEntry } from '../../../shared/transport/engine-api.js';
+import type { MatrixEntry } from '../../../shared/transport/engine-api.js';
 import { showError } from '../../dialogs/show-error.js';
 import { openFixtureLibrary } from '../../fixtures/fixture-library-dialog.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { openAddFixtures } from './add-fixtures-dialog.js';
+import { openMatrixDialog } from './matrix-dialog.js';
 import { PatchGridView } from './patch-grid-view.js';
 import { PatchListView } from './patch-list-view.js';
+import { patchRows, type PatchRow } from './patch-rows.js';
 
 type PatchView = 'list' | 'grid';
 
@@ -24,7 +26,8 @@ export class PatchSection extends Panel {
     private readonly listKey: Key;
     private readonly gridKey: Key;
     private view: PatchView = viewPreference.get() === 'grid' ? 'grid' : 'list';
-    private entries: PatchEntry[] = [];
+    private entries: PatchRow[] = [];
+    private matrices: MatrixEntry[] = [];
     private content: Component | null = null;
     // Universe of the grid, kept when the patch changes
     private gridUniverse: number | null = null;
@@ -33,6 +36,8 @@ export class PatchSection extends Panel {
         super({ title: t('patch.title'), classes: ['patch-section'] });
 
         const add = new Key({ label: t('patch.addFixtures'), icon: 'plus' });
+        const addMatrix = new Key({ label: t('matrix.add'), icon: 'grid-3x3' });
+        addMatrix.onPress(() => openMatrixDialog(null, this.entries, this.targetUniverse()));
         const library = new Key({ label: t('patch.library'), icon: 'layout-template' });
         add.onPress(() => void openAddFixtures(this.entries, this.targetUniverse()));
         library.onPress(() => openFixtureLibrary());
@@ -48,7 +53,7 @@ export class PatchSection extends Panel {
             direction: 'row',
             gap: 2,
             align: 'center',
-            children: [add, library, this.summary, new Spacer(), new Stack({ direction: 'row', gap: 1, children: [this.listKey, this.gridKey] })]
+            children: [add, addMatrix, library, this.summary, new Spacer(), new Stack({ direction: 'row', gap: 1, children: [this.listKey, this.gridKey] })]
         }));
 
         void this.load();
@@ -82,13 +87,18 @@ export class PatchSection extends Panel {
 
     private async load(): Promise<void> {
         try {
-            this.entries = await engine().request('patch.get');
+            const [entries, matrices] = await Promise.all([engine().request('patch.get'), engine().request('patch.getMatrices')]);
+            this.matrices = matrices;
+            this.entries = patchRows(entries, matrices);
         } catch (error) {
             await showError(error);
             return;
         }
         const universes = new Set(this.entries.map((entry) => entry.universe)).size;
-        this.summary.setText(this.entries.length === 0 ? '' : t('patch.summary', { count: this.entries.length, universes }));
+        const fixtures = this.entries.filter((entry) => entry.matrix === undefined).length;
+        this.summary.setText(this.entries.length === 0 ? '' : this.matrices.length === 0
+            ? t('patch.summary', { count: fixtures, universes })
+            : t('patch.summaryMatrices', { count: fixtures, matrices: this.matrices.length, universes }));
         this.render();
     }
 

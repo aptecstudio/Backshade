@@ -16,6 +16,7 @@ import { registerFixtureService } from '../services/fixture-service';
 import { registerOutputService } from '../services/output-service';
 import { registerPatchService } from '../services/patch-service';
 import { startLocaleService } from '../services/locale-service';
+import { registerMatrixService } from '../services/matrix-service';
 import { registerMediaService } from '../services/media-service';
 import { registerMemoryService } from '../services/memory-service';
 import { registerRecentService } from '../services/recent-service';
@@ -48,6 +49,7 @@ export function startEngine(): void {
     registerAttributeService(router, bus, session, library, desk);
     const player = registerMemoryService(router, bus, session, desk, output.engine);
     registerCueService(router, bus, session, player);
+    registerMatrixService(router, session, output.engine);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);
