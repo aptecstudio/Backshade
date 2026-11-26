@@ -1,0 +1,2518 @@
+{
+  "formatVersion": 1,
+  "id": "d4e66304-7000-4adb-bb06-7f2cb2c8b8e0",
+  "name": "Demo show",
+  "createdAt": "2026-11-26T06:22:59.244Z",
+  "modifiedAt": "2026-11-26T19:36:44.665Z",
+  "createdWith": "0.0.0",
+  "settings": {
+    "description": "Demo show of Backshade: fixtures, LED wall, scenes, chasers, cues, grid, audio, video and a timeline.",
+    "notes": "",
+    "timecodeRate": "25",
+    "fadeInSeconds": 0,
+    "fadeOutSeconds": 0
+  },
+  "patch": {
+    "fixtures": [
+      {
+        "id": "dfc19534-c235-4440-bc38-c8636693ab0a",
+        "number": 1,
+        "name": "Wash 1",
+        "definition": "chauvet/rogue-r2-wash",
+        "mode": "17 Channel",
+        "channelCount": 17,
+        "universe": 1,
+        "address": 1
+      },
+      {
+        "id": "7aa18b56-2c9c-431e-8b38-8d8e6014d7f8",
+        "number": 2,
+        "name": "Wash 2",
+        "definition": "chauvet/rogue-r2-wash",
+        "mode": "17 Channel",
+        "channelCount": 17,
+        "universe": 1,
+        "address": 18
+      },
+      {
+        "id": "00d46836-0514-4d31-8ec9-0e581b1ffebe",
+        "number": 3,
+        "name": "Wash 3",
+        "definition": "chauvet/rogue-r2-wash",
+        "mode": "17 Channel",
+        "channelCount": 17,
+        "universe": 1,
+        "address": 35
+      },
+      {
+        "id": "4e8645ef-b1df-4723-a2c8-1732a4a5fd3a",
+        "number": 4,
+        "name": "Wash 4",
+        "definition": "chauvet/rogue-r2-wash",
+        "mode": "17 Channel",
+        "channelCount": 17,
+        "universe": 1,
+        "address": 52
+      },
+      {
+        "id": "a93fb2c1-76d7-4c64-9ea7-4fe762c67ac1",
+        "number": 11,
+        "name": "Beam 1",
+        "definition": "chauvet/intimidator-beam-q60",
+        "mode": "12 Channel",
+        "channelCount": 12,
+        "universe": 1,
+        "address": 81
+      },
+      {
+        "id": "5be64e5a-771b-46a4-ab10-f275ab34be38",
+        "number": 12,
+        "name": "Beam 2",
+        "definition": "chauvet/intimidator-beam-q60",
+        "mode": "12 Channel",
+        "channelCount": 12,
+        "universe": 1,
+        "address": 93
+      },
+      {
+        "id": "13b676a2-3ab1-46da-a8ff-78938e2739ca",
+        "number": 13,
+        "name": "Beam 3",
+        "definition": "chauvet/intimidator-beam-q60",
+        "mode": "12 Channel",
+        "channelCount": 12,
+        "universe": 1,
+        "address": 105
+      },
+      {
+        "id": "621944a7-8554-4a63-b2cc-6bc5d8653bdf",
+        "number": 14,
+        "name": "Beam 4",
+        "definition": "chauvet/intimidator-beam-q60",
+        "mode": "12 Channel",
+        "channelCount": 12,
+        "universe": 1,
+        "address": 117
+      },
+      {
+        "id": "b7833945-91cd-43c1-86ea-4893009a77c6",
+        "number": 21,
+        "name": "Par 1",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 141
+      },
+      {
+        "id": "285d2058-9ea0-4ed1-8a9f-0933ff7aec5c",
+        "number": 22,
+        "name": "Par 2",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 148
+      },
+      {
+        "id": "90d6d6e7-d83a-42c9-9e66-0121d8ad6050",
+        "number": 23,
+        "name": "Par 3",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 155
+      },
+      {
+        "id": "5f54fc6f-806a-437d-9e3b-0fdcd85cdd23",
+        "number": 24,
+        "name": "Par 4",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 162
+      },
+      {
+        "id": "5c3aa8da-e483-4a56-a38c-d7a273a22e4f",
+        "number": 25,
+        "name": "Par 5",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 169
+      },
+      {
+        "id": "2dab5997-9fc8-465e-b8f5-dd2fe062db59",
+        "number": 26,
+        "name": "Par 6",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 176
+      },
+      {
+        "id": "7f304bb2-f2d5-4733-8bde-643555072a8a",
+        "number": 27,
+        "name": "Par 7",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 183
+      },
+      {
+        "id": "bd15fa3d-d84f-42a6-ac79-c6c8e0e83304",
+        "number": 28,
+        "name": "Par 8",
+        "definition": "chauvet/slimpar-pro-h-usb",
+        "mode": "7 Channel",
+        "channelCount": 7,
+        "universe": 1,
+        "address": 190
+      },
+      {
+        "id": "7f819c12-2d28-4bac-a37e-e523502bb6e9",
+        "number": 31,
+        "name": "Bar 1",
+        "definition": "chauvet/colorband-t3-usb",
+        "mode": "9 Channel",
+        "channelCount": 9,
+        "universe": 2,
+        "address": 1
+      },
+      {
+        "id": "971a0843-0a34-4caa-ac21-70e9d0820696",
+        "number": 32,
+        "name": "Bar 2",
+        "definition": "chauvet/colorband-t3-usb",
+        "mode": "9 Channel",
+        "channelCount": 9,
+        "universe": 2,
+        "address": 10
+      },
+      {
+        "id": "dc0095f8-cf4e-4527-ad2f-29c12dd7c311",
+        "number": 33,
+        "name": "Bar 3",
+        "definition": "chauvet/colorband-t3-usb",
+        "mode": "9 Channel",
+        "channelCount": 9,
+        "universe": 2,
+        "address": 19
+      },
+      {
+        "id": "c5ab4159-be6e-4cf3-af33-ee43294fa9b7",
+        "number": 34,
+        "name": "Bar 4",
+        "definition": "chauvet/colorband-t3-usb",
+        "mode": "9 Channel",
+        "channelCount": 9,
+        "universe": 2,
+        "address": 28
+      }
+    ],
+    "matrices": [
+      {
+        "number": 41,
+        "name": "LED wall",
+        "width": 32,
+        "height": 16,
+        "pixelType": "rgb",
+        "startCorner": "topLeft",
+        "direction": "rows",
+        "snake": true,
+        "universe": 3,
+        "address": 1,
+        "id": "b69837c7-b2fb-4d14-844c-f3978326a4c3"
+      }
+    ],
+    "groups": [
+      {
+        "id": "32397bb7-2d41-4f29-8073-1836b65d354c",
+        "number": 1,
+        "name": "Wash",
+        "fixtures": [
+          "dfc19534-c235-4440-bc38-c8636693ab0a",
+          "7aa18b56-2c9c-431e-8b38-8d8e6014d7f8",
+          "00d46836-0514-4d31-8ec9-0e581b1ffebe",
+          "4e8645ef-b1df-4723-a2c8-1732a4a5fd3a"
+        ]
+      },
+      {
+        "id": "e6be3996-a88a-4acf-91ad-d60c6df7cc2d",
+        "number": 2,
+        "name": "Pars",
+        "fixtures": [
+          "b7833945-91cd-43c1-86ea-4893009a77c6",
+          "285d2058-9ea0-4ed1-8a9f-0933ff7aec5c",
+          "90d6d6e7-d83a-42c9-9e66-0121d8ad6050",
+          "5f54fc6f-806a-437d-9e3b-0fdcd85cdd23",
+          "5c3aa8da-e483-4a56-a38c-d7a273a22e4f",
+          "2dab5997-9fc8-465e-b8f5-dd2fe062db59",
+          "7f304bb2-f2d5-4733-8bde-643555072a8a",
+          "bd15fa3d-d84f-42a6-ac79-c6c8e0e83304"
+        ]
+      },
+      {
+        "id": "204767e8-a5df-497f-867d-8c20f05f96ed",
+        "number": 3,
+        "name": "Beams",
+        "fixtures": [
+          "a93fb2c1-76d7-4c64-9ea7-4fe762c67ac1",
+          "5be64e5a-771b-46a4-ab10-f275ab34be38",
+          "13b676a2-3ab1-46da-a8ff-78938e2739ca",
+          "621944a7-8554-4a63-b2cc-6bc5d8653bdf"
+        ]
+      }
+    ]
+  },
+  "output": {
+    "frameRate": 40,
+    "universes": []
+  },
+  "memories": {
+    "scenes": [
+      {
+        "id": "a855ac35-269f-4d54-ad24-51ba87f5cdba",
+        "slot": 1,
+        "name": "Warm open",
+        "fadeIn": 3,
+        "fadeOut": 2,
+        "levels": [
+          {
+            "universe": 1,
+            "channels": [
+              [
+                1,
+                128
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                3,
+                89
+              ],
+              [
+                4,
+                153
+              ],
+              [
+                6,
+                153
+              ],
+              [
+                8,
+                255
+              ],
+              [
+                9,
+                128
+              ],
+              [
+                10,
+                26
+              ],
+              [
+                18,
+                128
+              ],
+              [
+                19,
+                0
+              ],
+              [
+                20,
+                89
+              ],
+              [
+                21,
+                153
+              ],
+              [
+                23,
+                153
+              ],
+              [
+                25,
+                255
+              ],
+              [
+                26,
+                128
+              ],
+              [
+                27,
+                26
+              ],
+              [
+                35,
+                128
+              ],
+              [
+                36,
+                0
+              ],
+              [
+                37,
+                89
+              ],
+              [
+                38,
+                153
+              ],
+              [
+                40,
+                153
+              ],
+              [
+                42,
+                255
+              ],
+              [
+                43,
+                128
+              ],
+              [
+                44,
+                26
+              ],
+              [
+                52,
+                128
+              ],
+              [
+                53,
+                0
+              ],
+              [
+                54,
+                89
+              ],
+              [
+                55,
+                153
+              ],
+              [
+                57,
+                153
+              ],
+              [
+                59,
+                255
+              ],
+              [
+                60,
+                128
+              ],
+              [
+                61,
+                26
+              ],
+              [
+                141,
+                204
+              ],
+              [
+                142,
+                255
+              ],
+              [
+                143,
+                115
+              ],
+              [
+                144,
+                13
+              ],
+              [
+                145,
+                153
+              ],
+              [
+                148,
+                204
+              ],
+              [
+                149,
+                255
+              ],
+              [
+                150,
+                115
+              ],
+              [
+                151,
+                13
+              ],
+              [
+                152,
+                153
+              ],
+              [
+                155,
+                204
+              ],
+              [
+                156,
+                255
+              ],
+              [
+                157,
+                115
+              ],
+              [
+                158,
+                13
+              ],
+              [
+                159,
+                153
+              ],
+              [
+                162,
+                204
+              ],
+              [
+                163,
+                255
+              ],
+              [
+                164,
+                115
+              ],
+              [
+                165,
+                13
+              ],
+              [
+                166,
+                153
+              ],
+              [
+                169,
+                204
+              ],
+              [
+                170,
+                255
+              ],
+              [
+                171,
+                115
+              ],
+              [
+                172,
+                13
+              ],
+              [
+                173,
+                153
+              ],
+              [
+                176,
+                204
+              ],
+              [
+                177,
+                255
+              ],
+              [
+                178,
+                115
+              ],
+              [
+                179,
+                13
+              ],
+              [
+                180,
+                153
+              ],
+              [
+                183,
+                204
+              ],
+              [
+                184,
+                255
+              ],
+              [
+                185,
+                115
+              ],
+              [
+                186,
+                13
+              ],
+              [
+                187,
+                153
+              ],
+              [
+                190,
+                204
+              ],
+              [
+                191,
+                255
+              ],
+              [
+                192,
+                115
+              ],
+              [
+                193,
+                13
+              ],
+              [
+                194,
+                153
+              ]
+            ]
+          },
+          {
+            "universe": 2,
+            "channels": [
+              [
+                1,
+                255
+              ],
+              [
+                2,
+                102
+              ],
+              [
+                10,
+                255
+              ],
+              [
+                11,
+                102
+              ],
+              [
+                19,
+                255
+              ],
+              [
+                20,
+                102
+              ],
+              [
+                28,
+                255
+              ],
+              [
+                29,
+                102
+              ]
+            ]
+          }
+        ],
+        "matrices": {},
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "095614dc-3ad6-4591-877a-b2a94b5614d2",
+        "slot": 2,
+        "name": "Blue wash",
+        "fadeIn": 2,
+        "fadeOut": 2,
+        "levels": [
+          {
+            "universe": 1,
+            "channels": [
+              [
+                1,
+                115
+              ],
+              [
+                2,
+                51
+              ],
+              [
+                3,
+                102
+              ],
+              [
+                4,
+                102
+              ],
+              [
+                6,
+                230
+              ],
+              [
+                8,
+                0
+              ],
+              [
+                9,
+                77
+              ],
+              [
+                10,
+                255
+              ],
+              [
+                18,
+                115
+              ],
+              [
+                19,
+                51
+              ],
+              [
+                20,
+                102
+              ],
+              [
+                21,
+                102
+              ],
+              [
+                23,
+                230
+              ],
+              [
+                25,
+                0
+              ],
+              [
+                26,
+                77
+              ],
+              [
+                27,
+                255
+              ],
+              [
+                35,
+                115
+              ],
+              [
+                36,
+                51
+              ],
+              [
+                37,
+                102
+              ],
+              [
+                38,
+                102
+              ],
+              [
+                40,
+                230
+              ],
+              [
+                42,
+                0
+              ],
+              [
+                43,
+                77
+              ],
+              [
+                44,
+                255
+              ],
+              [
+                52,
+                115
+              ],
+              [
+                53,
+                51
+              ],
+              [
+                54,
+                102
+              ],
+              [
+                55,
+                102
+              ],
+              [
+                57,
+                230
+              ],
+              [
+                59,
+                0
+              ],
+              [
+                60,
+                77
+              ],
+              [
+                61,
+                255
+              ],
+              [
+                141,
+                255
+              ],
+              [
+                142,
+                0
+              ],
+              [
+                143,
+                51
+              ],
+              [
+                144,
+                255
+              ],
+              [
+                148,
+                255
+              ],
+              [
+                149,
+                0
+              ],
+              [
+                150,
+                51
+              ],
+              [
+                151,
+                255
+              ],
+              [
+                155,
+                255
+              ],
+              [
+                156,
+                0
+              ],
+              [
+                157,
+                51
+              ],
+              [
+                158,
+                255
+              ],
+              [
+                162,
+                255
+              ],
+              [
+                163,
+                0
+              ],
+              [
+                164,
+                51
+              ],
+              [
+                165,
+                255
+              ],
+              [
+                169,
+                255
+              ],
+              [
+                170,
+                0
+              ],
+              [
+                171,
+                51
+              ],
+              [
+                172,
+                255
+              ],
+              [
+                176,
+                255
+              ],
+              [
+                177,
+                0
+              ],
+              [
+                178,
+                51
+              ],
+              [
+                179,
+                255
+              ],
+              [
+                183,
+                255
+              ],
+              [
+                184,
+                0
+              ],
+              [
+                185,
+                51
+              ],
+              [
+                186,
+                255
+              ],
+              [
+                190,
+                255
+              ],
+              [
+                191,
+                0
+              ],
+              [
+                192,
+                51
+              ],
+              [
+                193,
+                255
+              ]
+            ]
+          },
+          {
+            "universe": 2,
+            "channels": [
+              [
+                3,
+                255
+              ],
+              [
+                12,
+                255
+              ],
+              [
+                21,
+                255
+              ],
+              [
+                30,
+                255
+              ]
+            ]
+          }
+        ],
+        "matrices": {},
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "54e910a5-c260-4f16-8aef-8584b53b9cdb",
+        "slot": 3,
+        "name": "Chorus red",
+        "fadeIn": 2,
+        "fadeOut": 2,
+        "levels": [
+          {
+            "universe": 1,
+            "channels": [
+              [
+                1,
+                153
+              ],
+              [
+                2,
+                153
+              ],
+              [
+                3,
+                128
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                6,
+                255
+              ],
+              [
+                8,
+                255
+              ],
+              [
+                18,
+                153
+              ],
+              [
+                19,
+                153
+              ],
+              [
+                20,
+                128
+              ],
+              [
+                21,
+                0
+              ],
+              [
+                23,
+                255
+              ],
+              [
+                25,
+                255
+              ],
+              [
+                35,
+                153
+              ],
+              [
+                36,
+                153
+              ],
+              [
+                37,
+                128
+              ],
+              [
+                38,
+                0
+              ],
+              [
+                40,
+                255
+              ],
+              [
+                42,
+                255
+              ],
+              [
+                52,
+                153
+              ],
+              [
+                53,
+                153
+              ],
+              [
+                54,
+                128
+              ],
+              [
+                55,
+                0
+              ],
+              [
+                57,
+                255
+              ],
+              [
+                59,
+                255
+              ],
+              [
+                141,
+                255
+              ],
+              [
+                142,
+                255
+              ],
+              [
+                148,
+                255
+              ],
+              [
+                149,
+                255
+              ],
+              [
+                155,
+                255
+              ],
+              [
+                156,
+                255
+              ],
+              [
+                162,
+                255
+              ],
+              [
+                163,
+                255
+              ],
+              [
+                169,
+                255
+              ],
+              [
+                170,
+                255
+              ],
+              [
+                176,
+                255
+              ],
+              [
+                177,
+                255
+              ],
+              [
+                183,
+                255
+              ],
+              [
+                184,
+                255
+              ],
+              [
+                190,
+                255
+              ],
+              [
+                191,
+                255
+              ]
+            ]
+          },
+          {
+            "universe": 2,
+            "channels": [
+              [
+                1,
+                255
+              ],
+              [
+                10,
+                255
+              ],
+              [
+                19,
+                255
+              ],
+              [
+                28,
+                255
+              ]
+            ]
+          }
+        ],
+        "matrices": {},
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "9c83de8f-f233-4a86-a010-b62b32111c0e",
+        "slot": 4,
+        "name": "Beams up",
+        "fadeIn": 2,
+        "fadeOut": 2,
+        "levels": [
+          {
+            "universe": 1,
+            "channels": [
+              [
+                81,
+                77
+              ],
+              [
+                82,
+                179
+              ],
+              [
+                85,
+                255
+              ],
+              [
+                93,
+                77
+              ],
+              [
+                94,
+                179
+              ],
+              [
+                97,
+                255
+              ],
+              [
+                105,
+                77
+              ],
+              [
+                106,
+                179
+              ],
+              [
+                109,
+                255
+              ],
+              [
+                117,
+                77
+              ],
+              [
+                118,
+                179
+              ],
+              [
+                121,
+                255
+              ],
+              [
+                141,
+                77
+              ],
+              [
+                144,
+                153
+              ],
+              [
+                148,
+                77
+              ],
+              [
+                151,
+                153
+              ],
+              [
+                155,
+                77
+              ],
+              [
+                158,
+                153
+              ],
+              [
+                162,
+                77
+              ],
+              [
+                165,
+                153
+              ],
+              [
+                169,
+                77
+              ],
+              [
+                172,
+                153
+              ],
+              [
+                176,
+                77
+              ],
+              [
+                179,
+                153
+              ],
+              [
+                183,
+                77
+              ],
+              [
+                186,
+                153
+              ],
+              [
+                190,
+                77
+              ],
+              [
+                193,
+                153
+              ]
+            ]
+          }
+        ],
+        "matrices": {},
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "84c023fd-434b-4f29-bad2-47438f026300",
+        "slot": 5,
+        "name": "Front white",
+        "fadeIn": 2,
+        "fadeOut": 2,
+        "levels": [
+          {
+            "universe": 1,
+            "channels": [
+              [
+                141,
+                255
+              ],
+              [
+                142,
+                255
+              ],
+              [
+                143,
+                255
+              ],
+              [
+                144,
+                255
+              ],
+              [
+                146,
+                255
+              ],
+              [
+                148,
+                255
+              ],
+              [
+                149,
+                255
+              ],
+              [
+                150,
+                255
+              ],
+              [
+                151,
+                255
+              ],
+              [
+                153,
+                255
+              ],
+              [
+                155,
+                255
+              ],
+              [
+                156,
+                255
+              ],
+              [
+                157,
+                255
+              ],
+              [
+                158,
+                255
+              ],
+              [
+                160,
+                255
+              ],
+              [
+                162,
+                255
+              ],
+              [
+                163,
+                255
+              ],
+              [
+                164,
+                255
+              ],
+              [
+                165,
+                255
+              ],
+              [
+                167,
+                255
+              ],
+              [
+                169,
+                255
+              ],
+              [
+                170,
+                255
+              ],
+              [
+                171,
+                255
+              ],
+              [
+                172,
+                255
+              ],
+              [
+                174,
+                255
+              ],
+              [
+                176,
+                255
+              ],
+              [
+                177,
+                255
+              ],
+              [
+                178,
+                255
+              ],
+              [
+                179,
+                255
+              ],
+              [
+                181,
+                255
+              ],
+              [
+                183,
+                255
+              ],
+              [
+                184,
+                255
+              ],
+              [
+                185,
+                255
+              ],
+              [
+                186,
+                255
+              ],
+              [
+                188,
+                255
+              ],
+              [
+                190,
+                255
+              ],
+              [
+                191,
+                255
+              ],
+              [
+                192,
+                255
+              ],
+              [
+                193,
+                255
+              ],
+              [
+                195,
+                255
+              ]
+            ]
+          }
+        ],
+        "matrices": {},
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "42a7a2a1-768c-4359-a1b5-3a0101f67144",
+        "slot": 6,
+        "name": "Outro amber",
+        "fadeIn": 2,
+        "fadeOut": 2,
+        "levels": [
+          {
+            "universe": 1,
+            "channels": [
+              [
+                141,
+                102
+              ],
+              [
+                142,
+                255
+              ],
+              [
+                143,
+                77
+              ],
+              [
+                145,
+                255
+              ],
+              [
+                148,
+                102
+              ],
+              [
+                149,
+                255
+              ],
+              [
+                150,
+                77
+              ],
+              [
+                152,
+                255
+              ],
+              [
+                155,
+                102
+              ],
+              [
+                156,
+                255
+              ],
+              [
+                157,
+                77
+              ],
+              [
+                159,
+                255
+              ],
+              [
+                162,
+                102
+              ],
+              [
+                163,
+                255
+              ],
+              [
+                164,
+                77
+              ],
+              [
+                166,
+                255
+              ],
+              [
+                169,
+                102
+              ],
+              [
+                170,
+                255
+              ],
+              [
+                171,
+                77
+              ],
+              [
+                173,
+                255
+              ],
+              [
+                176,
+                102
+              ],
+              [
+                177,
+                255
+              ],
+              [
+                178,
+                77
+              ],
+              [
+                180,
+                255
+              ],
+              [
+                183,
+                102
+              ],
+              [
+                184,
+                255
+              ],
+              [
+                185,
+                77
+              ],
+              [
+                187,
+                255
+              ],
+              [
+                190,
+                102
+              ],
+              [
+                191,
+                255
+              ],
+              [
+                192,
+                77
+              ],
+              [
+                194,
+                255
+              ]
+            ]
+          },
+          {
+            "universe": 2,
+            "channels": [
+              [
+                1,
+                204
+              ],
+              [
+                2,
+                51
+              ],
+              [
+                10,
+                204
+              ],
+              [
+                11,
+                51
+              ],
+              [
+                19,
+                204
+              ],
+              [
+                20,
+                51
+              ],
+              [
+                28,
+                204
+              ],
+              [
+                29,
+                51
+              ]
+            ]
+          }
+        ],
+        "matrices": {},
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "fa07b106-7f2e-4314-9cfd-78aac7013169",
+        "slot": 7,
+        "name": "LED plasma",
+        "fadeIn": 0,
+        "fadeOut": 0,
+        "levels": [],
+        "matrices": {
+          "b69837c7-b2fb-4d14-844c-f3978326a4c3": {
+            "kind": "plasma",
+            "colors": [
+              "#ff2a6d",
+              "#05d9e8",
+              "#f5b700"
+            ],
+            "speed": 0.4,
+            "direction": "right",
+            "angle": 0,
+            "size": 0.5,
+            "text": "",
+            "font": "sans-serif",
+            "mask": null,
+            "media": "",
+            "fit": "fill",
+            "image": null
+          }
+        },
+        "audio": null,
+        "video": {}
+      },
+      {
+        "id": "000c743d-05d0-423e-9aa0-b32f91ed9d09",
+        "slot": 8,
+        "name": "Doors countdown",
+        "fadeIn": 0,
+        "fadeOut": 0,
+        "levels": [],
+        "matrices": {},
+        "audio": null,
+        "video": {
+          "4a84ad64-16f1-4a8e-925a-36b515cc6988": [
+            {
+              "source": {
+                "kind": "video",
+                "file": "color-loop.webm"
+              },
+              "opacity": 1,
+              "fit": "fill",
+              "loop": true
+            },
+            {
+              "source": {
+                "kind": "gobo",
+                "gobo": "g1"
+              },
+              "opacity": 1,
+              "fit": "fill",
+              "loop": true
+            },
+            {
+              "source": null,
+              "opacity": 1,
+              "fit": "fill",
+              "loop": true
+            }
+          ]
+        }
+      }
+    ],
+    "chasers": [
+      {
+        "id": "3af3c74d-afbc-4cb7-b4cd-0e7270579a9f",
+        "slot": 1,
+        "name": "Color loop",
+        "steps": [
+          "095614dc-3ad6-4591-877a-b2a94b5614d2",
+          "54e910a5-c260-4f16-8aef-8584b53b9cdb",
+          "a855ac35-269f-4d54-ad24-51ba87f5cdba"
+        ],
+        "bpm": 128,
+        "fade": 0.3,
+        "direction": "loop"
+      },
+      {
+        "id": "2f94916d-df33-4c37-9930-00a08bc184d1",
+        "slot": 2,
+        "name": "Bounce",
+        "steps": [
+          "a855ac35-269f-4d54-ad24-51ba87f5cdba",
+          "095614dc-3ad6-4591-877a-b2a94b5614d2",
+          "54e910a5-c260-4f16-8aef-8584b53b9cdb"
+        ],
+        "bpm": 96,
+        "fade": 0.5,
+        "direction": "bounce"
+      },
+      {
+        "id": "2654b8a2-6255-43f3-9ebb-b99f8e4c56c8",
+        "slot": 3,
+        "name": "Strobe hits",
+        "steps": [
+          "84c023fd-434b-4f29-bad2-47438f026300",
+          "42a7a2a1-768c-4359-a1b5-3a0101f67144"
+        ],
+        "bpm": 240,
+        "fade": 0,
+        "direction": "random"
+      }
+    ],
+    "cues": [
+      {
+        "id": "affea2bd-1fa4-48b0-9c01-699876b99e29",
+        "number": 1,
+        "scene": "a855ac35-269f-4d54-ad24-51ba87f5cdba",
+        "note": "Doors open",
+        "fadeIn": null,
+        "fadeOut": null,
+        "follow": 5
+      },
+      {
+        "id": "e0e454ac-a5f2-40da-8298-6b59124ed4e1",
+        "number": 2,
+        "scene": "095614dc-3ad6-4591-877a-b2a94b5614d2",
+        "note": "Verse 1",
+        "fadeIn": null,
+        "fadeOut": null,
+        "follow": null
+      },
+      {
+        "id": "6e40e480-6534-4aa3-82fa-bbde7182e7a7",
+        "number": 3,
+        "scene": "54e910a5-c260-4f16-8aef-8584b53b9cdb",
+        "note": "Chorus",
+        "fadeIn": null,
+        "fadeOut": null,
+        "follow": null
+      },
+      {
+        "id": "63d59a72-3932-4518-9c6f-ccc95a3fc7a9",
+        "number": 4,
+        "scene": "9c83de8f-f233-4a86-a010-b62b32111c0e",
+        "note": "Bridge",
+        "fadeIn": null,
+        "fadeOut": null,
+        "follow": null
+      },
+      {
+        "id": "90abbaf2-e45f-4d88-a0db-6cca6275a245",
+        "number": 5,
+        "scene": "42a7a2a1-768c-4359-a1b5-3a0101f67144",
+        "note": "Final song",
+        "fadeIn": null,
+        "fadeOut": null,
+        "follow": null
+      }
+    ]
+  },
+  "grid": {
+    "pages": [
+      {
+        "id": "p1",
+        "name": "Show",
+        "columns": 12,
+        "rows": 6,
+        "widgets": [
+          {
+            "id": "w0",
+            "type": "fader",
+            "x": 0,
+            "y": 0,
+            "w": 1,
+            "h": 4,
+            "label": "",
+            "link": {
+              "kind": "group",
+              "id": "32397bb7-2d41-4f29-8073-1836b65d354c"
+            }
+          },
+          {
+            "id": "w1",
+            "type": "fader",
+            "x": 1,
+            "y": 0,
+            "w": 1,
+            "h": 4,
+            "label": "",
+            "link": {
+              "kind": "group",
+              "id": "e6be3996-a88a-4acf-91ad-d60c6df7cc2d"
+            }
+          },
+          {
+            "id": "w2",
+            "type": "fader",
+            "x": 2,
+            "y": 0,
+            "w": 1,
+            "h": 4,
+            "label": "",
+            "link": {
+              "kind": "group",
+              "id": "204767e8-a5df-497f-867d-8c20f05f96ed"
+            }
+          },
+          {
+            "id": "w3",
+            "type": "fader",
+            "x": 3,
+            "y": 0,
+            "w": 1,
+            "h": 4,
+            "label": "",
+            "link": {
+              "kind": "scene",
+              "id": "a855ac35-269f-4d54-ad24-51ba87f5cdba"
+            }
+          },
+          {
+            "id": "w4",
+            "type": "fader",
+            "x": 4,
+            "y": 0,
+            "w": 1,
+            "h": 4,
+            "label": "",
+            "link": {
+              "kind": "master",
+              "master": "grand"
+            }
+          },
+          {
+            "id": "w5",
+            "type": "key",
+            "x": 5,
+            "y": 0,
+            "w": 2,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "scene",
+              "id": "095614dc-3ad6-4591-877a-b2a94b5614d2"
+            }
+          },
+          {
+            "id": "w6",
+            "type": "key",
+            "x": 7,
+            "y": 0,
+            "w": 2,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "scene",
+              "id": "54e910a5-c260-4f16-8aef-8584b53b9cdb"
+            }
+          },
+          {
+            "id": "w7",
+            "type": "key",
+            "x": 5,
+            "y": 1,
+            "w": 2,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "chaser",
+              "id": "3af3c74d-afbc-4cb7-b4cd-0e7270579a9f"
+            }
+          },
+          {
+            "id": "w8",
+            "type": "key",
+            "x": 7,
+            "y": 1,
+            "w": 2,
+            "h": 1,
+            "label": "Beam flash",
+            "link": {
+              "kind": "group",
+              "id": "204767e8-a5df-497f-867d-8c20f05f96ed"
+            }
+          },
+          {
+            "id": "w9",
+            "type": "key",
+            "x": 9,
+            "y": 0,
+            "w": 3,
+            "h": 2,
+            "label": "",
+            "link": {
+              "kind": "cue",
+              "action": "go"
+            }
+          },
+          {
+            "id": "w10",
+            "type": "monitor",
+            "x": 9,
+            "y": 2,
+            "w": 3,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "cue",
+              "action": "go"
+            }
+          },
+          {
+            "id": "w11",
+            "type": "xyPad",
+            "x": 5,
+            "y": 2,
+            "w": 2,
+            "h": 2,
+            "label": "Wash position",
+            "link": {
+              "kind": "group",
+              "id": "32397bb7-2d41-4f29-8073-1836b65d354c"
+            }
+          },
+          {
+            "id": "w12",
+            "type": "colorPicker",
+            "x": 7,
+            "y": 2,
+            "w": 2,
+            "h": 1,
+            "label": "Pars color",
+            "link": {
+              "kind": "group",
+              "id": "e6be3996-a88a-4acf-91ad-d60c6df7cc2d"
+            }
+          },
+          {
+            "id": "w13",
+            "type": "knob",
+            "x": 7,
+            "y": 3,
+            "w": 1,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "master",
+              "master": "scene"
+            }
+          },
+          {
+            "id": "w14",
+            "type": "key",
+            "x": 9,
+            "y": 3,
+            "w": 1,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "cue",
+              "action": "back"
+            }
+          },
+          {
+            "id": "w15",
+            "type": "key",
+            "x": 10,
+            "y": 3,
+            "w": 1,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "cue",
+              "action": "pause"
+            }
+          },
+          {
+            "id": "w16",
+            "type": "key",
+            "x": 11,
+            "y": 3,
+            "w": 1,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "desk",
+              "action": "blackout"
+            }
+          },
+          {
+            "id": "w17",
+            "type": "label",
+            "x": 0,
+            "y": 4,
+            "w": 3,
+            "h": 1,
+            "label": "Groups",
+            "link": {
+              "kind": "none"
+            }
+          },
+          {
+            "id": "w18",
+            "type": "monitor",
+            "x": 3,
+            "y": 4,
+            "w": 2,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "chaser",
+              "id": "3af3c74d-afbc-4cb7-b4cd-0e7270579a9f"
+            }
+          },
+          {
+            "id": "tm1",
+            "type": "key",
+            "x": 0,
+            "y": 5,
+            "w": 2,
+            "h": 1,
+            "label": "Countdown",
+            "link": {
+              "kind": "timer",
+              "id": "t1",
+              "action": "toggle"
+            }
+          },
+          {
+            "id": "tm2",
+            "type": "monitor",
+            "x": 2,
+            "y": 5,
+            "w": 3,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "timer",
+              "id": "t1",
+              "action": "toggle"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "name": "Media",
+        "columns": 8,
+        "rows": 4,
+        "widgets": [
+          {
+            "id": "m0",
+            "type": "key",
+            "x": 0,
+            "y": 0,
+            "w": 2,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "scene",
+              "id": "fa07b106-7f2e-4314-9cfd-78aac7013169"
+            }
+          },
+          {
+            "id": "m1",
+            "type": "key",
+            "x": 2,
+            "y": 0,
+            "w": 2,
+            "h": 1,
+            "label": "",
+            "link": {
+              "kind": "scene",
+              "id": "000c743d-05d0-423e-9aa0-b32f91ed9d09"
+            }
+          },
+          {
+            "id": "m2",
+            "type": "key",
+            "x": 4,
+            "y": 0,
+            "w": 2,
+            "h": 1,
+            "label": "Countdown",
+            "link": {
+              "kind": "timer",
+              "id": "t1",
+              "action": "toggle"
+            }
+          },
+          {
+            "id": "m3",
+            "type": "key",
+            "x": 6,
+            "y": 0,
+            "w": 2,
+            "h": 1,
+            "label": "Reset countdown",
+            "link": {
+              "kind": "timer",
+              "id": "t1",
+              "action": "reset"
+            }
+          },
+          {
+            "id": "m4",
+            "type": "key",
+            "x": 0,
+            "y": 1,
+            "w": 2,
+            "h": 1,
+            "label": "Play",
+            "link": {
+              "kind": "audio",
+              "action": "play"
+            }
+          },
+          {
+            "id": "m5",
+            "type": "key",
+            "x": 2,
+            "y": 1,
+            "w": 2,
+            "h": 1,
+            "label": "Pause",
+            "link": {
+              "kind": "audio",
+              "action": "pause"
+            }
+          },
+          {
+            "id": "m6",
+            "type": "key",
+            "x": 4,
+            "y": 1,
+            "w": 2,
+            "h": 1,
+            "label": "Stop",
+            "link": {
+              "kind": "audio",
+              "action": "stop"
+            }
+          },
+          {
+            "id": "m7",
+            "type": "key",
+            "x": 6,
+            "y": 1,
+            "w": 2,
+            "h": 1,
+            "label": "Next song",
+            "link": {
+              "kind": "audio",
+              "action": "next"
+            }
+          },
+          {
+            "id": "m8",
+            "type": "monitor",
+            "x": 0,
+            "y": 2,
+            "w": 4,
+            "h": 2,
+            "label": "",
+            "link": {
+              "kind": "timer",
+              "id": "t1",
+              "action": "toggle"
+            }
+          },
+          {
+            "id": "m9",
+            "type": "fader",
+            "x": 4,
+            "y": 2,
+            "w": 1,
+            "h": 2,
+            "label": "",
+            "link": {
+              "kind": "scene",
+              "id": "fa07b106-7f2e-4314-9cfd-78aac7013169"
+            }
+          },
+          {
+            "id": "m10",
+            "type": "fader",
+            "x": 5,
+            "y": 2,
+            "w": 1,
+            "h": 2,
+            "label": "",
+            "link": {
+              "kind": "master",
+              "master": "grand"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "audio": {
+    "device": "",
+    "volume": 1,
+    "autoAdvance": false,
+    "items": [
+      {
+        "id": "147294c2-e544-4c54-ae80-3284e33c6b97",
+        "file": "walk-in-music.wav",
+        "name": "Walk-in music",
+        "start": 0,
+        "end": null,
+        "fadeIn": 2,
+        "fadeOut": 3,
+        "volume": 0.8,
+        "loop": true
+      },
+      {
+        "id": "97734042-62cc-45f8-a88d-902a62973a29",
+        "file": "intro-sting.wav",
+        "name": "Intro sting",
+        "start": 0,
+        "end": null,
+        "fadeIn": 0,
+        "fadeOut": 0,
+        "volume": 1,
+        "loop": false
+      }
+    ]
+  },
+  "video": {
+    "outputs": [
+      {
+        "id": "4a84ad64-16f1-4a8e-925a-36b515cc6988",
+        "name": "Stage screen",
+        "enabled": false,
+        "display": "",
+        "fullscreen": false,
+        "x": 80,
+        "y": 80,
+        "width": 640,
+        "height": 360,
+        "stack": 0,
+        "layers": 3
+      }
+    ],
+    "gobos": [
+      {
+        "id": "g1",
+        "name": "Doors",
+        "text": "Doors open\nin {countdown}",
+        "font": "sans-serif",
+        "weight": "bold",
+        "size": 0.14,
+        "color": "#ffd27a",
+        "outlineColor": "#000000",
+        "outline": 0.04,
+        "align": "center",
+        "x": 0.5,
+        "y": 0.5,
+        "mask": "circle",
+        "maskFile": "",
+        "maskSize": 0.95,
+        "softness": 0.4,
+        "focus": 0.05,
+        "rotation": 0,
+        "prism": 3,
+        "prismSpread": 0.25,
+        "animation": "rotate",
+        "speed": 0.1,
+        "direction": "right",
+        "countdownMode": "duration",
+        "countdownSeconds": 600,
+        "countdownTime": "21:00"
+      }
+    ],
+    "timers": [
+      {
+        "id": "t1",
+        "name": "Set countdown",
+        "mode": "countdown",
+        "label": "Show starts in",
+        "showSeconds": true,
+        "showDate": false,
+        "duration": 120,
+        "targetTime": "21:00",
+        "atZero": "negative",
+        "flashAtZero": true,
+        "warningSeconds": 60,
+        "color": "#ffffff",
+        "warningColor": "#e8b420",
+        "endColor": "#d8383a",
+        "background": "",
+        "font": "sans-serif"
+      },
+      {
+        "id": "t2",
+        "name": "Stage clock",
+        "mode": "clock",
+        "label": "Local time",
+        "showSeconds": true,
+        "showDate": true,
+        "duration": 120,
+        "targetTime": "21:00",
+        "atZero": "negative",
+        "flashAtZero": true,
+        "warningSeconds": 60,
+        "color": "#ffffff",
+        "warningColor": "#e8b420",
+        "endColor": "#d8383a",
+        "background": "#000000",
+        "font": "sans-serif"
+      }
+    ]
+  },
+  "timelines": {
+    "timelines": [
+      {
+        "id": "aff06923-91df-4e49-9919-23cc2f3ef0fc",
+        "name": "Opening song",
+        "bpm": 120,
+        "beatsPerBar": 4,
+        "length": 60,
+        "tracks": [
+          {
+            "id": "f1",
+            "name": "Lights",
+            "kind": "folder",
+            "parent": null,
+            "collapsed": false,
+            "muted": false,
+            "height": 64,
+            "clips": [],
+            "device": "",
+            "volume": 1,
+            "output": "",
+            "layer": 0,
+            "target": null,
+            "points": []
+          },
+          {
+            "id": "t1",
+            "name": "Stage lights",
+            "kind": "light",
+            "parent": "f1",
+            "collapsed": false,
+            "muted": false,
+            "height": 64,
+            "clips": [
+              {
+                "id": "c1",
+                "start": 0,
+                "duration": 8,
+                "offset": 0,
+                "fadeIn": 1,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "scene",
+                  "id": "a855ac35-269f-4d54-ad24-51ba87f5cdba"
+                }
+              },
+              {
+                "id": "c2",
+                "start": 8,
+                "duration": 8,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "scene",
+                  "id": "095614dc-3ad6-4591-877a-b2a94b5614d2"
+                }
+              },
+              {
+                "id": "c3",
+                "start": 16,
+                "duration": 8,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "chaser",
+                  "id": "3af3c74d-afbc-4cb7-b4cd-0e7270579a9f"
+                }
+              }
+            ],
+            "device": "",
+            "volume": 1,
+            "output": "",
+            "layer": 0,
+            "target": null,
+            "points": []
+          },
+          {
+            "id": "t2",
+            "name": "Wash level",
+            "kind": "automation",
+            "parent": "f1",
+            "collapsed": false,
+            "muted": false,
+            "height": 64,
+            "clips": [],
+            "device": "",
+            "volume": 1,
+            "output": "",
+            "layer": 0,
+            "target": {
+              "kind": "group",
+              "id": "32397bb7-2d41-4f29-8073-1836b65d354c"
+            },
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                12,
+                0.3
+              ],
+              [
+                20,
+                1
+              ]
+            ]
+          },
+          {
+            "id": "t3",
+            "name": "Backing track",
+            "kind": "audio",
+            "parent": null,
+            "collapsed": false,
+            "muted": false,
+            "height": 64,
+            "clips": [
+              {
+                "id": "c4",
+                "start": 0,
+                "duration": 4,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 1,
+                "name": "",
+                "source": {
+                  "kind": "audio",
+                  "file": "walk-in-music.wav",
+                  "volume": 0.3
+                }
+              },
+              {
+                "id": "c5",
+                "start": 6,
+                "duration": 2,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "audio",
+                  "file": "intro-sting.wav",
+                  "volume": 0.3
+                }
+              }
+            ],
+            "device": "",
+            "volume": 1,
+            "output": "",
+            "layer": 0,
+            "target": null,
+            "points": []
+          },
+          {
+            "id": "t4",
+            "name": "Screen",
+            "kind": "video",
+            "parent": null,
+            "collapsed": false,
+            "muted": false,
+            "height": 64,
+            "clips": [
+              {
+                "id": "c6",
+                "start": 0,
+                "duration": 12,
+                "offset": 0,
+                "fadeIn": 2,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "layer",
+                  "layer": {
+                    "source": {
+                      "kind": "video",
+                      "file": "color-loop.webm"
+                    },
+                    "opacity": 1,
+                    "fit": "fill",
+                    "loop": true
+                  }
+                }
+              }
+            ],
+            "device": "",
+            "volume": 1,
+            "output": "4a84ad64-16f1-4a8e-925a-36b515cc6988",
+            "layer": 0,
+            "target": null,
+            "points": []
+          }
+        ],
+        "markers": []
+      }
+    ]
+  },
+  "operators": []
+}
