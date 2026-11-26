@@ -5,7 +5,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import { MAX_VIDEO_LAYERS, MAX_VIDEO_OUTPUTS, normalizeLayer, type ShowVideo, type VideoOutputConfig } from '../../shared/video/video';
+import { MAX_VIDEO_LAYERS, MAX_VIDEO_OUTPUTS, normalizeLayer, type ShowVideo, type VideoInput, type VideoOutputConfig } from '../../shared/video/video';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
@@ -18,7 +18,7 @@ import { VideoEngine } from '../video/video-engine';
  * Registers the methods of the service.
  * @returns the video engine, also used by the scenes and cues
  */
-export function registerVideoService(router: RequestRouter, bus: EventBus, session: ShowSession): VideoEngine {
+export function registerVideoService(router: RequestRouter, bus: EventBus, session: ShowSession, inputs: () => Promise<VideoInput[]>): VideoEngine {
     const videoOf = (): ShowVideo | null => session.summary() === null ? null : session.video();
     const engine = new VideoEngine(videoOf, (compositions) => bus.emit('video.stateChanged', { compositions }));
 
@@ -67,6 +67,7 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
     router.register('video.get', () => session.video());
     router.register('video.getState', () => engine.compositions());
     router.register('video.listDisplays', () => listDisplays());
+    router.register('video.listInputs', () => inputs());
 
     router.register('video.addOutput', (params) => {
         const input = requireObject(params);

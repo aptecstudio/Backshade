@@ -5,7 +5,7 @@
  * reports; commands sent before it is ready wait in a queue.
  */
 
-import { BrowserWindow, ipcMain, session, type IpcMainEvent } from 'electron';
+import { BrowserWindow, ipcMain, type IpcMainEvent } from 'electron';
 import {
     PLAYBACK_COMMAND_CHANNEL,
     PLAYBACK_STATUS_CHANNEL,
@@ -34,10 +34,6 @@ export class PlaybackWindow {
             }
             this.listeners.forEach((listener) => listener(status));
         });
-        // Audio outputs are listed with their names only by the playback window
-        const isPlayback = (contents: Electron.WebContents | null): boolean => contents !== null && contents === this.window?.webContents;
-        session.defaultSession.setPermissionCheckHandler((contents, permission) => permission !== 'media' || isPlayback(contents));
-        session.defaultSession.setPermissionRequestHandler((contents, permission, callback) => callback(permission !== 'media' || isPlayback(contents)));
     }
 
     /**

@@ -39,8 +39,35 @@ export interface ShowVideo {
 /** Video of a new show */
 export const EMPTY_VIDEO: ShowVideo = { outputs: [] };
 
-/** Source of a layer: a video or an image of the show media */
-export type LayerSource = { kind: 'video'; file: string } | { kind: 'image'; file: string };
+/** Resolution asked to a video input */
+export type InputQuality = '720p' | '1080p' | '2160p';
+export const INPUT_QUALITIES: readonly InputQuality[] = ['720p', '1080p', '2160p'];
+
+/** Size of each input quality */
+export const QUALITY_SIZES: Readonly<Record<InputQuality, { width: number; height: number }>> = {
+    '720p': { width: 1280, height: 720 },
+    '1080p': { width: 1920, height: 1080 },
+    '2160p': { width: 3840, height: 2160 }
+};
+
+/** Frame rates asked to a video input */
+export const INPUT_FRAME_RATES: readonly number[] = [25, 30, 50, 60];
+
+/**
+ * Source of a layer: a video or an image of the show media, or a video
+ * input of the computer (camera, capture card), found again by its name
+ * when its identifier changes; the device uses the nearest quality it supports.
+ */
+export type LayerSource =
+    | { kind: 'video'; file: string }
+    | { kind: 'image'; file: string }
+    | { kind: 'input'; device: string; label: string; quality: InputQuality; frameRate: number };
+
+/** Video input of the computer */
+export interface VideoInput {
+    id: string;
+    label: string;
+}
 
 /** How a source fills the output */
 export type LayerFit = 'fill' | 'fit' | 'stretch';
@@ -89,15 +116,32 @@ const int = (value: unknown, min: number, max: number, fallback: number): number
  */
 export function normalizeLayer(value: unknown): LayerState {
     const input = (typeof value === 'object' && value !== null ? value : {}) as Partial<Record<keyof LayerState, unknown>>;
-    const source = (typeof input.source === 'object' && input.source !== null ? input.source : {}) as { kind?: unknown; file?: unknown };
     return {
-        source: (source.kind === 'video' || source.kind === 'image') && typeof source.file === 'string' && source.file !== ''
-            ? { kind: source.kind, file: source.file }
-            : null,
+        source: normalizeSource(input.source),
         opacity: typeof input.opacity === 'number' && Number.isFinite(input.opacity) ? Math.min(1, Math.max(0, input.opacity)) : 1,
         fit: LAYER_FITS.includes(input.fit as LayerFit) ? input.fit as LayerFit : 'fill',
         loop: input.loop !== false
     };
+}
+
+/**
+ * Reads the source of a layer; null when it is not valid.
+ */
+function normalizeSource(value: unknown): LayerSource | null {
+    const source = (typeof value === 'object' && value !== null ? value : {}) as Record<string, unknown>;
+    if ((source.kind === 'video' || source.kind === 'image') && typeof source.file === 'string' && source.file !== '') {
+        return { kind: source.kind, file: source.file };
+    }
+    if (source.kind === 'input' && typeof source.device === 'string' && source.device !== '') {
+        return {
+            kind: 'input',
+            device: source.device,
+            label: typeof source.label === 'string' ? source.label.slice(0, 200) : '',
+            quality: INPUT_QUALITIES.includes(source.quality as InputQuality) ? source.quality as InputQuality : '1080p',
+            frameRate: INPUT_FRAME_RATES.includes(source.frameRate as number) ? source.frameRate as number : 30
+        };
+    }
+    return null;
 }
 
 /**

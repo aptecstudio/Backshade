@@ -551,7 +551,11 @@
       "opacity": "Opacità",
       "fit": "Adattamento",
       "once": "Una volta",
-      "layer": "Layer {number}"
+      "layer": "Layer {number}",
+      "inputName": "Ingresso: {name}",
+      "quality": "Qualità",
+      "frameRate": "Fotogrammi",
+      "fps": "{rate} fps"
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

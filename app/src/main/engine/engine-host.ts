@@ -55,7 +55,7 @@ export function startEngine(): void {
     registerGroupService(router, bus, session, output.engine, desk);
     const playback = new PlaybackWindow();
     const audio = registerAudioService(router, bus, session, playback);
-    const video = registerVideoService(router, bus, session);
+    const video = registerVideoService(router, bus, session, () => audio.videoInputs());
     const live = registerMatrixService(router, bus, session, output.engine, desk);
     const player = registerMemoryService(router, bus, session, desk, output.engine, live, audio, video);
     registerCueService(router, bus, session, player);

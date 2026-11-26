@@ -8,7 +8,7 @@
 
 import { Key, Label, NumberField, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
 import type { MediaItem } from '../../../shared/transport/engine-api.js';
-import type { OutputComposition, ShowVideo, VideoOutputConfig } from '../../../shared/video/video.js';
+import type { OutputComposition, ShowVideo, VideoInput, VideoOutputConfig } from '../../../shared/video/video.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
@@ -33,6 +33,7 @@ export class VideoSection extends Stack {
     private video: ShowVideo = { outputs: [] };
     private compositions: Record<string, OutputComposition> = {};
     private media: MediaItem[] = [];
+    private inputs: VideoInput[] = [];
     private selected: string | null = null;
 
     constructor() {
@@ -75,10 +76,11 @@ export class VideoSection extends Stack {
 
     private async load(): Promise<void> {
         try {
-            [this.video, this.compositions, this.media] = await Promise.all([
+            [this.video, this.compositions, this.media, this.inputs] = await Promise.all([
                 engine().request('video.get'),
                 engine().request('video.getState'),
-                engine().request('media.list')
+                engine().request('media.list'),
+                engine().request('video.listInputs')
             ]);
         } catch (error) {
             await showError(error);
@@ -117,7 +119,7 @@ export class VideoSection extends Stack {
             const view = new CompositionView();
             view.element.style.setProperty('--output-ratio', `${output.width} / ${output.height}`);
             view.show(composition[target], 0);
-            const rows = composition[target].map((layer, index) => new LayerRow(output.id, target, index, layer, this.media));
+            const rows = composition[target].map((layer, index) => new LayerRow(output.id, target, index, layer, this.media, this.inputs));
             // Top layer first, as they are stacked
             panel.append(view, new Stack({ children: [...rows].reverse() }));
             panels.push(panel);

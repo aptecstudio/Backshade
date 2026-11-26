@@ -9,6 +9,7 @@ import { startPage } from './launch-options';
 import * as localeRegistry from './locales/locale-registry';
 import { installAppMenu } from './menu/app-menu';
 import * as appProtocol from './protocol/app-protocol';
+import * as mediaPermissions from './security/media-permissions';
 import * as navigationGuard from './security/navigation-guard';
 import * as mainWindow from './window/main-window';
 
@@ -30,6 +31,7 @@ if (!app.requestSingleInstanceLock()) {
     app.whenReady().then(() => {
         localeRegistry.ensureUserDirectory();
         appProtocol.handle();
+        mediaPermissions.install();
         installAppMenu();
         startEngine();
         mainWindow.create(startPage());

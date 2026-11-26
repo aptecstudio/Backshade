@@ -61,6 +61,12 @@ function handle(command: PlaybackCommand): void {
             // An output that is gone falls back to the default one
             void context.setSinkId(command.device).catch(() => context.setSinkId(''));
             break;
+        case 'listVideoInputs':
+            void navigator.mediaDevices.enumerateDevices()
+                .then((devices) => devices.filter((device) => device.kind === 'videoinput').map((device) => ({ id: device.deviceId, label: device.label })))
+                .catch(() => [])
+                .then((inputs) => bridge.report({ type: 'videoInputs', request: command.request, inputs }));
+            break;
         case 'listDevices':
             void listDevices().catch(() => []).then((devices) => bridge.report({ type: 'devices', request: command.request, devices }));
             break;

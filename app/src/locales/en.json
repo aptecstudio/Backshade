@@ -551,7 +551,11 @@
       "opacity": "Opacity",
       "fit": "Fit",
       "once": "Once",
-      "layer": "Layer {number}"
+      "layer": "Layer {number}",
+      "inputName": "Input: {name}",
+      "quality": "Quality",
+      "frameRate": "Frame rate",
+      "fps": "{rate} fps"
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

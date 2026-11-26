@@ -5,6 +5,7 @@
  * crossfade two voices sound together.
  */
 
+import type { VideoInput } from '../video/video.js';
 import type { AudioDevice } from './audio.js';
 
 /** Command from the engine to the playback window */
@@ -28,7 +29,8 @@ export type PlaybackCommand =
     | { type: 'resume'; voice: string }
     | { type: 'volume'; voice: string; volume: number; ramp: number }
     | { type: 'output'; device: string; volume: number }
-    | { type: 'listDevices'; request: number };
+    | { type: 'listDevices'; request: number }
+    | { type: 'listVideoInputs'; request: number };
 
 /** Report from the playback window to the engine */
 export type PlaybackStatus =
@@ -36,7 +38,8 @@ export type PlaybackStatus =
     | { type: 'position'; voice: string; position: number; duration: number }
     | { type: 'ended'; voice: string }
     | { type: 'error'; voice: string; message: string }
-    | { type: 'devices'; request: number; devices: AudioDevice[] };
+    | { type: 'devices'; request: number; devices: AudioDevice[] }
+    | { type: 'videoInputs'; request: number; inputs: VideoInput[] };
 
 /** IPC channels of the playback window */
 export const PLAYBACK_COMMAND_CHANNEL = 'backshade:playback-command';

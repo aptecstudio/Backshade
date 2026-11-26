@@ -9,6 +9,7 @@
 
 import { randomUUID } from 'node:crypto';
 import type { AudioDevice, AudioItem, AudioPlayback, ShowAudio } from '../../shared/audio/audio';
+import type { VideoInput } from '../../shared/video/video';
 import { SHOW_MEDIA_ROUTE, type PlaybackStatus } from '../../shared/audio/playback-protocol';
 import type { PlaybackWindow } from '../playback/playback-window';
 import * as appProtocol from '../protocol/app-protocol';
@@ -34,6 +35,7 @@ export class AudioEngine {
     private lastState = 0;
     private deviceRequest = 0;
     private readonly deviceAnswers = new Map<number, (devices: AudioDevice[]) => void>();
+    private readonly inputAnswers = new Map<number, (inputs: VideoInput[]) => void>();
 
     /**
      * @param audio - Audio of the open show, null when no show is open
@@ -66,6 +68,22 @@ export class AudioEngine {
             // Without an answer (no window) the list is empty
             setTimeout(() => {
                 if (this.deviceAnswers.delete(request)) {
+                    resolve([]);
+                }
+            }, 3000);
+        });
+    }
+
+    /**
+     * Video inputs of the computer (cameras, capture cards), listed by the playback window.
+     */
+    videoInputs(): Promise<VideoInput[]> {
+        const request = ++this.deviceRequest;
+        return new Promise((resolve) => {
+            this.inputAnswers.set(request, resolve);
+            this.window.send({ type: 'listVideoInputs', request });
+            setTimeout(() => {
+                if (this.inputAnswers.delete(request)) {
                     resolve([]);
                 }
             }, 3000);
@@ -174,6 +192,10 @@ export class AudioEngine {
         switch (status.type) {
             case 'ready':
                 this.applyOutput();
+                break;
+            case 'videoInputs':
+                this.inputAnswers.get(status.request)?.(status.inputs);
+                this.inputAnswers.delete(status.request);
                 break;
             case 'devices':
                 this.deviceAnswers.get(status.request)?.(status.devices);
