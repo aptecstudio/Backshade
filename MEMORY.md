@@ -455,6 +455,17 @@ Status: Confirmed (2026-11-23).
 
 Status: Confirmed (2026-11-23).
 
+### Reordering by drag and drop
+
+Requested by the human on 2026-11-26: every element that can be reordered is moved by drag and drop, with mouse, pen or touch, never with up and down keys.
+
+- Framework `makeSortable` (`framework/ts/list/sortable.ts`, styles `components/_sortable.scss`): the item follows the pointer, the other items move aside with an animation to show where it will land, the dragged item settles in its place before the list is rebuilt; the list scrolls near its edges; with the mouse the drag starts after 4 px, with touch after a press of 250 ms (a finger that moves first scrolls the page). Animations are off with the reduced motion preference.
+- Items that accept others (timeline folders) receive the dragged item when the pointer is over their middle (dashed outline); near their top or bottom edge the item goes before or after them.
+- Fields and keys inside an item do not start a drag, unless they are marked `data-sortable-handle` (the name of a track header, the rows of the cue list); an optional handle selector limits the drag to a part of the item (the track headers, so dragging on the lanes stays for the clips).
+- Used by: timeline tracks (also into and out of folders), chaser steps, audio playlist (`audio.moveItem` to a place), channels of a fixture mode, cue list (`cues.move`: the cue takes a number between its neighbours with one decimal digit, or every cue is numbered again when there is no room), video layers of program and preview (`video.moveLayer`).
+
+Status: Confirmed (drag and drop only, cue list and video layers included), Proposed (thresholds and animation times).
+
 ### Application layout
 
 Built in Phase 1.5 after the console reference rendering (`docs/design/console.png`), entirely from components (`src/renderer/shell/`):
@@ -465,7 +476,7 @@ Built in Phase 1.5 after the console reference rendering (`docs/design/console.p
 - `SectionNavigation`: open section and change notifications; the last open section is remembered per device (`localStorage`, key `backshade.section`).
 - `SectionHost`: shows the open section; the previous section component is destroyed and the new one created when the section changes.
 - `StatusBar`: application status on the left, section tabs in the middle, "A product by" with the Aptec Studio wordmark linking to the website on the right.
-- Sections are declared in `src/renderer/sections/section-definitions.ts` (identifier, text, optional icon, factory). Main sections: console, grid (virtual console), timeline, patch, output, media; settings has its own key. Sections not yet developed show a placeholder panel.
+- Sections are declared in `src/renderer/sections/section-definitions.ts` (identifier, text, optional icon, factory). Main sections: console, grid (virtual console), timeline, patch, matrices, audio, video, output, media; settings has its own key.
 - Settings: `SettingsSection` collects one panel per setting; the first is `LanguageSettings`.
 - Timecode and tempo show neutral values (`00:00:00:00`, `---.-`) until the engine provides them.
 - The blackout key of the reference is in the top bar since the output engine (Phase 3.5).
@@ -716,6 +727,20 @@ Requested by the human on 2026-11-26 (Phase 7.8): screens of the current time an
 - **Drawing** (`src/renderer/video/timer-renderer.ts`): large digits fitted to the width, label above, date below; the date follows the interface language (output windows read it from the same storage).
 
 Status: Confirmed (kinds, choice at zero, controls in the Video section and the grid), Proposed (one minute changes, colors and layout, flashing every half second).
+
+## Timelines
+
+Defined with the human on 2026-11-26 (Phase 8), after the reference rendering `docs/design/timeline.png`. Editing works as in an audio workstation (requested by the human; reference products are not named in the project).
+
+- **Several timelines per show** (decided by the human), saved in `show.json` under `timelines` (`src/shared/timeline/timeline.ts`): name, tempo (bpm), beats per bar, length; tracks and markers. Times are in seconds; the ruler shows bars and the displays show time (timecode of the show rate), bar (bar.beat.sixteenth) and tempo (decided by the human: bars and seconds).
+- **Free tracks** (requested by the human): added, removed, moved by dragging their header (between tracks, or into a folder), grouped in folder tracks that open and close (a deleted folder gives its tracks to its own parent), muted (also through their folders), with their height (32 to 256 px, multiple of 8). Kinds: lights (clips of scenes and chasers), audio (clips of audio files, output device and volume per track), video (clips of videos, images, gobos and timers on an output and layer), automation (curve for a master, a group or a scene), folder.
+- **Clips:** start, length, offset into the file, fades, name (empty for the name of the source). In the editor: select (Shift or Ctrl add), move (also to another track of the same kind when only one track is selected), resize from the edges (the start edge moves the offset), fades from the top handles, double click to change, double click on an empty lane to add, snap to bars, beats, half and quarter beats, seconds or frames. Keys: Space play or pause, Delete removes, Ctrl+Z and Ctrl+Shift+Z (or Ctrl+Y) undo and redo, Ctrl+D duplicates, S splits at the playhead, Home goes to the start; Ctrl and the wheel zoom the time.
+- **Automation:** points added with a click, moved by dragging, removed with a double click; straight lines between points (`curveValue`).
+- **Editing session** (`timeline-session.ts`): the interface edits a copy and sends the whole timeline (`timeline.save`), checked by the engine; undo and redo keep up to 100 steps per window.
+- **Shared clock and player** (`src/main/timeline/timeline-player.ts`, 8.5): one timeline loaded at a time; play, pause, stop (to the start, clips leave the outputs), locate, loop (over the selected clips, or four bars from the playhead). While playing, every 25 ms: light clips set the level of their scene or chaser in the memory player (`setClipLevel`, a fade of every channel, scaled by the scene master; clips play lights only, the audio and video of their scenes are not started); audio clips play on the bus of their track in the playback window (`timeline-audio.ts`, a bus per audio track with its device and volume); video clips take their output layer over the program (`VideoEngine.setTimelineLayer`); automation sets masters, groups and scenes (the last value stays after stop). The state is sent with the wall clock time, so every window moves the playhead and the timecode display of the top bar with its own clock.
+- **Go mode and recording:** options of the player already sent to the interface; stop markers pause the playback in go mode (markers editing and recording of live actions come in the next steps).
+
+Status: Confirmed (several timelines, free tracks and folders, editing as in an audio workstation, bars and seconds, recording of live actions), Proposed (colors per kind, header layout, keyboard shortcuts, clips without media of their scenes, last automation value kept).
 
 ## Localization
 
