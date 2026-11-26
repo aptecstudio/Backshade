@@ -341,6 +341,17 @@ Video outputs (7.3, 7.4, 7.6), defined with the human on 2026-11-26:
 
 Status: Confirmed (layers per output, preview and program with Take, scenes record the program, window position, size, fullscreen and stacking), Proposed (CSS composition, muted videos, recording only outputs that show something).
 
+Video inputs (7.5), defined with the human on 2026-11-26:
+
+- **Source of a layer:** a video input of the computer (camera, capture card) besides videos and images: `{ kind: 'input', device, label, quality, frameRate }`. The device is found again by its name when its identifier changes; an input not connected stays in the list with its name.
+- **Quality per layer** (decided by the human): 720p, 1080p or 2160p and 25, 30, 50 or 60 fps, asked as ideal values: the device uses the nearest it supports.
+- **Live image in the monitors too** (decided by the human): the output windows and the preview and program of the Video section open the same input (shared by Chromium).
+- **No sound from inputs** (decided by the human): external audio comes with the mixer integration of Phase 9.
+- **Media permission** (`src/main/security/media-permissions.ts`): cameras, capture cards and device names are allowed only to the windows on the internal protocol; inputs are listed by the playback window (`video.listInputs`).
+- Tests use the fake camera of Chromium (`--use-fake-device-for-media-stream`), so no real camera is turned on.
+
+Status: Confirmed (live monitors, quality per layer, no sound), Proposed (finding the device by its name).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.
