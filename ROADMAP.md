@@ -107,12 +107,12 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 
 ## Phase 6 - Virtual console on a grid
 
-- [ ] 6.1 Customizable grid per show (size, pages)
-- [ ] 6.2 Widgets: key, fader, knob, color picker, XY pad, label, monitor
-- [ ] 6.3 Linking widgets to scenes, chasers, groups, media and cues
-- [ ] 6.4 Edit mode and run mode
-- [ ] 6.5 MIDI mapping of widgets (with MIDI learn and feedback, see Phase 16)
-- [ ] 6.6 Touch use of the grid: large hit areas, several faders and keys at the same time with multi-touch (see Phase 16)
+- [x] 6.1 Customizable grid per show (size, pages): columns x rows per page, square cells adapting to the window
+- [x] 6.2 Widgets: key, fader, knob, color picker, XY pad, label, monitor
+- [x] 6.3 Linking widgets to scenes, chasers, groups, cues, masters, DMX channels and desk commands, with the new fixture groups; media links come with Phase 7 (decided by the human on 2026-11-26)
+- [x] 6.4 Edit mode and run mode
+- [ ] 6.5 MIDI mapping of widgets (with MIDI learn and feedback, see Phase 16); done with the shared MIDI layer of Phase 16 (decided by the human on 2026-11-26)
+- [x] 6.6 Touch use of the grid: large hit areas, several faders and keys at the same time with multi-touch (see Phase 16)
 
 ## Phase 7 - Audio and video
 

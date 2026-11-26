@@ -289,6 +289,31 @@ Defined with the human on 2026-11-26 (Phase 5).
 
 Status: Confirmed (pixels on DMX, several universes, Patch and Matrices sections, effects in scenes, system fonts, preset animations with chosen colors), Proposed (pixel types, limits, preview, list of animations and their parameters, white channel rule, live effect frozen by blind).
 
+## Fixture groups
+
+Defined with the human on 2026-11-26 (introduced with Phase 6).
+
+- **Groups** (`src/shared/patch/groups.ts`): named sets of patched fixtures saved in `patch.groups` (`id`, `number` 1 to 999, `name`, `fixtures` in the chosen order). Removing a fixture removes it from its groups.
+- **Patch section:** "Groups" key with the list of groups and the group editor (number, name, fixtures chosen with keys); delete keeps the fixtures.
+- **Attributes panel:** group keys select the fixtures of a group (the first one is the reference); "Save as group" stores the current selection with the next free number.
+- **Group level** (`src/main/console/group-levels.ts`, proposed): a group fader puts the intensity channels of its fixtures at its level (16-bit as one value), as mixer source `groups`, HTP with the desk and the memories, like the submasters of a desk; fixtures without a dimmer get their additive colors (white light). Levels belong to the running session; home brings them to zero.
+
+Status: Confirmed (groups introduced now, group faders), Proposed (storage in the patch, group level rule).
+
+## Virtual console
+
+Defined with the human on 2026-11-26 (Phase 6), in the Grid section.
+
+- **Pages** (`src/shared/grid/grid.ts`, `grid` in `show.json`): each page has a name, columns (1 to 32) and rows (1 to 24); square cells adapt to the width of the window (decided by the human); at most 50 pages and 400 widgets.
+- **Widgets:** key, fader, knob, color picker, XY pad, label, monitor; each takes a rectangle of cells, has an optional label (otherwise the name of what it controls) and a link. Links: scene, chaser, cue list action (go, back, pause, release), master (A, B, scene, grand), group, raw DMX channel (row A of the desk), desk command (blackout, full on, blind, home). `WIDGET_LINKS` lists the links each type accepts; media links come with Phase 7 (decided by the human).
+- **Behavior:** keys toggle scenes and chasers, run cue actions and desk commands, flash groups and channels while held; faders and knobs set levels; a fader on a scene or chaser is its level (decided by the human): above zero the memory is on, intensity follows the fader, the other channels take their values as soon as it leaves zero, zero stops it (`memories.setLevel`, `MemoryPlayback.level`); color picker and XY pad set RGB and pan/tilt of a group through the attributes service; monitors show the current and next cue, chaser tempo and step, or a level.
+- **Run and edit mode:** in edit mode empty cells add widgets, a widget is pressed to open its dialog (type when added, label, link, size, delete), dragged to move it and resized from its corner; pages are added, changed (name, size; widgets are moved inside) and deleted. The interface edits a copy and sends the whole grid (`grid.set`), checked by the engine; the chosen page is remembered per device (`backshade.gridPage`).
+- **Interface** (`src/renderer/sections/grid/`): `GridStore` follows desk, output, memories, cues, groups and the channels in use; widgets refresh at most once per frame. Framework additions: `Fader` size `fill`, `XyPad`.
+- **Touch** (6.6): every control uses pointer events with one drag per pointer, so several faders and keys work at the same time (checked with two fingers); controls block scrolling while dragged.
+- **MIDI mapping** (6.5) waits for the shared MIDI layer of Phase 16.
+
+Status: Confirmed (adaptive cells, groups, scene fader level, media with Phase 7), Proposed (widget sizes and limits, flash behavior of group and channel keys, monitor texts).
+
 ## Brand
 
 - Backshade is a product of **Aptec Studio** (website `https://www.aptecstudio.com`). Aptec Studio is the project name of the owner, not a separate legal entity, as in the WooJam project.
