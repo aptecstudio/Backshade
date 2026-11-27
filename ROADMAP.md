@@ -230,15 +230,15 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [ ] 13.2.4 Moving fixtures split into separate parts (base, yoke, head) with defined pivot points, so pan and tilt can be animated
   - [ ] 13.2.5 Musicians with their instrument: drummer (with drum kit), guitarist, bassist, pianist (with piano or keyboard), singer (with microphone and stand); neutral figures, to visualize the band on stage and aim the lights
   - [ ] 13.2.6 Stage elements: guitar and bass amplifiers and cabinets, drum riser, risers and platforms, floor wedge monitors, PA speakers and subwoofers, microphone stands, keyboard stands, instrument stands, cases and flight cases, DJ booth
-- [ ] 13.3 Link between fixture definitions and 3D models: model, beam angle and zoom range, pan and tilt range, light output
+- [x] 13.3 Link between fixture definitions and 3D models: model, beam angle and zoom range, pan and tilt range, light output
 - [x] 13.4 Stage editor: place, move, rotate and snap truss, decks and fixtures; hang fixtures on truss; camera views (front, top, side, free)
 - [x] 13.5 Placed fixtures linked to the patch; stage layout saved in `show.json`
-- [ ] 13.6 Live emulation from the DMX output:
-  - [ ] 13.6.1 Brightness: intensity, dimmer curve, strobe
-  - [ ] 13.6.2 Colors: RGB/RGBW mixing, CMY, color wheel, color temperature
-  - [ ] 13.6.3 Movements: pan and tilt with realistic speed, zoom
-  - [ ] 13.6.4 Visible beams (volumetric cones) and light on the stage surfaces, with an optional haze level
-- [ ] 13.7 Performance: frame rate limit, quality levels, beam on/off switch
+- [x] 13.6 Live emulation from the DMX output:
+  - [x] 13.6.1 Brightness: intensity, dimmer curve, strobe
+  - [x] 13.6.2 Colors: RGB/RGBW mixing, CMY, color wheel, color temperature
+  - [x] 13.6.3 Movements: pan and tilt with realistic speed, zoom
+  - [x] 13.6.4 Visible beams (volumetric cones) and light on the stage surfaces, with an optional haze level
+- [x] 13.7 Performance: frame rate limit, quality levels, beam on/off switch
 - [ ] 13.8 Import of custom `.obj` models into the show folder
 - [ ] 13.9 Video outputs in the 3D stage, to pre-program the whole show (lights and video together) without the real hardware:
   - [ ] 13.9.1 Screens and LED walls: flat or curved surfaces, sized in meters and pixels, showing the real program output of the linked video output as a live texture

@@ -792,6 +792,16 @@ Status: Confirmed (2026-11-22).
 - **Not included:** the stage is not offered by the import from another show. (Proposed)
 - **Demo show:** two truss rows with the washes and beams hung, PARs on the floor, deck, two singers, amplifiers and monitors; the LED bars are left to be placed.
 
+### Live emulation (13.3, 13.6 and 13.7, 2026-11-28)
+
+- **Modes** (decided by the human): the toolbar has Setup (work light, grid, handles) and Live (dark venue, the fixtures follow the output, free camera, nothing can be moved). Live is open to read-only operators too. (Confirmed)
+- **Strobe** (decided by the human): shown by default, with a key that turns it off (the fixture then stays lit). (Confirmed)
+- **Values:** the window reads the frames really sent (`output.getFrame`, so grand master and blackout count) for the universes of the placed fixtures, at the chosen frame rate. `shared/stage/fixture-light.ts` turns the channels of a mode into light: dimmer (linear, definitions have no curve), shutter and strobe from the capabilities, additive emitters (their average over the cells of a bar), CMY, color wheel colors, hue, color temperature, 16-bit pan and tilt, zoom, pan and tilt speed. Gobos, prisms, focus and macros are not shown. (Proposed)
+- **Definitions and models (13.3):** travel, beam angle and zoom range, lumens and color temperature from the physical data of the definition, usual values by category when missing (`shared/stage/light-profile.ts`); the models list their pivots and the lens the beam starts from. Pan and tilt at the middle of the travel point along the axis of the base. (Proposed)
+- **Rendering:** the head travels at the speed of a real one (pan 240, tilt 180 degrees per second, slowed by the speed channel); beams are additive cones up to 14 m that end on the floor (they pass through objects, no shadows); light on the surfaces is given by a fixed pool of spot lights assigned to the brightest fixtures. (Proposed)
+- **Performance:** haze (none, light, medium, heavy), quality (low: no light on surfaces; medium: 8 spot lights; high: 24 and full screen density), 15, 30 or 60 fps, beams and strobe on or off, saved on the computer. Defaults: medium haze and quality, 30 fps. (Proposed)
+- **Demo show:** the PARs on the floor aim upwards.
+
 ### Video outputs in the 3D stage
 
 Requested by the human on 2026-11-23: the 3D stage also emulates the video outputs, so the whole show can be pre-programmed. It includes (Phase 13.9):

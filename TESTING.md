@@ -225,6 +225,8 @@ How to use it:
 - [ ] Mouse: orbit, pan and zoom; touch screen: one finger orbits, two fingers pinch and pan.
 - [ ] Editor on a touch screen: a tap selects, the arrows and rings can be dragged with a finger without moving the camera.
 - [ ] A stage built like a real one (truss, decks, hung fixtures) in a venue: the 20 cm grid is fine enough; heights and distances match the measures.
+- [ ] Live view next to the real rig: colors, intensity, pan and tilt directions, travel and speed, zoom and strobe rate match the fixtures (moving heads hung and standing).
+- [ ] Live view fluid on the show computer with the whole patch placed, at each quality level, while the engine keeps its timing (check the DMX output does not stutter).
 - [ ] Operators: stage hidden (no key in the top bar), read only (no handles) and editable; changing operator updates the open stage window.
 - [ ] Save, close and reopen the show, also on another computer: the stage is the same.
 - [ ] Moving the window to a second screen and resizing it keeps the view sharp and proportioned; closing the main window closes it.
