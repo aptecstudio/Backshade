@@ -2,10 +2,11 @@
  * Ruler of the timeline: bar numbers and lines, the loop area and the
  * markers. Pressing or dragging on it moves the playhead; a double click adds
  * a marker. A marker is moved by dragging it (with snap), a press without
- * dragging moves the playhead to it and a double click opens it.
+ * dragging moves the playhead to it and a double click opens it. On touch
+ * a long press does what the double click does.
  */
 
-import { Component, Emitter, create, type Unsubscribe } from '../../../framework/ts/index.js';
+import { Component, Emitter, create, onLongPress, type Unsubscribe } from '../../../framework/ts/index.js';
 import { beatLength, type Timeline } from '../../../shared/timeline/timeline.js';
 import { snapTime } from './timeline-time.js';
 
@@ -60,6 +61,12 @@ export class TimelineRuler extends Component<HTMLDivElement> {
             flag.style.setProperty('--tick-x', `${marker.time * pps}px`);
             this.element.append(flag);
             this.listen(flag, 'pointerdown', (event) => this.dragMarker(event, flag, marker.id, marker.time, timeline.length, step, editable()));
+            // Touch: a long press opens the marker, as the double click
+            this.track(onLongPress(flag, () => {
+                if (editable()) {
+                    this.opens.emit(marker.id);
+                }
+            }));
             this.listen(flag, 'dblclick', (event) => {
                 event.stopPropagation();
                 if (editable()) {
@@ -78,6 +85,11 @@ export class TimelineRuler extends Component<HTMLDivElement> {
             this.element.addEventListener('pointermove', move);
             this.element.addEventListener('pointerup', up);
         });
+        this.track(onLongPress(this.element, (event) => {
+            if (editable() && event.target === this.element) {
+                this.adds.emit(Math.min(timeline.length, snapTime(this.timeAt(event.clientX), step())));
+            }
+        }));
         this.listen(this.element, 'dblclick', (event) => editable() && this.adds.emit(Math.min(timeline.length, snapTime(this.timeAt(event.clientX), step()))));
         this.track(() => {
             this.locates.clear();

@@ -6,9 +6,11 @@
 
 import { initI18n, t } from './i18n/i18n.js';
 import { followMidiLearn } from './midi/midi-learn.js';
+import { initTouchMode } from './preferences/touch-mode.js';
 import { AppShell } from './shell/app-shell.js';
 import { initShowStore } from './show/show-store.js';
 
+initTouchMode();
 await initI18n();
 await initShowStore();
 document.title = t('app.name');

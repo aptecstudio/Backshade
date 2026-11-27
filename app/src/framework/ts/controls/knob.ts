@@ -27,7 +27,8 @@ export class Knob extends RangeControl<HTMLDivElement> {
         });
         super(element, options);
 
-        element.append(create('div', { classes: ['knob__indicator'] }));
+        // The hit area reaches 48 px around a small knob, without changing its look
+        element.append(create('div', { classes: ['knob__indicator'] }), create('span', { classes: ['knob__hit'], attributes: { 'aria-hidden': 'true' } }));
         this.listen(element, 'pointerdown', (event) => this.startDrag(event));
 
         this.setValue(options.value ?? 0);

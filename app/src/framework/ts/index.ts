@@ -67,6 +67,7 @@ export { ListItem, type ListItemOptions } from './list/list-item.js';
 export { makeSortable, type SortableDrop, type SortableOptions } from './list/sortable.js';
 export { Dialog, type DialogOptions } from './overlay/dialog.js';
 export { onShortcut } from './keyboard/shortcuts.js';
+export { LONG_PRESS_MS, onLongPress } from './dom/long-press.js';
 
 // Keys
 export { Key, type KeyOptions, type KeyState } from './keys/key.js';

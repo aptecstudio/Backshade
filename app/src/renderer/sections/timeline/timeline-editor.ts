@@ -7,13 +7,14 @@
  * another track of the same kind), resized from their edges and given fades
  * from their top corners, with snap to the grid; a double click opens a clip
  * or adds one. Automation points are added with a click, moved by dragging
- * and removed with a double click. Audio clips show the waveform of the
+ * and removed with a double click. On touch a long press does what the
+ * double click does, and two fingers zoom the time. Audio clips show the waveform of the
  * part of the file they play. Markers are added with a double click on the
  * ruler or at the playhead, moved by dragging and opened with a double
  * click. Every change goes through the session, so it can be undone.
  */
 
-import { CHANNEL_COLORS, Component, Emitter, channelColorClass, create, makeSortable, type SortableDrop, type Unsubscribe } from '../../../framework/ts/index.js';
+import { CHANNEL_COLORS, Component, Emitter, LONG_PRESS_MS, channelColorClass, create, makeSortable, onLongPress, type SortableDrop, type Unsubscribe } from '../../../framework/ts/index.js';
 import type { Clip, Marker, Timeline, Track } from '../../../shared/timeline/timeline.js';
 import { t } from '../../i18n/i18n.js';
 import { markEdit } from '../../show/edit-access.js';
@@ -95,7 +96,58 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             this.setZoom(this.pps * (event.deltaY < 0 ? 1.25 : 0.8));
             this.element.scrollLeft = time * this.pps - (event.clientX - rect.left - HEADER_WIDTH);
         }, { passive: false });
+        this.pinchZoom();
         this.render();
+    }
+
+    /**
+     * Touch: two fingers moving apart or together zoom the time around the
+     * point between them; scrolling with the fingers stays the one of the
+     * system (the page itself never zooms, see the styles).
+     */
+    private pinchZoom(): void {
+        // While the fingers move the lanes are only stretched (rebuilding them would lose the touch); the zoom is applied when they lift
+        let pinch: { distance: number; origin: number; ratio: number; x: number } | null = null;
+        const spread = (touches: TouchList): { distance: number; x: number } => ({
+            distance: Math.hypot(touches[0].clientX - touches[1].clientX, touches[0].clientY - touches[1].clientY),
+            x: (touches[0].clientX + touches[1].clientX) / 2
+        });
+        this.listen(this.element, 'touchstart', (event) => {
+            if (event.touches.length !== 2) {
+                return;
+            }
+            const { distance, x } = spread(event.touches);
+            const origin = x - this.inner.getBoundingClientRect().left;
+            pinch = { distance: Math.max(1, distance), origin, ratio: 1, x };
+            this.inner.style.setProperty('transform-origin', `${origin}px 0`);
+        }, { passive: true });
+        this.listen(this.element, 'touchmove', (event) => {
+            if (pinch === null || event.touches.length !== 2) {
+                return;
+            }
+            const { distance, x } = spread(event.touches);
+            const pps = Math.min(800, Math.max(2, this.pps * distance / pinch.distance));
+            pinch.ratio = pps / this.pps;
+            pinch.x = x;
+            this.inner.style.setProperty('transform', `scaleX(${pinch.ratio})`);
+        }, { passive: true });
+        const end = (event: TouchEvent): void => {
+            if (pinch === null || event.touches.length >= 2) {
+                return;
+            }
+            const { ratio, x } = pinch;
+            pinch = null;
+            this.inner.style.removeProperty('transform');
+            if (Math.abs(ratio - 1) < 0.01) {
+                return;
+            }
+            const rect = this.element.getBoundingClientRect();
+            const time = (x - rect.left + this.element.scrollLeft - HEADER_WIDTH) / this.pps;
+            this.setZoom(this.pps * ratio);
+            this.element.scrollLeft = time * this.pps - (x - rect.left - HEADER_WIDTH);
+        };
+        this.listen(this.element, 'touchend', end);
+        this.listen(this.element, 'touchcancel', end);
     }
 
     /** Pixels per second */
@@ -268,6 +320,12 @@ export class TimelineEditor extends Component<HTMLDivElement> {
                         void this.addClip(track, this.timeAt(event.clientX));
                     }
                 });
+                // Touch: a long press on an empty lane adds a clip, as the double click
+                this.track(onLongPress(lane, (event) => {
+                    if (event.target === lane && this.editable()) {
+                        void this.addClip(track, this.timeAt(event.clientX));
+                    }
+                }));
                 this.listen(lane, 'pointerdown', (event) => {
                     if (event.target === lane && !event.shiftKey && !event.ctrlKey) {
                         this.clearSelection();
@@ -323,6 +381,12 @@ export class TimelineEditor extends Component<HTMLDivElement> {
                 void this.editClip(track, clip);
             }
         });
+        // Touch: a long press opens the clip, as the double click
+        this.track(onLongPress(element, () => {
+            if (this.editable()) {
+                void this.editClip(track, clip);
+            }
+        }));
         return element;
     }
 
@@ -649,6 +713,14 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         line.classList.add('timeline-automation__line');
         svg.append(line);
         points.forEach(([time, value], index) => {
+            // An invisible larger circle makes the point easy to touch
+            const hit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            hit.setAttribute('cx', String(time * this.pps));
+            hit.setAttribute('cy', String(y(value)));
+            hit.setAttribute('r', '16');
+            hit.classList.add('timeline-automation__point', 'timeline-automation__hit');
+            hit.dataset.index = String(index);
+            svg.append(hit);
             const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             dot.setAttribute('cx', String(time * this.pps));
             dot.setAttribute('cy', String(y(value)));
@@ -680,16 +752,39 @@ export class TimelineEditor extends Component<HTMLDivElement> {
                 return;
             }
             const index = Number(dot.dataset.index);
+            const circles = svg.querySelectorAll(`[data-index="${index}"]`);
             lane.setPointerCapture(event.pointerId);
             let latest: [number, number] = points[index];
+            // A long press without moving removes the point (as the double click)
+            let removed = false;
+            const startX = event.clientX;
+            const startY = event.clientY;
+            const hold = window.setTimeout(() => {
+                removed = true;
+                this.session.edit((next) => {
+                    next.tracks.find((item) => item.id === track.id)?.points.splice(index, 1);
+                });
+            }, LONG_PRESS_MS);
             const move = (moveEvent: PointerEvent): void => {
+                if (Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY) > 8) {
+                    window.clearTimeout(hold);
+                }
+                if (removed) {
+                    return;
+                }
                 latest = [snapTime(this.timeAt(moveEvent.clientX), this.step()), valueAt(moveEvent.clientY)];
-                dot.setAttribute('cx', String(latest[0] * this.pps));
-                dot.setAttribute('cy', String(y(latest[1])));
+                circles.forEach((circle) => {
+                    circle.setAttribute('cx', String(latest[0] * this.pps));
+                    circle.setAttribute('cy', String(y(latest[1])));
+                });
             };
             const up = (): void => {
+                window.clearTimeout(hold);
                 lane.removeEventListener('pointermove', move);
                 lane.removeEventListener('pointerup', up);
+                if (removed) {
+                    return;
+                }
                 this.session.edit((next) => {
                     const own = next.tracks.find((item) => item.id === track.id);
                     if (own !== undefined && own.points[index] !== undefined) {

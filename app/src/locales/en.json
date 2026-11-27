@@ -185,7 +185,13 @@
       "knobValues": "Knobs",
       "valuesPercent": "Percentage",
       "valuesDmx": "0-255",
-      "controlValuesHint": "The choice is saved on this device."
+      "controlValuesHint": "The choice is saved on this device.",
+      "touch": "Touch",
+      "touchMode": "Touch mode",
+      "touchAuto": "Automatic",
+      "touchOn": "Always",
+      "touchOff": "Never",
+      "touchHint": "Larger keys, fields, rows and handles for touch screens. Automatic turns it on when the screen of this device is touch. Saved on this device."
     },
     "about": {
       "title": "About Backshade",

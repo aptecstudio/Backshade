@@ -185,7 +185,13 @@
       "knobValues": "Trimmer",
       "valuesPercent": "Percentuale",
       "valuesDmx": "0-255",
-      "controlValuesHint": "La scelta è salvata su questo dispositivo."
+      "controlValuesHint": "La scelta è salvata su questo dispositivo.",
+      "touch": "Touch",
+      "touchMode": "Modalità touch",
+      "touchAuto": "Automatica",
+      "touchOn": "Sempre",
+      "touchOff": "Mai",
+      "touchHint": "Tasti, campi, righe e maniglie più grandi per gli schermi touch. Automatica la accende quando lo schermo di questo dispositivo è touch. Salvata su questo dispositivo."
     },
     "about": {
       "title": "Informazioni su Backshade",

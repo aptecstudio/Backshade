@@ -3,6 +3,8 @@
 
 .timeline-editor {
     position: relative;
+    // Fingers scroll the editor; the pinch zooms the time (handled by the editor), never the page
+    touch-action: pan-x pan-y;
     height: 60vh;
     min-height: space(8) * 5;
     border: 1px solid color('panel-border');
@@ -297,6 +299,13 @@
     cursor: grab;
 }
 
+// Invisible touch area of a point
+.timeline-automation__hit {
+    fill: transparent;
+    stroke: none;
+    pointer-events: all;
+}
+
 .timeline-editor__playhead {
     position: absolute;
     z-index: 1;
@@ -377,4 +386,16 @@
 
 .marker-row__stop {
     color: color('armed');
+}
+
+// Touch mode: wider edges and fade handles of the clips
+.touch-mode {
+    .timeline-clip__edge {
+        width: space(2);
+    }
+
+    .timeline-clip__handle {
+        width: space(2);
+        height: space(2);
+    }
 }

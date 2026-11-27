@@ -69,3 +69,9 @@ $cap-ratio: 64%;
         height: 14px;
     }
 }
+
+// Hit area of at least 48 px around the knob
+.knob__hit {
+    position: absolute;
+    inset: min(0px, calc(50% - 24px));
+}
