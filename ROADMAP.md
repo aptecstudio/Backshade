@@ -245,6 +245,15 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [ ] 13.9.2 Virtual projectors: position, orientation, lens (throw ratio, lens shift), brightness and aspect ratio; the image is projected on the stage surfaces and models, with the visible light cone
   - [ ] 13.9.3 Preview of the videomapping (Phase 14): warp, masks and edge blending shown on the 3D surfaces as they would appear in the venue
   - [ ] 13.9.4 Screens, LED walls and projectors placed in the stage editor and linked to the video outputs of Phase 7; layout saved in `show.json`
+- [ ] 13.10 Overcome the limits of the live emulation (requested by the human on 2026-11-28):
+  - [ ] 13.10.1 Beams stopped by the objects they meet
+  - [ ] 13.10.2 Focus, frost and iris
+  - [ ] 13.10.3 Dimmer curve in the fixture definitions
+  - [ ] 13.10.4 Counter of the frames really drawn and quality lowered automatically
+  - [ ] 13.10.5 Shadows of the brightest fixtures
+  - [ ] 13.10.6 Prisms and rotating gobos (generic patterns or images given by the user)
+  - [ ] 13.10.7 Color macros, where the definition gives their colors
+  - [ ] 13.10.8 Precise beam occlusion and gobos visible in the haze, only if still needed after the rest
 
 ## Phase 14 - Videomapping
 
