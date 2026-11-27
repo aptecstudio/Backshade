@@ -28,6 +28,7 @@ import { registerOperatorService } from '../services/operator-service';
 import { registerMemoryService } from '../services/memory-service';
 import { registerRecentService } from '../services/recent-service';
 import { registerRemoteService } from '../services/remote-service';
+import { registerRemoteViewService } from '../services/remote-view-service';
 import { registerSettingsService } from '../services/settings-service';
 import { registerShowImportService } from '../services/show-import-service';
 import { registerShowService } from '../services/show-service';
@@ -80,11 +81,12 @@ export function startEngine(): void {
     startCloseGuard(bus, session);
 
     attachIpcTransport(router, bus);
-    const webServer = registerRemoteService(router, bus, operators);
+    const remoteAccess = registerRemoteService(router, bus, operators);
+    registerRemoteViewService(router);
 
     // At quit the recovery copy stays only if there are unsaved changes
     app.on('before-quit', () => {
-        webServer.stop();
+        remoteAccess.stop();
         session.autosave();
         session.dispose();
         output.dispose();

@@ -8,7 +8,7 @@ import { ICON_FILE, PRELOAD_FILE } from '../paths';
 import * as appProtocol from '../protocol/app-protocol';
 
 // Surface color (see docs/design): avoids the white flash when opening
-const SURFACE_COLOR = '#16171a';
+export const SURFACE_COLOR = '#16171a';
 
 let instance: BrowserWindow | null = null;
 // Decides whether the window can close; false keeps it open
@@ -66,6 +66,11 @@ export function create(page: string): BrowserWindow {
 
     instance = window;
     return window;
+}
+
+/** The main window, null when closed */
+export function current(): BrowserWindow | null {
+    return instance;
 }
 
 /**

@@ -1,11 +1,14 @@
 /**
- * Actions of the start page: new show, open show, templates.
+ * Actions of the start page: new show, open show, templates, and the remote
+ * control of another instance (not inside a remote client).
  */
 
 import { Key, Panel } from '../../framework/ts/index.js';
 import { t } from '../i18n/i18n.js';
 import { importShow, newShow, openShow } from '../show/show-commands.js';
+import { openDiscoverDialog } from '../remote/discover-dialog.js';
 import { openTemplateManager } from '../templates/template-manager-dialog.js';
+import { isRemote } from '../transport/engine.js';
 
 export class StartActionsPanel extends Panel {
     constructor() {
@@ -20,6 +23,10 @@ export class StartActionsPanel extends Panel {
         importKey.onPress(() => void importShow());
         templates.onPress(() => openTemplateManager());
 
-        this.append(create, open, importKey, templates);
+        const remote = new Key({ label: t('instance.remoteControl'), icon: 'radar' });
+        remote.onPress(() => openDiscoverDialog());
+        remote.element.hidden = isRemote();
+
+        this.append(create, open, importKey, templates, remote);
     }
 }

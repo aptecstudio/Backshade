@@ -9,3 +9,18 @@
     padding: space(2);
     outline: none;
 }
+
+// Bar above the remote control of another instance: the view of the instance covers the rest
+.remote-bar {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: color('surface');
+}
+
+.remote-bar__content {
+    height: space(8);
+    padding: 0 space(2);
+    border-bottom: 1px solid color('panel-border');
+    background: color('panel');
+}

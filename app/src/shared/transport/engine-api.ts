@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { DiscoveredInstance } from '../remote/instance.js';
 import type { FileRoot, FolderContent } from '../files/file-entry.js';
 import type { AttributeLayout } from '../console/fixture-attributes.js';
 import type { AudioDevice, AudioPlayback, ShowAudio } from '../audio/audio.js';
@@ -195,6 +196,8 @@ export interface AppSettings {
     outputEnabled: boolean;
     /** USB DMX interfaces of the workstation */
     usbDmxDevices: UsbDmxDevice[];
+    /** Name of this computer among the instances on the network */
+    instanceName: string;
 }
 
 /** Serial port of the computer, for the choice of a USB DMX interface */
@@ -268,6 +271,12 @@ export interface OutputUniverseUpdate {
 
 /** Engine methods: parameters and result */
 export interface EngineMethods {
+    /** Searches the other instances on the local network */
+    'remote.discover': { params: undefined; result: DiscoveredInstance[] };
+    /** Shows the remote control of another instance in the main window (desktop only) */
+    'remoteView.open': { params: { address: string; port: number }; result: undefined };
+    /** Closes the remote control shown in the main window (desktop only) */
+    'remoteView.close': { params: undefined; result: undefined };
     /** Port of the web server of the remote control and the addresses where it is reached */
     'remote.getInfo': { params: undefined; result: { port: number | null; addresses: string[] } };
     /** Information about the application */

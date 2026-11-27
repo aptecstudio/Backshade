@@ -36,6 +36,9 @@ const DESK = ['console', 'virtualConsole'] as const;
 export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'app.getInfo': FREE,
     'remote.getInfo': FREE,
+    'remote.discover': FREE,
+    'remoteView.open': FREE,
+    'remoteView.close': FREE,
     'app.confirmClose': FREE,
     'window.openAbout': FREE,
     'window.isFullScreen': FREE,

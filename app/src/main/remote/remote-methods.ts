@@ -14,7 +14,9 @@ export const LOCAL_ONLY_METHODS: ReadonlySet<EngineMethod> = new Set<EngineMetho
     'window.isFullScreen',
     'window.toggleFullScreen',
     'operators.login',
-    'operators.logout'
+    'operators.logout',
+    'remoteView.open',
+    'remoteView.close'
 ]);
 
 /** Events meant only for the windows of the computer */

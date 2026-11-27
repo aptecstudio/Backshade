@@ -1436,6 +1436,20 @@
       "address": "Address",
       "unavailable": "The remote control is not available: no free port was found.",
       "noNetwork": "This computer is not connected to a network."
+    },
+    "instance": {
+      "title": "This computer",
+      "name": "Instance name",
+      "rename": "Rename",
+      "hint": "The name that tells this computer apart on the network.",
+      "remoteControl": "Remote control",
+      "searching": "Searching the network...",
+      "noneFound": "No other instance of Backshade found. Check that it is open and on the same network, or type its address.",
+      "searchAgain": "Search again",
+      "address": "IP address",
+      "connect": "Connect",
+      "controlling": "Remote control of {name}",
+      "close": "Close"
     }
   }
 }

@@ -1436,6 +1436,20 @@
       "address": "Indirizzo",
       "unavailable": "Il controllo remoto non è disponibile: nessuna porta libera.",
       "noNetwork": "Questo computer non è collegato a una rete."
+    },
+    "instance": {
+      "title": "Questo computer",
+      "name": "Nome istanza",
+      "rename": "Rinomina",
+      "hint": "Il nome che distingue questo computer sulla rete.",
+      "remoteControl": "Controllo remoto",
+      "searching": "Ricerca nella rete...",
+      "noneFound": "Nessun'altra istanza di Backshade trovata. Controlla che sia aperta e sulla stessa rete, oppure digita il suo indirizzo.",
+      "searchAgain": "Cerca di nuovo",
+      "address": "Indirizzo IP",
+      "connect": "Collega",
+      "controlling": "Controllo remoto di {name}",
+      "close": "Chiudi"
     }
   }
 }

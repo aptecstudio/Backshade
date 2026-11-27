@@ -3,8 +3,10 @@
  * folder and separate from the show settings.
  */
 
+import os from 'node:os';
 import path from 'node:path';
 import { app } from 'electron';
+import { INSTANCE_NAME_LENGTH } from '../../shared/remote/instance';
 import { normalizeUsbDmxDevice, type UsbDmxDevice } from '../../shared/output/usb-dmx';
 import type { AppSettings } from '../../shared/transport/engine-api';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
@@ -22,7 +24,8 @@ function defaults(): AppSettings {
         defaultShowsFolder: path.join(app.getPath('documents'), 'Backshade', 'Shows'),
         artNetInterface: '',
         outputEnabled: true,
-        usbDmxDevices: []
+        usbDmxDevices: [],
+        instanceName: os.hostname().slice(0, INSTANCE_NAME_LENGTH)
     };
 }
 
@@ -41,6 +44,9 @@ export function readSettings(): AppSettings {
         }
         if (typeof data?.outputEnabled === 'boolean') {
             result.outputEnabled = data.outputEnabled;
+        }
+        if (typeof data?.instanceName === 'string' && data.instanceName.trim() !== '') {
+            result.instanceName = data.instanceName.trim().slice(0, INSTANCE_NAME_LENGTH);
         }
         if (Array.isArray(data?.usbDmxDevices)) {
             result.usbDmxDevices = data.usbDmxDevices
