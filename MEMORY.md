@@ -763,6 +763,19 @@ Requested by the human on 2026-11-23 (Phase 16). These are requirements for **ev
 
 Status: Confirmed (requirements), Proposed (details).
 
+### MIDI layer: input (16.2a)
+
+Built on 2026-11-27; the order (input first, then feedback, monitor and profiles) and the learn key were decided by the human.
+
+- **Ports:** the hidden playback window, opened at start, hosts Web MIDI (`src/renderer/playback/midi-host.ts`): it reports the inputs and outputs, again at every plug or unplug, and passes the bytes of every input message to the engine (`midiDevices`, `midiMessage` of the playback protocol). The MIDI permission is granted only to the windows of the application; recent Chromium asks `midiSysex` for every Web MIDI access, so it is granted to them too, while the application asks without system exclusive messages. (Confirmed)
+- **Mappings** (`src/shared/midi/midi.ts`, `midi` in `show.json`): message (device name, note, control change, program change or pitch bend, channel, number), target and mode (key or level). Targets are the links of the grid widgets (scenes, chasers, cues, masters, groups, DMX channels, desk commands, audio, timers) plus the timeline transport (play and pause, stop, Go, Back). Saved in the show with the device name, so each workstation keeps the mappings of its own controllers in the same show. A message has one target: learning it again replaces the old mapping. (Confirmed)
+- **MIDI learn** (decided by the human): the MIDI key of the top bar (Lucide `piano`) turns learn on only with a long press of 800 ms, while a ring fills around the icon (framework `HoldKey`); a short press, or Escape, turns it off. While learning, the controls that MIDI can drive are outlined with a dashed line (mapped ones solid, the chosen one red); touching one chooses it without using it (`markMidi`, attribute `data-midi`, interception in the capture phase), and the next message of a controller is tied to it. Messages do not run actions while learning. The key is shown to who may change the show. (Confirmed key, Proposed outlines and the rest)
+- **Engine** (`src/main/midi/`): `parseMidi` reads the messages; `MidiActions` runs the targets through the router, like requests of the interface (every window follows and the access of the operator is checked); `MidiEngine` keeps the ports, learn and the pickup. Learning, deleting and clearing mappings need an administrator. (Proposed)
+- **Pickup:** a level mapping moves its target only after the control comes within 3 % of the current level, or crosses it; when the level is moved elsewhere by more than 2 % the control must pick it up again. (Proposed values)
+- **Controls marked** so far: Preset A faders and flash keys of the console, masters and grand master (console and output), full on, blind, home, blackout, memory keys, cue keys, audio transport, timer commands, timeline play and stop, Go and Back of the markers panel, grid keys and levels. Preset B faders are not mapped (the grid links drive Preset A). (Proposed)
+- **Settings:** the MIDI panel of the show settings lists the connected controllers and the mappings by device, with delete keys.
+- **Demo show:** no mappings, since they depend on the controller of each workstation.
+
 ## Text gobos
 
 Requested by the human on 2026-11-23 (Phase 7.7), defined on 2026-11-26.

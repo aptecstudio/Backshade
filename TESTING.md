@@ -171,3 +171,11 @@ How to use it:
 - [ ] A whole show run (several hours) with lights, audio, video and timeline: no slowdowns, memory and CPU stay stable.
 - [ ] Quit and restart during a show: everything comes back as saved.
 - [ ] Two instances on the same network do not disturb each other's Art-Net output when configured on different universes.
+
+## 15. MIDI controllers
+
+- [ ] Plugging and unplugging a USB MIDI controller updates the list in the MIDI panel of the show settings, while the application runs.
+- [ ] The MIDI key turns learn on only after a long press (the ring fills); a short press does nothing, and a short press turns learn off.
+- [ ] MIDI learn with a real controller: faders on masters and Preset A channels, buttons on memory keys, cues, blackout, audio and timeline transport, grid widgets; the mappings work after saving and reopening the show.
+- [ ] Pickup: a fader without motor does not move its target until it reaches the current level.
+- [ ] The same show on two workstations with different controllers keeps the mappings of both.

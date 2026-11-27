@@ -297,12 +297,12 @@ Requirements that apply to the whole interface: every new component is designed 
   - [ ] 16.1.5 Gestures where useful: pinch zoom and two-finger pan in the timeline, the 3D stage and the mapping editor
   - [ ] 16.1.6 Touch mode with larger controls, chosen per device
 - [ ] 16.2 MIDI layer shared by the whole application (Web MIDI API, permission granted by the main process):
-  - [ ] 16.2.1 Detection of MIDI devices and hot plug, with status in the interface
-  - [ ] 16.2.2 MIDI learn on any control: faders, knobs, keys, go and back, scenes, chasers, cues, grid widgets
+  - [x] 16.2.1 Detection of MIDI devices and hot plug, with status in the interface
+  - [x] 16.2.2 MIDI learn on any control: faders, knobs, keys, go and back, scenes, chasers, cues, grid widgets (MIDI key of the top bar with a long press, decided by the human on 2026-11-27)
   - [ ] 16.2.3 Feedback to the controller: LEDs, motorized faders, displays, rings of the encoders
-  - [ ] 16.2.4 Pickup (soft takeover) for faders and knobs without motors, to avoid jumps
-  - [ ] 16.2.5 Notes, control change, program change, pitch bend, relative encoders, MIDI Show Control
-  - [ ] 16.2.6 Mappings saved per show and per workstation (the same show on different hardware)
+  - [x] 16.2.4 Pickup (soft takeover) for faders and knobs without motors, to avoid jumps
+  - [ ] 16.2.5 Notes, control change, program change, pitch bend, relative encoders, MIDI Show Control (notes, control change, program change and pitch bend done)
+  - [x] 16.2.6 Mappings saved per show and per workstation (the same show on different hardware)
   - [ ] 16.2.7 Ready-made profiles for common controllers (for example Akai APC, Novation Launchpad and Launch Control, Behringer X-Touch, Korg nanoKONTROL), also in Mackie Control mode
   - [ ] 16.2.8 Monitor of the received and sent MIDI messages
 - [ ] 16.3 Other controllers: OSC control surfaces (for example TouchOSC) on the OSC layer of Phase 9.2; HID devices such as Stream Deck to be evaluated (they need a native dependency)
