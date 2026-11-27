@@ -1330,7 +1330,40 @@
       "encodings": {
         "absolute": "Absolute",
         "relative2c": "Encoder, two's complement",
-        "relative64": "Encoder, offset 64"
+        "relative64": "Encoder, offset 64",
+        "signMagnitude": "Encoder, sign and magnitude"
+      },
+      "profiles": "Controller profiles",
+      "profile": "Profile",
+      "profileDevice": "Device",
+      "profileStart": "Set up",
+      "profilesHint": "A profile maps a common controller: you touch its controls one at a time, as asked (scenes and chasers go on their places, faders on masters and groups). Mackie Control is mapped at once. Places without a scene, chaser or group are left out.",
+      "mackie": "Mackie Control (X-Touch, iCON and similar)",
+      "profileTitle": "Set up {name}",
+      "profileHint": "Move or press the control on the controller. Skip goes to the next one.",
+      "profileStep": "Control {number} of {count}",
+      "profileTouch": "Touch {control}",
+      "profileSkip": "Skip",
+      "profileDone": "Done: {count} controls mapped.",
+      "profileEmpty": "The show has no scenes, chasers or groups for this profile yet.",
+      "controls": {
+        "fader": "Fader {number}",
+        "knob": "Knob {number}",
+        "encoder": "Encoder {number}",
+        "pad": "Pad {number}",
+        "button": "Button {number}",
+        "topButton": "Top button {number}",
+        "bottomButton": "Bottom button {number}",
+        "sideButton": "Side button {number}",
+        "soloButton": "S button {number}",
+        "muteButton": "M button {number}",
+        "recButton": "R button {number}",
+        "play": "Play",
+        "stop": "Stop",
+        "rewind": "Rewind",
+        "forward": "Fast forward",
+        "record": "Record",
+        "cycle": "Cycle"
       }
     }
   }

@@ -104,6 +104,10 @@ export class MidiFeedback {
         if (value === null) {
             return null;
         }
+        // A key lit with the value of its profile (a color on some controllers)
+        if (mapping.mode === 'button' && value > 0 && mapping.led !== null && mapping.input.kind !== 'pitch') {
+            return [(mapping.input.kind === 'note' ? 0x90 : 0xb0) | (mapping.input.channel - 1), mapping.input.number, mapping.led];
+        }
         const { kind, channel, number } = mapping.input;
         const status = channel - 1;
         switch (kind) {

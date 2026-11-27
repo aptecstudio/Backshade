@@ -3,14 +3,18 @@
  * mappings of the show (message, device, what it drives, and for control
  * changes driving a level the encoding of an endless encoder), each one
  * with a key to delete it; the mappings of a device can be deleted
- * together. Then MIDI Show Control and the monitor of the messages.
+ * together. Profiles of common controllers set up the mappings (guided, or
+ * at once for Mackie Control). Then MIDI Show Control and the monitor.
  * Mappings are made with MIDI learn (the MIDI key of the top bar).
  */
 
 import { ChoiceKeys, Key, Label, NumberField, Panel, SelectField, Stack } from '../../../framework/ts/index.js';
 import type { MemoriesSummary } from '../../../shared/console/memories.js';
 import { MIDI_ENCODINGS, type MidiEncoding, type MidiMapping, type MidiMonitorEntry, type MidiState, type MidiTarget, type MscSettings } from '../../../shared/midi/midi.js';
+import { GUIDED_PROFILES, mackieMappings } from '../../../shared/midi/midi-profiles.js';
 import { showError } from '../../dialogs/show-error.js';
+import { resolveRole } from '../../midi/profile-roles.js';
+import { openProfileDialog } from './midi-profile-dialog.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 
@@ -26,6 +30,8 @@ export class MidiSettings extends Panel {
     private readonly msc = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end' });
     private readonly monitorList = new Stack({ classes: ['midi-monitor'] });
     private readonly monitorKey: Key;
+    private readonly profile: SelectField<string>;
+    private readonly profileDevice: SelectField<string>;
     private monitoring = false;
     private memories: MemoriesSummary = { scenes: [], chasers: [], cues: [] };
 
@@ -35,9 +41,24 @@ export class MidiSettings extends Panel {
             new Label({ text: t('midi.hint'), tone: 'secondary', size: 'small' }),
             new Label({ text: t('midi.devices'), weight: 'medium', size: 'small' }),
             this.devices,
+            new Label({ text: t('midi.profiles'), weight: 'medium', size: 'small' })
+        );
+        this.profile = new SelectField<string>({
+            label: t('midi.profile'),
+            options: [...GUIDED_PROFILES.map((item) => ({ value: item.id, label: item.name })), { value: 'mackie', label: t('midi.mackie') }],
+            value: GUIDED_PROFILES[0].id
+        });
+        this.profileDevice = new SelectField<string>({ label: t('midi.profileDevice'), options: [], value: '' });
+        const setUp = new Key({ label: t('midi.profileStart'), icon: 'piano' });
+        setUp.onPress(() => void this.setUpProfile());
+        this.profile.onChange(() => this.showProfileDevice());
+        this.append(
+            new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [this.profile, this.profileDevice, setUp] }),
+            new Label({ text: t('midi.profilesHint'), tone: 'secondary', size: 'small' }),
             new Label({ text: t('midi.mappings'), weight: 'medium', size: 'small' }),
             this.list
         );
+        this.showProfileDevice();
         this.monitorKey = new Key({ label: t('midi.monitor'), icon: 'activity' });
         this.monitorKey.onPress(() => this.setMonitor(!this.monitoring));
         this.append(
@@ -59,9 +80,34 @@ export class MidiSettings extends Panel {
         void this.load();
     }
 
+    /** Mackie Control needs the device; guided profiles learn from any */
+    private showProfileDevice(): void {
+        this.profileDevice.element.hidden = this.profile.value !== 'mackie';
+    }
+
+    private async setUpProfile(): Promise<void> {
+        const guided = GUIDED_PROFILES.find((item) => item.id === this.profile.value);
+        if (guided !== undefined) {
+            await openProfileDialog(guided, (target) => this.targetText(target));
+            return;
+        }
+        const device = this.profileDevice.value;
+        if (device === '') {
+            return;
+        }
+        try {
+            const [memories, groups] = await Promise.all([engine().request('memories.get'), engine().request('patch.getGroups')]);
+            await engine().request('midi.addMappings', { mappings: mackieMappings(device, (role) => resolveRole(role, memories, groups)) });
+        } catch (error) {
+            await showError(error);
+        }
+    }
+
     private showDevices(state: MidiState): void {
         this.devices.element.replaceChildren();
         const inputs = state.devices.filter((device) => device.kind === 'input');
+        const names = [...new Set(inputs.filter((device) => device.connected).map((device) => device.name))];
+        this.profileDevice.setOptions(names.map((name) => ({ value: name, label: name })), names.includes(this.profileDevice.value) ? this.profileDevice.value : names[0] ?? '');
         if (inputs.length === 0) {
             this.devices.append(new Label({ text: t('midi.noDevices'), tone: 'secondary', size: 'small' }));
         }

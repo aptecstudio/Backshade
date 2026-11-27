@@ -1330,7 +1330,40 @@
       "encodings": {
         "absolute": "Assoluta",
         "relative2c": "Encoder, complemento a due",
-        "relative64": "Encoder, offset 64"
+        "relative64": "Encoder, offset 64",
+        "signMagnitude": "Encoder, segno e modulo"
+      },
+      "profiles": "Profili dei controller",
+      "profile": "Profilo",
+      "profileDevice": "Dispositivo",
+      "profileStart": "Configura",
+      "profilesHint": "Un profilo mappa un controller comune: tocchi i suoi controlli uno alla volta, come richiesto (scene e chaser vanno sui loro posti, i fader su master e gruppi). Mackie Control è mappato subito. I posti senza scena, chaser o gruppo sono saltati.",
+      "mackie": "Mackie Control (X-Touch, iCON e simili)",
+      "profileTitle": "Configura {name}",
+      "profileHint": "Muovi o premi il controllo sul controller. Salta passa al successivo.",
+      "profileStep": "Controllo {number} di {count}",
+      "profileTouch": "Tocca {control}",
+      "profileSkip": "Salta",
+      "profileDone": "Fatto: {count} controlli mappati.",
+      "profileEmpty": "Lo show non ha ancora scene, chaser o gruppi per questo profilo.",
+      "controls": {
+        "fader": "Fader {number}",
+        "knob": "Manopola {number}",
+        "encoder": "Encoder {number}",
+        "pad": "Pad {number}",
+        "button": "Tasto {number}",
+        "topButton": "Tasto in alto {number}",
+        "bottomButton": "Tasto in basso {number}",
+        "sideButton": "Tasto laterale {number}",
+        "soloButton": "Tasto S {number}",
+        "muteButton": "Tasto M {number}",
+        "recButton": "Tasto R {number}",
+        "play": "Play",
+        "stop": "Stop",
+        "rewind": "Riavvolgi",
+        "forward": "Avanti veloce",
+        "record": "Registra",
+        "cycle": "Cycle"
       }
     }
   }

@@ -28,7 +28,7 @@ import type { OperatorAccess, OperatorProfile, OperatorState } from '../show/ope
 import type { ImportCatalog, ImportChoice, ImportResult } from '../show/show-import.js';
 import type { ShowSettings } from '../show/show-settings.js';
 import type { MixerRecall, ShowMixer, ShowMixers } from '../mixers/mixers.js';
-import type { MidiEncoding, MidiMode, MidiMonitorEntry, MidiState, MidiTarget, ShowMidi } from '../midi/midi.js';
+import type { MidiEncoding, MidiMapping, MidiMode, MidiMonitorEntry, MidiState, MidiTarget, ShowMidi } from '../midi/midi.js';
 
 /** Information about the application, for the About window */
 export interface AppInfo {
@@ -516,7 +516,9 @@ export interface EngineMethods {
     /** MIDI learn on or off */
     'midi.setLearn': { params: { on: boolean }; result: MidiState };
     /** Control chosen in learn mode: the next MIDI message is tied to it (the mapping is an unsaved change) */
-    'midi.choose': { params: { target: MidiTarget; mode: MidiMode }; result: MidiState };
+    'midi.choose': { params: { target: MidiTarget; mode: MidiMode; led?: number | null }; result: MidiState };
+    /** Adds the mappings of a profile at once; mappings with the same messages are replaced (unsaved change) */
+    'midi.addMappings': { params: { mappings: Array<Omit<MidiMapping, 'id'>> }; result: ShowMidi };
     /** Changes how a control change mapping reads its level: absolute or relative encoder (unsaved change) */
     'midi.updateMapping': { params: { id: string; encoding: MidiEncoding }; result: ShowMidi };
     /** MIDI Show Control on or off and the device identifier of the show (unsaved change) */

@@ -25,7 +25,7 @@ export interface MidiShow {
     mappings(): MidiMapping[];
     msc(): MscSettings;
     /** Adds a mapping learned; the ones with the same message are replaced */
-    learned(input: MidiInputKey, target: MidiTarget, mode: MidiMode): void;
+    learned(input: MidiInputKey, target: MidiTarget, mode: MidiMode, led: number | null): void;
 }
 
 /** Listeners of the engine */
@@ -49,6 +49,9 @@ interface Pickup {
 function encoderSteps(encoding: MidiMapping['encoding'], raw: number): number {
     if (encoding === 'relative2c') {
         return raw < 64 ? raw : raw - 128;
+    }
+    if (encoding === 'signMagnitude') {
+        return raw < 64 ? raw : -(raw - 64);
     }
     return raw - 64;
 }
@@ -95,9 +98,9 @@ export class MidiEngine {
     }
 
     /** Control chosen in learn mode: the next message is tied to it */
-    choose(target: MidiTarget, mode: MidiMode): void {
+    choose(target: MidiTarget, mode: MidiMode, led: number | null = null): void {
         if (this.learn) {
-            this.pending = { target, mode };
+            this.pending = { target, mode, led };
             this.announce();
         }
     }
@@ -134,7 +137,7 @@ export class MidiEngine {
         if (this.learn) {
             // A key is learned when pressed, not when released
             if (this.pending !== null && (event.pressed || event.kind === 'pitch' || event.kind === 'cc')) {
-                this.show.learned(input, this.pending.target, this.pending.mode);
+                this.show.learned(input, this.pending.target, this.pending.mode, this.pending.led);
                 this.pickups.clear();
                 this.pending = null;
                 this.announce();

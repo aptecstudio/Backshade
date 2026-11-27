@@ -35,11 +35,12 @@ export type MidiMode = 'button' | 'level';
 
 /**
  * How a control change carries a level: absolute (0 to 127), or relative
- * for endless encoders: two's complement (1 to 63 up, 127 down to 65 down)
- * or offset 64 (65 and more up, 63 and less down)
+ * for endless encoders: two's complement (1 to 63 up, 127 down to 65 down),
+ * offset 64 (65 and more up, 63 and less down) or sign and magnitude (1 to
+ * 63 up, 65 to 127 down, as the V-Pots of Mackie Control)
  */
-export type MidiEncoding = 'absolute' | 'relative2c' | 'relative64';
-export const MIDI_ENCODINGS: readonly MidiEncoding[] = ['absolute', 'relative2c', 'relative64'];
+export type MidiEncoding = 'absolute' | 'relative2c' | 'relative64' | 'signMagnitude';
+export const MIDI_ENCODINGS: readonly MidiEncoding[] = ['absolute', 'relative2c', 'relative64', 'signMagnitude'];
 
 /** Mapping of a message to a target */
 export interface MidiMapping {
@@ -49,6 +50,8 @@ export interface MidiMapping {
     mode: MidiMode;
     /** Level mappings on control changes: absolute or relative encoder; missing in older files */
     encoding: MidiEncoding;
+    /** Value sent to light the LED of a key (its color on some controllers), null for 127; missing in older files */
+    led: number | null;
 }
 
 /** MIDI Show Control received from a show controller: Go, Stop, Resume and Reset act on the cue list */
@@ -97,8 +100,8 @@ export interface MidiDevice {
 export interface MidiState {
     /** MIDI learn: touching a control and moving a controller ties them */
     learn: boolean;
-    /** Control chosen in learn mode, waiting for a message */
-    pending: { target: MidiTarget; mode: MidiMode } | null;
+    /** Control chosen in learn mode, waiting for a message, with the LED value of a profile */
+    pending: { target: MidiTarget; mode: MidiMode; led: number | null } | null;
     devices: MidiDevice[];
 }
 
@@ -152,7 +155,8 @@ export function normalizeMidi(value: unknown): ShowMidi {
         }
         ids.add(entry.id);
         const encoding = key.kind === 'cc' && MIDI_ENCODINGS.includes(entry.encoding as MidiEncoding) ? entry.encoding as MidiEncoding : 'absolute';
-        mappings.push({ id: entry.id, input: key, target, mode: entry.mode === 'level' ? 'level' : 'button', encoding });
+        const led = typeof entry.led === 'number' && Number.isInteger(entry.led) && entry.led >= 1 && entry.led <= 127 ? entry.led : null;
+        mappings.push({ id: entry.id, input: key, target, mode: entry.mode === 'level' ? 'level' : 'button', encoding, led });
     }
     const msc = (typeof (input as { msc?: unknown }).msc === 'object' && (input as { msc?: unknown }).msc !== null ? (input as { msc: Record<string, unknown> }).msc : {}) as Record<string, unknown>;
     const deviceId = typeof msc.deviceId === 'number' && Number.isInteger(msc.deviceId) && msc.deviceId >= 0 && msc.deviceId <= 111 ? msc.deviceId : 1;

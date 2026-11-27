@@ -7,7 +7,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import { MAX_MIDI_MAPPINGS, MIDI_ENCODINGS, normalizeTarget, sameInput, type MidiMonitorEntry, type ShowMidi } from '../../shared/midi/midi';
+import { MAX_MIDI_MAPPINGS, MIDI_ENCODINGS, normalizeMidi, normalizeTarget, sameInput, type MidiMonitorEntry, type ShowMidi } from '../../shared/midi/midi';
 import { MidiActions } from '../midi/midi-actions';
 import { MidiEngine } from '../midi/midi-engine';
 import { MidiFeedback } from '../midi/midi-feedback';
@@ -64,7 +64,7 @@ export function registerMidiService(router: RequestRouter, bus: EventBus, sessio
     const engine = new MidiEngine(actions, {
         mappings: () => midiOf().mappings,
         msc: () => midiOf().msc,
-        learned: (input, target, mode) => {
+        learned: (input, target, mode, led) => {
             if (session.summary() === null) {
                 return;
             }
@@ -73,7 +73,7 @@ export function registerMidiService(router: RequestRouter, bus: EventBus, sessio
             if (others.length >= MAX_MIDI_MAPPINGS) {
                 return;
             }
-            session.setMidi({ ...midi, mappings: [...others, { id: randomUUID(), input, target, mode, encoding: 'absolute' }] });
+            session.setMidi({ ...midi, mappings: [...others, { id: randomUUID(), input, target, mode, encoding: 'absolute', led }] });
         }
     }, {
         state: (state) => {
@@ -138,8 +138,22 @@ export function registerMidiService(router: RequestRouter, bus: EventBus, sessio
         if (target === null) {
             throw new EngineError('invalid-params', 'Invalid target');
         }
-        engine.choose(target, requireChoice(input, 'mode', ['button', 'level'] as const));
+        const led = typeof input.led === 'number' && Number.isInteger(input.led) && input.led >= 1 && input.led <= 127 ? input.led : null;
+        engine.choose(target, requireChoice(input, 'mode', ['button', 'level'] as const), led);
         return engine.state();
+    });
+
+    // Mappings of a profile made at once (Mackie Control): the ones with the same messages are replaced
+    router.register('midi.addMappings', (params) => {
+        const list = requireObject(params).mappings;
+        if (!Array.isArray(list)) {
+            throw new EngineError('invalid-params', 'Invalid mappings');
+        }
+        const added = normalizeMidi({ mappings: list.map((item: unknown) => ({ ...(item as object), id: randomUUID() })) }).mappings;
+        return change((midi) => ({
+            ...midi,
+            mappings: [...midi.mappings.filter((mapping) => !added.some((item) => sameInput(item.input, mapping.input))), ...added].slice(0, MAX_MIDI_MAPPINGS)
+        }));
     });
 
     router.register('midi.updateMapping', (params) => {
