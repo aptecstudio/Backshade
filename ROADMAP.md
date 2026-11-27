@@ -71,7 +71,7 @@ Development order: the first block is 2.1, 2.2, 2.5, 2.8, 2.9.1 to 2.9.3 and 2.9
   - [x] 2.10.1 Operators saved in the show, PIN kept as a salted hash; the creator of the protection is an administrator, more administrators allowed
   - [x] 2.10.2 Access per working section: hidden, read only (see and play) or editable; checked by the engine before every method
   - [x] 2.10.3 PIN keypad when a show with operators opens, on every workstation; operator key in the top bar to change operator
-  - [ ] 2.10.4 Read-only sections disable their editing controls (today the engine refuses the change and a notice marks the section)
+  - [x] 2.10.4 Read-only sections disable their editing controls (the engine still refuses the change, the notice stays)
 - [x] 2.11 Import from another show (see `MEMORY.md`, Import from another show)
   - [x] 2.11.1 Dialog in the show settings: source among the recent shows or from a folder; categories (scenes, chasers, fixtures, audio, video, images, operators) and single items with toggles
   - [x] 2.11.2 Dependencies imported with the items that need them (chaser -> scenes -> fixtures, matrices, audio, video, media)

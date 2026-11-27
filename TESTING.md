@@ -143,6 +143,8 @@ How to use it:
 - [ ] Show settings available only to administrators.
 - [ ] A protected show moved to another computer keeps its operators; templates and new shows never carry operators.
 
+- [ ] An operator with read-only sections sees their editing controls dimmed and cannot use them (mouse, touch and keyboard), while faders, memory keys, cues, transport, Go and Take still work; the timeline cannot be recorded.
+
 ## 13. Import from another show
 
 - [ ] Import dialog: source among the recent shows and from a folder; categories and single items with toggles.
