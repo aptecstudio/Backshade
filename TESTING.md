@@ -120,6 +120,9 @@ How to use it:
 - [ ] Clips: move (also to another track), resize, fades, snap (bars, beats, seconds, frames), selection, duplicate, split, undo and redo.
 - [ ] Playback with loop; the timecode display of the top bar follows the playhead.
 - [ ] Lights, audio and video stay in sync during a whole song and over a long run.
+- [ ] Audio clips show the waveform of the part of the file they play, also after trimming the start; long files (10 minutes and more) load without freezing the window.
+- [ ] Markers: added with the Marker key, the M key and a double click on the ruler; moved by dragging with snap; a press moves the playhead to them; renamed, moved and deleted from their dialog; undo and redo.
+- [ ] In go mode playback pauses exactly on a stop marker and Play continues from there.
 
 ## 11. Drag and drop
 

@@ -147,7 +147,7 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [x] 8.1 DAW-style track editor: ruler, zoom, scrolling, playhead; several timelines per show; tracks added, removed, moved, grouped in folders, muted, with their height
 - [x] 8.2 Light tracks (scenes, chasers), audio tracks with their output, video tracks (videos, images, gobos, timers) on an output layer, automation tracks (masters, groups, scenes)
 - [x] 8.3 Clips: move (also to another track), resize, fades, snap to grid (bars, beats, seconds, frames), selection, duplicate, split, undo and redo
-- [ ] 8.4 Audio waveform and markers
+- [x] 8.4 Audio waveform and markers
 - [x] 8.5 Shared clock and synchronized playback, with loop; the timecode display of the top bar follows it
 - [ ] 8.6 Cue list and go mode (manual advance)
 
