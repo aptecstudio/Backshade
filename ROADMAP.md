@@ -258,7 +258,7 @@ Mapping of the video outputs on real surfaces: screens, projection surfaces, sce
 Several Backshade machines work on the same show at the same time, communicating in real time and staying in sync. It extends the transport of the remote web interface (Phase 10) and depends on the shared clock (Phase 8.5). Architecture: one master and several nodes (see `MEMORY.md`, Multi-device), with two working modes that can be combined:
 
 - **Master-slave:** the slaves follow the master entirely (state and playback), as additional operator positions or as a backup ready to take over.
-- **Distributed hardware:** the machines are synchronized and each one is dedicated to a specific task, driving only the part of the hardware connected to it (for example DMX interfaces on one machine, video outputs on another, audio interfaces on a third).
+- **Distributed hardware:** the machines are synchronized and each one is dedicated to a specific task, driving only the part of the hardware connected to it (for example DMX interfaces on one machine, video outputs on another, audio interfaces on a third). Each machine manages only the hardware physically connected to it, never the hardware of another machine (decided by the human on 2026-11-27).
 
 - [ ] 15.1 Session: a machine starts as master and opens the show; other machines join as nodes on the local network
 - [ ] 15.2 Discovery of masters on the network (UDP broadcast through `dgram`) and manual connection by address
@@ -278,11 +278,11 @@ Several Backshade machines work on the same show at the same time, communicating
   - [ ] 15.13.3 Slave as backup (tracking backup): it runs the show in parallel with its outputs disabled and takes over on request or when the master stops (extends 15.11)
 - [ ] 15.14 Distributed hardware mode:
   - [ ] 15.14.1 Stable machine identity (identifier and name), kept across sessions and restarts
-  - [ ] 15.14.2 Hardware map saved in the show: every output and input device (DMX interfaces and Art-Net universes, video outputs and displays, audio devices, MIDI controllers, timecode inputs) is assigned to a machine
-  - [ ] 15.14.3 Each machine drives only the hardware assigned to it; the others never touch it
+  - [ ] 15.14.2 Hardware map saved in the show: every output and input device (DMX interfaces and Art-Net universes, video outputs and displays, audio devices, MIDI controllers, timecode inputs) is recorded with the machine it is physically connected to, as that machine reports it
+  - [ ] 15.14.3 Each machine drives only the hardware physically connected to it; no machine drives or relays the hardware of another machine
   - [ ] 15.14.4 Inputs connected to any machine (MIDI controllers, timecode, touch screens) are forwarded to the master and act on the whole show
   - [ ] 15.14.5 Synchronized start of cues, timeline, audio and video on all machines (clock of 15.6), with a check of the residual offset
-  - [ ] 15.14.6 Hardware map editor: list of the machines with their detected devices, assignment by drag or selection, warnings for devices missing on the assigned machine
+  - [ ] 15.14.6 Hardware map editor: list of the machines with their connected devices, choice of which outputs of the show (universes, video outputs, audio outputs) each machine drives with its own devices, warnings for devices missing on their machine
   - [ ] 15.14.7 Failure of a machine: alert and quick reassignment of its hardware to another machine where the same devices are available
 
 ## Phase 16 - Touch and external controllers
@@ -290,13 +290,13 @@ Several Backshade machines work on the same show at the same time, communicating
 Requirements that apply to the whole interface: every new component is designed to work with touch screens and to be controlled from external MIDI hardware. This phase collects the shared parts; each phase applies them to its own components.
 
 - [ ] 16.1 Touch support in every component:
-  - [ ] 16.1.1 Pointer events only (mouse, pen, touch with the same code), no functions available only on hover
-  - [ ] 16.1.2 Hit areas of at least 48 px also for small controls (square keys, knobs), with the visual size unchanged
-  - [ ] 16.1.3 Multi-touch: several faders, knobs and keys moved or pressed at the same time
-  - [ ] 16.1.4 No accidental scrolling or zooming while a control is dragged; long press instead of right click
-  - [ ] 16.1.5 Gestures where useful: pinch zoom and two-finger pan in the timeline, the 3D stage and the mapping editor
-  - [ ] 16.1.6 Touch mode with larger controls, chosen per device
-- [ ] 16.2 MIDI layer shared by the whole application (Web MIDI API, permission granted by the main process):
+  - [x] 16.1.1 Pointer events only (mouse, pen, touch with the same code), no functions available only on hover
+  - [x] 16.1.2 Hit areas of at least 48 px also for small controls (square keys, knobs), with the visual size unchanged
+  - [x] 16.1.3 Multi-touch: several faders, knobs and keys moved or pressed at the same time
+  - [x] 16.1.4 No accidental scrolling or zooming while a control is dragged; long press instead of right click
+  - [ ] 16.1.5 Gestures where useful: pinch zoom and two-finger pan in the timeline, the 3D stage and the mapping editor (timeline done; the 3D stage and the mapping editor get them with Phases 13 and 14)
+  - [x] 16.1.6 Touch mode with larger controls, chosen per device
+- [x] 16.2 MIDI layer shared by the whole application (Web MIDI API, permission granted by the main process):
   - [x] 16.2.1 Detection of MIDI devices and hot plug, with status in the interface
   - [x] 16.2.2 MIDI learn on any control: faders, knobs, keys, go and back, scenes, chasers, cues, grid widgets (MIDI key of the top bar with a long press, decided by the human on 2026-11-27)
   - [x] 16.2.3 Feedback to the controller: LEDs, motorized faders, displays, rings of the encoders (displays of Mackie Control left out: no verified source of their messages yet)

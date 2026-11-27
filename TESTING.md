@@ -189,3 +189,11 @@ How to use it:
 - [ ] Mackie Control profile with a real surface (X-Touch, X-Touch One, iCON): faders, motorized feedback, V-Pots, Select, Mute, Solo and transport do what the MIDI panel says.
 - [ ] MIDI timecode from a DAW or a timecode generator at 25 and 30 fps: the timeline starts, follows, locates after a jump of the DAW and pauses when it stops; the start timecode works with 01:00:00:00.
 
+## 16. Touch screens
+
+- [ ] On a touch screen the automatic touch mode turns on; keys, fields and rows are easy to hit; it can be forced on or off per device.
+- [ ] Several faders and keys moved and pressed together with several fingers (console, grid).
+- [ ] Long press in the timeline: opens a clip, adds a clip, opens or adds a marker, removes an automation point; the system menu never appears.
+- [ ] Pinch zoom in the timeline follows the fingers and lands on the right point; scrolling with one or two fingers works; the page never zooms.
+- [ ] Small square keys and knobs can be hit with a finger also slightly outside their drawing.
+

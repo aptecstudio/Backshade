@@ -745,6 +745,7 @@ Requested by the human on 2026-11-23 (Phase 15): several machines work on the sa
 - **Two working modes** (requested by the human on 2026-11-23), which can be combined in the same session:
   - **master-slave:** the slaves mirror the master (state and playback); a slave can be an additional operator position or a tracking backup that runs in parallel with its outputs disabled and takes over when needed;
   - **distributed hardware:** the machines are synchronized and each one is dedicated to a task, driving only the hardware connected to it. The show stores a **hardware map** that assigns every output and input device (DMX interfaces and Art-Net universes, video outputs and displays, audio devices, MIDI controllers, timecode inputs) to a machine, identified by a stable machine identifier. Inputs on any machine are forwarded to the master. If a machine fails, its hardware can be reassigned to another machine with the same devices.
+- **Only local hardware** (decided by the human on 2026-11-27, replacing the first idea that a machine could also drive hardware connected to other machines through their instances): every machine drives only the hardware physically connected to it (its DMX and USB interfaces, the Art-Net of its own network interface, its displays and video inputs, its audio devices, its MIDI ports and timecode inputs). No machine drives, or relays to, hardware connected to another machine. The hardware map of the show therefore records, for each device, the machine it is connected to, as reported by that machine; it is not a free assignment. A failed machine's devices can only be taken over by another machine where the same devices are physically connected. (Confirmed)
 - Each node drives its own outputs locally from the replicated state; frames are never streamed over the network, only state changes and clock data.
 - Transport: WebSocket, with the same protocol as IPC and the remote web interface (see Architecture); the server-side WebSocket choice is the one still to be evaluated in Dependencies.
 - Discovery: UDP broadcast through Node.js `dgram`, plus manual connection by address.
@@ -763,6 +764,17 @@ Requested by the human on 2026-11-23 (Phase 16). These are requirements for **ev
 - OSC control surfaces use the OSC layer of Phase 9.2; HID devices such as Stream Deck need a native dependency and are to be evaluated.
 
 Status: Confirmed (requirements), Proposed (details).
+
+### Touch (16.1)
+
+Built on 2026-11-27.
+
+- **Pointer events only:** checked in the whole interface: no mouse events, no right click, hover only changes looks. Drags follow each pointer with its own capture, so several faders, knobs and keys work together with multi-touch.
+- **Hit areas:** square keys and knobs have an invisible area of at least 48 px around them (`::before` of the square key, `knob__hit`), with the look unchanged; automation points have an invisible circle of 16 px radius. (Proposed)
+- **Long press** (framework `onLongPress`, 500 ms, 8 px of tolerance): the touch replacement of the double click and of the right click. In the timeline it opens a clip, adds a clip on an empty lane, opens a marker, adds a marker on the ruler and removes an automation point. The system menu of a long press is never shown on these controls. (Proposed)
+- **Pinch in the timeline:** two fingers zoom the time around the point between them; while they move the lanes are only stretched with a transform (rebuilding them would lose the touch, whose target must stay in the page), the zoom is applied when they lift. One and two fingers scroll the editor natively; the page itself never zooms (`touch-action: pan-x pan-y`). (Proposed)
+- **Touch mode** (`src/renderer/preferences/touch-mode.ts`, Application settings): automatic (on when the main pointer is a finger, `pointer: coarse`), always or never, saved per device (`backshade.touchMode`) and applied to every window at once with the class `touch-mode` of the document (framework `base/_touch.scss`): keys 64 px high (large keys 80 px), square keys 40 px, fields 48 px, list rows 64 px, clip edges and fade handles of the timeline 16 px. (Proposed sizes)
+- **Tests:** touch is tested with the touch emulation of Chromium; the automatic touch mode turns on under emulation and moves the layout, so coordinates must be read with the emulation on.
 
 ### MIDI layer: input (16.2a)
 
