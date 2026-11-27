@@ -749,7 +749,14 @@
       "markerStop": "In modalità Go",
       "markerPass": "Prosegui",
       "markerPause": "Pausa qui",
-      "deleteMarker": "Elimina il marker"
+      "deleteMarker": "Elimina il marker",
+      "markers": "Marker",
+      "nextStop": "Prossimo stop",
+      "noStop": "Nessuno",
+      "noMarkers": "Nessun marker: aggiungili con il tasto Marker, il tasto M o un doppio clic sul righello.",
+      "locateMarker": "Vai al marker {name}",
+      "editMarker": "Modifica il marker {name}",
+      "stop": "Stop"
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

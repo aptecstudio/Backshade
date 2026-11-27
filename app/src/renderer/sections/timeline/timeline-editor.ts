@@ -231,7 +231,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         ruler.onMoveMarker(({ id, time }) => this.session.edit((next) => {
             next.markers = next.markers.map((marker) => marker.id === id ? { ...marker, time } : marker).sort((a, b) => a.time - b.time);
         }));
-        ruler.onOpenMarker((id) => void this.editMarker(id));
+        ruler.onOpenMarker((id) => void this.openMarker(id));
         ruler.mount(rulerRow);
         this.views.push(ruler);
         this.inner.append(rulerRow);
@@ -334,7 +334,8 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         });
     }
 
-    private async editMarker(id: string): Promise<void> {
+    /** Opens the dialog of a marker */
+    async openMarker(id: string): Promise<void> {
         const marker = this.session.timeline.markers.find((item) => item.id === id);
         if (marker === undefined) {
             return;

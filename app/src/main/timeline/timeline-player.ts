@@ -4,7 +4,8 @@
  * tick the light clips set the level of their scene or chaser, the audio
  * clips play on their tracks, the video clips take their layer, and the
  * automation curves set masters, groups and scenes. Loop, go mode (pause
- * at the stop markers) and the end of the timeline are handled here.
+ * at the stop markers, Go and Back between markers) and the end of the
+ * timeline are handled here.
  */
 
 import { clipLevel, curveValue, type Clip, type ShowTimelines, type Timeline, type TimelineState, type Track } from '../../shared/timeline/timeline';
@@ -32,6 +33,8 @@ export interface TimelinePlayerContext {
 }
 
 const TICK_MS = 25;
+// While playing, Back goes to the marker before the one just passed within this time
+const BACK_GRACE = 1;
 
 export class TimelinePlayer {
     private readonly context: TimelinePlayerContext;
@@ -120,6 +123,29 @@ export class TimelinePlayer {
         this.stopTimer();
         this.context.audio.stopAll();
         this.announce();
+    }
+
+    /**
+     * Go: playback continues (in go mode up to the next stop marker).
+     * Pressed while playing it does nothing, so a double press never skips
+     * a part of the show.
+     */
+    go(): void {
+        this.play();
+    }
+
+    /**
+     * Back: the playhead goes to the previous marker (to the start when
+     * there is none), playing or paused as it was.
+     */
+    back(): void {
+        const timeline = this.current();
+        if (timeline === null) {
+            return;
+        }
+        const before = this.position() - (this.playing ? BACK_GRACE : 0.001);
+        const previous = timeline.markers.filter((marker) => marker.time < before).pop();
+        this.locate(previous?.time ?? 0);
     }
 
     toggle(): void {

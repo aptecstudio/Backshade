@@ -749,7 +749,14 @@
       "markerStop": "In go mode",
       "markerPass": "Play through",
       "markerPause": "Pause here",
-      "deleteMarker": "Delete the marker"
+      "deleteMarker": "Delete the marker",
+      "markers": "Markers",
+      "nextStop": "Next stop",
+      "noStop": "None",
+      "noMarkers": "No markers: add them with the Marker key, the M key or a double click on the ruler.",
+      "locateMarker": "Go to the marker {name}",
+      "editMarker": "Change the marker {name}",
+      "stop": "Stop"
     },
     "fixtures": {
       "libraryTitle": "Fixture library",

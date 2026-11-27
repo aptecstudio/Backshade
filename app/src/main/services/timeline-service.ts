@@ -21,7 +21,7 @@ import type { RequestRouter } from '../transport/request-router';
 import type { VideoEngine } from '../video/video-engine';
 import type { GroupLevelSetter } from './group-service';
 
-const ACTIONS = ['play', 'pause', 'toggle', 'stop', 'locate'] as const;
+const ACTIONS = ['play', 'pause', 'toggle', 'stop', 'locate', 'go', 'back'] as const;
 
 /** Parts of the engine played by the timelines */
 export interface TimelineTargets {
@@ -132,6 +132,8 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
             case 'toggle': player.toggle(); break;
             case 'stop': player.stop(); break;
             case 'locate': player.locate(requireNumber(input, 'time')); break;
+            case 'go': player.go(); break;
+            case 'back': player.back(); break;
         }
         return player.state();
     });

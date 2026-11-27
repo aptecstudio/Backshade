@@ -311,3 +311,70 @@
 .clip-dialog__slider .slider {
     width: space(8) * 3;
 }
+
+// Editor and markers panel side by side
+.timeline-section__body {
+    align-items: stretch;
+}
+
+.timeline-section__editor {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.marker-panel {
+    flex: 0 0 space(8) * 4;
+    min-width: 0;
+}
+
+.marker-panel__go,
+.marker-panel__back {
+    width: 100%;
+}
+
+.marker-panel__list {
+    max-height: space(8) * 4;
+    overflow-y: auto;
+}
+
+.marker-row {
+    border-bottom: 1px solid color('panel-border');
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+// Row of a marker: name above, time and stop below; the next stop has the armed bar
+.marker-row__item {
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: space(1);
+    min-width: 0;
+    border-left: 2px solid transparent;
+    text-align: left;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    > .label:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+.marker-row--next .marker-row__item {
+    border-left-color: color('armed');
+}
+
+.marker-row--current .marker-row__item .label {
+    color: color('accent');
+}
+
+.marker-row__stop {
+    color: color('armed');
+}

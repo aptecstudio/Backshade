@@ -2,7 +2,8 @@
  * Timeline section: the timelines of the show, as in an audio workstation.
  * On top the choice of the timeline, the transport (start, stop, play,
  * record, loop, go mode), the time, bar and tempo displays, the snap and the
- * zoom; below the editor of the tracks. Space plays or pauses, Delete
+ * zoom; below the editor of the tracks and, beside it, the markers panel
+ * with Go, Back and the list of the markers. Space plays or pauses, Delete
  * removes the selected clips, Ctrl+Z and Ctrl+Shift+Z undo and redo,
  * Ctrl+D duplicates, S splits at the playhead, M adds a marker at the
  * playhead, Home goes to the start.
@@ -14,6 +15,7 @@ import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { EMPTY_CONTEXT, type EditorContext } from './editor-context.js';
+import { MarkerPanel } from './marker-panel.js';
 import { TimelineEditor } from './timeline-editor.js';
 import { openTimelineDialog } from './timeline-dialog.js';
 import { TimelineSession } from './timeline-session.js';
@@ -34,6 +36,8 @@ export class TimelineSection extends Stack {
     private readonly empty: Label;
     private readonly info: Label;
     private readonly holder = new Stack({ classes: ['timeline-section__editor'] });
+    private readonly markerPanel = new MarkerPanel();
+    private readonly body: Stack;
     private session: TimelineSession | null = null;
     private editor: TimelineEditor | null = null;
     private timelines: Timeline[] = [];
@@ -102,7 +106,16 @@ export class TimelineSection extends Stack {
             new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.chooser, this.settings, create, this.addTrack, undo, redo, new Spacer(), zoomOut, zoomIn, this.snap] }),
             new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [start, stop, this.play, this.record, this.loopKey, this.goKey, marker, new Spacer(), this.time, this.bar, this.bpm] })
         );
-        this.append(header, this.empty, this.holder, this.info);
+        this.markerPanel.onAction((action) => {
+            switch (action.kind) {
+                case 'go': this.transport('go'); break;
+                case 'back': this.transport('back'); break;
+                case 'locate': this.transport('locate', action.time); break;
+                case 'open': void this.editor?.openMarker(action.id); break;
+            }
+        });
+        this.body = new Stack({ direction: 'row', gap: 2, classes: ['timeline-section__body'], children: [this.holder, this.markerPanel] });
+        this.append(header, this.empty, this.body, this.info);
 
         this.track(engine().on('timeline.changed', () => void this.load()));
         this.track(engine().on('timeline.stateChanged', ({ state }) => this.applyState(state)));
@@ -128,6 +141,7 @@ export class TimelineSection extends Stack {
             ]);
             this.context = { memories, groups, media, video, devices, fps: frameRate(settings.timecodeRate) };
             this.editor?.setContext(this.context);
+            this.showMarkers();
         } catch (error) {
             await showError(error);
         }
@@ -156,6 +170,7 @@ export class TimelineSection extends Stack {
         this.settings.element.hidden = timeline === null;
         this.addTrack.setDisabled(timeline === null);
         this.empty.element.hidden = timeline !== null;
+        this.body.element.hidden = timeline === null;
         if (timeline === null) {
             this.editor?.destroy();
             this.editor = null;
@@ -168,13 +183,17 @@ export class TimelineSection extends Stack {
             this.session = new TimelineSession(timeline);
             this.editor = new TimelineEditor(this.session, this.context, () => snapStep(this.snap.value, this.session?.timeline ?? timeline, this.context.fps));
             this.editor.onLocate((time) => this.transport('locate', time));
-            this.track(this.session.onChange(() => this.showInfo()));
+            this.track(this.session.onChange(() => {
+                this.showInfo();
+                this.showMarkers();
+            }));
             this.holder.append(this.editor);
         } else {
             this.session.replace(timeline);
         }
         this.editor?.setLoop(this.state.loop);
         this.showInfo();
+        this.showMarkers();
         this.applyState(this.state);
     }
 
@@ -186,6 +205,12 @@ export class TimelineSection extends Stack {
         const bars = Math.ceil(timeline.length / ((60 / timeline.bpm) * timeline.beatsPerBar));
         this.info.setText(t('timeline.info', { bars, length: timecode(timeline.length, this.context.fps).slice(0, 8) }));
         this.bpm.setText(timeline.bpm.toFixed(1));
+    }
+
+    private showMarkers(): void {
+        if (this.session !== null) {
+            this.markerPanel.setTimeline(this.session.timeline, this.context.fps);
+        }
     }
 
     private applyState(state: TimelineState): void {
@@ -219,13 +244,14 @@ export class TimelineSection extends Stack {
                 this.editor?.setPlayhead(position, this.state.playing);
                 this.time.setText(timecode(position, this.context.fps));
                 this.bar.setText(barPosition(timeline, position));
+                this.markerPanel.setPosition(position);
             }
             this.frame = requestAnimationFrame(frame);
         };
         this.frame = requestAnimationFrame(frame);
     }
 
-    private transport(action: 'play' | 'pause' | 'toggle' | 'stop' | 'locate', time?: number): void {
+    private transport(action: 'play' | 'pause' | 'toggle' | 'stop' | 'locate' | 'go' | 'back', time?: number): void {
         void engine().request('timeline.transport', { action, ...(time === undefined ? {} : { time }) }).then((state) => this.applyState(state)).catch(showError);
     }
 

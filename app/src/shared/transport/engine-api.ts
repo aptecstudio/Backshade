@@ -529,8 +529,8 @@ export interface EngineMethods {
     'timeline.delete': { params: { id: string }; result: ShowTimelines };
     /** Loads a timeline in the player, stopped at its start */
     'timeline.load': { params: { id: string }; result: TimelineState };
-    /** Play, pause, play or pause, stop, or move the playhead to a time in seconds */
-    'timeline.transport': { params: { action: 'play' | 'pause' | 'toggle' | 'stop' | 'locate'; time?: number }; result: TimelineState };
+    /** Play, pause, play or pause, stop, move the playhead to a time in seconds, Go (play to the next stop marker) or Back (previous marker) */
+    'timeline.transport': { params: { action: 'play' | 'pause' | 'toggle' | 'stop' | 'locate' | 'go' | 'back'; time?: number }; result: TimelineState };
     /** Loop (null to turn it off), go mode and recording */
     'timeline.setOptions': { params: { loop?: { start: number; end: number } | null; goMode?: boolean; recording?: boolean }; result: TimelineState };
     /** Pages of the virtual console of the open show */
