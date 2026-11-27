@@ -157,7 +157,13 @@
       "operatorInUse": "Non puoi eliminare l'operatore con cui sei entrato.",
       "operatorNotFound": "L'operatore non esiste più.",
       "sameShow": "Scegli uno show diverso da quello aperto.",
-      "sourcePinRequired": "Lo show sorgente è protetto: serve il PIN di un suo amministratore."
+      "sourcePinRequired": "Lo show sorgente è protetto: serve il PIN di un suo amministratore.",
+      "fileNotFound": "File o cartella non trovati.",
+      "fileNotAllowed": "Si possono usare solo la cartella home e i dischi esterni.",
+      "fileProtected": "È protetto: le posizioni, i dati dell'applicazione e lo show aperto (tranne i suoi media) non si possono modificare.",
+      "fileExists": "Esiste già un file o una cartella con questo nome.",
+      "copyIntoItself": "Una cartella non può essere copiata o spostata dentro sé stessa.",
+      "trashFailed": "Il sistema non è riuscito a spostarlo nel cestino."
     },
     "settings": {
       "language": "Lingua",
@@ -1387,6 +1393,39 @@
       "mtcDevice": "Porta",
       "mtcAny": "Qualsiasi porta",
       "mtcStart": "Inizio (HH:MM:SS:FF)"
+    },
+    "files": {
+      "home": "Home",
+      "up": "Cartella superiore",
+      "name": "Nome",
+      "newFolder": "Nuova cartella",
+      "newFolderName": "Nuova cartella",
+      "rename": "Rinomina",
+      "copy": "Copia",
+      "cut": "Taglia",
+      "paste": "Incolla",
+      "trash": "Sposta nel cestino",
+      "delete": "Elimina",
+      "select": "Seleziona {name}",
+      "emptyFolder": "Questa cartella è vuota.",
+      "chooseFolder": "Scegli questa cartella",
+      "openShow": "Apri show",
+      "choose": "Scegli",
+      "replace": "Sostituisci",
+      "overwrite": "\"{name}\" esiste già: sostituirlo?",
+      "deleteOne": "Eliminare \"{name}\" definitivamente? Non si potrà recuperare.",
+      "deleteMany": "Eliminare {count} elementi definitivamente? Non si potranno recuperare.",
+      "kinds": {
+        "folder": "Cartella",
+        "show": "Show",
+        "audio": "Audio",
+        "video": "Video",
+        "image": "Immagine",
+        "showArchive": "Archivio show",
+        "templateArchive": "Archivio modello",
+        "document": "Documento",
+        "other": "File"
+      }
     }
   }
 }

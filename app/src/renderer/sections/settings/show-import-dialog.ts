@@ -22,6 +22,7 @@ import { errorMessage, showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { currentShow } from '../../show/show-store.js';
 import { EngineRequestError } from '../../transport/engine-client.js';
+import { pickShow } from '../../files/file-dialogs.js';
 import { engine } from '../../transport/engine.js';
 
 /** Controls of an item row */
@@ -90,7 +91,7 @@ export function openShowImportDialog(): void {
             return key;
         });
         const browse = new Key({ label: t('showImport.chooseFolder'), icon: 'folder-search' });
-        browse.onPress(() => void engine().request('dialog.chooseFolder', {}).then((path) => {
+        browse.onPress(() => void pickShow(t('showImport.chooseFolder')).then((path) => {
             if (path !== null) {
                 choose(path);
             }

@@ -1,0 +1,89 @@
+// Internal file manager: places on the left, path and entries on the right
+@use 'framework/scss/tokens' as *;
+
+.file-dialog .dialog__body {
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+
+.file-browser {
+    flex: 1 1 auto;
+    flex-direction: row;
+    min-height: 0;
+}
+
+.file-browser__places {
+    flex: 0 0 space(8) * 3;
+    overflow-y: auto;
+}
+
+.file-browser__main {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    // Room for the focus ring of the keys
+    padding: space(1);
+}
+
+// Long paths wrap instead of widening the window
+.file-browser__main > .label {
+    overflow-wrap: anywhere;
+}
+
+.file-browser__list {
+    flex: 1 1 auto;
+    min-height: space(8) * 3;
+    overflow-y: auto;
+    border: 1px solid color('panel-border');
+    border-radius: $radius-panel;
+}
+
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: space(1);
+    padding: 0 space(1);
+
+    .list-item {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+}
+
+.file-row__text {
+    min-width: 0;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+// Narrow windows: places and toolbar become rows that scroll sideways, so the entries keep the room
+@media (max-width: 720px) {
+    .file-dialog .file-browser {
+        flex-direction: column;
+    }
+
+    .file-dialog .file-browser__places,
+    .file-dialog .file-browser__toolbar {
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .file-dialog .file-browser__places .list-item {
+        flex: 0 0 auto;
+        width: auto;
+    }
+
+    .file-dialog .file-browser__toolbar {
+        padding: 4px;
+    }
+
+    .file-dialog .file-browser__main {
+        padding: 0;
+    }
+}

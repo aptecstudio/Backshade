@@ -13,7 +13,7 @@ import { missingFixtures } from '../patch/patch-editor';
 import { ARCHIVE_EXTENSIONS, packFolder, unpackArchive } from '../archive/backshade-archive';
 import { readSettings } from '../settings/app-settings';
 import { addRecentShow } from '../shows/recent-shows';
-import { isShowFolder, TRANSIENT_ENTRIES } from '../shows/show-files';
+import { TRANSIENT_ENTRIES } from '../shows/show-files';
 import type { SessionOpenResult, ShowSession } from '../shows/show-session';
 import { findTemplate, TEMPLATE_ONLY_ENTRIES } from '../templates/template-library';
 import { EngineError } from '../transport/engine-error';
@@ -21,8 +21,7 @@ import type { EventBus } from '../transport/event-bus';
 import { optionalBoolean, optionalString, requireObject, requireString } from '../transport/params';
 import { TIMECODE_RATES, type ShowSettings, type TimecodeRate } from '../../shared/show/show-settings';
 import type { RequestRouter } from '../transport/request-router';
-import { requireDesktop } from '../transport/require-desktop';
-import { chooseFile, chooseFolder, chooseSaveFile } from '../window/file-dialogs';
+import { pickedFile, pickedTarget } from '../files/picked-paths';
 
 /**
  * Registers the methods of the service.
@@ -57,20 +56,7 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         return remember(session.open(folder));
     });
 
-    router.register('show.chooseAndOpen', async (_params, context) => {
-        requireDesktop(context);
-        const folder = await chooseFolder(readSettings().defaultShowsFolder);
-        if (folder === null) {
-            return null;
-        }
-        if (!isShowFolder(folder)) {
-            throw new EngineError('show-not-found', `No show in the folder: ${folder}`);
-        }
-        return remember(session.open(folder));
-    });
-
-    router.register('show.export', async (_params, context) => {
-        requireDesktop(context);
+    router.register('show.export', async (params) => {
         const show = session.summary();
         if (show === null) {
             throw new EngineError('no-show', 'No show open');
@@ -78,26 +64,16 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         if (show.dirty) {
             throw new EngineError('unsaved-changes', 'Save the show before exporting it');
         }
-        const target = await chooseSaveFile(
-            [{ name: 'Backshade show', extensions: [ARCHIVE_EXTENSIONS.show] }],
-            path.join(readSettings().defaultShowsFolder, `${show.name}.${ARCHIVE_EXTENSIONS.show}`)
-        );
-        if (target === null) {
-            return null;
-        }
+        const target = pickedTarget(requireString(requireObject(params), 'file'), ARCHIVE_EXTENSIONS.show, session);
         await packFolder(show.folder, target, 'show', show.name, TRANSIENT_ENTRIES);
         return target;
     });
 
-    router.register('show.import', async (_params, context) => {
-        requireDesktop(context);
+    router.register('show.import', async (params) => {
         if (session.dirty) {
             throw new EngineError('unsaved-changes', 'The open show has unsaved changes');
         }
-        const archive = await chooseFile([{ name: 'Backshade show', extensions: [ARCHIVE_EXTENSIONS.show] }]);
-        if (archive === null) {
-            return null;
-        }
+        const archive = pickedFile(requireString(requireObject(params), 'file'), session);
         const folder = await unpackArchive(archive, readSettings().defaultShowsFolder, 'show');
         return remember(session.open(folder));
     });

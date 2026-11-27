@@ -5,19 +5,14 @@
  */
 
 import fs from 'node:fs';
-import path from 'node:path';
-import { app } from 'electron';
 import { validateFixture } from '../../shared/fixtures/validate-fixture';
 import { FIXTURE_FILE_EXTENSION, toSummary, type FixtureLibrary } from '../fixtures/fixture-library';
 import { followDefinition } from '../patch/patch-editor';
 import type { ShowSession } from '../shows/show-session';
 import type { EventBus } from '../transport/event-bus';
-import { optionalString, requireObject, requireString } from '../transport/params';
+import { optionalString, requireObject, requireString, requireStringArray } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
-import { requireDesktop } from '../transport/require-desktop';
-import { chooseFiles, chooseSaveFile } from '../window/file-dialogs';
-
-const FILE_FILTER = { name: 'Backshade fixture', extensions: [FIXTURE_FILE_EXTENSION] };
+import { pickedFile, pickedTarget } from '../files/picked-paths';
 
 /**
  * Registers the methods of the service.
@@ -56,9 +51,8 @@ export function registerFixtureService(router: RequestRouter, bus: EventBus, ses
         return undefined;
     });
 
-    router.register('fixtures.import', async (_params, context) => {
-        requireDesktop(context);
-        const files = await chooseFiles([FILE_FILTER]);
+    router.register('fixtures.import', (params) => {
+        const files = requireStringArray(requireObject(params), 'files').map((file) => pickedFile(file, session));
         if (files.length === 0) {
             return [];
         }
@@ -68,16 +62,10 @@ export function registerFixtureService(router: RequestRouter, bus: EventBus, ses
         return ids;
     });
 
-    router.register('fixtures.export', async (params, context) => {
-        requireDesktop(context);
-        const record = library.require(requireString(requireObject(params), 'id'));
-        const target = await chooseSaveFile(
-            [FILE_FILTER],
-            path.join(app.getPath('documents'), `${record.id.replace('/', '-')}.${FIXTURE_FILE_EXTENSION}`)
-        );
-        if (target === null) {
-            return null;
-        }
+    router.register('fixtures.export', (params) => {
+        const input = requireObject(params);
+        const record = library.require(requireString(input, 'id'));
+        const target = pickedTarget(requireString(input, 'file'), FIXTURE_FILE_EXTENSION, session);
         fs.copyFileSync(record.file, target);
         return target;
     });

@@ -11,6 +11,7 @@ import { showError } from '../../dialogs/show-error.js';
 import { formatSize } from '../../i18n/format-size.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
 import { markEdit } from '../../show/edit-access.js';
+import { browseFiles, pickFiles } from '../../files/file-dialogs.js';
 import { engine } from '../../transport/engine.js';
 
 const KIND_ICONS: Record<MediaKind, IconName> = { audio: 'music', video: 'video', image: 'image' };
@@ -35,7 +36,23 @@ export class MediaSection extends Panel {
 
     private async importMedia(): Promise<void> {
         try {
-            await engine().request('media.import');
+            const files = await pickFiles(t('media.import'), (entry) => entry.kind === 'audio' || entry.kind === 'video' || entry.kind === 'image');
+            if (files.length > 0) {
+                await engine().request('media.import', { files });
+            }
+        } catch (error) {
+            await showError(error);
+        }
+    }
+
+    /** Shows the folder of a media file in the file manager */
+    private async reveal(item: MediaItem): Promise<void> {
+        try {
+            const show = await engine().request('show.getCurrent');
+            if (show !== null) {
+                const inside = item.file.includes('/') ? `/${item.file.slice(0, item.file.lastIndexOf('/'))}` : '';
+                await browseFiles(t('media.reveal'), `${show.folder}/media${inside}`);
+            }
         } catch (error) {
             await showError(error);
         }
@@ -62,7 +79,7 @@ export class MediaSection extends Panel {
     private row(item: MediaItem): Stack {
         const reveal = new Key({ label: t('media.reveal'), icon: 'folder-search', iconOnly: true });
         const remove = new Key({ label: t('media.delete'), icon: 'trash-2', iconOnly: true });
-        reveal.onPress(() => void engine().request('media.reveal', { file: item.file }).catch(showError));
+        reveal.onPress(() => void this.reveal(item));
         remove.onPress(() => void this.remove(item));
         markEdit(remove);
 

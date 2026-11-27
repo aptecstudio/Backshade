@@ -5,11 +5,9 @@
  */
 
 import type { EventBus } from '../transport/event-bus';
-import { optionalString, requireObject } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 import { requireDesktop } from '../transport/require-desktop';
 import * as aboutWindow from '../window/about-window';
-import { chooseFolder } from '../window/file-dialogs';
 import * as mainWindow from '../window/main-window';
 
 /**
@@ -32,12 +30,6 @@ export function registerWindowService(router: RequestRouter, bus: EventBus): voi
         requireDesktop(context);
         aboutWindow.open();
         return undefined;
-    });
-
-    router.register('dialog.chooseFolder', async (params, context) => {
-        requireDesktop(context);
-        const defaultPath = params === undefined ? undefined : optionalString(requireObject(params), 'defaultPath');
-        return chooseFolder(defaultPath);
     });
 
     router.register('app.confirmClose', (_params, context) => {

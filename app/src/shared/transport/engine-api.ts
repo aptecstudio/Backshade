@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { FileRoot, FolderContent } from '../files/file-entry.js';
 import type { AttributeLayout } from '../console/fixture-attributes.js';
 import type { AudioDevice, AudioPlayback, ShowAudio } from '../audio/audio.js';
 import type { CueStackState } from '../console/cue-stack.js';
@@ -277,8 +278,23 @@ export interface EngineMethods {
     'window.isFullScreen': { params: undefined; result: boolean };
     /** Puts the main window in fullscreen or brings it back; returns the new state (desktop application only) */
     'window.toggleFullScreen': { params: undefined; result: boolean };
-    /** Lets the user choose a folder (desktop application only) */
-    'dialog.chooseFolder': { params: { defaultPath?: string }; result: string | null };
+
+    /** Places the internal file manager can browse: home, external drives and the folder of the open show */
+    'fs.roots': { params: undefined; result: FileRoot[] };
+    /** Content of a folder inside the roots */
+    'fs.list': { params: { path: string }; result: FolderContent };
+    /** Creates a folder; returns its path */
+    'fs.createFolder': { params: { parent: string; name: string }; result: string };
+    /** Renames a file or folder; returns its new path */
+    'fs.rename': { params: { path: string; name: string }; result: string };
+    /** Copies files and folders into a folder; a name already used gets a number */
+    'fs.copy': { params: { paths: string[]; target: string }; result: undefined };
+    /** Moves files and folders into a folder */
+    'fs.move': { params: { paths: string[]; target: string }; result: undefined };
+    /** Moves files and folders to the trash of the system */
+    'fs.trash': { params: { paths: string[] }; result: undefined };
+    /** Deletes files and folders for good */
+    'fs.delete': { params: { paths: string[] }; result: undefined };
 
     /** Open show, or null */
     'show.getCurrent': { params: undefined; result: ShowSummary | null };
@@ -286,8 +302,6 @@ export interface EngineMethods {
     'show.create': { params: { name: string; folder: string; templateId: string; admin: { name: string; pin: string } }; result: OpenShowResult };
     /** Opens the show of a folder */
     'show.open': { params: { folder: string }; result: OpenShowResult };
-    /** Lets the user choose the folder of a show and opens it; null if cancelled */
-    'show.chooseAndOpen': { params: undefined; result: OpenShowResult | null };
     /** Saves the open show */
     'show.save': { params: undefined; result: ShowSummary };
     /** Saves the open show with a new name in a folder */
@@ -301,10 +315,10 @@ export interface EngineMethods {
     /** Closes the show; with discard true the unsaved changes are discarded */
     'show.close': { params: { discard?: boolean }; result: undefined };
 
-    /** Exports the open, saved show to a .bshow archive; returns the file, or null if cancelled */
-    'show.export': { params: undefined; result: string | null };
-    /** Imports a show from a .bshow archive into the default folder and opens it; null if cancelled */
-    'show.import': { params: undefined; result: OpenShowResult | null };
+    /** Exports the open, saved show to a .bshow archive; returns the file */
+    'show.export': { params: { file: string }; result: string };
+    /** Imports a show from a .bshow archive into the default folder and opens it */
+    'show.import': { params: { file: string }; result: OpenShowResult };
 
     /** Settings of the open show */
     'show.getSettings': { params: undefined; result: ShowSettings };
@@ -313,14 +327,12 @@ export interface EngineMethods {
 
     /** Media of the open show */
     'media.list': { params: undefined; result: MediaItem[] };
-    /** Lets the user choose files and copies them into the show media (desktop application only) */
-    'media.import': { params: undefined; result: MediaItem[] };
+    /** Copies files into the show media */
+    'media.import': { params: { files: string[] }; result: MediaItem[] };
     /** Deletes a media file from the show */
     'media.remove': { params: { file: string }; result: undefined };
     /** Contents of a raster image of the show media, as base64 (for the image effect of the matrices) */
     'media.readImage': { params: { file: string }; result: string };
-    /** Shows a media file in the system folder (desktop application only) */
-    'media.reveal': { params: { file: string }; result: undefined };
 
     /** Fixture definitions of the library: included and from the user */
     'fixtures.list': { params: undefined; result: FixtureSummary[] };
@@ -335,10 +347,10 @@ export interface EngineMethods {
     'fixtures.save': { params: { definition: FixtureDefinition; previousId?: string }; result: FixtureSummary };
     /** Deletes a user definition */
     'fixtures.delete': { params: { id: string }; result: undefined };
-    /** Lets the user choose definition files and copies them into the user library; returns the identifiers */
-    'fixtures.import': { params: undefined; result: string[] };
-    /** Exports a definition to a file; returns the file, or null if cancelled */
-    'fixtures.export': { params: { id: string }; result: string | null };
+    /** Copies definition files into the user library; returns the identifiers */
+    'fixtures.import': { params: { files: string[] }; result: string[] };
+    /** Exports a definition to a file; returns the file */
+    'fixtures.export': { params: { id: string; file: string }; result: string };
 
     /** Patch of the open show */
     'patch.get': { params: undefined; result: PatchEntry[] };
@@ -605,10 +617,10 @@ export interface EngineMethods {
     'template.update': { params: { id: string; name: string; description: string }; result: TemplateInfo };
     /** Deletes a user template */
     'template.delete': { params: { id: string }; result: undefined };
-    /** Exports a template to a .btemplate archive; returns the file, or null if cancelled */
-    'template.export': { params: { id: string }; result: string | null };
-    /** Imports a template from a .btemplate archive; null if cancelled */
-    'template.import': { params: undefined; result: TemplateInfo | null };
+    /** Exports a template to a .btemplate archive; returns the file */
+    'template.export': { params: { id: string; file: string }; result: string };
+    /** Imports a template from a .btemplate archive */
+    'template.import': { params: { file: string }; result: TemplateInfo };
 
     /** Global settings */
     'settings.get': { params: undefined; result: AppSettings };

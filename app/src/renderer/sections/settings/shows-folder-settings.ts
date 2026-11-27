@@ -4,6 +4,7 @@
 
 import { Key, Label, Panel, Stack, TextField } from '../../../framework/ts/index.js';
 import { showError } from '../../dialogs/show-error.js';
+import { pickFolder } from '../../files/file-dialogs.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 
@@ -15,7 +16,7 @@ export class ShowsFolderSettings extends Panel {
         const choose = new Key({ label: t('settings.chooseFolder'), icon: 'folder-open' });
         choose.onPress(() => void (async () => {
             try {
-                const folder = await engine().request('dialog.chooseFolder', { defaultPath: field.value });
+                const folder = await pickFolder(t('settings.showsFolder'), field.value);
                 if (folder !== null) {
                     const settings = await engine().request('settings.update', { defaultShowsFolder: folder });
                     field.setValue(settings.defaultShowsFolder);

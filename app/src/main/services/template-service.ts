@@ -21,8 +21,7 @@ import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
-import { requireDesktop } from '../transport/require-desktop';
-import { chooseFile, chooseSaveFile } from '../window/file-dialogs';
+import { pickedFile, pickedTarget } from '../files/picked-paths';
 
 /**
  * Removes the path on disk, which the interface must not know.
@@ -73,26 +72,16 @@ export function registerTemplateService(router: RequestRouter, bus: EventBus, se
         return undefined;
     });
 
-    router.register('template.export', async (params, context) => {
-        requireDesktop(context);
-        const record = findTemplate(requireString(requireObject(params), 'id'));
-        const target = await chooseSaveFile(
-            [{ name: 'Backshade template', extensions: [ARCHIVE_EXTENSIONS.template] }],
-            `${plainName(record)}.${ARCHIVE_EXTENSIONS.template}`
-        );
-        if (target === null) {
-            return null;
-        }
+    router.register('template.export', async (params) => {
+        const input = requireObject(params);
+        const record = findTemplate(requireString(input, 'id'));
+        const target = pickedTarget(requireString(input, 'file'), ARCHIVE_EXTENSIONS.template, session);
         await packFolder(record.folder, target, 'template', plainName(record), TRANSIENT_ENTRIES);
         return target;
     });
 
-    router.register('template.import', async (_params, context) => {
-        requireDesktop(context);
-        const archive = await chooseFile([{ name: 'Backshade template', extensions: [ARCHIVE_EXTENSIONS.template] }]);
-        if (archive === null) {
-            return null;
-        }
+    router.register('template.import', async (params) => {
+        const archive = pickedFile(requireString(requireObject(params), 'file'), session);
         const folder = await unpackArchive(archive, USER_TEMPLATES_DIR, 'template');
         const record = readTemplateFolder('user', folder);
         changed();

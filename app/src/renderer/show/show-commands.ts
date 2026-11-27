@@ -10,6 +10,7 @@ import type { OpenShowResult } from '../../shared/transport/engine-api.js';
 import { askChoice } from '../dialogs/ask-choice.js';
 import { askText } from '../dialogs/ask-text.js';
 import { showError } from '../dialogs/show-error.js';
+import { pickFiles, pickSaveFile, pickShow } from '../files/file-dialogs.js';
 import { t } from '../i18n/i18n.js';
 import { localized } from '../templates/template-text.js';
 import { engine } from '../transport/engine.js';
@@ -98,9 +99,9 @@ export function openShow(): Promise<void> {
         if (!await resolveUnsaved()) {
             return;
         }
-        const result = await engine().request('show.chooseAndOpen');
-        if (result !== null) {
-            await afterOpen(result);
+        const folder = await pickShow(t('start.openShow'));
+        if (folder !== null) {
+            await afterOpen(await engine().request('show.open', { folder }));
         }
     });
 }
@@ -124,9 +125,9 @@ export function importShow(): Promise<void> {
         if (!await resolveUnsaved()) {
             return;
         }
-        const result = await engine().request('show.import');
-        if (result !== null) {
-            await afterOpen(result);
+        const [file] = await pickFiles(t('start.importShow'), (entry) => entry.kind === 'showArchive', false);
+        if (file !== undefined) {
+            await afterOpen(await engine().request('show.import', { file }));
         }
     });
 }
@@ -140,8 +141,9 @@ export function exportShow(): Promise<void> {
         if (currentShow()?.dirty === true) {
             update(await engine().request('show.save'));
         }
-        const file = await engine().request('show.export');
-        if (file !== null) {
+        const target = await pickSaveFile(t('start.exportShow'), currentShow()?.name ?? 'Show', 'bshow');
+        if (target !== null) {
+            const file = await engine().request('show.export', { file: target });
             await askChoice(t('start.exportShow'), t('start.exported', { file }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
         }
     });

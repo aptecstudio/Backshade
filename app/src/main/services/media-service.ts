@@ -1,20 +1,17 @@
 /**
- * media.* methods: list, import, delete and reveal in the
- * system of the media of the open show, and read of raster images for the
- * image effect of the matrices. Every change is notified with media.changed.
+ * media.* methods: list, import and delete of the media of the open show,
+ * and read of raster images for the image effect of the matrices. Every change is notified with media.changed.
  */
 
 import fs from 'node:fs';
-import { shell } from 'electron';
-import { MEDIA_EXTENSIONS, mediaKindOf } from '../../shared/show/media-kinds';
+import { mediaKindOf } from '../../shared/show/media-kinds';
 import { importMedia, listMedia, removeMedia, resolveMediaPath } from '../shows/media-library';
 import { EngineError } from '../transport/engine-error';
 import type { ShowSession } from '../shows/show-session';
 import type { EventBus } from '../transport/event-bus';
-import { requireObject, requireString } from '../transport/params';
+import { requireObject, requireString, requireStringArray } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
-import { requireDesktop } from '../transport/require-desktop';
-import { chooseFiles } from '../window/file-dialogs';
+import { pickedFile } from '../files/picked-paths';
 
 // Largest image read for the matrices
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
@@ -42,10 +39,9 @@ export function registerMediaService(router: RequestRouter, bus: EventBus, sessi
         return fs.readFileSync(absolute).toString('base64');
     });
 
-    router.register('media.import', async (_params, context) => {
-        requireDesktop(context);
+    router.register('media.import', async (params) => {
         const folder = session.folder();
-        const files = await chooseFiles([{ name: 'Media', extensions: Object.values(MEDIA_EXTENSIONS).flat() }]);
+        const files = requireStringArray(requireObject(params), 'files').map((file) => pickedFile(file, session));
         if (files.length === 0) {
             return [];
         }
@@ -57,12 +53,6 @@ export function registerMediaService(router: RequestRouter, bus: EventBus, sessi
     router.register('media.remove', (params) => {
         removeMedia(session.folder(), requireString(requireObject(params), 'file'));
         changed();
-        return undefined;
-    });
-
-    router.register('media.reveal', (params, context) => {
-        requireDesktop(context);
-        shell.showItemInFolder(resolveMediaPath(session.folder(), requireString(requireObject(params), 'file')));
         return undefined;
     });
 }

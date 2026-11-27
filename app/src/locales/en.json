@@ -157,7 +157,13 @@
       "operatorInUse": "You cannot delete the operator you entered with.",
       "operatorNotFound": "The operator does not exist anymore.",
       "sameShow": "Choose a show other than the open one.",
-      "sourcePinRequired": "The source show is protected: the PIN of one of its administrators is needed."
+      "sourcePinRequired": "The source show is protected: the PIN of one of its administrators is needed.",
+      "fileNotFound": "The file or folder was not found.",
+      "fileNotAllowed": "Only the home folder and external drives can be used.",
+      "fileProtected": "This is protected: the places, the application data and the open show (except its media) cannot be changed.",
+      "fileExists": "A file or folder with this name already exists.",
+      "copyIntoItself": "A folder cannot be copied or moved into itself.",
+      "trashFailed": "The system could not move it to the trash."
     },
     "settings": {
       "language": "Language",
@@ -1387,6 +1393,39 @@
       "mtcDevice": "Port",
       "mtcAny": "Any port",
       "mtcStart": "Start (HH:MM:SS:FF)"
+    },
+    "files": {
+      "home": "Home",
+      "up": "Folder above",
+      "name": "Name",
+      "newFolder": "New folder",
+      "newFolderName": "New folder",
+      "rename": "Rename",
+      "copy": "Copy",
+      "cut": "Cut",
+      "paste": "Paste",
+      "trash": "Move to the trash",
+      "delete": "Delete",
+      "select": "Select {name}",
+      "emptyFolder": "This folder is empty.",
+      "chooseFolder": "Choose this folder",
+      "openShow": "Open show",
+      "choose": "Choose",
+      "replace": "Replace",
+      "overwrite": "\"{name}\" already exists: replace it?",
+      "deleteOne": "Delete \"{name}\" for good? It cannot be recovered.",
+      "deleteMany": "Delete {count} items for good? They cannot be recovered.",
+      "kinds": {
+        "folder": "Folder",
+        "show": "Show",
+        "audio": "Audio",
+        "video": "Video",
+        "image": "Image",
+        "showArchive": "Show archive",
+        "templateArchive": "Template archive",
+        "document": "Document",
+        "other": "File"
+      }
     }
   }
 }

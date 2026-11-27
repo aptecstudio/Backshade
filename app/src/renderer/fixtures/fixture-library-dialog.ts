@@ -11,6 +11,7 @@ import type { FixtureSummary } from '../../shared/transport/engine-api.js';
 import { askChoice } from '../dialogs/ask-choice.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
+import { pickFiles, pickSaveFile } from '../files/file-dialogs.js';
 import { engine } from '../transport/engine.js';
 import { openFixtureEditor } from './editor/fixture-editor-dialog.js';
 import { FixturePicker } from './fixture-picker.js';
@@ -79,8 +80,9 @@ class FixtureDetails extends Panel {
             return;
         }
         try {
-            const file = await engine().request('fixtures.export', { id: this.fixture.id });
-            if (file !== null) {
+            const target = await pickSaveFile(t('fixtures.export'), this.fixture.id.replace('/', '-'), 'json');
+            if (target !== null) {
+                const file = await engine().request('fixtures.export', { id: this.fixture.id, file: target });
                 await askChoice(t('fixtures.export'), t('fixtures.exported', { file }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
             }
         } catch (error) {
@@ -115,7 +117,11 @@ class FixtureDetails extends Panel {
  */
 export async function importFixtures(): Promise<number> {
     try {
-        const ids = await engine().request('fixtures.import');
+        const files = await pickFiles(t('fixtures.import'), (entry) => entry.name.toLowerCase().endsWith('.json'));
+        if (files.length === 0) {
+            return 0;
+        }
+        const ids = await engine().request('fixtures.import', { files });
         if (ids.length > 0) {
             await askChoice(t('fixtures.import'), t('fixtures.imported', { count: ids.length }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
         }

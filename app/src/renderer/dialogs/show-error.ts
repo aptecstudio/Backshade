@@ -43,6 +43,12 @@ const MESSAGES: Record<string, TextKey> = {
     'last-admin': 'errors.lastAdmin',
     'operator-in-use': 'errors.operatorInUse',
     'operator-not-found': 'errors.operatorNotFound',
+    'file-not-found': 'errors.fileNotFound',
+    'file-not-allowed': 'errors.fileNotAllowed',
+    'file-protected': 'errors.fileProtected',
+    'file-exists': 'errors.fileExists',
+    'copy-into-itself': 'errors.copyIntoItself',
+    'trash-failed': 'errors.trashFailed',
     'same-show': 'errors.sameShow',
     'source-pin-required': 'errors.sourcePinRequired'
 };

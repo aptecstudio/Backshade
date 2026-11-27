@@ -10,6 +10,7 @@ import { askChoice } from '../dialogs/ask-choice.js';
 import { askText } from '../dialogs/ask-text.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
+import { pickFiles, pickSaveFile } from '../files/file-dialogs.js';
 import { engine } from '../transport/engine.js';
 import { localized } from './template-text.js';
 
@@ -44,8 +45,9 @@ function templateRow(template: TemplateInfo): Stack {
 
 async function exportTemplate(template: TemplateInfo): Promise<void> {
     try {
-        const file = await engine().request('template.export', { id: template.id });
-        if (file !== null) {
+        const target = await pickSaveFile(t('templates.export'), localized(template.name), 'btemplate');
+        if (target !== null) {
+            const file = await engine().request('template.export', { id: template.id, file: target });
             await askChoice(t('templates.export'), t('templates.exported', { file }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
         }
     } catch (error) {
@@ -55,8 +57,9 @@ async function exportTemplate(template: TemplateInfo): Promise<void> {
 
 async function importTemplate(): Promise<void> {
     try {
-        const template = await engine().request('template.import');
-        if (template !== null) {
+        const [file] = await pickFiles(t('templates.import'), (entry) => entry.kind === 'templateArchive', false);
+        if (file !== undefined) {
+            const template = await engine().request('template.import', { file });
             await askChoice(t('templates.import'), t('templates.imported', { name: localized(template.name) }), [
                 { id: 'ok', label: t('common.ok'), primary: true }
             ]);

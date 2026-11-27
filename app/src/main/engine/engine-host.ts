@@ -15,6 +15,7 @@ import { registerVideoService } from '../services/video-service';
 import { registerAttributeService } from '../services/attribute-service';
 import { registerConsoleService } from '../services/console-service';
 import { registerCueService } from '../services/cue-service';
+import { registerFileService } from '../services/file-service';
 import { registerFixtureService } from '../services/fixture-service';
 import { registerGridService } from '../services/grid-service';
 import { registerGroupService } from '../services/group-service';
@@ -72,6 +73,7 @@ export function startEngine(): void {
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);
+    registerFileService(router, bus, session);
     registerShowImportService(router, bus, session, operators);
     startLocaleService(bus);
     startCloseGuard(bus, session);
