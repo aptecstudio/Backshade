@@ -15,6 +15,7 @@ import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
 import type { ShowOperator } from './operators.js';
 import type { ShowSettings } from './show-settings.js';
+import type { ShowStage } from '../stage/stage.js';
 
 /** Format version of show.json */
 export const SHOW_FORMAT_VERSION = 1;
@@ -56,6 +57,8 @@ export interface ShowDocument {
     midi: ShowMidi;
     /** Timelines of tracks; missing in older files, completed when reading */
     timelines: ShowTimelines;
+    /** Layout of the 3D stage; missing in older files, completed when reading */
+    stage: ShowStage;
     /** Operators with their PIN and sections; missing in older files, completed when reading */
     operators: ShowOperator[];
 }

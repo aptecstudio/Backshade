@@ -6,7 +6,7 @@
  */
 
 /** Working sections an operator profile controls */
-export const OPERATOR_SECTIONS = ['console', 'virtualConsole', 'timeline', 'patch', 'matrices', 'audio', 'video', 'output', 'media'] as const;
+export const OPERATOR_SECTIONS = ['console', 'virtualConsole', 'timeline', 'patch', 'matrices', 'audio', 'video', 'output', 'media', 'stage'] as const;
 
 export type OperatorSection = typeof OPERATOR_SECTIONS[number];
 

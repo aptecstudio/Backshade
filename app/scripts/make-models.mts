@@ -23,14 +23,16 @@ interface Model {
     id: string;
     category: 'truss' | 'stage' | 'fixtures' | 'musicians' | 'elements';
     obj: Obj;
+    /** Length of a truss along X, to hang fixtures on it */
+    length?: number;
     /** Points the moving parts turn around */
     pivots?: { pan: Vector; tilt: Vector };
 }
 
 const MODELS: Model[] = [
-    { id: 'truss-1m', category: 'truss', obj: truss(1) },
-    { id: 'truss-2m', category: 'truss', obj: truss(2) },
-    { id: 'truss-3m', category: 'truss', obj: truss(3) },
+    { id: 'truss-1m', category: 'truss', obj: truss(1), length: 1 },
+    { id: 'truss-2m', category: 'truss', obj: truss(2), length: 2 },
+    { id: 'truss-3m', category: 'truss', obj: truss(3), length: 3 },
     { id: 'deck-2x1', category: 'stage', obj: deck(0.4) },
     { id: 'moving-head', category: 'fixtures', obj: movingHead(), pivots: { pan: [0, 0.16, 0], tilt: [0, 0.4, 0] } },
     { id: 'par', category: 'fixtures', obj: par() },
@@ -45,6 +47,6 @@ fs.mkdirSync(targetDir, { recursive: true });
 for (const model of MODELS) {
     fs.writeFileSync(path.join(targetDir, `${model.id}.obj`), model.obj.text());
 }
-const list = MODELS.map(({ id, category, pivots }) => ({ id, category, file: `${id}.obj`, ...(pivots === undefined ? {} : { pivots }) }));
+const list = MODELS.map(({ id, category, pivots, length }) => ({ id, category, file: `${id}.obj`, ...(pivots === undefined ? {} : { pivots }), ...(length === undefined ? {} : { length }) }));
 fs.writeFileSync(path.join(targetDir, 'models.json'), `${JSON.stringify(list, null, 4)}\n`);
 console.log(`Models written: ${MODELS.length}`);

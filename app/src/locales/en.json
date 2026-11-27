@@ -1468,7 +1468,7 @@
     "stage": {
       "title": "3D stage",
       "open": "Open the 3D stage",
-      "library": "Models",
+      "library": "Add",
       "camera": "Camera view",
       "cameras": {
         "front": "Front",
@@ -1494,7 +1494,27 @@
         "singer-female": "Female singer with microphone",
         "wedge": "Floor monitor",
         "amp": "Amplifier and cabinet"
-      }
+      },
+      "fixtures": "Patch fixtures",
+      "noFixtures": "No fixtures left to place",
+      "handles": "Handles",
+      "move": "Move",
+      "rotate": "Rotate",
+      "undo": "Undo",
+      "redo": "Redo",
+      "object": "Selected object",
+      "noSelection": "Touch an object of the scene to select it.",
+      "position": "X {x} m, height {y} m, Z {z} m",
+      "hang": "Hang on the truss",
+      "detach": "Take off the truss",
+      "hung": "Hanging on a truss",
+      "duplicate": "Duplicate",
+      "remove": "Remove from the scene",
+      "model": "Model",
+      "readOnly": "Read only",
+      "noShow": "Open a show to set up the stage.",
+      "locked": "Enter your PIN in the main window.",
+      "denied": "Your profile does not see the stage."
     }
   }
 }

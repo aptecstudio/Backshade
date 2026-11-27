@@ -18,6 +18,8 @@ export interface ModelInfo {
     id: string;
     category: ModelCategory;
     file: string;
+    /** Length of a truss along X, in meters */
+    length?: number;
     /** Points the moving parts of a fixture turn around */
     pivots?: { pan: [number, number, number]; tilt: [number, number, number] };
 }

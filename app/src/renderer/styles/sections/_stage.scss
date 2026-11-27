@@ -1,4 +1,4 @@
-// 3D stage window: toolbar, catalog of the models and the view
+// 3D stage window: toolbar, what can be added, the view and the selected object
 @use 'framework/scss/tokens' as *;
 
 .stage-page {
@@ -6,13 +6,18 @@
     padding: space(2);
 }
 
-.stage-page__body {
+.stage-editor {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.stage-editor__body {
     flex: 1 1 auto;
     align-items: stretch;
     min-height: 0;
 }
 
-.stage-catalog {
+.stage-panel {
     flex: 0 0 space(8) * 4;
     overflow-y: auto;
 }
@@ -31,4 +36,9 @@
         height: 100%;
         touch-action: none;
     }
+}
+
+// Elements hidden by the editor keep hidden even when their class sets a display
+.stage-page [hidden] {
+    display: none;
 }

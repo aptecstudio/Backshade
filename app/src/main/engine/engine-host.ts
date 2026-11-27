@@ -85,7 +85,7 @@ export function startEngine(): void {
     attachIpcTransport(router, bus);
     const remoteAccess = registerRemoteService(router, bus, operators, registerUploadService(router, bus, session));
     registerRemoteViewService(router);
-    registerStageService(router);
+    registerStageService(router, bus, session);
 
     // At quit the recovery copy stays only if there are unsaved changes
     app.on('before-quit', () => {

@@ -19,7 +19,6 @@ import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { operatorState } from '../../show/operator-store.js';
 import { engine } from '../../transport/engine.js';
-import { MAIN_SECTIONS } from '../section-definitions.js';
 
 /**
  * Opens the dialog.
@@ -42,16 +41,17 @@ export function openOperatorDialog(operator: OperatorProfile | null): void {
     const access = { ...(operator?.access ?? uniformAccess('hidden')) };
     const rows = new Stack({ classes: ['operator-dialog__access'] });
     for (const section of OPERATOR_SECTIONS) {
-        const definition = MAIN_SECTIONS.find((item) => item.id === section);
+        // The 3D stage has its own window, not a section of the main one
+        const title = t(`sections.${section}`);
         const choice = new ChoiceKeys<SectionAccess>({
-            ariaLabel: definition === undefined ? section : t(definition.labelKey),
+            ariaLabel: title,
             options: SECTION_ACCESS.map((level) => ({ value: level, label: t(`operators.access.${level}`) })),
             value: access[section]
         });
         choice.onChange((level) => {
             access[section as OperatorSection] = level;
         });
-        rows.append(new Label({ text: definition === undefined ? section : t(definition.labelKey) }), choice);
+        rows.append(new Label({ text: title }), choice);
     }
     const sections = new Stack({ gap: 1, children: [new Label({ text: t('operators.sections'), weight: 'medium' }), rows] });
 

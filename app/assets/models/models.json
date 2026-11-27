@@ -2,17 +2,20 @@
     {
         "id": "truss-1m",
         "category": "truss",
-        "file": "truss-1m.obj"
+        "file": "truss-1m.obj",
+        "length": 1
     },
     {
         "id": "truss-2m",
         "category": "truss",
-        "file": "truss-2m.obj"
+        "file": "truss-2m.obj",
+        "length": 2
     },
     {
         "id": "truss-3m",
         "category": "truss",
-        "file": "truss-3m.obj"
+        "file": "truss-3m.obj",
+        "length": 3
     },
     {
         "id": "deck-2x1",

@@ -2633,5 +2633,553 @@
       }
     ]
   },
+  "stage": {
+    "objects": [
+      {
+        "id": "back-truss-1",
+        "model": "truss-2m",
+        "position": [
+          -2,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "back-truss-2",
+        "model": "truss-2m",
+        "position": [
+          0,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "back-truss-3",
+        "model": "truss-2m",
+        "position": [
+          2,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "front-truss-1",
+        "model": "truss-2m",
+        "position": [
+          -2,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "front-truss-2",
+        "model": "truss-2m",
+        "position": [
+          0,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "front-truss-3",
+        "model": "truss-2m",
+        "position": [
+          2,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-7",
+        "model": "deck-2x1",
+        "position": [
+          -2,
+          0,
+          -1.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-8",
+        "model": "deck-2x1",
+        "position": [
+          0,
+          0,
+          -1.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-9",
+        "model": "deck-2x1",
+        "position": [
+          2,
+          0,
+          -1.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-10",
+        "model": "deck-2x1",
+        "position": [
+          -2,
+          0,
+          -0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-11",
+        "model": "deck-2x1",
+        "position": [
+          0,
+          0,
+          -0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-12",
+        "model": "deck-2x1",
+        "position": [
+          2,
+          0,
+          -0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-13",
+        "model": "singer-male",
+        "position": [
+          0,
+          0.4,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-14",
+        "model": "singer-female",
+        "position": [
+          1.2,
+          0.4,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-15",
+        "model": "amp",
+        "position": [
+          -2.2,
+          0.4,
+          -1.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-16",
+        "model": "amp",
+        "position": [
+          2.2,
+          0.4,
+          -1.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-17",
+        "model": "wedge",
+        "position": [
+          0,
+          0.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-18",
+        "model": "wedge",
+        "position": [
+          1.2,
+          0.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stage-19",
+        "model": "moving-head",
+        "position": [
+          -2.4,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "dfc19534-c235-4440-bc38-c8636693ab0a",
+        "hungOn": "front-truss-1"
+      },
+      {
+        "id": "stage-20",
+        "model": "moving-head",
+        "position": [
+          -0.8,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "7aa18b56-2c9c-431e-8b38-8d8e6014d7f8",
+        "hungOn": "front-truss-2"
+      },
+      {
+        "id": "stage-21",
+        "model": "moving-head",
+        "position": [
+          0.8,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "00d46836-0514-4d31-8ec9-0e581b1ffebe",
+        "hungOn": "front-truss-2"
+      },
+      {
+        "id": "stage-22",
+        "model": "moving-head",
+        "position": [
+          2.4,
+          3.6,
+          1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "4e8645ef-b1df-4723-a2c8-1732a4a5fd3a",
+        "hungOn": "front-truss-3"
+      },
+      {
+        "id": "stage-23",
+        "model": "moving-head",
+        "position": [
+          -2.4,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "a93fb2c1-76d7-4c64-9ea7-4fe762c67ac1",
+        "hungOn": "back-truss-1"
+      },
+      {
+        "id": "stage-24",
+        "model": "moving-head",
+        "position": [
+          -0.8,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "5be64e5a-771b-46a4-ab10-f275ab34be38",
+        "hungOn": "back-truss-2"
+      },
+      {
+        "id": "stage-25",
+        "model": "moving-head",
+        "position": [
+          0.8,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "13b676a2-3ab1-46da-a8ff-78938e2739ca",
+        "hungOn": "back-truss-2"
+      },
+      {
+        "id": "stage-26",
+        "model": "moving-head",
+        "position": [
+          2.4,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "621944a7-8554-4a63-b2cc-6bc5d8653bdf",
+        "hungOn": "back-truss-3"
+      },
+      {
+        "id": "stage-27",
+        "model": "par",
+        "position": [
+          -2.6,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "b7833945-91cd-43c1-86ea-4893009a77c6",
+        "hungOn": null
+      },
+      {
+        "id": "stage-28",
+        "model": "par",
+        "position": [
+          -1.8,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "285d2058-9ea0-4ed1-8a9f-0933ff7aec5c",
+        "hungOn": null
+      },
+      {
+        "id": "stage-29",
+        "model": "par",
+        "position": [
+          -1.2,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "90d6d6e7-d83a-42c9-9e66-0121d8ad6050",
+        "hungOn": null
+      },
+      {
+        "id": "stage-30",
+        "model": "par",
+        "position": [
+          -0.4,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "5f54fc6f-806a-437d-9e3b-0fdcd85cdd23",
+        "hungOn": null
+      },
+      {
+        "id": "stage-31",
+        "model": "par",
+        "position": [
+          0.4,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "5c3aa8da-e483-4a56-a38c-d7a273a22e4f",
+        "hungOn": null
+      },
+      {
+        "id": "stage-32",
+        "model": "par",
+        "position": [
+          1.2,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "2dab5997-9fc8-465e-b8f5-dd2fe062db59",
+        "hungOn": null
+      },
+      {
+        "id": "stage-33",
+        "model": "par",
+        "position": [
+          1.8,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "7f304bb2-f2d5-4733-8bde-643555072a8a",
+        "hungOn": null
+      },
+      {
+        "id": "stage-34",
+        "model": "par",
+        "position": [
+          2.6,
+          0,
+          -2.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": "bd15fa3d-d84f-42a6-ac79-c6c8e0e83304",
+        "hungOn": null
+      }
+    ]
+  },
   "operators": []
 }

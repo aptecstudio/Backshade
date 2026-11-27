@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { ShowStage } from '../stage/stage.js';
 import type { DiscoveredInstance } from '../remote/instance.js';
 import type { FileRoot, FolderContent } from '../files/file-entry.js';
 import type { AttributeLayout } from '../console/fixture-attributes.js';
@@ -275,6 +276,10 @@ export interface EngineMethods {
     'upload.media': { params: { name: string; size: number }; result: { ticket: string } };
     /** Ticket to send a file into a folder of the file manager (remote clients only) */
     'upload.file': { params: { folder: string; name: string; size: number }; result: { ticket: string } };
+    /** Layout of the 3D stage of the open show */
+    'stage.get': { params: undefined; result: ShowStage };
+    /** Replaces the layout of the 3D stage (unsaved change) */
+    'stage.set': { params: { stage: ShowStage }; result: ShowStage };
     /** Opens the window of the 3D stage (desktop only) */
     'stage.open': { params: undefined; result: undefined };
     /** Searches the other instances on the local network */
@@ -738,6 +743,7 @@ export interface EngineEvents {
     'timeline.stateChanged': { state: TimelineState };
     /** The pages of the virtual console have changed */
     'grid.changed': Record<string, never>;
+    'stage.changed': Record<string, never>;
     /** The intensity levels of the fixture groups have changed */
     'console.groupLevelsChanged': { levels: Record<string, number> };
     /** The live effects of the matrices have changed */

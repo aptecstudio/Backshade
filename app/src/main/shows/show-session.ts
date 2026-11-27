@@ -15,6 +15,7 @@ import type { ShowTimelines } from '../../shared/timeline/timeline';
 import type { ShowVideo } from '../../shared/video/video';
 import type { ShowMixers } from '../../shared/mixers/mixers';
 import type { ShowMidi } from '../../shared/midi/midi';
+import type { ShowStage } from '../../shared/stage/stage';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import type { ShowOperator } from '../../shared/show/operators';
@@ -41,7 +42,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'mixers' | 'midi' | 'timelines' | 'operators' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'mixers' | 'midi' | 'timelines' | 'operators' | 'stage' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -413,6 +414,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('grid');
+    }
+
+    /**
+     * Layout of the 3D stage of the open show.
+     */
+    stage(): ShowStage {
+        return this.requireOpen().document.stage;
+    }
+
+    /**
+     * Replaces the layout of the 3D stage; the change must be saved.
+     */
+    setStage(stage: ShowStage): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(stage) === JSON.stringify(show.document.stage)) {
+            return;
+        }
+        show.document = { ...show.document, stage };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('stage');
     }
 
     /**

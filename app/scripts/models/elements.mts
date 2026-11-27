@@ -5,26 +5,26 @@
 import { Obj } from './obj.mts';
 import type { Vector } from './vector.mts';
 
-/** Floor wedge monitor, angled front towards the back of the stage */
+/** Floor wedge monitor, its sloped face towards the back of the stage (-Z) */
 export function wedge(): Obj {
     const obj = new Obj();
     obj.object('wedge');
     obj.material('body');
     const w = 0.28;
-    const a: Vector = [-w, 0, 0.2];
-    const b: Vector = [w, 0, 0.2];
-    const c: Vector = [w, 0.14, 0.2];
-    const d: Vector = [-w, 0.14, 0.2];
-    const e: Vector = [-w, 0, -0.2];
-    const f: Vector = [w, 0, -0.2];
-    const g: Vector = [w, 0.32, -0.02];
-    const h: Vector = [-w, 0.32, -0.02];
-    obj.face([a, b, c, d]);
-    obj.face([d, c, g, h]);
-    obj.face([f, e, h, g]);
-    obj.face([a, d, h, e]);
-    obj.face([b, f, g, c]);
-    obj.face([e, f, b, a]);
+    const a: Vector = [-w, 0, -0.2];
+    const b: Vector = [w, 0, -0.2];
+    const c: Vector = [w, 0.14, -0.2];
+    const d: Vector = [-w, 0.14, -0.2];
+    const e: Vector = [-w, 0, 0.2];
+    const f: Vector = [w, 0, 0.2];
+    const g: Vector = [w, 0.32, 0.02];
+    const h: Vector = [-w, 0.32, 0.02];
+    obj.face([d, c, b, a]);
+    obj.face([h, g, c, d]);
+    obj.face([g, h, e, f]);
+    obj.face([e, h, d, a]);
+    obj.face([c, g, f, b]);
+    obj.face([a, b, f, e]);
     return obj;
 }
 

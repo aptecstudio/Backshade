@@ -44,16 +44,18 @@ export function isLocked(): boolean {
     return show !== null && (state.showId !== show.id || state.operator === null);
 }
 
-/** Access of the operator to a working section; settings and start page are always editable */
-export function sectionAccess(id: SectionId): SectionAccess {
-    if (!MAIN_SECTIONS.some((section) => section.id === id)) {
-        return 'edit';
-    }
+/** Access of the operator to a section of the profile */
+export function accessTo(section: OperatorSection): SectionAccess {
     if (isLocked()) {
         return 'hidden';
     }
     // Without a show there are no operators
-    return state.operator === null ? 'edit' : effectiveAccess(state.operator)[id as OperatorSection];
+    return state.operator === null ? 'edit' : effectiveAccess(state.operator)[section];
+}
+
+/** Access of the operator to a working section; settings and start page are always editable */
+export function sectionAccess(id: SectionId): SectionAccess {
+    return MAIN_SECTIONS.some((section) => section.id === id) ? accessTo(id as OperatorSection) : 'edit';
 }
 
 /** The working section is shown to the operator */

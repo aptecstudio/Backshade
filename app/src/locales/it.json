@@ -1468,7 +1468,7 @@
     "stage": {
       "title": "Palco 3D",
       "open": "Apri il palco 3D",
-      "library": "Modelli",
+      "library": "Aggiungi",
       "camera": "Vista della camera",
       "cameras": {
         "front": "Fronte",
@@ -1494,7 +1494,27 @@
         "singer-female": "Cantante donna con microfono",
         "wedge": "Monitor da palco",
         "amp": "Testata e cassa"
-      }
+      },
+      "fixtures": "Fari del patch",
+      "noFixtures": "Nessun faro da posare",
+      "handles": "Maniglie",
+      "move": "Sposta",
+      "rotate": "Ruota",
+      "undo": "Annulla",
+      "redo": "Ripeti",
+      "object": "Oggetto selezionato",
+      "noSelection": "Tocca un oggetto della scena per selezionarlo.",
+      "position": "X {x} m, altezza {y} m, Z {z} m",
+      "hang": "Appendi al traliccio",
+      "detach": "Stacca dal traliccio",
+      "hung": "Appeso a un traliccio",
+      "duplicate": "Duplica",
+      "remove": "Togli dalla scena",
+      "model": "Modello",
+      "readOnly": "Sola lettura",
+      "noShow": "Apri uno show per allestire il palco.",
+      "locked": "Entra con il tuo PIN nella finestra principale.",
+      "denied": "Il tuo profilo non vede il palco."
     }
   }
 }
