@@ -5,7 +5,7 @@
  * actions that change files are shown only to who may do them.
  */
 
-import { Emitter, Key, Label, ListItem, Stack, type IconName, type Unsubscribe } from '../../framework/ts/index.js';
+import { Emitter, icon, Key, Label, ListItem, Stack, type IconName, type Unsubscribe } from '../../framework/ts/index.js';
 import type { FileEntry, FileRoot, FolderContent } from '../../shared/files/file-entry.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
@@ -24,6 +24,9 @@ export interface BrowserOptions {
     /** Pressing the row of a folder selects it instead of opening it */
     picksFolder?: (entry: FileEntry) => boolean;
 }
+
+// Places that are folders and places that are drives
+const PLACE_ICONS: Readonly<Record<FileRoot['kind'], IconName>> = { home: 'folder', drive: 'hard-drive', show: 'clapperboard' };
 
 const isFolder = (entry: FileEntry): boolean => entry.kind === 'folder' || entry.kind === 'show';
 
@@ -148,6 +151,7 @@ export class FileBrowser extends Stack {
         this.placeItems.forEach(({ item }) => item.destroy());
         this.placeItems = roots.map((root) => {
             const item = new ListItem({ children: [new Label({ text: root.kind === 'home' ? t('files.home') : root.name })] });
+            item.element.prepend(icon(PLACE_ICONS[root.kind], { classes: ['icon--large'] }));
             item.onPress(() => void this.openFolder(root.path));
             return { root, item };
         });

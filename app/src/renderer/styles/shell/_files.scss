@@ -17,6 +17,19 @@
     overflow-y: auto;
 }
 
+.file-browser__places .list-item {
+    // The icon keeps its size, a long drive name is cut
+    .icon {
+        flex-shrink: 0;
+    }
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
 .file-browser__main {
     flex: 1 1 auto;
     min-width: 0;
