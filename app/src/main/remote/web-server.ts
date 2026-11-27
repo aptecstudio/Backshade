@@ -14,6 +14,7 @@ import { handleLocaleRequest } from '../protocol/locale-routes';
 import { handleShowMediaRequest } from '../protocol/show-media-route';
 import { SHOW_MEDIA_ROUTE } from '../../shared/audio/playback-protocol';
 import type { RemoteAuth } from './remote-auth';
+import type { Uploads } from './uploads';
 import { SESSION_ENDED, type RemoteClients } from './remote-clients';
 import { sendFetchResponse, sendJson, sendStatus, sendWebFile } from './web-files';
 import { WebSocketConnection } from './websocket';
@@ -22,6 +23,8 @@ import { WebSocketConnection } from './websocket';
 export const FIRST_PORT = 4747;
 const PORTS = 10;
 const MAX_BODY_BYTES = 1024;
+const BODY_MS = 10 * 1000;
+const UPLOAD_PATH = '/api/upload/';
 const INDEX_PAGE = '/renderer/index.html';
 
 export class WebServer {
@@ -31,9 +34,12 @@ export class WebServer {
     /** Port listened, null until listening */
     port: number | null = null;
 
-    constructor(auth: RemoteAuth, clients: RemoteClients) {
+    private readonly uploads: Uploads;
+
+    constructor(auth: RemoteAuth, clients: RemoteClients, uploads: Uploads) {
         this.auth = auth;
         this.clients = clients;
+        this.uploads = uploads;
     }
 
     /** Listens on the first free port */
@@ -54,6 +60,8 @@ export class WebServer {
             console.warn('Web server request failed:', error);
             response.destroy();
         }));
+        // Large files take longer than the default limit of a request; a silent upload is cut anyway
+        server.requestTimeout = 0;
         server.on('upgrade', (request, socket: Duplex) => this.upgrade(request, socket));
         server.once('error', (error: NodeJS.ErrnoException) => {
             if (error.code === 'EADDRINUSE' && port < FIRST_PORT + PORTS - 1) {
@@ -77,6 +85,10 @@ export class WebServer {
         const token = sessionToken(request, this.port);
         if (url.pathname === '/api/login' || url.pathname === '/api/logout') {
             await this.account(request, response, url.pathname, token);
+            return;
+        }
+        if (url.pathname.startsWith(UPLOAD_PATH)) {
+            await this.upload(request, response, url.pathname.slice(UPLOAD_PATH.length), token);
             return;
         }
         if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -144,6 +156,22 @@ export class WebServer {
         }
     }
 
+    /** A file of a client, sent with the ticket the engine gave it */
+    private async upload(request: IncomingMessage, response: ServerResponse, ticket: string, token: string | null): Promise<void> {
+        if (request.method !== 'POST' || !isOwnOrigin(request) || request.headers['content-type'] !== 'application/octet-stream' || !this.auth.isValid(token)) {
+            response.setHeader('connection', 'close');
+            sendStatus(response, 403);
+            return;
+        }
+        const name = await this.uploads.receive(ticket, request, () => this.auth.isValid(token));
+        if (name === null) {
+            response.setHeader('connection', 'close');
+            sendStatus(response, 400);
+        } else {
+            sendJson(response, 200, { name });
+        }
+    }
+
     private upgrade(request: IncomingMessage, socket: Duplex): void {
         const token = sessionToken(request, this.port);
         const url = new URL(request.url ?? '/', 'http://localhost');
@@ -193,6 +221,10 @@ function readBody(request: IncomingMessage): Promise<string | null> {
     return new Promise((resolve) => {
         const chunks: Buffer[] = [];
         let size = 0;
+        request.setTimeout(BODY_MS, () => {
+            resolve(null);
+            request.destroy();
+        });
         request.on('data', (chunk: Buffer) => {
             size += chunk.length;
             if (size > MAX_BODY_BYTES) {

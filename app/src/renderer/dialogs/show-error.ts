@@ -49,6 +49,10 @@ const MESSAGES: Record<string, TextKey> = {
     'file-exists': 'errors.fileExists',
     'copy-into-itself': 'errors.copyIntoItself',
     'trash-failed': 'errors.trashFailed',
+    'unsupported-file': 'errors.unsupportedFile',
+    'file-too-large': 'errors.fileTooLarge',
+    'disk-full': 'errors.diskFull',
+    'upload-busy': 'errors.uploadBusy',
     'same-show': 'errors.sameShow',
     'source-pin-required': 'errors.sourcePinRequired'
 };

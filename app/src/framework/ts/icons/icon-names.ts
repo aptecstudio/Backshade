@@ -64,6 +64,7 @@ export const ICON_NAMES = [
     'timer',
     'trash-2',
     'triangle-alert',
+    'upload',
     'user-round',
     'user-round-plus',
     'video',

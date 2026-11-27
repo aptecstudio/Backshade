@@ -34,6 +34,7 @@ import { registerShowImportService } from '../services/show-import-service';
 import { registerShowService } from '../services/show-service';
 import { registerTemplateService } from '../services/template-service';
 import { registerTimelineService } from '../services/timeline-service';
+import { registerUploadService } from '../services/upload-service';
 import { registerMixerService } from '../services/mixer-service';
 import { registerMidiService } from '../services/midi-service';
 import { registerWindowService } from '../services/window-service';
@@ -81,7 +82,7 @@ export function startEngine(): void {
     startCloseGuard(bus, session);
 
     attachIpcTransport(router, bus);
-    const remoteAccess = registerRemoteService(router, bus, operators);
+    const remoteAccess = registerRemoteService(router, bus, operators, registerUploadService(router, bus, session));
     registerRemoteViewService(router);
 
     // At quit the recovery copy stays only if there are unsaved changes

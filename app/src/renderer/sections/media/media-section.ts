@@ -12,7 +12,9 @@ import { formatSize } from '../../i18n/format-size.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
 import { markEdit } from '../../show/edit-access.js';
 import { browseFiles, pickFiles } from '../../files/file-dialogs.js';
-import { engine } from '../../transport/engine.js';
+import { MEDIA_ACCEPT, pickDeviceFiles } from '../../remote/device-files.js';
+import { sendFiles } from '../../remote/send-files.js';
+import { engine, isRemote } from '../../transport/engine.js';
 
 const KIND_ICONS: Record<MediaKind, IconName> = { audio: 'music', video: 'video', image: 'image' };
 const KIND_LABELS: Record<MediaKind, TextKey> = { audio: 'media.kindAudio', video: 'media.kindVideo', image: 'media.kindImage' };
@@ -27,8 +29,13 @@ export class MediaSection extends Panel {
         const importKey = new Key({ label: t('media.import'), icon: 'folder-open' });
         importKey.onPress(() => void this.importMedia());
         markEdit(importKey);
+        // A remote client can also send media from its own device
+        const sendKey = new Key({ label: t('upload.fromDevice'), icon: 'upload' });
+        sendKey.onPress(() => void this.sendMedia());
+        sendKey.element.hidden = !isRemote();
+        markEdit(sendKey);
         this.summary = new Label({ text: '', tone: 'secondary', size: 'small' });
-        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', children: [importKey, this.summary] }));
+        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', children: [importKey, sendKey, this.summary] }));
 
         void this.load();
         this.track(engine().on('media.changed', () => void this.load()));
@@ -43,6 +50,11 @@ export class MediaSection extends Panel {
         } catch (error) {
             await showError(error);
         }
+    }
+
+    private async sendMedia(): Promise<void> {
+        const files = await pickDeviceFiles(MEDIA_ACCEPT);
+        await sendFiles(files, (file) => engine().request('upload.media', file));
     }
 
     /** Shows the folder of a media file in the file manager */

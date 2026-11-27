@@ -8,6 +8,7 @@ import os from 'node:os';
 import { Discovery } from '../network/discovery';
 import { RemoteAuth } from '../remote/remote-auth';
 import { RemoteClients } from '../remote/remote-clients';
+import type { Uploads } from '../remote/uploads';
 import { WebServer } from '../remote/web-server';
 import { readSettings } from '../settings/app-settings';
 import type { EventBus } from '../transport/event-bus';
@@ -25,9 +26,9 @@ function localAddresses(): string[] {
 /**
  * Registers the service and starts the web server.
  */
-export function registerRemoteService(router: RequestRouter, bus: EventBus, operators: OperatorSessionInfo): { stop: () => void } {
+export function registerRemoteService(router: RequestRouter, bus: EventBus, operators: OperatorSessionInfo, uploads: Uploads): { stop: () => void } {
     const auth = new RemoteAuth(operators);
-    const server = new WebServer(auth, new RemoteClients(router, bus, auth));
+    const server = new WebServer(auth, new RemoteClients(router, bus, auth), uploads);
     router.register('remote.getInfo', () => ({
         port: server.port,
         addresses: server.port === null ? [] : localAddresses().map((address) => `http://${address}:${server.port}`)

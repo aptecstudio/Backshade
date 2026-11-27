@@ -177,5 +177,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'timeline.delete': edit('timeline'),
     'grid.set': edit('virtualConsole'),
     'media.import': edit('media'),
-    'media.remove': edit('media')
+    'media.remove': edit('media'),
+    'upload.media': edit('media'),
+    'upload.file': ADMIN
 };

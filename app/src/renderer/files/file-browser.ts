@@ -1,8 +1,9 @@
 /**
  * Internal file manager: the places (home, external drives, open show), the
  * path of the folder, its entries and the actions on the selected ones (new
- * folder, rename, copy, cut and paste, move to the trash, delete). The
- * actions that change files are shown only to who may do them.
+ * folder, rename, copy, cut and paste, move to the trash, delete, and from
+ * a remote client send files of its device). The actions that change files
+ * are shown only to who may do them.
  */
 
 import { Emitter, icon, Key, Label, ListItem, Stack, type IconName, type Unsubscribe } from '../../framework/ts/index.js';
@@ -10,7 +11,9 @@ import type { FileEntry, FileRoot, FolderContent } from '../../shared/files/file
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
 import { canManageShow } from '../show/operator-store.js';
-import { engine } from '../transport/engine.js';
+import { ANY_ACCEPT, pickDeviceFiles } from '../remote/device-files.js';
+import { sendFiles } from '../remote/send-files.js';
+import { engine, isRemote } from '../transport/engine.js';
 import { askDelete, askName } from './file-actions.js';
 import { clipboard, setClipboard } from './file-clipboard.js';
 import { FileRow } from './file-row.js';
@@ -39,6 +42,7 @@ export class FileBrowser extends Stack {
     private readonly up: Key;
     private readonly selectionKeys: Key[];
     private readonly paste: Key;
+    private readonly send: Key;
     private readonly changes = new Emitter<void>();
     private rows: FileRow[] = [];
     private placeItems: Array<{ root: FileRoot; item: ListItem }> = [];
@@ -65,13 +69,16 @@ export class FileBrowser extends Stack {
         const remove = key(t('files.delete'), 'x', () => void this.deleteSelected(), false, true);
         this.selectionKeys = [rename, copy, cut, trash, remove];
 
+        this.send = key(t('upload.fromDevice'), 'upload', () => void this.sendHere());
         const manage = canManageShow();
+        // A remote client sends files of its own device into the folder shown
+        this.send.element.hidden = !isRemote() || !manage;
         const toolbar = new Stack({
             direction: 'row',
             gap: 1,
             wrap: true,
             classes: ['file-browser__toolbar'],
-            children: manage ? [this.up, newFolder, rename, copy, cut, this.paste, trash, remove] : [this.up, newFolder]
+            children: manage ? [this.up, newFolder, this.send, rename, copy, cut, this.paste, trash, remove] : [this.up, newFolder]
         });
         this.append(
             this.places,
@@ -206,6 +213,7 @@ export class FileBrowser extends Stack {
             item.setSelected(this.content !== null && this.content.path.startsWith(root.path));
         }
         this.up.setDisabled(this.busy || this.content?.parent === null);
+        this.send.setDisabled(this.busy || this.content === null);
         const [rename, ...others] = this.selectionKeys;
         rename.setDisabled(this.busy || this.selection.size !== 1);
         others.forEach((item) => item.setDisabled(this.busy || this.selection.size === 0));
@@ -238,6 +246,17 @@ export class FileBrowser extends Stack {
         const name = await askName(t('files.newFolder'), t('files.newFolderName'));
         if (name !== null) {
             await this.change(() => engine().request('fs.createFolder', { parent, name }));
+        }
+    }
+
+    private async sendHere(): Promise<void> {
+        const folder = this.folder;
+        if (folder === null) {
+            return;
+        }
+        const files = await pickDeviceFiles(ANY_ACCEPT);
+        if (await sendFiles(files, (file) => engine().request('upload.file', { ...file, folder }))) {
+            await this.reload();
         }
     }
 

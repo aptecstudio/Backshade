@@ -163,7 +163,12 @@
       "fileProtected": "È protetto: le posizioni, i dati dell'applicazione e lo show aperto (tranne i suoi media) non si possono modificare.",
       "fileExists": "Esiste già un file o una cartella con questo nome.",
       "copyIntoItself": "Una cartella non può essere copiata o spostata dentro sé stessa.",
-      "trashFailed": "Il sistema non è riuscito a spostarlo nel cestino."
+      "trashFailed": "Il sistema non è riuscito a spostarlo nel cestino.",
+      "uploadFailed": "il file non è arrivato.",
+      "unsupportedFile": "Questo tipo di file non si può inviare.",
+      "fileTooLarge": "Il file è troppo grande.",
+      "diskFull": "Sul disco del computer non c'è abbastanza spazio.",
+      "uploadBusy": "Troppi file in attesa: riprova tra un momento."
     },
     "settings": {
       "language": "Lingua",
@@ -1450,6 +1455,12 @@
       "connect": "Collega",
       "controlling": "Controllo remoto di {name}",
       "close": "Chiudi"
+    },
+    "upload": {
+      "title": "Invio dei file",
+      "fromDevice": "Invia dal dispositivo",
+      "progress": "File {number} di {count}",
+      "done": "{number} file di {count} inviati."
     }
   }
 }

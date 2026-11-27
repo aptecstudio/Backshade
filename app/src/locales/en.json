@@ -163,7 +163,12 @@
       "fileProtected": "This is protected: the places, the application data and the open show (except its media) cannot be changed.",
       "fileExists": "A file or folder with this name already exists.",
       "copyIntoItself": "A folder cannot be copied or moved into itself.",
-      "trashFailed": "The system could not move it to the trash."
+      "trashFailed": "The system could not move it to the trash.",
+      "uploadFailed": "the file did not arrive.",
+      "unsupportedFile": "This kind of file cannot be sent.",
+      "fileTooLarge": "The file is too large.",
+      "diskFull": "There is not enough space on the disk of the computer.",
+      "uploadBusy": "Too many files are waiting: try again in a moment."
     },
     "settings": {
       "language": "Language",
@@ -1450,6 +1455,12 @@
       "connect": "Connect",
       "controlling": "Remote control of {name}",
       "close": "Close"
+    },
+    "upload": {
+      "title": "Sending files",
+      "fromDevice": "Send from this device",
+      "progress": "File {number} of {count}",
+      "done": "{number} of {count} files sent."
     }
   }
 }
