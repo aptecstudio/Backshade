@@ -165,10 +165,10 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 Remote control works as an extension of the controlled instance (see `MEMORY.md`, Remote control; defined with the human on 2026-11-28). Development order: 10.0, 10.6, then 10.1, 10.2 and 10.4 together, then 10.7, then 10.8, 10.5 and 10.3.
 
 - [x] 10.0 Mandatory show operators: every show has an administrator with a PIN, asked when a show is created and when a show without operators is opened
-- [ ] 10.1 Web server on the local network (native `http` module), always on while the application is open
-- [ ] 10.2 WebSocket transport with the same protocol as IPC (internal implementation, no dependency)
+- [x] 10.1 Web server on the local network (native `http` module), always on while the application is open
+- [x] 10.2 WebSocket transport with the same protocol as IPC (internal implementation, no dependency)
 - [ ] 10.3 Responsive layout for desktop and mobile
-- [ ] 10.4 Access with the PIN of the operator entered on the controlled instance; the remote client acts as that operator
+- [x] 10.4 Access with the PIN of the operator entered on the controlled instance; the remote client acts as that operator
 - [ ] 10.5 Connection address and QR code shown in the application (internal QR code generator, no dependency)
 - [x] 10.6 Internal file manager replacing the system file dialogs: browse home and external drives, file and media types, new folder, copy, move, rename, move to trash, delete
 - [ ] 10.7 Instance name per computer, discovery of the instances on the network and "Remote control" from the start page, opened inside the application

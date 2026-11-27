@@ -177,6 +177,19 @@ Built on 2026-11-28 (10.6).
 - **Code:** engine `src/main/files/` and `file-service.ts` (`fs.*` methods), interface `src/renderer/files/` (`FileBrowser`, `file-dialogs.ts`: folder, show, files, save with overwrite confirmation, browse).
 - **Phone width:** places and toolbar become rows that scroll sideways. (Proposed)
 
+### Web server and WebSocket (10.1, 10.2, 10.4)
+
+Built on 2026-11-28.
+
+- **Server** (`src/main/remote/web-server.ts`, `remote-service.ts`): native `http`, on every network interface, port 4747 or the next free one (up to 4756); stopped at quit. It serves the same interface files, the language packs and, with a session, the media of the open show (the routes of the app protocol, byte ranges included). The addresses are listed in the Application settings (`remote.getInfo`). (Proposed port)
+- **WebSocket** (`websocket.ts`, `websocket-frames.ts`): internal, text only, messages up to 8 MB, ping every 4 s and a client silent for 10 s dropped, a client that reads too slowly dropped. (Proposed times and limits)
+- **Entering** (`remote-auth.ts`): `POST /api/login` with the PIN of the operator entered; the session is an HttpOnly, SameSite=Strict cookie (named by port) valid only while that operator with that PIN stays entered; otherwise the socket closes with code 4001 and the browser shows the login again (or that nobody is entered). 5 wrong PINs lock the address for 5 minutes, 30 wrong PINs lock every address for 5 minutes, each wrong PIN waits 600 ms. (Proposed limits)
+- **Protection:** `Host` must be an IP address, `localhost` or the computer name (against DNS rebinding); login and socket require the `Origin` of the server; security headers on every answer. (Proposed)
+- **Methods:** a remote request runs like one of the interface, with the permissions of the operator; only the window of the computer and changing the operator are refused (`remote-methods.ts`: `app.confirmClose`, `window.*`, `operators.login`, `operators.logout`, `desktop-only`); `app.closeRequested` and `window.fullScreenChanged` are not sent. Folders named by remote requests (open, create, save as, import source, default folder) must be inside the places of the file manager (`requestedFolder`). (Confirmed full control; Proposed the list)
+- **Held controls** (`held-controls.ts`): flash keys of channels and groups, MIDI learn and MIDI monitor held by a client are released by the engine (request context `internal`, without permission checks) when it disconnects. The group flash became an engine method, `console.flashGroup`, used by the grid and MIDI too, so the level before is kept by the engine. (Proposed)
+- **Browser** (`src/renderer/remote/`): without the IPC bridge the interface first shows the login, then talks through `createWebSocketChannel`; when the connection ends it says so and reloads as soon as the computer answers. `crypto.randomUUID` is provided over plain HTTP. In the browser the operator key only shows the operator, the About key and the full screen key are hidden, the PIN dialogs are not used; webcam previews show the placeholder. (Proposed)
+- **Fixed on the way:** a flash on a universe the desk had never touched did nothing (grid and MIDI on a freshly opened show).
+
 ## Show operators
 
 Requested by the human on 2026-11-26, in view of the multi-device work: every show can have its operators with a 4 digit PIN, each one with the working sections enabled or not. It replaces a first per-workstation setting of hidden sections, removed on the human's request: everything goes through the operators.
@@ -639,12 +652,10 @@ Features built with native APIs, without extra dependencies:
 - Art-Net: UDP through Node.js `dgram` (built in Phase 3.4).
 - DOM manipulation: internal TypeScript framework (replaces jQuery).
 - Web server: Node.js `http` module.
+- Server-side WebSocket: internal implementation of RFC 6455 (decided by the human on 2026-11-28, see Remote control).
 - OSC for external mixers: UDP through `dgram`.
 - MIDI for mixers and controllers: Chromium Web MIDI API.
 
-To be evaluated in the related phases (to be proposed with a poll):
-
-- Server-side WebSocket: `ws` or a minimal internal implementation.
 
 Status: Proposed.
 

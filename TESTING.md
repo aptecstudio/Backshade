@@ -204,3 +204,12 @@ How to use it:
 - [ ] New folder, rename, copy and move large videos also between drives, move to the trash (check the system trash) and delete.
 - [ ] The open show and its folders cannot be removed; a link cannot lead outside the places.
 
+## 18. Remote control from a browser
+
+- [ ] From phones, tablets and another computer on the same network (Wi-Fi and cable): the address of the Application settings opens the login; the PIN of the operator entered works, others and nobody entered are refused.
+- [ ] Changes made on the browser and on the computer reach each other; media and video previews play on the browser.
+- [ ] Changing or leaving the operator on the computer disconnects the browser, which asks again.
+- [ ] Turning off the Wi-Fi of a phone while holding a flash key releases it within about 10 seconds; reconnecting brings the page back.
+- [ ] Firewall of Windows and macOS: the first start asks to allow the network; the browser connects after allowing it.
+- [ ] Safari on iPhone and iPad, Chrome on Android, Firefox: every section works.
+
