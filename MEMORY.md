@@ -113,7 +113,7 @@ Built in the first block of Phase 2 (2026-11-23).
   - **RGB colors:** always a `ColorWheel`: hue around the wheel (red at the top, clockwise), saturation from the center, brightness on a `LinearSlider`, plus R, G, B (0 to 255) and hex fields;
   - **fader and knob values:** every fader and every knob (trimmer), small or large, has a `RangeInput` under it, so the value can always be typed on the keyboard (displayed range configurable, for example 0 to 100 % or 0 to 255); control and field stay in sync also when the engine changes the value (`RangeControl.onRender`). Exception (decided by the human on 2026-11-24): the faders of the preset surface of the simple console show their value only in the display above them, without a field under them, to avoid repeating it.
 - **Display of fader and knob values** (requested by the human on 2026-11-23): percentage (default) or 0 to 255, chosen in the Application settings separately for faders and for knobs (called "trimmer" in the Italian interface, at the human's request), saved per device (`localStorage`, keys `backshade.faderValues` and `backshade.knobValues`) and applied immediately, also to the other open windows. Every fader and knob of the interface is bound with `bindControlValue` (`src/renderer/preferences/control-values.ts`), which updates the typed field range, the value text of assistive technologies and the related displays.
-- **System dialogs:** all file and folder pickers of the engine go through `src/main/window/file-dialogs.ts` and are available only through IPC; they always start from the nearest existing folder of the proposed path, so a default folder not yet created (for example `Documents/Backshade/Shows`) never triggers a system warning (fixed on 2026-11-24 at the human's request).
+- **No system file dialogs** (decided by the human on 2026-11-28): every choice of files and folders uses the internal file manager (see Internal file manager); the previous system dialogs (`main/window/file-dialogs.ts`) were removed, with `show.chooseAndOpen`, `dialog.chooseFolder` and `media.reveal`.
 
 Status: Confirmed (2026-11-23).
 
@@ -164,6 +164,18 @@ Defined with the human on 2026-11-28 (Phase 10). It replaces the first idea of o
 - **Instance name:** one per computer, the same for every show, set from the start page. (Confirmed)
 - **Remote control from the application:** "Remote control" on the start page lists the instances found on the network (name and IP address) and opens the chosen one inside the application; it is also reachable from a browser by IP address. (Confirmed)
 - **Internal file manager:** it replaces the system file dialogs, locally and from remote: browse home and external drives, tell file and media types apart, new folder, copy, move, rename, move to trash, delete. Remote clients also send media from their own device. (Confirmed)
+
+## Internal file manager
+
+Built on 2026-11-28 (10.6).
+
+- **Where:** it replaces the system dialogs for opening a show, importing and exporting shows and templates, importing and exporting fixtures, importing media and choosing folders; "show in folder" of the media opens it too. (Confirmed)
+- **Places:** the home folder, external drives (Linux `/media/<user>`, `/run/media/<user>`, `/media`, `/mnt`; macOS `/Volumes` without the system volume; Windows drive letters other than the system one), leaving out empty or unreadable mount points, and the folder of the open show when it is elsewhere. Every path from the interface is checked against them following symbolic links (`file-roots.ts`); hidden files are not listed. (Confirmed places: home and external drives; Proposed details)
+- **Actions:** new folder, rename, copy, cut and paste (a name already used gets a number; across drives a move copies and then removes), move to the trash (`shell.trashItem`), delete for good after a confirmation. File types are shown with their icon and name. (Confirmed)
+- **Protections:** the places themselves, the application data folder, the open show (except inside its `media/`) and the folders containing it cannot be renamed, moved or deleted; nothing is written into the open show outside `media/` or into the application data. Changes in the media of the open show send `media.changed`. (Proposed)
+- **Permissions:** browsing and new folders are free; rename, copy, move, trash and delete need an administrator when a show is open (the interface hides them otherwise). (Proposed)
+- **Code:** engine `src/main/files/` and `file-service.ts` (`fs.*` methods), interface `src/renderer/files/` (`FileBrowser`, `file-dialogs.ts`: folder, show, files, save with overwrite confirmation, browse).
+- **Phone width:** places and toolbar become rows that scroll sideways. (Proposed)
 
 ## Show operators
 

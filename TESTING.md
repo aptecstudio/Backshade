@@ -197,3 +197,10 @@ How to use it:
 - [ ] Pinch zoom in the timeline follows the fingers and lands on the right point; scrolling with one or two fingers works; the page never zooms.
 - [ ] Small square keys and knobs can be hit with a finger also slightly outside their drawing.
 
+## 17. File manager
+
+- [ ] On Windows, macOS and Linux the home folder and external drives (USB sticks, other disks) are listed; a drive plugged in appears when the manager is opened again.
+- [ ] Opening, importing and exporting shows and templates, fixtures and media; overwrite asks first.
+- [ ] New folder, rename, copy and move large videos also between drives, move to the trash (check the system trash) and delete.
+- [ ] The open show and its folders cannot be removed; a link cannot lead outside the places.
+
