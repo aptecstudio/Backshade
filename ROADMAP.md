@@ -149,7 +149,8 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [x] 8.3 Clips: move (also to another track), resize, fades, snap to grid (bars, beats, seconds, frames), selection, duplicate, split, undo and redo
 - [x] 8.4 Audio waveform and markers
 - [x] 8.5 Shared clock and synchronized playback, with loop; the timecode display of the top bar follows it
-- [ ] 8.6 Cue list and go mode (manual advance)
+- [x] 8.6 Cue list and go mode (manual advance): the markers are the cues of the timeline; markers panel beside the editor with the next stop, Go, Back and the list of the markers (decided by the human on 2026-11-27)
+- [ ] 8.7 Recording of live actions as clips while the timeline plays (record key; added by the human on 2026-11-27)
 
 ## Phase 9 - Integrations
 
