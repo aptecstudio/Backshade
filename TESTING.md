@@ -217,4 +217,5 @@ How to use it:
 - [ ] Inside the application the controlled instance works as in a browser; Close brings back the start page and opening it again asks the PIN.
 - [ ] Sending files from a phone (photos, videos from the gallery, audio) and a tablet into the media and into a folder: large videos over Wi-Fi, the progress, cancel, and a lost connection leaves nothing behind.
 - [ ] Inside the application the remote control opens the system file window to send files of this computer.
+- [ ] The QR code (start page and Application settings) is read by the camera of an iPhone and of an Android phone and opens the login; with several networks the chosen address is the reachable one.
 

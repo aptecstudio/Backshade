@@ -169,7 +169,7 @@ Remote control works as an extension of the controlled instance (see `MEMORY.md`
 - [x] 10.2 WebSocket transport with the same protocol as IPC (internal implementation, no dependency)
 - [ ] 10.3 Responsive layout for desktop and mobile (postponed after the final tests, decided by the human on 2026-11-28)
 - [x] 10.4 Access with the PIN of the operator entered on the controlled instance; the remote client acts as that operator
-- [ ] 10.5 Connection address and QR code shown in the application (internal QR code generator, no dependency)
+- [x] 10.5 Connection address and QR code shown in the application (internal QR code generator, no dependency)
 - [x] 10.6 Internal file manager replacing the system file dialogs: browse home and external drives, file and media types, new folder, copy, move, rename, move to trash, delete
 - [x] 10.7 Instance name per computer, discovery of the instances on the network and "Remote control" from the start page, opened inside the application
 - [x] 10.8 Full control from remote: host files through the internal file manager, media sent from the remote device

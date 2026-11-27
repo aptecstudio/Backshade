@@ -210,6 +210,14 @@ Built on 2026-11-28.
 - **Transfer:** `upload.media` or `upload.file` checks the permission and gives a one-use ticket (60 s); the file goes as the body of `POST /api/upload/<ticket>` (session cookie, origin, `application/octet-stream`, exact length), streamed to a hidden `.part` file which takes its name (with a number when used) only when complete and when the session is still valid (`src/main/remote/uploads.ts`). Accepted: media, `.bshow`, `.btemplate`, `.json`; up to 16 GB, with the free space checked, 4 at a time; 60 s of silence stop it. The web server has no total request time limit; the login body has its own. (Proposed limits)
 - **Window:** progress of each file, cancel, and the list of the files that did not arrive.
 
+### Address and QR code (10.5)
+
+Built on 2026-11-28.
+
+- **Where:** the Application settings (Remote control panel) and an "Address and QR code" key of the "This computer" panel of the start page (`ConnectionInfo`). With several networks the address is chosen, 192.168 and 10 first. The code holds only `http://address:port`, never the PIN. (Proposed places)
+- **Generator:** internal, in the framework (`framework/ts/qr/`: Reed-Solomon, codewords, matrix, `QrView` as SVG): byte mode, error correction M, versions 1 to 6 (up to 106 bytes). (Confirmed internal; Proposed limits)
+- **Checks:** known answers of the standard (Reed-Solomon, format strings), zero syndromes of every block and reading the symbol back for lengths up to 106 bytes. No independent decoder was available on the development machine: the human read the code with a phone on 2026-11-28, which gave the address. (Confirmed)
+
 ## Show operators
 
 Requested by the human on 2026-11-26, in view of the multi-device work: every show can have its operators with a 4 digit PIN, each one with the working sections enabled or not. It replaces a first per-workstation setting of hidden sections, removed on the human's request: everything goes through the operators.
