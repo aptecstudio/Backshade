@@ -8,6 +8,7 @@ import { AdminDialog } from '../dialogs/admin-dialog.js';
 import { PinDialog } from '../dialogs/pin-dialog.js';
 import { onOperatorChange, operatorState } from '../show/operator-store.js';
 import { currentShow } from '../show/show-store.js';
+import { isRemote } from '../transport/engine.js';
 
 /** Which request is open */
 type Request = 'pin' | 'admin';
@@ -15,6 +16,10 @@ type Request = 'pin' | 'admin';
 let open: { kind: Request; dialog: PinDialog | AdminDialog } | null = null;
 
 function follow(): void {
+    // A remote client acts as the operator of the controlled computer: without one it is disconnected
+    if (isRemote()) {
+        return;
+    }
     const state = operatorState();
     const show = currentShow();
     const locked = show !== null && state.showId === show.id && state.operator === null;

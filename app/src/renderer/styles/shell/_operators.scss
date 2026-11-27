@@ -10,6 +10,8 @@
     .key,
     .pin-pad__gap {
         width: space(8);
+        // The keys have a larger minimum width: without this the last row would not line up
+        min-width: space(8);
     }
 }
 

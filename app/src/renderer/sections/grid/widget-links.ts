@@ -116,9 +116,6 @@ export function isMomentary(link: WidgetLink): boolean {
     return link.kind === 'group' || link.kind === 'channel';
 }
 
-// Level of a group before its flash key was pressed, to restore it
-const flashed = new Map<string, number>();
-
 /**
  * Press of a key; for momentary links also the release (down false).
  */
@@ -136,13 +133,7 @@ export function pressLink(link: WidgetLink, store: GridStore, down: boolean): vo
             }
             break;
         case 'group':
-            if (down) {
-                flashed.set(link.id, store.groupLevels[link.id] ?? 0);
-                setLinkLevel(link, 1);
-            } else {
-                setLinkLevel(link, flashed.get(link.id) ?? 0);
-                flashed.delete(link.id);
-            }
+            report(engine().request('console.flashGroup', { id: link.id, on: down }));
             break;
         case 'channel':
             report(engine().request('console.setFlash', { row: 'a', universe: link.universe, channel: link.channel, on: down }));

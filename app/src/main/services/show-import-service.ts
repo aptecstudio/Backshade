@@ -16,7 +16,8 @@ import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { optionalString, requireObject, requireString } from '../transport/params';
-import type { RequestRouter } from '../transport/request-router';
+import type { RequestContext, RequestRouter } from '../transport/request-router';
+import { requestedFolder } from '../files/remote-folder';
 import type { OperatorSessionInfo } from './operator-service';
 
 // Wait after a wrong PIN of the source, so that PINs cannot be tried quickly
@@ -31,8 +32,8 @@ export function registerShowImportService(router: RequestRouter, bus: EventBus, 
     };
 
     /** Reads the source show and checks the access to it */
-    const openSource = async (input: Record<string, unknown>): Promise<ImportShow> => {
-        const folder = path.resolve(requireString(input, 'folder'));
+    const openSource = async (input: Record<string, unknown>, context: RequestContext): Promise<ImportShow> => {
+        const folder = requestedFolder(requireString(input, 'folder'), context, target().folder);
         if (folder === path.resolve(target().folder)) {
             throw new EngineError('same-show', 'The source is the open show');
         }
@@ -60,14 +61,14 @@ export function registerShowImportService(router: RequestRouter, bus: EventBus, 
         return { folder, document };
     };
 
-    router.register('showImport.inspect', async (params) => {
-        const source = await openSource(requireObject(params));
+    router.register('showImport.inspect', async (params, context) => {
+        const source = await openSource(requireObject(params), context);
         return buildCatalog(source, target(), operators.current()?.operator.id ?? null);
     });
 
-    router.register('showImport.apply', async (params) => {
+    router.register('showImport.apply', async (params, context) => {
         const input = requireObject(params);
-        const source = await openSource(input);
+        const source = await openSource(input, context);
         if (!Array.isArray(input.items)) {
             throw new EngineError('invalid-params', 'Invalid field "items"');
         }

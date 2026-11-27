@@ -102,6 +102,8 @@ export class PresetDesk {
     setFlash(row: PresetRow, universe: number, channel: number, on: boolean): void {
         const key = `${row}:${universe}:${channel}`;
         if (on) {
+            // The desk composes the universes it knows: a flash may be the first thing on one
+            this.universeLevels(universe);
             this.flashes.add(key);
         } else {
             this.flashes.delete(key);

@@ -1,7 +1,8 @@
 /**
  * Intensity of the fixture groups, set by the group faders of the grid:
  * each group puts the intensity channels of its fixtures at its level
- * (16-bit channels as one value). It is one source of the mixer, merged
+ * (16-bit channels as one value). A flash puts a group at full and gives
+ * back the level it had when released. It is one source of the mixer, merged
  * HTP with the desk and the memories, like the submasters of a desk.
  */
 
@@ -17,6 +18,8 @@ export class GroupLevels {
     private readonly patch: () => ShowPatch | null;
     private readonly mapOf: UniverseMapLookup;
     private readonly levels = new Map<string, number>();
+    /** Level of the flashed groups before the flash */
+    private readonly flashed = new Map<string, number>();
 
     constructor(mixer: DmxMixer, patch: () => ShowPatch | null, mapOf: UniverseMapLookup) {
         this.mixer = mixer;
@@ -39,6 +42,22 @@ export class GroupLevels {
         this.apply();
     }
 
+    /** Press (full) or release (the level before) of the flash of a group */
+    flash(id: string, on: boolean): void {
+        if (on) {
+            if (!this.flashed.has(id)) {
+                this.flashed.set(id, this.levels.get(id) ?? 0);
+                this.set(id, 1);
+            }
+            return;
+        }
+        const before = this.flashed.get(id);
+        if (before !== undefined) {
+            this.flashed.delete(id);
+            this.set(id, before);
+        }
+    }
+
     /**
      * Forgets the levels of deleted groups and writes again, after a change of the patch.
      */
@@ -54,6 +73,7 @@ export class GroupLevels {
 
     clear(): void {
         this.levels.clear();
+        this.flashed.clear();
         this.apply();
     }
 

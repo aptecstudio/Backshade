@@ -1426,6 +1426,16 @@
         "document": "Document",
         "other": "File"
       }
+    },
+    "remote": {
+      "title": "Remote control",
+      "pinHint": "Type the PIN of the operator entered on the computer.",
+      "noOperator": "No operator is entered on the computer: open a show there and enter with the PIN.",
+      "connectionLost": "Connection lost. Reconnecting...",
+      "settingsHint": "Other devices on the same network open this address in a browser and type the PIN of the operator entered here. The network must be private: the connection is not encrypted.",
+      "address": "Address",
+      "unavailable": "The remote control is not available: no free port was found.",
+      "noNetwork": "This computer is not connected to a network."
     }
   }
 }

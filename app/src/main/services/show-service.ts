@@ -4,7 +4,6 @@
  * opened or created shows go into the recent shows.
  */
 
-import path from 'node:path';
 import type { OpenShowResult } from '../../shared/transport/engine-api';
 import type { FixtureLibrary } from '../fixtures/fixture-library';
 import { newAdministrator } from '../operators/new-operator';
@@ -22,6 +21,7 @@ import { optionalBoolean, optionalString, requireObject, requireString } from '.
 import { TIMECODE_RATES, type ShowSettings, type TimecodeRate } from '../../shared/show/show-settings';
 import type { RequestRouter } from '../transport/request-router';
 import { pickedFile, pickedTarget } from '../files/picked-paths';
+import { requestedFolder } from '../files/remote-folder';
 
 /**
  * Registers the methods of the service.
@@ -37,10 +37,10 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
 
     router.register('show.getCurrent', () => session.summary());
 
-    router.register('show.create', (params) => {
+    router.register('show.create', (params, context) => {
         const input = requireObject(params);
         const template = findTemplate(requireString(input, 'templateId'));
-        const folder = path.resolve(requireString(input, 'folder'));
+        const folder = requestedFolder(requireString(input, 'folder'), context, session.summary()?.folder ?? null);
         const admin = requireObject(input.admin);
         const pin = requireString(admin, 'pin');
         // Checked before the folder is made: a wrong PIN never leaves a half-made show
@@ -51,8 +51,8 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         return remember(result);
     });
 
-    router.register('show.open', (params) => {
-        const folder = path.resolve(requireString(requireObject(params), 'folder'));
+    router.register('show.open', (params, context) => {
+        const folder = requestedFolder(requireString(requireObject(params), 'folder'), context, session.summary()?.folder ?? null);
         return remember(session.open(folder));
     });
 
@@ -85,9 +85,9 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         return summary;
     });
 
-    router.register('show.saveAs', (params) => {
+    router.register('show.saveAs', (params, context) => {
         const input = requireObject(params);
-        const summary = session.saveAs(requireString(input, 'name'), path.resolve(requireString(input, 'folder')));
+        const summary = session.saveAs(requireString(input, 'name'), requestedFolder(requireString(input, 'folder'), context, session.summary()?.folder ?? null));
         addRecentShow(summary.name, summary.folder);
         bus.emit('recent.changed', {});
         return summary;

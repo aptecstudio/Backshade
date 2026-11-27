@@ -1,0 +1,11 @@
+// Login of a remote client: the keypad in the middle of the screen
+@use 'framework/scss/tokens' as *;
+
+.remote-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: space(2);
+    outline: none;
+}

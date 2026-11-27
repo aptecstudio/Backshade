@@ -16,8 +16,6 @@ import type { MscCommand } from './midi-parse';
 
 export class MidiActions {
     private readonly router: RequestRouter;
-    /** Level of a group before its key was held, to restore it */
-    private readonly flashed = new Map<string, number>();
     /** Answers of the reading methods during a batch (one round of feedback) */
     private cache: Map<string, Promise<unknown>> | null = null;
 
@@ -180,13 +178,7 @@ export class MidiActions {
                 }
                 break;
             case 'group':
-                if (down) {
-                    this.flashed.set(link.id, (await this.call('console.getGroupLevels'))[link.id] ?? 0);
-                    await this.call('console.setGroupLevel', { id: link.id, level: 1 });
-                } else {
-                    await this.call('console.setGroupLevel', { id: link.id, level: this.flashed.get(link.id) ?? 0 });
-                    this.flashed.delete(link.id);
-                }
+                await this.call('console.flashGroup', { id: link.id, on: down });
                 break;
             case 'channel':
                 await this.call('console.setFlash', { row: 'a', universe: link.universe, channel: link.channel, on: down });

@@ -36,8 +36,8 @@ export function registerScheme(): void {
  * Converts a request into a path inside the interface folder.
  * Returns null if the path leaves the folder.
  */
-function resolveFilePath(url: URL): string | null {
-    const relativePath = decodeURIComponent(url.pathname);
+export function resolveWebFile(pathname: string): string | null {
+    const relativePath = decodeURIComponent(pathname);
     const filePath = path.normalize(path.join(WEB_ROOT, relativePath));
 
     if (filePath !== WEB_ROOT && !filePath.startsWith(WEB_ROOT + path.sep)) {
@@ -68,7 +68,7 @@ export function handle(): void {
             return localeResponse;
         }
 
-        const filePath = resolveFilePath(url);
+        const filePath = resolveWebFile(url.pathname);
 
         if (filePath === null) {
             return new Response(null, { status: 404 });

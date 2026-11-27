@@ -35,6 +35,7 @@ const DESK = ['console', 'virtualConsole'] as const;
 
 export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'app.getInfo': FREE,
+    'remote.getInfo': FREE,
     'app.confirmClose': FREE,
     'window.openAbout': FREE,
     'window.isFullScreen': FREE,
@@ -94,6 +95,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'console.setMaster': play(...DESK),
     'console.setFullOn': play(...DESK),
     'console.setGroupLevel': play(...DESK),
+    'console.flashGroup': play(...DESK),
     'memories.setBpm': play(...DESK),
     'memories.setActive': play(...DESK),
     'memories.setLevel': play(...DESK),

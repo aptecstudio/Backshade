@@ -75,7 +75,10 @@ export function registerOperatorService(router: RequestRouter, bus: EventBus, se
         }
     });
 
-    router.setGuard((method) => {
+    router.setGuard((method, context) => {
+        if (context.transport === 'internal') {
+            return;
+        }
         const rule = METHOD_RULES[method];
         // Without a show there are no operators; with a show, only free methods work until an operator entered
         // (a show without operators first creates its administrator, with the free operators.save)

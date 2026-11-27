@@ -10,7 +10,7 @@ import type { OutputEngine } from '../output/output-engine';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
-import { requireNumber, requireObject, requireString } from '../transport/params';
+import { requireBoolean, requireNumber, requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 /** Level of a group set by the engine (timeline automation) */
@@ -46,12 +46,24 @@ export function registerGroupService(router: RequestRouter, bus: EventBus, sessi
 
     router.register('console.getGroupLevels', () => groups.get());
 
-    router.register('console.setGroupLevel', (params) => {
-        const input = requireObject(params);
+    const existing = (input: Record<string, unknown>): string => {
         const id = requireString(input, 'id');
         if (session.summary() === null || !session.patch().groups.some((group) => group.id === id)) {
             throw new EngineError('group-not-found', `Group not found: ${id}`);
         }
+        return id;
+    };
+
+    router.register('console.flashGroup', (params) => {
+        const input = requireObject(params);
+        groups.flash(existing(input), requireBoolean(input, 'on'));
+        announce();
+        return undefined;
+    });
+
+    router.register('console.setGroupLevel', (params) => {
+        const input = requireObject(params);
+        const id = existing(input);
         groups.set(id, requireNumber(input, 'level'));
         announce();
         return undefined;

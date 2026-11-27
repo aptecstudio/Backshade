@@ -26,7 +26,6 @@ import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { optionalBoolean, optionalString, requireInteger, requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
-import { requireDesktop } from '../transport/require-desktop';
 import { listSerialPorts } from '../usbdmx/serial-binding';
 import { portId, UsbDmxManager } from '../usbdmx/usb-dmx-manager';
 
@@ -182,8 +181,7 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
         return nodes.sort((a, b) => a.address.localeCompare(b.address, undefined, { numeric: true }));
     });
 
-    router.register('output.listSerialPorts', async (_params, context) => {
-        requireDesktop(context);
+    router.register('output.listSerialPorts', async () => {
         const ports = await listSerialPorts();
         return ports
             .map((port) => ({
@@ -199,8 +197,7 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
             .sort((a, b) => Number(b.likelyDmx) - Number(a.likelyDmx) || a.path.localeCompare(b.path));
     });
 
-    router.register('output.setUsbDevice', (params, context) => {
-        requireDesktop(context);
+    router.register('output.setUsbDevice', (params) => {
         const device = normalizeUsbDmxDevice(params);
         if (device === null) {
             throw new EngineError('invalid-params', 'Invalid USB DMX interface');
@@ -212,8 +209,7 @@ export function registerOutputService(router: RequestRouter, bus: EventBus, sess
         return stateChanged();
     });
 
-    router.register('output.removeUsbDevice', (params, context) => {
-        requireDesktop(context);
+    router.register('output.removeUsbDevice', (params) => {
         const id = requireString(requireObject(params), 'id');
         usb.configure(updateSettings({ usbDmxDevices: readSettings().usbDmxDevices.filter((item) => item.id !== id) }).usbDmxDevices);
         engine.refresh();

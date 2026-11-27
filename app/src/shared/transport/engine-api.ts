@@ -268,6 +268,8 @@ export interface OutputUniverseUpdate {
 
 /** Engine methods: parameters and result */
 export interface EngineMethods {
+    /** Port of the web server of the remote control and the addresses where it is reached */
+    'remote.getInfo': { params: undefined; result: { port: number | null; addresses: string[] } };
     /** Information about the application */
     'app.getInfo': { params: undefined; result: AppInfo };
     /** Closes the main window after the confirmation of the user */
@@ -436,6 +438,8 @@ export interface EngineMethods {
     'console.getGroupLevels': { params: undefined; result: Record<string, number> };
     /** Sets the intensity level of a fixture group, 0 to 1 */
     'console.setGroupLevel': { params: { id: string; level: number }; result: undefined };
+    /** Flash of a group: full while held, then the level it had */
+    'console.flashGroup': { params: { id: string; on: boolean }; result: undefined };
     /** Channels of a patched fixture for the attributes panel, null when its definition is missing */
     'console.attributeLayout': { params: { fixture: string }; result: AttributeLayout | null };
     /**

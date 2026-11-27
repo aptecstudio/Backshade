@@ -5,7 +5,7 @@
 
 import { Key, Label, Panel, Stack } from '../../../framework/ts/index.js';
 import { t } from '../../i18n/i18n.js';
-import { engine } from '../../transport/engine.js';
+import { engine, isRemote } from '../../transport/engine.js';
 
 export class AboutSettings extends Panel {
     constructor() {
@@ -13,6 +13,8 @@ export class AboutSettings extends Panel {
 
         const version = new Label({ text: t('app.name'), tone: 'secondary' });
         const open = new Key({ label: t('about.open') });
+        // The About window belongs to the computer
+        open.element.hidden = isRemote();
         open.onPress(() => {
             void engine().request('window.openAbout');
         });

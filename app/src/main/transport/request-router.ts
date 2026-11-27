@@ -9,8 +9,8 @@ import { EngineError } from './engine-error';
 
 /** Origin of a request */
 export interface RequestContext {
-    /** Transport the request comes from */
-    transport: 'ipc' | 'remote';
+    /** Transport the request comes from; internal is the engine itself, without permission checks */
+    transport: 'ipc' | 'remote' | 'internal';
 }
 
 /**
