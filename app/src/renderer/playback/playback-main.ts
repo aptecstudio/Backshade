@@ -7,7 +7,7 @@ import type { AudioDevice } from '../../shared/audio/audio.js';
 import type { PlaybackBridge } from '../../shared/audio/playback-bridge.js';
 import type { PlaybackCommand } from '../../shared/audio/playback-protocol.js';
 import { AudioVoice } from './audio-voice.js';
-import { startMidiHost } from './midi-host.js';
+import { sendMidi, startMidiHost } from './midi-host.js';
 
 declare global {
     interface Window {
@@ -86,6 +86,9 @@ function handle(command: PlaybackCommand): void {
                 .then((devices) => devices.filter((device) => device.kind === 'videoinput').map((device) => ({ id: device.deviceId, label: device.label })))
                 .catch(() => [])
                 .then((inputs) => bridge.report({ type: 'videoInputs', request: command.request, inputs }));
+            break;
+        case 'midiSend':
+            sendMidi(command.device, command.data);
             break;
         case 'listDevices':
             void listDevices().catch(() => []).then((devices) => bridge.report({ type: 'devices', request: command.request, devices }));

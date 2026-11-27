@@ -4,18 +4,22 @@
  * of the operator is checked. Keys act on press (momentary targets also on
  * release); levels set masters, groups, scenes, chasers and DMX channels.
  * The current level of a target is read for the pickup of faders without
- * motors.
+ * motors and for the feedback, with the on state of keys (LEDs). MIDI Show
+ * Control commands act on the cue list.
  */
 
 import type { WidgetLink } from '../../shared/grid/grid';
 import type { MidiTarget } from '../../shared/midi/midi';
 import type { EngineMethod, EngineMethods } from '../../shared/transport/engine-api';
 import type { RequestRouter } from '../transport/request-router';
+import type { MscCommand } from './midi-parse';
 
 export class MidiActions {
     private readonly router: RequestRouter;
     /** Level of a group before its key was held, to restore it */
     private readonly flashed = new Map<string, number>();
+    /** Answers of the reading methods during a batch (one round of feedback) */
+    private cache: Map<string, Promise<unknown>> | null = null;
 
     constructor(router: RequestRouter) {
         this.router = router;
@@ -86,6 +90,81 @@ export class MidiActions {
         }
     }
 
+    /**
+     * On state of a key target, for its LED; null when it has none (cue keys).
+     */
+    async active(target: MidiTarget): Promise<boolean | null> {
+        switch (target.kind) {
+            case 'scene':
+            case 'chaser':
+                return (await this.call('memories.getState')).active.some((item) => item.id === target.id);
+            case 'desk':
+                if (target.action === 'blackout') {
+                    return (await this.call('output.getState')).blackout;
+                }
+                if (target.action === 'home') {
+                    return null;
+                }
+                return (await this.call('console.getState'))[target.action];
+            case 'timeline': {
+                const state = await this.call('timeline.getState');
+                return target.action === 'toggle' ? state.playing : target.action === 'stop' ? null : state.goMode && !state.playing;
+            }
+            case 'audio': {
+                const state = await this.call('audio.getState');
+                if (target.action === 'play') {
+                    return state.item !== null && !state.paused;
+                }
+                return target.action === 'pause' ? state.paused : null;
+            }
+            case 'timer':
+                return (await this.call('video.getTimers'))[target.id]?.running ?? false;
+            case 'group':
+            case 'channel':
+            case 'master': {
+                const level = await this.level(target);
+                return level === null ? null : level > 0;
+            }
+            case 'cue':
+            case 'none':
+                return null;
+        }
+    }
+
+    /**
+     * MIDI Show Control: Go (to a cue number when given), Stop (pause),
+     * Resume (go on after a pause), Reset (release).
+     */
+    async msc(command: MscCommand, cue: string | null): Promise<void> {
+        const state = await this.call('cues.getState');
+        switch (command) {
+            case 'go': {
+                if (cue !== null) {
+                    const target = (await this.call('memories.get')).cues.find((item) => Math.abs(item.number - Number(cue)) < 0.001);
+                    if (target === undefined) {
+                        return;
+                    }
+                    await this.call('cues.setNext', { id: target.id });
+                }
+                await this.call('cues.go', undefined);
+                break;
+            }
+            case 'stop':
+                if (!state.paused) {
+                    await this.call('cues.pause', undefined);
+                }
+                break;
+            case 'resume':
+                if (state.paused) {
+                    await this.call('cues.go', undefined);
+                }
+                break;
+            case 'reset':
+                await this.call('cues.release', undefined);
+                break;
+        }
+    }
+
     private async pressLink(link: WidgetLink, down: boolean): Promise<void> {
         switch (link.kind) {
             case 'scene':
@@ -143,13 +222,37 @@ export class MidiActions {
     }
 
     /**
+     * Runs a function reading the state once per method: the feedback of
+     * many mappings reads each state one time.
+     */
+    async batch<T>(run: () => Promise<T>): Promise<T> {
+        this.cache = new Map();
+        try {
+            return await run();
+        } finally {
+            this.cache = null;
+        }
+    }
+
+    /**
      * Runs a method of the engine like a request of the interface.
      */
     private async call<M extends EngineMethod>(method: M, ...params: EngineMethods[M]['params'] extends undefined ? [] | [undefined] : [EngineMethods[M]['params']]): Promise<EngineMethods[M]['result']> {
-        const response = await this.router.handle({ type: 'request', id: 0, method, params: params[0] }, { transport: 'ipc' });
-        if (!response.ok) {
-            throw new Error(`${response.error.code}: ${response.error.message}`);
+        const reading = method.includes('.get');
+        const key = `${method} ${JSON.stringify(params[0] ?? null)}`;
+        const cached = reading ? this.cache?.get(key) : undefined;
+        if (cached !== undefined) {
+            return cached as Promise<EngineMethods[M]['result']>;
         }
-        return response.result as EngineMethods[M]['result'];
+        const result = this.router.handle({ type: 'request', id: 0, method, params: params[0] }, { transport: 'ipc' }).then((response) => {
+            if (!response.ok) {
+                throw new Error(`${response.error.code}: ${response.error.message}`);
+            }
+            return response.result as EngineMethods[M]['result'];
+        });
+        if (reading) {
+            this.cache?.set(key, result);
+        }
+        return result;
     }
 }

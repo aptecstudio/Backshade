@@ -33,20 +33,54 @@ export type MidiTarget = WidgetLink | { kind: 'timeline'; action: TimelineComman
 /** How a message acts: a key (press and release) or a level (fader, knob) */
 export type MidiMode = 'button' | 'level';
 
+/**
+ * How a control change carries a level: absolute (0 to 127), or relative
+ * for endless encoders: two's complement (1 to 63 up, 127 down to 65 down)
+ * or offset 64 (65 and more up, 63 and less down)
+ */
+export type MidiEncoding = 'absolute' | 'relative2c' | 'relative64';
+export const MIDI_ENCODINGS: readonly MidiEncoding[] = ['absolute', 'relative2c', 'relative64'];
+
 /** Mapping of a message to a target */
 export interface MidiMapping {
     id: string;
     input: MidiInputKey;
     target: MidiTarget;
     mode: MidiMode;
+    /** Level mappings on control changes: absolute or relative encoder; missing in older files */
+    encoding: MidiEncoding;
+}
+
+/** MIDI Show Control received from a show controller: Go, Stop, Resume and Reset act on the cue list */
+export interface MscSettings {
+    enabled: boolean;
+    /** Device identifier this show answers to, 0 to 111; 127 (all) is always accepted */
+    deviceId: number;
 }
 
 /** MIDI section of show.json */
 export interface ShowMidi {
     mappings: MidiMapping[];
+    msc: MscSettings;
 }
 
-export const EMPTY_MIDI: ShowMidi = { mappings: [] };
+export const EMPTY_MIDI: ShowMidi = { mappings: [], msc: { enabled: false, deviceId: 1 } };
+
+/** Message received or sent, for the MIDI monitor */
+export interface MidiMonitorEntry {
+    /** Wall clock time, milliseconds */
+    time: number;
+    direction: 'in' | 'out';
+    device: string;
+    /** Kind of the message, null for the others (clock, system exclusive) */
+    kind: MidiMessageKind | null;
+    channel: number;
+    number: number;
+    /** Raw value, 0 to 127 (0 to 16383 for pitch bend) */
+    value: number;
+    /** Text of a MIDI Show Control command, empty for the others */
+    msc: string;
+}
 
 /** Most mappings of a show */
 export const MAX_MIDI_MAPPINGS = 2000;
@@ -117,7 +151,10 @@ export function normalizeMidi(value: unknown): ShowMidi {
             continue;
         }
         ids.add(entry.id);
-        mappings.push({ id: entry.id, input: key, target, mode: entry.mode === 'level' ? 'level' : 'button' });
+        const encoding = key.kind === 'cc' && MIDI_ENCODINGS.includes(entry.encoding as MidiEncoding) ? entry.encoding as MidiEncoding : 'absolute';
+        mappings.push({ id: entry.id, input: key, target, mode: entry.mode === 'level' ? 'level' : 'button', encoding });
     }
-    return { mappings };
+    const msc = (typeof (input as { msc?: unknown }).msc === 'object' && (input as { msc?: unknown }).msc !== null ? (input as { msc: Record<string, unknown> }).msc : {}) as Record<string, unknown>;
+    const deviceId = typeof msc.deviceId === 'number' && Number.isInteger(msc.deviceId) && msc.deviceId >= 0 && msc.deviceId <= 111 ? msc.deviceId : 1;
+    return { mappings, msc: { enabled: msc.enabled === true, deviceId } };
 }

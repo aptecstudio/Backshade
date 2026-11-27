@@ -1,13 +1,15 @@
 /**
- * MIDI panel of the show settings: the MIDI ports of the workstation, and
- * the mappings of the show (message, device, what it drives), each one with
- * a key to delete it; the mappings of a device can be deleted together.
+ * MIDI panel of the show settings: the MIDI ports of the workstation, the
+ * mappings of the show (message, device, what it drives, and for control
+ * changes driving a level the encoding of an endless encoder), each one
+ * with a key to delete it; the mappings of a device can be deleted
+ * together. Then MIDI Show Control and the monitor of the messages.
  * Mappings are made with MIDI learn (the MIDI key of the top bar).
  */
 
-import { Key, Label, Panel, Stack } from '../../../framework/ts/index.js';
+import { ChoiceKeys, Key, Label, NumberField, Panel, SelectField, Stack } from '../../../framework/ts/index.js';
 import type { MemoriesSummary } from '../../../shared/console/memories.js';
-import type { MidiMapping, MidiState, MidiTarget } from '../../../shared/midi/midi.js';
+import { MIDI_ENCODINGS, type MidiEncoding, type MidiMapping, type MidiMonitorEntry, type MidiState, type MidiTarget, type MscSettings } from '../../../shared/midi/midi.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
@@ -21,6 +23,10 @@ function messageText(mapping: MidiMapping): string {
 export class MidiSettings extends Panel {
     private readonly devices = new Stack({ gap: 1 });
     private readonly list = new Stack({ gap: 1 });
+    private readonly msc = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end' });
+    private readonly monitorList = new Stack({ classes: ['midi-monitor'] });
+    private readonly monitorKey: Key;
+    private monitoring = false;
     private memories: MemoriesSummary = { scenes: [], chasers: [], cues: [] };
 
     constructor() {
@@ -32,8 +38,23 @@ export class MidiSettings extends Panel {
             new Label({ text: t('midi.mappings'), weight: 'medium', size: 'small' }),
             this.list
         );
+        this.monitorKey = new Key({ label: t('midi.monitor'), icon: 'activity' });
+        this.monitorKey.onPress(() => this.setMonitor(!this.monitoring));
+        this.append(
+            new Label({ text: t('midi.msc'), weight: 'medium', size: 'small' }),
+            new Label({ text: t('midi.mscHint'), tone: 'secondary', size: 'small' }),
+            this.msc,
+            new Stack({ direction: 'row', gap: 2, align: 'center', children: [new Label({ text: t('midi.monitorTitle'), weight: 'medium', size: 'small' }), this.monitorKey] }),
+            this.monitorList
+        );
         this.track(engine().on('midi.stateChanged', ({ state }) => this.showDevices(state)));
         this.track(engine().on('midi.changed', () => void this.load()));
+        this.track(engine().on('midi.monitor', ({ entries }) => this.showTraffic(entries)));
+        this.track(() => {
+            if (this.monitoring) {
+                void engine().request('midi.setMonitor', { on: false }).catch(() => undefined);
+            }
+        });
         void engine().request('midi.getState').then((state) => this.showDevices(state)).catch(showError);
         void this.load();
     }
@@ -65,10 +86,54 @@ export class MidiSettings extends Panel {
         }
     }
 
+    private setMonitor(on: boolean): void {
+        this.monitoring = on;
+        this.monitorKey.setState(on ? 'active' : 'normal');
+        if (!on) {
+            this.monitorList.element.replaceChildren();
+        }
+        void engine().request('midi.setMonitor', { on }).catch(showError);
+    }
+
+    /** Last messages first, at most 40 */
+    private showTraffic(entries: MidiMonitorEntry[]): void {
+        if (!this.monitoring) {
+            return;
+        }
+        for (const entry of entries) {
+            const time = new Date(entry.time).toLocaleTimeString(undefined, { hour12: false });
+            const text = entry.msc !== '' ? t('midi.mscMessage', { command: entry.msc })
+                : entry.kind === null ? t('midi.otherMessage')
+                    : `${t(`midi.messages.${entry.kind}`, { number: entry.number, channel: entry.channel })}, ${entry.value}`;
+            const row = new Label({ text: `${time}  ${entry.direction === 'in' ? t('midi.received') : t('midi.sent')}  ${entry.device}  ${text}`, size: 'small', tone: entry.direction === 'in' ? 'primary' : 'secondary' });
+            this.monitorList.element.prepend(row.element);
+        }
+        while (this.monitorList.element.childElementCount > 40) {
+            this.monitorList.element.lastElementChild?.remove();
+        }
+    }
+
+    private showMsc(settings: MscSettings): void {
+        this.msc.element.replaceChildren();
+        const enabled = new ChoiceKeys<'on' | 'off'>({
+            label: t('midi.mscEnabled'),
+            options: [{ value: 'off', label: t('output.off') }, { value: 'on', label: t('output.on') }],
+            value: settings.enabled ? 'on' : 'off'
+        });
+        const deviceId = new NumberField({ label: t('midi.mscDevice'), value: settings.deviceId, min: 0, max: 111 });
+        const send = (): void => void engine().request('midi.setMsc', { enabled: enabled.value === 'on', deviceId: Math.round(deviceId.value) }).catch(showError);
+        enabled.onChange(send);
+        deviceId.onChange(send);
+        this.msc.append(enabled, deviceId);
+    }
+
     private async load(): Promise<void> {
         let mappings: MidiMapping[];
         try {
-            [mappings, this.memories] = await Promise.all([engine().request('midi.getMappings').then((midi) => midi.mappings), engine().request('memories.get')]);
+            const [midi, memories] = await Promise.all([engine().request('midi.getMappings'), engine().request('memories.get')]);
+            mappings = midi.mappings;
+            this.memories = memories;
+            this.showMsc(midi.msc);
         } catch (error) {
             await showError(error);
             return;
@@ -85,6 +150,17 @@ export class MidiSettings extends Panel {
             for (const mapping of mappings.filter((item) => item.input.device === device)) {
                 const remove = new Key({ label: t('midi.deleteMapping'), icon: 'trash-2', iconOnly: true });
                 remove.onPress(() => void engine().request('midi.deleteMapping', { id: mapping.id }).catch(showError));
+                // Control changes driving a level can come from endless encoders
+                const extra: Array<SelectField<MidiEncoding>> = [];
+                if (mapping.mode === 'level' && mapping.input.kind === 'cc') {
+                    const encoding = new SelectField<MidiEncoding>({
+                        ariaLabel: t('midi.encoding'),
+                        options: MIDI_ENCODINGS.map((value) => ({ value, label: t(`midi.encodings.${value}`) })),
+                        value: mapping.encoding
+                    });
+                    encoding.onChange((value) => void engine().request('midi.updateMapping', { id: mapping.id, encoding: value }).catch(showError));
+                    extra.push(encoding);
+                }
                 this.list.append(new Stack({
                     direction: 'row',
                     gap: 2,
@@ -93,6 +169,7 @@ export class MidiSettings extends Panel {
                     children: [
                         new Label({ text: messageText(mapping), size: 'small' }),
                         new Label({ text: this.targetText(mapping.target), size: 'small', tone: 'secondary' }),
+                        ...extra,
                         remove
                     ]
                 }));

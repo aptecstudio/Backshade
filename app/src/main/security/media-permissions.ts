@@ -1,8 +1,8 @@
 /**
  * Media permission (cameras, capture cards, names of the audio and video
  * devices) and MIDI permission (controllers, Phase 16.2): granted only to
- * the windows of the application, the ones on the internal protocol (the
- * application asks MIDI without system exclusive messages). Every other
+ * the windows of the application, the ones on the internal protocol (system
+ * exclusive messages are read only for MIDI Show Control). Every other
  * permission keeps the default behavior.
  */
 
@@ -13,7 +13,7 @@ function isInternal(contents: WebContents | null): boolean {
     return contents !== null && appProtocol.isInternalUrl(contents.getURL());
 }
 
-// Recent Chromium asks "midiSysex" for every Web MIDI access, also without system exclusive messages
+// Recent Chromium asks "midiSysex" for every Web MIDI access; system exclusive also brings MIDI Show Control
 const INTERNAL_ONLY = new Set(['media', 'midi', 'midiSysex']);
 
 /**

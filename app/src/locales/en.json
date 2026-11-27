@@ -1315,6 +1315,22 @@
         "stop": "Timeline stop",
         "go": "Timeline Go",
         "back": "Timeline Back"
+      },
+      "monitor": "Show the messages",
+      "monitorTitle": "Monitor",
+      "received": "in",
+      "sent": "out",
+      "otherMessage": "Other message",
+      "mscMessage": "Show Control {command}",
+      "msc": "MIDI Show Control",
+      "mscHint": "A show controller can drive the cue list of the console: Go (also to a cue number), Stop pauses, Resume goes on, Reset releases.",
+      "mscEnabled": "Answer to MIDI Show Control",
+      "mscDevice": "Device ID",
+      "encoding": "Encoding",
+      "encodings": {
+        "absolute": "Absolute",
+        "relative2c": "Encoder, two's complement",
+        "relative64": "Encoder, offset 64"
       }
     }
   }

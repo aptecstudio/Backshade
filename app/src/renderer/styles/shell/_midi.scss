@@ -19,3 +19,10 @@
 .midi-mapping-row > .label:first-child {
     min-width: space(8) * 3;
 }
+
+// Monitor of the MIDI messages: newest first, fixed height
+.midi-monitor {
+    max-height: space(8) * 3;
+    overflow-y: auto;
+    font-family: $font-family-mono;
+}

@@ -28,7 +28,7 @@ import type { OperatorAccess, OperatorProfile, OperatorState } from '../show/ope
 import type { ImportCatalog, ImportChoice, ImportResult } from '../show/show-import.js';
 import type { ShowSettings } from '../show/show-settings.js';
 import type { MixerRecall, ShowMixer, ShowMixers } from '../mixers/mixers.js';
-import type { MidiMode, MidiState, MidiTarget, ShowMidi } from '../midi/midi.js';
+import type { MidiEncoding, MidiMode, MidiMonitorEntry, MidiState, MidiTarget, ShowMidi } from '../midi/midi.js';
 
 /** Information about the application, for the About window */
 export interface AppInfo {
@@ -517,6 +517,12 @@ export interface EngineMethods {
     'midi.setLearn': { params: { on: boolean }; result: MidiState };
     /** Control chosen in learn mode: the next MIDI message is tied to it (the mapping is an unsaved change) */
     'midi.choose': { params: { target: MidiTarget; mode: MidiMode }; result: MidiState };
+    /** Changes how a control change mapping reads its level: absolute or relative encoder (unsaved change) */
+    'midi.updateMapping': { params: { id: string; encoding: MidiEncoding }; result: ShowMidi };
+    /** MIDI Show Control on or off and the device identifier of the show (unsaved change) */
+    'midi.setMsc': { params: { enabled: boolean; deviceId: number }; result: ShowMidi };
+    /** Monitor of the MIDI messages on or off: while on, midi.monitor events carry the messages */
+    'midi.setMonitor': { params: { on: boolean }; result: undefined };
     /** Deletes a mapping (unsaved change) */
     'midi.deleteMapping': { params: { id: string }; result: ShowMidi };
     /** Deletes the mappings of a device, or all of them (unsaved change) */
@@ -683,6 +689,8 @@ export interface EngineEvents {
     'midi.stateChanged': { state: MidiState };
     /** The MIDI mappings of the open show have changed */
     'midi.changed': Record<string, never>;
+    /** Messages received and sent, while the monitor is on */
+    'midi.monitor': { entries: MidiMonitorEntry[] };
     /** The mixers of the open show have changed */
     'mixers.changed': Record<string, never>;
     /** A timer was started, paused, reset or changed */

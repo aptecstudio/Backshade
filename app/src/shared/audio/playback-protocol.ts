@@ -35,7 +35,9 @@ export type PlaybackCommand =
     | { type: 'volume'; voice: string; volume: number; ramp: number }
     | { type: 'output'; bus: string; device: string; volume: number }
     | { type: 'listDevices'; request: number }
-    | { type: 'listVideoInputs'; request: number };
+    | { type: 'listVideoInputs'; request: number }
+    // MIDI message to an output port, by its name (feedback to controllers)
+    | { type: 'midiSend'; device: string; data: number[] };
 
 /** Report from the playback window to the engine */
 export type PlaybackStatus =

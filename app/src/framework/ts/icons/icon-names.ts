@@ -4,6 +4,7 @@
  */
 
 export const ICON_NAMES = [
+    'activity',
     'arrow-down',
     'arrow-up',
     'chevron-down',
