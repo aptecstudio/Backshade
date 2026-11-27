@@ -776,6 +776,16 @@ Built on 2026-11-27; the order (input first, then feedback, monitor and profiles
 - **Settings:** the MIDI panel of the show settings lists the connected controllers and the mappings by device, with delete keys.
 - **Demo show:** no mappings, since they depend on the controller of each workstation.
 
+### MIDI layer: feedback, encoders, Show Control and monitor (16.2b)
+
+Built on 2026-11-27.
+
+- **Feedback** (`src/main/midi/midi-feedback.ts`): about ten times per second the state of every mapping is read (once per method for all of them, `MidiActions.batch`) and only the changes are sent, to the output port with the same name as the input of the mapping (playback command `midiSend`). Keys send their on state (note or control change, 127 or 0): scenes and chasers on, blackout, full on, blind, timeline playing (Go lit while waiting in go mode), audio playing or paused, timers running, groups and channels above zero; cue keys have no state. Levels send their value (control change, pitch bend for motorized faders). A level moved from the controller is not sent back for 400 ms, so a motorized fader never fights the hand. (Proposed: same port name, rates and states)
+- **Echoes:** a message equal to one sent less than 100 ms before to a port of the same name is ignored, so loopback ports and controllers that echo never press keys by themselves. (Proposed)
+- **Endless encoders:** a level mapping on a control change has an encoding, chosen in the MIDI panel: absolute, relative in two's complement (1 to 63 up, 127 down to 65 down) or relative with offset 64; a step moves the level by 1 %. (Proposed step)
+- **MIDI Show Control** (`parseMsc`): when it is on in the MIDI panel, MSC commands for lighting (command formats 01, 02 and all) sent to the device ID of the show (0 to 111) or to all (127) act on the cue list: Go (to the cue with the given number, when there is one), Stop pauses, Resume goes on after a pause, Reset and Go off release. Saved in `midi.msc` of the show. Web MIDI is asked with system exclusive messages for this. (Proposed)
+- **Monitor:** a key of the MIDI panel turns it on; the engine sends the messages received and sent in groups every 150 ms (`midi.monitor`), the panel shows the last 40 with time, direction, port and decoded message. It turns off when the panel closes.
+
 ## Text gobos
 
 Requested by the human on 2026-11-23 (Phase 7.7), defined on 2026-11-26.

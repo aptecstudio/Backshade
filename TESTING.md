@@ -179,3 +179,8 @@ How to use it:
 - [ ] MIDI learn with a real controller: faders on masters and Preset A channels, buttons on memory keys, cues, blackout, audio and timeline transport, grid widgets; the mappings work after saving and reopening the show.
 - [ ] Pickup: a fader without motor does not move its target until it reaches the current level.
 - [ ] The same show on two workstations with different controllers keeps the mappings of both.
+- [ ] Feedback: LEDs of pads follow scenes, chasers, blackout and transport; motorized faders follow masters moved from the interface and do not fight the hand; LED rings of encoders follow their level.
+- [ ] Endless encoders in both relative encodings move their level in small steps in the right direction.
+- [ ] MIDI Show Control from a show controller (for example QLab): Go with and without a cue number, Stop, Resume, Reset; other device IDs are ignored.
+- [ ] The monitor shows what the controller sends and what Backshade sends back.
+
