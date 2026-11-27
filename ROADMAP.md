@@ -162,19 +162,21 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 
 ## Phase 10 - Remote web interface
 
-Remote control works as an extension of the controlled instance (see `MEMORY.md`, Remote control; defined with the human on 2026-11-28). Development order: 10.0, 10.6, then 10.1, 10.2 and 10.4 together, then 10.7, then 10.8, 10.5 and 10.3.
+Remote control works as an extension of the controlled instance (see `MEMORY.md`, Remote control; defined with the human on 2026-11-28). Development order: 10.0, 10.6, then 10.1, 10.2 and 10.4 together, then 10.7, then 10.8 and 10.5; 10.3 after the final tests.
 
 - [x] 10.0 Mandatory show operators: every show has an administrator with a PIN, asked when a show is created and when a show without operators is opened
 - [x] 10.1 Web server on the local network (native `http` module), always on while the application is open
 - [x] 10.2 WebSocket transport with the same protocol as IPC (internal implementation, no dependency)
-- [ ] 10.3 Responsive layout for desktop and mobile
+- [ ] 10.3 Responsive layout for desktop and mobile (postponed after the final tests, decided by the human on 2026-11-28)
 - [x] 10.4 Access with the PIN of the operator entered on the controlled instance; the remote client acts as that operator
 - [ ] 10.5 Connection address and QR code shown in the application (internal QR code generator, no dependency)
 - [x] 10.6 Internal file manager replacing the system file dialogs: browse home and external drives, file and media types, new folder, copy, move, rename, move to trash, delete
 - [x] 10.7 Instance name per computer, discovery of the instances on the network and "Remote control" from the start page, opened inside the application
-- [ ] 10.8 Full control from remote: host files through the internal file manager, media sent from the remote device
+- [x] 10.8 Full control from remote: host files through the internal file manager, media sent from the remote device
 
 ## Phase 11 - Distribution
+
+Done at the end, after every other phase (decided by the human on 2026-11-28).
 
 - [ ] 11.1 Packaging configuration
 - [ ] 11.2 Windows build

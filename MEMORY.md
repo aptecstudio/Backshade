@@ -201,6 +201,15 @@ Built on 2026-11-28.
 - **Remote control** on the start page (not inside a remote client): a dialog lists the instances found, searches again, or takes an IP address typed by hand (port 4747 by default) when broadcast is blocked. (Confirmed list; Proposed manual address)
 - **View** (`src/main/window/remote-view.ts`): the interface of the other instance in a `WebContentsView` of the main window below a 64 px bar with name, address and Close; sandboxed, no preload (no access to this computer), all permissions refused, its own partition, it can only navigate within that instance and opens nothing; leaving forgets its session cookie, so the PIN is asked again. Closing the application closes it first. (Proposed)
 
+### Files sent from remote devices (10.8)
+
+Built on 2026-11-28.
+
+- **System file window, as an exception** (decided by the human on 2026-11-28): choosing files on the device of a remote client uses the system file window, in browsers and in the remote control inside the application; every other choice of files stays in the internal file manager. (Confirmed)
+- **Keys** (only in a remote client): "Send from this device" in the Media section (into the media of the open show, with the media editable) and in the toolbar of the file manager (into the folder shown, administrators). (Proposed places and permissions)
+- **Transfer:** `upload.media` or `upload.file` checks the permission and gives a one-use ticket (60 s); the file goes as the body of `POST /api/upload/<ticket>` (session cookie, origin, `application/octet-stream`, exact length), streamed to a hidden `.part` file which takes its name (with a number when used) only when complete and when the session is still valid (`src/main/remote/uploads.ts`). Accepted: media, `.bshow`, `.btemplate`, `.json`; up to 16 GB, with the free space checked, 4 at a time; 60 s of silence stop it. The web server has no total request time limit; the login body has its own. (Proposed limits)
+- **Window:** progress of each file, cancel, and the list of the files that did not arrive.
+
 ## Show operators
 
 Requested by the human on 2026-11-26, in view of the multi-device work: every show can have its operators with a 4 digit PIN, each one with the working sections enabled or not. It replaces a first per-workstation setting of hidden sections, removed on the human's request: everything goes through the operators.

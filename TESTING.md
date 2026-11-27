@@ -215,4 +215,6 @@ How to use it:
 - [ ] Safari on iPhone and iPad, Chrome on Android, Firefox: every section works.
 - [ ] Remote control from the start page: instances on Windows, macOS and Linux find each other with their names (check the firewall asks to allow the network); the typed IP address works when the search finds nothing.
 - [ ] Inside the application the controlled instance works as in a browser; Close brings back the start page and opening it again asks the PIN.
+- [ ] Sending files from a phone (photos, videos from the gallery, audio) and a tablet into the media and into a folder: large videos over Wi-Fi, the progress, cancel, and a lost connection leaves nothing behind.
+- [ ] Inside the application the remote control opens the system file window to send files of this computer.
 
