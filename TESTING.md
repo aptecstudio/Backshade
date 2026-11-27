@@ -145,6 +145,14 @@ How to use it:
 
 - [ ] An operator with read-only sections sees their editing controls dimmed and cannot use them (mouse, touch and keyboard), while faders, memory keys, cues, transport, Go and Take still work; the timeline cannot be recorded.
 
+## 12b. External mixers
+
+- [ ] X32 or M32: a recall from the mixer dialog, from a scene, from a cue and from a mixer track loads the right scene of the show loaded on the mixer (check that the number shown on the mixer matches).
+- [ ] X Air or MR (XR12, XR16, XR18, MR18): snapshots 1 to 64 are recalled.
+- [ ] Wing: with a show loaded on the mixer, the right item of the show list is recalled.
+- [ ] Generic OSC with another device or software (for example QLab or Reaper): the address with the number arrives as expected.
+- [ ] A mixer that is off or unreachable never blocks the show; the test row reports the error.
+
 ## 13. Import from another show
 
 - [ ] Import dialog: source among the recent shows and from a folder; categories and single items with toggles.

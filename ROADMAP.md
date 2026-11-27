@@ -155,9 +155,9 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 ## Phase 9 - Integrations
 
 - [ ] 9.1 Lights, audio and video integration: cross triggers and sync
-- [ ] 9.2 External audio mixers via OSC (native UDP)
+- [x] 9.2 External audio mixers via OSC (native UDP): recall of mixer scenes from scenes, cues and mixer tracks of the timelines (decided by the human on 2026-11-27)
 - [ ] 9.3 Mixers and controllers via MIDI (Web MIDI API), on the shared MIDI layer of Phase 16
-- [ ] 9.4 Profiles for the most common mixers (to be defined)
+- [x] 9.4 Profiles for the most common mixers: Behringer X32 and Midas M32, Behringer X Air and Midas MR, Behringer Wing, and generic OSC (decided by the human on 2026-11-27)
 - [ ] 9.5 External timecode (MIDI Timecode, to be evaluated)
 
 ## Phase 10 - Remote web interface

@@ -407,6 +407,17 @@ Status: Confirmed (live monitors, quality per layer, no sound), Proposed (findin
 
 Status: Confirmed (2026-11-21, logo 2026-11-22).
 
+## External audio mixers
+
+Defined with the human on 2026-11-27 (Phase 9.2 and 9.4).
+
+- **What:** Backshade recalls the scenes (snapshots) of external mixers; faders, mutes, meters and triggers from the mixer are not included (decided by the human). (Confirmed)
+- **Models** (decided by the human): Behringer X32 and Midas M32 (`/-action/goscene` with the scene 0 to 99, UDP port 10023), Behringer X Air and Midas MR (`/-snap/load` with the snapshot 1 to 64, port 10024), Behringer Wing (`/$ctl/lib/$actionidx` with the item of the show list, then `/$ctl/lib/$action` "GO", port 2223; a show must be loaded on the mixer), generic OSC (an address with `{number}` replaced by the number, optionally the number as an integer argument, port 8000 by default). The addresses come from the protocol documents of the makers and of the community, to be checked on real mixers (`TESTING.md`). (Confirmed models, Proposed addresses and ranges)
+- **Saved in the show** under `mixers` (`src/shared/mixers/mixers.ts`: name, model, host, port, address, number argument), at most 16; configured in a Mixers panel of the **Output section** (decided by the human), with a test row that recalls a scene at once (`mixers.recall`). Editing needs the Output section editable; recalling is allowed to who plays the output, console, grid or timeline. (Confirmed place, Proposed rules)
+- **Recall from scenes:** a scene has `mixer` (mixer and number, null for none), set in the scene dialog; turning the scene on (memory key, fader, cue) recalls it, like the audio and video of the scene; timeline light clips do not recall (they play lights only). (Proposed)
+- **Mixer tracks** (decided by the human): a new track kind bound to one mixer; each clip recalls a scene when the playhead passes its start, and after a jump (play, locate, loop) the clip under the playhead is recalled, so the mixer follows the timeline. Mixer tracks have no arm key. (Confirmed track, Proposed chase on jumps)
+- **Engine:** OSC messages encoded natively (`src/main/osc/osc-message.ts`), sent on one UDP socket (`src/main/mixers/mixer-sender.ts`); a recall during the show never stops the engine, errors are logged; the test from the interface gets them back (`mixer-unreachable`). No dependency.
+
 ## Repository structure
 
 The repository contains two separate projects, each with its own `package.json`:
