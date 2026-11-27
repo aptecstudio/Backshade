@@ -1,6 +1,6 @@
 /**
  * Messages between the engine and the playback window, which plays the
- * sound. The engine decides what plays; the window plays it and reports
+ * sound and hosts the MIDI ports (Web MIDI). The engine decides what plays; the window plays it and reports
  * positions, ends and errors. A voice is one playing file: during a
  * crossfade two voices sound together. Voices play on a bus, an audio output
  * with its own volume: the bus "player" of the audio player, one bus per
@@ -9,6 +9,7 @@
 
 import type { VideoInput } from '../video/video.js';
 import type { AudioDevice } from './audio.js';
+import type { MidiDevice } from '../midi/midi.js';
 
 /** Command from the engine to the playback window */
 export type PlaybackCommand =
@@ -43,7 +44,11 @@ export type PlaybackStatus =
     | { type: 'ended'; voice: string }
     | { type: 'error'; voice: string; message: string }
     | { type: 'devices'; request: number; devices: AudioDevice[] }
-    | { type: 'videoInputs'; request: number; inputs: VideoInput[] };
+    | { type: 'videoInputs'; request: number; inputs: VideoInput[] }
+    // MIDI ports of the workstation, at the start and at every plug or unplug
+    | { type: 'midiDevices'; devices: MidiDevice[] }
+    // Message received from a MIDI input: name of the port and the bytes
+    | { type: 'midiMessage'; device: string; data: number[] };
 
 /** IPC channels of the playback window */
 export const PLAYBACK_COMMAND_CHANNEL = 'backshade:playback-command';

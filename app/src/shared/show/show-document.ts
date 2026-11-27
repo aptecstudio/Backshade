@@ -10,6 +10,7 @@ import type { ShowGrid } from '../grid/grid.js';
 import type { ShowTimelines } from '../timeline/timeline.js';
 import type { ShowVideo } from '../video/video.js';
 import type { ShowMixers } from '../mixers/mixers.js';
+import type { ShowMidi } from '../midi/midi.js';
 import type { ShowOutput } from '../output/output-config.js';
 import type { ShowPatch } from '../patch/patch.js';
 import type { ShowOperator } from './operators.js';
@@ -51,6 +52,8 @@ export interface ShowDocument {
     video: ShowVideo;
     /** External audio mixers recalled over OSC; missing in older files, completed when reading */
     mixers: ShowMixers;
+    /** MIDI mappings of the controllers, with the name of their device; missing in older files, completed when reading */
+    midi: ShowMidi;
     /** Timelines of tracks; missing in older files, completed when reading */
     timelines: ShowTimelines;
     /** Operators with their PIN and sections; missing in older files, completed when reading */

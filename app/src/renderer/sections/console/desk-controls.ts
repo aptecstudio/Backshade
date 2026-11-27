@@ -6,6 +6,7 @@
  */
 
 import { Fader, Key, Label, LIGHT_SCALE, Panel, RangeInput, Stack } from '../../../framework/ts/index.js';
+import { markMidi } from '../../midi/midi-target.js';
 import type { PresetDeskState, PresetMaster } from '../../../shared/console/preset-desk.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
@@ -38,6 +39,7 @@ export class DeskControls extends Panel {
                 void engine().request('console.setMaster', { master, position }).catch(showError);
             });
             this.masters.set(master, strip.fader);
+            markMidi(strip.fader, { kind: 'master', master }, 'level');
             strips.push(strip);
         }
         const grand = this.strip(t('deskConsole.grandMaster'), false);
@@ -50,6 +52,7 @@ export class DeskControls extends Panel {
             }
         }));
         strips.push(grand);
+        markMidi(grand.fader, { kind: 'master', master: 'grand' }, 'level');
 
         this.fullOn = new Key({ label: t('deskConsole.fullOn') });
         this.blind = new Key({ label: t('deskConsole.blind') });
@@ -57,6 +60,9 @@ export class DeskControls extends Panel {
         this.fullOn.onPress(() => this.toggle('console.setFullOn', this.fullOn));
         this.blind.onPress(() => this.toggle('console.setBlind', this.blind));
         home.onPress(() => void engine().request('console.home').catch(showError));
+        markMidi(this.fullOn, { kind: 'desk', action: 'fullOn' }, 'button');
+        markMidi(this.blind, { kind: 'desk', action: 'blind' }, 'button');
+        markMidi(home, { kind: 'desk', action: 'home' }, 'button');
         this.blindHint = new Label({ text: t('deskConsole.blindOn'), tone: 'accent', size: 'small' });
         this.blindHint.element.hidden = true;
 

@@ -28,6 +28,7 @@ import type { OperatorAccess, OperatorProfile, OperatorState } from '../show/ope
 import type { ImportCatalog, ImportChoice, ImportResult } from '../show/show-import.js';
 import type { ShowSettings } from '../show/show-settings.js';
 import type { MixerRecall, ShowMixer, ShowMixers } from '../mixers/mixers.js';
+import type { MidiMode, MidiState, MidiTarget, ShowMidi } from '../midi/midi.js';
 
 /** Information about the application, for the About window */
 export interface AppInfo {
@@ -508,6 +509,18 @@ export interface EngineMethods {
     'video.saveTimer': { params: { timer: ShowTimer }; result: ShowVideo };
     /** Deletes a timer screen preset (unsaved change) */
     'video.deleteTimer': { params: { id: string }; result: ShowVideo };
+    /** MIDI ports of the workstation and MIDI learn */
+    'midi.getState': { params: undefined; result: MidiState };
+    /** MIDI mappings of the open show */
+    'midi.getMappings': { params: undefined; result: ShowMidi };
+    /** MIDI learn on or off */
+    'midi.setLearn': { params: { on: boolean }; result: MidiState };
+    /** Control chosen in learn mode: the next MIDI message is tied to it (the mapping is an unsaved change) */
+    'midi.choose': { params: { target: MidiTarget; mode: MidiMode }; result: MidiState };
+    /** Deletes a mapping (unsaved change) */
+    'midi.deleteMapping': { params: { id: string }; result: ShowMidi };
+    /** Deletes the mappings of a device, or all of them (unsaved change) */
+    'midi.clearMappings': { params: { device?: string } | undefined; result: ShowMidi };
     /** External audio mixers of the open show */
     'mixers.get': { params: undefined; result: ShowMixers };
     /** Creates (empty id) or changes a mixer (unsaved change) */
@@ -666,6 +679,10 @@ export interface EngineEvents {
     'audio.stateChanged': { state: AudioPlayback };
     /** The video outputs of the open show have changed */
     'video.changed': Record<string, never>;
+    /** MIDI ports or learn changed */
+    'midi.stateChanged': { state: MidiState };
+    /** The MIDI mappings of the open show have changed */
+    'midi.changed': Record<string, never>;
     /** The mixers of the open show have changed */
     'mixers.changed': Record<string, never>;
     /** A timer was started, paused, reset or changed */

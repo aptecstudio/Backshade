@@ -70,6 +70,7 @@ export { onShortcut } from './keyboard/shortcuts.js';
 
 // Keys
 export { Key, type KeyOptions, type KeyState } from './keys/key.js';
+export { HoldKey, type HoldKeyOptions } from './keys/hold-key.js';
 export { SquareKey, type SquareKeyOptions, type SquareKeyVariant } from './keys/square-key.js';
 export { FunctionKey, type FunctionKeyOptions } from './keys/function-key.js';
 

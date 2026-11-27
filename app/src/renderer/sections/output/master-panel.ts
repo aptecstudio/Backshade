@@ -5,6 +5,7 @@
  */
 
 import { Fader, Label, LIGHT_SCALE, Panel, RangeInput, Stack } from '../../../framework/ts/index.js';
+import { markMidi } from '../../midi/midi-target.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { applyOutputState, onOutputState } from '../../output/output-store.js';
@@ -18,6 +19,7 @@ export class MasterPanel extends Panel {
 
         const level = new Label({ text: '', size: 'small' });
         const fader = new Fader({ label: t('output.grandMaster'), value: 1, scale: LIGHT_SCALE });
+        markMidi(fader, { kind: 'master', master: 'grand' }, 'level');
         const input = new RangeInput(fader, { label: t('output.grandMaster') });
         this.track(bindControlValue('fader', fader, { input, text: (text) => level.setText(text) }));
         this.track(fader.onChange((value) => {

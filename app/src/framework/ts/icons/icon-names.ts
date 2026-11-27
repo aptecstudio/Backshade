@@ -36,6 +36,7 @@ export const ICON_NAMES = [
     'package',
     'package-open',
     'pencil',
+    'piano',
     'play',
     'plus',
     'radar',

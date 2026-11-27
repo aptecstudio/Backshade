@@ -11,6 +11,7 @@ import { Emitter, Key, Label, ListItem, Panel, Stack, ValueDisplay, type Unsubsc
 import type { Marker, Timeline } from '../../../shared/timeline/timeline.js';
 import { t } from '../../i18n/i18n.js';
 import { markEdit } from '../../show/edit-access.js';
+import { markMidi } from '../../midi/midi-target.js';
 import { timecode } from './timeline-time.js';
 
 /** Commands of the panel */
@@ -37,6 +38,8 @@ export class MarkerPanel extends Panel {
         back.element.classList.add('marker-panel__back');
         go.onPress(() => this.actions.emit({ kind: 'go' }));
         back.onPress(() => this.actions.emit({ kind: 'back' }));
+        markMidi(go, { kind: 'timeline', action: 'go' }, 'button');
+        markMidi(back, { kind: 'timeline', action: 'back' }, 'button');
         this.empty = new Label({ text: t('timeline.noMarkers'), tone: 'secondary', size: 'small' });
         this.append(new Stack({ gap: 2, children: [this.next, go, back, this.empty, this.list] }));
         this.track(() => this.actions.clear());

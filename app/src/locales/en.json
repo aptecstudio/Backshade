@@ -1285,6 +1285,37 @@
         "xair": "Recalls the snapshots {first} to {last}.",
         "wing": "Recalls the items {first} to {last} of the show list; a show must be loaded on the mixer."
       }
+    },
+    "midi": {
+      "learnHold": "MIDI learn: hold to start",
+      "learnStop": "Leave MIDI learn",
+      "title": "MIDI",
+      "hint": "To map a controller, hold the MIDI key of the top bar until its ring is full, touch a fader or a key of the interface, then move or press the control of the controller. Press the MIDI key (or Escape) to leave. Mappings are saved in the show with the name of their device.",
+      "devices": "Controllers connected",
+      "noDevices": "No MIDI controllers connected.",
+      "disconnected": "{name} (disconnected)",
+      "mappings": "Mappings",
+      "noMappings": "No mappings yet.",
+      "clearDevice": "Delete the mappings of the device",
+      "deleteMapping": "Delete the mapping",
+      "messages": {
+        "note": "Note {number}, channel {channel}",
+        "cc": "CC {number}, channel {channel}",
+        "program": "Program {number}, channel {channel}",
+        "pitch": "Pitch bend, channel {channel}"
+      },
+      "targets": {
+        "scene": "Scene {name}",
+        "chaser": "Chaser {name}",
+        "group": "Group fader",
+        "timer": "Timer command"
+      },
+      "timeline": {
+        "toggle": "Timeline play and pause",
+        "stop": "Timeline stop",
+        "go": "Timeline Go",
+        "back": "Timeline Back"
+      }
     }
   }
 }

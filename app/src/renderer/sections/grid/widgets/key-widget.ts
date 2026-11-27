@@ -8,6 +8,7 @@ import { Key } from '../../../../framework/ts/index.js';
 import type { GridWidget } from '../../../../shared/grid/grid.js';
 import type { GridStore } from '../grid-store.js';
 import { isMomentary, linkActive, pressLink } from '../widget-links.js';
+import { markMidi } from '../../../midi/midi-target.js';
 import { GridWidgetView } from './grid-widget.js';
 
 export class KeyWidget extends GridWidgetView {
@@ -17,6 +18,9 @@ export class KeyWidget extends GridWidgetView {
         super(widget, store);
         this.key = new Key({ label: '' });
         this.append(this.key);
+        if (widget.link.kind !== 'none') {
+            markMidi(this.key, widget.link, 'button');
+        }
         if (isMomentary(widget.link)) {
             let held = false;
             const release = (): void => {

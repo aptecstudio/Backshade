@@ -9,6 +9,7 @@ import type { GridWidget } from '../../../../shared/grid/grid.js';
 import { bindControlValue } from '../../../preferences/control-values.js';
 import type { GridStore } from '../grid-store.js';
 import { linkLevel, setLinkLevel } from '../widget-links.js';
+import { markMidi } from '../../../midi/midi-target.js';
 import { GridWidgetView } from './grid-widget.js';
 
 export class LevelWidget extends GridWidgetView {
@@ -21,6 +22,9 @@ export class LevelWidget extends GridWidgetView {
         const value = new Label({ text: '', size: 'small', tone: 'secondary' });
         this.track(bindControlValue(widget.type === 'fader' ? 'fader' : 'knob', this.control, { text: (text) => value.setText(text) }));
         this.control.onChange((level) => setLinkLevel(widget.link, level));
+        if (widget.link.kind !== 'none') {
+            markMidi(this.control, widget.link, 'level');
+        }
         this.append(this.control, value);
     }
 

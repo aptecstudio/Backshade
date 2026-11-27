@@ -32,6 +32,7 @@ import { registerShowService } from '../services/show-service';
 import { registerTemplateService } from '../services/template-service';
 import { registerTimelineService } from '../services/timeline-service';
 import { registerMixerService } from '../services/mixer-service';
+import { registerMidiService } from '../services/midi-service';
 import { registerWindowService } from '../services/window-service';
 import { ShowSession } from '../shows/show-session';
 import { EventBus } from '../transport/event-bus';
@@ -67,6 +68,7 @@ export function startEngine(): void {
     registerCueService(router, bus, session, player);
     registerTimelineService(router, bus, session, { memory: player, video, playback, desk, output: output.engine, groupLevels, audio, mixers });
     registerGridService(router, bus, session);
+    registerMidiService(router, bus, session, playback);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);

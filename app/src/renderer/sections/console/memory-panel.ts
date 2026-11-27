@@ -9,6 +9,7 @@
 
 import { ChoiceKeys, Key, Label, NumberField, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
 import { canEdit, markEdit } from '../../show/edit-access.js';
+import { markMidi, unmarkMidi } from '../../midi/midi-target.js';
 import {
     BPM_LIMITS,
     CHASER_SLOTS,
@@ -187,6 +188,11 @@ export class MemoryPanel extends Panel {
         key.element.title = memory === null ? code : `${code} ${memory.name}`;
         key.setState(memory !== null && this.isActive(memory.id) ? 'active' : memory === null ? 'inactive' : 'normal');
         key.setArmed(selected);
+        if (memory === null) {
+            unmarkMidi(key);
+        } else {
+            markMidi(key, { kind, id: memory.id }, 'button');
+        }
         // In record mode only the scene keys can be used
         key.setDisabled(this.mode === 'record' && kind === 'chaser');
     }

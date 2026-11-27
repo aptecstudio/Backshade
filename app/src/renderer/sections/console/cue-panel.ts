@@ -8,6 +8,7 @@
 
 import { Key, Label, ListItem, Panel, SelectField, Stack, ValueDisplay, makeSortable } from '../../../framework/ts/index.js';
 import { canEdit, markEdit } from '../../show/edit-access.js';
+import { markMidi } from '../../midi/midi-target.js';
 import type { CueStackState } from '../../../shared/console/cue-stack.js';
 import type { Cue, MemoriesSummary } from '../../../shared/console/memories.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -64,6 +65,10 @@ export class CuePanel extends Panel {
         back.onPress(() => this.command('cues.back'));
         this.pause.onPress(() => this.command('cues.pause'));
         release.onPress(() => this.command('cues.release'));
+        markMidi(go, { kind: 'cue', action: 'go' }, 'button');
+        markMidi(back, { kind: 'cue', action: 'back' }, 'button');
+        markMidi(this.pause, { kind: 'cue', action: 'pause' }, 'button');
+        markMidi(release, { kind: 'cue', action: 'release' }, 'button');
 
         this.append(new Stack({
             direction: 'row',

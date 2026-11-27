@@ -1,6 +1,6 @@
 /**
  * Settings of the open show: description and notes, timecode
- * frame rate, default fade times, operators, import from another show. Every change goes to the engine immediately
+ * frame rate, default fade times, operators, MIDI mappings, import from another show. Every change goes to the engine immediately
  * and becomes an unsaved change of the show.
  */
 
@@ -10,6 +10,7 @@ import { showError } from '../../dialogs/show-error.js';
 import { timePickerLabels } from '../../i18n/control-labels.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
+import { MidiSettings } from './midi-settings.js';
 import { OperatorsSettings } from './operators-settings.js';
 import { ShowImportSettings } from './show-import-settings.js';
 
@@ -70,6 +71,6 @@ export class ShowSettingsPanels extends Stack {
         const fades = new Panel({ title: t('settings.fades') });
         fades.append(new Stack({ direction: 'row', gap: 3, children: [fadeIn, fadeOut] }));
 
-        this.append(general, timecode, fades, new OperatorsSettings(), new ShowImportSettings());
+        this.append(general, timecode, fades, new OperatorsSettings(), new MidiSettings(), new ShowImportSettings());
     }
 }

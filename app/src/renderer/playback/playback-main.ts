@@ -7,6 +7,7 @@ import type { AudioDevice } from '../../shared/audio/audio.js';
 import type { PlaybackBridge } from '../../shared/audio/playback-bridge.js';
 import type { PlaybackCommand } from '../../shared/audio/playback-protocol.js';
 import { AudioVoice } from './audio-voice.js';
+import { startMidiHost } from './midi-host.js';
 
 declare global {
     interface Window {
@@ -94,3 +95,4 @@ function handle(command: PlaybackCommand): void {
 
 bridge.onCommand(handle);
 bridge.report({ type: 'ready' });
+startMidiHost((status) => bridge.report(status));

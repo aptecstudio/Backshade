@@ -159,6 +159,8 @@ export class PresetSurface extends Panel {
             this.strips[row].forEach((strip, index) => {
                 const target = this.target(row, index);
                 strip.setChannel(target?.channel ?? null, target === null ? null : this.labels[target.channel - 1] ?? null);
+                // MIDI drives the channels of Preset A, like the grid
+                strip.setMidiChannel(this.state?.universe ?? 1, target?.row === 'a' ? target.channel : null);
                 if (target !== null) {
                     strip.setValue(this.levels[target.row][target.channel - 1] ?? 0);
                 }

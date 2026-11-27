@@ -13,6 +13,7 @@ import { showError } from '../../dialogs/show-error.js';
 import { timePickerLabels } from '../../i18n/control-labels.js';
 import { t } from '../../i18n/i18n.js';
 import { markEdit } from '../../show/edit-access.js';
+import { markMidi } from '../../midi/midi-target.js';
 import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
 import { ColorSwatch } from '../matrices/color-swatch.js';
@@ -131,6 +132,7 @@ export class TimerPanel extends Panel {
         };
         const command = (label: string, action: TimerAction): Key => {
             const key = new Key({ label });
+            markMidi(key, { kind: 'timer', id: timer.id, action }, 'button');
             key.onPress(() => void engine().request('video.timerCommand', { id: timer.id, action }).then((states) => this.applyStates(states)).catch(showError));
             return key;
         };

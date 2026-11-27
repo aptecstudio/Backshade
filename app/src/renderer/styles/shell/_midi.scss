@@ -1,0 +1,21 @@
+// MIDI learn outlines and the mappings of the show settings
+@use 'framework/scss/tokens' as *;
+
+// MIDI learn: controls that MIDI can drive are outlined, the mapped ones with a solid line, the chosen one in red
+.midi-learn [data-midi] {
+    outline: 2px dashed color('accent');
+    outline-offset: 2px;
+    cursor: crosshair;
+}
+
+.midi-learn .midi-target--mapped {
+    outline-style: solid;
+}
+
+.midi-learn .midi-target--pending {
+    outline: 2px solid color('armed');
+}
+
+.midi-mapping-row > .label:first-child {
+    min-width: space(8) * 3;
+}

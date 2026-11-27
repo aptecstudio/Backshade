@@ -11,6 +11,7 @@
 
 import { Key, Label, Panel, ReadoutDisplay, SelectField, Spacer, Stack } from '../../../framework/ts/index.js';
 import { canEdit, markEdit } from '../../show/edit-access.js';
+import { markMidi } from '../../midi/midi-target.js';
 import { barPosition, newTrack, TRACK_KINDS, type Timeline, type TimelineState, type TrackKind } from '../../../shared/timeline/timeline.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
@@ -88,6 +89,8 @@ export class TimelineSection extends Stack {
         start.onPress(() => this.transport('locate', 0));
         stop.onPress(() => this.transport('stop'));
         this.play.onPress(() => this.transport('toggle'));
+        markMidi(this.play, { kind: 'timeline', action: 'toggle' }, 'button');
+        markMidi(stop, { kind: 'timeline', action: 'stop' }, 'button');
         this.record.onPress(() => void engine().request('timeline.setRecording', { on: !this.state.recording }).then((state) => this.applyState(state)).catch(showError));
         this.loopKey.onPress(() => this.toggleLoop());
         this.goKey.onPress(() => void engine().request('timeline.setOptions', { goMode: !this.state.goMode }).then((state) => this.applyState(state)).catch(showError));

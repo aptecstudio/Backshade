@@ -18,6 +18,7 @@ import {
 import type { ChannelLabel } from '../../../shared/console/preset-desk.js';
 import { t } from '../../i18n/i18n.js';
 import { bindControlValue } from '../../preferences/control-values.js';
+import { markMidi, unmarkMidi } from '../../midi/midi-target.js';
 
 const DMX_MAX = 255;
 
@@ -58,6 +59,20 @@ export class PresetStrip extends Stack {
             this.fader,
             this.flash
         );
+    }
+
+    /**
+     * MIDI target of the strip: fader and flash key on a DMX channel of
+     * Preset A, or none (row B in A/B mode).
+     */
+    setMidiChannel(universe: number, channel: number | null): void {
+        if (channel === null) {
+            unmarkMidi(this.fader);
+            unmarkMidi(this.flash);
+        } else {
+            markMidi(this.fader, { kind: 'channel', universe, channel }, 'level');
+            markMidi(this.flash, { kind: 'channel', universe, channel }, 'button');
+        }
     }
 
     /**

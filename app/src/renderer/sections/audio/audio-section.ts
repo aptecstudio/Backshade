@@ -24,6 +24,7 @@ import type { AudioPlayback, ShowAudio } from '../../../shared/audio/audio.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { canEdit, markEdit } from '../../show/edit-access.js';
+import { markMidi } from '../../midi/midi-target.js';
 import { engine } from '../../transport/engine.js';
 import { openAddAudio } from './add-audio-dialog.js';
 import { openAudioItemDialog } from './audio-item-dialog.js';
@@ -63,6 +64,11 @@ export class AudioSection extends Stack {
         this.pause.onPress(() => this.command('audio.pause'));
         stop.onPress(() => this.command('audio.stop'));
         next.onPress(() => this.command('audio.next'));
+        markMidi(previous, { kind: 'audio', action: 'previous' }, 'button');
+        markMidi(play, { kind: 'audio', action: 'play' }, 'button');
+        markMidi(this.pause, { kind: 'audio', action: 'pause' }, 'button');
+        markMidi(stop, { kind: 'audio', action: 'stop' }, 'button');
+        markMidi(next, { kind: 'audio', action: 'next' }, 'button');
 
         this.volume = new LinearSlider({ label: t('audio.volume'), value: 1 });
         this.volume.onChange((volume) => void engine().request('audio.setPlayer', { volume }).catch(showError));

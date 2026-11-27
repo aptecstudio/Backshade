@@ -7,12 +7,14 @@
 import { Key } from '../../framework/ts/index.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
+import { markMidi } from '../midi/midi-target.js';
 import { applyOutputState, onOutputState, outputState } from '../output/output-store.js';
 import { engine } from '../transport/engine.js';
 
 export class BlackoutKey extends Key {
     constructor() {
         super({ label: t('output.blackout') });
+        markMidi(this, { kind: 'desk', action: 'blackout' }, 'button');
         this.onPress(() => void this.toggle());
         this.track(onOutputState((state) => {
             this.setState(state.blackout ? 'active' : 'normal');

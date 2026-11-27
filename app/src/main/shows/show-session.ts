@@ -14,6 +14,7 @@ import type { ShowGrid } from '../../shared/grid/grid';
 import type { ShowTimelines } from '../../shared/timeline/timeline';
 import type { ShowVideo } from '../../shared/video/video';
 import type { ShowMixers } from '../../shared/mixers/mixers';
+import type { ShowMidi } from '../../shared/midi/midi';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import type { ShowOperator } from '../../shared/show/operators';
@@ -40,7 +41,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'mixers' | 'timelines' | 'operators' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'mixers' | 'midi' | 'timelines' | 'operators' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -326,6 +327,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('mixers');
+    }
+
+    /**
+     * MIDI mappings of the open show.
+     */
+    midi(): ShowMidi {
+        return this.requireOpen().document.midi;
+    }
+
+    /**
+     * Replaces the MIDI mappings; the change must be saved.
+     */
+    setMidi(midi: ShowMidi): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(midi) === JSON.stringify(show.document.midi)) {
+            return;
+        }
+        show.document = { ...show.document, midi };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('midi');
     }
 
     /**

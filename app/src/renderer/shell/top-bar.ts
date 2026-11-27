@@ -1,6 +1,6 @@
 /**
  * Top bar: brand and show, timecode and tempo displays, blackout key,
- * operator key, Start and Settings keys. The tabs of the working sections are in the
+ * MIDI learn key, operator key, Start and Settings keys. The tabs of the working sections are in the
  * status bar.
  *
  * The displays show neutral values until the engine provides them
@@ -14,6 +14,7 @@ import { SETTINGS_SECTION, START_SECTION } from '../sections/section-definitions
 import { BlackoutKey } from './blackout-key.js';
 import { BrandBlock } from './brand-block.js';
 import { FullScreenKey } from './fullscreen-key.js';
+import { MidiKey } from './midi-key.js';
 import { OperatorKey } from './operator-key.js';
 import type { SectionNavigation } from './section-navigation.js';
 import { SectionTabs } from './section-tabs.js';
@@ -49,6 +50,7 @@ export class TopBar extends Panel {
                 this.timecode,
                 this.tempo,
                 new BlackoutKey(),
+                new MidiKey(),
                 new OperatorKey(),
                 new SectionTabs([START_SECTION, SETTINGS_SECTION], navigation),
                 new FullScreenKey()
