@@ -206,7 +206,9 @@ export class TimelinePlayer {
         if (this.goMode) {
             const marker = timeline.markers.find((item) => item.stop && item.time > this.lastPosition && item.time <= position);
             if (marker !== undefined) {
+                // The clock starts again from the marker, so the pause keeps its time
                 this.basePosition = marker.time;
+                this.startedAt = performance.now();
                 this.pause();
                 return;
             }

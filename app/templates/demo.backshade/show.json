@@ -2510,7 +2510,26 @@
             "points": []
           }
         ],
-        "markers": []
+        "markers": [
+          {
+            "id": "93754d83-8fd9-441d-8e26-e9610511ea18",
+            "time": 0,
+            "name": "Walk-in",
+            "stop": false
+          },
+          {
+            "id": "ec209611-b77f-413f-a90d-fab5e345aab3",
+            "time": 8,
+            "name": "Blue wash",
+            "stop": false
+          },
+          {
+            "id": "ad3cdaf3-5824-4e2f-8651-b304c1405362",
+            "time": 16,
+            "name": "Hold for the band",
+            "stop": true
+          }
+        ]
       }
     ]
   },

@@ -7,15 +7,20 @@
  * another track of the same kind), resized from their edges and given fades
  * from their top corners, with snap to the grid; a double click opens a clip
  * or adds one. Automation points are added with a click, moved by dragging
- * and removed with a double click. Every change goes through the session,
- * so it can be undone.
+ * and removed with a double click. Audio clips show the waveform of the
+ * part of the file they play. Markers are added with a double click on the
+ * ruler or at the playhead, moved by dragging and opened with a double
+ * click. Every change goes through the session, so it can be undone.
  */
 
 import { CHANNEL_COLORS, Component, Emitter, channelColorClass, create, makeSortable, type SortableDrop, type Unsubscribe } from '../../../framework/ts/index.js';
-import type { Clip, Timeline, Track } from '../../../shared/timeline/timeline.js';
+import type { Clip, Marker, Timeline, Track } from '../../../shared/timeline/timeline.js';
 import { t } from '../../i18n/i18n.js';
+import { loadPeaks, peaksKey, peaksNow } from './audio-peaks.js';
+import { createWaveform, drawWaveform } from './clip-waveform.js';
 import { clipName, targetName, type EditorContext } from './editor-context.js';
 import { openClipDialog } from './clip-dialog.js';
+import { openMarkerDialog } from './marker-dialog.js';
 import { TrackHeader, type HeaderAction } from './track-header.js';
 import { TimelineRuler } from './timeline-ruler.js';
 import type { TimelineSession } from './timeline-session.js';
@@ -128,6 +133,16 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         return this.locates.subscribe(listener);
     }
 
+    /** Adds a marker at a time, named with the next number */
+    addMarker(time: number): void {
+        const timeline = this.session.timeline;
+        const marker: Marker = { id: crypto.randomUUID(), time: Math.max(0, Math.min(timeline.length, time)), name: t('timeline.markerName', { number: timeline.markers.length + 1 }), stop: false };
+        this.session.edit((next) => {
+            next.markers.push(marker);
+            next.markers.sort((a, b) => a.time - b.time);
+        });
+    }
+
     clearSelection(): void {
         this.selection.clear();
         this.render();
@@ -210,8 +225,13 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         this.inner.style.setProperty('--lane-width', `${width}px`);
 
         const rulerRow = create('div', { classes: ['timeline-editor__ruler-row'], children: [create('div', { classes: ['timeline-editor__corner'], text: t('timeline.trackCount', { count: timeline.tracks.length }) })] });
-        const ruler = new TimelineRuler(timeline, this.pps, this.loop);
+        const ruler = new TimelineRuler(timeline, this.pps, this.loop, this.step);
         ruler.onLocate((time) => this.locates.emit(Math.max(0, Math.min(timeline.length, time))));
+        ruler.onAddMarker((time) => this.addMarker(time));
+        ruler.onMoveMarker(({ id, time }) => this.session.edit((next) => {
+            next.markers = next.markers.map((marker) => marker.id === id ? { ...marker, time } : marker).sort((a, b) => a.time - b.time);
+        }));
+        ruler.onOpenMarker((id) => void this.editMarker(id));
         ruler.mount(rulerRow);
         this.views.push(ruler);
         this.inner.append(rulerRow);
@@ -281,10 +301,53 @@ export class TimelineEditor extends Component<HTMLDivElement> {
                 create('span', { classes: ['timeline-clip__edge', 'timeline-clip__edge--end'], attributes: { 'data-part': 'end' } })
             ]
         });
+        if (clip.source.kind === 'audio') {
+            this.addWaveform(element, clip, clip.source.file);
+        }
         this.place(element, clip);
         this.listen(element, 'pointerdown', (event) => this.startDrag(event, track, clip, element));
         this.listen(element, 'dblclick', () => void this.editClip(track, clip));
         return element;
+    }
+
+    /** Waveform under the name of an audio clip, drawn when the peaks of its file are ready */
+    private addWaveform(element: HTMLDivElement, clip: Clip, file: string): void {
+        const item = this.context.media.find((media) => media.file === file);
+        if (item === undefined) {
+            return;
+        }
+        const svg = createWaveform();
+        element.insertBefore(svg, element.children[1] ?? null);
+        const width = clip.duration * this.pps;
+        const key = peaksKey(item);
+        const peaks = peaksNow(key);
+        if (peaks !== undefined) {
+            if (peaks !== null) {
+                drawWaveform(svg, peaks, clip.offset, clip.duration, width);
+            }
+            return;
+        }
+        void loadPeaks(key, file).then((loaded) => {
+            if (loaded !== null && svg.isConnected) {
+                drawWaveform(svg, loaded, clip.offset, clip.duration, width);
+            }
+        });
+    }
+
+    private async editMarker(id: string): Promise<void> {
+        const marker = this.session.timeline.markers.find((item) => item.id === id);
+        if (marker === undefined) {
+            return;
+        }
+        const result = await openMarkerDialog(marker, this.session.timeline);
+        if (result === null) {
+            return;
+        }
+        this.session.edit((next) => {
+            next.markers = result.action === 'delete'
+                ? next.markers.filter((item) => item.id !== id)
+                : next.markers.map((item) => item.id === id ? result.marker : item).sort((a, b) => a.time - b.time);
+        });
     }
 
     private place(element: HTMLElement, clip: Pick<Clip, 'start' | 'duration' | 'fadeIn' | 'fadeOut'>): void {

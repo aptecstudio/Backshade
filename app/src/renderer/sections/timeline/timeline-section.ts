@@ -4,7 +4,8 @@
  * record, loop, go mode), the time, bar and tempo displays, the snap and the
  * zoom; below the editor of the tracks. Space plays or pauses, Delete
  * removes the selected clips, Ctrl+Z and Ctrl+Shift+Z undo and redo,
- * Ctrl+D duplicates, S splits at the playhead, Home goes to the start.
+ * Ctrl+D duplicates, S splits at the playhead, M adds a marker at the
+ * playhead, Home goes to the start.
  */
 
 import { Key, Label, Panel, ReadoutDisplay, SelectField, Spacer, Stack } from '../../../framework/ts/index.js';
@@ -76,6 +77,8 @@ export class TimelineSection extends Stack {
         this.record = new Key({ label: t('memories.record'), icon: 'circle-dot', iconOnly: true });
         this.loopKey = new Key({ label: t('timeline.loop'), icon: 'repeat', iconOnly: true });
         this.goKey = new Key({ label: t('timeline.goMode') });
+        const marker = new Key({ label: t('timeline.addMarker'), icon: 'flag' });
+        marker.onPress(() => this.editor?.addMarker(this.position()));
         start.onPress(() => this.transport('locate', 0));
         stop.onPress(() => this.transport('stop'));
         this.play.onPress(() => this.transport('toggle'));
@@ -97,7 +100,7 @@ export class TimelineSection extends Stack {
         const header = new Panel({ classes: ['timeline-section__header'] });
         header.append(
             new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.chooser, this.settings, create, this.addTrack, undo, redo, new Spacer(), zoomOut, zoomIn, this.snap] }),
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [start, stop, this.play, this.record, this.loopKey, this.goKey, new Spacer(), this.time, this.bar, this.bpm] })
+            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [start, stop, this.play, this.record, this.loopKey, this.goKey, marker, new Spacer(), this.time, this.bar, this.bpm] })
         );
         this.append(header, this.empty, this.holder, this.info);
 
@@ -290,6 +293,8 @@ export class TimelineSection extends Stack {
             this.editor?.duplicateSelected();
         } else if (!mod && key === 's') {
             this.editor?.splitAt(this.position());
+        } else if (!mod && key === 'm') {
+            this.editor?.addMarker(this.position());
         } else if (key === 'home') {
             this.transport('locate', 0);
         } else {

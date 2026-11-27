@@ -17,6 +17,7 @@ export const ICON_NAMES = [
     'cone',
     'delete',
     'file-plus',
+    'flag',
     'folder-open',
     'folder-search',
     'grid-3x2',

@@ -741,7 +741,15 @@
       },
       "beatsPerBar": "Movimenti per battuta",
       "deleteTimeline": "Elimina la timeline",
-      "deleteConfirm": "Eliminare \"{name}\" e le sue tracce?"
+      "deleteConfirm": "Eliminare \"{name}\" e le sue tracce?",
+      "addMarker": "Marker",
+      "marker": "Marker",
+      "markerName": "Marker {number}",
+      "markerTime": "Tempo",
+      "markerStop": "In modalità Go",
+      "markerPass": "Prosegui",
+      "markerPause": "Pausa qui",
+      "deleteMarker": "Elimina il marker"
     },
     "fixtures": {
       "libraryTitle": "Libreria fixture",

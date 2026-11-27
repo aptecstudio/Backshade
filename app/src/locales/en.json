@@ -741,7 +741,15 @@
       },
       "beatsPerBar": "Beats per bar",
       "deleteTimeline": "Delete the timeline",
-      "deleteConfirm": "Delete \"{name}\" and its tracks?"
+      "deleteConfirm": "Delete \"{name}\" and its tracks?",
+      "addMarker": "Marker",
+      "marker": "Marker",
+      "markerName": "Marker {number}",
+      "markerTime": "Time",
+      "markerStop": "In go mode",
+      "markerPass": "Play through",
+      "markerPause": "Pause here",
+      "deleteMarker": "Delete the marker"
     },
     "fixtures": {
       "libraryTitle": "Fixture library",
