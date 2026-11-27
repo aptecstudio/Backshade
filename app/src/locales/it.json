@@ -1514,7 +1514,27 @@
       "readOnly": "Sola lettura",
       "noShow": "Apri uno show per allestire il palco.",
       "locked": "Entra con il tuo PIN nella finestra principale.",
-      "denied": "Il tuo profilo non vede il palco."
+      "denied": "Il tuo profilo non vede il palco.",
+      "mode": "Modalità",
+      "setup": "Allestimento",
+      "live": "Dal vivo",
+      "haze": "Foschia",
+      "hazeLevels": {
+        "none": "Senza foschia",
+        "light": "Foschia leggera",
+        "medium": "Foschia media",
+        "heavy": "Foschia densa"
+      },
+      "quality": "Qualità",
+      "qualityLevels": {
+        "low": "Qualità bassa",
+        "medium": "Qualità media",
+        "high": "Qualità alta"
+      },
+      "frameRate": "Fotogrammi al secondo",
+      "fps": "{count} fps",
+      "beams": "Fasci",
+      "strobe": "Strobo"
     }
   }
 }

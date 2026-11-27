@@ -25,6 +25,7 @@ export class StagePage extends Stack {
         this.track(onOperatorChange(() => void this.refresh().catch(showError)));
         this.track(engine().on('stage.changed', () => void this.reload().catch(showError)));
         this.track(engine().on('patch.changed', () => void this.reload().catch(showError)));
+        this.track(engine().on('fixtures.changed', () => void this.reload().catch(showError)));
         void this.refresh().catch(showError);
     }
 
@@ -43,10 +44,12 @@ export class StagePage extends Stack {
         if (reason !== null || show === null) {
             this.message.setText(reason ?? '');
             this.editor.setEditable(false);
+            this.editor.suspend();
             this.loaded = null;
             return;
         }
         this.editor.setEditable(access === 'edit');
+        this.editor.resume();
         if (this.loaded !== show.id) {
             this.loaded = show.id;
             await this.editor.load(true);

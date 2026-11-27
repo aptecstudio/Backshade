@@ -18,6 +18,8 @@ export interface ModelInfo {
     id: string;
     category: ModelCategory;
     file: string;
+    /** Lens of a fixture: centre of its face, direction of the beam and radius */
+    emitter?: { position: [number, number, number]; direction: [number, number, number]; radius: number };
     /** Length of a truss along X, in meters */
     length?: number;
     /** Points the moving parts of a fixture turn around */

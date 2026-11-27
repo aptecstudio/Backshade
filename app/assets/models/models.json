@@ -37,12 +37,38 @@
                 0.4,
                 0
             ]
+        },
+        "emitter": {
+            "position": [
+                0,
+                0.593,
+                0
+            ],
+            "direction": [
+                0,
+                1,
+                0
+            ],
+            "radius": 0.09
         }
     },
     {
         "id": "par",
         "category": "fixtures",
-        "file": "par.obj"
+        "file": "par.obj",
+        "emitter": {
+            "position": [
+                0,
+                0.18,
+                0.091
+            ],
+            "direction": [
+                0,
+                0,
+                1
+            ],
+            "radius": 0.09
+        }
     },
     {
         "id": "singer-male",

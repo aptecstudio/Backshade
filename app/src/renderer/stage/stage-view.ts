@@ -30,6 +30,9 @@ export class StageView extends Component<HTMLDivElement> {
     readonly orbit: OrbitControls;
     private readonly renderer: THREE.WebGLRenderer;
     private frame = 0;
+    private readonly house: Array<{ light: THREE.Light; full: number; dim: number }>;
+    private readonly grids: THREE.GridHelper[];
+    private readonly floor: THREE.Mesh;
 
     constructor() {
         super(create('div', { classes: ['stage-view'] }));
@@ -46,7 +49,15 @@ export class StageView extends Component<HTMLDivElement> {
         const squares = new THREE.GridHelper(FLOOR, Math.round(FLOOR / STAGE_GRID), 0x24252a, 0x24252a);
         const meters = new THREE.GridHelper(FLOOR, FLOOR, 0x5a5d66, 0x3a3c43);
         meters.position.y = 0.001;
-        this.scene.add(new THREE.HemisphereLight(0xdfe3ea, 0x1b1c20, 1.8), sun, back, squares, meters);
+        const sky = new THREE.HemisphereLight(0xdfe3ea, 0x1b1c20, 1.8);
+        // Surface that takes the light of the fixtures in the live view
+        this.floor = new THREE.Mesh(new THREE.PlaneGeometry(FLOOR * 2, FLOOR * 2), new THREE.MeshStandardMaterial({ color: 0x55565c, roughness: 0.95 }));
+        this.floor.rotation.x = -Math.PI / 2;
+        this.floor.position.y = -0.002;
+        this.floor.visible = false;
+        this.house = [{ light: sky, full: 1.8, dim: 0.14 }, { light: sun, full: 2, dim: 0.08 }, { light: back, full: 0.8, dim: 0.05 }];
+        this.grids = [squares, meters];
+        this.scene.add(sky, sun, back, squares, meters, this.floor);
 
         this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
         this.orbit.addEventListener('change', () => this.draw());
@@ -69,6 +80,25 @@ export class StageView extends Component<HTMLDivElement> {
     /** Point the camera looks at, on the floor */
     get centre(): { x: number; z: number } {
         return this.orbit.target;
+    }
+
+    /** Full work light with the grid, or a dark venue for the live view */
+    setHouseLights(on: boolean): void {
+        for (const { light, full, dim } of this.house) {
+            light.intensity = on ? full : dim;
+        }
+        this.grids.forEach((grid) => {
+            grid.visible = on;
+        });
+        this.floor.visible = !on;
+        (this.scene.background as THREE.Color).set(on ? 0x16171a : 0x050506);
+        this.draw();
+    }
+
+    /** Pixels drawn for each pixel of the screen, up to the density of the screen */
+    setPixelRatio(limit: number): void {
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, limit));
+        this.resize();
     }
 
     /** Moves the camera to a view of the whole content */

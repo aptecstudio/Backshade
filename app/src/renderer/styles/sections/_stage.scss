@@ -42,3 +42,8 @@
 .stage-page [hidden] {
     display: none;
 }
+
+// Compact choices of the live view in the toolbar
+.stage-editor .select-field {
+    flex: 0 0 auto;
+}

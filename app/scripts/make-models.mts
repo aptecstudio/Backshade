@@ -23,6 +23,8 @@ interface Model {
     id: string;
     category: 'truss' | 'stage' | 'fixtures' | 'musicians' | 'elements';
     obj: Obj;
+    /** Lens of a fixture: centre of its face, direction of the beam and radius */
+    emitter?: { position: Vector; direction: Vector; radius: number };
     /** Length of a truss along X, to hang fixtures on it */
     length?: number;
     /** Points the moving parts turn around */
@@ -34,8 +36,8 @@ const MODELS: Model[] = [
     { id: 'truss-2m', category: 'truss', obj: truss(2), length: 2 },
     { id: 'truss-3m', category: 'truss', obj: truss(3), length: 3 },
     { id: 'deck-2x1', category: 'stage', obj: deck(0.4) },
-    { id: 'moving-head', category: 'fixtures', obj: movingHead(), pivots: { pan: [0, 0.16, 0], tilt: [0, 0.4, 0] } },
-    { id: 'par', category: 'fixtures', obj: par() },
+    { id: 'moving-head', category: 'fixtures', obj: movingHead(), pivots: { pan: [0, 0.16, 0], tilt: [0, 0.4, 0] }, emitter: { position: [0, 0.593, 0], direction: [0, 1, 0], radius: 0.09 } },
+    { id: 'par', category: 'fixtures', obj: par(), emitter: { position: [0, 0.18, 0.091], direction: [0, 0, 1], radius: 0.09 } },
     { id: 'singer-male', category: 'musicians', obj: singer('male') },
     { id: 'singer-female', category: 'musicians', obj: singer('female') },
     { id: 'wedge', category: 'elements', obj: wedge() },
@@ -47,6 +49,6 @@ fs.mkdirSync(targetDir, { recursive: true });
 for (const model of MODELS) {
     fs.writeFileSync(path.join(targetDir, `${model.id}.obj`), model.obj.text());
 }
-const list = MODELS.map(({ id, category, pivots, length }) => ({ id, category, file: `${id}.obj`, ...(pivots === undefined ? {} : { pivots }), ...(length === undefined ? {} : { length }) }));
+const list = MODELS.map(({ id, category, pivots, length, emitter }) => ({ id, category, file: `${id}.obj`, ...(pivots === undefined ? {} : { pivots }), ...(emitter === undefined ? {} : { emitter }), ...(length === undefined ? {} : { length }) }));
 fs.writeFileSync(path.join(targetDir, 'models.json'), `${JSON.stringify(list, null, 4)}\n`);
 console.log(`Models written: ${MODELS.length}`);

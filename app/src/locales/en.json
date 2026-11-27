@@ -1514,7 +1514,27 @@
       "readOnly": "Read only",
       "noShow": "Open a show to set up the stage.",
       "locked": "Enter your PIN in the main window.",
-      "denied": "Your profile does not see the stage."
+      "denied": "Your profile does not see the stage.",
+      "mode": "Mode",
+      "setup": "Setup",
+      "live": "Live",
+      "haze": "Haze",
+      "hazeLevels": {
+        "none": "No haze",
+        "light": "Light haze",
+        "medium": "Medium haze",
+        "heavy": "Dense haze"
+      },
+      "quality": "Quality",
+      "qualityLevels": {
+        "low": "Low quality",
+        "medium": "Medium quality",
+        "high": "High quality"
+      },
+      "frameRate": "Frames per second",
+      "fps": "{count} fps",
+      "beams": "Beams",
+      "strobe": "Strobe"
     }
   }
 }
