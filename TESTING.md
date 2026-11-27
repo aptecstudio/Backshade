@@ -213,4 +213,6 @@ How to use it:
 - [ ] From a browser: close the show, open another one and enter with its PIN; the computer shows the same operator. After the operator leaves on the computer, entering again from the browser asks the PIN.
 - [ ] Firewall of Windows and macOS: the first start asks to allow the network; the browser connects after allowing it.
 - [ ] Safari on iPhone and iPad, Chrome on Android, Firefox: every section works.
+- [ ] Remote control from the start page: instances on Windows, macOS and Linux find each other with their names (check the firewall asks to allow the network); the typed IP address works when the search finds nothing.
+- [ ] Inside the application the controlled instance works as in a browser; Close brings back the start page and opening it again asks the PIN.
 

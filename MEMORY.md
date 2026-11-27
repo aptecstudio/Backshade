@@ -192,6 +192,15 @@ Built on 2026-11-28.
 - **Browser** (`src/renderer/remote/`): without the IPC bridge the interface first shows the login, then talks through `createWebSocketChannel`; when the connection ends it says so and reloads as soon as the computer answers. `crypto.randomUUID` is provided over plain HTTP. In the browser the operator key only shows the operator, the About key and the full screen key are hidden, the PIN dialogs are not used; webcam previews show the placeholder. (Proposed)
 - **Fixed on the way:** a flash on a universe the desk had never touched did nothing (grid and MIDI on a freshly opened show).
 
+### Instance name, discovery and remote control in the application (10.7)
+
+Built on 2026-11-28.
+
+- **Instance name:** `instanceName` in the global settings (default the computer name, at most 40 characters), shown and renamed in a "This computer" panel of the start page, with or without a show. (Confirmed per computer; Proposed default and panel)
+- **Discovery** (`src/main/network/discovery.ts`): UDP port 4746 (native `dgram`); a search sends `BACKSHADE-DISCOVER 1` to the broadcast addresses and collects for 1.5 s the answers (name and web port) of the other instances; nothing else is told. (Proposed port and protocol)
+- **Remote control** on the start page (not inside a remote client): a dialog lists the instances found, searches again, or takes an IP address typed by hand (port 4747 by default) when broadcast is blocked. (Confirmed list; Proposed manual address)
+- **View** (`src/main/window/remote-view.ts`): the interface of the other instance in a `WebContentsView` of the main window below a 64 px bar with name, address and Close; sandboxed, no preload (no access to this computer), all permissions refused, its own partition, it can only navigate within that instance and opens nothing; leaving forgets its session cookie, so the PIN is asked again. Closing the application closes it first. (Proposed)
+
 ## Show operators
 
 Requested by the human on 2026-11-26, in view of the multi-device work: every show can have its operators with a 4 digit PIN, each one with the working sections enabled or not. It replaces a first per-workstation setting of hidden sections, removed on the human's request: everything goes through the operators.
