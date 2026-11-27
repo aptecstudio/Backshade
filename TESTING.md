@@ -210,6 +210,7 @@ How to use it:
 - [ ] Changes made on the browser and on the computer reach each other; media and video previews play on the browser.
 - [ ] Changing or leaving the operator on the computer disconnects the browser, which asks again.
 - [ ] Turning off the Wi-Fi of a phone while holding a flash key releases it within about 10 seconds; reconnecting brings the page back.
+- [ ] From a browser: close the show, open another one and enter with its PIN; the computer shows the same operator. After the operator leaves on the computer, entering again from the browser asks the PIN.
 - [ ] Firewall of Windows and macOS: the first start asks to allow the network; the browser connects after allowing it.
 - [ ] Safari on iPhone and iPad, Chrome on Android, Firefox: every section works.
 
