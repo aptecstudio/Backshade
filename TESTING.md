@@ -219,3 +219,9 @@ How to use it:
 - [ ] Inside the application the remote control opens the system file window to send files of this computer.
 - [ ] The QR code (start page and Application settings) is read by the camera of an iPhone and of an Android phone and opens the login; with several networks the chosen address is the reachable one.
 
+## 19. 3D stage
+
+- [ ] On Windows, macOS and Linux the key of the top bar opens the stage window; the models are drawn (WebGL available), also on computers with older or integrated graphics.
+- [ ] Mouse: orbit, pan and zoom; touch screen: one finger orbits, two fingers pinch and pan.
+- [ ] Moving the window to a second screen and resizing it keeps the view sharp and proportioned; closing the main window closes it.
+

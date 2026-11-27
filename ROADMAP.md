@@ -10,6 +10,10 @@ Versioning rules (see `AGENTS.md`):
 
 ---
 
+Development order from 2026-11-28 (decided by the human): Phase 13, Phase 14, Phase 15, 16.3, 10.3, then Phase 11. The position of Phase 12 is still to be decided.
+
+---
+
 ## Phase 0 - Project initialization
 
 - [x] 0.1 `AGENTS.md` with the rules for AI agents
@@ -218,7 +222,7 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
 
 3D modeling of the stage with three.js, and a live visualizer that emulates the fixtures from the DMX output. It depends on the fixture model and the output engine (Phase 3) and on the simple console (Phase 4). It is numbered after the existing phases to avoid renumbering them; its position in the development order can be decided later.
 
-- [ ] 13.1 three.js vendored locally and imported as native ES modules (see `MEMORY.md`, Dependencies and Code style)
+- [x] 13.1 three.js vendored locally and imported as native ES modules (see `MEMORY.md`, Dependencies and Code style)
 - [ ] 13.2 Bundled `.obj` model library, ready to use:
   - [ ] 13.2.1 Truss: straight sections of common lengths, corners, T and cross joints, base plates, towers
   - [ ] 13.2.2 Stage: modular decks, risers, stairs

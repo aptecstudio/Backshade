@@ -85,10 +85,12 @@ Development dependencies (in `app/package.json`, installed with `npm ci`):
 | `electron` | 45.4.1 | Application runtime |
 | `typescript` | 7.0.2 | TypeScript compiler (`tsc`) for the application, the internal framework and the build scripts |
 | `sass` | 1.108.2 | SCSS compiler (Dart Sass) for the styles |
+| `@types/three` | 0.187.0 | TypeScript types of three.js |
 
 Bundled in the repository:
 
 - [Lucide](https://lucide.dev) icons 1.78.0 (ISC license), one SVG file per icon in `app/assets/icons/lucide`, turned into a sprite at build time.
+- [three.js](https://threejs.org) 0.187.0 (MIT license), the files used by the 3D stage in `app/vendor/three`.
 
 Built inside the project, without external libraries:
 
