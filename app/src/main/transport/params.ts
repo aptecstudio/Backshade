@@ -41,6 +41,17 @@ export function optionalString(params: Record<string, unknown>, field: string): 
 }
 
 /**
+ * Returns a required boolean field.
+ */
+export function requireBoolean(params: Record<string, unknown>, field: string): boolean {
+    const value = optionalBoolean(params, field);
+    if (value === undefined) {
+        throw new EngineError('invalid-params', `Missing field "${field}"`);
+    }
+    return value;
+}
+
+/**
  * Returns an optional boolean field.
  */
 export function optionalBoolean(params: Record<string, unknown>, field: string): boolean | undefined {

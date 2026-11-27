@@ -7,6 +7,7 @@
  */
 
 import { Key, Label, ListItem, Panel, SelectField, Stack, ValueDisplay, makeSortable } from '../../../framework/ts/index.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
 import type { CueStackState } from '../../../shared/console/cue-stack.js';
 import type { Cue, MemoriesSummary } from '../../../shared/console/memories.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -43,6 +44,7 @@ export class CuePanel extends Panel {
         this.empty = new Label({ text: t('cues.empty'), tone: 'secondary', size: 'small' });
         this.sceneChoice = new SelectField<string>({ ariaLabel: t('cues.scene'), options: [], value: '' });
         this.add = new Key({ label: t('cues.add'), icon: 'plus' });
+        markEdit(this.sceneChoice, this.add);
         this.add.onPress(() => {
             if (this.sceneChoice.value !== '') {
                 void engine().request('cues.add', { scene: this.sceneChoice.value }).catch(showError);
@@ -92,6 +94,7 @@ export class CuePanel extends Panel {
         this.track(makeSortable({
             container: this.list.element,
             items: () => this.rows.map((row) => row.element.element),
+            enabled: () => canEdit('console'),
             onDrop: ({ from, to }) => {
                 const cue = this.rows[from]?.cue;
                 if (cue !== undefined) {
@@ -139,6 +142,7 @@ export class CuePanel extends Panel {
             item.element.dataset.sortableHandle = '';
             const edit = new Key({ label: t('cues.edit', { number: formatCue(cue.number) }), icon: 'pencil', iconOnly: true });
             edit.onPress(() => openCueDialog(cue, this.memories.scenes));
+            markEdit(edit);
             const element = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['cue-row'], children: [item, edit] });
             this.list.append(element);
             return { cue, element };

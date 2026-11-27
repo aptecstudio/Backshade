@@ -31,6 +31,11 @@
     }
 }
 
+// Editing controls of a read-only section: inert (set by the section host) and dimmed
+.section-host--read-only [data-edit] {
+    opacity: 0.4;
+}
+
 .operator-row {
     padding: space(1) 0;
     border-bottom: 1px solid color('panel-border');

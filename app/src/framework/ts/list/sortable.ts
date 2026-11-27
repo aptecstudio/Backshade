@@ -31,6 +31,8 @@ export interface SortableOptions {
     handle?: string;
     /** The item at an index can receive the dragged one inside it */
     canDropInto?: (target: number, dragged: number) => boolean;
+    /** The list can be reordered now (for example, the operator may edit it); always when missing */
+    enabled?: () => boolean;
     onDrop: (drop: SortableDrop) => void;
 }
 
@@ -65,7 +67,7 @@ function scrollParent(element: HTMLElement): HTMLElement | null {
  */
 export function makeSortable(options: SortableOptions): Unsubscribe {
     const stop = on(options.container, 'pointerdown', (event) => {
-        if (event.button !== 0) {
+        if (event.button !== 0 || options.enabled?.() === false) {
             return;
         }
         const target = event.target as HTMLElement;

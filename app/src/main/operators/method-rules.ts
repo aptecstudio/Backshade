@@ -150,6 +150,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'video.deleteTimer': edit('video'),
     'timeline.create': edit('timeline'),
     'timeline.save': edit('timeline'),
+    'timeline.setRecording': edit('timeline'),
     'timeline.delete': edit('timeline'),
     'grid.set': edit('virtualConsole'),
     'media.import': edit('media'),

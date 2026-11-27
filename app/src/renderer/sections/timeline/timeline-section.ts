@@ -10,6 +10,7 @@
  */
 
 import { Key, Label, Panel, ReadoutDisplay, SelectField, Spacer, Stack } from '../../../framework/ts/index.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
 import { barPosition, newTrack, TRACK_KINDS, type Timeline, type TimelineState, type TrackKind } from '../../../shared/timeline/timeline.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
@@ -83,10 +84,11 @@ export class TimelineSection extends Stack {
         this.goKey = new Key({ label: t('timeline.goMode') });
         const marker = new Key({ label: t('timeline.addMarker'), icon: 'flag' });
         marker.onPress(() => this.editor?.addMarker(this.position()));
+        markEdit(create, this.settings, this.addTrack, undo, redo, this.record, marker);
         start.onPress(() => this.transport('locate', 0));
         stop.onPress(() => this.transport('stop'));
         this.play.onPress(() => this.transport('toggle'));
-        this.record.onPress(() => void engine().request('timeline.setOptions', { recording: !this.state.recording }).then((state) => this.applyState(state)).catch(showError));
+        this.record.onPress(() => void engine().request('timeline.setRecording', { on: !this.state.recording }).then((state) => this.applyState(state)).catch(showError));
         this.loopKey.onPress(() => this.toggleLoop());
         this.goKey.onPress(() => void engine().request('timeline.setOptions', { goMode: !this.state.goMode }).then((state) => this.applyState(state)).catch(showError));
 
@@ -184,7 +186,7 @@ export class TimelineSection extends Stack {
         if (this.session === null || this.session.timeline.id !== timeline.id) {
             this.editor?.destroy();
             this.session = new TimelineSession(timeline);
-            this.editor = new TimelineEditor(this.session, this.context, () => snapStep(this.snap.value, this.session?.timeline ?? timeline, this.context.fps));
+            this.editor = new TimelineEditor(this.session, this.context, () => snapStep(this.snap.value, this.session?.timeline ?? timeline, this.context.fps), () => canEdit('timeline'));
             this.editor.onLocate((time) => this.transport('locate', time));
             this.track(this.session.onChange(() => {
                 this.showInfo();
@@ -308,6 +310,11 @@ export class TimelineSection extends Stack {
         let handled = true;
         if (key === ' ') {
             this.transport('toggle');
+        } else if (key === 'home') {
+            this.transport('locate', 0);
+        } else if (!canEdit('timeline')) {
+            // The other shortcuts change the timeline
+            handled = false;
         } else if (key === 'delete' || key === 'backspace') {
             this.editor?.deleteSelected();
         } else if (mod && key === 'z' && event.shiftKey) {
@@ -324,8 +331,6 @@ export class TimelineSection extends Stack {
             this.editor?.splitAt(this.position());
         } else if (!mod && key === 'm') {
             this.editor?.addMarker(this.position());
-        } else if (key === 'home') {
-            this.transport('locate', 0);
         } else {
             handled = false;
         }

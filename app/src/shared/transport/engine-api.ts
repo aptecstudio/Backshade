@@ -531,8 +531,10 @@ export interface EngineMethods {
     'timeline.load': { params: { id: string }; result: TimelineState };
     /** Play, pause, play or pause, stop, move the playhead to a time in seconds, Go (play to the next stop marker) or Back (previous marker) */
     'timeline.transport': { params: { action: 'play' | 'pause' | 'toggle' | 'stop' | 'locate' | 'go' | 'back'; time?: number }; result: TimelineState };
-    /** Loop (null to turn it off), go mode and recording */
-    'timeline.setOptions': { params: { loop?: { start: number; end: number } | null; goMode?: boolean; recording?: boolean }; result: TimelineState };
+    /** Loop (null to turn it off) and go mode */
+    'timeline.setOptions': { params: { loop?: { start: number; end: number } | null; goMode?: boolean }; result: TimelineState };
+    /** Record key: live actions become clips on the armed tracks (it changes the timeline, so it needs the section editable) */
+    'timeline.setRecording': { params: { on: boolean }; result: TimelineState };
     /** Pages of the virtual console of the open show */
     'grid.get': { params: undefined; result: ShowGrid };
     /** Replaces the pages of the virtual console (unsaved change); returns them as saved */

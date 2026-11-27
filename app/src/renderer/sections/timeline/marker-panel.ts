@@ -10,6 +10,7 @@
 import { Emitter, Key, Label, ListItem, Panel, Stack, ValueDisplay, type Unsubscribe } from '../../../framework/ts/index.js';
 import type { Marker, Timeline } from '../../../shared/timeline/timeline.js';
 import { t } from '../../i18n/i18n.js';
+import { markEdit } from '../../show/edit-access.js';
 import { timecode } from './timeline-time.js';
 
 /** Commands of the panel */
@@ -65,6 +66,7 @@ export class MarkerPanel extends Panel {
             item.onPress(() => this.actions.emit({ kind: 'locate', time: marker.time }));
             const edit = new Key({ label: t('timeline.editMarker', { name: marker.name }), icon: 'pencil', iconOnly: true });
             edit.onPress(() => this.actions.emit({ kind: 'open', id: marker.id }));
+            markEdit(edit);
             const element = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['marker-row'], children: [item, edit] });
             this.list.append(element);
             return { marker, element };

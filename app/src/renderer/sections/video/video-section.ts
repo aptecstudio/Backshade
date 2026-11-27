@@ -13,6 +13,7 @@ import type { GoboContext } from '../../../shared/video/text-gobo.js';
 import type { OutputComposition, ShowVideo, VideoInput, VideoOutputConfig } from '../../../shared/video/video.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
+import { markEdit } from '../../show/edit-access.js';
 import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
 import { GoboPanel } from './gobo-panel.js';
@@ -56,6 +57,7 @@ export class VideoSection extends Stack {
             }
         });
         this.transition = new NumberField({ ariaLabel: t('video.transition'), value: 1, min: 0, max: 60, decimals: 1, unit: 's' });
+        markEdit(add, this.settings);
         const take = new Key({ label: t('video.take'), size: 'large' });
         const takeAll = new Key({ label: t('video.takeAll') });
         take.onPress(() => this.take(this.selected));

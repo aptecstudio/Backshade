@@ -16,7 +16,7 @@ import { TimelineAudio } from '../timeline/timeline-audio';
 import { TimelinePlayer } from '../timeline/timeline-player';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
-import { optionalBoolean, requireChoice, requireNumber, requireObject, requireString } from '../transport/params';
+import { optionalBoolean, requireBoolean, requireChoice, requireNumber, requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 import type { AudioEngine } from '../audio/audio-engine';
 import type { VideoEngine } from '../video/video-engine';
@@ -170,10 +170,11 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
         if (goMode !== undefined) {
             player.setGoMode(goMode);
         }
-        const recording = optionalBoolean(input, 'recording');
-        if (recording !== undefined) {
-            player.setRecording(recording);
-        }
+        return player.state();
+    });
+
+    router.register('timeline.setRecording', (params) => {
+        player.setRecording(requireBoolean(requireObject(params), 'on'));
         return player.state();
     });
 

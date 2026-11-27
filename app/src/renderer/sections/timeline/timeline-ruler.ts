@@ -30,8 +30,9 @@ export class TimelineRuler extends Component<HTMLDivElement> {
     /**
      * @param pps - Pixels per second
      * @param step - Length of a step of the grid, in seconds (zero for no snap)
+     * @param editable - Markers can be added, moved and opened; otherwise a press only moves the playhead
      */
-    constructor(timeline: Timeline, pps: number, loop: { start: number; end: number } | null, step: () => number) {
+    constructor(timeline: Timeline, pps: number, loop: { start: number; end: number } | null, step: () => number, editable: () => boolean) {
         super(create('div', { classes: ['timeline-ruler'] }));
         this.pps = pps;
         this.element.style.setProperty('--ruler-width', `${timeline.length * pps}px`);
@@ -58,10 +59,12 @@ export class TimelineRuler extends Component<HTMLDivElement> {
             });
             flag.style.setProperty('--tick-x', `${marker.time * pps}px`);
             this.element.append(flag);
-            this.listen(flag, 'pointerdown', (event) => this.dragMarker(event, flag, marker.id, marker.time, timeline.length, step));
+            this.listen(flag, 'pointerdown', (event) => this.dragMarker(event, flag, marker.id, marker.time, timeline.length, step, editable()));
             this.listen(flag, 'dblclick', (event) => {
                 event.stopPropagation();
-                this.opens.emit(marker.id);
+                if (editable()) {
+                    this.opens.emit(marker.id);
+                }
             });
         }
         this.listen(this.element, 'pointerdown', (event) => {
@@ -75,7 +78,7 @@ export class TimelineRuler extends Component<HTMLDivElement> {
             this.element.addEventListener('pointermove', move);
             this.element.addEventListener('pointerup', up);
         });
-        this.listen(this.element, 'dblclick', (event) => this.adds.emit(Math.min(timeline.length, snapTime(this.timeAt(event.clientX), step()))));
+        this.listen(this.element, 'dblclick', (event) => editable() && this.adds.emit(Math.min(timeline.length, snapTime(this.timeAt(event.clientX), step()))));
         this.track(() => {
             this.locates.clear();
             this.adds.clear();
@@ -108,7 +111,7 @@ export class TimelineRuler extends Component<HTMLDivElement> {
         return Math.max(0, (clientX - this.element.getBoundingClientRect().left) / this.pps);
     }
 
-    private dragMarker(event: PointerEvent, flag: HTMLElement, id: string, time: number, length: number, step: () => number): void {
+    private dragMarker(event: PointerEvent, flag: HTMLElement, id: string, time: number, length: number, step: () => number, editable: boolean): void {
         if (event.button !== 0) {
             return;
         }
@@ -119,7 +122,7 @@ export class TimelineRuler extends Component<HTMLDivElement> {
         let latest = time;
         const move = (moveEvent: PointerEvent): void => {
             const dx = moveEvent.clientX - startX;
-            if (!dragged && Math.abs(dx) < DRAG_THRESHOLD) {
+            if (!editable || (!dragged && Math.abs(dx) < DRAG_THRESHOLD)) {
                 return;
             }
             dragged = true;

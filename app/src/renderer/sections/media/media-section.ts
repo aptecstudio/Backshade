@@ -10,6 +10,7 @@ import { askChoice } from '../../dialogs/ask-choice.js';
 import { showError } from '../../dialogs/show-error.js';
 import { formatSize } from '../../i18n/format-size.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
+import { markEdit } from '../../show/edit-access.js';
 import { engine } from '../../transport/engine.js';
 
 const KIND_ICONS: Record<MediaKind, IconName> = { audio: 'music', video: 'video', image: 'image' };
@@ -24,6 +25,7 @@ export class MediaSection extends Panel {
 
         const importKey = new Key({ label: t('media.import'), icon: 'folder-open' });
         importKey.onPress(() => void this.importMedia());
+        markEdit(importKey);
         this.summary = new Label({ text: '', tone: 'secondary', size: 'small' });
         this.append(new Stack({ direction: 'row', gap: 2, align: 'center', children: [importKey, this.summary] }));
 
@@ -62,6 +64,7 @@ export class MediaSection extends Panel {
         const remove = new Key({ label: t('media.delete'), icon: 'trash-2', iconOnly: true });
         reveal.onPress(() => void engine().request('media.reveal', { file: item.file }).catch(showError));
         remove.onPress(() => void this.remove(item));
+        markEdit(remove);
 
         const row = new Stack({ direction: 'row', gap: 2, align: 'center', classes: ['media-row'] });
         row.element.prepend(icon(KIND_ICONS[item.kind], { classes: ['icon--large'] }));

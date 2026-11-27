@@ -6,6 +6,8 @@
  */
 
 import { Key, Label, LocalPreference, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
+import { onOperatorChange } from '../../show/operator-store.js';
 import { GRID_LIMITS, WIDGET_SIZES, type GridPage, type GridWidget, type ShowGrid } from '../../../shared/grid/grid.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
@@ -43,6 +45,13 @@ export class GridSection extends Panel {
         this.editKey.onPress(() => this.setEditing(!this.editing));
         this.addPage.onPress(() => void this.createPage());
         this.pageSettings.onPress(() => void this.changePage());
+        markEdit(this.editKey, this.addPage, this.pageSettings);
+        // An operator who loses the editing of the grid leaves the edit mode
+        this.track(onOperatorChange(() => {
+            if (this.editing && !canEdit('virtualConsole')) {
+                this.setEditing(false);
+            }
+        }));
         this.empty = new Label({ text: t('grid.empty'), tone: 'secondary' });
 
         this.append(

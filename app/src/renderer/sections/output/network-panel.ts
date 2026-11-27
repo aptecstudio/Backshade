@@ -8,6 +8,7 @@ import { FRAME_RATE } from '../../../shared/output/output-config.js';
 import type { NetworkInterfaceInfo, OutputState } from '../../../shared/transport/engine-api.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
+import { markEdit } from '../../show/edit-access.js';
 import { applyOutputState, onOutputState } from '../../output/output-store.js';
 import { currentShow } from '../../show/show-store.js';
 import { engine } from '../../transport/engine.js';
@@ -67,6 +68,7 @@ export class NetworkPanel extends Panel {
         const setWorkstation = (params: { enabled?: boolean; artNetInterface?: string }): void => {
             void engine().request('output.setWorkstation', params).then(applyOutputState).catch(showError);
         };
+        markEdit(enabled, networkInterface, this.frameRate);
         enabled.onChange((value) => setWorkstation({ enabled: value === 'on' }));
         networkInterface.onChange((value) => setWorkstation({ artNetInterface: value }));
         this.frameRate.onChange((value) => {

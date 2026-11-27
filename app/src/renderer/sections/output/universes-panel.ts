@@ -9,6 +9,7 @@ import { formatPortAddress, outputUniverse, type OutputUniverse, type ShowOutput
 import { MAX_UNIVERSE } from '../../../shared/patch/patch.js';
 import type { PatchEntry } from '../../../shared/transport/engine-api.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
 import { openUniverseDialog } from './universe-dialog.js';
 
 const COLUMNS: readonly TextKey[] = ['output.columnUniverse', 'output.columnPortAddress', 'output.columnTransport', 'output.columnFixtures'];
@@ -56,6 +57,7 @@ export class UniversesPanel extends Panel {
     constructor() {
         super({ title: t('output.universes'), classes: ['universes-panel'] });
         const add = new Key({ label: t('output.addUniverse'), icon: 'plus' });
+        markEdit(add);
         add.onPress(() => {
             if (this.output !== null) {
                 const used = this.universes();
@@ -107,7 +109,11 @@ export class UniversesPanel extends Panel {
                 cell(String(fixtures), 'secondary')
             ]
         });
-        row.onPress(() => openUniverseDialog(destination, output.universes.some((item) => item.universe === universe)));
+        row.onPress(() => {
+            if (canEdit('output')) {
+                openUniverseDialog(destination, output.universes.some((item) => item.universe === universe));
+            }
+        });
         return row;
     }
 }

@@ -16,6 +16,7 @@
 import { CHANNEL_COLORS, Component, Emitter, channelColorClass, create, makeSortable, type SortableDrop, type Unsubscribe } from '../../../framework/ts/index.js';
 import type { Clip, Marker, Timeline, Track } from '../../../shared/timeline/timeline.js';
 import { t } from '../../i18n/i18n.js';
+import { markEdit } from '../../show/edit-access.js';
 import { loadPeaks, peaksKey, peaksNow } from './audio-peaks.js';
 import { createWaveform, drawWaveform } from './clip-waveform.js';
 import { clipName, targetName, type EditorContext } from './editor-context.js';
@@ -50,6 +51,8 @@ export class TimelineEditor extends Component<HTMLDivElement> {
     private context: EditorContext;
     private pps = 40;
     private step: () => number;
+    /** The operator may change the timeline */
+    private readonly editable: () => boolean;
     private loop: { start: number; end: number } | null = null;
     private readonly selection = new Set<string>();
     private views: Component[] = [];
@@ -58,12 +61,14 @@ export class TimelineEditor extends Component<HTMLDivElement> {
 
     /**
      * @param step - Length of a step of the grid, in seconds (zero for no snap)
+     * @param editable - The operator may change the timeline; otherwise clips, curves, markers and tracks only play
      */
-    constructor(session: TimelineSession, context: EditorContext, step: () => number) {
+    constructor(session: TimelineSession, context: EditorContext, step: () => number, editable: () => boolean) {
         super(create('div', { classes: ['timeline-editor'], attributes: { tabindex: '0' } }));
         this.session = session;
         this.context = context;
         this.step = step;
+        this.editable = editable;
         this.inner = create('div', { classes: ['timeline-editor__inner'] });
         this.playhead = create('div', { classes: ['timeline-editor__playhead'] });
         this.element.append(this.inner);
@@ -73,6 +78,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             container: this.inner,
             items: () => [...this.inner.querySelectorAll<HTMLElement>('.timeline-row')],
             handle: '.track-header',
+            enabled: editable,
             canDropInto: (target, dragged) => this.canNest(this.shown[target], this.shown[dragged]),
             onDrop: (drop) => this.moveTrack(drop)
         }));
@@ -135,6 +141,9 @@ export class TimelineEditor extends Component<HTMLDivElement> {
 
     /** Adds a marker at a time, named with the next number */
     addMarker(time: number): void {
+        if (!this.editable()) {
+            return;
+        }
         const timeline = this.session.timeline;
         const marker: Marker = { id: crypto.randomUUID(), time: Math.max(0, Math.min(timeline.length, time)), name: t('timeline.markerName', { number: timeline.markers.length + 1 }), stop: false };
         this.session.edit((next) => {
@@ -225,7 +234,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         this.inner.style.setProperty('--lane-width', `${width}px`);
 
         const rulerRow = create('div', { classes: ['timeline-editor__ruler-row'], children: [create('div', { classes: ['timeline-editor__corner'], text: t('timeline.trackCount', { count: timeline.tracks.length }) })] });
-        const ruler = new TimelineRuler(timeline, this.pps, this.loop, this.step);
+        const ruler = new TimelineRuler(timeline, this.pps, this.loop, this.step, this.editable);
         ruler.onLocate((time) => this.locates.emit(Math.max(0, Math.min(timeline.length, time))));
         ruler.onAddMarker((time) => this.addMarker(time));
         ruler.onMoveMarker(({ id, time }) => this.session.edit((next) => {
@@ -244,6 +253,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             const summary = this.summary(track);
             const header = new TrackHeader(track, number, depth, summary);
             header.onAction((action) => void this.headerAction(track, action));
+            markEdit(header);
             header.mount(row);
             this.views.push(header);
             const lane = create('div', { classes: ['timeline-row__lane', ...(track.muted ? ['timeline-row__lane--muted'] : [])], attributes: { 'data-track': track.id } });
@@ -253,7 +263,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             } else if (track.kind !== 'folder') {
                 track.clips.forEach((clip) => lane.append(this.clipElement(track, clip)));
                 this.listen(lane, 'dblclick', (event) => {
-                    if (event.target === lane) {
+                    if (event.target === lane && this.editable()) {
                         void this.addClip(track, this.timeAt(event.clientX));
                     }
                 });
@@ -306,7 +316,11 @@ export class TimelineEditor extends Component<HTMLDivElement> {
         }
         this.place(element, clip);
         this.listen(element, 'pointerdown', (event) => this.startDrag(event, track, clip, element));
-        this.listen(element, 'dblclick', () => void this.editClip(track, clip));
+        this.listen(element, 'dblclick', () => {
+            if (this.editable()) {
+                void this.editClip(track, clip);
+            }
+        });
         return element;
     }
 
@@ -359,7 +373,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
     }
 
     private startDrag(event: PointerEvent, track: Track, clip: Clip, element: HTMLDivElement): void {
-        if (event.button !== 0) {
+        if (event.button !== 0 || !this.editable()) {
             return;
         }
         event.stopPropagation();
@@ -648,6 +662,9 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             return Math.max(0, Math.min(1, 1 - (clientY - rect.top - pad) / (rect.height - pad * 2)));
         };
         this.listen(lane, 'pointerdown', (event) => {
+            if (!this.editable()) {
+                return;
+            }
             const dot = (event.target as Element).closest('.timeline-automation__point') as SVGCircleElement | null;
             if (dot === null) {
                 // A new point where the lane is pressed
@@ -683,6 +700,9 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             lane.addEventListener('pointerup', up);
         });
         this.listen(lane, 'dblclick', (event) => {
+            if (!this.editable()) {
+                return;
+            }
             const dot = (event.target as Element).closest('.timeline-automation__point') as SVGCircleElement | null;
             if (dot !== null) {
                 const index = Number(dot.dataset.index);

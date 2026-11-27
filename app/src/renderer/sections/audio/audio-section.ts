@@ -23,6 +23,7 @@ import {
 import type { AudioPlayback, ShowAudio } from '../../../shared/audio/audio.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
 import { engine } from '../../transport/engine.js';
 import { openAddAudio } from './add-audio-dialog.js';
 import { openAudioItemDialog } from './audio-item-dialog.js';
@@ -92,12 +93,14 @@ export class AudioSection extends Stack {
         const playlist = new Panel({ title: t('audio.playlist'), classes: ['audio-playlist-panel'] });
         const add = new Key({ label: t('audio.addFromMedia'), icon: 'plus' });
         add.onPress(() => void openAddAudio());
+        markEdit(add);
         this.empty = new Label({ text: t('audio.empty'), tone: 'secondary', size: 'small' });
         playlist.append(new Stack({ direction: 'row', gap: 2, children: [add] }), this.empty, this.list);
 
         this.append(transport, playlist);
         // Items of the playlist are reordered by dragging them
         this.track(makeSortable({
+            enabled: () => canEdit('audio'),
             container: this.list.element,
             items: () => this.rows.map((row) => row.element),
             onDrop: ({ from, to }) => {
@@ -143,6 +146,7 @@ export class AudioSection extends Stack {
             const edit = new Key({ label: t('audio.editItem', { name: item.name }), icon: 'pencil', iconOnly: true });
             play.onPress(() => void engine().request('audio.play', { id: item.id }).then((state) => this.applyState(state)).catch(showError));
             edit.onPress(() => openAudioItemDialog(item));
+            markEdit(edit);
             const row = new Stack({
                 direction: 'row',
                 gap: 2,

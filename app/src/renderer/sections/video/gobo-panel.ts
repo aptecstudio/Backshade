@@ -35,6 +35,7 @@ import { askChoice } from '../../dialogs/ask-choice.js';
 import { showError } from '../../dialogs/show-error.js';
 import { timePickerLabels } from '../../i18n/control-labels.js';
 import { t } from '../../i18n/i18n.js';
+import { markEdit } from '../../show/edit-access.js';
 import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
 import { ColorSwatch } from '../matrices/color-swatch.js';
@@ -61,6 +62,7 @@ export class GoboPanel extends Panel {
             this.selected = gobo.id;
             void engine().request('video.saveGobo', { gobo }).catch(showError);
         });
+        markEdit(add);
         this.append(new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.keysRow, add] }), this.editorHolder);
         this.track(() => {
             if (this.timer !== null) {
@@ -236,6 +238,7 @@ export class GoboPanel extends Panel {
                 })
             ]
         });
+        markEdit(remove, ...this.editor.element.querySelectorAll<HTMLElement>('.gobo-panel__fields'));
         this.editorHolder.append(this.editor);
     }
 

@@ -6,6 +6,7 @@
  */
 
 import { Key, Label, LocalPreference, Panel, Spacer, Stack, type Component } from '../../../framework/ts/index.js';
+import { markEdit } from '../../show/edit-access.js';
 import type { MatrixEntry } from '../../../shared/transport/engine-api.js';
 import { showError } from '../../dialogs/show-error.js';
 import { openFixtureLibrary } from '../../fixtures/fixture-library-dialog.js';
@@ -44,6 +45,7 @@ export class PatchSection extends Panel {
         groups.onPress(() => void openGroups());
         add.onPress(() => void openAddFixtures(this.entries, this.targetUniverse()));
         library.onPress(() => openFixtureLibrary());
+        markEdit(add, addMatrix, library, groups);
         this.summary = new Label({ text: '', tone: 'secondary', size: 'small' });
 
         this.listKey = new Key({ label: t('patch.viewList'), icon: 'list' });

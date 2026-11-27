@@ -6,6 +6,7 @@
 import { Key, Label, ListItem, Panel, Stack } from '../../../framework/ts/index.js';
 import type { OutputState, UsbDmxDeviceState } from '../../../shared/transport/engine-api.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
 import { onOutputState } from '../../output/output-store.js';
 import { openUsbDeviceDialog } from './usb-device-dialog.js';
 import { usbStatusLabel, usbTypeLabel } from './usb-text.js';
@@ -27,6 +28,7 @@ export class UsbPanel extends Panel {
     constructor() {
         super({ title: t('output.usb'), classes: ['usb-panel'] });
         this.add = new Key({ label: t('output.addUsb'), icon: 'plus' });
+        markEdit(this.add);
         this.add.onPress(() => {
             const used = this.devices.map((device) => device.universe);
             void openUsbDeviceDialog(null, used.length === 0 ? 1 : Math.max(...used) + 1);
@@ -72,7 +74,11 @@ export class UsbPanel extends Panel {
                     })
                 ]
             });
-            row.onPress(() => void openUsbDeviceDialog(device, device.universe));
+            row.onPress(() => {
+                if (canEdit('output')) {
+                    void openUsbDeviceDialog(device, device.universe);
+                }
+            });
             return row;
         });
         this.list.append(...this.rows);

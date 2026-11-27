@@ -8,6 +8,7 @@
  */
 
 import { ChoiceKeys, Key, Label, NumberField, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
+import { canEdit, markEdit } from '../../show/edit-access.js';
 import {
     BPM_LIMITS,
     CHASER_SLOTS,
@@ -72,6 +73,7 @@ export class MemoryPanel extends Panel {
         const release = new Key({ label: t('memories.releaseAll'), icon: 'square' });
         this.record.onPress(() => this.setMode(this.mode === 'record' ? 'play' : 'record'));
         this.edit.onPress(() => this.setMode(this.mode === 'edit' ? 'play' : 'edit'));
+        markEdit(this.record, this.edit);
         release.onPress(() => void engine().request('memories.releaseAll').then((state) => this.applyState(state)).catch(showError));
         this.hint = new Label({ text: '', tone: 'accent', size: 'small' });
 
@@ -229,6 +231,9 @@ export class MemoryPanel extends Panel {
         const editing = this.mode === 'edit';
         if (this.mode !== 'play') {
             this.setMode('play');
+        }
+        if ((editing || chaser === undefined) && !canEdit('console')) {
+            return;
         }
         if (editing || chaser === undefined) {
             openChaserDialog(slot, chaser ?? null, this.memories.scenes);
