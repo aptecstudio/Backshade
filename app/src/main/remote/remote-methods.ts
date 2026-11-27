@@ -16,7 +16,8 @@ export const LOCAL_ONLY_METHODS: ReadonlySet<EngineMethod> = new Set<EngineMetho
     'operators.login',
     'operators.logout',
     'remoteView.open',
-    'remoteView.close'
+    'remoteView.close',
+    'stage.open'
 ]);
 
 /** Events meant only for the windows of the computer */

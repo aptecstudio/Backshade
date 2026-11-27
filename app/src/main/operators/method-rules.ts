@@ -39,6 +39,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'remote.discover': FREE,
     'remoteView.open': FREE,
     'remoteView.close': FREE,
+    'stage.open': FREE,
     'app.confirmClose': FREE,
     'window.openAbout': FREE,
     'window.isFullScreen': FREE,

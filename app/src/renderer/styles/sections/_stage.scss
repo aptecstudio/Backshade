@@ -1,0 +1,34 @@
+// 3D stage window: toolbar, catalog of the models and the view
+@use 'framework/scss/tokens' as *;
+
+.stage-page {
+    height: 100vh;
+    padding: space(2);
+}
+
+.stage-page__body {
+    flex: 1 1 auto;
+    align-items: stretch;
+    min-height: 0;
+}
+
+.stage-catalog {
+    flex: 0 0 space(8) * 4;
+    overflow-y: auto;
+}
+
+.stage-view {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 1px solid color('panel-border');
+    border-radius: $radius-panel;
+    overflow: hidden;
+
+    // The canvas follows the size of the view, which sets its drawing size
+    canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+    }
+}

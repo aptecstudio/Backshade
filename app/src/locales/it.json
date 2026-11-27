@@ -1464,6 +1464,37 @@
       "fromDevice": "Invia dal dispositivo",
       "progress": "File {number} di {count}",
       "done": "{number} file di {count} inviati."
+    },
+    "stage": {
+      "title": "Palco 3D",
+      "open": "Apri il palco 3D",
+      "library": "Modelli",
+      "camera": "Vista della camera",
+      "cameras": {
+        "front": "Fronte",
+        "top": "Pianta",
+        "side": "Lato",
+        "free": "Libera"
+      },
+      "categories": {
+        "truss": "Tralicci",
+        "stage": "Palco",
+        "fixtures": "Fari",
+        "musicians": "Musicisti",
+        "elements": "Elementi di scena"
+      },
+      "models": {
+        "truss-1m": "Traliccio, 1 m",
+        "truss-2m": "Traliccio, 2 m",
+        "truss-3m": "Traliccio, 3 m",
+        "deck-2x1": "Pedana, 2 x 1 m",
+        "moving-head": "Testa mobile",
+        "par": "PAR",
+        "singer-male": "Cantante uomo con microfono",
+        "singer-female": "Cantante donna con microfono",
+        "wedge": "Monitor da palco",
+        "amp": "Testata e cassa"
+      }
     }
   }
 }

@@ -1,0 +1,64 @@
+[
+    {
+        "id": "truss-1m",
+        "category": "truss",
+        "file": "truss-1m.obj"
+    },
+    {
+        "id": "truss-2m",
+        "category": "truss",
+        "file": "truss-2m.obj"
+    },
+    {
+        "id": "truss-3m",
+        "category": "truss",
+        "file": "truss-3m.obj"
+    },
+    {
+        "id": "deck-2x1",
+        "category": "stage",
+        "file": "deck-2x1.obj"
+    },
+    {
+        "id": "moving-head",
+        "category": "fixtures",
+        "file": "moving-head.obj",
+        "pivots": {
+            "pan": [
+                0,
+                0.16,
+                0
+            ],
+            "tilt": [
+                0,
+                0.4,
+                0
+            ]
+        }
+    },
+    {
+        "id": "par",
+        "category": "fixtures",
+        "file": "par.obj"
+    },
+    {
+        "id": "singer-male",
+        "category": "musicians",
+        "file": "singer-male.obj"
+    },
+    {
+        "id": "singer-female",
+        "category": "musicians",
+        "file": "singer-female.obj"
+    },
+    {
+        "id": "wedge",
+        "category": "elements",
+        "file": "wedge.obj"
+    },
+    {
+        "id": "amp",
+        "category": "elements",
+        "file": "amp.obj"
+    }
+]

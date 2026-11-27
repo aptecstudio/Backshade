@@ -10,6 +10,7 @@
   "main": "dist/node/main/main.js",
   "scripts": {
     "clean": "node scripts/clean.mts",
+    "models": "node scripts/make-models.mts",
     "build:icons": "node scripts/build-icons.mts",
     "build:locales": "node scripts/build-locales.mts",
     "build:node": "tsc -p tsconfig.node.json",
@@ -22,6 +23,7 @@
     "catalog": "npm run build && electron . --catalog"
   },
   "devDependencies": {
+    "@types/three": "0.187.0",
     "electron": "45.4.1",
     "sass": "1.108.2",
     "typescript": "7.0.2"

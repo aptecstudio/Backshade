@@ -275,6 +275,8 @@ export interface EngineMethods {
     'upload.media': { params: { name: string; size: number }; result: { ticket: string } };
     /** Ticket to send a file into a folder of the file manager (remote clients only) */
     'upload.file': { params: { folder: string; name: string; size: number }; result: { ticket: string } };
+    /** Opens the window of the 3D stage (desktop only) */
+    'stage.open': { params: undefined; result: undefined };
     /** Searches the other instances on the local network */
     'remote.discover': { params: undefined; result: DiscoveredInstance[] };
     /** Shows the remote control of another instance in the main window (desktop only) */

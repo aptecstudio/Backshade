@@ -1,7 +1,9 @@
 /**
  * Copies the static files of the interface, keeping the folder structure:
  * - HTML pages from src/renderer to dist/web/renderer;
- * - images from assets/images to dist/web/assets/images.
+ * - images from assets/images to dist/web/assets/images;
+ * - the stage models from assets/models to dist/web/assets/models;
+ * - the vendored three.js from vendor/three to dist/web/vendor/three.
  */
 
 import fs from 'node:fs';
@@ -27,3 +29,6 @@ function copyFiles(sourceDir: string, targetDir: string, extensions: ReadonlySet
 
 copyFiles(path.join(appDir, 'src', 'renderer'), path.join(webDir, 'renderer'), new Set(['.html']));
 copyFiles(path.join(appDir, 'assets', 'images'), path.join(webDir, 'assets', 'images'), new Set(['.png', '.svg', '.jpg', '.webp']));
+copyFiles(path.join(appDir, 'assets', 'models'), path.join(webDir, 'assets', 'models'), new Set(['.obj', '.json']));
+// The licence of three.js goes with it
+copyFiles(path.join(appDir, 'vendor', 'three'), path.join(webDir, 'vendor', 'three'), new Set(['.js', '']));

@@ -1464,6 +1464,37 @@
       "fromDevice": "Send from this device",
       "progress": "File {number} of {count}",
       "done": "{number} of {count} files sent."
+    },
+    "stage": {
+      "title": "3D stage",
+      "open": "Open the 3D stage",
+      "library": "Models",
+      "camera": "Camera view",
+      "cameras": {
+        "front": "Front",
+        "top": "Top",
+        "side": "Side",
+        "free": "Free"
+      },
+      "categories": {
+        "truss": "Truss",
+        "stage": "Stage",
+        "fixtures": "Fixtures",
+        "musicians": "Musicians",
+        "elements": "Stage elements"
+      },
+      "models": {
+        "truss-1m": "Truss, 1 m",
+        "truss-2m": "Truss, 2 m",
+        "truss-3m": "Truss, 3 m",
+        "deck-2x1": "Deck, 2 x 1 m",
+        "moving-head": "Moving head",
+        "par": "PAR",
+        "singer-male": "Male singer with microphone",
+        "singer-female": "Female singer with microphone",
+        "wedge": "Floor monitor",
+        "amp": "Amplifier and cabinet"
+      }
     }
   }
 }

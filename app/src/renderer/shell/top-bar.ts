@@ -16,6 +16,7 @@ import { BrandBlock } from './brand-block.js';
 import { FullScreenKey } from './fullscreen-key.js';
 import { MidiKey } from './midi-key.js';
 import { OperatorKey } from './operator-key.js';
+import { StageKey } from './stage-key.js';
 import type { SectionNavigation } from './section-navigation.js';
 import { SectionTabs } from './section-tabs.js';
 import { followTempo } from './tempo-readout.js';
@@ -51,6 +52,7 @@ export class TopBar extends Panel {
                 this.tempo,
                 new BlackoutKey(),
                 new MidiKey(),
+                new StageKey(),
                 new OperatorKey(),
                 new SectionTabs([START_SECTION, SETTINGS_SECTION], navigation),
                 new FullScreenKey()
