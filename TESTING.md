@@ -134,14 +134,15 @@ How to use it:
 
 ## 12. Operators
 
-- [ ] Create the administrator profile in a show: the show asks for the PIN at every opening, on every computer.
+- [ ] A new show always asks for the administrator and their PIN; it asks for the PIN at every opening, on every computer.
+- [ ] A show without operators (older show, archive) asks for the administrator before anything works, also from the grid and MIDI controllers; saved, it asks for the PIN at the next opening.
 - [ ] Operators with sections hidden, read only and editable: tabs and sections follow the profile.
 - [ ] Read only: the section can be seen and played (scenes, cues, video take, timeline) but changes are refused.
 - [ ] Change operator from the top bar key; the last section opens again after the PIN.
 - [ ] Wrong PIN: message; after 5 wrong PINs the keypad is locked for 30 seconds.
-- [ ] Several administrators; the last administrator cannot lose the role; deleting the own last profile removes the protection.
+- [ ] Several administrators; the last administrator cannot lose the role; the operator who entered cannot be deleted.
 - [ ] Show settings available only to administrators.
-- [ ] A protected show moved to another computer keeps its operators; templates and new shows never carry operators.
+- [ ] A protected show moved to another computer keeps its operators; templates never carry operators, new shows have only their administrator.
 
 - [ ] An operator with read-only sections sees their editing controls dimmed and cannot use them (mouse, touch and keyboard), while faders, memory keys, cues, transport, Go and Take still work; the timeline cannot be recorded.
 
@@ -165,7 +166,6 @@ How to use it:
 - [ ] A protected source asks for the PIN of its administrator; no PIN when the same administrator (same name and PIN) entered the open show.
 - [ ] Dependencies: choosing a chaser brings its scenes, and the scenes bring their fixtures, matrices, audio, video and media.
 - [ ] Conflicts: add, replace and skip for occupied slots, overlapping addresses, different files with the same name, operator names; imported scenes drive the moved fixtures on the real rig.
-- [ ] Importing operators into an unprotected show: who imports enters as the source administrator.
 - [ ] Two operators with the same PIN after an import: the keypad offers their names.
 
 ## 14. Stability

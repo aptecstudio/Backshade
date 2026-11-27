@@ -44,7 +44,7 @@ Available now:
 
 - Start page with recent shows; shows saved as portable folders, with autosave, recovery and history of the saved versions
 - Show templates, with a complete "Demo show" to try every feature; export and import of shows and templates as single archives, show media in the show folder
-- Show operators with a 4 digit PIN: each operator sees the sections of the profile, hidden, read only or editable
+- Show operators with a 4 digit PIN, mandatory in every show: each operator sees the sections of the profile, hidden, read only or editable
 - Import from another show: scenes, chasers, fixtures, audio, video, images and operators, with their dependencies and the choice of how to solve conflicts
 - Fixture library with a custom fixture editor; multi-universe patch with groups and LED matrices
 - DMX output over Art-Net and USB DMX interfaces, with grand master, blackout and a DMX monitor
