@@ -1437,10 +1437,13 @@
       "pinHint": "Type the PIN of the operator entered on the computer.",
       "noOperator": "No operator is entered on the computer: open a show there and enter with the PIN.",
       "connectionLost": "Connection lost. Reconnecting...",
-      "settingsHint": "Other devices on the same network open this address in a browser and type the PIN of the operator entered here. The network must be private: the connection is not encrypted.",
-      "address": "Address",
+      "settingsHint": "Other devices on the same private network reach this computer here. The connection is not encrypted.",
       "unavailable": "The remote control is not available: no free port was found.",
-      "noNetwork": "This computer is not connected to a network."
+      "noNetwork": "This computer is not connected to a network.",
+      "network": "Network",
+      "qrLabel": "QR code of {address}",
+      "scanHint": "Scan the code with the camera of a phone or tablet on the same network, or type the address in a browser. Then type the PIN of the operator entered here.",
+      "connectTitle": "Address and QR code"
     },
     "instance": {
       "title": "This computer",

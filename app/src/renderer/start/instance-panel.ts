@@ -1,6 +1,7 @@
 /**
  * This computer on the start page: the name that tells it apart among the
- * instances on the network, and the key to change it.
+ * instances on the network, the key to change it, and its address with the
+ * QR code.
  */
 
 import { Key, Label, Panel, Stack } from '../../framework/ts/index.js';
@@ -8,6 +9,7 @@ import { INSTANCE_NAME_LENGTH } from '../../shared/remote/instance.js';
 import { askText } from '../dialogs/ask-text.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
+import { openConnectionDialog } from '../remote/connection-dialog.js';
 import { engine } from '../transport/engine.js';
 
 export class InstancePanel extends Panel {
@@ -17,9 +19,11 @@ export class InstancePanel extends Panel {
         super({ title: t('instance.title'), classes: ['instance-panel'] });
         const rename = new Key({ label: t('instance.rename'), icon: 'pencil' });
         rename.onPress(() => void this.rename());
+        const connect = new Key({ label: t('remote.connectTitle'), icon: 'scan-line' });
+        connect.onPress(() => openConnectionDialog());
         this.append(
             new Stack({ gap: 1, children: [this.name, new Label({ text: t('instance.hint'), tone: 'secondary', size: 'small' })] }),
-            new Stack({ direction: 'row', children: [rename] })
+            new Stack({ direction: 'row', gap: 1, wrap: true, children: [rename, connect] })
         );
         void engine().request('settings.get').then((settings) => this.name.setText(settings.instanceName)).catch(showError);
     }

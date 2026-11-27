@@ -1437,10 +1437,13 @@
       "pinHint": "Digita il PIN dell'operatore entrato sul computer.",
       "noOperator": "Sul computer non è entrato nessun operatore: apri lì uno show ed entra con il PIN.",
       "connectionLost": "Connessione persa. Riconnessione...",
-      "settingsHint": "Gli altri dispositivi sulla stessa rete aprono questo indirizzo in un browser e digitano il PIN dell'operatore entrato qui. La rete deve essere privata: la connessione non è cifrata.",
-      "address": "Indirizzo",
+      "settingsHint": "Gli altri dispositivi sulla stessa rete privata raggiungono questo computer da qui. La connessione non è cifrata.",
       "unavailable": "Il controllo remoto non è disponibile: nessuna porta libera.",
-      "noNetwork": "Questo computer non è collegato a una rete."
+      "noNetwork": "Questo computer non è collegato a una rete.",
+      "network": "Rete",
+      "qrLabel": "QR code di {address}",
+      "scanHint": "Inquadra il codice con la fotocamera di un telefono o tablet sulla stessa rete, oppure digita l'indirizzo in un browser. Poi digita il PIN dell'operatore entrato qui.",
+      "connectTitle": "Indirizzo e QR code"
     },
     "instance": {
       "title": "Questo computer",
