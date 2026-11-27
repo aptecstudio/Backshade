@@ -156,9 +156,9 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 
 - [x] 9.1 Lights, audio and video integration: cross triggers and sync; defined by the human on 2026-11-27 as the shared tempo, with an option per chaser (scenes already carry audio, video and mixer scenes, and the timelines sync everything)
 - [x] 9.2 External audio mixers via OSC (native UDP): recall of mixer scenes from scenes, cues and mixer tracks of the timelines (decided by the human on 2026-11-27)
-- [ ] 9.3 Mixers and controllers via MIDI (Web MIDI API), on the shared MIDI layer of Phase 16
+- [x] 9.3 Mixers and controllers via MIDI (Web MIDI API), on the shared MIDI layer of Phase 16: controllers with the MIDI layer, mixers with a MIDI program change model (bank select optional)
 - [x] 9.4 Profiles for the most common mixers: Behringer X32 and Midas M32, Behringer X Air and Midas MR, Behringer Wing, and generic OSC (decided by the human on 2026-11-27)
-- [ ] 9.5 External timecode (MIDI Timecode, to be evaluated)
+- [x] 9.5 External timecode (MIDI Timecode): the loaded timeline follows an incoming MTC
 
 ## Phase 10 - Remote web interface
 

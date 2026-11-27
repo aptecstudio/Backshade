@@ -157,6 +157,8 @@ How to use it:
 - [ ] Generic OSC with another device or software (for example QLab or Reaper): the address with the number arrives as expected.
 - [ ] A mixer that is off or unreachable never blocks the show; the test row reports the error.
 
+- [ ] MIDI mixer (for example Allen & Heath SQ or Qu, Yamaha): scenes recalled by program change, with bank select above 128; check that the scene numbers match.
+
 ## 13. Import from another show
 
 - [ ] Import dialog: source among the recent shows and from a folder; categories and single items with toggles.
@@ -185,4 +187,5 @@ How to use it:
 - [ ] The monitor shows what the controller sends and what Backshade sends back.
 - [ ] Guided profiles with each real controller (APC mini and mk2, Launchpad, Launch Control XL, nanoKONTROL2, X-Touch Mini): every asked control is learned, LEDs light in the documented colors.
 - [ ] Mackie Control profile with a real surface (X-Touch, X-Touch One, iCON): faders, motorized feedback, V-Pots, Select, Mute, Solo and transport do what the MIDI panel says.
+- [ ] MIDI timecode from a DAW or a timecode generator at 25 and 30 fps: the timeline starts, follows, locates after a jump of the DAW and pauses when it stops; the start timecode works with 01:00:00:00.
 
