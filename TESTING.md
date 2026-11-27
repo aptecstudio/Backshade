@@ -183,4 +183,6 @@ How to use it:
 - [ ] Endless encoders in both relative encodings move their level in small steps in the right direction.
 - [ ] MIDI Show Control from a show controller (for example QLab): Go with and without a cue number, Stop, Resume, Reset; other device IDs are ignored.
 - [ ] The monitor shows what the controller sends and what Backshade sends back.
+- [ ] Guided profiles with each real controller (APC mini and mk2, Launchpad, Launch Control XL, nanoKONTROL2, X-Touch Mini): every asked control is learned, LEDs light in the documented colors.
+- [ ] Mackie Control profile with a real surface (X-Touch, X-Touch One, iCON): faders, motorized feedback, V-Pots, Select, Mute, Solo and transport do what the MIDI panel says.
 
