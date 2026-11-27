@@ -4,8 +4,9 @@
  * tick the light clips set the level of their scene or chaser, the audio
  * clips play on their tracks, the video clips take their layer, and the
  * automation curves set masters, groups and scenes. Loop, go mode (pause
- * at the stop markers, Go and Back between markers) and the end of the
- * timeline are handled here.
+ * at the stop markers, Go and Back between markers), the end of the
+ * timeline and the passes of the recorder (live actions recorded on the
+ * armed tracks while playing with the record key on) are handled here.
  */
 
 import { clipLevel, curveValue, type Clip, type ShowTimelines, type Timeline, type TimelineState, type Track } from '../../shared/timeline/timeline';
@@ -14,6 +15,7 @@ import type { LayerState } from '../../shared/video/video';
 import type { MemoryPlayer } from '../console/memory-player';
 import type { VideoEngine } from '../video/video-engine';
 import type { TimelineAudio } from './timeline-audio';
+import { TimelineRecorder, type LiveSources } from './timeline-recorder';
 
 /** Where the automation curves send their values */
 export interface AutomationSink {
@@ -30,6 +32,12 @@ export interface TimelinePlayerContext {
     audio: TimelineAudio;
     automation: AutomationSink;
     onState: (state: TimelineState) => void;
+    /** What is live, for the recorder; without it nothing is recorded */
+    live?: LiveSources;
+    /** A pass of the recorder ended with something recorded: the timeline to save */
+    onRecorded?: (timeline: Timeline) => void;
+    /** New identifiers for recorded clips */
+    newId?: () => string;
 }
 
 const TICK_MS = 25;
@@ -52,8 +60,11 @@ export class TimelinePlayer {
     private readonly videoTracks = new Map<string, string>();
     private readonly automation = new Map<string, number>();
 
+    private readonly recorder: TimelineRecorder | null;
+
     constructor(context: TimelinePlayerContext) {
         this.context = context;
+        this.recorder = context.live === undefined ? null : new TimelineRecorder(context.live, context.newId ?? (() => Math.random().toString(36).slice(2)));
     }
 
     state(): TimelineState {
@@ -109,6 +120,8 @@ export class TimelinePlayer {
         this.lastPosition = this.basePosition;
         this.context.audio.applyOutputs(timeline, (track) => this.muted(timeline, track));
         this.timer = setInterval(() => this.tick(), TICK_MS);
+        // The pass starts first, so the armed automation tracks do not play their curve
+        this.startPass();
         this.apply(this.basePosition, true);
         this.announce();
     }
@@ -118,6 +131,7 @@ export class TimelinePlayer {
         if (!this.playing) {
             return;
         }
+        this.endPass();
         this.basePosition = this.position();
         this.playing = false;
         this.stopTimer();
@@ -158,6 +172,7 @@ export class TimelinePlayer {
 
     /** Stops and goes back to the start: the clips of the timeline leave the outputs */
     stop(): void {
+        this.endPass();
         this.playing = false;
         this.stopTimer();
         this.basePosition = 0;
@@ -172,11 +187,13 @@ export class TimelinePlayer {
     locate(time: number): void {
         const timeline = this.current();
         const position = Math.max(0, Math.min(timeline?.length ?? 0, time));
+        this.endPass();
         this.context.audio.stopAll();
         this.basePosition = position;
         this.startedAt = performance.now();
         this.lastPosition = position;
         if (this.playing) {
+            this.startPass();
             this.apply(position, true);
         }
         this.announce();
@@ -193,8 +210,39 @@ export class TimelinePlayer {
     }
 
     setRecording(on: boolean): void {
+        if (!on) {
+            this.endPass();
+        }
         this.recording = on;
+        this.startPass();
         this.announce();
+        // An armed automation track goes back to its curve when recording ends
+        if (!on && this.playing) {
+            this.apply(this.position(), false);
+        }
+    }
+
+    /** Starts a pass of the recorder, when playing with the record key on */
+    private startPass(): void {
+        const timeline = this.current();
+        if (this.recorder !== null && this.recording && this.playing && !this.recorder.recording && timeline !== null) {
+            this.recorder.start(timeline);
+        }
+    }
+
+    /**
+     * Ends the pass of the recorder and gives what was recorded.
+     * @param position - End of the pass, the playhead by default
+     */
+    private endPass(position = this.position()): void {
+        const timeline = this.current();
+        if (this.recorder === null || !this.recorder.recording || timeline === null) {
+            return;
+        }
+        const recorded = this.recorder.finish(timeline, Math.min(timeline.length, position));
+        if (recorded !== null) {
+            this.context.onRecorded?.(recorded);
+        }
     }
 
     /**
@@ -241,6 +289,7 @@ export class TimelinePlayer {
         }
         if (position >= timeline.length) {
             position = timeline.length;
+            this.endPass(position);
             this.apply(position, false);
             this.basePosition = position;
             this.playing = false;
@@ -251,6 +300,7 @@ export class TimelinePlayer {
         }
         this.lastPosition = position;
         this.apply(position, false);
+        this.recorder?.tick(position);
     }
 
     /** A track is silent when it or one of its folders is muted */
@@ -284,7 +334,10 @@ export class TimelinePlayer {
                 continue;
             }
             if (track.kind === 'automation') {
-                this.applyAutomation(track, position);
+                // An armed track being recorded does not play its curve
+                if (!(track.armed && this.recorder?.recording === true)) {
+                    this.applyAutomation(track, position);
+                }
                 continue;
             }
             const active = track.clips.filter((clip) => clipLevel(clip, position) > 0 || (clip.fadeIn === 0 && position >= clip.start && position < clip.start + clip.duration));

@@ -59,6 +59,20 @@ export interface MemoryPlayerContext {
     now?: () => number;
 }
 
+/** Scene or chaser on stage, for the timeline recorder */
+export interface LivePlayback {
+    /** Identifier of the playback: the memory, or the cue that plays the scene */
+    key: string;
+    kind: MemoryKind;
+    /** Scene or chaser */
+    id: string;
+    /** Fades in seconds */
+    fadeIn: number;
+    fadeOut: number;
+    /** Level set by a fader, null when the fades decide */
+    manual: number | null;
+}
+
 /** What a playback plays: a memory key, or a cue of the cue list */
 type PlaybackKind = MemoryKind | 'cue' | 'clip';
 
@@ -119,6 +133,34 @@ export class MemoryPlayer {
                 })),
             selectedChaser: this.selected
         };
+    }
+
+    /**
+     * Scenes and chasers on stage now, turned on by a memory key, a fader or
+     * a cue (a cue gives its scene, with the fades of the cue); timeline
+     * clips and memories fading out are left out. Read by the timeline recorder.
+     */
+    livePlaybacks(): LivePlayback[] {
+        const memories = this.context.memories();
+        const result: LivePlayback[] = [];
+        for (const playback of this.playbacks) {
+            if (playback.released !== null || playback.kind === 'clip') {
+                continue;
+            }
+            const target = this.find(playback.kind, playback.id, memories);
+            if (target === undefined) {
+                continue;
+            }
+            result.push({
+                key: playback.id,
+                kind: playback.kind === 'chaser' ? 'chaser' : 'scene',
+                id: target.id,
+                fadeIn: this.fadeIn(playback.kind, playback.id) / 1000,
+                fadeOut: this.fadeOut(playback.kind, playback.id) / 1000,
+                manual: playback.manual
+            });
+        }
+        return result;
     }
 
     /**

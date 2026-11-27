@@ -550,6 +550,8 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             }
             if (action === 'mute') {
                 own.muted = !own.muted;
+            } else if (action === 'arm') {
+                own.armed = !own.armed;
             } else {
                 own.collapsed = !own.collapsed;
             }

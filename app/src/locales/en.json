@@ -713,6 +713,7 @@
       "trackCount": "{count} tracks",
       "trackSettings": "Track settings",
       "mute": "Mute",
+      "arm": "Arm for recording",
       "openFolder": "Open the folder",
       "closeFolder": "Close the folder",
       "noTarget": "No target",

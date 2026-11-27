@@ -18,8 +18,9 @@ import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
 import { optionalBoolean, requireChoice, requireNumber, requireObject, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
+import type { AudioEngine } from '../audio/audio-engine';
 import type { VideoEngine } from '../video/video-engine';
-import type { GroupLevelSetter } from './group-service';
+import type { GroupLevelAccess } from './group-service';
 
 const ACTIONS = ['play', 'pause', 'toggle', 'stop', 'locate', 'go', 'back'] as const;
 
@@ -30,7 +31,9 @@ export interface TimelineTargets {
     playback: PlaybackWindow;
     desk: PresetDesk;
     output: OutputEngine;
-    setGroupLevel: GroupLevelSetter;
+    groupLevels: GroupLevelAccess;
+    /** Audio player, read by the recorder */
+    audio: AudioEngine;
 }
 
 /**
@@ -54,11 +57,28 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
                     bus.emit('console.stateChanged', { state: targets.desk.getState() });
                 }
             },
-            group: (id, level) => targets.setGroupLevel(id, level),
+            group: (id, level) => targets.groupLevels.set(id, level),
             scene: (id, level) => targets.memory.setLevel('scene', id, level)
         },
-        onState: (state) => bus.emit('timeline.stateChanged', { state })
+        onState: (state) => bus.emit('timeline.stateChanged', { state }),
+        live: {
+            memories: () => targets.memory.livePlaybacks(),
+            masters: () => ({ ...targets.desk.getState().masters, grand: targets.output.state().grandMaster }),
+            groups: () => targets.groupLevels.get(),
+            audio: () => targets.audio.voice(),
+            programs: () => targets.video.programs()
+        },
+        // A recorded pass is saved like an edit of the timeline (an unsaved change of the show)
+        onRecorded: (timeline) => {
+            if (session.summary() !== null && session.timelines().timelines.some((item) => item.id === timeline.id)) {
+                recorded = true;
+                update((timelines) => timelines.map((item) => item.id === timeline.id ? timeline : item));
+                recorded = false;
+            }
+        },
+        newId: () => randomUUID()
     });
+    let recorded = false;
     targets.memory.setClipTarget((id) => player.clipTarget(id));
 
     session.onContentChange((part) => {
@@ -67,7 +87,7 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
             bus.emit('timeline.changed', {});
         } else if (part === 'timelines') {
             player.timelinesChanged();
-            bus.emit('timeline.changed', {});
+            bus.emit('timeline.changed', recorded ? { recorded: true } : {});
         }
     });
 

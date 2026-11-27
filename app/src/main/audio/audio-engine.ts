@@ -62,6 +62,15 @@ export class AudioEngine {
         };
     }
 
+    /**
+     * Voice of the player now: file, position in the file and volume, for
+     * the timeline recorder; null when nothing plays.
+     */
+    voice(): { id: string; file: string; position: number; volume: number; paused: boolean } | null {
+        const voice = this.current;
+        return voice === null ? null : { id: voice.id, file: voice.item.file, position: voice.position, volume: voice.item.volume, paused: voice.paused };
+    }
+
     /** Audio outputs of the computer */
     devices(): Promise<AudioDevice[]> {
         const request = ++this.deviceRequest;

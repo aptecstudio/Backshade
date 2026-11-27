@@ -16,11 +16,17 @@ import type { RequestRouter } from '../transport/request-router';
 /** Level of a group set by the engine (timeline automation) */
 export type GroupLevelSetter = (id: string, level: number) => void;
 
+/** Levels of the groups for the rest of the engine: set (timeline automation) and read (timeline recorder) */
+export interface GroupLevelAccess {
+    set: GroupLevelSetter;
+    get: () => Record<string, number>;
+}
+
 /**
  * Registers the methods of the service.
- * @returns the function that sets the level of a group, for the timeline automation
+ * @returns the access to the levels of the groups, for the timelines
  */
-export function registerGroupService(router: RequestRouter, bus: EventBus, session: ShowSession, output: OutputEngine, desk: PresetDesk): GroupLevelSetter {
+export function registerGroupService(router: RequestRouter, bus: EventBus, session: ShowSession, output: OutputEngine, desk: PresetDesk): GroupLevelAccess {
     const groups = new GroupLevels(output.mixer, () => session.summary() === null ? null : session.patch(), (universe) => output.universeMap(universe));
     const announce = (): void => bus.emit('console.groupLevelsChanged', { levels: groups.get() });
     session.onContentChange((part) => {
@@ -51,10 +57,13 @@ export function registerGroupService(router: RequestRouter, bus: EventBus, sessi
         return undefined;
     });
 
-    return (id, level) => {
-        if (session.summary() !== null && session.patch().groups.some((group) => group.id === id)) {
-            groups.set(id, level);
-            announce();
-        }
+    return {
+        set: (id, level) => {
+            if (session.summary() !== null && session.patch().groups.some((group) => group.id === id)) {
+                groups.set(id, level);
+                announce();
+            }
+        },
+        get: () => groups.get()
     };
 }

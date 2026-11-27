@@ -76,9 +76,17 @@ export class TimelineSession {
 
     /**
      * Takes the timeline saved by the engine (another window, a check of the engine).
+     * @param undoable - The change can be undone here (a pass of the recorder)
      */
-    replace(timeline: Timeline): void {
+    replace(timeline: Timeline, undoable = false): void {
         if (JSON.stringify(timeline) !== JSON.stringify(this.current)) {
+            if (undoable) {
+                this.undoStack.push(JSON.stringify(this.current));
+                if (this.undoStack.length > HISTORY) {
+                    this.undoStack.shift();
+                }
+                this.redoStack.length = 0;
+            }
             this.current = timeline;
             this.changes.emit(timeline);
         }

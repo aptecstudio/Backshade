@@ -117,7 +117,7 @@ export class TimelineSection extends Stack {
         this.body = new Stack({ direction: 'row', gap: 2, classes: ['timeline-section__body'], children: [this.holder, this.markerPanel] });
         this.append(header, this.empty, this.body, this.info);
 
-        this.track(engine().on('timeline.changed', () => void this.load()));
+        this.track(engine().on('timeline.changed', ({ recorded }) => void this.load(recorded === true)));
         this.track(engine().on('timeline.stateChanged', ({ state }) => this.applyState(state)));
         for (const event of ['memories.changed', 'patch.changed', 'media.changed', 'video.changed', 'show.changed'] as const) {
             this.track(engine().on(event, () => void this.loadContext()));
@@ -147,7 +147,10 @@ export class TimelineSection extends Stack {
         }
     }
 
-    private async load(): Promise<void> {
+    /**
+     * @param recorded - The change is a pass of the recorder, which can be undone
+     */
+    private async load(recorded = false): Promise<void> {
         try {
             const [list, state] = await Promise.all([engine().request('timeline.list'), engine().request('timeline.getState')]);
             this.timelines = list.timelines;
@@ -156,14 +159,14 @@ export class TimelineSection extends Stack {
             await showError(error);
             return;
         }
-        this.render();
+        this.render(recorded);
     }
 
     private current(): Timeline | null {
         return this.timelines.find((timeline) => timeline.id === this.state.timeline) ?? null;
     }
 
-    private render(): void {
+    private render(recorded = false): void {
         const timeline = this.current();
         this.chooser.setOptions(this.timelines.map((item) => ({ value: item.id, label: item.name })), timeline?.id ?? '');
         this.chooser.element.hidden = this.timelines.length === 0;
@@ -189,7 +192,7 @@ export class TimelineSection extends Stack {
             }));
             this.holder.append(this.editor);
         } else {
-            this.session.replace(timeline);
+            this.session.replace(timeline, recorded);
         }
         this.editor?.setLoop(this.state.loop);
         this.showInfo();

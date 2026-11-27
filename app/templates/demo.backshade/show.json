@@ -2332,7 +2332,8 @@
             "output": "",
             "layer": 0,
             "target": null,
-            "points": []
+            "points": [],
+            "armed": false
           },
           {
             "id": "t1",
@@ -2388,7 +2389,25 @@
             "output": "",
             "layer": 0,
             "target": null,
-            "points": []
+            "points": [],
+            "armed": false
+          },
+          {
+            "id": "70d7eafd-bbea-4f81-aa96-2941eceb0285",
+            "name": "Live take",
+            "kind": "light",
+            "parent": "f1",
+            "collapsed": false,
+            "muted": false,
+            "height": 64,
+            "clips": [],
+            "device": "",
+            "volume": 1,
+            "output": "",
+            "layer": 0,
+            "target": null,
+            "points": [],
+            "armed": true
           },
           {
             "id": "t2",
@@ -2424,7 +2443,8 @@
                 20,
                 1
               ]
-            ]
+            ],
+            "armed": false
           },
           {
             "id": "t3",
@@ -2469,7 +2489,8 @@
             "output": "",
             "layer": 0,
             "target": null,
-            "points": []
+            "points": [],
+            "armed": false
           },
           {
             "id": "t4",
@@ -2507,7 +2528,8 @@
             "output": "4a84ad64-16f1-4a8e-925a-36b515cc6988",
             "layer": 0,
             "target": null,
-            "points": []
+            "points": [],
+            "armed": false
           }
         ],
         "markers": [

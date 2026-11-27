@@ -55,6 +55,8 @@ export interface Track {
     /** A folder hides its tracks */
     collapsed: boolean;
     muted: boolean;
+    /** Armed: live actions are recorded on the track while the timeline records */
+    armed: boolean;
     /** Height of the track in the editor, in pixels (multiple of 8) */
     height: number;
     clips: Clip[];
@@ -115,7 +117,7 @@ export const TRACK_SOURCES: Readonly<Record<TrackKind, readonly ClipSource['kind
 /** New track */
 export function newTrack(id: string, kind: TrackKind, name: string): Track {
     return {
-        id, name, kind, parent: null, collapsed: false, muted: false, height: TRACK_HEIGHT.default, clips: [],
+        id, name, kind, parent: null, collapsed: false, muted: false, armed: false, height: TRACK_HEIGHT.default, clips: [],
         device: '', volume: 1, output: '', layer: 0, target: null, points: []
     };
 }
@@ -220,6 +222,7 @@ function readTrack(value: unknown, ids: Set<string>, count: { clips: number }): 
     track.parent = typeof input.parent === 'string' && input.parent !== '' ? input.parent : null;
     track.collapsed = input.collapsed === true;
     track.muted = input.muted === true;
+    track.armed = kind !== 'folder' && input.armed === true;
     track.height = Math.round(num(input.height, TRACK_HEIGHT.min, TRACK_HEIGHT.max, TRACK_HEIGHT.default) / 8) * 8;
     track.device = text(input.device, 300);
     track.volume = num(input.volume, 0, 1, 1);

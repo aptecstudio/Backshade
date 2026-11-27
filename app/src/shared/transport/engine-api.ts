@@ -659,8 +659,8 @@ export interface EngineEvents {
     'video.timersChanged': { states: Record<string, TimerState> };
     /** Program or preview of the video outputs have changed */
     'video.stateChanged': { compositions: Record<string, OutputComposition> };
-    /** The timelines of the open show have changed */
-    'timeline.changed': Record<string, never>;
+    /** The timelines of the open show have changed; recorded when the change is a pass of the recorder */
+    'timeline.changed': { recorded?: boolean };
     /** The transport of the timeline player has changed */
     'timeline.stateChanged': { state: TimelineState };
     /** The pages of the virtual console have changed */
