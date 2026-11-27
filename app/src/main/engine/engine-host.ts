@@ -63,12 +63,12 @@ export function startEngine(): void {
     const audio = registerAudioService(router, bus, session, playback);
     const video = registerVideoService(router, bus, session, () => audio.videoInputs());
     const live = registerMatrixService(router, bus, session, output.engine, desk);
-    const mixers = registerMixerService(router, bus, session);
+    const mixers = registerMixerService(router, bus, session, playback);
     const player = registerMemoryService(router, bus, session, desk, output.engine, live, audio, video, mixers);
     registerCueService(router, bus, session, player);
-    registerTimelineService(router, bus, session, { memory: player, video, playback, desk, output: output.engine, groupLevels, audio, mixers });
+    const timelinePlayer = registerTimelineService(router, bus, session, { memory: player, video, playback, desk, output: output.engine, groupLevels, audio, mixers });
     registerGridService(router, bus, session);
-    registerMidiService(router, bus, session, playback);
+    registerMidiService(router, bus, session, playback, timelinePlayer);
     registerRecentService(router, bus);
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);

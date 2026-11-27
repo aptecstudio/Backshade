@@ -1278,13 +1278,20 @@
         "x32": "Behringer X32 / Midas M32",
         "xair": "Behringer X Air / Midas MR",
         "wing": "Behringer Wing",
-        "osc": "OSC generico"
+        "osc": "OSC generico",
+        "midi": "MIDI program change (Allen & Heath, Yamaha e altri)"
       },
       "hints": {
         "x32": "Richiama le scene da {first} a {last} dello show caricato sul mixer.",
         "xair": "Richiama gli snapshot da {first} a {last}.",
-        "wing": "Richiama le voci da {first} a {last} della lista dello show; sul mixer deve essere caricato uno show."
-      }
+        "wing": "Richiama le voci da {first} a {last} della lista dello show; sul mixer deve essere caricato uno show.",
+        "midi": "La scena {first} è il program 0 sul canale del mixer; con il bank select fino alla scena {last}. Controlla la numerazione delle scene nelle impostazioni MIDI del mixer."
+      },
+      "midiDevice": "Porta MIDI",
+      "midiChannel": "Canale MIDI",
+      "bankSelect": "Bank select",
+      "testSentMidi": "Scena {number} inviata a {device}.",
+      "midiPlace": "{device}, canale {channel}"
     },
     "midi": {
       "learnHold": "MIDI learn: tieni premuto per iniziare",
@@ -1364,7 +1371,13 @@
         "forward": "Avanti veloce",
         "record": "Registra",
         "cycle": "Cycle"
-      }
+      },
+      "mtc": "Timecode MIDI",
+      "mtcHint": "La timeline caricata segue un timecode MIDI (MTC) di un'altra macchina o di un DAW: suona dallo stesso punto mentre il timecode scorre e va in pausa quando si ferma. L'inizio è il timecode all'inizio della timeline.",
+      "mtcEnabled": "Segui il timecode",
+      "mtcDevice": "Porta",
+      "mtcAny": "Qualsiasi porta",
+      "mtcStart": "Inizio (HH:MM:SS:FF)"
     }
   }
 }

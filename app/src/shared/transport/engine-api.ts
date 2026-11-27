@@ -523,6 +523,8 @@ export interface EngineMethods {
     'midi.updateMapping': { params: { id: string; encoding: MidiEncoding }; result: ShowMidi };
     /** MIDI Show Control on or off and the device identifier of the show (unsaved change) */
     'midi.setMsc': { params: { enabled: boolean; deviceId: number }; result: ShowMidi };
+    /** MIDI timecode followed by the loaded timeline: on or off, input port (empty for any), timecode of the start (unsaved change) */
+    'midi.setMtc': { params: { enabled: boolean; device: string; start: number }; result: ShowMidi };
     /** Monitor of the MIDI messages on or off: while on, midi.monitor events carry the messages */
     'midi.setMonitor': { params: { on: boolean }; result: undefined };
     /** Deletes a mapping (unsaved change) */

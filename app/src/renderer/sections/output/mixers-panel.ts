@@ -59,7 +59,7 @@ export class MixersPanel extends Panel {
                 children: [
                     cell(mixer.name),
                     cell(mixerModelLabel(mixer.model), 'secondary'),
-                    cell(mixer.host === '' ? t('mixers.noHost') : `${mixer.host}:${mixer.port}`, 'secondary')
+                    cell(mixer.model === 'midi' ? (mixer.midiDevice === '' ? t('mixers.noHost') : t('mixers.midiPlace', { device: mixer.midiDevice, channel: mixer.midiChannel })) : mixer.host === '' ? t('mixers.noHost') : `${mixer.host}:${mixer.port}`, 'secondary')
                 ]
             });
             row.onPress(() => {

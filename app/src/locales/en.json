@@ -1278,13 +1278,20 @@
         "x32": "Behringer X32 / Midas M32",
         "xair": "Behringer X Air / Midas MR",
         "wing": "Behringer Wing",
-        "osc": "Generic OSC"
+        "osc": "Generic OSC",
+        "midi": "MIDI program change (Allen & Heath, Yamaha and others)"
       },
       "hints": {
         "x32": "Recalls the scenes {first} to {last} of the show loaded on the mixer.",
         "xair": "Recalls the snapshots {first} to {last}.",
-        "wing": "Recalls the items {first} to {last} of the show list; a show must be loaded on the mixer."
-      }
+        "wing": "Recalls the items {first} to {last} of the show list; a show must be loaded on the mixer.",
+        "midi": "Scene {first} is program 0 on the channel of the mixer; with bank select up to scene {last}. Check the scene numbers of the mixer in its MIDI settings."
+      },
+      "midiDevice": "MIDI port",
+      "midiChannel": "MIDI channel",
+      "bankSelect": "Bank select",
+      "testSentMidi": "Scene {number} sent to {device}.",
+      "midiPlace": "{device}, channel {channel}"
     },
     "midi": {
       "learnHold": "MIDI learn: hold to start",
@@ -1364,7 +1371,13 @@
         "forward": "Fast forward",
         "record": "Record",
         "cycle": "Cycle"
-      }
+      },
+      "mtc": "MIDI timecode",
+      "mtcHint": "The loaded timeline follows a MIDI timecode (MTC) of another machine or a DAW: it plays from the same point while the timecode runs and pauses when it stops. The start is the timecode at the start of the timeline.",
+      "mtcEnabled": "Follow the timecode",
+      "mtcDevice": "Port",
+      "mtcAny": "Any port",
+      "mtcStart": "Start (HH:MM:SS:FF)"
     }
   }
 }

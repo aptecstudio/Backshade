@@ -3,13 +3,15 @@
  * mixer are recalled over the network with OSC (UDP) from the scenes of
  * Backshade, their cues and the mixer tracks of the timelines. Models with a
  * ready profile: Behringer X32 and Midas M32, Behringer X Air and Midas MR,
- * Behringer Wing; any other OSC device with an address written by hand.
+ * Behringer Wing; any other OSC device with an address written by hand;
+ * mixers that recall scenes with a MIDI program change (Phase 9.3, for
+ * example Allen & Heath and Yamaha), on a MIDI output port.
  * Saved in show.json under "mixers". Shared between engine and interface.
  */
 
 /** Model of a mixer, which sets the OSC messages of a recall */
-export type MixerModel = 'x32' | 'xair' | 'wing' | 'osc';
-export const MIXER_MODELS: readonly MixerModel[] = ['x32', 'xair', 'wing', 'osc'];
+export type MixerModel = 'x32' | 'xair' | 'wing' | 'osc' | 'midi';
+export const MIXER_MODELS: readonly MixerModel[] = ['x32', 'xair', 'wing', 'osc', 'midi'];
 
 /** Mixer reached over the network */
 export interface ShowMixer {
@@ -26,6 +28,10 @@ export interface ShowMixer {
     address: string;
     /** Generic OSC: the number of the scene is also sent as an integer argument */
     numberArgument: boolean;
+    /** MIDI: output port (its name), channel 1 to 16, and bank select before the program change for scenes above 128 */
+    midiDevice: string;
+    midiChannel: number;
+    bankSelect: boolean;
 }
 
 /** Mixers section of show.json */
@@ -52,7 +58,9 @@ export const MIXER_PROFILES: Readonly<Record<MixerModel, { port: number; first: 
     xair: { port: 10024, first: 1, last: 64 },
     // Items of the show list of the mixer
     wing: { port: 2223, first: 1, last: 999 },
-    osc: { port: 8000, first: 0, last: 9999 }
+    osc: { port: 8000, first: 0, last: 9999 },
+    // Scene 1 is program 0; with bank select up to 128 banks of 128 programs
+    midi: { port: 0, first: 1, last: 16384 }
 };
 
 /** Placeholder of the number in the address of a generic OSC mixer */
@@ -60,7 +68,7 @@ export const NUMBER_PLACEHOLDER = '{number}';
 
 /** New mixer of a model */
 export function newMixer(id: string, name: string, model: MixerModel = 'x32'): ShowMixer {
-    return { id, name, model, host: '', port: MIXER_PROFILES[model].port, address: `/scene/${NUMBER_PLACEHOLDER}`, numberArgument: false };
+    return { id, name, model, host: '', port: MIXER_PROFILES[model].port, address: `/scene/${NUMBER_PLACEHOLDER}`, numberArgument: false, midiDevice: '', midiChannel: 1, bankSelect: false };
 }
 
 /** Number of a scene kept within the range of the model */
@@ -84,6 +92,9 @@ export function normalizeMixer(value: unknown): ShowMixer | null {
     const address = text(input.address, 200);
     mixer.address = address.startsWith('/') ? address : mixer.address;
     mixer.numberArgument = input.numberArgument === true;
+    mixer.midiDevice = text(input.midiDevice, 200);
+    mixer.midiChannel = typeof input.midiChannel === 'number' && Number.isInteger(input.midiChannel) && input.midiChannel >= 1 && input.midiChannel <= 16 ? input.midiChannel : 1;
+    mixer.bankSelect = input.bankSelect === true;
     return mixer;
 }
 

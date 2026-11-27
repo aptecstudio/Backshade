@@ -4,16 +4,18 @@
  * changes driving a level the encoding of an endless encoder), each one
  * with a key to delete it; the mappings of a device can be deleted
  * together. Profiles of common controllers set up the mappings (guided, or
- * at once for Mackie Control). Then MIDI Show Control and the monitor.
+ * at once for Mackie Control). Then MIDI Show Control, the MIDI timecode
+ * followed by the timeline, and the monitor.
  * Mappings are made with MIDI learn (the MIDI key of the top bar).
  */
 
-import { ChoiceKeys, Key, Label, NumberField, Panel, SelectField, Stack } from '../../../framework/ts/index.js';
+import { ChoiceKeys, Key, Label, NumberField, Panel, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
 import type { MemoriesSummary } from '../../../shared/console/memories.js';
-import { MIDI_ENCODINGS, type MidiEncoding, type MidiMapping, type MidiMonitorEntry, type MidiState, type MidiTarget, type MscSettings } from '../../../shared/midi/midi.js';
+import { MIDI_ENCODINGS, type MidiEncoding, type MidiMapping, type MidiMonitorEntry, type MidiState, type MidiTarget, type MscSettings, type MtcSettings } from '../../../shared/midi/midi.js';
 import { GUIDED_PROFILES, mackieMappings } from '../../../shared/midi/midi-profiles.js';
 import { showError } from '../../dialogs/show-error.js';
 import { resolveRole } from '../../midi/profile-roles.js';
+import { frameRate, timecode } from '../timeline/timeline-time.js';
 import { openProfileDialog } from './midi-profile-dialog.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
@@ -28,6 +30,9 @@ export class MidiSettings extends Panel {
     private readonly devices = new Stack({ gap: 1 });
     private readonly list = new Stack({ gap: 1 });
     private readonly msc = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end' });
+    private readonly mtc = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end' });
+    private inputs: string[] = [];
+    private fps = 25;
     private readonly monitorList = new Stack({ classes: ['midi-monitor'] });
     private readonly monitorKey: Key;
     private readonly profile: SelectField<string>;
@@ -65,6 +70,9 @@ export class MidiSettings extends Panel {
             new Label({ text: t('midi.msc'), weight: 'medium', size: 'small' }),
             new Label({ text: t('midi.mscHint'), tone: 'secondary', size: 'small' }),
             this.msc,
+            new Label({ text: t('midi.mtc'), weight: 'medium', size: 'small' }),
+            new Label({ text: t('midi.mtcHint'), tone: 'secondary', size: 'small' }),
+            this.mtc,
             new Stack({ direction: 'row', gap: 2, align: 'center', children: [new Label({ text: t('midi.monitorTitle'), weight: 'medium', size: 'small' }), this.monitorKey] }),
             this.monitorList
         );
@@ -107,6 +115,7 @@ export class MidiSettings extends Panel {
         this.devices.element.replaceChildren();
         const inputs = state.devices.filter((device) => device.kind === 'input');
         const names = [...new Set(inputs.filter((device) => device.connected).map((device) => device.name))];
+        this.inputs = names;
         this.profileDevice.setOptions(names.map((name) => ({ value: name, label: name })), names.includes(this.profileDevice.value) ? this.profileDevice.value : names[0] ?? '');
         if (inputs.length === 0) {
             this.devices.append(new Label({ text: t('midi.noDevices'), tone: 'secondary', size: 'small' }));
@@ -173,6 +182,33 @@ export class MidiSettings extends Panel {
         this.msc.append(enabled, deviceId);
     }
 
+    private showMtc(settings: MtcSettings): void {
+        this.mtc.element.replaceChildren();
+        const enabled = new ChoiceKeys<'on' | 'off'>({
+            label: t('midi.mtcEnabled'),
+            options: [{ value: 'off', label: t('output.off') }, { value: 'on', label: t('output.on') }],
+            value: settings.enabled ? 'on' : 'off'
+        });
+        const names = settings.device !== '' && !this.inputs.includes(settings.device) ? [...this.inputs, settings.device] : this.inputs;
+        const device = new SelectField<string>({
+            label: t('midi.mtcDevice'),
+            options: [{ value: '', label: t('midi.mtcAny') }, ...names.map((name) => ({ value: name, label: name }))],
+            value: settings.device
+        });
+        const start = new TextField({ label: t('midi.mtcStart'), value: timecode(settings.start, this.fps), maxLength: 11 });
+        const send = (): void => {
+            // HH:MM:SS:FF at the timecode rate of the show
+            const parts = start.value.trim().split(':').map(Number);
+            const valid = parts.length === 4 && parts.every((part) => Number.isInteger(part) && part >= 0);
+            const seconds = valid ? parts[0] * 3600 + parts[1] * 60 + parts[2] + parts[3] / this.fps : settings.start;
+            void engine().request('midi.setMtc', { enabled: enabled.value === 'on', device: device.value, start: seconds }).catch(showError);
+        };
+        enabled.onChange(send);
+        device.onChange(send);
+        start.onChange(send);
+        this.mtc.append(enabled, device, start);
+    }
+
     private async load(): Promise<void> {
         let mappings: MidiMapping[];
         try {
@@ -180,6 +216,8 @@ export class MidiSettings extends Panel {
             mappings = midi.mappings;
             this.memories = memories;
             this.showMsc(midi.msc);
+            this.fps = frameRate((await engine().request('show.getSettings')).timecodeRate);
+            this.showMtc(midi.mtc);
         } catch (error) {
             await showError(error);
             return;

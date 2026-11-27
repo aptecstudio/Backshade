@@ -137,6 +137,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'midi.updateMapping': ADMIN,
     'midi.setMsc': ADMIN,
     'midi.addMappings': ADMIN,
+    'midi.setMtc': ADMIN,
     'mixers.delete': edit('output'),
     'memories.recordScene': edit('console'),
     'memories.updateScene': edit('console'),

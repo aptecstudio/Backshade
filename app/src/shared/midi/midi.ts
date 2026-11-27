@@ -61,13 +61,23 @@ export interface MscSettings {
     deviceId: number;
 }
 
+/** MIDI timecode received: the loaded timeline follows it */
+export interface MtcSettings {
+    enabled: boolean;
+    /** Input port of the timecode, empty for any */
+    device: string;
+    /** Timecode of the start of the timeline, in seconds (for example 3600 for 01:00:00:00) */
+    start: number;
+}
+
 /** MIDI section of show.json */
 export interface ShowMidi {
     mappings: MidiMapping[];
     msc: MscSettings;
+    mtc: MtcSettings;
 }
 
-export const EMPTY_MIDI: ShowMidi = { mappings: [], msc: { enabled: false, deviceId: 1 } };
+export const EMPTY_MIDI: ShowMidi = { mappings: [], msc: { enabled: false, deviceId: 1 }, mtc: { enabled: false, device: '', start: 0 } };
 
 /** Message received or sent, for the MIDI monitor */
 export interface MidiMonitorEntry {
@@ -160,5 +170,14 @@ export function normalizeMidi(value: unknown): ShowMidi {
     }
     const msc = (typeof (input as { msc?: unknown }).msc === 'object' && (input as { msc?: unknown }).msc !== null ? (input as { msc: Record<string, unknown> }).msc : {}) as Record<string, unknown>;
     const deviceId = typeof msc.deviceId === 'number' && Number.isInteger(msc.deviceId) && msc.deviceId >= 0 && msc.deviceId <= 111 ? msc.deviceId : 1;
-    return { mappings, msc: { enabled: msc.enabled === true, deviceId } };
+    const mtc = (typeof (input as { mtc?: unknown }).mtc === 'object' && (input as { mtc?: unknown }).mtc !== null ? (input as { mtc: Record<string, unknown> }).mtc : {}) as Record<string, unknown>;
+    return {
+        mappings,
+        msc: { enabled: msc.enabled === true, deviceId },
+        mtc: {
+            enabled: mtc.enabled === true,
+            device: typeof mtc.device === 'string' ? mtc.device.slice(0, 200) : '',
+            start: typeof mtc.start === 'number' && Number.isFinite(mtc.start) ? Math.min(24 * 3600, Math.max(0, mtc.start)) : 0
+        }
+    };
 }

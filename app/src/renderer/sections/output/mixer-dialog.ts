@@ -41,6 +41,23 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
         options: [{ value: 'no', label: t('matrix.snakeNo') }, { value: 'yes', label: t('matrix.snakeYes') }],
         value: draft.numberArgument ? 'yes' : 'no'
     });
+    // MIDI mixers: output port, channel and bank select
+    const midiDevice = new SelectField<string>({ label: t('mixers.midiDevice'), options: draft.midiDevice === '' ? [] : [{ value: draft.midiDevice, label: draft.midiDevice }], value: draft.midiDevice });
+    const midiChannel = new NumberField({ label: t('mixers.midiChannel'), value: draft.midiChannel, min: 1, max: 16 });
+    const bankSelect = new ChoiceKeys<YesNo>({
+        label: t('mixers.bankSelect'),
+        options: [{ value: 'no', label: t('matrix.snakeNo') }, { value: 'yes', label: t('matrix.snakeYes') }],
+        value: draft.bankSelect ? 'yes' : 'no'
+    });
+    const midi = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [midiDevice, midiChannel, bankSelect] });
+    const network = new Stack({ direction: 'row', gap: 2, wrap: true, children: [host, port] });
+    void engine().request('midi.getState').then((state) => {
+        const names = [...new Set(state.devices.filter((device) => device.kind === 'output').map((device) => device.name))];
+        if (draft.midiDevice !== '' && !names.includes(draft.midiDevice)) {
+            names.push(draft.midiDevice);
+        }
+        midiDevice.setOptions(names.map((name) => ({ value: name, label: name })), draft.midiDevice !== '' ? draft.midiDevice : names[0] ?? '');
+    }).catch(() => undefined);
     const genericHint = new Label({ text: t('mixers.addressHint', { placeholder: NUMBER_PLACEHOLDER }), tone: 'secondary', size: 'small' });
     const modelHint = new Label({ text: '', tone: 'secondary', size: 'small' });
     const generic = new Stack({ gap: 1, children: [new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [address, argument] }), genericHint] });
@@ -56,11 +73,16 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
         host: host.value.trim(),
         port: Math.round(port.value),
         address: address.value.trim().startsWith('/') ? address.value.trim() : draft.address,
-        numberArgument: argument.value === 'yes'
+        numberArgument: argument.value === 'yes',
+        midiDevice: midiDevice.value,
+        midiChannel: Math.round(midiChannel.value),
+        bankSelect: bankSelect.value === 'yes'
     });
     const showModel = (): void => {
         const profile = MIXER_PROFILES[model.value];
         generic.element.hidden = model.value !== 'osc';
+        midi.element.hidden = model.value !== 'midi';
+        network.element.hidden = model.value === 'midi';
         modelHint.setText(model.value === 'osc' ? '' : t(`mixers.hints.${model.value as Exclude<MixerModel, 'osc'>}`, { first: profile.first, last: profile.last }));
         modelHint.element.hidden = model.value === 'osc';
     };
@@ -93,7 +115,7 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
         }
         try {
             await engine().request('mixers.recall', { mixer: current.id, number: testNumber.value });
-            testResult.setText(t('mixers.testSent', { number: testNumber.value, host: current.host, port: current.port }));
+            testResult.setText(current.model === 'midi' ? t('mixers.testSentMidi', { number: testNumber.value, device: current.midiDevice }) : t('mixers.testSent', { number: testNumber.value, host: current.host, port: current.port }));
         } catch (error) {
             testResult.setText('');
             await showError(error);
@@ -102,7 +124,8 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
 
     dialog.append(
         new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, model] }),
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [host, port] }),
+        network,
+        midi,
         modelHint,
         generic,
         new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [testNumber, test] }),

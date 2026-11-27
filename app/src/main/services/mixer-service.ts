@@ -8,6 +8,7 @@
 import { randomUUID } from 'node:crypto';
 import { MAX_MIXERS, normalizeMixer, type MixerRecall, type ShowMixers } from '../../shared/mixers/mixers';
 import { MixerSender } from '../mixers/mixer-sender';
+import type { PlaybackWindow } from '../playback/playback-window';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
@@ -23,8 +24,9 @@ export interface MixerRecaller {
 /**
  * Registers the methods of the service.
  */
-export function registerMixerService(router: RequestRouter, bus: EventBus, session: ShowSession): MixerRecaller {
-    const sender = new MixerSender();
+export function registerMixerService(router: RequestRouter, bus: EventBus, session: ShowSession, playback: PlaybackWindow): MixerRecaller {
+    // MIDI mixers are reached through the MIDI ports of the playback window
+    const sender = new MixerSender((device, data) => playback.send({ type: 'midiSend', device, data }));
     const mixersOf = (): ShowMixers => session.summary() === null ? { mixers: [] } : session.mixers();
     const update = (change: (mixers: ShowMixers) => ShowMixers): ShowMixers => {
         session.setMixers(change(session.mixers()));

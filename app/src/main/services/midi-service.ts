@@ -7,16 +7,19 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import { MAX_MIDI_MAPPINGS, MIDI_ENCODINGS, normalizeMidi, normalizeTarget, sameInput, type MidiMonitorEntry, type ShowMidi } from '../../shared/midi/midi';
+import { EMPTY_MIDI, MAX_MIDI_MAPPINGS, MIDI_ENCODINGS, normalizeMidi, normalizeTarget, sameInput, type MidiMonitorEntry, type ShowMidi } from '../../shared/midi/midi';
 import { MidiActions } from '../midi/midi-actions';
 import { MidiEngine } from '../midi/midi-engine';
 import { MidiFeedback } from '../midi/midi-feedback';
 import { parseMidi } from '../midi/midi-parse';
+import { MtcReader } from '../midi/mtc-reader';
+import { TimecodeChase } from '../midi/timecode-chase';
+import type { TimelinePlayer } from '../timeline/timeline-player';
 import type { PlaybackWindow } from '../playback/playback-window';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
 import type { EventBus } from '../transport/event-bus';
-import { requireBoolean, requireChoice, requireObject, requireRange, requireString } from '../transport/params';
+import { requireBoolean, requireChoice, requireNumber, requireObject, requireRange, requireString } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 
 // Monitor: messages sent to the interface together, and the most kept between two sends
@@ -28,8 +31,17 @@ const ECHO_MS = 100;
 /**
  * Registers the methods of the service.
  */
-export function registerMidiService(router: RequestRouter, bus: EventBus, session: ShowSession, playback: PlaybackWindow): MidiEngine {
-    const midiOf = (): ShowMidi => session.summary() === null ? { mappings: [], msc: { enabled: false, deviceId: 1 } } : session.midi();
+export function registerMidiService(router: RequestRouter, bus: EventBus, session: ShowSession, playback: PlaybackWindow, timeline: TimelinePlayer): MidiEngine {
+    const midiOf = (): ShowMidi => session.summary() === null ? EMPTY_MIDI : session.midi();
+    // MIDI timecode: the loaded timeline follows it
+    const mtcReader = new MtcReader();
+    const chase = new TimecodeChase({
+        playing: () => timeline.state().playing,
+        position: () => timeline.position(),
+        play: () => timeline.play(),
+        pause: () => timeline.pause(),
+        locate: (time) => timeline.locate(time)
+    });
     const actions = new MidiActions(router);
     let monitoring = false;
     let entries: MidiMonitorEntry[] = [];
@@ -91,6 +103,14 @@ export function registerMidiService(router: RequestRouter, bus: EventBus, sessio
         if (status.type === 'midiDevices') {
             engine.setDevices(status.devices);
         } else if (status.type === 'midiMessage') {
+            if (MtcReader.isTimecode(status.data)) {
+                const mtc = midiOf().mtc;
+                const time = mtc.enabled && (mtc.device === '' || mtc.device === status.device) ? mtcReader.read(status.data) : null;
+                if (time !== null) {
+                    chase.follow(time, mtc.start);
+                }
+                return;
+            }
             const key = `${status.device} ${status.data.join(',')}`;
             const sent = echoes.get(key);
             if (sent !== undefined && Date.now() - sent < ECHO_MS) {
@@ -181,6 +201,15 @@ export function registerMidiService(router: RequestRouter, bus: EventBus, sessio
         const input = requireObject(params);
         const msc = { enabled: requireBoolean(input, 'enabled'), deviceId: requireRange(input, 'deviceId', 0, 111) };
         return change((midi) => ({ ...midi, msc }));
+    });
+
+    router.register('midi.setMtc', (params) => {
+        const input = requireObject(params);
+        const mtc = { enabled: requireBoolean(input, 'enabled'), device: requireString(input, 'device').slice(0, 200), start: Math.min(24 * 3600, Math.max(0, requireNumber(input, 'start'))) };
+        if (!mtc.enabled) {
+            chase.stop();
+        }
+        return change((midi) => ({ ...midi, mtc }));
     });
 
     router.register('midi.setMonitor', (params) => {
