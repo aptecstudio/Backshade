@@ -17,7 +17,7 @@ Log of Backshade's technical decisions and conventions. Each entry shows its sta
 | Interface | HTML, TypeScript, SCSS, internal TypeScript and SCSS frameworks | Confirmed (TypeScript and SCSS replace JavaScript, jQuery and Tailwind on 2026-11-23) |
 | Versioning | SemVer; 1.0.0 is the first release, when all planned features are implemented and the application is ready for distribution and testing; no versions before it (`app/package.json` stays at `0.0.0`) | Confirmed (changed on 2026-11-23, it was the first runnable version) |
 | Live tests | `TESTING.md`: checklist of the final tests to run live with real hardware; the agent adds the new features to it at the end of every phase or sub-phase | Confirmed (requested by the human on 2026-11-26) |
-| README screenshots | Only 5 screenshots in `README.md`, showing the most interesting features; updated when better features arrive | Confirmed (requested by the human on 2026-11-26) |
+| README screenshots | Only 6 screenshots in `README.md`, showing the most interesting features; updated when better features arrive | Confirmed (requested by the human on 2026-11-26; 6 since 2026-11-28, with the 3D stage) |
 | Demo show | The included "Demo show" template (`app/templates/demo.backshade`) is updated with every new feature and committed and pushed with it | Confirmed (requested by the human on 2026-11-26) |
 
 ## Language
@@ -779,8 +779,18 @@ Status: Confirmed (2026-11-22).
 - **Detail level** (decided by the human on 2026-11-28): objects stay simple solids; musicians and singers are more detailed (rounded smooth surfaces, face, hair, clothes, hands, shoes). The singer exists as a man and as a woman. People are told apart in greys by lightness. `models/person.mts` is the figure reused by every musician, posed by elbow and wrist. (Confirmed detail and two singers, Proposed look)
 - **Generator:** `make-models.mts` lists the models; the builders are in `scripts/models/` (writer, vectors, one file per family). The files carry their normals; normals are computed only for files without them.
 - **Window:** the stage has its own window, opened on request from the key of the top bar (Lucide `spotlight`), one at a time, closed with the main window; method `stage.open`, desktop only. The key is shown with a show open and an operator entered, never to remote clients. (Confirmed window and key, Proposed rest)
-- **View:** floor grid of 20 x 20 m with 1 m squares, front, top, side and free views that frame the content, orbit, pan and zoom with mouse and touch; it draws only when something changes. (Proposed)
-- **First block:** a catalog of the models, to judge their style before generating the whole library; it will become the library of the stage editor. (Proposed)
+- **View:** floor grid of 20 x 20 m, front, top, side and free views that frame the content, orbit, pan and zoom with mouse and touch; it draws only when something changes. (Proposed)
+
+### Stage editor (13.4 and 13.5, 2026-11-28)
+
+- **Permission** (decided by the human): the operator profiles have their own "stage" section (hidden, read only, editable); profiles of older shows have it hidden until an administrator changes it. `stage.open` and `stage.get` need it shown, `stage.set` editable. (Confirmed)
+- **Fixtures** (decided by the human): only the fixtures of the patch can be placed, each once; the model follows the category (moving head and scanner: moving head; the others: PAR) and can be changed. A fixture removed from the patch leaves the stage. (Confirmed from patch, Proposed models)
+- **Handles and grid** (decided by the human): objects move only with the 3D handles, on a grid of 20 cm in real scale (the floor shows 20 cm squares with stronger lines every meter). Rotations in steps of 15 degrees. No numeric fields: the position is only shown. (Confirmed handles and 20 cm, Proposed 15 degrees)
+- **Saving:** `show.json` section `stage` (`shared/stage/stage.ts`): objects with model, position in meters (origin at the bottom centre), rotation in degrees, patched fixture and truss they hang from. The editor sends the whole stage (`stage.set`), saved as an unsaved change; undo and redo (100 steps) live in the window; Ctrl+S saves the show. (Proposed)
+- **Hanging:** the "Hang on the truss" key puts the fixture upside down under the nearest truss, on the grid along it; moving or turning the truss carries it along (so its position can leave the grid when the truss is turned); it can still be moved by itself, until taken off. Removing a truss leaves its fixtures where they are. (Proposed)
+- **Selection:** press on an object, also inside the outline of open shapes such as trusses. Duplicate for scenery, remove (also with Delete). New objects go on the floor at the point the camera looks at, beside what is already there. (Proposed)
+- **Not included:** the stage is not offered by the import from another show. (Proposed)
+- **Demo show:** two truss rows with the washes and beams hung, PARs on the floor, deck, two singers, amplifiers and monitors; the LED bars are left to be placed.
 
 ### Video outputs in the 3D stage
 

@@ -18,6 +18,10 @@ Backshade is a cross-platform desktop application (Windows, Linux, macOS) built 
 
 ## Screenshots
 
+The 3D stage: truss, decks, musicians and the fixtures of the patch placed in real scale, in its own window.
+
+![3D stage](docs/screenshots/stage-3d.png)
+
 Pre-programmed shows on a timeline of tracks: light, automation, audio and video clips on a shared clock, with folders, fades and snap to the beat.
 
 ![Timeline](docs/screenshots/timeline.png)

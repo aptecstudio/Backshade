@@ -10,7 +10,7 @@ Versioning rules (see `AGENTS.md`):
 
 ---
 
-Development order from 2026-11-28 (decided by the human): Phase 13, Phase 14, Phase 15, 16.3, 10.3, then Phase 11. The position of Phase 12 is still to be decided.
+Development order from 2026-11-28 (decided by the human): Phase 13, Phase 14, Phase 15, 16.3, 10.3, then Phase 11 and finally Phase 12.
 
 ---
 
@@ -231,8 +231,8 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [ ] 13.2.5 Musicians with their instrument: drummer (with drum kit), guitarist, bassist, pianist (with piano or keyboard), singer (with microphone and stand); neutral figures, to visualize the band on stage and aim the lights
   - [ ] 13.2.6 Stage elements: guitar and bass amplifiers and cabinets, drum riser, risers and platforms, floor wedge monitors, PA speakers and subwoofers, microphone stands, keyboard stands, instrument stands, cases and flight cases, DJ booth
 - [ ] 13.3 Link between fixture definitions and 3D models: model, beam angle and zoom range, pan and tilt range, light output
-- [ ] 13.4 Stage editor: place, move, rotate and snap truss, decks and fixtures; hang fixtures on truss; camera views (front, top, side, free)
-- [ ] 13.5 Placed fixtures linked to the patch; stage layout saved in `show.json`
+- [x] 13.4 Stage editor: place, move, rotate and snap truss, decks and fixtures; hang fixtures on truss; camera views (front, top, side, free)
+- [x] 13.5 Placed fixtures linked to the patch; stage layout saved in `show.json`
 - [ ] 13.6 Live emulation from the DMX output:
   - [ ] 13.6.1 Brightness: intensity, dimmer curve, strobe
   - [ ] 13.6.2 Colors: RGB/RGBW mixing, CMY, color wheel, color temperature

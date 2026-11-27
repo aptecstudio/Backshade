@@ -223,5 +223,9 @@ How to use it:
 
 - [ ] On Windows, macOS and Linux the key of the top bar opens the stage window; the models are drawn (WebGL available), also on computers with older or integrated graphics.
 - [ ] Mouse: orbit, pan and zoom; touch screen: one finger orbits, two fingers pinch and pan.
+- [ ] Editor on a touch screen: a tap selects, the arrows and rings can be dragged with a finger without moving the camera.
+- [ ] A stage built like a real one (truss, decks, hung fixtures) in a venue: the 20 cm grid is fine enough; heights and distances match the measures.
+- [ ] Operators: stage hidden (no key in the top bar), read only (no handles) and editable; changing operator updates the open stage window.
+- [ ] Save, close and reopen the show, also on another computer: the stage is the same.
 - [ ] Moving the window to a second screen and resizing it keeps the view sharp and proportioned; closing the main window closes it.
 
