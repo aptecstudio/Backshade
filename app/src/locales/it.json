@@ -1129,7 +1129,11 @@
       "addStep": "Aggiungi step",
       "removeStep": "Togli step",
       "stepsHint": "Ogni step suona una scena per un battito. Se riregistri una scena, cambiano i chaser che la usano.",
-      "noScenes": "Non ci sono ancora scene: registra prima le scene, poi usale come step."
+      "noScenes": "Non ci sono ancora scene: registra prima le scene, poi usale come step.",
+      "tempoSource": "Tempo",
+      "tempoOwn": "Bpm propri",
+      "tempoShared": "Tempo condiviso",
+      "tempoSharedHint": "Con il tempo condiviso, mentre una timeline suona i passi cambiano sui suoi battiti, al suo tempo; altrimenti il chaser tiene i suoi bpm."
     },
     "cues": {
       "title": "Cue",

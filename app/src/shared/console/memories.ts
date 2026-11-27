@@ -94,6 +94,18 @@ export interface Chaser {
     /** Crossfade between steps, as a part of the step time, 0 to 1 */
     fade: number;
     direction: ChaserDirection;
+    /**
+     * Follows the shared tempo: while a timeline plays, the steps change on
+     * its beats at its tempo; otherwise the chaser keeps its own bpm. Missing in older files
+     */
+    followTempo: boolean;
+}
+
+/** Shared tempo: tempo and position in beats of the timeline playing */
+export interface SharedTempo {
+    bpm: number;
+    /** Beats from the start of the timeline */
+    beats: number;
 }
 
 /** Cue of the cue list: a scene played with Go */
@@ -265,7 +277,8 @@ export function normalizeMemories(value: unknown): ShowMemories {
             steps,
             bpm: clampNumber(entry.bpm, BPM_LIMITS.min, BPM_LIMITS.max, DEFAULT_BPM),
             fade: clampNumber(entry.fade, 0, 1, 0),
-            direction: CHASER_DIRECTIONS.includes(entry.direction as ChaserDirection) ? entry.direction as ChaserDirection : 'loop'
+            direction: CHASER_DIRECTIONS.includes(entry.direction as ChaserDirection) ? entry.direction as ChaserDirection : 'loop',
+            followTempo: entry.followTempo === true
         });
     }
 

@@ -15,7 +15,7 @@
  */
 
 import type { CueTiming } from '../../shared/console/cue-stack';
-import type { Chaser, MemoriesState, MemoryKind, Scene, ShowMemories } from '../../shared/console/memories';
+import type { Chaser, MemoriesState, MemoryKind, Scene, SharedTempo, ShowMemories } from '../../shared/console/memories';
 import type { PatchedMatrix } from '../../shared/patch/matrix';
 import { renderMatrixEffect } from '../matrix/render-effect';
 import type { DmxMixer } from '../output/dmx-mixer';
@@ -88,6 +88,8 @@ interface Playback {
     /** Chasers: current and previous step, start of the current step */
     position: SequencePosition;
     previous: number | null;
+    /** Chasers following the shared tempo: last whole beat seen, null before the first */
+    beat: number | null;
     stepStarted: number;
     /** Level set by a fader, 0 to 1, null when the fades decide */
     manual: number | null;
@@ -114,6 +116,7 @@ export class MemoryPlayer {
     private readonly values = new WeakMap<Scene, SceneValues>();
     private selected: string | null = null;
     private clipResolver: ((id: string) => { kind: MemoryKind; id: string } | null) | null = null;
+    private tempoSource: (() => SharedTempo | null) | null = null;
     private timer: NodeJS.Timeout | null = null;
 
     constructor(context: MemoryPlayerContext) {
@@ -205,6 +208,10 @@ export class MemoryPlayer {
     /**
      * Sets how light clips find their scene or chaser (the timeline player).
      */
+    setTempoSource(source: () => SharedTempo | null): void {
+        this.tempoSource = source;
+    }
+
     setClipTarget(resolver: (id: string) => { kind: MemoryKind; id: string } | null): void {
         this.clipResolver = resolver;
     }
@@ -363,6 +370,7 @@ export class MemoryPlayer {
             position: { step: 0, heading: 1 },
             previous: null,
             stepStarted: this.now(),
+            beat: null,
             manual: null,
             driven: null,
             pausedAt: null,
@@ -526,15 +534,35 @@ export class MemoryPlayer {
         if (scenes.length === 0) {
             return { output: new Map(), stepChanged: false, finished: false };
         }
-        const stepMs = 60000 / chaser.bpm;
+        const tempo = chaser.followTempo ? this.tempoSource?.() ?? null : null;
+        const stepMs = 60000 / (tempo?.bpm ?? chaser.bpm);
         let stepChanged = false;
         if (playback.position.step >= scenes.length) {
             playback.position = { step: 0, heading: 1 };
             playback.previous = null;
             stepChanged = true;
         }
+        if (tempo !== null) {
+            // Shared tempo: one step for every beat of the timeline, on its beats
+            const beat = Math.floor(tempo.beats);
+            const passed = playback.beat === null ? 0 : beat - playback.beat;
+            // A jump of the playhead (backwards or far) moves one step only
+            for (let index = 0; index < (passed < 0 || passed > 4 ? 1 : passed) && playback.released === null; index++) {
+                const next = nextStep(chaser.direction, playback.position, scenes.length);
+                if (next === null) {
+                    return { output: new Map(), stepChanged: true, finished: true };
+                }
+                playback.previous = playback.position.step;
+                playback.position = next;
+                stepChanged = true;
+            }
+            playback.beat = beat;
+            playback.stepStarted = now - (tempo.beats - beat) * stepMs;
+        } else {
+            playback.beat = null;
+        }
         // After a long pause (or a much slower tempo) the chaser starts the next step now
-        if (now - playback.stepStarted > stepMs * 4) {
+        if (tempo === null && now - playback.stepStarted > stepMs * 4) {
             playback.stepStarted = now - stepMs;
         }
         while (playback.released === null && now - playback.stepStarted >= stepMs) {

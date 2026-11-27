@@ -9,7 +9,8 @@
  * armed tracks while playing with the record key on) are handled here.
  */
 
-import { clipLevel, curveValue, type Clip, type ShowTimelines, type Timeline, type TimelineState, type Track } from '../../shared/timeline/timeline';
+import type { SharedTempo } from '../../shared/console/memories';
+import { beatLength, clipLevel, curveValue, type Clip, type ShowTimelines, type Timeline, type TimelineState, type Track } from '../../shared/timeline/timeline';
 import type { GridMaster } from '../../shared/grid/grid';
 import type { LayerState } from '../../shared/video/video';
 import type { MemoryPlayer } from '../console/memory-player';
@@ -263,6 +264,18 @@ export class TimelinePlayer {
             this.context.audio.applyOutputs(timeline, (track) => this.muted(timeline, track));
             this.apply(this.position(), false);
         }
+    }
+
+    /**
+     * Shared tempo for the chasers that follow it: tempo and beats of the
+     * timeline while it plays, null otherwise.
+     */
+    tempo(): SharedTempo | null {
+        const timeline = this.current();
+        if (!this.playing || timeline === null) {
+            return null;
+        }
+        return { bpm: timeline.bpm, beats: this.position() / beatLength(timeline) };
     }
 
     /** Position of the playhead, in seconds */

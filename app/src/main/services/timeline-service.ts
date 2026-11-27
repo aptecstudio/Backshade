@@ -84,6 +84,7 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
     });
     let recorded = false;
     targets.memory.setClipTarget((id) => player.clipTarget(id));
+    targets.memory.setTempoSource(() => player.tempo());
 
     session.onContentChange((part) => {
         if (part === 'all') {

@@ -1129,7 +1129,11 @@
       "addStep": "Add step",
       "removeStep": "Remove step",
       "stepsHint": "Each step plays a scene for one beat. Recording a scene again changes the chasers that use it.",
-      "noScenes": "There are no scenes yet: record scenes first, then use them as steps."
+      "noScenes": "There are no scenes yet: record scenes first, then use them as steps.",
+      "tempoSource": "Tempo",
+      "tempoOwn": "Own bpm",
+      "tempoShared": "Shared tempo",
+      "tempoSharedHint": "With the shared tempo, while a timeline plays the steps change on its beats, at its tempo; otherwise the chaser keeps its own bpm."
     },
     "cues": {
       "title": "Cues",

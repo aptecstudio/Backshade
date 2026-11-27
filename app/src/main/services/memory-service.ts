@@ -221,7 +221,8 @@ export function registerMemoryService(
             steps,
             bpm: requireBpm(input),
             fade,
-            direction: requireChoice(input, 'direction', CHASER_DIRECTIONS)
+            direction: requireChoice(input, 'direction', CHASER_DIRECTIONS),
+            followTempo: optionalBoolean(input, 'followTempo') ?? false
         };
         replaceChaser(chaser);
         player.selectChaser(chaser.id);

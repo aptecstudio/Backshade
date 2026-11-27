@@ -446,7 +446,7 @@ export interface EngineMethods {
     /** Deletes a scene and removes it from the chaser steps (unsaved change) */
     'memories.deleteScene': { params: { id: string }; result: undefined };
     /** Creates (without id) or changes a chaser (unsaved change) */
-    'memories.saveChaser': { params: { id?: string; slot: number; name: string; steps: string[]; bpm: number; fade: number; direction: ChaserDirection }; result: Chaser };
+    'memories.saveChaser': { params: { id?: string; slot: number; name: string; steps: string[]; bpm: number; fade: number; direction: ChaserDirection; followTempo?: boolean }; result: Chaser };
     /** Deletes a chaser (unsaved change) */
     'memories.deleteChaser': { params: { id: string }; result: undefined };
     /** Changes the speed of a chaser and selects it (unsaved change) */

@@ -1690,7 +1690,8 @@
         ],
         "bpm": 128,
         "fade": 0.3,
-        "direction": "loop"
+        "direction": "loop",
+        "followTempo": true
       },
       {
         "id": "2f94916d-df33-4c37-9930-00a08bc184d1",
@@ -1703,7 +1704,8 @@
         ],
         "bpm": 96,
         "fade": 0.5,
-        "direction": "bounce"
+        "direction": "bounce",
+        "followTempo": false
       },
       {
         "id": "2654b8a2-6255-43f3-9ebb-b99f8e4c56c8",
@@ -1715,7 +1717,8 @@
         ],
         "bpm": 240,
         "fade": 0,
-        "direction": "random"
+        "direction": "random",
+        "followTempo": false
       }
     ],
     "cues": [

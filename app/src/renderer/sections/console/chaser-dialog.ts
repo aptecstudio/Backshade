@@ -5,7 +5,7 @@
  * changes the chasers that use it; steps are reordered by dragging them.
  */
 
-import { Dialog, Key, Label, NumberField, Panel, SelectField, Spacer, Stack, TextField, makeSortable } from '../../../framework/ts/index.js';
+import { ChoiceKeys, Dialog, Key, Label, NumberField, Panel, SelectField, Spacer, Stack, TextField, makeSortable } from '../../../framework/ts/index.js';
 import {
     BPM_LIMITS,
     DEFAULT_BPM,
@@ -52,6 +52,12 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
     const bpm = new NumberField({ label: t('memories.bpm'), value: chaser?.bpm ?? DEFAULT_BPM, min: BPM_LIMITS.min, max: BPM_LIMITS.max, decimals: 1 });
     const fade = new NumberField({ label: t('memories.stepFade'), value: Math.round((chaser?.fade ?? 0) * 100), min: 0, max: 100, unit: '%' });
     const direction = new SelectField({ label: t('memories.directionLabel'), options: directionOptions(), value: chaser?.direction ?? 'loop' });
+    // Shared tempo: while a timeline plays the chaser steps on its beats
+    const followTempo = new ChoiceKeys<'own' | 'shared'>({
+        label: t('memories.tempoSource'),
+        options: [{ value: 'own', label: t('memories.tempoOwn') }, { value: 'shared', label: t('memories.tempoShared') }],
+        value: chaser?.followTempo === true ? 'shared' : 'own'
+    });
 
     const list = new Panel({ title: t('memories.steps'), classes: ['chaser-steps'] });
     const empty = new Label({ text: t('memories.noSteps'), tone: 'secondary', size: 'small' });
@@ -101,6 +107,7 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
     dialog.append(
         name,
         new Stack({ direction: 'row', gap: 2, wrap: true, children: [bpm, fade, direction] }),
+        new Stack({ gap: 1, children: [followTempo, new Label({ text: t('memories.tempoSharedHint'), tone: 'secondary', size: 'small' })] }),
         list,
         new Stack({ direction: 'row', gap: 1, align: 'center', children: [sceneChoice, add] }),
         new Label({ text: scenes.length === 0 ? t('memories.noScenes') : t('memories.stepsHint'), tone: 'secondary', size: 'small' })
@@ -126,7 +133,8 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
                 steps: [...steps],
                 bpm: bpm.value,
                 fade: fade.value / 100,
-                direction: direction.value
+                direction: direction.value,
+                followTempo: followTempo.value === 'shared'
             });
             dialog.close();
         } catch (error) {
