@@ -1,7 +1,8 @@
 /**
  * What a remote client cannot do: act on the window of the computer, and
  * change the operator of the instance (a remote client always acts as the
- * operator entered there). Everything else is allowed, within that
+ * operator entered there, except while waiting to enter a show it opened).
+ * Everything else is allowed, within that
  * operator's permissions.
  */
 

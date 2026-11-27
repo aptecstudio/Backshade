@@ -27,6 +27,8 @@ export class RemoteAuth {
     private readonly operators: OperatorSessionInfo;
     private readonly sessions = new Map<string, { operatorId: string; pinHash: string }>();
     private readonly failures = new Map<string, number>();
+    /** Sessions of clients that opened or closed a show and may enter again */
+    readonly waiting = new Set<string>();
     private totalFailures = 0;
     private readonly locked = new Map<string, number>();
     private totalLockedUntil = 0;
@@ -55,7 +57,7 @@ export class RemoteAuth {
             return { error: 'wrong-pin' };
         }
         this.failures.delete(address);
-        this.purge();
+        this.revokeEnded();
         if (this.sessions.size >= MAX_SESSIONS) {
             this.sessions.delete(this.sessions.keys().next().value as string);
         }
@@ -72,14 +74,25 @@ export class RemoteAuth {
             && current.operator.id === session.operatorId && current.operator.pinHash === session.pinHash;
     }
 
+    /** Binds a session to the operator entered now (a client that entered again from remote) */
+    rebind(token: string): void {
+        const current = this.operators.current();
+        if (current !== null && this.sessions.has(token)) {
+            this.sessions.set(token, { operatorId: current.operator.id, pinHash: current.operator.pinHash });
+        }
+    }
+
     logout(token: string): void {
         this.sessions.delete(token);
     }
 
-    /** Forgets the sessions of operators no longer entered */
-    private purge(): void {
+    /**
+     * Forgets the sessions of operators no longer entered, unless they wait
+     * to enter again: once an operator left, coming back asks the PIN anew.
+     */
+    revokeEnded(): void {
         for (const token of [...this.sessions.keys()]) {
-            if (!this.isValid(token)) {
+            if (!this.isValid(token) && !this.waiting.has(token)) {
                 this.sessions.delete(token);
             }
         }
