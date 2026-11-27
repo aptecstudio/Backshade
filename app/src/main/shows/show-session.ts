@@ -86,8 +86,9 @@ export class ShowSession {
      * Creates a show by copying a template and opens it.
      * @param templateFolder - Template folder
      * @param exclude - Template entries not to copy (for example template.json)
+     * @param administrator - First operator of the show: the operators of a template never pass to a new show
      */
-    create(name: string, parentFolder: string, templateFolder: string, exclude: readonly string[]): SessionOpenResult {
+    create(name: string, parentFolder: string, templateFolder: string, exclude: readonly string[], administrator: ShowOperator): SessionOpenResult {
         this.requireClosedOrSaved();
         fs.mkdirSync(parentFolder, { recursive: true });
         const folder = uniquePath(parentFolder, toFileName(name), SHOW_FOLDER_EXTENSION);
@@ -101,8 +102,7 @@ export class ShowSession {
             createdAt: now,
             modifiedAt: now,
             createdWith: app.getVersion(),
-            // The operators of a template never pass to a new show: who creates it sets them up
-            operators: []
+            operators: [administrator]
         };
         showFiles.writeShow(folder, document, false);
 

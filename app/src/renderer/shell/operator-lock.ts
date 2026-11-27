@@ -1,24 +1,31 @@
 /**
- * Asks for the PIN when the open show has operators and nobody entered,
- * and closes the request as soon as an operator enters.
+ * Asks to enter when the open show has no operator entered: the PIN of an
+ * operator, or the creation of the administrator for a show without
+ * operators. The request closes as soon as an operator enters.
  */
 
+import { AdminDialog } from '../dialogs/admin-dialog.js';
 import { PinDialog } from '../dialogs/pin-dialog.js';
 import { onOperatorChange, operatorState } from '../show/operator-store.js';
 import { currentShow } from '../show/show-store.js';
 
-let dialog: PinDialog | null = null;
+/** Which request is open */
+type Request = 'pin' | 'admin';
+
+let open: { kind: Request; dialog: PinDialog | AdminDialog } | null = null;
 
 function follow(): void {
     const state = operatorState();
     const show = currentShow();
-    const locked = show !== null && state.showId === show.id && state.required && state.operator === null;
-    if (locked && dialog === null) {
-        dialog = new PinDialog();
-        dialog.open();
-    } else if (!locked && dialog !== null) {
-        dialog.close();
-        dialog = null;
+    const locked = show !== null && state.showId === show.id && state.operator === null;
+    const kind: Request | null = !locked ? null : state.required ? 'pin' : 'admin';
+    if (open !== null && open.kind !== kind) {
+        open.dialog.close();
+        open = null;
+    }
+    if (open === null && kind !== null) {
+        open = { kind, dialog: kind === 'pin' ? new PinDialog() : new AdminDialog() };
+        open.dialog.open();
     }
 }
 

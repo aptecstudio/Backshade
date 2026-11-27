@@ -8,7 +8,6 @@
 
 import { randomUUID } from 'node:crypto';
 import {
-    OPERATOR_NAME_LENGTH,
     OPERATOR_SECTIONS,
     effectiveAccess,
     isValidPin,
@@ -19,6 +18,7 @@ import {
     type ShowOperator
 } from '../../shared/show/operators';
 import { METHOD_RULES } from '../operators/method-rules';
+import { operatorName } from '../operators/new-operator';
 import { hashPin, matchesPin } from '../operators/operator-pin';
 import type { ShowSession } from '../shows/show-session';
 import { EngineError } from '../transport/engine-error';
@@ -35,8 +35,8 @@ const WRONG_PIN_DELAY_MS = 400;
 /** Operator who entered, with the PIN typed to enter (kept only in memory) */
 export interface OperatorSessionInfo {
     current(): { operator: ShowOperator; pin: string } | null;
-    /** Enters as an operator that is about to be added to the show, for example by an import */
-    enter(id: string, pin: string): void;
+    /** Enters as an operator of the open show and tells every window, for example who just created it */
+    signIn(id: string, pin: string): void;
 }
 
 export function registerOperatorService(router: RequestRouter, bus: EventBus, session: ShowSession): OperatorSessionInfo {
@@ -57,7 +57,7 @@ export function registerOperatorService(router: RequestRouter, bus: EventBus, se
     const profiles = (): OperatorProfile[] => session.operators().map(operatorProfile);
     const changed = (): void => bus.emit('operators.changed', { state: state() });
 
-    /** Administrators only, or anyone while the show has no operators */
+    /** Administrators only, or anyone while the show waits for its first administrator */
     const requireManager = (): void => {
         if (session.operators().length > 0 && current()?.admin !== true) {
             throw new EngineError('operator-not-allowed', 'Only administrators manage the operators');
@@ -76,9 +76,10 @@ export function registerOperatorService(router: RequestRouter, bus: EventBus, se
     });
 
     router.setGuard((method) => {
-        const operators = session.operators();
         const rule = METHOD_RULES[method];
-        if (operators.length === 0 || rule?.kind === 'free') {
+        // Without a show there are no operators; with a show, only free methods work until an operator entered
+        // (a show without operators first creates its administrator, with the free operators.save)
+        if (session.summary() === null || rule?.kind === 'free') {
             return;
         }
         const operator = current();
@@ -143,14 +144,11 @@ export function registerOperatorService(router: RequestRouter, bus: EventBus, se
         const input = requireObject(params);
         const operators = session.operators();
         const id = optionalString(input, 'id');
-        const name = requireString(input, 'name').trim().slice(0, OPERATOR_NAME_LENGTH);
+        const name = operatorName(requireString(input, 'name'));
         const pin = optionalString(input, 'pin');
         const first = operators.length === 0;
         // The first operator is who protects the show: always an administrator
         const admin = first || optionalBoolean(input, 'admin') === true;
-        if (name === '') {
-            throw new EngineError('invalid-name', 'Empty name');
-        }
         if (pin !== undefined && !isValidPin(pin)) {
             throw new EngineError('invalid-pin', 'The PIN has 4 digits');
         }
@@ -190,13 +188,9 @@ export function registerOperatorService(router: RequestRouter, bus: EventBus, se
         requireManager();
         const id = requireString(requireObject(params), 'id');
         const operators = session.operators();
-        // The operator who entered can delete only the last profile: the show opens again without a PIN
-        if (id === currentId && operators.length > 1) {
-            throw new EngineError('operator-in-use', 'The operator who entered cannot be deleted');
-        }
+        // A show always keeps its operators: the one who entered, an administrator, stays
         if (id === currentId) {
-            currentId = null;
-            currentPin = null;
+            throw new EngineError('operator-in-use', 'The operator who entered cannot be deleted');
         }
         session.setOperators(operators.filter((operator) => operator.id !== id));
         return profiles();
@@ -207,9 +201,10 @@ export function registerOperatorService(router: RequestRouter, bus: EventBus, se
             const operator = current();
             return operator === undefined || currentPin === null ? null : { operator, pin: currentPin };
         },
-        enter: (id, pin) => {
+        signIn: (id, pin) => {
             currentId = id;
             currentPin = pin;
+            changed();
         }
     };
 }

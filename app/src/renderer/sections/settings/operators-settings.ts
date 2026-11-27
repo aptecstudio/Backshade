@@ -1,7 +1,6 @@
 /**
  * Operators of the show, in the show settings: the list with the access of
- * every profile, adding and changing operators. A show without operators
- * offers to create the administrator profile that protects it.
+ * every profile, adding and changing operators.
  */
 
 import { Key, Label, Panel, Spacer, Stack } from '../../../framework/ts/index.js';
@@ -49,34 +48,32 @@ export class OperatorsSettings extends Panel {
     private render(operators: OperatorProfile[]): void {
         this.content?.destroy();
         const me = operatorState().operator?.id;
-        const children = operators.length === 0
-            ? [new Label({ text: t('operators.empty') }), this.addKey(t('operators.protect'), true, 0)]
-            : [
-                ...operators.map((operator) => {
-                    const edit = new Key({ label: t('operators.edit'), icon: 'pencil' });
-                    edit.onPress(() => openOperatorDialog(operator, false, operators.length));
-                    return new Stack({
-                        direction: 'row',
-                        gap: 2,
-                        align: 'center',
-                        classes: ['operator-row'],
-                        children: [
-                            new Label({ text: operator.id === me ? t('operators.you', { name: operator.name }) : operator.name }),
-                            new Label({ text: summary(operator), tone: 'secondary', size: 'small' }),
-                            new Spacer(),
-                            edit
-                        ]
-                    });
-                }),
-                this.addKey(t('operators.add'), false, operators.length)
-            ];
+        const children = [
+            ...operators.map((operator) => {
+                const edit = new Key({ label: t('operators.edit'), icon: 'pencil' });
+                edit.onPress(() => openOperatorDialog(operator));
+                return new Stack({
+                    direction: 'row',
+                    gap: 2,
+                    align: 'center',
+                    classes: ['operator-row'],
+                    children: [
+                        new Label({ text: operator.id === me ? t('operators.you', { name: operator.name }) : operator.name }),
+                        new Label({ text: summary(operator), tone: 'secondary', size: 'small' }),
+                        new Spacer(),
+                        edit
+                    ]
+                });
+            }),
+            this.addKey(t('operators.add'))
+        ];
         this.content = new Stack({ gap: 2, children });
         this.append(this.content);
     }
 
-    private addKey(label: string, first: boolean, count: number): Stack {
+    private addKey(label: string): Stack {
         const key = new Key({ label, icon: 'user-round-plus' });
-        key.onPress(() => openOperatorDialog(null, first, count));
+        key.onPress(() => openOperatorDialog(null));
         return new Stack({ direction: 'row', children: [key] });
     }
 }

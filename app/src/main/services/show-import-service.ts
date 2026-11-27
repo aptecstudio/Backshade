@@ -5,7 +5,6 @@
  * one of them: same name and same PIN.
  */
 
-import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { CONFLICT_RESOLUTIONS, type ConflictResolution, withRequirements } from '../../shared/show/show-import';
@@ -69,7 +68,6 @@ export function registerShowImportService(router: RequestRouter, bus: EventBus, 
     router.register('showImport.apply', async (params) => {
         const input = requireObject(params);
         const source = await openSource(input);
-        const pin = optionalString(input, 'pin');
         if (!Array.isArray(input.items)) {
             throw new EngineError('invalid-params', 'Invalid field "items"');
         }
@@ -106,20 +104,6 @@ export function registerShowImportService(router: RequestRouter, bus: EventBus, 
             session.setMemories(plan.memories);
         }
         if (plan.operators !== null) {
-            // Operators imported into a show without operators protect it: who imports enters as
-            // the source administrator of the PIN typed, imported with them when not chosen
-            if (show.document.operators.length === 0 && pin !== undefined) {
-                let admin = plan.operators.find((operator) => operator.admin && matchesPin(pin, operator));
-                const original = source.document.operators.find((operator) => operator.admin && matchesPin(pin, operator));
-                if (admin === undefined && original !== undefined) {
-                    admin = { ...original, id: randomUUID() };
-                    plan.operators.push(admin);
-                    plan.result.imported += 1;
-                }
-                if (admin !== undefined) {
-                    operators.enter(admin.id, pin);
-                }
-            }
             session.setOperators(plan.operators);
         }
         return plan.result;

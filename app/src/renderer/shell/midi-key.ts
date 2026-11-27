@@ -1,8 +1,7 @@
 /**
  * MIDI key of the top bar: a long press (the ring fills) turns MIDI learn
  * on, so it is never turned on by mistake; a short press turns it off. It
- * is shown to who may change the show (administrators, or everyone in a
- * show without operators), and only with a show open.
+ * is shown to administrators, and only with a show open.
  */
 
 import { HoldKey } from '../../framework/ts/index.js';

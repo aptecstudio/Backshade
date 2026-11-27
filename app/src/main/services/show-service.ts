@@ -7,6 +7,8 @@
 import path from 'node:path';
 import type { OpenShowResult } from '../../shared/transport/engine-api';
 import type { FixtureLibrary } from '../fixtures/fixture-library';
+import { newAdministrator } from '../operators/new-operator';
+import type { OperatorSessionInfo } from './operator-service';
 import { missingFixtures } from '../patch/patch-editor';
 import { ARCHIVE_EXTENSIONS, packFolder, unpackArchive } from '../archive/backshade-archive';
 import { readSettings } from '../settings/app-settings';
@@ -25,7 +27,7 @@ import { chooseFile, chooseFolder, chooseSaveFile } from '../window/file-dialogs
 /**
  * Registers the methods of the service.
  */
-export function registerShowService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): void {
+export function registerShowService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary, operators: OperatorSessionInfo): void {
     // Opened shows go into the recent shows and report the definitions missing on this workstation
     const remember = (result: SessionOpenResult): OpenShowResult => {
         addRecentShow(result.show.name, result.show.folder);
@@ -40,7 +42,14 @@ export function registerShowService(router: RequestRouter, bus: EventBus, sessio
         const input = requireObject(params);
         const template = findTemplate(requireString(input, 'templateId'));
         const folder = path.resolve(requireString(input, 'folder'));
-        return remember(session.create(requireString(input, 'name'), folder, template.folder, TEMPLATE_ONLY_ENTRIES));
+        const admin = requireObject(input.admin);
+        const pin = requireString(admin, 'pin');
+        // Checked before the folder is made: a wrong PIN never leaves a half-made show
+        const administrator = newAdministrator(requireString(admin, 'name'), pin);
+        const result = session.create(requireString(input, 'name'), folder, template.folder, TEMPLATE_ONLY_ENTRIES, administrator);
+        // Who creates the show is already its operator
+        operators.signIn(administrator.id, pin);
+        return remember(result);
     });
 
     router.register('show.open', (params) => {

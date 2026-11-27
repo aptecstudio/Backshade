@@ -1,10 +1,12 @@
 /**
- * New show dialog: name, folder and starting template.
+ * New show dialog: name, folder, starting template and the administrator
+ * of the show, which is always asked.
  * Returns the chosen data, or null if the user cancels.
  */
 
 import { Dialog, Key, Label, ListItem, Stack, TextField } from '../../../framework/ts/index.js';
 import type { TemplateInfo } from '../../../shared/transport/engine-api.js';
+import { AdminFields, type AdminChoice } from '../../dialogs/admin-fields.js';
 import { t } from '../../i18n/i18n.js';
 import { localized } from '../../templates/template-text.js';
 import { FolderPicker } from './folder-picker.js';
@@ -14,6 +16,7 @@ export interface NewShowChoice {
     name: string;
     folder: string;
     templateId: string;
+    admin: AdminChoice;
 }
 
 /**
@@ -24,6 +27,7 @@ export function askNewShow(templates: readonly TemplateInfo[], defaultFolder: st
         const dialog = new Dialog({ title: t('newShow.title'), size: 'wide' });
         const name = new TextField({ label: t('newShow.name'), value: t('newShow.defaultName'), maxLength: 100 });
         const folder = new FolderPicker(t('newShow.folder'), defaultFolder);
+        const admin = new AdminFields();
 
         let selected = templates[0]?.id ?? '';
         const items = templates.map((template) => {
@@ -53,7 +57,8 @@ export function askNewShow(templates: readonly TemplateInfo[], defaultFolder: st
                     new Label({ text: t('newShow.template'), tone: 'secondary', size: 'small' }),
                     new Stack({ gap: 1, classes: ['template-choice'], children: items })
                 ]
-            })
+            }),
+            admin
         );
 
         const finish = (choice: NewShowChoice | null): void => {
@@ -63,7 +68,12 @@ export function askNewShow(templates: readonly TemplateInfo[], defaultFolder: st
         const cancel = new Key({ label: t('common.cancel') });
         const create = new Key({ label: t('newShow.create'), icon: 'file-plus', state: 'active' });
         cancel.onPress(() => finish(null));
-        create.onPress(() => finish({ name: name.value.trim(), folder: folder.folder, templateId: selected }));
+        create.onPress(() => {
+            const administrator = admin.read();
+            if (administrator !== null) {
+                finish({ name: name.value.trim(), folder: folder.folder, templateId: selected, admin: administrator });
+            }
+        });
         dialog.addActions(cancel, create);
         dialog.onCancel(() => finish(null));
         dialog.open();

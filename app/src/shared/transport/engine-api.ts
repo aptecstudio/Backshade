@@ -283,7 +283,7 @@ export interface EngineMethods {
     /** Open show, or null */
     'show.getCurrent': { params: undefined; result: ShowSummary | null };
     /** Creates a show from a template and opens it */
-    'show.create': { params: { name: string; folder: string; templateId: string }; result: OpenShowResult };
+    'show.create': { params: { name: string; folder: string; templateId: string; admin: { name: string; pin: string } }; result: OpenShowResult };
     /** Opens the show of a folder */
     'show.open': { params: { folder: string }; result: OpenShowResult };
     /** Lets the user choose the folder of a show and opens it; null if cancelled */
@@ -636,8 +636,8 @@ export interface EngineMethods {
         result: OperatorProfile[];
     };
     /**
-     * Deletes an operator; administrators only. The operator who entered can
-     * delete only the last profile, and the show then opens without a PIN.
+     * Deletes an operator; administrators only. The operator who entered
+     * cannot be deleted, so a show always keeps its operators.
      */
     'operators.delete': { params: { id: string }; result: OperatorProfile[] };
     /**

@@ -52,7 +52,7 @@ export function startEngine(): void {
     registerWindowService(router, bus);
     registerSettingsService(router);
     const operators = registerOperatorService(router, bus, session);
-    registerShowService(router, bus, session, library);
+    registerShowService(router, bus, session, library, operators);
     registerFixtureService(router, bus, session, library);
     registerPatchService(router, bus, session, library);
     const output = registerOutputService(router, bus, session, library);

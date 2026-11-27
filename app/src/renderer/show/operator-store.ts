@@ -1,8 +1,8 @@
 /**
  * Operator of the open show on the interface side: who entered and which
- * working sections the profile shows, read only or editable. A show
- * without operators shows every section; until the engine tells the
- * operator state of a just opened show, no working section is shown.
+ * working sections the profile shows, read only or editable. Until an
+ * operator entered (also while a show without operators waits for its
+ * administrator) no working section is shown.
  */
 
 import { Emitter, type Unsubscribe } from '../../framework/ts/index.js';
@@ -38,10 +38,10 @@ export function operatorState(): OperatorState {
     return state;
 }
 
-/** The open show waits for the PIN of an operator */
+/** The open show waits for an operator to enter */
 export function isLocked(): boolean {
     const show = currentShow();
-    return show !== null && (state.showId !== show.id || (state.required && state.operator === null));
+    return show !== null && (state.showId !== show.id || state.operator === null);
 }
 
 /** Access of the operator to a working section; settings and start page are always editable */
@@ -52,6 +52,7 @@ export function sectionAccess(id: SectionId): SectionAccess {
     if (isLocked()) {
         return 'hidden';
     }
+    // Without a show there are no operators
     return state.operator === null ? 'edit' : effectiveAccess(state.operator)[id as OperatorSection];
 }
 
@@ -65,9 +66,9 @@ export function firstVisibleSection(): SectionId | null {
     return MAIN_SECTIONS.find((section) => isSectionVisible(section.id))?.id ?? null;
 }
 
-/** The operator may change the settings of the show: administrator, or a show without operators */
+/** The operator may change the settings of the show: an administrator */
 export function canManageShow(): boolean {
-    return !isLocked() && (!state.required || state.operator?.admin === true);
+    return !isLocked() && (currentShow() === null || state.operator?.admin === true);
 }
 
 /** Registers a listener for the changes of the operator or of the open show */

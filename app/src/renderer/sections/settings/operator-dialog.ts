@@ -1,7 +1,7 @@
 /**
  * Adds or changes an operator of the show: name, PIN, administrator and
  * access to every working section (hidden, read only, editable). The
- * first operator is the administrator who protects the show.
+ * operator who entered cannot be deleted.
  */
 
 import { ChoiceKeys, Dialog, Key, Label, Stack, TextField } from '../../../framework/ts/index.js';
@@ -15,7 +15,6 @@ import {
     type OperatorSection,
     type SectionAccess
 } from '../../../shared/show/operators.js';
-import { askChoice } from '../../dialogs/ask-choice.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { operatorState } from '../../show/operator-store.js';
@@ -25,11 +24,9 @@ import { MAIN_SECTIONS } from '../section-definitions.js';
 /**
  * Opens the dialog.
  * @param operator - Operator to change, or null for a new one
- * @param first - The show has no operators yet: the new operator is its administrator
- * @param count - Operators of the show
  */
-export function openOperatorDialog(operator: OperatorProfile | null, first: boolean, count: number): void {
-    const title = first ? t('operators.firstOperator') : operator === null ? t('operators.newOperator') : t('operators.editOperator');
+export function openOperatorDialog(operator: OperatorProfile | null): void {
+    const title = operator === null ? t('operators.newOperator') : t('operators.editOperator');
     const dialog = new Dialog({ title, size: 'wide' });
     const name = new TextField({ label: t('operators.name'), value: operator?.name ?? '', maxLength: OPERATOR_NAME_LENGTH });
     const pin = new TextField({
@@ -38,9 +35,8 @@ export function openOperatorDialog(operator: OperatorProfile | null, first: bool
         secret: true,
         inputMode: 'numeric'
     });
-    let admin = first || operator?.admin === true;
+    let admin = operator?.admin === true;
     const adminKey = new Key({ label: t('operators.admin') });
-    adminKey.element.hidden = first;
     const adminHint = new Label({ text: t('operators.adminHint'), tone: 'secondary', size: 'small' });
 
     const access = { ...(operator?.access ?? uniformAccess('hidden')) };
@@ -96,19 +92,9 @@ export function openOperatorDialog(operator: OperatorProfile | null, first: bool
             await showError(error);
         }
     })());
-    if (operator !== null) {
+    if (operator !== null && operator.id !== operatorState().operator?.id) {
         const remove = new Key({ label: t('common.delete'), icon: 'trash-2', armed: true });
         remove.onPress(() => void (async () => {
-            // Deleting the own and last profile removes the protection of the show
-            if (operator.id === operatorState().operator?.id && count === 1) {
-                const choice = await askChoice(t('operators.editOperator'), t('operators.removeLast'), [
-                    { id: 'cancel', label: t('common.cancel') },
-                    { id: 'delete', label: t('common.delete'), destructive: true }
-                ]);
-                if (choice !== 'delete') {
-                    return;
-                }
-            }
             try {
                 await engine().request('operators.delete', { id: operator.id });
                 dialog.close();

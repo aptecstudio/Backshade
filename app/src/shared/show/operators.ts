@@ -1,8 +1,8 @@
 /**
  * Operators of a show: each operator enters with a 4 digit PIN and sees
  * the working sections of the profile, hidden, read only or editable.
- * Administrators can edit everything and manage the operators. A show
- * without operators opens without a PIN.
+ * Administrators can edit everything and manage the operators. Every show
+ * has operators: older shows without them ask for the administrator first.
  */
 
 /** Working sections an operator profile controls */
@@ -48,9 +48,9 @@ export interface OperatorProfile {
 export interface OperatorState {
     /** Identifier of the open show, null without a show */
     showId: string | null;
-    /** The show has operators: a PIN is needed to work on it */
+    /** The show has operators; false until the administrator of an older show is created */
     required: boolean;
-    /** Operator who entered, null when nobody entered or the show has no operators */
+    /** Operator who entered, null when nobody entered */
     operator: OperatorProfile | null;
 }
 

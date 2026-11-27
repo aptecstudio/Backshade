@@ -1,7 +1,6 @@
 /**
- * Operator key of the top bar, shown when the show has operators: it
- * shows who entered and leaves, so that another operator can enter with
- * the PIN.
+ * Operator key of the top bar, shown when an operator entered: it shows
+ * who and leaves, so that another operator can enter with the PIN.
  */
 
 import { Key } from '../../framework/ts/index.js';

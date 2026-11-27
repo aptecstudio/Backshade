@@ -1173,13 +1173,11 @@
     "operators": {
       "title": "Operatori",
       "hint": "Gli operatori entrano nello show con un PIN di 4 cifre su ogni postazione e vedono solo le sezioni del loro profilo. Gli amministratori modificano tutto e gestiscono gli operatori.",
-      "empty": "Lo show si apre senza PIN. Crea il tuo profilo amministratore per proteggerlo e aggiungere operatori.",
-      "protect": "Crea il mio profilo amministratore",
       "add": "Aggiungi operatore",
       "edit": "Modifica",
       "newOperator": "Nuovo operatore",
       "editOperator": "Modifica operatore",
-      "firstOperator": "Il tuo profilo amministratore",
+      "firstOperator": "Amministratore dello show",
       "name": "Nome",
       "pin": "PIN (4 cifre)",
       "pinKeep": "Nuovo PIN (vuoto per tenerlo)",
@@ -1194,7 +1192,6 @@
       "administrator": "Amministratore",
       "summary": "{shown} sezioni visibili, {edit} modificabili",
       "you": "{name} (tu)",
-      "removeLast": "Eliminare il tuo profilo toglie la protezione: lo show si aprirà di nuovo senza PIN.",
       "enterTitle": "Entra nello show",
       "enterHint": "Digita il PIN del tuo profilo operatore.",
       "closeShow": "Chiudi show",
@@ -1202,7 +1199,13 @@
       "backspace": "Cancella l'ultima cifra",
       "switch": "Cambia operatore: {name}",
       "readOnly": "Sola lettura: puoi vedere e mandare in onda questa sezione, non modificarla.",
-      "chooseOperator": "Più operatori hanno questo PIN: scegli il tuo."
+      "chooseOperator": "Più operatori hanno questo PIN: scegli il tuo.",
+      "adminName": "Nome amministratore",
+      "adminDefaultName": "Amministratore",
+      "pinConfirm": "Ripeti il PIN",
+      "pinMismatch": "I due PIN sono diversi.",
+      "adminRequired": "Ogni show ha un amministratore: con questo PIN di 4 cifre entri nello show e gestisci i suoi operatori. Conservalo.",
+      "createAdmin": "Crea"
     },
     "showImport": {
       "title": "Importa da un altro show",

@@ -1173,13 +1173,11 @@
     "operators": {
       "title": "Operators",
       "hint": "Operators enter the show with a 4 digit PIN on every workstation and see only the sections of their profile. Administrators edit everything and manage the operators.",
-      "empty": "The show opens without a PIN. Create your administrator profile to protect it and to add operators.",
-      "protect": "Create my administrator profile",
       "add": "Add operator",
       "edit": "Change",
       "newOperator": "New operator",
       "editOperator": "Change operator",
-      "firstOperator": "Your administrator profile",
+      "firstOperator": "Show administrator",
       "name": "Name",
       "pin": "PIN (4 digits)",
       "pinKeep": "New PIN (empty to keep it)",
@@ -1194,7 +1192,6 @@
       "administrator": "Administrator",
       "summary": "{shown} sections shown, {edit} editable",
       "you": "{name} (you)",
-      "removeLast": "Deleting your profile removes the protection: the show opens again without a PIN.",
       "enterTitle": "Enter the show",
       "enterHint": "Type the PIN of your operator profile.",
       "closeShow": "Close show",
@@ -1202,7 +1199,13 @@
       "backspace": "Delete the last digit",
       "switch": "Change operator: {name}",
       "readOnly": "Read only: you can see and play this section, not change it.",
-      "chooseOperator": "Several operators have this PIN: choose yours."
+      "chooseOperator": "Several operators have this PIN: choose yours.",
+      "adminName": "Administrator name",
+      "adminDefaultName": "Administrator",
+      "pinConfirm": "Repeat the PIN",
+      "pinMismatch": "The two PINs are different.",
+      "adminRequired": "Every show has an administrator: with this 4 digit PIN you enter the show and manage its operators. Keep it safe.",
+      "createAdmin": "Create"
     },
     "showImport": {
       "title": "Import from another show",
