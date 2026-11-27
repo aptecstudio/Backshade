@@ -4,6 +4,7 @@
  * the layer settings. A new audio or video clip takes the length of its file.
  */
 
+import { MIXER_PROFILES } from '../../../shared/mixers/mixers.js';
 import { Dialog, Key, Label, LinearSlider, NumberField, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
 import { SHOW_MEDIA_ROUTE } from '../../../shared/audio/playback-protocol.js';
 import type { Clip, ClipSource, Track } from '../../../shared/timeline/timeline.js';
@@ -33,6 +34,7 @@ function sourceValue(source: ClipSource): string {
         case 'scene': return `scene:${source.id}`;
         case 'chaser': return `chaser:${source.id}`;
         case 'audio': return `audio:${source.file}`;
+        case 'mixer': return `mixer:${source.number}`;
         case 'layer': {
             const layer = source.layer.source;
             if (layer === null) {
@@ -69,6 +71,17 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
             options.push(...context.video.timers.map((timer) => ({ value: `timer:${timer.id}`, label: t('video.timerName', { name: timer.name }) })));
         }
         const source = new SelectField<string>({ label: t('timeline.source'), options, value: sourceValue(clip.source) || options[0]?.value || '' });
+        // Mixer tracks: the number of the scene of the mixer of the track
+        const model = context.mixers.find((item) => item.id === track.mixer)?.model ?? 'osc';
+        const range = MIXER_PROFILES[model];
+        const sceneNumber = new NumberField({
+            label: t('mixers.scene'),
+            value: Math.min(range.last, Math.max(range.first, clip.source.kind === 'mixer' ? clip.source.number : range.first)),
+            min: range.first,
+            max: range.last
+        });
+        const isMixer = track.kind === 'mixer';
+        const hasSource = isMixer || options.length > 0;
         const name = new TextField({ label: t('patch.name'), value: clip.name, maxLength: 60 });
         const seconds = (label: string, value: number, min = 0): NumberField => new NumberField({ label, value, min, max: 4 * 3600, decimals: 2, unit: 's' });
         const start = seconds(t('timeline.start'), clip.start);
@@ -80,11 +93,13 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
         const layer = clip.source.kind === 'layer' ? clip.source.layer : null;
         const opacity = new LinearSlider({ label: t('video.opacity'), value: layer?.opacity ?? 1 });
         const fit = new SelectField<LayerFit>({ label: t('video.fit'), options: LAYER_FITS.map((item) => ({ value: item, label: t(`matrices.fits.${item}`) })), value: layer?.fit ?? 'fill' });
-        offset.element.hidden = track.kind === 'light';
+        offset.element.hidden = track.kind === 'light' || isMixer;
+        fadeIn.element.hidden = isMixer;
+        fadeOut.element.hidden = isMixer;
 
         const slider = (label: string, control: LinearSlider): Stack => new Stack({ gap: 1, classes: ['clip-dialog__slider'], children: [new Label({ text: label, size: 'small' }), control] });
         dialog.append(
-            options.length === 0 ? new Label({ text: t(`timeline.noSources.${track.kind as 'light' | 'audio' | 'video'}`), tone: 'secondary', size: 'small' }) : source,
+            isMixer ? sceneNumber : options.length === 0 ? new Label({ text: t(`timeline.noSources.${track.kind as 'light' | 'audio' | 'video'}`), tone: 'secondary', size: 'small' }) : source,
             name,
             new Stack({ direction: 'row', gap: 2, wrap: true, children: [start, duration, offset] }),
             new Stack({ direction: 'row', gap: 2, wrap: true, children: [fadeIn, fadeOut] }),
@@ -115,6 +130,9 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
         }
 
         const chosenSource = (): ClipSource | null => {
+            if (isMixer) {
+                return { kind: 'mixer', number: sceneNumber.value };
+            }
             const value = source.value;
             const at = value.indexOf(':');
             const kind = value.slice(0, at);
@@ -145,7 +163,7 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
         };
         const cancel = new Key({ label: t('common.cancel') });
         const apply = new Key({ label: isNew ? t('grid.add') : t('common.apply'), state: 'active' });
-        apply.setDisabled(options.length === 0);
+        apply.setDisabled(!hasSource);
         cancel.onPress(() => finish(null));
         apply.onPress(() => {
             const next = chosenSource();

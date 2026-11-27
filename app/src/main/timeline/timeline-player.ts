@@ -38,6 +38,8 @@ export interface TimelinePlayerContext {
     onRecorded?: (timeline: Timeline) => void;
     /** New identifiers for recorded clips */
     newId?: () => string;
+    /** Recalls a scene of an external mixer (mixer tracks) */
+    recallMixer?: (mixer: string, number: number) => void;
 }
 
 const TICK_MS = 25;
@@ -123,6 +125,7 @@ export class TimelinePlayer {
         // The pass starts first, so the armed automation tracks do not play their curve
         this.startPass();
         this.apply(this.basePosition, true);
+        this.recallMixers(timeline, this.basePosition, this.basePosition, true);
         this.announce();
     }
 
@@ -192,9 +195,10 @@ export class TimelinePlayer {
         this.basePosition = position;
         this.startedAt = performance.now();
         this.lastPosition = position;
-        if (this.playing) {
+        if (this.playing && timeline !== null) {
             this.startPass();
             this.apply(position, true);
+            this.recallMixers(timeline, position, position, true);
         }
         this.announce();
     }
@@ -298,9 +302,33 @@ export class TimelinePlayer {
             this.announce();
             return;
         }
+        this.recallMixers(timeline, this.lastPosition, position, false);
         this.lastPosition = position;
         this.apply(position, false);
         this.recorder?.tick(position);
+    }
+
+    /**
+     * Mixer tracks: a clip recalls its mixer scene when the playhead passes
+     * its start; after a jump (play, locate, loop) the clip under the
+     * playhead is recalled, so the mixer follows the timeline.
+     */
+    private recallMixers(timeline: Timeline, from: number, to: number, jumped: boolean): void {
+        const recall = this.context.recallMixer;
+        if (recall === undefined) {
+            return;
+        }
+        for (const track of timeline.tracks) {
+            if (track.kind !== 'mixer' || track.mixer === '' || this.muted(timeline, track)) {
+                continue;
+            }
+            const clip = jumped
+                ? track.clips.filter((item) => item.start <= to && to < item.start + item.duration).pop()
+                : track.clips.filter((item) => item.start > from && item.start <= to).pop();
+            if (clip !== undefined && clip.source.kind === 'mixer') {
+                recall(track.mixer, clip.source.number);
+            }
+        }
     }
 
     /** A track is silent when it or one of its folders is muted */

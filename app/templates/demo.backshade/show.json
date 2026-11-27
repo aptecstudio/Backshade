@@ -616,7 +616,8 @@
         ],
         "matrices": {},
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": null
       },
       {
         "id": "095614dc-3ad6-4591-877a-b2a94b5614d2",
@@ -910,7 +911,11 @@
         ],
         "matrices": {},
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": {
+          "mixer": "40324b32-1a74-4132-bd58-a436b6524566",
+          "number": 2
+        }
       },
       {
         "id": "54e910a5-c260-4f16-8aef-8584b53b9cdb",
@@ -1108,7 +1113,8 @@
         ],
         "matrices": {},
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": null
       },
       {
         "id": "9c83de8f-f233-4a86-a010-b62b32111c0e",
@@ -1237,7 +1243,8 @@
         ],
         "matrices": {},
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": null
       },
       {
         "id": "84c023fd-434b-4f29-bad2-47438f026300",
@@ -1414,7 +1421,8 @@
         ],
         "matrices": {},
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": null
       },
       {
         "id": "42a7a2a1-768c-4359-a1b5-3a0101f67144",
@@ -1596,7 +1604,8 @@
         ],
         "matrices": {},
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": null
       },
       {
         "id": "fa07b106-7f2e-4314-9cfd-78aac7013169",
@@ -1626,7 +1635,8 @@
           }
         },
         "audio": null,
-        "video": {}
+        "video": {},
+        "mixer": null
       },
       {
         "id": "000c743d-05d0-423e-9aa0-b32f91ed9d09",
@@ -1664,7 +1674,8 @@
               "loop": true
             }
           ]
-        }
+        },
+        "mixer": null
       }
     ],
     "chasers": [
@@ -2309,6 +2320,19 @@
       }
     ]
   },
+  "mixers": {
+    "mixers": [
+      {
+        "id": "40324b32-1a74-4132-bd58-a436b6524566",
+        "name": "FOH mixer",
+        "model": "x32",
+        "host": "",
+        "port": 10023,
+        "address": "/scene/{number}",
+        "numberArgument": false
+      }
+    ]
+  },
   "timelines": {
     "timelines": [
       {
@@ -2333,7 +2357,8 @@
             "layer": 0,
             "target": null,
             "points": [],
-            "armed": false
+            "armed": false,
+            "mixer": ""
           },
           {
             "id": "t1",
@@ -2390,7 +2415,8 @@
             "layer": 0,
             "target": null,
             "points": [],
-            "armed": false
+            "armed": false,
+            "mixer": ""
           },
           {
             "id": "70d7eafd-bbea-4f81-aa96-2941eceb0285",
@@ -2407,7 +2433,8 @@
             "layer": 0,
             "target": null,
             "points": [],
-            "armed": true
+            "armed": true,
+            "mixer": ""
           },
           {
             "id": "t2",
@@ -2444,7 +2471,8 @@
                 1
               ]
             ],
-            "armed": false
+            "armed": false,
+            "mixer": ""
           },
           {
             "id": "t3",
@@ -2490,7 +2518,8 @@
             "layer": 0,
             "target": null,
             "points": [],
-            "armed": false
+            "armed": false,
+            "mixer": ""
           },
           {
             "id": "t4",
@@ -2529,7 +2558,53 @@
             "layer": 0,
             "target": null,
             "points": [],
-            "armed": false
+            "armed": false,
+            "mixer": ""
+          },
+          {
+            "id": "028c54de-0f95-4900-aab9-a5966f024d53",
+            "name": "FOH scenes",
+            "kind": "mixer",
+            "parent": null,
+            "collapsed": false,
+            "muted": false,
+            "armed": false,
+            "height": 64,
+            "clips": [
+              {
+                "id": "4391e738-4bcc-4efa-82bb-df9f9f743ccc",
+                "start": 0,
+                "duration": 16,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "Walk-in",
+                "source": {
+                  "kind": "mixer",
+                  "number": 1
+                }
+              },
+              {
+                "id": "6f8fac28-fef8-4b10-b152-0f83e9033c68",
+                "start": 16,
+                "duration": 44,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "Opening song",
+                "source": {
+                  "kind": "mixer",
+                  "number": 2
+                }
+              }
+            ],
+            "device": "",
+            "volume": 1,
+            "output": "",
+            "layer": 0,
+            "mixer": "40324b32-1a74-4132-bd58-a436b6524566",
+            "target": null,
+            "points": []
           }
         ],
         "markers": [

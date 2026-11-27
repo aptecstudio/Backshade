@@ -38,6 +38,7 @@ const KIND_COLORS: Readonly<Record<Track['kind'], typeof CHANNEL_COLORS[number]>
     audio: 'green',
     video: 'teal',
     automation: 'amber',
+    mixer: 'pink',
     folder: 'purple'
 };
 
@@ -288,6 +289,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             case 'automation': return targetName(track.target, this.context);
             case 'folder': return t('timeline.tracksInside', { count: this.session.timeline.tracks.filter((item) => item.parent === track.id).length });
             case 'light': return t('timeline.kinds.light');
+            case 'mixer': return this.context.mixers.find((mixer) => mixer.id === track.mixer)?.name ?? t('mixers.none');
         }
     }
 
@@ -502,7 +504,7 @@ export class TimelineEditor extends Component<HTMLDivElement> {
             fadeIn: 0,
             fadeOut: 0,
             name: '',
-            source: track.kind === 'audio' ? { kind: 'audio', file: '', volume: 1 } : { kind: 'scene', id: '' }
+            source: track.kind === 'audio' ? { kind: 'audio', file: '', volume: 1 } : track.kind === 'mixer' ? { kind: 'mixer', number: 0 } : { kind: 'scene', id: '' }
         };
         const result = await openClipDialog(track, draft, true, this.context);
         if (result?.action === 'save') {

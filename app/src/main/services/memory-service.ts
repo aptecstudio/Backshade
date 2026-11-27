@@ -26,6 +26,8 @@ import { FADE_LIMITS } from '../../shared/show/show-settings';
 import { MemoryPlayer } from '../console/memory-player';
 import type { PresetDesk } from '../console/preset-desk';
 import type { AudioEngine } from '../audio/audio-engine';
+import { normalizeRecall } from '../../shared/mixers/mixers';
+import type { MixerRecaller } from './mixer-service';
 import type { MatrixLive } from '../matrix/matrix-live';
 import type { VideoEngine } from '../video/video-engine';
 import type { OutputEngine } from '../output/output-engine';
@@ -82,7 +84,8 @@ export function registerMemoryService(
     output: OutputEngine,
     live: MatrixLive,
     audio: AudioEngine,
-    video: VideoEngine
+    video: VideoEngine,
+    mixers: MixerRecaller
 ): MemoryPlayer {
     const memoriesOf = (): ShowMemories | null => session.summary() === null ? null : session.memories();
     const player = new MemoryPlayer({
@@ -97,6 +100,9 @@ export function registerMemoryService(
                 }
                 if (Object.keys(scene.video).length > 0) {
                     video.startFromScene(key, scene.video, fadeIn);
+                }
+                if (scene.mixer !== null) {
+                    mixers.recall(scene.mixer);
                 }
             },
             stop: (key, fadeOut) => {
@@ -161,7 +167,7 @@ export function registerMemoryService(
         // Only the outputs that show something are recorded, so a scene never blanks the others
         const videoPrograms = Object.fromEntries(Object.entries(video.programs()).filter(([, layers]) => layers.some((layer) => layer.source !== null)));
         const scene: Scene = existing === undefined
-            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms }
+            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms, mixer: null }
             : { ...existing, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms };
         update((memories) => ({ ...memories, scenes: [...memories.scenes.filter((item) => item.id !== scene.id), scene].sort((a, b) => a.slot - b.slot) }));
         return sceneSummary(scene);
@@ -170,6 +176,12 @@ export function registerMemoryService(
     router.register('memories.updateScene', (params) => {
         const input = requireObject(params);
         const scene: Scene = { ...requireScene(requireString(input, 'id')), name: requireName(input), fadeIn: requireFade(input, 'fadeIn'), fadeOut: requireFade(input, 'fadeOut') };
+        // Scene of a mixer recalled with the scene: null for none, missing to keep it
+        if (input.mixer === null) {
+            scene.mixer = null;
+        } else if (input.mixer !== undefined) {
+            scene.mixer = normalizeRecall(input.mixer);
+        }
         update((memories) => ({ ...memories, scenes: memories.scenes.map((item) => item.id === scene.id ? scene : item) }));
         return sceneSummary(scene);
     });

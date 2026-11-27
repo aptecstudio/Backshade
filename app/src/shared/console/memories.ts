@@ -7,6 +7,7 @@
  * scenes in order with Go and Back. Shared between engine and interface.
  */
 
+import { normalizeRecall, type MixerRecall } from '../mixers/mixers.js';
 import { UNIVERSE_SIZE } from '../fixtures/fixture-definition.js';
 import { normalizeMatrixEffects, type MatrixEffect } from '../patch/matrix-effect.js';
 import { MAX_UNIVERSE } from '../patch/patch.js';
@@ -76,6 +77,8 @@ export interface Scene {
     audio: string | null;
     /** Program of the video outputs that had something on: output identifier -> layers; missing in older files */
     video: Record<string, LayerState[]>;
+    /** Scene of an external mixer recalled when the scene goes on, null for none; missing in older files */
+    mixer: MixerRecall | null;
 }
 
 /** Chaser: scenes played one after the other */
@@ -235,7 +238,8 @@ export function normalizeMemories(value: unknown): ShowMemories {
             levels: readLevels(entry.levels),
             matrices: normalizeMatrixEffects(entry.matrices),
             audio: typeof entry.audio === 'string' && entry.audio !== '' ? entry.audio : null,
-            video: readVideo(entry.video)
+            video: readVideo(entry.video),
+            mixer: normalizeRecall(entry.mixer)
         });
     }
 

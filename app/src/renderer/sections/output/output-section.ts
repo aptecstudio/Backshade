@@ -14,6 +14,7 @@ import { MonitorPanel } from './monitor-panel.js';
 import { NetworkPanel } from './network-panel.js';
 import { UniversesPanel } from './universes-panel.js';
 import { UsbPanel } from './usb-panel.js';
+import { MixersPanel } from './mixers-panel.js';
 
 export class OutputSection extends Stack {
     private readonly network = new NetworkPanel();
@@ -23,7 +24,7 @@ export class OutputSection extends Stack {
     constructor() {
         super({ gap: 3, classes: ['output-section'] });
         this.append(
-            new Stack({ direction: 'row', gap: 3, align: 'stretch', children: [new MasterPanel(), new Stack({ gap: 3, classes: ['output-section__main'], children: [this.network, this.universes, new UsbPanel()] })] }),
+            new Stack({ direction: 'row', gap: 3, align: 'stretch', children: [new MasterPanel(), new Stack({ gap: 3, classes: ['output-section__main'], children: [this.network, this.universes, new UsbPanel(), new MixersPanel()] })] }),
             this.monitor
         );
 

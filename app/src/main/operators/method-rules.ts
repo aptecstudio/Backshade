@@ -111,6 +111,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'timeline.load': play('timeline', 'virtualConsole'),
     'timeline.transport': play('timeline', 'virtualConsole'),
     'timeline.setOptions': play('timeline'),
+    'mixers.recall': play('output', 'console', 'virtualConsole', 'timeline'),
 
     'patch.add': edit('patch'),
     'patch.update': edit('patch'),
@@ -128,6 +129,8 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'output.resetUniverse': edit('output'),
     'output.setUsbDevice': edit('output'),
     'output.removeUsbDevice': edit('output'),
+    'mixers.save': edit('output'),
+    'mixers.delete': edit('output'),
     'memories.recordScene': edit('console'),
     'memories.updateScene': edit('console'),
     'memories.deleteScene': edit('console'),

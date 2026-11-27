@@ -10,6 +10,7 @@ import type { FixtureGroup } from '../../../shared/patch/groups.js';
 import type { ClipSource, Clip, AutomationTarget } from '../../../shared/timeline/timeline.js';
 import type { MediaItem } from '../../../shared/transport/engine-api.js';
 import type { ShowVideo } from '../../../shared/video/video.js';
+import type { ShowMixer } from '../../../shared/mixers/mixers.js';
 import { t } from '../../i18n/i18n.js';
 
 export interface EditorContext {
@@ -18,6 +19,8 @@ export interface EditorContext {
     media: MediaItem[];
     video: ShowVideo;
     devices: AudioDevice[];
+    /** External mixers of the show */
+    mixers: ShowMixer[];
     /** Frames per second of the show timecode */
     fps: number;
 }
@@ -29,6 +32,7 @@ export const EMPTY_CONTEXT: EditorContext = {
     media: [],
     video: { outputs: [], gobos: [], timers: [] },
     devices: [],
+    mixers: [],
     fps: 25
 };
 
@@ -44,6 +48,7 @@ export function sourceName(source: ClipSource, context: EditorContext): string {
         case 'scene': return context.memories.scenes.find((scene) => scene.id === source.id)?.name ?? t('grid.missing');
         case 'chaser': return context.memories.chasers.find((chaser) => chaser.id === source.id)?.name ?? t('grid.missing');
         case 'audio': return fileName(source.file);
+        case 'mixer': return t('mixers.sceneNumber', { number: source.number });
         case 'layer': {
             const layer = source.layer.source;
             if (layer === null) {

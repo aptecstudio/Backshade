@@ -121,7 +121,7 @@ export class TimelineSection extends Stack {
 
         this.track(engine().on('timeline.changed', ({ recorded }) => void this.load(recorded === true)));
         this.track(engine().on('timeline.stateChanged', ({ state }) => this.applyState(state)));
-        for (const event of ['memories.changed', 'patch.changed', 'media.changed', 'video.changed', 'show.changed'] as const) {
+        for (const event of ['memories.changed', 'patch.changed', 'media.changed', 'video.changed', 'mixers.changed', 'show.changed'] as const) {
             this.track(engine().on(event, () => void this.loadContext()));
         }
         this.listen(document, 'keydown', (event) => this.key(event));
@@ -133,15 +133,16 @@ export class TimelineSection extends Stack {
 
     private async loadContext(): Promise<void> {
         try {
-            const [memories, groups, media, video, devices, settings] = await Promise.all([
+            const [memories, groups, media, video, devices, settings, mixers] = await Promise.all([
                 engine().request('memories.get'),
                 engine().request('patch.getGroups'),
                 engine().request('media.list'),
                 engine().request('video.get'),
                 engine().request('audio.listDevices'),
-                engine().request('show.getSettings')
+                engine().request('show.getSettings'),
+                engine().request('mixers.get')
             ]);
-            this.context = { memories, groups, media, video, devices, fps: frameRate(settings.timecodeRate) };
+            this.context = { memories, groups, media, video, devices, mixers: mixers.mixers, fps: frameRate(settings.timecodeRate) };
             this.editor?.setContext(this.context);
             this.showMarkers();
         } catch (error) {

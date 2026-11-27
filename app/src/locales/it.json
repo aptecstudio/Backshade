@@ -687,7 +687,8 @@
         "audio": "Audio",
         "video": "Video",
         "automation": "Automazione",
-        "folder": "Cartella"
+        "folder": "Cartella",
+        "mixer": "Mixer"
       },
       "undo": "Annulla",
       "redo": "Ripeti",
@@ -1243,6 +1244,42 @@
         "address": "Gli indirizzi sono occupati da {with}",
         "file": "Esiste già un file diverso {with}",
         "name": "Esiste già un operatore di nome \"{with}\""
+      }
+    },
+    "mixers": {
+      "panel": "Mixer audio",
+      "hint": "Mixer in rete di cui le scene, le cue e le tracce mixer delle timeline richiamano le scene via OSC.",
+      "empty": "Nessun mixer.",
+      "add": "Aggiungi mixer",
+      "title": "Mixer",
+      "defaultName": "Mixer {number}",
+      "model": "Modello",
+      "host": "Indirizzo",
+      "port": "Porta UDP",
+      "noHost": "Nessun indirizzo",
+      "address": "Indirizzo OSC",
+      "addressHint": "{placeholder} nell'indirizzo è sostituito dal numero della scena.",
+      "numberArgument": "Numero come argomento",
+      "testScene": "Scena da provare",
+      "test": "Richiama ora",
+      "testSent": "Scena {number} inviata a {host}:{port}.",
+      "delete": "Elimina il mixer",
+      "deleteConfirm": "Eliminare \"{name}\"? Scene e tracce che lo richiamano smettono di farlo.",
+      "mixer": "Mixer",
+      "none": "Nessun mixer",
+      "scene": "Scena del mixer",
+      "sceneNumber": "Scena {number}",
+      "recallWith": "Richiama su un mixer",
+      "models": {
+        "x32": "Behringer X32 / Midas M32",
+        "xair": "Behringer X Air / Midas MR",
+        "wing": "Behringer Wing",
+        "osc": "OSC generico"
+      },
+      "hints": {
+        "x32": "Richiama le scene da {first} a {last} dello show caricato sul mixer.",
+        "xair": "Richiama gli snapshot da {first} a {last}.",
+        "wing": "Richiama le voci da {first} a {last} della lista dello show; sul mixer deve essere caricato uno show."
       }
     }
   }

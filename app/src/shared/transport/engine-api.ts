@@ -27,6 +27,7 @@ import type { MediaKind } from '../show/media-kinds.js';
 import type { OperatorAccess, OperatorProfile, OperatorState } from '../show/operators.js';
 import type { ImportCatalog, ImportChoice, ImportResult } from '../show/show-import.js';
 import type { ShowSettings } from '../show/show-settings.js';
+import type { MixerRecall, ShowMixer, ShowMixers } from '../mixers/mixers.js';
 
 /** Information about the application, for the About window */
 export interface AppInfo {
@@ -441,7 +442,7 @@ export interface EngineMethods {
      */
     'memories.recordScene': { params: { slot: number; name: string }; result: SceneSummary };
     /** Changes the name and fades of a scene (unsaved change) */
-    'memories.updateScene': { params: { id: string; name: string; fadeIn: number; fadeOut: number }; result: SceneSummary };
+    'memories.updateScene': { params: { id: string; name: string; fadeIn: number; fadeOut: number; mixer?: MixerRecall | null }; result: SceneSummary };
     /** Deletes a scene and removes it from the chaser steps (unsaved change) */
     'memories.deleteScene': { params: { id: string }; result: undefined };
     /** Creates (without id) or changes a chaser (unsaved change) */
@@ -507,6 +508,14 @@ export interface EngineMethods {
     'video.saveTimer': { params: { timer: ShowTimer }; result: ShowVideo };
     /** Deletes a timer screen preset (unsaved change) */
     'video.deleteTimer': { params: { id: string }; result: ShowVideo };
+    /** External audio mixers of the open show */
+    'mixers.get': { params: undefined; result: ShowMixers };
+    /** Creates (empty id) or changes a mixer (unsaved change) */
+    'mixers.save': { params: { mixer: ShowMixer }; result: ShowMixers };
+    /** Deletes a mixer (unsaved change) */
+    'mixers.delete': { params: { id: string }; result: ShowMixers };
+    /** Recalls a scene of a mixer now, for example to test it; mixer-unreachable when it cannot be sent */
+    'mixers.recall': { params: { mixer: string; number: number }; result: undefined };
     /** Live states of the timers */
     'video.getTimers': { params: undefined; result: Record<string, TimerState> };
     /** Starts, pauses, resets or changes a timer by a minute */
@@ -657,6 +666,8 @@ export interface EngineEvents {
     'audio.stateChanged': { state: AudioPlayback };
     /** The video outputs of the open show have changed */
     'video.changed': Record<string, never>;
+    /** The mixers of the open show have changed */
+    'mixers.changed': Record<string, never>;
     /** A timer was started, paused, reset or changed */
     'video.timersChanged': { states: Record<string, TimerState> };
     /** Program or preview of the video outputs have changed */

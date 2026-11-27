@@ -687,7 +687,8 @@
         "audio": "Audio",
         "video": "Video",
         "automation": "Automation",
-        "folder": "Folder"
+        "folder": "Folder",
+        "mixer": "Mixer"
       },
       "undo": "Undo",
       "redo": "Redo",
@@ -1243,6 +1244,42 @@
         "address": "The addresses are used by {with}",
         "file": "A different file {with} already exists",
         "name": "An operator named \"{with}\" already exists"
+      }
+    },
+    "mixers": {
+      "panel": "Audio mixers",
+      "hint": "Mixers on the network whose scenes are recalled over OSC by the scenes, the cues and the mixer tracks of the timelines.",
+      "empty": "No mixers yet.",
+      "add": "Add mixer",
+      "title": "Mixer",
+      "defaultName": "Mixer {number}",
+      "model": "Model",
+      "host": "Address",
+      "port": "UDP port",
+      "noHost": "No address",
+      "address": "OSC address",
+      "addressHint": "{placeholder} in the address is replaced by the number of the scene.",
+      "numberArgument": "Number as an argument",
+      "testScene": "Scene to try",
+      "test": "Recall now",
+      "testSent": "Scene {number} sent to {host}:{port}.",
+      "delete": "Delete the mixer",
+      "deleteConfirm": "Delete \"{name}\"? Scenes and tracks that recall it stop recalling.",
+      "mixer": "Mixer",
+      "none": "No mixer",
+      "scene": "Mixer scene",
+      "sceneNumber": "Scene {number}",
+      "recallWith": "Recall on a mixer",
+      "models": {
+        "x32": "Behringer X32 / Midas M32",
+        "xair": "Behringer X Air / Midas MR",
+        "wing": "Behringer Wing",
+        "osc": "Generic OSC"
+      },
+      "hints": {
+        "x32": "Recalls the scenes {first} to {last} of the show loaded on the mixer.",
+        "xair": "Recalls the snapshots {first} to {last}.",
+        "wing": "Recalls the items {first} to {last} of the show list; a show must be loaded on the mixer."
       }
     }
   }

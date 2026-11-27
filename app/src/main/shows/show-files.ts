@@ -11,6 +11,7 @@ import { normalizeMemories } from '../../shared/console/memories';
 import { normalizeGrid } from '../../shared/grid/grid';
 import { normalizeTimelines } from '../../shared/timeline/timeline';
 import { normalizeVideo } from '../../shared/video/video';
+import { normalizeMixers } from '../../shared/mixers/mixers';
 import { normalizeOutput } from '../../shared/output/output-config';
 import { normalizePatch } from '../../shared/patch/patch';
 import { normalizeOperators } from '../../shared/show/operators';
@@ -50,6 +51,7 @@ function toShowDocument(data: unknown, file: string): ShowDocument {
         grid: normalizeGrid(document.grid),
         audio: normalizeAudio(document.audio),
         video: normalizeVideo(document.video),
+        mixers: normalizeMixers(document.mixers),
         timelines: normalizeTimelines(document.timelines),
         operators: normalizeOperators(document.operators)
     };

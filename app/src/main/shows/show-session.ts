@@ -13,6 +13,7 @@ import type { ShowMemories } from '../../shared/console/memories';
 import type { ShowGrid } from '../../shared/grid/grid';
 import type { ShowTimelines } from '../../shared/timeline/timeline';
 import type { ShowVideo } from '../../shared/video/video';
+import type { ShowMixers } from '../../shared/mixers/mixers';
 import type { ShowOutput } from '../../shared/output/output-config';
 import type { ShowPatch } from '../../shared/patch/patch';
 import type { ShowOperator } from '../../shared/show/operators';
@@ -39,7 +40,7 @@ export type ShowChangeListener = (show: ShowSummary | null) => void;
 export type SessionOpenResult = Omit<OpenShowResult, 'missingFixtures'>;
 
 /** Part of the show content that changed; "all" when the show is opened, closed or recovered */
-export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'timelines' | 'operators' | 'all';
+export type ContentPart = 'patch' | 'output' | 'memories' | 'grid' | 'audio' | 'video' | 'mixers' | 'timelines' | 'operators' | 'all';
 
 /** Function called when a part of the show content may have changed */
 export type ContentChangeListener = (part: ContentPart) => void;
@@ -304,6 +305,27 @@ export class ShowSession {
         show.dirty = true;
         this.notify();
         this.notifyContent('video');
+    }
+
+    /**
+     * External mixers of the open show.
+     */
+    mixers(): ShowMixers {
+        return this.requireOpen().document.mixers;
+    }
+
+    /**
+     * Replaces the mixers; the change must be saved.
+     */
+    setMixers(mixers: ShowMixers): void {
+        const show = this.requireOpen();
+        if (JSON.stringify(mixers) === JSON.stringify(show.document.mixers)) {
+            return;
+        }
+        show.document = { ...show.document, mixers };
+        show.dirty = true;
+        this.notify();
+        this.notifyContent('mixers');
     }
 
     /**

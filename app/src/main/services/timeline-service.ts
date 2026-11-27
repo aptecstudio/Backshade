@@ -21,6 +21,7 @@ import type { RequestRouter } from '../transport/request-router';
 import type { AudioEngine } from '../audio/audio-engine';
 import type { VideoEngine } from '../video/video-engine';
 import type { GroupLevelAccess } from './group-service';
+import type { MixerRecaller } from './mixer-service';
 
 const ACTIONS = ['play', 'pause', 'toggle', 'stop', 'locate', 'go', 'back'] as const;
 
@@ -34,6 +35,8 @@ export interface TimelineTargets {
     groupLevels: GroupLevelAccess;
     /** Audio player, read by the recorder */
     audio: AudioEngine;
+    /** External mixers, recalled by the mixer tracks */
+    mixers: MixerRecaller;
 }
 
 /**
@@ -76,7 +79,8 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
                 recorded = false;
             }
         },
-        newId: () => randomUUID()
+        newId: () => randomUUID(),
+        recallMixer: (mixer, number) => targets.mixers.recall({ mixer, number })
     });
     let recorded = false;
     targets.memory.setClipTarget((id) => player.clipTarget(id));

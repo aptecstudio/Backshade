@@ -11,15 +11,16 @@ import type { GridMaster } from '../grid/grid.js';
 import { normalizeLayer, type LayerState } from '../video/video.js';
 
 /** Kind of track */
-export type TrackKind = 'light' | 'audio' | 'video' | 'automation' | 'folder';
-export const TRACK_KINDS: readonly TrackKind[] = ['light', 'audio', 'video', 'automation', 'folder'];
+export type TrackKind = 'light' | 'audio' | 'video' | 'automation' | 'mixer' | 'folder';
+export const TRACK_KINDS: readonly TrackKind[] = ['light', 'audio', 'video', 'automation', 'mixer', 'folder'];
 
 /** What a clip plays, by kind of track */
 export type ClipSource =
     | { kind: 'scene'; id: string }
     | { kind: 'chaser'; id: string }
     | { kind: 'audio'; file: string; volume: number }
-    | { kind: 'layer'; layer: LayerState };
+    | { kind: 'layer'; layer: LayerState }
+    | { kind: 'mixer'; number: number };
 
 /** Clip on a track */
 export interface Clip {
@@ -66,6 +67,8 @@ export interface Track {
     /** Video tracks: output and layer (from 0) */
     output: string;
     layer: number;
+    /** Mixer tracks: the external mixer whose scenes the clips recall, at their start */
+    mixer: string;
     /** Automation tracks: target and curve */
     target: AutomationTarget | null;
     points: AutomationPoint[];
@@ -111,6 +114,7 @@ export const TRACK_SOURCES: Readonly<Record<TrackKind, readonly ClipSource['kind
     audio: ['audio'],
     video: ['layer'],
     automation: [],
+    mixer: ['mixer'],
     folder: []
 };
 
@@ -118,7 +122,7 @@ export const TRACK_SOURCES: Readonly<Record<TrackKind, readonly ClipSource['kind
 export function newTrack(id: string, kind: TrackKind, name: string): Track {
     return {
         id, name, kind, parent: null, collapsed: false, muted: false, armed: false, height: TRACK_HEIGHT.default, clips: [],
-        device: '', volume: 1, output: '', layer: 0, target: null, points: []
+        device: '', volume: 1, output: '', layer: 0, mixer: '', target: null, points: []
     };
 }
 
@@ -195,6 +199,8 @@ function readSource(value: unknown): ClipSource | null {
             const layer = normalizeLayer(input.layer);
             return layer.source === null ? null : { kind: 'layer', layer };
         }
+        case 'mixer':
+            return { kind: 'mixer', number: Math.round(num(input.number, 0, 9999, 0)) };
         default:
             return null;
     }
@@ -228,6 +234,7 @@ function readTrack(value: unknown, ids: Set<string>, count: { clips: number }): 
     track.volume = num(input.volume, 0, 1, 1);
     track.output = text(input.output, 100);
     track.layer = Math.round(num(input.layer, 0, 7, 0));
+    track.mixer = kind === 'mixer' ? text(input.mixer, 100) : '';
     track.target = kind === 'automation' ? readTarget(input.target) : null;
     if (kind === 'automation' && Array.isArray(input.points)) {
         track.points = input.points

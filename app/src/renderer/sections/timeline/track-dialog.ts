@@ -70,7 +70,14 @@ export function openTrackDialog(track: Track, timeline: Timeline, context: Edito
             ],
             value: targetValue(track.target)
         });
-        if (track.kind === 'audio') {
+        const mixer = new SelectField<string>({
+            label: t('mixers.mixer'),
+            options: [{ value: '', label: t('mixers.none') }, ...context.mixers.map((item) => ({ value: item.id, label: item.name }))],
+            value: track.mixer
+        });
+        if (track.kind === 'mixer') {
+            fields.push(new Stack({ children: [mixer] }));
+        } else if (track.kind === 'audio') {
             fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [device, new Stack({ gap: 1, classes: ['clip-dialog__slider'], children: [new Label({ text: t('audio.volume'), size: 'small' }), volume] })] }));
         } else if (track.kind === 'video') {
             fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, children: [output, layer] }));
@@ -106,6 +113,7 @@ export function openTrackDialog(track: Track, timeline: Timeline, context: Edito
                 volume: volume.value,
                 output: output.value,
                 layer: Number(layer.value),
+                mixer: track.kind === 'mixer' ? mixer.value : track.mixer,
                 target: track.kind === 'automation' ? readTarget() : track.target
             }
         }));

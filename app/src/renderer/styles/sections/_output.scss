@@ -22,6 +22,10 @@
     grid-template-columns: space(8) minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr);
 }
 
+.mixer-table__row {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr);
+}
+
 .usb-port-row > .select-field {
     flex: 1 1 auto;
 }
