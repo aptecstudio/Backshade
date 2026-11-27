@@ -150,7 +150,7 @@ A two-preset console (A/B) like the classic hardware desks, defined with the hum
 - [x] 8.4 Audio waveform and markers
 - [x] 8.5 Shared clock and synchronized playback, with loop; the timecode display of the top bar follows it
 - [x] 8.6 Cue list and go mode (manual advance): the markers are the cues of the timeline; markers panel beside the editor with the next stop, Go, Back and the list of the markers (decided by the human on 2026-11-27)
-- [ ] 8.7 Recording of live actions as clips while the timeline plays (record key; added by the human on 2026-11-27)
+- [x] 8.7 Recording of live actions as clips while the timeline plays (record key; added by the human on 2026-11-27): scenes and chasers, masters and groups, audio player, video program, on armed tracks
 
 ## Phase 9 - Integrations
 

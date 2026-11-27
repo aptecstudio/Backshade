@@ -123,6 +123,8 @@ How to use it:
 - [ ] Audio clips show the waveform of the part of the file they play, also after trimming the start; long files (10 minutes and more) load without freezing the window.
 - [ ] Markers: added with the Marker key, the M key and a double click on the ruler; moved by dragging with snap; a press moves the playhead to them; renamed, moved and deleted from their dialog; undo and redo.
 - [ ] In go mode playback pauses exactly on a stop marker and Play continues from there.
+- [ ] Recording: with tracks armed and the record key on, play and use memory keys, cues, master and group faders, the audio player and Take on the video outputs; every action becomes a clip or a curve on the right armed track, with the right times and fades, and plays back the same; Undo removes the whole pass.
+- [ ] Recording over a loop adds a pass for every turn; recording with real controllers (MIDI faders, when available) gives smooth curves.
 - [ ] Markers panel: Go continues to the next stop, a second Go while playing does nothing; Back goes to the previous marker, playing or paused; a row moves the playhead; the next stop and the current marker follow the playhead during a whole show.
 
 ## 11. Drag and drop
