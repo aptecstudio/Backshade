@@ -407,6 +407,14 @@ Status: Confirmed (live monitors, quality per layer, no sound), Proposed (findin
 
 Status: Confirmed (2026-11-21, logo 2026-11-22).
 
+## Shared tempo
+
+Defined with the human on 2026-11-27 (Phase 9.1): the cross integration of lights, audio and video is the shared tempo, with an option in each chaser; the other cross triggers proposed (end of an audio item, cues starting timelines, end of a timeline) were not chosen.
+
+- **Option per chaser** (decided by the human): `followTempo` in the chaser ("Own bpm" or "Shared tempo" in the chaser dialog). (Confirmed)
+- **Source:** the timeline playing gives its tempo and its position in beats (`TimelinePlayer.tempo`, given to the memory player with `setTempoSource`). While it plays, a chaser that follows it changes step on every beat of the timeline, at its tempo, and its crossfade follows the beat; a jump of the playhead moves one step only. When no timeline plays the chaser keeps its own bpm. (Proposed)
+- **Display:** the tempo display of the top bar shows the tempo of the timeline when the selected chaser follows it and a timeline plays. (Proposed)
+
 ## External audio mixers
 
 Defined with the human on 2026-11-27 (Phase 9.2 and 9.4).

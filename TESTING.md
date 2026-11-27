@@ -145,6 +145,10 @@ How to use it:
 
 - [ ] An operator with read-only sections sees their editing controls dimmed and cannot use them (mouse, touch and keyboard), while faders, memory keys, cues, transport, Go and Take still work; the timeline cannot be recorded.
 
+## 12a. Shared tempo
+
+- [ ] A chaser with the shared tempo changes step exactly on the beats of the timeline playing (watch it against the audio of a song with a click), and goes back to its own bpm when the timeline stops; the top bar shows the right tempo.
+
 ## 12b. External mixers
 
 - [ ] X32 or M32: a recall from the mixer dialog, from a scene, from a cue and from a mixer track loads the right scene of the show loaded on the mixer (check that the number shown on the mixer matches).
