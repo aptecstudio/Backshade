@@ -285,7 +285,7 @@ export class VideoEngine {
     private message(output: VideoOutputConfig, layers: LayerState[], transition: number): ComposeMessage {
         return {
             layers, transition, gobos: this.video()?.gobos ?? [], context: this.context, timers: this.video()?.timers ?? [], timerStates: this.timerStates(),
-            surfaces: output.surfaces, masks: output.masks, testPattern: this.tests.has(output.id), name: output.name
+            surfaces: output.surfaces, masks: output.masks, blend: output.blend, testPattern: this.tests.has(output.id), name: output.name
         };
     }
 

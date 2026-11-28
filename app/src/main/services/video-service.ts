@@ -7,6 +7,7 @@
 import { randomUUID } from 'node:crypto';
 import { normalizeSurfaces } from '../../shared/video/mapping';
 import { normalizeMasks } from '../../shared/video/mask';
+import { noBlend, normalizeBlend } from '../../shared/video/blend';
 import { MAX_VIDEO_LAYERS, MAX_VIDEO_OUTPUTS, normalizeLayer, type ShowVideo, type VideoInput, type VideoOutputConfig } from '../../shared/video/video';
 import { MAX_TIMERS, normalizeTimer, TIMER_ACTIONS, type TimerState } from '../../shared/video/show-timer';
 import { MAX_GOBOS, normalizeGobo } from '../../shared/video/text-gobo';
@@ -119,7 +120,7 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         }
         const base: VideoOutputConfig = {
             id: randomUUID(), name: requireString(input, 'name'), enabled: false, display: '', fullscreen: true,
-            x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3, surfaces: [], masks: []
+            x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3, surfaces: [], masks: [], blend: noBlend()
         };
         const output = outputData(input, base);
         return update((video) => ({ ...video, outputs: [...video.outputs, output] }));
@@ -157,6 +158,14 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         const { id } = knownOutput(requireString(input, 'id'));
         const masks = normalizeMasks(input.masks);
         update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, masks } : item) }));
+        return undefined;
+    });
+
+    router.register('video.setBlend', (params) => {
+        const input = requireObject(params);
+        const { id } = knownOutput(requireString(input, 'id'));
+        const blend = normalizeBlend(input.blend);
+        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, blend } : item) }));
         return undefined;
     });
 

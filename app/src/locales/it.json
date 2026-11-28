@@ -1727,7 +1727,22 @@
       "pointTitle": "Punto {number}",
       "maskPoint": "Punto {number} della maschera",
       "handleIn": "Maniglia della curva prima del punto",
-      "handleOut": "Maniglia della curva dopo il punto"
+      "handleOut": "Maniglia della curva dopo il punto",
+      "blend": "Edge blending",
+      "side": "Lato",
+      "sides": {
+        "left": "Sinistro",
+        "right": "Destro",
+        "top": "Alto",
+        "bottom": "Basso"
+      },
+      "blendFields": {
+        "width": "Larghezza della zona",
+        "curve": "Curva",
+        "gamma": "Gamma"
+      },
+      "black": "Compensazione del nero",
+      "blendHint": "Per proiettori affiancati: dai ai lati sovrapposti di entrambi la stessa larghezza della sovrapposizione."
     }
   }
 }

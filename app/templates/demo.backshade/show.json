@@ -2570,7 +2570,32 @@
               }
             ]
           }
-        ]
+        ],
+        "blend": {
+          "edges": {
+            "left": {
+              "width": 0,
+              "curve": 2,
+              "gamma": 2.2
+            },
+            "right": {
+              "width": 0.06,
+              "curve": 2,
+              "gamma": 2.2
+            },
+            "top": {
+              "width": 0,
+              "curve": 2,
+              "gamma": 2.2
+            },
+            "bottom": {
+              "width": 0,
+              "curve": 2,
+              "gamma": 2.2
+            }
+          },
+          "black": 0
+        }
       }
     ],
     "gobos": [

@@ -3,6 +3,7 @@
  * show, the time of the transition to them and their videomapping.
  */
 
+import type { OutputBlend } from './blend.js';
 import type { MappingSurface } from './mapping.js';
 import type { OutputMask } from './mask.js';
 import type { ShowTimer, TimerState } from './show-timer.js';
@@ -24,6 +25,7 @@ export interface ComposeMessage {
     /** Videomapping of the output */
     surfaces: MappingSurface[];
     masks: OutputMask[];
+    blend: OutputBlend;
     /** A test image is shown on every surface instead of the program */
     testPattern: boolean;
     /** Name of the output, written on the test image */

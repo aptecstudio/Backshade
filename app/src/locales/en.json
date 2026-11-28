@@ -1727,7 +1727,22 @@
       "pointTitle": "Point {number}",
       "maskPoint": "Mask point {number}",
       "handleIn": "Curve handle before the point",
-      "handleOut": "Curve handle after the point"
+      "handleOut": "Curve handle after the point",
+      "blend": "Edge blending",
+      "side": "Side",
+      "sides": {
+        "left": "Left",
+        "right": "Right",
+        "top": "Top",
+        "bottom": "Bottom"
+      },
+      "blendFields": {
+        "width": "Width of the zone",
+        "curve": "Curve",
+        "gamma": "Gamma"
+      },
+      "black": "Black level compensation",
+      "blendHint": "For projectors side by side: give the overlapping sides of both the same width as their overlap."
     }
   }
 }

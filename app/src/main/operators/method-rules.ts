@@ -170,6 +170,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'video.removeOutput': edit('video'),
     'video.setSurfaces': edit('video'),
     'video.setMasks': edit('video'),
+    'video.setBlend': edit('video'),
     'video.setTestPattern': edit('video'),
     'video.getTestPatterns': play('video'),
     'video.saveGobo': edit('video'),
