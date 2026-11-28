@@ -1701,7 +1701,15 @@
       "remove": "Rimuovi superficie",
       "testPattern": "Immagine di prova",
       "corner": "Angolo {number}",
-      "hint": "Trascina gli angoli numerati sulla forma reale; le frecce spostano di un pixel, dieci con Maiusc. L'uscita segue subito."
+      "hint": "Trascina gli angoli numerati sulla forma reale; le frecce spostano di un pixel, dieci con Maiusc. L'uscita segue subito.",
+      "mesh": "Griglia curva",
+      "columns": "Colonne di punti",
+      "rows": "Righe di punti",
+      "handles": "Sposta",
+      "corners": "Angoli",
+      "points": "Punti della griglia",
+      "point": "Punto {number} della griglia",
+      "resetMesh": "Ripristina griglia"
     }
   }
 }

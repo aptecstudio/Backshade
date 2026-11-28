@@ -1701,7 +1701,15 @@
       "remove": "Remove surface",
       "testPattern": "Test image",
       "corner": "Corner {number}",
-      "hint": "Drag the numbered corners onto the real shape; arrow keys move one pixel, ten with Shift. The output follows at once."
+      "hint": "Drag the numbered corners onto the real shape; arrow keys move one pixel, ten with Shift. The output follows at once.",
+      "mesh": "Curved grid",
+      "columns": "Columns of points",
+      "rows": "Rows of points",
+      "handles": "Move",
+      "corners": "Corners",
+      "points": "Grid points",
+      "point": "Grid point {number}",
+      "resetMesh": "Reset grid"
     }
   }
 }

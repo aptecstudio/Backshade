@@ -1,12 +1,12 @@
 /**
- * Videomapping editor of an output: its surfaces, the corners of the chosen
- * one, what it shows and the part of the picture it takes, and the test
- * image. Every change is sent at once, so it is seen on the output; Cancel
+ * Videomapping editor of an output: its surfaces, the corners and the grid
+ * of the chosen one, what it shows and the part of the picture it takes, and
+ * the test image. Every change is sent at once, so it is seen on the output; Cancel
  * puts back the surfaces of before.
  */
 
-import { Checkbox, Dialog, Key, Label, ListItem, NumberField, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
-import { FULL_CORNERS, FULL_CROP, MAX_SURFACES, normalizeSurfaces, type Crop, type MappingSurface } from '../../../shared/video/mapping.js';
+import { Checkbox, ChoiceKeys, Dialog, Key, Label, ListItem, NumberField, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
+import { CORNER_MARGIN, FULL_CORNERS, FULL_CROP, MAX_SURFACES, MESH_POINTS, homography, meshPoint, normalizeSurfaces, regularMesh, unproject, type Crop, type MappingPoint, type MappingSurface, type Mesh } from '../../../shared/video/mapping.js';
 import type { OutputComposition, ShowVideo, VideoOutputConfig } from '../../../shared/video/video.js';
 import type { TimerState } from '../../../shared/video/show-timer.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -14,7 +14,13 @@ import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
 import { MappedComposition } from '../../video/mapped-composition.js';
-import { MappingStage } from './mapping-stage.js';
+import { MappingStage, type MappingHandles } from './mapping-stage.js';
+
+/** Grid of a new number of points, keeping the shape of the one before */
+function resample(mesh: Mesh | undefined, columns: number, rows: number): Mesh {
+    const grid = regularMesh(columns, rows);
+    return { ...grid, points: grid.points.map(([u, v]) => meshPoint(mesh, u, v)) };
+}
 
 /** Corners of a new surface: smaller than the output and a little aside of the one before */
 function newCorners(index: number): MappingSurface['corners'] {
@@ -38,6 +44,7 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
     let surfaces = structuredClone(output.surfaces);
     let selected: string | null = surfaces[0]?.id ?? null;
     let testPattern = testing;
+    let handles: MappingHandles = 'corners';
 
     const stage = new MappingStage(output.width, output.height);
     const view = new CompositionView();
@@ -72,7 +79,7 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
     };
 
     const draw = (): void => {
-        stage.show(surfaces, selected);
+        stage.show(surfaces, selected, handles);
         mapping.apply({ surfaces, testPattern, name: output.name });
     };
 
@@ -128,18 +135,56 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
             });
             return field;
         };
-        const reset = new Key({ label: t('mapping.resetCorners') });
-        reset.onPress(() => change({ corners: structuredClone(FULL_CORNERS) }));
+        const reset = new Key({ label: t(handles === 'mesh' ? 'mapping.resetMesh' : 'mapping.resetCorners') });
+        reset.onPress(() => {
+            const mesh = surfaces.find((item) => item.id === selected)?.mesh;
+            change(handles === 'mesh' && mesh !== undefined ? { mesh: regularMesh(mesh.columns, mesh.rows) } : { corners: structuredClone(FULL_CORNERS) });
+        });
+        const grid = new Checkbox({ label: t('mapping.mesh'), checked: surface.mesh !== undefined });
+        grid.onChange((on) => {
+            handles = on ? 'mesh' : 'corners';
+            change({ mesh: on ? resample(undefined, 4, 4) : undefined });
+            renderDetails();
+        });
+        const meshControls = (mesh: Mesh): Stack => {
+            const side = (key: 'columns' | 'rows'): SelectField<string> => {
+                const field = new SelectField<string>({
+                    label: t(`mapping.${key}`),
+                    options: Array.from({ length: MESH_POINTS.max - MESH_POINTS.min + 1 }, (_, index) => ({ value: String(MESH_POINTS.min + index), label: String(MESH_POINTS.min + index) })),
+                    value: String(mesh[key])
+                });
+                field.onChange((value) => {
+                    const now = surfaces.find((item) => item.id === selected)?.mesh;
+                    if (now !== undefined) {
+                        change({ mesh: resample(now, key === 'columns' ? Number(value) : now.columns, key === 'rows' ? Number(value) : now.rows) });
+                    }
+                });
+                return field;
+            };
+            const moving = new ChoiceKeys<MappingHandles>({
+                ariaLabel: t('mapping.handles'),
+                options: [{ value: 'corners', label: t('mapping.corners') }, { value: 'mesh', label: t('mapping.points') }],
+                value: handles
+            });
+            moving.onChange((value) => {
+                handles = value;
+                refresh();
+            });
+            return new Stack({ gap: 8, children: [moving, new Stack({ direction: 'row', gap: 8, children: [side('columns'), side('rows')] })] });
+        };
         const remove = new Key({ label: t('mapping.remove'), icon: 'trash-2' });
         remove.onPress(() => {
             surfaces = surfaces.filter((item) => item.id !== selected);
             selected = surfaces[0]?.id ?? null;
+            handles = 'corners';
             refresh();
             send();
         });
         details.append(
             name,
             source,
+            grid,
+            ...(surface.mesh === undefined ? [] : [meshControls(surface.mesh)]),
             new Label({ text: t('mapping.cropTitle'), size: 'small' }),
             new Stack({ direction: 'row', gap: 8, wrap: true, children: [crop('x'), crop('y'), crop('width'), crop('height')] }),
             new Stack({ direction: 'row', gap: 8, wrap: true, children: [reset, remove] })
@@ -154,6 +199,9 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
 
     const choose = (id: string): void => {
         selected = id;
+        if (surfaces.find((item) => item.id === id)?.mesh === undefined) {
+            handles = 'corners';
+        }
         refresh();
     };
 
@@ -169,6 +217,7 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         };
         surfaces = [...surfaces, surface];
         selected = surface.id;
+        handles = 'corners';
         refresh();
         send();
     });
@@ -179,7 +228,24 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         void engine().request('video.setTestPattern', { id: output.id, on }).catch(showError);
     });
     stage.onPick(choose);
-    stage.onMove((corners) => change({ corners }));
+    // A corner stays near the output; a point of the grid is kept in the surface it bends
+    const limit = ([x, y]: MappingPoint): MappingPoint =>
+        [x, y].map((value) => Math.round(Math.max(-CORNER_MARGIN, Math.min(1 + CORNER_MARGIN, value)) * 100000) / 100000) as MappingPoint;
+    stage.onMove((index, point) => {
+        const surface = surfaces.find((item) => item.id === selected);
+        if (surface === undefined) {
+            return;
+        }
+        if (handles === 'corners') {
+            change({ corners: surface.corners.map((corner, at) => at === index ? limit(point) : corner) as MappingSurface['corners'] });
+            return;
+        }
+        const matrix = homography(surface.corners);
+        const { mesh } = surface;
+        if (matrix !== null && mesh !== undefined) {
+            change({ mesh: { ...mesh, points: mesh.points.map((old, at) => at === index ? limit(unproject(matrix, point)) : old) } });
+        }
+    });
 
     dialog.append(new Stack({
         direction: 'row',

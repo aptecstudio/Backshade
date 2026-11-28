@@ -6,11 +6,31 @@
  * out of sight.
  */
 
-import { FULL_CROP, homography, type Corners, type Crop, type MappingSurface } from '../../shared/video/mapping.js';
+import { FULL_CROP, homography, meshPoint, type Corners, type Crop, type MappingSurface, type Mesh } from '../../shared/video/mapping.js';
 import { createMappingProgram, type MappingProgram } from './mapping-shader.js';
 import { testCard } from './mapping-test-card.js';
 
 type Picture = HTMLVideoElement | HTMLImageElement | HTMLCanvasElement;
+
+/** Pieces of each side of a bent surface; a flat one is a single piece */
+const PIECES = 48;
+
+/** Two triangles for every piece of a surface: each vertex flat and bent */
+function triangles(mesh: Mesh | undefined): Float32Array {
+    const pieces = mesh === undefined ? 1 : PIECES;
+    const data: number[] = [];
+    const corner = (column: number, row: number): number[] => {
+        const point: [number, number] = [column / pieces, row / pieces];
+        return [...point, ...meshPoint(mesh, ...point)];
+    };
+    for (let row = 0; row < pieces; row++) {
+        for (let column = 0; column < pieces; column++) {
+            const [a, b, c, d] = [corner(column, row), corner(column + 1, row), corner(column, row + 1), corner(column + 1, row + 1)];
+            data.push(...a, ...b, ...c, ...c, ...b, ...d);
+        }
+    }
+    return new Float32Array(data);
+}
 
 export interface MappingScene {
     surfaces: MappingSurface[];
@@ -41,6 +61,10 @@ export class MappingRenderer {
     private readonly textures = new Map<Picture, Texture>();
     private readonly cards = new Map<string, HTMLCanvasElement>();
     private scene: MappingScene = { surfaces: [], testPattern: false, name: '' };
+    /** Vertices of the shapes, computed once for each mesh */
+    private readonly shapes = new Map<string, Float32Array>();
+    /** Vertices of the surface being drawn */
+    private count = 0;
     private frame = 0;
 
     /**
@@ -103,6 +127,7 @@ export class MappingRenderer {
             if (!this.place(surface.corners)) {
                 return;
             }
+            this.shape(surface.mesh);
             if (scene.testPattern) {
                 const key = `${index} ${surface.name}`;
                 let card = this.cards.get(key);
@@ -158,6 +183,23 @@ export class MappingRenderer {
         return true;
     }
 
+    /** Sends the vertices of a surface to the card */
+    private shape(mesh: Mesh | undefined): void {
+        const key = mesh === undefined ? '' : JSON.stringify(mesh);
+        let data = this.shapes.get(key);
+        if (data === undefined) {
+            // Dragging a point makes many shapes: the old ones are not kept
+            if (this.shapes.size > 64) {
+                this.shapes.clear();
+            }
+            data = triangles(mesh);
+            this.shapes.set(key, data);
+        }
+        this.count = data.length / 4;
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.program.vertices);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, data, this.gl.DYNAMIC_DRAW);
+    }
+
     private paint(picture: Picture, crop: Crop, fit: [number, number], opacity: number, still: boolean): void {
         const { gl } = this;
         let entry = this.textures.get(picture);
@@ -179,6 +221,6 @@ export class MappingRenderer {
         gl.uniform4f(this.program.crop, crop.x, crop.y, crop.width, crop.height);
         gl.uniform2f(this.program.fit, fit[0], fit[1]);
         gl.uniform1f(this.program.opacity, opacity);
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        gl.drawArrays(gl.TRIANGLES, 0, this.count);
     }
 }

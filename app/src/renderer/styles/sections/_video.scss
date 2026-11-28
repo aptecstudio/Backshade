@@ -209,3 +209,24 @@ body.video-output .mapping-canvas {
         content: '';
     }
 }
+
+// Points of the grid: smaller than the corners, with a smaller hit area to stay apart
+.mapping-stage__handle--point {
+    width: space(16);
+    height: space(16);
+    margin: calc(space(16) / -2) 0 0 calc(space(16) / -2);
+    border-color: color('text');
+
+    &::after {
+        inset: calc((space(16) - space(32)) / 2);
+    }
+}
+
+.mapping-stage__grid {
+    fill: none;
+    stroke: color('accent');
+    stroke-width: 1;
+    stroke-opacity: 0.5;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+}

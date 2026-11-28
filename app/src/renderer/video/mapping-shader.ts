@@ -1,16 +1,19 @@
 /**
- * WebGL program of the videomapping: a surface is the unit square moved onto
- * its corners with a perspective transform, showing a part of a picture laid
- * in the composition as the layers do (fill, fit or stretch).
+ * WebGL program of the videomapping: a surface is the unit square, bent by
+ * its mesh and moved onto its corners with a perspective transform, showing
+ * a part of a picture laid in the composition as the layers do (fill, fit or
+ * stretch). Every vertex says where it is on the flat surface, for the
+ * picture, and where the mesh takes it.
  */
 
 const VERTEX = `#version 300 es
 uniform mat3 corners;
 in vec2 point;
+in vec2 bent;
 out vec2 surface;
 void main() {
     surface = point;
-    vec3 place = corners * vec3(point, 1.0);
+    vec3 place = corners * vec3(bent, 1.0);
     // The weight of the perspective keeps the picture straight inside the shape
     gl_Position = vec4(place.x * 2.0 - place.z, place.z - place.y * 2.0, 0.0, place.z);
 }
@@ -41,6 +44,8 @@ export interface MappingProgram {
     crop: WebGLUniformLocation | null;
     fit: WebGLUniformLocation | null;
     opacity: WebGLUniformLocation | null;
+    /** Filled by the renderer: for every vertex, the point and where the mesh takes it */
+    vertices: WebGLBuffer;
 }
 
 function shader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader {
@@ -62,12 +67,13 @@ export function createMappingProgram(gl: WebGL2RenderingContext): MappingProgram
         throw new Error(gl.getProgramInfoLog(program) ?? 'Program not linked');
     }
     gl.useProgram(program);
-    // The unit square as two triangles
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), gl.STATIC_DRAW);
-    const point = gl.getAttribLocation(program, 'point');
-    gl.enableVertexAttribArray(point);
-    gl.vertexAttribPointer(point, 2, gl.FLOAT, false, 0, 0);
+    const vertices = gl.createBuffer() as WebGLBuffer;
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertices);
+    for (const [name, offset] of [['point', 0], ['bent', 8]] as const) {
+        const location = gl.getAttribLocation(program, name);
+        gl.enableVertexAttribArray(location);
+        gl.vertexAttribPointer(location, 2, gl.FLOAT, false, 16, offset);
+    }
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     return {
@@ -75,6 +81,7 @@ export function createMappingProgram(gl: WebGL2RenderingContext): MappingProgram
         corners: gl.getUniformLocation(program, 'corners'),
         crop: gl.getUniformLocation(program, 'crop'),
         fit: gl.getUniformLocation(program, 'fit'),
-        opacity: gl.getUniformLocation(program, 'opacity')
+        opacity: gl.getUniformLocation(program, 'opacity'),
+        vertices
     };
 }
