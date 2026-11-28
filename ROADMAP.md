@@ -223,13 +223,13 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
 3D modeling of the stage with three.js, and a live visualizer that emulates the fixtures from the DMX output. It depends on the fixture model and the output engine (Phase 3) and on the simple console (Phase 4). It is numbered after the existing phases to avoid renumbering them; its position in the development order can be decided later.
 
 - [x] 13.1 three.js vendored locally and imported as native ES modules (see `MEMORY.md`, Dependencies and Code style)
-- [ ] 13.2 Bundled `.obj` model library, ready to use:
-  - [ ] 13.2.1 Truss: straight sections of common lengths, corners, T and cross joints, base plates, towers
-  - [ ] 13.2.2 Stage: modular decks, risers, stairs
-  - [ ] 13.2.3 Most used fixtures: moving head spot, moving head wash, moving head beam, PAR, LED bar, blinder, strobe, follow spot
-  - [ ] 13.2.4 Moving fixtures split into separate parts (base, yoke, head) with defined pivot points, so pan and tilt can be animated
-  - [ ] 13.2.5 Musicians with their instrument: drummer (with drum kit), guitarist, bassist, pianist (with piano or keyboard), singer (with microphone and stand); neutral figures, to visualize the band on stage and aim the lights
-  - [ ] 13.2.6 Stage elements: guitar and bass amplifiers and cabinets, drum riser, risers and platforms, floor wedge monitors, PA speakers and subwoofers, microphone stands, keyboard stands, instrument stands, cases and flight cases, DJ booth
+- [x] 13.2 Bundled `.obj` model library, ready to use:
+  - [x] 13.2.1 Truss: straight sections of common lengths, corners, T and cross joints, base plates, towers
+  - [x] 13.2.2 Stage: modular decks, risers, stairs
+  - [x] 13.2.3 Most used fixtures: moving head spot, moving head wash, moving head beam, PAR, LED bar, blinder, strobe, follow spot
+  - [x] 13.2.4 Moving fixtures split into separate parts (base, yoke, head) with defined pivot points, so pan and tilt can be animated
+  - [x] 13.2.5 Musicians with their instrument: drummer (with drum kit), guitarist, bassist, pianist (with piano or keyboard), singer (with microphone and stand); neutral figures, to visualize the band on stage and aim the lights
+  - [x] 13.2.6 Stage elements: guitar and bass amplifiers and cabinets, drum riser, risers and platforms, floor wedge monitors, PA speakers and subwoofers, microphone stands, keyboard stands, instrument stands, cases and flight cases, DJ booth
 - [x] 13.3 Link between fixture definitions and 3D models: model, beam angle and zoom range, pan and tilt range, light output
 - [x] 13.4 Stage editor: place, move, rotate and snap truss, decks and fixtures; hang fixtures on truss; camera views (front, top, side, free)
 - [x] 13.5 Placed fixtures linked to the patch; stage layout saved in `show.json`
@@ -246,14 +246,29 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [ ] 13.9.3 Preview of the videomapping (Phase 14): warp, masks and edge blending shown on the 3D surfaces as they would appear in the venue
   - [ ] 13.9.4 Screens, LED walls and projectors placed in the stage editor and linked to the video outputs of Phase 7; layout saved in `show.json`
 - [ ] 13.10 Overcome the limits of the live emulation (requested by the human on 2026-11-28):
-  - [ ] 13.10.1 Beams stopped by the objects they meet
-  - [ ] 13.10.2 Focus, frost and iris
-  - [ ] 13.10.3 Dimmer curve in the fixture definitions
-  - [ ] 13.10.4 Counter of the frames really drawn and quality lowered automatically
-  - [ ] 13.10.5 Shadows of the brightest fixtures
-  - [ ] 13.10.6 Prisms and rotating gobos (generic patterns or images given by the user)
-  - [ ] 13.10.7 Color macros, where the definition gives their colors
+  - [x] 13.10.1 Beams stopped by the objects they meet
+  - [x] 13.10.2 Focus, frost and iris
+  - [x] 13.10.3 Dimmer curve in the fixture definitions: ready curves or drawn in the fixture editor
+  - [x] 13.10.4 Counter of the frames really drawn and quality lowered automatically
+  - [x] 13.10.5 Shadows of the brightest fixtures, that can be turned on or off
+  - [x] 13.10.6 Prisms and rotating gobos; the fixture editor takes black and white masks for the gobos (white is the lit part)
+  - [x] 13.10.7 Color macros, where the definition gives their colors
   - [ ] 13.10.8 Precise beam occlusion and gobos visible in the haze, only if still needed after the rest
+  - [x] 13.10.9 Blackout and grand master stop lasers and strobe LEDs without a dimmer (safety)
+  - [x] 13.10.10 Derby effects: several beams and their rotation
+  - [x] 13.10.11 Laser in the live view
+  - [x] 13.10.12 Strobe and UV LEDs of multi effect fixtures in the live view
+  - [x] 13.10.13 Automatic programmes of the fixtures shown in some way instead of off
+- [x] 13.11 Requested by the human on 2026-11-28: Stairville Stage Quad LED Bundle RGB WW and LED BossFx-1 Pro Bundle as fixtures with their own 3D models, and a wind-up stand of adjustable height (inspired by the Manfrotto 087NW) to mount fixtures on
+- [x] 13.12 Limits of the stage editor and of the model library:
+  - [x] 13.12.1 Categories of the "Add" column that open and close
+  - [x] 13.12.2 Mouse controls of the view with tools for orbit, pan and zoom; no 3D stage on mobile or other connected devices
+  - [x] 13.12.3 The follow spot also as scenery without DMX
+  - [x] 13.12.4 Hanging also on truss joints and towers
+  - [x] 13.12.5 Lighter model files (from 13 to 7.5 MB)
+  - [x] 13.12.6 String trio of men and women together
+  - [x] 13.12.7 Stage included in the import from another show
+  - [x] 13.12.8 README features list updated with the 3D stage
 
 ## Phase 14 - Videomapping
 

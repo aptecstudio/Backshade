@@ -224,7 +224,9 @@ How to use it:
 ## 19. 3D stage
 
 - [ ] On Windows, macOS and Linux the key of the top bar opens the stage window; the models are drawn (WebGL available), also on computers with older or integrated graphics.
-- [ ] Mouse: orbit, pan and zoom; touch screen: one finger orbits, two fingers pinch and pan.
+- [ ] Mouse: middle button orbits, with Shift pans, wheel zooms towards the pointer, double press centres; tools and keys O, H, Z, Space, Shift+Z; also with a trackpad. Touch screen of the computer: one finger orbits, two fingers pinch and pan.
+- [ ] A phone or another computer connected to the show has no 3D stage, also when the address of its page is typed.
+- [ ] Hanging on joints and tower sides matches how the fixtures are really clamped.
 - [ ] Editor on a touch screen: a tap selects, the arrows and rings can be dragged with a finger without moving the camera.
 - [ ] A stage built like a real one (truss, decks, hung fixtures) in a venue: the 20 cm grid is fine enough; heights and distances match the measures.
 - [ ] Live view next to the real rig: colors, intensity, pan and tilt directions, travel and speed, zoom and strobe rate match the fixtures (moving heads hung and standing).
@@ -232,4 +234,18 @@ How to use it:
 - [ ] Operators: stage hidden (no key in the top bar), read only (no handles) and editable; changing operator updates the open stage window.
 - [ ] Save, close and reopen the show, also on another computer: the stage is the same.
 - [ ] Moving the window to a second screen and resizing it keeps the view sharp and proportioned; closing the main window closes it.
-
+- [ ] Model library: sizes of truss, towers, decks, stairs, risers and PA match the real ones used; a rig of a real show can be built with the available pieces.
+- [ ] Placing the fixtures of a real patch gives the right model (spot, wash, beam, PAR, LED bar, blinder, strobe); LED bars, blinders and strobes light in the right direction in the live view.
+- [ ] A large stage (full truss, many musicians) opens in a reasonable time and stays fluid on the show computer.
+- [ ] Stairville Stage Quad LED RGB WW on the real unit, every mode (2, 4, 5, 8, 10, 18 channels): channels, spot order from left to right, strobe; the 3D stage shows the same colors on the same spots.
+- [ ] Stairville LED BossFx-1 Pro on the real unit, every mode (3, 5, 10, 28 channels): derby and spot order, rotation, laser, strobe LEDs and UV. Check with care what stays on in blackout (laser and strobe LEDs are not stopped by it) and use the safety switch.
+- [ ] Wind-up stand: the arrow on its top can be dragged with mouse and finger; mounted bars sit as on the real stand at the same height.
+- [ ] Blackout and grand master at zero stop the laser and the strobe LEDs of the real BossFx in 3, 10 and 28 channel mode; raising them brings back what the desk sends.
+- [ ] Automatic quality on the show computer settles on a level that keeps the frame rate; shadows stay usable.
+- [ ] Effects against the real units: derby rotation way and speed, laser colors, strobe and UV LEDs, focus, frost, iris and color macros of the moving heads; a dimmer curve drawn from the real fixture matches what is seen.
+- [ ] Curve editor of the fixture editor with a finger: add, drag and remove points.
+- [ ] Gobo masks made from the real gobos of a fixture: choose them in the fixture editor, compare projection, rotation way and speed, and the prism pattern with the real fixture.
+- [ ] Choosing a mask image from a remote client (sent with "Send from this device").
+- [ ] Prism and gobo shake, rotation, indexing and zoom against the real fixtures: speeds, ways and the width of the movement.
+- [ ] Many gobo fixtures projecting at once on the show computer: the frame rate holds with automatic quality.
+- [ ] Import the 3D stage from a real previous show, adding to and replacing the one there.
