@@ -275,10 +275,10 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
 Mapping of the video outputs on real surfaces: screens, projection surfaces, scenery and LED walls. It depends on the video outputs and layers (Phase 7) and, for the 3D mapping, on the 3D stage (Phase 13). Rendering runs on the GPU with WebGL in the output windows.
 
 - [x] 14.1 Output model: each video output has a canvas (resolution) split into one or more mapping surfaces, each showing the whole program or one layer (decided by the human on 2026-11-28)
-- [ ] 14.2 2D warp on the output:
+- [x] 14.2 2D warp on the output:
   - [x] 14.2.1 Corner pin (four corners)
   - [x] 14.2.2 Mesh warp with an editable grid of points (smooth curves through the points)
-  - [ ] 14.2.3 Masks: polygons and bezier shapes, with feather and inversion
+  - [x] 14.2.3 Masks: polygons and bezier shapes, with feather and inversion, over the whole output
   - [x] 14.2.4 Input crop: the part of the source shown on each surface
 - [ ] 14.3 Edge blending between overlapping projectors: blend width, curve and gamma per edge, black level compensation
 - [ ] 14.4 3D mapping on models:

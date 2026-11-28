@@ -259,3 +259,4 @@ How to use it:
 - [ ] Videos on several surfaces stay smooth at the output resolution on the show computer, also with transitions, timers and text gobos.
 - [ ] Video inputs (cameras) mapped on a surface.
 - [ ] Mesh warp on a real curved or irregular surface: 4 x 4 and finer grids are enough; dragging points with a finger on a tablet.
+- [ ] Masks on a real projector: shapes follow the scenery, soft edges look right, dragging points and curve handles is precise with mouse and finger.
