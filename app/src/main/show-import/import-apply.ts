@@ -335,7 +335,9 @@ export function planImport(
             levels: moveLevels(scene.levels),
             matrices,
             audio: scene.audio === null ? null : audioIds.get(scene.audio) ?? null,
-            video: sceneVideo
+            video: sceneVideo,
+            // Outputs keep their presets when they are imported
+            mapping: Object.fromEntries(Object.entries(scene.mapping).flatMap(([id, preset]) => videoIds.has(id) ? [[videoIds.get(id)!, preset]] : []))
         });
         done();
     }

@@ -41,6 +41,8 @@ export interface TimelinePlayerContext {
     newId?: () => string;
     /** Recalls a scene of an external mixer (mixer tracks) */
     recallMixer?: (mixer: string, number: number) => void;
+    /** Recalls a mapping preset of a video output (mapping tracks) */
+    recallMapping?: (output: string, preset: string) => void;
 }
 
 const TICK_MS = 25;
@@ -126,7 +128,7 @@ export class TimelinePlayer {
         // The pass starts first, so the armed automation tracks do not play their curve
         this.startPass();
         this.apply(this.basePosition, true);
-        this.recallMixers(timeline, this.basePosition, this.basePosition, true);
+        this.recallClips(timeline, this.basePosition, this.basePosition, true);
         this.announce();
     }
 
@@ -199,7 +201,7 @@ export class TimelinePlayer {
         if (this.playing && timeline !== null) {
             this.startPass();
             this.apply(position, true);
-            this.recallMixers(timeline, position, position, true);
+            this.recallClips(timeline, position, position, true);
         }
         this.announce();
     }
@@ -315,31 +317,29 @@ export class TimelinePlayer {
             this.announce();
             return;
         }
-        this.recallMixers(timeline, this.lastPosition, position, false);
+        this.recallClips(timeline, this.lastPosition, position, false);
         this.lastPosition = position;
         this.apply(position, false);
         this.recorder?.tick(position);
     }
 
     /**
-     * Mixer tracks: a clip recalls its mixer scene when the playhead passes
-     * its start; after a jump (play, locate, loop) the clip under the
-     * playhead is recalled, so the mixer follows the timeline.
+     * Mixer and mapping tracks: a clip recalls its mixer scene or mapping
+     * preset when the playhead passes its start; after a jump (play, locate,
+     * loop) the clip under the playhead is recalled, so they follow the timeline.
      */
-    private recallMixers(timeline: Timeline, from: number, to: number, jumped: boolean): void {
-        const recall = this.context.recallMixer;
-        if (recall === undefined) {
-            return;
-        }
+    private recallClips(timeline: Timeline, from: number, to: number, jumped: boolean): void {
         for (const track of timeline.tracks) {
-            if (track.kind !== 'mixer' || track.mixer === '' || this.muted(timeline, track)) {
+            if ((track.kind !== 'mixer' && track.kind !== 'mapping') || this.muted(timeline, track)) {
                 continue;
             }
             const clip = jumped
                 ? track.clips.filter((item) => item.start <= to && to < item.start + item.duration).pop()
                 : track.clips.filter((item) => item.start > from && item.start <= to).pop();
-            if (clip !== undefined && clip.source.kind === 'mixer') {
-                recall(track.mixer, clip.source.number);
+            if (clip?.source.kind === 'mixer' && track.mixer !== '') {
+                this.context.recallMixer?.(track.mixer, clip.source.number);
+            } else if (clip?.source.kind === 'mapping' && track.output !== '') {
+                this.context.recallMapping?.(track.output, clip.source.preset);
             }
         }
     }

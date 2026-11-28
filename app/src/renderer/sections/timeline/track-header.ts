@@ -42,7 +42,7 @@ export class TrackHeader extends Component<HTMLDivElement> {
         };
         if (track.kind === 'folder') {
             key('collapse', { label: track.collapsed ? t('timeline.openFolder') : t('timeline.closeFolder'), icon: track.collapsed ? 'chevron-right' : 'chevron-down' });
-        } else if (track.kind !== 'mixer') {
+        } else if (track.kind !== 'mixer' && track.kind !== 'mapping') {
             key('arm', { label: t('timeline.arm'), text: 'r', on: track.armed });
         }
         key('mute', { label: t('timeline.mute'), text: 'm', on: track.muted });

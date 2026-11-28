@@ -16,6 +16,7 @@ import {
     type ShowVideo,
     type VideoOutputConfig
 } from '../../shared/video/video';
+import { mappingOf, type MappingPreset, type OutputMapping } from '../../shared/video/mapping-preset';
 import type { TimerState } from '../../shared/video/show-timer';
 import type { GoboContext } from '../../shared/video/text-gobo';
 import type { ComposeMessage } from '../../shared/video/video-output-protocol';
@@ -26,6 +27,8 @@ interface OutputRuntime {
     preview: LayerState[];
     /** Scene or cue that set the program, with the program it replaced */
     owner: { key: string; before: LayerState[] } | null;
+    /** Preset recalled over the mapping of the show: playing does not change the show */
+    recalled: MappingPreset | null;
 }
 
 export class VideoEngine {
@@ -207,7 +210,7 @@ export class VideoEngine {
         let state = this.runtime.get(output.id);
         if (state === undefined) {
             const empty = Array.from({ length: output.layers }, () => ({ ...EMPTY_LAYER }));
-            state = { program: empty, preview: structuredClone(empty), owner: null };
+            state = { program: empty, preview: structuredClone(empty), owner: null, recalled: null };
             this.runtime.set(output.id, state);
         }
         return state;
@@ -282,10 +285,35 @@ export class VideoEngine {
         return [...this.tests];
     }
 
+    /** Moves an output to one of its presets; unknown ones are ignored */
+    recallMapping(outputId: string, presetId: string): void {
+        const output = this.outputs().find((item) => item.id === outputId);
+        const preset = output?.presets.find((item) => item.id === presetId);
+        if (output === undefined || preset === undefined) {
+            return;
+        }
+        this.state(output).recalled = structuredClone(preset);
+        this.send(output.id, 0);
+    }
+
+    /** Forgets the recalled preset, before the mapping of the show is changed */
+    clearMapping(outputId: string): void {
+        const state = this.runtime.get(outputId);
+        if (state !== undefined) {
+            state.recalled = null;
+        }
+    }
+
+    /** Mapping shown by an output, and the preset it comes from */
+    mapping(output: VideoOutputConfig): { mapping: OutputMapping; preset: string | null } {
+        const recalled = this.runtime.get(output.id)?.recalled ?? null;
+        return { mapping: mappingOf(recalled ?? output), preset: recalled?.id ?? null };
+    }
+
     private message(output: VideoOutputConfig, layers: LayerState[], transition: number): ComposeMessage {
         return {
             layers, transition, gobos: this.video()?.gobos ?? [], context: this.context, timers: this.video()?.timers ?? [], timerStates: this.timerStates(),
-            surfaces: output.surfaces, masks: output.masks, blend: output.blend, testPattern: this.tests.has(output.id), name: output.name
+            ...this.mapping(output).mapping, morph: this.runtime.get(output.id)?.recalled?.morph ?? 0, testPattern: this.tests.has(output.id), name: output.name
         };
     }
 

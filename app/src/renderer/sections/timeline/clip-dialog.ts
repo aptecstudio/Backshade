@@ -35,6 +35,7 @@ function sourceValue(source: ClipSource): string {
         case 'chaser': return `chaser:${source.id}`;
         case 'audio': return `audio:${source.file}`;
         case 'mixer': return `mixer:${source.number}`;
+        case 'mapping': return source.preset === '' ? '' : `mapping:${source.preset}`;
         case 'layer': {
             const layer = source.layer.source;
             if (layer === null) {
@@ -62,6 +63,9 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
         if (track.kind === 'light') {
             options.push(...context.memories.scenes.map((scene) => ({ value: `scene:${scene.id}`, label: `S${scene.slot} ${scene.name}` })));
             options.push(...context.memories.chasers.map((chaser) => ({ value: `chaser:${chaser.id}`, label: `C${chaser.slot} ${chaser.name}` })));
+        } else if (track.kind === 'mapping') {
+            const presets = context.video.outputs.find((output) => output.id === track.output)?.presets ?? [];
+            options.push(...presets.map((preset) => ({ value: `mapping:${preset.id}`, label: preset.name })));
         } else if (track.kind === 'audio') {
             options.push(...context.media.filter((item) => item.kind === 'audio').map((item) => ({ value: `audio:${item.file}`, label: item.name })));
         } else if (track.kind === 'video') {
@@ -81,6 +85,8 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
             max: range.last
         });
         const isMixer = track.kind === 'mixer';
+        /** Clips that recall something at their start: no offset or fades */
+        const recalls = isMixer || track.kind === 'mapping';
         const hasSource = isMixer || options.length > 0;
         const name = new TextField({ label: t('patch.name'), value: clip.name, maxLength: 60 });
         const seconds = (label: string, value: number, min = 0): NumberField => new NumberField({ label, value, min, max: 4 * 3600, decimals: 2, unit: 's' });
@@ -93,13 +99,13 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
         const layer = clip.source.kind === 'layer' ? clip.source.layer : null;
         const opacity = new LinearSlider({ label: t('video.opacity'), value: layer?.opacity ?? 1 });
         const fit = new SelectField<LayerFit>({ label: t('video.fit'), options: LAYER_FITS.map((item) => ({ value: item, label: t(`matrices.fits.${item}`) })), value: layer?.fit ?? 'fill' });
-        offset.element.hidden = track.kind === 'light' || isMixer;
-        fadeIn.element.hidden = isMixer;
-        fadeOut.element.hidden = isMixer;
+        offset.element.hidden = track.kind === 'light' || recalls;
+        fadeIn.element.hidden = recalls;
+        fadeOut.element.hidden = recalls;
 
         const slider = (label: string, control: LinearSlider): Stack => new Stack({ gap: 8, classes: ['clip-dialog__slider'], children: [new Label({ text: label, size: 'small' }), control] });
         dialog.append(
-            isMixer ? sceneNumber : options.length === 0 ? new Label({ text: t(`timeline.noSources.${track.kind as 'light' | 'audio' | 'video'}`), tone: 'secondary', size: 'small' }) : source,
+            isMixer ? sceneNumber : options.length === 0 ? new Label({ text: t(`timeline.noSources.${track.kind as 'light' | 'audio' | 'video' | 'mapping'}`), tone: 'secondary', size: 'small' }) : source,
             name,
             new Stack({ direction: 'row', gap: 8, wrap: true, children: [start, duration, offset] }),
             new Stack({ direction: 'row', gap: 8, wrap: true, children: [fadeIn, fadeOut] }),
@@ -139,6 +145,9 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
             const rest = value.slice(at + 1);
             if (value === '') {
                 return null;
+            }
+            if (kind === 'mapping') {
+                return { kind, preset: rest };
             }
             if (kind === 'scene' || kind === 'chaser') {
                 return { kind, id: rest };

@@ -707,7 +707,8 @@
         "video": "Video",
         "automation": "Automazione",
         "folder": "Cartella",
-        "mixer": "Mixer"
+        "mixer": "Mixer",
+        "mapping": "Mappatura"
       },
       "undo": "Annulla",
       "redo": "Ripeti",
@@ -758,7 +759,8 @@
       "noSources": {
         "light": "Non ci sono ancora scene o chaser: registrali nella sezione Console.",
         "audio": "Nessun file audio nei Media dello show.",
-        "video": "Non ci sono ancora video, immagini, gobo o timer."
+        "video": "Non ci sono ancora video, immagini, gobo o timer.",
+        "mapping": "Nessun preset di mappatura: scegli l'uscita della traccia e salva i preset nell'editor di mappatura."
       },
       "beatsPerBar": "Movimenti per battuta",
       "deleteTimeline": "Elimina la timeline",
@@ -1742,7 +1744,16 @@
         "gamma": "Gamma"
       },
       "black": "Compensazione del nero",
-      "blendHint": "Per proiettori affiancati: dai ai lati sovrapposti di entrambi la stessa larghezza della sovrapposizione."
+      "blendHint": "Per proiettori affiancati: dai ai lati sovrapposti di entrambi la stessa larghezza della sovrapposizione.",
+      "presets": "Preset",
+      "savePreset": "Salva come preset",
+      "preset": "Preset {number}",
+      "morph": "Tempo di morph",
+      "recall": "Richiama",
+      "overwrite": "Sovrascrivi",
+      "presetHint": "I preset si salvano subito e si richiamano da scene e timeline, muovendosi nel tempo di morph.",
+      "recallOn": "Mappatura di {name}",
+      "noPreset": "Invariata"
     }
   }
 }

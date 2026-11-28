@@ -5,9 +5,8 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import { normalizeSurfaces } from '../../shared/video/mapping';
-import { normalizeMasks } from '../../shared/video/mask';
-import { noBlend, normalizeBlend } from '../../shared/video/blend';
+import { noBlend } from '../../shared/video/blend';
+import { MAX_PRESETS, normalizeMapping, normalizePreset, type MappingPreset } from '../../shared/video/mapping-preset';
 import { MAX_VIDEO_LAYERS, MAX_VIDEO_OUTPUTS, normalizeLayer, type ShowVideo, type VideoInput, type VideoOutputConfig } from '../../shared/video/video';
 import { MAX_TIMERS, normalizeTimer, TIMER_ACTIONS, type TimerState } from '../../shared/video/show-timer';
 import { MAX_GOBOS, normalizeGobo } from '../../shared/video/text-gobo';
@@ -120,7 +119,7 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         }
         const base: VideoOutputConfig = {
             id: randomUUID(), name: requireString(input, 'name'), enabled: false, display: '', fullscreen: true,
-            x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3, surfaces: [], masks: [], blend: noBlend()
+            x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3, surfaces: [], masks: [], blend: noBlend(), presets: []
         };
         const output = outputData(input, base);
         return update((video) => ({ ...video, outputs: [...video.outputs, output] }));
@@ -145,27 +144,48 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         return output;
     };
 
-    router.register('video.setSurfaces', (params) => {
+    const setPresets = (id: string, change: (presets: MappingPreset[]) => MappingPreset[]): void => {
+        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, presets: change(item.presets) } : item) }));
+    };
+
+    router.register('video.getMapping', (params) => engine.mapping(knownOutput(requireString(requireObject(params), 'id'))));
+
+    router.register('video.setMapping', (params) => {
         const input = requireObject(params);
         const { id } = knownOutput(requireString(input, 'id'));
-        const surfaces = normalizeSurfaces(input.surfaces);
-        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, surfaces } : item) }));
+        const mapping = normalizeMapping(input.mapping);
+        engine.clearMapping(id);
+        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, ...mapping } : item) }));
         return undefined;
     });
 
-    router.register('video.setMasks', (params) => {
+    router.register('video.savePreset', (params) => {
         const input = requireObject(params);
-        const { id } = knownOutput(requireString(input, 'id'));
-        const masks = normalizeMasks(input.masks);
-        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, masks } : item) }));
+        const output = knownOutput(requireString(input, 'id'));
+        const preset = normalizePreset(input.preset);
+        if (preset === null) {
+            throw new EngineError('invalid-params', 'Invalid mapping preset');
+        }
+        const exists = output.presets.some((item) => item.id === preset.id);
+        if (!exists && output.presets.length >= MAX_PRESETS) {
+            throw new EngineError('invalid-params', 'No more mapping presets');
+        }
+        setPresets(output.id, (presets) => exists ? presets.map((item) => item.id === preset.id ? preset : item) : [...presets, preset]);
         return undefined;
     });
 
-    router.register('video.setBlend', (params) => {
+    router.register('video.deletePreset', (params) => {
         const input = requireObject(params);
         const { id } = knownOutput(requireString(input, 'id'));
-        const blend = normalizeBlend(input.blend);
-        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, blend } : item) }));
+        const preset = requireString(input, 'preset');
+        setPresets(id, (presets) => presets.filter((item) => item.id !== preset));
+        return undefined;
+    });
+
+    router.register('video.recallPreset', (params) => {
+        const input = requireObject(params);
+        const { id } = knownOutput(requireString(input, 'id'));
+        engine.recallMapping(id, requireString(input, 'preset'));
         return undefined;
     });
 

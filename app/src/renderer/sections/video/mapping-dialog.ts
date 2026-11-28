@@ -1,12 +1,14 @@
 /**
  * Videomapping editor of an output: its surfaces (corners, grid, what they
  * show and the part of the picture they take), its masks, its edge blending
- * and the test image. Every change is sent at once, so it is seen on the output; Cancel
- * puts back the surfaces of before.
+ * and the test image. Every change is sent at once, so it is seen on the
+ * output; Cancel puts back the mapping of before. Presets are saved at once
+ * and are not undone by Cancel.
  */
 
 import { Checkbox, ChoiceKeys, Dialog, Key, Label, ListItem, NumberField, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
-import { CORNER_MARGIN, FULL_CORNERS, FULL_CROP, MAX_SURFACES, MESH_POINTS, homography, meshPoint, normalizeSurfaces, regularMesh, unproject, type Crop, type MappingPoint, type MappingSurface, type Mesh } from '../../../shared/video/mapping.js';
+import { CORNER_MARGIN, FULL_CORNERS, FULL_CROP, MAX_SURFACES, MESH_POINTS, homography, normalizeSurfaces, regularMesh, resampleMesh, unproject, type Crop, type MappingPoint, type MappingSurface, type Mesh } from '../../../shared/video/mapping.js';
+import { mappingOf, type OutputMapping } from '../../../shared/video/mapping-preset.js';
 import type { OutputComposition, ShowVideo, VideoOutputConfig } from '../../../shared/video/video.js';
 import type { TimerState } from '../../../shared/video/show-timer.js';
 import { showError } from '../../dialogs/show-error.js';
@@ -16,14 +18,9 @@ import { CompositionView } from '../../video/composition-view.js';
 import { MappedComposition } from '../../video/mapped-composition.js';
 import { MappingBlend } from './mapping-blend.js';
 import { MappingMasks } from './mapping-masks.js';
+import { MappingPresets } from './mapping-presets.js';
 import { EMPTY_OVERLAY, MappingStage } from './mapping-stage.js';
 import { surfaceOverlay, type MappingHandles } from './mapping-surface-overlay.js';
-
-/** Grid of a new number of points, keeping the shape of the one before */
-function resample(mesh: Mesh | undefined, columns: number, rows: number): Mesh {
-    const grid = regularMesh(columns, rows);
-    return { ...grid, points: grid.points.map(([u, v]) => meshPoint(mesh, u, v)) };
-}
 
 /** Corners of a new surface: smaller than the output and a little aside of the one before */
 function newCorners(index: number): MappingSurface['corners'] {
@@ -32,24 +29,26 @@ function newCorners(index: number): MappingSurface['corners'] {
 }
 
 export async function openMappingDialog(output: VideoOutputConfig): Promise<void> {
-    const [video, compositions, timers, tests] = await Promise.all([
+    const [video, compositions, timers, tests, current] = await Promise.all([
         engine().request('video.get'),
         engine().request('video.getState'),
         engine().request('video.getTimers'),
-        engine().request('video.getTestPatterns')
+        engine().request('video.getTestPatterns'),
+        engine().request('video.getMapping', { id: output.id })
     ]);
-    show(output, video, compositions[output.id], timers, tests.includes(output.id));
+    show(video.outputs.find((item) => item.id === output.id) ?? output, current, video, compositions[output.id], timers, tests.includes(output.id));
 }
 
-function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputComposition | undefined, timers: Record<string, TimerState>, testing: boolean): void {
+function show(output: VideoOutputConfig, current: { mapping: OutputMapping; preset: string | null }, video: ShowVideo, composition: OutputComposition | undefined, timers: Record<string, TimerState>, testing: boolean): void {
     const dialog = new Dialog({ title: t('mapping.title', { name: output.name }), size: 'large' });
-    const before = structuredClone(output.surfaces);
-    const masks = new MappingMasks(structuredClone(output.masks));
-    const masksBefore = structuredClone(output.masks);
-    const blending = new MappingBlend(structuredClone(output.blend));
+    // The mapping on the output: a recalled preset, or the one of the show
+    const masks = new MappingMasks(structuredClone(current.mapping.masks));
+    const blending = new MappingBlend(structuredClone(current.mapping.blend));
     /** What is edited */
-    let editing: 'surfaces' | 'masks' | 'blend' = 'surfaces';
-    let surfaces = structuredClone(output.surfaces);
+    let editing: 'surfaces' | 'masks' | 'blend' | 'presets' = 'surfaces';
+    let surfaces = structuredClone(current.mapping.surfaces);
+    /** Something was sent to the output, so Cancel has to put it back */
+    let touched = false;
     let selected: string | null = surfaces[0]?.id ?? null;
     let testPattern = testing;
     let handles: MappingHandles = 'corners';
@@ -68,20 +67,19 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
     const detailArea = new Stack();
     list.append(rows);
 
+    const now = (): OutputMapping => ({ surfaces, masks: masks.masks, blend: blending.blend });
+
     // One request at a time while dragging; the last change is never lost
     let sending = false;
     let waiting = false;
     const send = (): void => {
+        touched = true;
         if (sending) {
             waiting = true;
             return;
         }
         sending = true;
-        void Promise.all([
-            engine().request('video.setSurfaces', { id: output.id, surfaces }),
-            engine().request('video.setMasks', { id: output.id, masks: masks.masks }),
-            engine().request('video.setBlend', { id: output.id, blend: blending.blend })
-        ]).catch(showError).finally(() => {
+        void engine().request('video.setMapping', { id: output.id, mapping: now() }).catch(showError).finally(() => {
             sending = false;
             if (waiting) {
                 waiting = false;
@@ -90,10 +88,21 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         });
     };
 
-    const draw = (): void => {
+    const draw = (morph = 0): void => {
         stage.show(editing === 'masks' ? masks.overlay() : editing === 'surfaces' ? surfaceOverlay(surfaces, selected, handles) : EMPTY_OVERLAY);
-        mapping.apply({ surfaces, masks: masks.masks, blend: blending.blend, testPattern, name: output.name });
+        mapping.apply({ ...now(), testPattern, name: output.name }, morph);
     };
+
+    const presets = new MappingPresets(output.id, output.presets, current.preset, now);
+    presets.onRecall((preset) => {
+        touched = true;
+        surfaces = structuredClone(preset.surfaces);
+        masks.set(structuredClone(preset.masks));
+        blending.set(structuredClone(preset.blend));
+        selected = surfaces[0]?.id ?? null;
+        handles = 'corners';
+        refresh(preset.morph);
+    });
 
     const change = (part: Partial<MappingSurface>): void => {
         surfaces = surfaces.map((surface) => surface.id === selected ? { ...surface, ...part } : surface);
@@ -155,7 +164,7 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         const grid = new Checkbox({ label: t('mapping.mesh'), checked: surface.mesh !== undefined });
         grid.onChange((on) => {
             handles = on ? 'mesh' : 'corners';
-            change({ mesh: on ? resample(undefined, 4, 4) : undefined });
+            change({ mesh: on ? resampleMesh(undefined, 4, 4) : undefined });
             renderDetails();
         });
         const meshControls = (mesh: Mesh): Stack => {
@@ -168,7 +177,7 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
                 field.onChange((value) => {
                     const now = surfaces.find((item) => item.id === selected)?.mesh;
                     if (now !== undefined) {
-                        change({ mesh: resample(now, key === 'columns' ? Number(value) : now.columns, key === 'rows' ? Number(value) : now.rows) });
+                        change({ mesh: resampleMesh(now, key === 'columns' ? Number(value) : now.columns, key === 'rows' ? Number(value) : now.rows) });
                     }
                 });
                 return field;
@@ -203,10 +212,10 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         );
     };
 
-    const refresh = (): void => {
+    const refresh = (morph = 0): void => {
         renderList();
         renderDetails();
-        draw();
+        draw(morph);
     };
 
     const choose = (id: string): void => {
@@ -279,16 +288,18 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
     const surfacePanel = new Stack({ gap: 8, children: [add, list, detailArea] });
     masks.element.element.hidden = true;
     blending.element.element.hidden = true;
-    const sections = new ChoiceKeys<'surfaces' | 'masks' | 'blend'>({
+    presets.element.element.hidden = true;
+    const sections = new ChoiceKeys<'surfaces' | 'masks' | 'blend' | 'presets'>({
         ariaLabel: t('mapping.editing'),
-        options: [{ value: 'surfaces', label: t('mapping.surfaces') }, { value: 'masks', label: t('mapping.masks') }, { value: 'blend', label: t('mapping.blend') }],
+        options: [{ value: 'surfaces', label: t('mapping.surfaces') }, { value: 'masks', label: t('mapping.masks') }, { value: 'blend', label: t('mapping.blend') }, { value: 'presets', label: t('mapping.presets') }],
         value: editing
     });
     const hint = new Label({ text: t('mapping.hint'), size: 'small', tone: 'secondary' });
     sections.onChange((value) => {
         editing = value;
-        // The blending has no handles to drag
-        hint.element.hidden = value === 'blend';
+        // The blending and the presets have no handles to drag
+        hint.element.hidden = value === 'blend' || value === 'presets';
+        presets.element.element.hidden = value !== 'presets';
         surfacePanel.element.hidden = value !== 'surfaces';
         masks.element.element.hidden = value !== 'masks';
         blending.element.element.hidden = value !== 'blend';
@@ -302,16 +313,15 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         classes: ['mapping-editor'],
         children: [
             new Stack({ gap: 8, classes: ['mapping-editor__picture'], children: [stage, hint] }),
-            new Stack({ gap: 8, classes: ['mapping-editor__side'], children: [sections, test, surfacePanel, masks.element, blending.element] })
+            new Stack({ gap: 8, classes: ['mapping-editor__side'], children: [sections, test, surfacePanel, masks.element, blending.element, presets.element] })
         ]
     }));
 
     const finish = (restore: boolean): void => {
-        if (restore) {
-            surfaces = before;
-            masks.masks = masksBefore;
-            blending.set(structuredClone(output.blend));
-            send();
+        if (restore && touched) {
+            void engine().request('video.setMapping', { id: output.id, mapping: mappingOf(output) })
+                .then(() => current.preset === null ? undefined : engine().request('video.recallPreset', { id: output.id, preset: current.preset }))
+                .catch(showError);
         }
         // The test image is a help of the editor only
         if (testPattern) {

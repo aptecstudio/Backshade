@@ -181,3 +181,9 @@ export function unproject(matrix: Matrix, [x, y]: MappingPoint): MappingPoint {
     const w = (d * h - e * g) * x + (b * g - a * h) * y + (a * e - b * d);
     return [((e * i - f * h) * x + (c * h - b * i) * y + (b * f - c * e)) / w, ((f * g - d * i) * x + (a * i - c * g) * y + (c * d - a * f)) / w];
 }
+
+/** Grid of a new number of points, keeping the shape of the one before */
+export function resampleMesh(mesh: Mesh | undefined, columns: number, rows: number): Mesh {
+    const grid = regularMesh(columns, rows);
+    return { ...grid, points: grid.points.map(([u, v]) => meshPoint(mesh, u, v)) };
+}

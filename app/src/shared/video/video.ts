@@ -7,6 +7,7 @@
  */
 
 import { normalizeBlend, type OutputBlend } from './blend.js';
+import { normalizePresets, type MappingPreset } from './mapping-preset.js';
 import { normalizeSurfaces, type MappingSurface } from './mapping.js';
 import { normalizeMasks, type OutputMask } from './mask.js';
 import { MAX_TIMERS, normalizeTimer, type ShowTimer } from './show-timer.js';
@@ -41,6 +42,8 @@ export interface VideoOutputConfig {
     masks: OutputMask[];
     /** Edge blending with the projectors beside */
     blend: OutputBlend;
+    /** Mappings that scenes and timelines recall */
+    presets: MappingPreset[];
 }
 
 /** Video section of show.json */
@@ -203,7 +206,8 @@ export function normalizeVideo(value: unknown): ShowVideo {
             layers: int(output.layers, 1, MAX_VIDEO_LAYERS, 3),
             surfaces: normalizeSurfaces(output.surfaces),
             masks: normalizeMasks(output.masks),
-            blend: normalizeBlend(output.blend)
+            blend: normalizeBlend(output.blend),
+            presets: normalizePresets(output.presets)
         });
     }
     const gobos: TextGobo[] = [];

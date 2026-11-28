@@ -26,6 +26,8 @@ export interface ComposeMessage {
     surfaces: MappingSurface[];
     masks: OutputMask[];
     blend: OutputBlend;
+    /** Seconds to move to this mapping from the one shown */
+    morph: number;
     /** A test image is shown on every surface instead of the program */
     testPattern: boolean;
     /** Name of the output, written on the test image */

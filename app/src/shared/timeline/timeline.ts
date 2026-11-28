@@ -11,8 +11,8 @@ import type { GridMaster } from '../grid/grid.js';
 import { normalizeLayer, type LayerState } from '../video/video.js';
 
 /** Kind of track */
-export type TrackKind = 'light' | 'audio' | 'video' | 'automation' | 'mixer' | 'folder';
-export const TRACK_KINDS: readonly TrackKind[] = ['light', 'audio', 'video', 'automation', 'mixer', 'folder'];
+export type TrackKind = 'light' | 'audio' | 'video' | 'automation' | 'mixer' | 'mapping' | 'folder';
+export const TRACK_KINDS: readonly TrackKind[] = ['light', 'audio', 'video', 'automation', 'mixer', 'mapping', 'folder'];
 
 /** What a clip plays, by kind of track */
 export type ClipSource =
@@ -20,7 +20,8 @@ export type ClipSource =
     | { kind: 'chaser'; id: string }
     | { kind: 'audio'; file: string; volume: number }
     | { kind: 'layer'; layer: LayerState }
-    | { kind: 'mixer'; number: number };
+    | { kind: 'mixer'; number: number }
+    | { kind: 'mapping'; preset: string };
 
 /** Clip on a track */
 export interface Clip {
@@ -64,7 +65,7 @@ export interface Track {
     /** Audio tracks: output device (empty for the system output) and volume */
     device: string;
     volume: number;
-    /** Video tracks: output and layer (from 0) */
+    /** Video and mapping tracks: output; video tracks: layer (from 0) */
     output: string;
     layer: number;
     /** Mixer tracks: the external mixer whose scenes the clips recall, at their start */
@@ -115,6 +116,7 @@ export const TRACK_SOURCES: Readonly<Record<TrackKind, readonly ClipSource['kind
     video: ['layer'],
     automation: [],
     mixer: ['mixer'],
+    mapping: ['mapping'],
     folder: []
 };
 
@@ -201,6 +203,8 @@ function readSource(value: unknown): ClipSource | null {
         }
         case 'mixer':
             return { kind: 'mixer', number: Math.round(num(input.number, 0, 9999, 0)) };
+        case 'mapping':
+            return typeof input.preset === 'string' && input.preset !== '' ? { kind: 'mapping', preset: input.preset.slice(0, 100) } : null;
         default:
             return null;
     }

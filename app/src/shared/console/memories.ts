@@ -79,6 +79,8 @@ export interface Scene {
     video: Record<string, LayerState[]>;
     /** Scene of an external mixer recalled when the scene goes on, null for none; missing in older files */
     mixer: MixerRecall | null;
+    /** Mapping presets recalled when the scene goes on: output identifier -> preset; missing in older files */
+    mapping: Record<string, string>;
 }
 
 /** Chaser: scenes played one after the other */
@@ -187,6 +189,12 @@ function readName(value: unknown): string | null {
     return typeof value === 'string' ? value.slice(0, MEMORY_NAME_MAX_LENGTH) : null;
 }
 
+/** Mapping presets of a scene: one for each output at most */
+export function readMapping(value: unknown): Record<string, string> {
+    const entries = typeof value === 'object' && value !== null ? Object.entries(value) : [];
+    return Object.fromEntries(entries.filter((entry): entry is [string, string] => entry[0] !== '' && typeof entry[1] === 'string' && entry[1] !== '').slice(0, 8));
+}
+
 function readVideo(value: unknown): Record<string, LayerState[]> {
     const result: Record<string, LayerState[]> = {};
     if (typeof value !== 'object' || value === null || Array.isArray(value)) {
@@ -251,7 +259,8 @@ export function normalizeMemories(value: unknown): ShowMemories {
             matrices: normalizeMatrixEffects(entry.matrices),
             audio: typeof entry.audio === 'string' && entry.audio !== '' ? entry.audio : null,
             video: readVideo(entry.video),
-            mixer: normalizeRecall(entry.mixer)
+            mixer: normalizeRecall(entry.mixer),
+            mapping: readMapping(entry.mapping)
         });
     }
 

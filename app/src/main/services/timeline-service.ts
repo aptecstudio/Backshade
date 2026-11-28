@@ -80,7 +80,8 @@ export function registerTimelineService(router: RequestRouter, bus: EventBus, se
             }
         },
         newId: () => randomUUID(),
-        recallMixer: (mixer, number) => targets.mixers.recall({ mixer, number })
+        recallMixer: (mixer, number) => targets.mixers.recall({ mixer, number }),
+        recallMapping: (output, preset) => targets.video.recallMapping(output, preset)
     });
     let recorded = false;
     targets.memory.setClipTarget((id) => player.clipTarget(id));

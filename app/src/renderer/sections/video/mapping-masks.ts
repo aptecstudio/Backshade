@@ -37,6 +37,14 @@ export class MappingMasks {
         this.changed = listener;
     }
 
+    /** Puts other masks and shows them */
+    set(masks: OutputMask[]): void {
+        this.masks = masks;
+        this.selected = masks[0]?.id ?? null;
+        this.point = 0;
+        this.render();
+    }
+
     overlay(): StageOverlay {
         const overlay: StageOverlay = { shapes: [], grid: [], guides: [], handles: [] };
         this.targets = [];

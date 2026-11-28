@@ -182,6 +182,11 @@ export function buildCatalog(source: ImportShow, target: ImportShow, currentOper
                 }
             }
         }
+        for (const output of Object.keys(scene.mapping)) {
+            if (from.video.outputs.some((item) => item.id === output)) {
+                requires.add(importKey('videoOutput', output));
+            }
+        }
         const occupant = sceneSlots.get(scene.slot);
         items.push({
             key: importKey('scene', scene.id),

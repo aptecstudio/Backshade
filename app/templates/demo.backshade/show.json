@@ -657,7 +657,10 @@
         "matrices": {},
         "audio": null,
         "video": {},
-        "mixer": null
+        "mixer": null,
+        "mapping": {
+          "4a84ad64-16f1-4a8e-925a-36b515cc6988": "demo-preset-sides"
+        }
       },
       {
         "id": "095614dc-3ad6-4591-877a-b2a94b5614d2",
@@ -955,7 +958,8 @@
         "mixer": {
           "mixer": "40324b32-1a74-4132-bd58-a436b6524566",
           "number": 2
-        }
+        },
+        "mapping": {}
       },
       {
         "id": "54e910a5-c260-4f16-8aef-8584b53b9cdb",
@@ -1218,7 +1222,10 @@
         "matrices": {},
         "audio": null,
         "video": {},
-        "mixer": null
+        "mixer": null,
+        "mapping": {
+          "4a84ad64-16f1-4a8e-925a-36b515cc6988": "demo-preset-wide"
+        }
       },
       {
         "id": "9c83de8f-f233-4a86-a010-b62b32111c0e",
@@ -1348,7 +1355,8 @@
         "matrices": {},
         "audio": null,
         "video": {},
-        "mixer": null
+        "mixer": null,
+        "mapping": {}
       },
       {
         "id": "84c023fd-434b-4f29-bad2-47438f026300",
@@ -1583,7 +1591,8 @@
         "matrices": {},
         "audio": null,
         "video": {},
-        "mixer": null
+        "mixer": null,
+        "mapping": {}
       },
       {
         "id": "42a7a2a1-768c-4359-a1b5-3a0101f67144",
@@ -1766,7 +1775,8 @@
         "matrices": {},
         "audio": null,
         "video": {},
-        "mixer": null
+        "mixer": null,
+        "mapping": {}
       },
       {
         "id": "fa07b106-7f2e-4314-9cfd-78aac7013169",
@@ -1797,7 +1807,8 @@
         },
         "audio": null,
         "video": {},
-        "mixer": null
+        "mixer": null,
+        "mapping": {}
       },
       {
         "id": "000c743d-05d0-423e-9aa0-b32f91ed9d09",
@@ -1836,7 +1847,8 @@
             }
           ]
         },
-        "mixer": null
+        "mixer": null,
+        "mapping": {}
       }
     ],
     "chasers": [
@@ -2595,7 +2607,385 @@
             }
           },
           "black": 0
-        }
+        },
+        "presets": [
+          {
+            "id": "demo-preset-sides",
+            "name": "Screen and side panel",
+            "morph": 2,
+            "surfaces": [
+              {
+                "id": "demo-surface-main",
+                "name": "Main screen",
+                "source": "program",
+                "corners": [
+                  [
+                    0.04,
+                    0.08
+                  ],
+                  [
+                    0.7,
+                    0.14
+                  ],
+                  [
+                    0.7,
+                    0.86
+                  ],
+                  [
+                    0.04,
+                    0.92
+                  ]
+                ],
+                "crop": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 1,
+                  "height": 1
+                }
+              },
+              {
+                "id": "demo-surface-side",
+                "name": "Side panel",
+                "source": 0,
+                "corners": [
+                  [
+                    0.74,
+                    0.22
+                  ],
+                  [
+                    0.96,
+                    0.16
+                  ],
+                  [
+                    0.96,
+                    0.84
+                  ],
+                  [
+                    0.74,
+                    0.78
+                  ]
+                ],
+                "crop": {
+                  "x": 0.25,
+                  "y": 0,
+                  "width": 0.5,
+                  "height": 1
+                },
+                "mesh": {
+                  "columns": 3,
+                  "rows": 3,
+                  "points": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0.08
+                    ],
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      0,
+                      0.5
+                    ],
+                    [
+                      0.5,
+                      0.55
+                    ],
+                    [
+                      1,
+                      0.5
+                    ],
+                    [
+                      0,
+                      1
+                    ],
+                    [
+                      0.5,
+                      1.06
+                    ],
+                    [
+                      1,
+                      1
+                    ]
+                  ]
+                }
+              }
+            ],
+            "masks": [
+              {
+                "id": "demo-mask",
+                "name": "Cut for the riser",
+                "feather": 0.01,
+                "inverted": false,
+                "enabled": true,
+                "points": [
+                  {
+                    "at": [
+                      0.25,
+                      0.95
+                    ],
+                    "in": [
+                      0,
+                      0
+                    ],
+                    "out": [
+                      0,
+                      -0.12
+                    ],
+                    "smooth": false
+                  },
+                  {
+                    "at": [
+                      0.37,
+                      0.76
+                    ],
+                    "in": [
+                      -0.055,
+                      0
+                    ],
+                    "out": [
+                      0.055,
+                      0
+                    ],
+                    "smooth": true
+                  },
+                  {
+                    "at": [
+                      0.49,
+                      0.95
+                    ],
+                    "in": [
+                      0,
+                      -0.12
+                    ],
+                    "out": [
+                      0,
+                      0
+                    ],
+                    "smooth": false
+                  }
+                ]
+              }
+            ],
+            "blend": {
+              "edges": {
+                "left": {
+                  "width": 0,
+                  "curve": 2,
+                  "gamma": 2.2
+                },
+                "right": {
+                  "width": 0.06,
+                  "curve": 2,
+                  "gamma": 2.2
+                },
+                "top": {
+                  "width": 0,
+                  "curve": 2,
+                  "gamma": 2.2
+                },
+                "bottom": {
+                  "width": 0,
+                  "curve": 2,
+                  "gamma": 2.2
+                }
+              },
+              "black": 0
+            }
+          },
+          {
+            "id": "demo-preset-wide",
+            "name": "Wide screen",
+            "morph": 3,
+            "surfaces": [
+              {
+                "id": "demo-surface-main",
+                "name": "Main screen",
+                "source": "program",
+                "corners": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    0,
+                    1
+                  ]
+                ],
+                "crop": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 1,
+                  "height": 1
+                }
+              },
+              {
+                "id": "demo-surface-side",
+                "name": "Side panel",
+                "source": 0,
+                "corners": [
+                  [
+                    1.05,
+                    0.22
+                  ],
+                  [
+                    1.27,
+                    0.16
+                  ],
+                  [
+                    1.27,
+                    0.84
+                  ],
+                  [
+                    1.05,
+                    0.78
+                  ]
+                ],
+                "crop": {
+                  "x": 0.25,
+                  "y": 0,
+                  "width": 0.5,
+                  "height": 1
+                },
+                "mesh": {
+                  "columns": 3,
+                  "rows": 3,
+                  "points": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0.5,
+                      0.08
+                    ],
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      0,
+                      0.5
+                    ],
+                    [
+                      0.5,
+                      0.55
+                    ],
+                    [
+                      1,
+                      0.5
+                    ],
+                    [
+                      0,
+                      1
+                    ],
+                    [
+                      0.5,
+                      1.06
+                    ],
+                    [
+                      1,
+                      1
+                    ]
+                  ]
+                }
+              }
+            ],
+            "masks": [
+              {
+                "id": "demo-mask",
+                "name": "Cut for the riser",
+                "feather": 0.01,
+                "inverted": false,
+                "enabled": true,
+                "points": [
+                  {
+                    "at": [
+                      0.38,
+                      0.95
+                    ],
+                    "in": [
+                      0,
+                      0
+                    ],
+                    "out": [
+                      0,
+                      -0.12
+                    ],
+                    "smooth": false
+                  },
+                  {
+                    "at": [
+                      0.5,
+                      0.76
+                    ],
+                    "in": [
+                      -0.055,
+                      0
+                    ],
+                    "out": [
+                      0.055,
+                      0
+                    ],
+                    "smooth": true
+                  },
+                  {
+                    "at": [
+                      0.62,
+                      0.95
+                    ],
+                    "in": [
+                      0,
+                      -0.12
+                    ],
+                    "out": [
+                      0,
+                      0
+                    ],
+                    "smooth": false
+                  }
+                ]
+              }
+            ],
+            "blend": {
+              "edges": {
+                "left": {
+                  "width": 0,
+                  "curve": 2,
+                  "gamma": 2.2
+                },
+                "right": {
+                  "width": 0.06,
+                  "curve": 2,
+                  "gamma": 2.2
+                },
+                "top": {
+                  "width": 0,
+                  "curve": 2,
+                  "gamma": 2.2
+                },
+                "bottom": {
+                  "width": 0,
+                  "curve": 2,
+                  "gamma": 2.2
+                }
+              },
+              "black": 0
+            }
+          }
+        ]
       }
     ],
     "gobos": [
@@ -2950,6 +3340,51 @@
             "output": "",
             "layer": 0,
             "mixer": "40324b32-1a74-4132-bd58-a436b6524566",
+            "target": null,
+            "points": []
+          },
+          {
+            "id": "demo-track-mapping",
+            "name": "Screen mapping",
+            "kind": "mapping",
+            "parent": null,
+            "collapsed": false,
+            "muted": false,
+            "armed": false,
+            "height": 64,
+            "clips": [
+              {
+                "id": "demo-clip-map-1",
+                "start": 0,
+                "duration": 8,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "mapping",
+                  "preset": "demo-preset-sides"
+                }
+              },
+              {
+                "id": "demo-clip-map-2",
+                "start": 8,
+                "duration": 52,
+                "offset": 0,
+                "fadeIn": 0,
+                "fadeOut": 0,
+                "name": "",
+                "source": {
+                  "kind": "mapping",
+                  "preset": "demo-preset-wide"
+                }
+              }
+            ],
+            "device": "",
+            "volume": 1,
+            "output": "4a84ad64-16f1-4a8e-925a-36b515cc6988",
+            "layer": 0,
+            "mixer": "",
             "target": null,
             "points": []
           }

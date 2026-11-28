@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { MappingPreset, OutputMapping } from '../video/mapping-preset.js';
 import type { CustomModel, ModelAxis, ModelUnit } from '../stage/custom-model.js';
 import type { ShowStage } from '../stage/stage.js';
 import type { DiscoveredInstance } from '../remote/instance.js';
@@ -16,9 +17,6 @@ import type { ShowTimer, TimerAction, TimerState } from '../video/show-timer.js'
 import type { ShowTimelines, Timeline, TimelineState } from '../timeline/timeline.js';
 import type { TextGobo } from '../video/text-gobo.js';
 import type { LayerState, OutputComposition, ShowVideo, VideoDisplay, VideoInput, VideoOutputConfig } from '../video/video.js';
-import type { MappingSurface } from '../video/mapping.js';
-import type { OutputMask } from '../video/mask.js';
-import type { OutputBlend } from '../video/blend.js';
 import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
@@ -494,7 +492,7 @@ export interface EngineMethods {
      */
     'memories.recordScene': { params: { slot: number; name: string }; result: SceneSummary };
     /** Changes the name and fades of a scene (unsaved change) */
-    'memories.updateScene': { params: { id: string; name: string; fadeIn: number; fadeOut: number; mixer?: MixerRecall | null }; result: SceneSummary };
+    'memories.updateScene': { params: { id: string; name: string; fadeIn: number; fadeOut: number; mixer?: MixerRecall | null; mapping?: Record<string, string> }; result: SceneSummary };
     /** Deletes a scene and removes it from the chaser steps (unsaved change) */
     'memories.deleteScene': { params: { id: string }; result: undefined };
     /** Creates (without id) or changes a chaser (unsaved change) */
@@ -543,9 +541,11 @@ export interface EngineMethods {
     /** Program and preview of every video output */
     'video.getState': { params: undefined; result: Record<string, OutputComposition> };
     /** Videomapping surfaces of an output, saved in the show */
-    'video.setSurfaces': { params: { id: string; surfaces: MappingSurface[] }; result: undefined };
-    'video.setMasks': { params: { id: string; masks: OutputMask[] }; result: undefined };
-    'video.setBlend': { params: { id: string; blend: OutputBlend }; result: undefined };
+    'video.getMapping': { params: { id: string }; result: { mapping: OutputMapping; preset: string | null } };
+    'video.setMapping': { params: { id: string; mapping: OutputMapping }; result: undefined };
+    'video.savePreset': { params: { id: string; preset: MappingPreset }; result: undefined };
+    'video.deletePreset': { params: { id: string; preset: string }; result: undefined };
+    'video.recallPreset': { params: { id: string; preset: string }; result: undefined };
     'video.setTestPattern': { params: { id: string; on: boolean }; result: undefined };
     'video.getTestPatterns': { params: undefined; result: string[] };
     /** Displays of the computer */

@@ -49,6 +49,7 @@ export function sourceName(source: ClipSource, context: EditorContext): string {
         case 'chaser': return context.memories.chasers.find((chaser) => chaser.id === source.id)?.name ?? t('grid.missing');
         case 'audio': return fileName(source.file);
         case 'mixer': return t('mixers.sceneNumber', { number: source.number });
+        case 'mapping': return context.video.outputs.flatMap((output) => output.presets).find((preset) => preset.id === source.preset)?.name ?? t('grid.missing');
         case 'layer': {
             const layer = source.layer.source;
             if (layer === null) {

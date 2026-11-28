@@ -707,7 +707,8 @@
         "video": "Video",
         "automation": "Automation",
         "folder": "Folder",
-        "mixer": "Mixer"
+        "mixer": "Mixer",
+        "mapping": "Mapping"
       },
       "undo": "Undo",
       "redo": "Redo",
@@ -758,7 +759,8 @@
       "noSources": {
         "light": "There are no scenes or chasers yet: record them in the Console section.",
         "audio": "No audio files in the show media.",
-        "video": "No videos, images, gobos or timers yet."
+        "video": "No videos, images, gobos or timers yet.",
+        "mapping": "No mapping preset: choose the output of the track and save presets in the mapping editor."
       },
       "beatsPerBar": "Beats per bar",
       "deleteTimeline": "Delete the timeline",
@@ -1742,7 +1744,16 @@
         "gamma": "Gamma"
       },
       "black": "Black level compensation",
-      "blendHint": "For projectors side by side: give the overlapping sides of both the same width as their overlap."
+      "blendHint": "For projectors side by side: give the overlapping sides of both the same width as their overlap.",
+      "presets": "Presets",
+      "savePreset": "Save as preset",
+      "preset": "Preset {number}",
+      "morph": "Morph time",
+      "recall": "Recall",
+      "overwrite": "Overwrite",
+      "presetHint": "Presets are saved at once and recalled by scenes and timelines, moving there in the morph time.",
+      "recallOn": "Mapping of {name}",
+      "noPreset": "Unchanged"
     }
   }
 }

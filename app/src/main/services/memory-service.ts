@@ -20,7 +20,8 @@ import {
     type MemoryKind,
     type Scene,
     type ShowMemories,
-    type UniverseLevels
+    type UniverseLevels,
+    readMapping
 } from '../../shared/console/memories';
 import { FADE_LIMITS } from '../../shared/show/show-settings';
 import { MemoryPlayer } from '../console/memory-player';
@@ -101,6 +102,9 @@ export function registerMemoryService(
                 if (Object.keys(scene.video).length > 0) {
                     video.startFromScene(key, scene.video, fadeIn);
                 }
+                for (const [output, preset] of Object.entries(scene.mapping)) {
+                    video.recallMapping(output, preset);
+                }
                 if (scene.mixer !== null) {
                     mixers.recall(scene.mixer);
                 }
@@ -167,7 +171,7 @@ export function registerMemoryService(
         // Only the outputs that show something are recorded, so a scene never blanks the others
         const videoPrograms = Object.fromEntries(Object.entries(video.programs()).filter(([, layers]) => layers.some((layer) => layer.source !== null)));
         const scene: Scene = existing === undefined
-            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms, mixer: null }
+            ? { id: randomUUID(), slot, name, fadeIn: settings.fadeInSeconds, fadeOut: settings.fadeOutSeconds, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms, mixer: null, mapping: {} }
             : { ...existing, levels, matrices: live.effects(), audio: audio.state().item, video: videoPrograms };
         update((memories) => ({ ...memories, scenes: [...memories.scenes.filter((item) => item.id !== scene.id), scene].sort((a, b) => a.slot - b.slot) }));
         return sceneSummary(scene);
@@ -181,6 +185,10 @@ export function registerMemoryService(
             scene.mixer = null;
         } else if (input.mixer !== undefined) {
             scene.mixer = normalizeRecall(input.mixer);
+        }
+        // Mapping presets recalled with the scene: missing to keep them
+        if (input.mapping !== undefined) {
+            scene.mapping = readMapping(input.mapping);
         }
         update((memories) => ({ ...memories, scenes: memories.scenes.map((item) => item.id === scene.id ? scene : item) }));
         return sceneSummary(scene);

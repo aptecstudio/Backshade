@@ -1,6 +1,6 @@
 /**
  * Settings of a track: name, folder, height and, by kind, the audio output
- * and volume, the video output and layer, or the target of the automation;
+ * and volume, the video output and layer, the output of a mapping track, or the target of the automation;
  * the track can be deleted (a folder gives its tracks to its own parent).
  */
 
@@ -79,6 +79,8 @@ export function openTrackDialog(track: Track, timeline: Timeline, context: Edito
             fields.push(new Stack({ children: [mixer] }));
         } else if (track.kind === 'audio') {
             fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [device, new Stack({ gap: 8, classes: ['clip-dialog__slider'], children: [new Label({ text: t('audio.volume'), size: 'small' }), volume] })] }));
+        } else if (track.kind === 'mapping') {
+            fields.push(new Stack({ children: [output] }));
         } else if (track.kind === 'video') {
             fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, children: [output, layer] }));
         } else if (track.kind === 'automation') {

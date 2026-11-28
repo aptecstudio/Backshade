@@ -1,6 +1,6 @@
 /**
  * Changes a scene: name, fade in and fade out, the scene of an external
- * mixer recalled with it, or deletes it. Deleting a scene also removes it
+ * mixer and the mapping presets recalled with it, or deletes it. Deleting a scene also removes it
  * from the chasers and cues that use it.
  */
 
@@ -8,6 +8,7 @@ import { Dialog, Key, Label, NumberField, SelectField, Stack, TextField, TimeFie
 import { MIXER_PROFILES, type ShowMixer } from '../../../shared/mixers/mixers.js';
 import { MEMORY_NAME_MAX_LENGTH, type SceneSummary } from '../../../shared/console/memories.js';
 import { FADE_LIMITS } from '../../../shared/show/show-settings.js';
+import type { VideoOutputConfig } from '../../../shared/video/video.js';
 import { askChoice } from '../../dialogs/ask-choice.js';
 import { showError } from '../../dialogs/show-error.js';
 import { timePickerLabels } from '../../i18n/control-labels.js';
@@ -40,10 +41,12 @@ async function removeScene(scene: SceneSummary, usedBy: number): Promise<boolean
  * @param usedBy - Number of chasers and cues that use the scene
  */
 export function openSceneDialog(scene: SceneSummary, usedBy: number): void {
-    void engine().request('mixers.get').then(({ mixers }) => buildSceneDialog(scene, usedBy, mixers)).catch(showError);
+    void Promise.all([engine().request('mixers.get'), engine().request('video.get')])
+        .then(([{ mixers }, video]) => buildSceneDialog(scene, usedBy, mixers, video.outputs))
+        .catch(showError);
 }
 
-function buildSceneDialog(scene: SceneSummary, usedBy: number, mixers: ShowMixer[]): void {
+function buildSceneDialog(scene: SceneSummary, usedBy: number, mixers: ShowMixer[], outputs: VideoOutputConfig[]): void {
     const dialog = new Dialog({ title: t('memories.sceneTitle', { code: memoryCode('scene', scene.slot) }) });
     const name = new TextField({ label: t('memories.name'), value: scene.name, maxLength: MEMORY_NAME_MAX_LENGTH });
     const fadeIn = new TimeField({ label: t('memories.fadeIn'), value: scene.fadeIn, min: FADE_LIMITS.min, max: FADE_LIMITS.max, labels: timePickerLabels() });
@@ -63,18 +66,29 @@ function buildSceneDialog(scene: SceneSummary, usedBy: number, mixers: ShowMixer
     mixer.onChange(showNumber);
     showNumber();
 
+    // Mapping preset recalled on each output that has some
+    const mappings = outputs.filter((output) => output.presets.length > 0).map((output) => ({
+        id: output.id,
+        field: new SelectField<string>({
+            label: t('mapping.recallOn', { name: output.name }),
+            options: [{ value: '', label: t('mapping.noPreset') }, ...output.presets.map((preset) => ({ value: preset.id, label: preset.name }))],
+            value: output.presets.some((preset) => preset.id === scene.mapping[output.id]) ? scene.mapping[output.id] : ''
+        })
+    }));
+
     dialog.append(
         new Label({ text: t('memories.channelCount', { count: scene.channelCount }), tone: 'secondary', size: 'small' }),
         name,
         new Stack({ direction: 'row', gap: 8, wrap: true, children: [fadeIn, fadeOut] }),
-        ...(mixers.length > 0 ? [new Stack({ direction: 'row', gap: 8, wrap: true, children: [mixer, number] })] : [])
+        ...(mixers.length > 0 ? [new Stack({ direction: 'row', gap: 8, wrap: true, children: [mixer, number] })] : []),
+        ...(mappings.length > 0 ? [new Stack({ direction: 'row', gap: 8, wrap: true, children: mappings.map((item) => item.field) })] : [])
     );
 
     const apply = async (): Promise<void> => {
         try {
             const range = profile();
             const recall = mixer.value === '' ? null : { mixer: mixer.value, number: Math.min(range.last, Math.max(range.first, Math.round(number.value))) };
-            await engine().request('memories.updateScene', { id: scene.id, name: name.value.trim() || scene.name, fadeIn: fadeIn.value, fadeOut: fadeOut.value, mixer: recall });
+            await engine().request('memories.updateScene', { id: scene.id, name: name.value.trim() || scene.name, fadeIn: fadeIn.value, fadeOut: fadeOut.value, mixer: recall, mapping: Object.fromEntries(mappings.map((item) => [item.id, item.field.value])) });
             dialog.close();
         } catch (error) {
             await showError(error);
