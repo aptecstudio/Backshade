@@ -286,7 +286,7 @@ Mapping of the video outputs on real surfaces: screens, projection surfaces, sce
   - [ ] 14.4.2 Virtual projector calibrated on the real one (position, orientation, lens), so the render from its point of view matches the real projection
   - [ ] 14.4.3 Calibration helper: matching points between the model and the real projected image
 - [ ] 14.5 Pixel mapping of the video on LED walls and LED matrices (extends Phase 5.4): pixel area, pixel order, output on Art-Net universes or on a video output
-- [ ] 14.6 Mapping editor: live editing from the Video section (done), test patterns with grid, colors and numbers (done), snap and zoom
+- [x] 14.6 Mapping editor: live editing from the Video section, test patterns with grid, colors and numbers, snap and zoom
 - [x] 14.7 Mapping presets saved in `show.json`, recallable from cues and from the timeline (Phase 8)
 
 ## Phase 15 - Multi-device
@@ -330,7 +330,7 @@ Requirements that apply to the whole interface: every new component is designed 
   - [x] 16.1.2 Hit areas of at least 48 px also for small controls (square keys, knobs), with the visual size unchanged
   - [x] 16.1.3 Multi-touch: several faders, knobs and keys moved or pressed at the same time
   - [x] 16.1.4 No accidental scrolling or zooming while a control is dragged; long press instead of right click
-  - [ ] 16.1.5 Gestures where useful: pinch zoom and two-finger pan in the timeline, the 3D stage and the mapping editor (timeline done; the 3D stage and the mapping editor get them with Phases 13 and 14)
+  - [ ] 16.1.5 Gestures where useful: pinch zoom and two-finger pan in the timeline, the 3D stage and the mapping editor (timeline and mapping editor done; the 3D stage gets them with Phase 13)
   - [x] 16.1.6 Touch mode with larger controls, chosen per device
 - [x] 16.2 MIDI layer shared by the whole application (Web MIDI API, permission granted by the main process):
   - [x] 16.2.1 Detection of MIDI devices and hot plug, with status in the interface

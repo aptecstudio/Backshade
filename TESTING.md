@@ -262,3 +262,4 @@ How to use it:
 - [ ] Masks on a real projector: shapes follow the scenery, soft edges look right, dragging points and curve handles is precise with mouse and finger.
 - [ ] Edge blending with two overlapping projectors: with the same width on the facing sides no brighter or darker band appears with the right gamma, and the black level compensation hides the doubled black.
 - [ ] Mapping presets: recall from scenes, cues, grid keys and a mapping track during a show; the morph is smooth at the output resolution with videos playing, also with masks and edge blending changing.
+- [ ] Mapping editor on a real touch screen: two fingers zoom and move the picture, dragging points with a finger snaps as expected and can be turned off.
