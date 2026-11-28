@@ -47,3 +47,19 @@
 .stage-editor .select-field {
     flex: 0 0 auto;
 }
+
+// Cursor of the tool of the view
+.stage-view canvas[data-tool='orbit'],
+.stage-view canvas[data-tool='pan'] {
+    cursor: grab;
+}
+
+.stage-view canvas[data-tool='zoom'] {
+    cursor: zoom-in;
+}
+
+// Header of a category of the library, which opens and closes it
+.stage-category {
+    justify-content: flex-start;
+    width: 100%;
+}

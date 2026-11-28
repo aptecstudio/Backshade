@@ -3,12 +3,13 @@
  * the left arm relaxed.
  */
 
+import { LOOKS } from './looks.mts';
 import { Obj } from './obj.mts';
 import { mouthOf, person, shoulderOf, type Build } from './person.mts';
 import { add, type Vector } from './vector.mts';
 
 /** Microphone with its grille, the clip and a stand with a boom */
-function microphone(obj: Obj, mouth: Vector): void {
+export function microphone(obj: Obj, mouth: Vector): void {
     const head = add(mouth, [0, -0.012, 0.065]);
     const handle = add(mouth, [0, -0.085, 0.165]);
     const joint: Vector = [0, mouth[1] - 0.17, 0.43];
@@ -32,6 +33,7 @@ export function singer(build: Build): Obj {
     person(
         obj,
         build,
+        LOOKS.singer[build === 'male' ? 0 : 1],
         { elbow: add(right, [-0.055, -0.25, 0.08]), wrist: add(mouth, [-0.07, -0.13, 0.1]), hand: add(mouth, [0.02, -0.07, 0.15]), grip: true },
         { elbow: add(left, [0.07, -0.29, -0.01]), wrist: add(left, [0.1, -0.54, 0.04]), hand: add(left, [0.105, -0.7, 0.06]), grip: false }
     );

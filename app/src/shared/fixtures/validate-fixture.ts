@@ -7,6 +7,9 @@
 import {
     ATTRIBUTE_GROUPS,
     BEAM_ANGLE_LIMITS,
+    MASK_MAX_LENGTH,
+    MASK_PREFIX,
+    PRISM_FACETS,
     CAPABILITY_KINDS,
     DMX_MAX,
     FIXTURE_CATEGORIES,
@@ -23,6 +26,7 @@ import {
     type FixtureMode,
     type FixturePhysical
 } from './fixture-definition.js';
+import { readDimmerCurve } from './dimmer-curve.js';
 
 /** Problem found in a definition */
 export type FixtureIssueCode =
@@ -30,7 +34,7 @@ export type FixtureIssueCode =
     | 'noChannels' | 'invalidChannelKey' | 'duplicateChannelKey' | 'missingChannelName' | 'invalidAttribute'
     | 'invalidFineChannel' | 'invalidDefaultValue' | 'invalidCapability' | 'overlappingCapabilities'
     | 'noModes' | 'missingModeName' | 'duplicateModeName' | 'emptyMode' | 'modeTooLong'
-    | 'unknownModeChannel' | 'duplicateModeChannel' | 'fineWithoutCoarse' | 'invalidHead' | 'invalidPhysical';
+    | 'unknownModeChannel' | 'duplicateModeChannel' | 'fineWithoutCoarse' | 'invalidHead' | 'invalidDimmerCurve' | 'invalidPhysical';
 
 /** Problem with the name of the channel, mode or field it concerns */
 export interface FixtureIssue {
@@ -128,6 +132,20 @@ function readCapabilities(value: unknown, channel: string, issues: FixtureIssue[
         if (typeof item.color === 'string' && COLOR_PATTERN.test(item.color.toLowerCase())) {
             capability.color = item.color.toLowerCase();
         }
+        if (item.image !== undefined) {
+            const { image } = item;
+            if (typeof image === 'string' && image.length <= MASK_MAX_LENGTH && image.startsWith(MASK_PREFIX) && /^[A-Za-z0-9+/]+=*$/.test(image.slice(MASK_PREFIX.length))) {
+                capability.image = image;
+            } else {
+                issues.push({ code: 'invalidCapability', subject: channel });
+            }
+        }
+        if (typeof item.facets === 'number' && Number.isInteger(item.facets) && item.facets >= PRISM_FACETS.min && item.facets <= PRISM_FACETS.max) {
+            capability.facets = item.facets;
+        }
+        if (item.shake === true) {
+            capability.shake = true;
+        }
         capabilities.push(capability);
     }
     capabilities.sort((a, b) => a.from - b.from);
@@ -180,6 +198,9 @@ function readChannels(value: unknown, issues: FixtureIssue[]): FixtureChannel[] 
             } else {
                 issues.push({ code: 'invalidDefaultValue', subject });
             }
+        }
+        if (item.blackout === true) {
+            channel.blackout = true;
         }
         const capabilities = readCapabilities(item.capabilities, subject, issues);
         if (capabilities !== undefined) {
@@ -282,6 +303,10 @@ export function validateFixture(data: unknown): FixtureValidation {
     const physical = readPhysical(data.physical, issues);
     const channels = readChannels(data.channels, issues);
     const modes = readModes(data.modes, channels, issues);
+    const dimmerCurve = readDimmerCurve(data.dimmerCurve);
+    if (dimmerCurve === null) {
+        issues.push({ code: 'invalidDimmerCurve' });
+    }
     if (issues.length > 0) {
         return { ok: false, issues };
     }
@@ -292,6 +317,7 @@ export function validateFixture(data: unknown): FixtureValidation {
         model,
         category: data.category as FixtureCategory,
         ...(physical === undefined ? {} : { physical }),
+        ...(dimmerCurve === undefined || dimmerCurve === null ? {} : { dimmerCurve }),
         channels,
         modes
     };

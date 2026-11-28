@@ -18,10 +18,28 @@ export interface ModelInfo {
     id: string;
     category: ModelCategory;
     file: string;
-    /** Lens of a fixture: centre of its face, direction of the beam and radius */
-    emitter?: { position: [number, number, number]; direction: [number, number, number]; radius: number };
+    /** Size along X, in meters */
+    width: number;
+    /** Lenses of a fixture from left to right: centre of the face, direction of the beam and radius */
+    emitters?: Array<{
+        position: [number, number, number];
+        direction: [number, number, number];
+        radius: number;
+        /** A colored light when not given: derby of several beams, laser or strobe LED */
+        kind?: 'derby' | 'laser' | 'led';
+    }>;
+    /** Height of the clamp point above the origin, for a fixture mounted on a stand */
+    mount?: number;
+    /** Height of the top of a bar above the origin: it hangs under a truss without being turned over */
+    hang?: number;
+    /** Adjustable stand: lowest and highest height of its top, in meters */
+    lift?: { min: number; max: number };
     /** Length of a truss along X, in meters */
     length?: number;
+    /** Arms of a truss joint to hang on, each from one end to the other */
+    rails?: Array<[[number, number, number], [number, number, number]]>;
+    /** Height of a tower: fixtures hang on its sides and stand on its top */
+    tower?: number;
     /** Points the moving parts of a fixture turn around */
     pivots?: { pan: [number, number, number]; tilt: [number, number, number] };
 }

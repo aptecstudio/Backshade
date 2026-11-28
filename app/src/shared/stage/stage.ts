@@ -7,6 +7,12 @@
 /** Step of the positions on the grid, in meters */
 export const STAGE_GRID = 0.2;
 
+/** Step of the height of an adjustable stand, in meters */
+export const STAGE_LIFT = 0.1;
+
+/** Highest adjustable height accepted, in meters */
+const MAX_HEIGHT = 20;
+
 /** Step of the rotations, in degrees */
 export const STAGE_ANGLE = 15;
 
@@ -28,8 +34,10 @@ export interface StageObject {
     rotation: StageVector;
     /** Patched fixture shown by the object, null for scenery */
     fixture: string | null;
-    /** Truss the object hangs from, null when it stands by itself */
+    /** Truss the object hangs from or stand it is mounted on, null when it stands by itself */
     hungOn: string | null;
+    /** Height of an adjustable stand in meters, null for its lowest */
+    height: number | null;
 }
 
 /** Stage section of show.json */
@@ -79,7 +87,8 @@ export function normalizeStage(value: unknown): ShowStage {
             position: vector(entry.position, STAGE_LIMIT),
             rotation: vector(entry.rotation, 360),
             fixture,
-            hungOn: typeof entry.hungOn === 'string' ? entry.hungOn : null
+            hungOn: typeof entry.hungOn === 'string' ? entry.hungOn : null,
+            height: typeof entry.height === 'number' && Number.isFinite(entry.height) ? Math.max(0, Math.min(MAX_HEIGHT, entry.height)) : null
         });
     }
     return { objects: objects.map((object) => object.hungOn === null || (object.hungOn !== object.id && ids.has(object.hungOn)) ? object : { ...object, hungOn: null }) };

@@ -15,6 +15,7 @@ import { findFreeAddress, findFreeNumber, fixturesInRange, occupiedRanges } from
 import { matrixSegments } from '../../shared/patch/matrix';
 import { MAX_UNIVERSE, type ShowPatch } from '../../shared/patch/patch';
 import type { ShowOperator } from '../../shared/show/operators';
+import type { ShowStage } from '../../shared/stage/stage';
 import { importKey, type ConflictResolution, type ImportCatalog, type ImportItemKind, type ImportResult } from '../../shared/show/show-import';
 import type { LayerState, ShowVideo } from '../../shared/video/video';
 import { removeFixtures } from '../patch/patch-editor';
@@ -28,6 +29,7 @@ export interface ImportPlan {
     audio: ShowAudio | null;
     video: ShowVideo | null;
     operators: ShowOperator[] | null;
+    stage: ShowStage | null;
     /** Media copies, absolute paths */
     copies: Array<{ from: string; to: string }>;
     result: ImportResult;
@@ -367,5 +369,38 @@ export function planImport(
         done();
     }
 
-    return { patch, memories, audio, video, operators, copies, result };
+    // 3D stage: scenery first, so the fixtures can hang on it; every object gets a new identifier
+    let stage: ShowStage | null = null;
+    const stageIds = new Map<string, string>();
+    for (const kind of ['stageScenery', 'stageFixtures'] as const) {
+        if (!chosen(kind, 'stage')) {
+            continue;
+        }
+        const resolution = decide(kind, 'stage');
+        if (resolution === 'skip') {
+            skip();
+            continue;
+        }
+        const scenery = kind === 'stageScenery';
+        stage ??= structuredClone(to.stage);
+        if (resolution === 'replace') {
+            stage.objects = stage.objects.filter((object) => (object.fixture === null) !== scenery);
+        }
+        for (const object of from.stage.objects) {
+            if ((object.fixture === null) !== scenery) {
+                continue;
+            }
+            // A fixture that was not imported is not placed
+            const fixture = object.fixture === null ? null : patchIds.get(object.fixture);
+            if (fixture === undefined) {
+                continue;
+            }
+            const id = randomUUID();
+            stageIds.set(object.id, id);
+            stage.objects.push({ ...object, id, fixture, hungOn: object.hungOn === null ? null : stageIds.get(object.hungOn) ?? null });
+        }
+        done();
+    }
+
+    return { patch, memories, audio, video, operators, stage, copies, result };
 }

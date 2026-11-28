@@ -7,6 +7,8 @@
  * (see fixture-id.ts); shows reference definitions by that identifier.
  */
 
+import type { DimmerCurve } from './dimmer-curve.js';
+
 /** Format version of the definition files */
 export const FIXTURE_FORMAT_VERSION = 1;
 
@@ -38,6 +40,7 @@ export type FixtureAttribute =
     | 'pan' | 'tilt' | 'panTiltSpeed'
     | 'gobo' | 'goboRotation' | 'prism' | 'prismRotation' | 'focus' | 'zoom' | 'iris' | 'frost' | 'beamEffect'
     | 'effect' | 'effectSpeed' | 'speed' | 'fog' | 'fan'
+    | 'laserRed' | 'laserGreen' | 'laserRotation' | 'strobeWhite' | 'strobeUv'
     | 'control' | 'generic' | 'none';
 
 /** Group of every attribute, in presentation order */
@@ -78,6 +81,11 @@ export const ATTRIBUTE_GROUPS: Readonly<Record<FixtureAttribute, AttributeGroup>
     speed: 'effects',
     fog: 'effects',
     fan: 'effects',
+    laserRed: 'effects',
+    laserGreen: 'effects',
+    laserRotation: 'effects',
+    strobeWhite: 'effects',
+    strobeUv: 'effects',
     control: 'control',
     generic: 'control',
     none: 'control'
@@ -89,12 +97,12 @@ export const FIXTURE_ATTRIBUTES = Object.keys(ATTRIBUTE_GROUPS) as readonly Fixt
 /** Meaning of a capability, when it is a known function */
 export type CapabilityKind =
     | 'open' | 'closed' | 'strobe' | 'pulse' | 'rotation' | 'stop' | 'index'
-    | 'color' | 'gobo' | 'prism' | 'reset' | 'lampOn' | 'lampOff' | 'none';
+    | 'color' | 'gobo' | 'prism' | 'program' | 'reset' | 'lampOn' | 'lampOff' | 'none';
 
 /** Known capability meanings */
 export const CAPABILITY_KINDS: readonly CapabilityKind[] = [
     'open', 'closed', 'strobe', 'pulse', 'rotation', 'stop', 'index',
-    'color', 'gobo', 'prism', 'reset', 'lampOn', 'lampOff', 'none'
+    'color', 'gobo', 'prism', 'program', 'reset', 'lampOn', 'lampOff', 'none'
 ];
 
 /** Range of DMX values of a channel with one meaning */
@@ -109,6 +117,12 @@ export interface FixtureCapability {
     kind?: CapabilityKind;
     /** Color of a color wheel slot, "#rrggbb" */
     color?: string;
+    /** Mask of a gobo, a small PNG data URL where white is the lit part */
+    image?: string;
+    /** Facets of a prism */
+    facets?: number;
+    /** The gobo or the prism shakes, slow to fast along the range */
+    shake?: boolean;
 }
 
 /** Channel offered by a fixture */
@@ -122,6 +136,8 @@ export interface FixtureChannel {
     fineOf?: string;
     /** Value when nothing controls the channel, 0 to 255 (default 0) */
     defaultValue?: number;
+    /** Set to 0 by the blackout and by a closed grand master, for outputs without a dimmer such as lasers */
+    blackout?: boolean;
     /** Ranges of values with their meaning, in increasing order and without overlaps */
     capabilities?: FixtureCapability[];
 }
@@ -173,6 +189,8 @@ export interface FixtureDefinition {
     model: string;
     category: FixtureCategory;
     physical?: FixturePhysical;
+    /** How the light follows the dimmer, linear without it */
+    dimmerCurve?: DimmerCurve;
     channels: FixtureChannel[];
     modes: FixtureMode[];
 }
@@ -192,6 +210,13 @@ export const PHYSICAL_LIMITS = {
 
 /** Limits of the beam angle, in degrees */
 export const BEAM_ANGLE_LIMITS = { min: 0, max: 180 } as const;
+
+/** Start and longest length of a gobo mask */
+export const MASK_PREFIX = 'data:image/png;base64,';
+export const MASK_MAX_LENGTH = 100000;
+
+/** Fewest and most facets of a prism */
+export const PRISM_FACETS = { min: 2, max: 32 } as const;
 
 /** Longest name of a manufacturer, model, channel or mode */
 export const FIXTURE_NAME_MAX_LENGTH = 100;

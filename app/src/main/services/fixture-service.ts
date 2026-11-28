@@ -5,6 +5,7 @@
  */
 
 import fs from 'node:fs';
+import path from 'node:path';
 import { validateFixture } from '../../shared/fixtures/validate-fixture';
 import { FIXTURE_FILE_EXTENSION, toSummary, type FixtureLibrary } from '../fixtures/fixture-library';
 import { followDefinition } from '../patch/patch-editor';
@@ -13,6 +14,11 @@ import type { EventBus } from '../transport/event-bus';
 import { optionalString, requireObject, requireString, requireStringArray } from '../transport/params';
 import type { RequestRouter } from '../transport/request-router';
 import { pickedFile, pickedTarget } from '../files/picked-paths';
+import { EngineError } from '../transport/engine-error';
+
+/** Images a gobo mask can be made from */
+const IMAGE_TYPES: Readonly<Record<string, string>> = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.bmp': 'image/bmp' };
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 
 /**
  * Registers the methods of the service.
@@ -60,6 +66,15 @@ export function registerFixtureService(router: RequestRouter, bus: EventBus, ses
         changed();
         bus.emit('patch.changed', {});
         return ids;
+    });
+
+    router.register('fixtures.readImage', (params) => {
+        const file = pickedFile(requireString(requireObject(params), 'file'), session);
+        const type = IMAGE_TYPES[path.extname(file).toLowerCase()];
+        if (type === undefined || fs.statSync(file).size > MAX_IMAGE_BYTES) {
+            throw new EngineError('invalid-params', 'Not an image that can be used as a gobo');
+        }
+        return `data:${type};base64,${fs.readFileSync(file).toString('base64')}`;
     });
 
     router.register('fixtures.export', (params) => {

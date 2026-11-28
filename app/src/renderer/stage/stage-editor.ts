@@ -10,6 +10,7 @@ import type { PatchEntry } from '../../shared/transport/engine-api.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
 import { engine } from '../transport/engine.js';
+import { defaultModel } from './default-model.js';
 import type { ModelInfo } from './model-library.js';
 import { StageDocument } from './stage-document.js';
 import * as edits from './stage-edits.js';
@@ -20,7 +21,7 @@ import { StageLiveBar } from './stage-live-bar.js';
 import { readLiveSettings } from './stage-live-settings.js';
 import { StageLive } from './stage-live.js';
 import { StageScene } from './stage-scene.js';
-import { STAGE_CAMERAS, StageView, type StageCamera } from './stage-view.js';
+import { STAGE_CAMERAS, StageView, VIEW_TOOLS, type StageCamera, type ViewTool } from './stage-view.js';
 
 /** Setting up the stage, or watching it follow the output */
 type StageMode = 'setup' | 'live';
@@ -36,6 +37,7 @@ export class StageEditor extends Stack {
     private readonly undoKey = new Key({ label: t('stage.undo') });
     private readonly redoKey = new Key({ label: t('stage.redo') });
     private readonly modeKeys: ChoiceKeys<HandleMode>;
+    private readonly tools: ChoiceKeys<ViewTool>;
     private readonly readOnly = new Label({ text: t('stage.readOnly'), tone: 'secondary' });
     private fixtures: PatchEntry[] = [];
     private readonly live: StageLive;
@@ -56,6 +58,7 @@ export class StageEditor extends Stack {
         this.live = new StageLive(this.view, this.scene, this.models, settings);
         this.liveBar = new StageLiveBar(settings);
         this.liveBar.onChange((next) => this.live.configure(next));
+        this.live.onRate(({ rate, level }) => this.liveBar.showRate(rate, level));
         const modes = new ChoiceKeys<StageMode>({
             ariaLabel: t('stage.mode'),
             options: [{ value: 'setup', label: t('stage.setup') }, { value: 'live', label: t('stage.live') }],
@@ -74,6 +77,12 @@ export class StageEditor extends Stack {
             this.camera = camera;
             this.view.setCamera(camera, this.scene.root);
         });
+        this.tools = new ChoiceKeys<ViewTool>({
+            ariaLabel: t('stage.tool'),
+            options: VIEW_TOOLS.map((value) => ({ value, label: t(`stage.tools.${value}`) })),
+            value: 'select'
+        });
+        this.tools.onChange((tool) => this.applyTool(tool));
         this.modeKeys = new ChoiceKeys<HandleMode>({
             ariaLabel: t('stage.handles'),
             options: [{ value: 'translate', label: t('stage.move') }, { value: 'rotate', label: t('stage.rotate') }],
@@ -82,7 +91,7 @@ export class StageEditor extends Stack {
         this.modeKeys.onChange((mode) => this.handles.setMode(mode));
 
         this.append(
-            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [modes, cameras, new Spacer(), this.readOnly, this.liveBar, this.modeKeys, this.undoKey, this.redoKey] }),
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [modes, cameras, this.tools, new Spacer(), this.readOnly, this.liveBar, this.modeKeys, this.undoKey, this.redoKey] }),
             new Stack({ direction: 'row', gap: 8, classes: ['stage-editor__body'], children: [this.library, this.view, this.inspector] })
         );
         this.bind();
@@ -156,11 +165,22 @@ export class StageEditor extends Stack {
             }
         });
         this.handles.onRelease((change) => this.document.apply(edits.transform(this.document.objects, change.id, change.position, change.rotation)));
-        this.library.onAdd((model) => this.add(model, null));
-        this.library.onPlace((fixture) => {
-            const moving = fixture.category === 'movingHead' || fixture.category === 'scanner';
-            this.add(moving ? 'moving-head' : 'par', fixture.id);
+        this.handles.setHeights((id) => {
+            const object = this.document.objects.find((item) => item.id === id);
+            return object === undefined ? null : edits.liftOf(object, this.models);
         });
+        // While the arrow is dragged, the stand and what is on it follow
+        this.handles.onLift((change) => {
+            for (const object of edits.setHeight(this.document.objects, change.id, change.height, this.models)) {
+                if (object.id === change.id || object.hungOn === change.id) {
+                    this.scene.place(object);
+                }
+            }
+            this.handles.refresh();
+        });
+        this.handles.onLifted((change) => this.document.apply(edits.setHeight(this.document.objects, change.id, change.height, this.models)));
+        this.library.onAdd((model) => this.add(model, null));
+        this.library.onPlace((fixture) => void defaultModel(fixture).then((model) => this.add(model, fixture.id)));
         this.inspector.onAction((action) => this.act(action));
         this.inspector.onModel((model) => this.change((objects, id) => objects.map((object) => object.id === id ? { ...object, model } : object)));
         this.undoKey.onPress(() => this.document.undo());
@@ -169,10 +189,10 @@ export class StageEditor extends Stack {
     }
 
     private add(model: string, fixture: string | null): void {
-        if (!this.editable) {
+        if (!this.editable || (fixture !== null && this.document.objects.some((object) => object.fixture === fixture))) {
             return;
         }
-        const width = this.models.get(model)?.length ?? (model === 'deck-2x1' ? 2 : 0.6);
+        const width = this.models.get(model)?.width ?? 0.6;
         const object = edits.newObject(model, edits.freeSpot(this.document.objects, this.view.centre, width), fixture);
         this.document.apply([...this.document.objects, object]);
         this.handles.select(object.id);
@@ -189,21 +209,51 @@ export class StageEditor extends Stack {
         const source = this.document.objects.find((object) => object.id === this.handles.selection);
         if (action === 'duplicate' && source !== undefined && source.fixture === null) {
             const [x, y, z] = source.position;
-            const copy = { ...edits.newObject(source.model, [x, y, edits.snap(z + 0.6)]), rotation: source.rotation };
+            const copy = { ...edits.newObject(source.model, [x, y, edits.snap(z + 0.6)]), rotation: source.rotation, height: source.height };
             this.document.apply([...this.document.objects, copy]);
             this.handles.select(copy.id);
         } else if (action === 'remove') {
             this.change(edits.remove);
         } else if (action === 'hang') {
             this.change((objects, id) => edits.hang(objects, id, this.models));
+        } else if (action === 'mount') {
+            this.change((objects, id) => edits.mount(objects, id, this.models));
         } else if (action === 'detach') {
             this.change(edits.detach);
         }
     }
 
+    private applyTool(tool: ViewTool): void {
+        this.tools.setValue(tool);
+        this.view.setTool(tool);
+        this.handles.setSelecting(tool === 'select');
+    }
+
+    /** Keys of the view, also with a read only or live stage: O, H, Z, Space and Shift+Z */
+    private viewShortcut(event: KeyboardEvent, key: string): boolean {
+        const tool = ({ o: 'orbit', h: 'pan', z: 'zoom', ' ': 'select' } as const)[key as 'o' | 'h' | 'z' | ' '];
+        if (event.ctrlKey || event.metaKey || event.altKey || event.target instanceof HTMLSelectElement || event.target instanceof HTMLInputElement) {
+            return false;
+        }
+        if (key === 'z' && event.shiftKey) {
+            this.view.frameContent(this.scene.root);
+        } else if (tool !== undefined) {
+            this.applyTool(tool);
+        } else if (key === 'escape' && this.view.surface.dataset.tool !== 'select') {
+            this.applyTool('select');
+        } else {
+            return false;
+        }
+        event.preventDefault();
+        return true;
+    }
+
     private shortcut(event: KeyboardEvent): void {
         const key = event.key.toLowerCase();
         const command = event.ctrlKey || event.metaKey;
+        if (this.viewShortcut(event, key)) {
+            return;
+        }
         if (command && key === 's') {
             event.preventDefault();
             void engine().request('show.save').catch(showError);
@@ -233,7 +283,11 @@ export class StageEditor extends Stack {
             object: selected,
             fixture: this.fixtures.find((fixture) => fixture.id === selected?.fixture) ?? null,
             editable: this.editable,
-            hasTruss: objects.some((object) => this.models.get(object.model)?.length !== undefined)
+            hasTruss: objects.some((object) => edits.canHang(this.models.get(object.model))),
+            hasStand: objects.some((object) => edits.topOf(object, this.models) !== null),
+            height: selected === null ? null : edits.liftOf(selected, this.models),
+            mounted: objects.some((object) => object.id === selected?.hungOn && selected !== null && edits.topOf(object, this.models) !== null
+                && Math.abs(selected.position[0] - object.position[0]) < 0.01 && Math.abs(selected.position[2] - object.position[2]) < 0.01)
         });
         this.readOnly.element.hidden = this.editable || this.mode === 'live';
         this.modeKeys.element.hidden = !editing;

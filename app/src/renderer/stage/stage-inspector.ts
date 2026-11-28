@@ -10,7 +10,7 @@ import { currentLocale, t } from '../i18n/i18n.js';
 import type { ModelInfo } from './model-library.js';
 import { modelName } from './stage-library-panel.js';
 
-export type InspectorAction = 'hang' | 'detach' | 'duplicate' | 'remove';
+export type InspectorAction = 'hang' | 'mount' | 'detach' | 'duplicate' | 'remove';
 
 export interface InspectorState {
     object: StageObject | null;
@@ -18,6 +18,12 @@ export interface InspectorState {
     editable: boolean;
     /** There is a truss to hang on */
     hasTruss: boolean;
+    /** There is a stand to mount on */
+    hasStand: boolean;
+    /** Height of the top of an adjustable stand, null for other objects */
+    height: number | null;
+    /** The object is on a stand */
+    mounted: boolean;
 }
 
 export class StageInspector extends Panel {
@@ -39,7 +45,7 @@ export class StageInspector extends Panel {
         return this.modelChanges.subscribe(listener);
     }
 
-    show({ object, fixture, editable, hasTruss }: InspectorState): void {
+    show({ object, fixture, editable, hasTruss, hasStand, height, mounted }: InspectorState): void {
         this.content.destroy();
         this.content = new Stack({ gap: 12 });
         this.area.append(this.content);
@@ -53,8 +59,11 @@ export class StageInspector extends Panel {
             new Label({ text: fixture === null ? modelName(object.model) : `${fixture.number}  ${fixture.name}`, weight: 'medium' }),
             new Label({ text: t('stage.position', { x, y, z }), tone: 'secondary', size: 'small' })
         );
+        if (height !== null) {
+            this.content.append(new Label({ text: t('stage.height', { height: format.format(height) }), size: 'small' }));
+        }
         if (object.hungOn !== null) {
-            this.content.append(new Label({ text: t('stage.hung'), tone: 'secondary', size: 'small' }));
+            this.content.append(new Label({ text: t(mounted ? 'stage.mounted' : 'stage.hung'), tone: 'secondary', size: 'small' }));
         }
         if (!editable) {
             return;
@@ -66,15 +75,20 @@ export class StageInspector extends Panel {
                 value: object.model
             });
             choice.onChange((model) => this.modelChanges.emit(model));
-            this.content.append(choice, this.key(object.hungOn === null ? 'hang' : 'detach', object.hungOn === null && !hasTruss));
+            this.content.append(choice);
+            if (object.hungOn === null) {
+                this.content.append(this.key('hang', !hasTruss), this.key('mount', !hasStand));
+            } else {
+                this.content.append(this.key('detach', false, undefined, mounted ? t('stage.unmount') : undefined));
+            }
         } else {
             this.content.append(this.key('duplicate', false, 'copy'));
         }
         this.content.append(this.key('remove', false, 'trash-2'));
     }
 
-    private key(action: InspectorAction, disabled: boolean, icon?: 'copy' | 'trash-2'): Key {
-        const key = new Key({ label: t(`stage.${action}`), icon });
+    private key(action: InspectorAction, disabled: boolean, icon?: 'copy' | 'trash-2', label = t(`stage.${action}`)): Key {
+        const key = new Key({ label, icon });
         key.setDisabled(disabled);
         key.onPress(() => this.actions.emit(action));
         return key;

@@ -1,7 +1,11 @@
 /**
  * 3D view of the stage: floor with its grid (squares of 20 cm, stronger
  * lines every meter), lights, camera with the front, top, side and free
- * views, orbit with mouse and touch. It draws only when something changes.
+ * views. The middle button of the mouse orbits (with Shift it pans), the
+ * wheel zooms towards the pointer and a double press of the middle button
+ * centres the view there; the left button selects, or orbits, pans or zooms
+ * with the tool chosen. One finger orbits, two pan and zoom. It draws only
+ * when something changes.
  */
 
 import * as THREE from 'three';
@@ -12,6 +16,13 @@ import { STAGE_GRID } from '../../shared/stage/stage.js';
 /** Camera view */
 export type StageCamera = 'front' | 'top' | 'side' | 'free';
 export const STAGE_CAMERAS: readonly StageCamera[] = ['front', 'top', 'side', 'free'];
+
+/** What the left button of the mouse does */
+export type ViewTool = 'select' | 'orbit' | 'pan' | 'zoom';
+export const VIEW_TOOLS: readonly ViewTool[] = ['select', 'orbit', 'pan', 'zoom'];
+
+/** Longest time between the two presses of a double press, in milliseconds */
+const DOUBLE_PRESS = 400;
 
 /** Side of the floor grid, in meters */
 const FLOOR = 20;
@@ -61,6 +72,20 @@ export class StageView extends Component<HTMLDivElement> {
 
         this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
         this.orbit.addEventListener('change', () => this.draw());
+        // The middle button orbits; with Shift the controls pan instead
+        this.orbit.zoomToCursor = true;
+        this.setTool('select');
+        let middle = 0;
+        this.listen(this.renderer.domElement, 'pointerdown', (event) => {
+            if (event.button === 1) {
+                // The browser would start its own scrolling
+                event.preventDefault();
+                if (event.timeStamp - middle < DOUBLE_PRESS) {
+                    this.centreOn(event);
+                }
+                middle = event.timeStamp;
+            }
+        });
 
         const observer = new ResizeObserver(() => this.resize());
         observer.observe(this.element);
@@ -70,6 +95,22 @@ export class StageView extends Component<HTMLDivElement> {
             this.orbit.dispose();
             this.renderer.dispose();
         });
+    }
+
+    setTool(tool: ViewTool): void {
+        const left = { select: null, orbit: THREE.MOUSE.ROTATE, pan: THREE.MOUSE.PAN, zoom: THREE.MOUSE.DOLLY }[tool];
+        this.orbit.mouseButtons = { LEFT: left, MIDDLE: THREE.MOUSE.ROTATE, RIGHT: null };
+        this.renderer.domElement.dataset.tool = tool;
+    }
+
+    /** Frames the whole content, keeping the direction the camera looks from */
+    frameContent(content: THREE.Object3D): void {
+        const direction = this.camera.position.clone().sub(this.orbit.target).normalize();
+        const { centre, distance } = this.framing(content);
+        this.camera.position.copy(centre).addScaledVector(direction, distance);
+        this.orbit.target.copy(centre);
+        this.orbit.update();
+        this.draw();
     }
 
     /** Surface that receives mouse and touch */
@@ -95,6 +136,25 @@ export class StageView extends Component<HTMLDivElement> {
         this.draw();
     }
 
+    /** Lets the lights that cast shadows draw them on and from every object */
+    setShadows(on: boolean): void {
+        const changed = this.renderer.shadowMap.enabled !== on;
+        this.renderer.shadowMap.enabled = on;
+        this.scene.traverse((object) => {
+            if (object instanceof THREE.Mesh && !(object.material instanceof THREE.ShaderMaterial)) {
+                const shadowChanged = object.receiveShadow !== on;
+                object.castShadow = on && object !== this.floor;
+                object.receiveShadow = on;
+                if (changed || shadowChanged) {
+                    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+                        (material as THREE.Material).needsUpdate = true;
+                    }
+                }
+            }
+        });
+        this.draw();
+    }
+
     /** Pixels drawn for each pixel of the screen, up to the density of the screen */
     setPixelRatio(limit: number): void {
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, limit));
@@ -103,14 +163,33 @@ export class StageView extends Component<HTMLDivElement> {
 
     /** Moves the camera to a view of the whole content */
     setCamera(view: StageCamera, content: THREE.Object3D): void {
-        const box = new THREE.Box3().setFromObject(content);
-        const centre = box.isEmpty() ? new THREE.Vector3(0, 1, 0) : box.getCenter(new THREE.Vector3());
-        const radius = box.isEmpty() ? 4 : Math.max(2, box.getSize(new THREE.Vector3()).length() / 2);
-        const distance = radius / Math.sin(THREE.MathUtils.degToRad(this.camera.fov) / 2);
+        const { centre, distance } = this.framing(content);
         this.camera.position.copy(centre).add(new THREE.Vector3(...DIRECTIONS[view]).normalize().multiplyScalar(distance));
         this.orbit.target.copy(centre);
         this.orbit.update();
         this.draw();
+    }
+
+    private framing(content: THREE.Object3D): { centre: THREE.Vector3; distance: number } {
+        const box = new THREE.Box3().setFromObject(content);
+        const centre = box.isEmpty() ? new THREE.Vector3(0, 1, 0) : box.getCenter(new THREE.Vector3());
+        const radius = box.isEmpty() ? 4 : Math.max(2, box.getSize(new THREE.Vector3()).length() / 2);
+        return { centre, distance: radius / Math.sin(THREE.MathUtils.degToRad(this.camera.fov) / 2) };
+    }
+
+    /** Looks at the point of the floor or of an object under the pointer */
+    private centreOn(event: PointerEvent): void {
+        const area = this.renderer.domElement.getBoundingClientRect();
+        const ray = new THREE.Raycaster();
+        ray.setFromCamera(new THREE.Vector2((event.clientX - area.left) / area.width * 2 - 1, 1 - (event.clientY - area.top) / area.height * 2), this.camera);
+        const objects = this.scene.children.filter((child) => child.type === 'Group');
+        const point = ray.intersectObjects(objects, true)[0]?.point ?? ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), new THREE.Vector3());
+        if (point !== null) {
+            this.camera.position.add(point.clone().sub(this.orbit.target));
+            this.orbit.target.copy(point);
+            this.orbit.update();
+            this.draw();
+        }
     }
 
     draw(): void {

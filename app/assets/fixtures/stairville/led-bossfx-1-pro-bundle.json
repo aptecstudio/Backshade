@@ -1,0 +1,711 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Stairville",
+  "model": "LED BossFx-1 Pro Bundle",
+  "category": "effect",
+  "physical": {
+    "width": 1500,
+    "height": 330,
+    "depth": 140,
+    "weight": 8.8,
+    "power": 135,
+    "source": "LED spots 12 x 9 W, derby 12 x 3 W, laser, strobe",
+    "beamAngle": {
+      "min": 30,
+      "max": 30
+    }
+  },
+  "channels": [
+    {
+      "key": "operating",
+      "name": "Operating mode",
+      "attribute": "effect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 9,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 10,
+          "to": 31,
+          "label": "Automatic show, spots and derby",
+          "kind": "program"
+        },
+        {
+          "from": 32,
+          "to": 65,
+          "label": "Automatic show, laser",
+          "kind": "program"
+        },
+        {
+          "from": 66,
+          "to": 95,
+          "label": "Automatic show, strobe LEDs",
+          "kind": "program"
+        },
+        {
+          "from": 96,
+          "to": 127,
+          "label": "Automatic show, all",
+          "kind": "program"
+        },
+        {
+          "from": 128,
+          "to": 159,
+          "label": "Sound show, spots and derby",
+          "kind": "program"
+        },
+        {
+          "from": 160,
+          "to": 191,
+          "label": "Sound show, laser",
+          "kind": "program"
+        },
+        {
+          "from": 192,
+          "to": 223,
+          "label": "Sound show, strobe LEDs",
+          "kind": "program"
+        },
+        {
+          "from": 224,
+          "to": 255,
+          "label": "Sound show, all",
+          "kind": "program"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "selection",
+      "name": "Programme selection",
+      "attribute": "effect"
+    },
+    {
+      "key": "speed",
+      "name": "Running speed",
+      "attribute": "effectSpeed"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "dimmer",
+      "name": "Dimmer and strobe",
+      "attribute": "dimmer",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 191,
+          "label": "Brightness 0 to 100 %"
+        },
+        {
+          "from": 192,
+          "to": 200,
+          "label": "Sound-controlled strobe",
+          "kind": "open"
+        },
+        {
+          "from": 201,
+          "to": 249,
+          "label": "Strobe with increasing speed",
+          "kind": "strobe"
+        },
+        {
+          "from": 250,
+          "to": 255,
+          "label": "All LEDs on",
+          "kind": "open"
+        }
+      ]
+    },
+    {
+      "key": "motor",
+      "name": "Derby rotation",
+      "attribute": "beamEffect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 5,
+          "to": 127,
+          "label": "Clockwise rotation, speed increasing",
+          "kind": "rotation"
+        },
+        {
+          "from": 128,
+          "to": 133,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 134,
+          "to": 255,
+          "label": "Anti-clockwise rotation, speed increasing",
+          "kind": "rotation"
+        }
+      ]
+    },
+    {
+      "key": "redLaser",
+      "name": "Red laser",
+      "attribute": "laserRed",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "Laser on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "greenLaser",
+      "name": "Green laser",
+      "attribute": "laserGreen",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "Laser on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "laserMotor",
+      "name": "Laser rotation",
+      "attribute": "laserRotation",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 5,
+          "to": 127,
+          "label": "Clockwise rotation, speed increasing",
+          "kind": "rotation"
+        },
+        {
+          "from": 128,
+          "to": 133,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 134,
+          "to": 255,
+          "label": "Anti-clockwise rotation, speed increasing",
+          "kind": "rotation"
+        }
+      ]
+    },
+    {
+      "key": "white",
+      "name": "Strobe LEDs white",
+      "attribute": "strobeWhite",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "LEDs on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "uv",
+      "name": "Strobe LEDs UV",
+      "attribute": "strobeUv",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "LEDs on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "derby1Red",
+      "name": "Derby 1 red",
+      "attribute": "red"
+    },
+    {
+      "key": "derby1Green",
+      "name": "Derby 1 green",
+      "attribute": "green"
+    },
+    {
+      "key": "derby1Blue",
+      "name": "Derby 1 blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "derby1Strobe",
+      "name": "Derby 1 strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 9,
+          "label": "No function",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ]
+    },
+    {
+      "key": "derby1Motor",
+      "name": "Derby 1 rotation",
+      "attribute": "beamEffect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 5,
+          "to": 127,
+          "label": "Clockwise rotation, speed increasing",
+          "kind": "rotation"
+        },
+        {
+          "from": 128,
+          "to": 133,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 134,
+          "to": 255,
+          "label": "Anti-clockwise rotation, speed increasing",
+          "kind": "rotation"
+        }
+      ]
+    },
+    {
+      "key": "spot1Red",
+      "name": "Spot 1 red",
+      "attribute": "red"
+    },
+    {
+      "key": "spot1Green",
+      "name": "Spot 1 green",
+      "attribute": "green"
+    },
+    {
+      "key": "spot1Blue",
+      "name": "Spot 1 blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "spot1Strobe",
+      "name": "Spot 1 strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 9,
+          "label": "No function",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ]
+    },
+    {
+      "key": "spot1None",
+      "name": "Spot 1 without function",
+      "attribute": "none"
+    },
+    {
+      "key": "spot2Red",
+      "name": "Spot 2 red",
+      "attribute": "red"
+    },
+    {
+      "key": "spot2Green",
+      "name": "Spot 2 green",
+      "attribute": "green"
+    },
+    {
+      "key": "spot2Blue",
+      "name": "Spot 2 blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "spot2Strobe",
+      "name": "Spot 2 strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 9,
+          "label": "No function",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ]
+    },
+    {
+      "key": "spot2None",
+      "name": "Spot 2 without function",
+      "attribute": "none"
+    },
+    {
+      "key": "derby2Red",
+      "name": "Derby 2 red",
+      "attribute": "red"
+    },
+    {
+      "key": "derby2Green",
+      "name": "Derby 2 green",
+      "attribute": "green"
+    },
+    {
+      "key": "derby2Blue",
+      "name": "Derby 2 blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "derby2Strobe",
+      "name": "Derby 2 strobe",
+      "attribute": "shutter",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 9,
+          "label": "No function",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ]
+    },
+    {
+      "key": "derby2Motor",
+      "name": "Derby 2 rotation",
+      "attribute": "beamEffect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 5,
+          "to": 127,
+          "label": "Clockwise rotation, speed increasing",
+          "kind": "rotation"
+        },
+        {
+          "from": 128,
+          "to": 133,
+          "label": "Stopped",
+          "kind": "stop"
+        },
+        {
+          "from": 134,
+          "to": 255,
+          "label": "Anti-clockwise rotation, speed increasing",
+          "kind": "rotation"
+        }
+      ]
+    },
+    {
+      "key": "white1",
+      "name": "Strobe LED 1 white",
+      "attribute": "strobeWhite",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "LEDs on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "white2",
+      "name": "Strobe LED 2 white",
+      "attribute": "strobeWhite",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "LEDs on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "white3",
+      "name": "Strobe LED 3 white",
+      "attribute": "strobeWhite",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "LEDs on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    },
+    {
+      "key": "white4",
+      "name": "Strobe LED 4 white",
+      "attribute": "strobeWhite",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 4,
+          "label": "Blackout",
+          "kind": "closed"
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "label": "LEDs on",
+          "kind": "open"
+        },
+        {
+          "from": 10,
+          "to": 255,
+          "label": "Strobe effect with increasing speed",
+          "kind": "strobe"
+        }
+      ],
+      "blackout": true
+    }
+  ],
+  "modes": [
+    {
+      "name": "3 channels",
+      "channels": [
+        "operating",
+        "selection",
+        "speed"
+      ]
+    },
+    {
+      "name": "5 channels",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "dimmer",
+        "motor"
+      ]
+    },
+    {
+      "name": "10 channels",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "dimmer",
+        "motor",
+        "redLaser",
+        "greenLaser",
+        "laserMotor",
+        "white",
+        "uv"
+      ]
+    },
+    {
+      "name": "28 channels",
+      "channels": [
+        "derby1Red",
+        "derby1Green",
+        "derby1Blue",
+        "derby1Strobe",
+        "derby1Motor",
+        "spot1Red",
+        "spot1Green",
+        "spot1Blue",
+        "spot1Strobe",
+        "spot1None",
+        "spot2Red",
+        "spot2Green",
+        "spot2Blue",
+        "spot2Strobe",
+        "spot2None",
+        "derby2Red",
+        "derby2Green",
+        "derby2Blue",
+        "derby2Strobe",
+        "derby2Motor",
+        "redLaser",
+        "greenLaser",
+        "laserMotor",
+        "white1",
+        "white2",
+        "white3",
+        "white4",
+        "uv"
+      ],
+      "heads": [
+        [
+          "derby1Red",
+          "derby1Green",
+          "derby1Blue",
+          "derby1Strobe",
+          "derby1Motor"
+        ],
+        [
+          "spot1Red",
+          "spot1Green",
+          "spot1Blue",
+          "spot1Strobe"
+        ],
+        [
+          "spot2Red",
+          "spot2Green",
+          "spot2Blue",
+          "spot2Strobe"
+        ],
+        [
+          "derby2Red",
+          "derby2Green",
+          "derby2Blue",
+          "derby2Strobe",
+          "derby2Motor"
+        ]
+      ]
+    }
+  ]
+}

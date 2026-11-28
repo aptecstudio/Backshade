@@ -3,7 +3,8 @@
  * desk, scenes, chasers, cues of the next phases) write channel levels;
  * intensity channels and channels without a fixture take the highest level
  * (HTP), the others the level written last (LTP). The grand master and the
- * blackout then scale the same channels, 16-bit pairs included.
+ * blackout then scale the same channels, 16-bit pairs included; when they
+ * are closed, the channels marked for the blackout (lasers) go to 0 too.
  */
 
 import { UNIVERSE_SIZE } from '../../shared/fixtures/fixture-definition';
@@ -133,6 +134,14 @@ export class DmxMixer {
 
         if (master < 1) {
             this.scale(frame, map, master);
+        }
+        // A level of these channels is not a brightness: they are not scaled, only stopped
+        if (master <= 0 && map !== undefined) {
+            map.stopped.forEach((stopped, index) => {
+                if (stopped === 1) {
+                    frame[index] = 0;
+                }
+            });
         }
         return frame;
     }

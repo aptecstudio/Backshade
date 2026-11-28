@@ -372,6 +372,7 @@ export interface EngineMethods {
     /** Copies definition files into the user library; returns the identifiers */
     'fixtures.import': { params: { files: string[] }; result: string[] };
     /** Exports a definition to a file; returns the file */
+    'fixtures.readImage': { params: { file: string }; result: string };
     'fixtures.export': { params: { id: string; file: string }; result: string };
 
     /** Patch of the open show */

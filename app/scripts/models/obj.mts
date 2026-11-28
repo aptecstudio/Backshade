@@ -12,7 +12,8 @@ export interface Section {
     depth: number;
 }
 
-const numbers = (values: Vector, decimals = 4): string => values.map((value) => Number(value.toFixed(decimals))).join(' ');
+/** Millimeters are enough for the stage */
+const numbers = (values: Vector, decimals = 3): string => values.map((value) => Number(value.toFixed(decimals))).join(' ');
 
 /** Catmull-Rom interpolation of the sections, for rounded profiles */
 function smooth(sections: Section[], steps: number): Section[] {
@@ -32,7 +33,36 @@ function smooth(sections: Section[], steps: number): Section[] {
 /** Writer of an OBJ file: faces are listed counterclockwise seen from outside */
 export class Obj {
     private readonly lines: string[] = ['# Backshade stage model, made by scripts/make-models.mts'];
-    private count = 0;
+    /** Indexes of the vertices and normals already written, so they are shared */
+    private readonly vertices = new Map<string, number>();
+    private readonly directions = new Map<string, number>();
+    private offset: Vector = [0, 0, 0];
+    private lowX = 0;
+    private highX = 0;
+
+    /** Width along X of what has been drawn, in meters */
+    get width(): number {
+        return Number((this.highX - this.lowX).toFixed(2));
+    }
+
+    /** Draws with the origin moved by an offset */
+    within(offset: Vector, draw: () => void): void {
+        const previous = this.offset;
+        this.offset = add(previous, offset);
+        draw();
+        this.offset = previous;
+    }
+
+    /** Index of a line "v" or "vn", writing it the first time */
+    private index(known: Map<string, number>, line: string): number {
+        let value = known.get(line);
+        if (value === undefined) {
+            value = known.size + 1;
+            known.set(line, value);
+            this.lines.push(line);
+        }
+        return value;
+    }
 
     object(name: string): void {
         this.lines.push(`o ${name}`);
@@ -45,10 +75,25 @@ export class Obj {
     /** Face with its own normals, or flat when they are not given */
     face(points: Vector[], normals?: Vector[]): void {
         const flat = normals === undefined ? unit(cross(sub(points[1], points[0]), sub(points[2], points[0]))) : undefined;
-        points.forEach((point, index) => {
-            this.lines.push(`v ${numbers(point)}`, `vn ${numbers(normals?.[index] ?? flat ?? point, 3)}`);
+        const corners = points.map((point, index) => {
+            const moved = add(point, this.offset);
+            this.lowX = Math.min(this.lowX, moved[0]);
+            this.highX = Math.max(this.highX, moved[0]);
+            return `${this.index(this.vertices, `v ${numbers(moved)}`)}//${this.index(this.directions, `vn ${numbers(normals?.[index] ?? flat ?? point, 2)}`)}`;
         });
-        this.lines.push(`f ${points.map(() => `${++this.count}//${this.count}`).join(' ')}`);
+        this.lines.push(`f ${corners.join(' ')}`);
+    }
+
+    /** Upright solid from its outline seen from above (counterclockwise, X and Z) */
+    prism(outline: Array<[number, number]>, bottom: number, top: number): void {
+        const low = outline.map(([x, z]): Vector => [x, bottom, z]);
+        const high = outline.map(([x, z]): Vector => [x, top, z]);
+        outline.forEach((_, index) => {
+            const next = (index + 1) % outline.length;
+            this.face([low[index], low[next], high[next], high[index]]);
+        });
+        this.face(high);
+        this.face([...low].reverse());
     }
 
     /** Box from its centre and size */
@@ -86,6 +131,8 @@ export class Obj {
 
     /** Sphere made of rings */
     ball(centre: Vector, radius: number, segments = 12, rings = 8): void {
+        segments = Math.max(6, Math.round(segments * 0.75));
+        rings = Math.max(4, Math.round(rings * 0.75));
         const point = (ring: number, index: number): Vector => {
             const polar = (ring / rings) * Math.PI;
             const around = (index / segments) * Math.PI * 2;
@@ -107,7 +154,9 @@ export class Obj {
      * between them, or kept horizontal for upright bodies such as a torso.
      */
     loft(sections: Section[], segments = 14, steps = 3, upright = false): void {
-        const path = smooth(sections, steps);
+        // Fewer facets and steps than asked keep the files light, with little to see
+        segments = Math.max(6, Math.round(segments * 0.75));
+        const path = smooth(sections, Math.max(1, steps - 1));
         const rings = path.map((section, index) => {
             const tangent: Vector = upright ? [0, 1, 0] : unit(sub(path[Math.min(index + 1, path.length - 1)].at, path[Math.max(index - 1, 0)].at));
             // The depth of a section faces front, or up for parts that point forward

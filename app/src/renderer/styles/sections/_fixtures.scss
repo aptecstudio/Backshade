@@ -63,7 +63,7 @@
 
 .channel-row {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr) auto minmax(0, 2fr) space(48);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr) auto minmax(0, 2fr) minmax(0, 2fr) space(48);
     gap: space(8);
     align-items: center;
 }
@@ -87,7 +87,7 @@
 
 .capability-row {
     display: grid;
-    grid-template-columns: auto auto minmax(0, 3fr) minmax(0, 2fr) space(48);
+    grid-template-columns: auto auto minmax(0, 2fr) minmax(0, 2fr) minmax(0, 4fr) space(48);
     gap: space(8);
     align-items: center;
 }
@@ -116,4 +116,17 @@
 
 .missing-fixture {
     gap: 0;
+}
+
+// Mask of a gobo, white where lit
+.capability-row__extra .select-field {
+    flex: 1 1 auto;
+    min-width: space(64) * 2;
+}
+
+.capability-row__extra .image-view {
+    width: space(40);
+    height: space(40);
+    border: 1px solid color('panel-border');
+    border-radius: $radius-square-key;
 }

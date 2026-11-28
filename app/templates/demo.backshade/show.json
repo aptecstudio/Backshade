@@ -213,6 +213,46 @@
         "channelCount": 9,
         "universe": 2,
         "address": 28
+      },
+      {
+        "id": "1e7ed245-9361-5658-bf71-d3a6d1fb2a18",
+        "number": 51,
+        "name": "Quad",
+        "definition": "stairville/stage-quad-led-bundle-rgb-ww",
+        "mode": "18 channels",
+        "channelCount": 18,
+        "universe": 2,
+        "address": 101
+      },
+      {
+        "id": "3d349638-480c-512c-bd12-2ab016efa2bf",
+        "number": 52,
+        "name": "BossFx",
+        "definition": "stairville/led-bossfx-1-pro-bundle",
+        "mode": "28 channels",
+        "channelCount": 28,
+        "universe": 2,
+        "address": 121
+      },
+      {
+        "id": "ab2457f9-c6c1-53b8-8261-a62053e08467",
+        "number": 61,
+        "name": "Gobo 1",
+        "definition": "generic/gobo-moving-head",
+        "mode": "12 channels",
+        "channelCount": 12,
+        "universe": 2,
+        "address": 151
+      },
+      {
+        "id": "699fcda7-b2d5-51bf-ae9d-5e6b18b58f51",
+        "number": 62,
+        "name": "Gobo 2",
+        "definition": "generic/gobo-moving-head",
+        "mode": "12 channels",
+        "channelCount": 12,
+        "universe": 2,
+        "address": 163
       }
     ],
     "matrices": [
@@ -1107,6 +1147,70 @@
               [
                 28,
                 255
+              ],
+              [
+                151,
+                128
+              ],
+              [
+                152,
+                90
+              ],
+              [
+                153,
+                255
+              ],
+              [
+                154,
+                255
+              ],
+              [
+                157,
+                55
+              ],
+              [
+                158,
+                40
+              ],
+              [
+                159,
+                200
+              ],
+              [
+                161,
+                128
+              ],
+              [
+                163,
+                128
+              ],
+              [
+                164,
+                90
+              ],
+              [
+                165,
+                255
+              ],
+              [
+                166,
+                255
+              ],
+              [
+                169,
+                55
+              ],
+              [
+                170,
+                40
+              ],
+              [
+                171,
+                200
+              ],
+              [
+                173,
+                128
               ]
             ]
           }
@@ -1414,6 +1518,63 @@
               ],
               [
                 195,
+                255
+              ]
+            ]
+          },
+          {
+            "universe": 2,
+            "channels": [
+              [
+                101,
+                255
+              ],
+              [
+                105,
+                255
+              ],
+              [
+                109,
+                255
+              ],
+              [
+                113,
+                255
+              ],
+              [
+                117,
+                255
+              ],
+              [
+                123,
+                255
+              ],
+              [
+                126,
+                255
+              ],
+              [
+                127,
+                255
+              ],
+              [
+                128,
+                255
+              ],
+              [
+                131,
+                255
+              ],
+              [
+                132,
+                255
+              ],
+              [
+                133,
+                255
+              ],
+              [
+                136,
                 255
               ]
             ]
@@ -2833,7 +2994,7 @@
         "position": [
           0,
           0.4,
-          -0.8
+          0.8
         ],
         "rotation": [
           0,
@@ -2847,9 +3008,9 @@
         "id": "stage-14",
         "model": "singer-female",
         "position": [
-          1.2,
+          1,
           0.4,
-          -0.8
+          0.8
         ],
         "rotation": [
           0,
@@ -2863,7 +3024,7 @@
         "id": "stage-15",
         "model": "amp",
         "position": [
-          -2.2,
+          -1.6,
           0.4,
           -1.4
         ],
@@ -2877,9 +3038,9 @@
       },
       {
         "id": "stage-16",
-        "model": "amp",
+        "model": "bass-amp",
         "position": [
-          2.2,
+          1.6,
           0.4,
           -1.4
         ],
@@ -2897,7 +3058,7 @@
         "position": [
           0,
           0.4,
-          0
+          1.2
         ],
         "rotation": [
           0,
@@ -2911,9 +3072,9 @@
         "id": "stage-18",
         "model": "wedge",
         "position": [
-          1.2,
+          1,
           0.4,
-          0
+          1.2
         ],
         "rotation": [
           0,
@@ -2925,7 +3086,7 @@
       },
       {
         "id": "stage-19",
-        "model": "moving-head",
+        "model": "moving-head-wash",
         "position": [
           -2.4,
           3.6,
@@ -2941,7 +3102,7 @@
       },
       {
         "id": "stage-20",
-        "model": "moving-head",
+        "model": "moving-head-wash",
         "position": [
           -0.8,
           3.6,
@@ -2957,7 +3118,7 @@
       },
       {
         "id": "stage-21",
-        "model": "moving-head",
+        "model": "moving-head-wash",
         "position": [
           0.8,
           3.6,
@@ -2973,7 +3134,7 @@
       },
       {
         "id": "stage-22",
-        "model": "moving-head",
+        "model": "moving-head-wash",
         "position": [
           2.4,
           3.6,
@@ -2989,7 +3150,7 @@
       },
       {
         "id": "stage-23",
-        "model": "moving-head",
+        "model": "moving-head-beam",
         "position": [
           -2.4,
           3.6,
@@ -3005,7 +3166,7 @@
       },
       {
         "id": "stage-24",
-        "model": "moving-head",
+        "model": "moving-head-beam",
         "position": [
           -0.8,
           3.6,
@@ -3021,7 +3182,7 @@
       },
       {
         "id": "stage-25",
-        "model": "moving-head",
+        "model": "moving-head-beam",
         "position": [
           0.8,
           3.6,
@@ -3037,7 +3198,7 @@
       },
       {
         "id": "stage-26",
-        "model": "moving-head",
+        "model": "moving-head-beam",
         "position": [
           2.4,
           3.6,
@@ -3178,6 +3339,540 @@
         ],
         "fixture": "bd15fa3d-d84f-42a6-ac79-c6c8e0e83304",
         "hungOn": null
+      },
+      {
+        "id": "deck-front-1",
+        "model": "deck-2x1",
+        "position": [
+          -2,
+          0,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "deck-front-2",
+        "model": "deck-2x1",
+        "position": [
+          0,
+          0,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "deck-front-3",
+        "model": "deck-2x1",
+        "position": [
+          2,
+          0,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "tower-1",
+        "model": "tower-4m",
+        "position": [
+          -3.2,
+          0,
+          -1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "tower-2",
+        "model": "tower-4m",
+        "position": [
+          3.2,
+          0,
+          -1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "tower-3",
+        "model": "tower-4m",
+        "position": [
+          -3.2,
+          0,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "tower-4",
+        "model": "tower-4m",
+        "position": [
+          3.2,
+          0,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "riser",
+        "model": "drum-riser",
+        "position": [
+          0,
+          0.4,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "drummer",
+        "model": "drummer-male",
+        "position": [
+          0,
+          0.8,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "guitarist",
+        "model": "guitarist-male",
+        "position": [
+          -1.4,
+          0.4,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "bassist",
+        "model": "bassist-female",
+        "position": [
+          2.2,
+          0.4,
+          0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "keyboardist",
+        "model": "keyboardist-female",
+        "position": [
+          -2.4,
+          0.4,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "guitar-stand",
+        "model": "guitar-stand",
+        "position": [
+          -2.8,
+          0.4,
+          0.6
+        ],
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "monitor-guitar",
+        "model": "wedge",
+        "position": [
+          -1.4,
+          0.4,
+          1.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "monitor-bass",
+        "model": "wedge",
+        "position": [
+          2.2,
+          0.4,
+          1.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "stairs",
+        "model": "stairs-40",
+        "position": [
+          3.4,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "case",
+        "model": "case-large",
+        "position": [
+          -4,
+          0,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "pa-left",
+        "model": "pa-speaker",
+        "position": [
+          -4.2,
+          0,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "pa-right",
+        "model": "pa-speaker",
+        "position": [
+          4.2,
+          0,
+          1.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "sub-left",
+        "model": "subwoofer",
+        "position": [
+          -4.2,
+          0,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "sub-right",
+        "model": "subwoofer",
+        "position": [
+          4.2,
+          0,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "bar-1",
+        "model": "led-bar",
+        "position": [
+          -2.2,
+          0,
+          1.6
+        ],
+        "rotation": [
+          60,
+          180,
+          0
+        ],
+        "fixture": "7f819c12-2d28-4bac-a37e-e523502bb6e9",
+        "hungOn": null
+      },
+      {
+        "id": "bar-2",
+        "model": "led-bar",
+        "position": [
+          -0.8,
+          0,
+          1.6
+        ],
+        "rotation": [
+          60,
+          180,
+          0
+        ],
+        "fixture": "971a0843-0a34-4caa-ac21-70e9d0820696",
+        "hungOn": null
+      },
+      {
+        "id": "bar-3",
+        "model": "led-bar",
+        "position": [
+          0.8,
+          0,
+          1.6
+        ],
+        "rotation": [
+          60,
+          180,
+          0
+        ],
+        "fixture": "dc0095f8-cf4e-4527-ad2f-29c12dd7c311",
+        "hungOn": null
+      },
+      {
+        "id": "bar-4",
+        "model": "led-bar",
+        "position": [
+          2.2,
+          0,
+          1.6
+        ],
+        "rotation": [
+          60,
+          180,
+          0
+        ],
+        "fixture": "c5ab4159-be6e-4cf3-af33-ee43294fa9b7",
+        "hungOn": null
+      },
+      {
+        "id": "trumpet",
+        "model": "trumpeter-female",
+        "position": [
+          2.6,
+          0.4,
+          -1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "sax",
+        "model": "saxophonist-male",
+        "position": [
+          1.8,
+          0.4,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null
+      },
+      {
+        "id": "windup-left",
+        "model": "windup-stand",
+        "position": [
+          -5.2,
+          0,
+          3.4
+        ],
+        "rotation": [
+          0,
+          120,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null,
+        "height": 2.6
+      },
+      {
+        "id": "windup-right",
+        "model": "windup-stand",
+        "position": [
+          5.2,
+          0,
+          3.4
+        ],
+        "rotation": [
+          0,
+          -120,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null,
+        "height": 2.6
+      },
+      {
+        "id": "quad",
+        "model": "stairville-quad",
+        "position": [
+          -5.2,
+          2.338,
+          3.4
+        ],
+        "rotation": [
+          0,
+          120,
+          0
+        ],
+        "fixture": "1e7ed245-9361-5658-bf71-d3a6d1fb2a18",
+        "hungOn": "windup-left",
+        "height": null
+      },
+      {
+        "id": "bossfx",
+        "model": "stairville-bossfx",
+        "position": [
+          5.2,
+          2.37,
+          3.4
+        ],
+        "rotation": [
+          0,
+          -120,
+          0
+        ],
+        "fixture": "3d349638-480c-512c-bd12-2ab016efa2bf",
+        "hungOn": "windup-right",
+        "height": null
+      },
+      {
+        "id": "gobo-1",
+        "model": "moving-head",
+        "position": [
+          -1.6,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "ab2457f9-c6c1-53b8-8261-a62053e08467",
+        "hungOn": "back-truss-1",
+        "height": null
+      },
+      {
+        "id": "gobo-2",
+        "model": "moving-head",
+        "position": [
+          1.6,
+          3.6,
+          -1.8
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "fixture": "699fcda7-b2d5-51bf-ae9d-5e6b18b58f51",
+        "hungOn": "back-truss-3",
+        "height": null
       }
     ]
   },

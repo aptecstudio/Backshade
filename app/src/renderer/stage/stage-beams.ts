@@ -10,10 +10,12 @@ uniform float startRadius;
 uniform float endRadius;
 uniform float reach;
 varying float along;
+varying vec2 disk;
 varying vec3 viewNormal;
 varying vec3 viewPosition;
 void main() {
     along = position.y;
+    disk = position.xz;
     float radius = mix(startRadius, endRadius, along);
     vec4 view = modelViewMatrix * vec4(position.x * radius, along * reach, position.z * radius, 1.0);
     viewPosition = view.xyz;
@@ -25,13 +27,24 @@ void main() {
 const FRAGMENT = `
 uniform vec3 color;
 uniform float strength;
+uniform float soft;
+uniform sampler2D gobo;
+uniform float useGobo;
 varying float along;
+varying vec2 disk;
 varying vec3 viewNormal;
 varying vec3 viewPosition;
 void main() {
-    float edge = pow(abs(dot(normalize(viewNormal), normalize(viewPosition))), 2.0);
+    // A soft beam, out of focus or frosted, has wider edges
+    float edge = pow(abs(dot(normalize(viewNormal), normalize(viewPosition))), 2.0 + soft * 6.0);
     float fade = pow(1.0 - along, 1.4) + 0.08;
-    gl_FragColor = vec4(color * strength * edge * fade, 1.0);
+    float shape = 1.0;
+    if (useGobo > 0.5) {
+        // The lit parts of the mask become streaks along the beam
+        vec2 out2 = normalize(disk);
+        shape = (texture2D(gobo, 0.5 + out2 * 0.15).r + texture2D(gobo, 0.5 + out2 * 0.28).r + texture2D(gobo, 0.5 + out2 * 0.41).r) * 0.8;
+    }
+    gl_FragColor = vec4(color * strength * edge * fade * shape, 1.0);
 }
 `;
 
@@ -48,6 +61,10 @@ export interface Beam {
     angle: number;
     lensRadius: number;
     length: number;
+    /** Softness of the edge, 0 to 1 */
+    soft?: number;
+    /** Gobo in front of the light */
+    gobo?: THREE.Texture | null;
 }
 
 type BeamMesh = THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>;
@@ -62,7 +79,7 @@ export class StageBeams {
             mesh = new THREE.Mesh(CONE, new THREE.ShaderMaterial({
                 vertexShader: VERTEX,
                 fragmentShader: FRAGMENT,
-                uniforms: { color: { value: new THREE.Color() }, strength: { value: 0 }, startRadius: { value: 0 }, endRadius: { value: 0 }, reach: { value: 1 } },
+                uniforms: { color: { value: new THREE.Color() }, strength: { value: 0 }, soft: { value: 0 }, gobo: { value: null }, useGobo: { value: 0 }, startRadius: { value: 0 }, endRadius: { value: 0 }, reach: { value: 1 } },
                 blending: THREE.AdditiveBlending,
                 transparent: true,
                 depthWrite: false,
@@ -79,15 +96,25 @@ export class StageBeams {
         const { uniforms } = mesh.material;
         (uniforms.color.value as THREE.Color).copy(beam.color);
         uniforms.strength.value = beam.strength;
+        uniforms.soft.value = beam.soft ?? 0;
+        uniforms.gobo.value = beam.gobo ?? null;
+        uniforms.useGobo.value = beam.gobo === undefined || beam.gobo === null ? 0 : 1;
         uniforms.startRadius.value = beam.lensRadius;
         uniforms.endRadius.value = beam.lensRadius + beam.length * Math.tan(THREE.MathUtils.degToRad(Math.min(beam.angle, 120) / 2));
         uniforms.reach.value = beam.length;
     }
 
-    /** Removes the beams of the fixtures no longer there */
-    keep(ids: ReadonlySet<string>): void {
+    /** Hides every beam: those of the new frame are set again */
+    frame(): void {
+        for (const mesh of this.meshes.values()) {
+            mesh.visible = false;
+        }
+    }
+
+    /** Removes the beams of the objects no longer there; beam names start with the object */
+    keep(objects: ReadonlySet<string>): void {
         for (const [id, mesh] of this.meshes) {
-            if (!ids.has(id)) {
+            if (!objects.has(id.split(':')[0])) {
                 mesh.material.dispose();
                 this.root.remove(mesh);
                 this.meshes.delete(id);

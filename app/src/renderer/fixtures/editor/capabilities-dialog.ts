@@ -1,17 +1,87 @@
 /**
  * Fixture editor: value ranges of a channel (from, to, description,
- * function and wheel color). Returns the edited ranges, or null if cancelled.
+ * function, mask of a gobo and facets of a prism). Returns the edited
+ * ranges, or null if cancelled.
  */
 
-import { Dialog, Key, Label, NumberField, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
-import { DMX_MAX, FIXTURE_NAME_MAX_LENGTH, type CapabilityKind, type FixtureCapability } from '../../../shared/fixtures/fixture-definition.js';
+import { Dialog, ImageView, Key, Label, NumberField, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
+import { DMX_MAX, FIXTURE_NAME_MAX_LENGTH, PRISM_FACETS, type CapabilityKind, type FixtureCapability } from '../../../shared/fixtures/fixture-definition.js';
+import { showError } from '../../dialogs/show-error.js';
+import { pickFiles } from '../../files/file-dialogs.js';
 import { t, type TextKey } from '../../i18n/i18n.js';
+import { engine } from '../../transport/engine.js';
 import { capabilityKindOptions } from '../fixture-text.js';
+import { makeMask } from './gobo-mask.js';
+import { GOBO_PRESETS, presetMask, type GoboPreset } from './gobo-presets.js';
+
+/** Chooses an image with the file manager and keeps it as the mask of the range */
+async function chooseMask(capability: FixtureCapability, onChange: () => void): Promise<void> {
+    const [file] = await pickFiles(t('fixtureEditor.chooseMask'), (entry) => entry.kind === 'image' && !entry.name.toLowerCase().endsWith('.svg'), false);
+    if (file === undefined) {
+        return;
+    }
+    try {
+        capability.image = await makeMask(await engine().request('fixtures.readImage', { file }));
+        onChange();
+    } catch (error) {
+        await showError(error);
+    }
+}
+
+/** Tells that the gobo or the prism shakes in this range, slow to fast */
+function shakeKey(capability: FixtureCapability, onChange: () => void): Key {
+    const key = new Key({ label: t('fixtureEditor.shake'), state: capability.shake === true ? 'active' : 'normal' });
+    key.onPress(() => {
+        if (capability.shake === true) {
+            delete capability.shake;
+        } else {
+            capability.shake = true;
+        }
+        onChange();
+    });
+    return key;
+}
+
+/** What a gobo or a prism needs besides its function */
+function extraFields(capability: FixtureCapability, onChange: () => void): Stack {
+    const extra = new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['capability-row__extra'] });
+    if (capability.kind === 'gobo') {
+        if (capability.image !== undefined) {
+            const remove = new Key({ label: t('fixtureEditor.removeMask'), icon: 'trash-2', iconOnly: true });
+            remove.onPress(() => {
+                delete capability.image;
+                onChange();
+            });
+            extra.append(new ImageView({ src: capability.image, alt: t('fixtureEditor.mask') }), remove);
+        }
+        const ready = new SelectField<GoboPreset | ''>({
+            ariaLabel: t('fixtureEditor.readyMask'),
+            options: [{ value: '', label: t('fixtureEditor.readyMask') }, ...GOBO_PRESETS.map((value) => ({ value, label: t(`fixtureEditor.goboPresets.${value}`) }))],
+            value: ''
+        });
+        ready.onChange((preset) => {
+            if (preset !== '') {
+                capability.image = presetMask(preset);
+                onChange();
+            }
+        });
+        const choose = new Key({ label: t('fixtureEditor.chooseMask') });
+        choose.onPress(() => void chooseMask(capability, onChange));
+        extra.append(ready, choose, shakeKey(capability, onChange));
+    } else if (capability.kind === 'prism') {
+        const facets = new NumberField({ ariaLabel: t('fixtureEditor.facets'), unit: t('fixtureEditor.facets'), value: capability.facets ?? 3, ...PRISM_FACETS });
+        facets.onChange((value) => {
+            capability.facets = value;
+        });
+        extra.append(facets, shakeKey(capability, onChange));
+    }
+    return extra;
+}
 
 /**
  * Row of a range; it edits the capability object it receives.
  */
-function capabilityRow(capability: FixtureCapability, onRemove: () => void): Stack {
+function capabilityRow(capability: FixtureCapability, onRemove: () => void, onChange: () => void): Stack {
     const from = new NumberField({ ariaLabel: t('fixtureEditor.from'), value: capability.from, min: 0, max: DMX_MAX });
     const to = new NumberField({ ariaLabel: t('fixtureEditor.to'), value: capability.to, min: 0, max: DMX_MAX });
     const label = new TextField({ ariaLabel: t('fixtureEditor.label'), value: capability.label, maxLength: FIXTURE_NAME_MAX_LENGTH });
@@ -33,13 +103,14 @@ function capabilityRow(capability: FixtureCapability, onRemove: () => void): Sta
         } else {
             capability.kind = value;
         }
+        onChange();
     });
     remove.onPress(onRemove);
 
-    return new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['capability-row'], children: [from, to, label, kind, remove] });
+    return new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['capability-row'], children: [from, to, label, kind, extraFields(capability, onChange), remove] });
 }
 
-const COLUMNS: readonly TextKey[] = ['fixtureEditor.from', 'fixtureEditor.to', 'fixtureEditor.label', 'fixtureEditor.kind'];
+const COLUMNS: readonly TextKey[] = ['fixtureEditor.from', 'fixtureEditor.to', 'fixtureEditor.label', 'fixtureEditor.kind', 'fixtureEditor.gobo'];
 
 /**
  * Header of the range columns.
@@ -58,7 +129,7 @@ function header(): Stack {
  */
 export function editCapabilities(channelName: string, capabilities: readonly FixtureCapability[]): Promise<FixtureCapability[] | null> {
     return new Promise((resolve) => {
-        const dialog = new Dialog({ title: t('fixtureEditor.capabilitiesTitle', { name: channelName }), size: 'wide' });
+        const dialog = new Dialog({ title: t('fixtureEditor.capabilitiesTitle', { name: channelName }), size: 'large' });
         const working = capabilities.map((capability) => ({ ...capability }));
         const list = new Stack({ gap: 8 });
         let rows: Stack[] = [];
@@ -68,7 +139,7 @@ export function editCapabilities(channelName: string, capabilities: readonly Fix
             rows = working.map((capability) => capabilityRow(capability, () => {
                 working.splice(working.indexOf(capability), 1);
                 render();
-            }));
+            }, render));
             list.append(...rows);
         };
 

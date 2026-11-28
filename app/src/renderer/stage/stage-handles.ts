@@ -1,13 +1,14 @@
 /**
  * Selection in the 3D view and its handles: a press on an object selects it,
  * the arrows move it on the grid of 20 cm and the rings turn it in steps of
- * 15 degrees.
+ * 15 degrees. An adjustable stand also has an arrow on its top that sets its
+ * height in steps of 10 cm.
  */
 
 import * as THREE from 'three';
 import { TransformControls } from 'three/addons/controls/TransformControls.js';
 import { Emitter, type Unsubscribe } from '../../framework/ts/index.js';
-import { STAGE_ANGLE, STAGE_GRID, type StageVector } from '../../shared/stage/stage.js';
+import { STAGE_ANGLE, STAGE_GRID, STAGE_LIFT, type StageVector } from '../../shared/stage/stage.js';
 import type { StageScene } from './stage-scene.js';
 import type { StageView } from './stage-view.js';
 
@@ -20,14 +21,28 @@ export interface HandleChange {
     rotation: StageVector;
 }
 
+/** Height the arrow on top of a stand is asking for */
+export interface HeightChange {
+    id: string;
+    height: number;
+}
+
 /** A press that moves less than this many pixels selects */
 const PRESS = 6;
 
 export class StageHandles {
     private readonly gizmo: TransformControls;
+    /** Arrow on the top of an adjustable stand, and the point it moves */
+    private readonly lifter: TransformControls;
+    private readonly grip = new THREE.Object3D();
+    private heightOf: (id: string) => number | null = () => null;
+    private readonly lifts = new Emitter<HeightChange>();
+    private readonly lifted = new Emitter<HeightChange>();
     private readonly outline = new THREE.BoxHelper(new THREE.Object3D(), 0xf0b429);
     private selected: string | null = null;
     private editable = false;
+    /** The left button selects: with a view tool it moves the camera instead */
+    private selecting = true;
     private readonly selections = new Emitter<string | null>();
     private readonly moves = new Emitter<HandleChange>();
     private readonly releases = new Emitter<HandleChange>();
@@ -50,7 +65,34 @@ export class StageHandles {
             this.report(this.moves);
         });
         this.gizmo.addEventListener('mouseUp', () => this.report(this.releases));
+        this.lifter = new TransformControls(view.camera, view.surface);
+        this.lifter.setTranslationSnap(STAGE_LIFT);
+        this.lifter.setSize(0.7);
+        this.lifter.showX = false;
+        this.lifter.showZ = false;
+        view.scene.add(this.grip, this.lifter.getHelper());
+        this.lifter.addEventListener('change', () => view.draw());
+        this.lifter.addEventListener('dragging-changed', (event) => {
+            view.orbit.enabled = event.value !== true;
+        });
+        this.lifter.addEventListener('objectChange', () => this.reportHeight(this.lifts));
+        this.lifter.addEventListener('mouseUp', () => this.reportHeight(this.lifted));
         this.listenToPresses();
+    }
+
+    /** Tells the handles which objects are adjustable stands, and how high they are */
+    setHeights(heightOf: (id: string) => number | null): void {
+        this.heightOf = heightOf;
+    }
+
+    /** While the arrow of a stand is dragged */
+    onLift(listener: (change: HeightChange) => void): Unsubscribe {
+        return this.lifts.subscribe(listener);
+    }
+
+    /** When the arrow of a stand is released */
+    onLifted(listener: (change: HeightChange) => void): Unsubscribe {
+        return this.lifted.subscribe(listener);
     }
 
     /** Selected stage object */
@@ -83,6 +125,12 @@ export class StageHandles {
 
     setMode(mode: HandleMode): void {
         this.gizmo.setMode(mode);
+        this.refresh();
+    }
+
+    setSelecting(selecting: boolean): void {
+        this.selecting = selecting;
+        this.refresh();
     }
 
     setEditable(editable: boolean): void {
@@ -97,12 +145,29 @@ export class StageHandles {
         if (node !== undefined) {
             this.outline.setFromObject(node);
         }
-        if (node !== undefined && this.editable) {
+        if (node !== undefined && this.editable && this.selecting) {
             this.gizmo.attach(node);
         } else {
             this.gizmo.detach();
         }
+        const height = this.selected === null ? null : this.heightOf(this.selected);
+        if (node !== undefined && height !== null && this.editable && this.selecting && this.gizmo.mode === 'translate') {
+            // While it is dragged the grip is where the pointer put it
+            if (!this.lifter.dragging) {
+                this.grip.position.copy(node.position).y += height;
+            }
+            this.lifter.attach(this.grip);
+        } else {
+            this.lifter.detach();
+        }
         this.view.draw();
+    }
+
+    private reportHeight(listeners: Emitter<HeightChange>): void {
+        const node = this.gizmo.object;
+        if (node !== undefined && this.selected !== null) {
+            listeners.emit({ id: this.selected, height: this.grip.position.y - node.position.y });
+        }
     }
 
     private report(listeners: Emitter<HandleChange>): void {
@@ -121,10 +186,13 @@ export class StageHandles {
         let start: { x: number; y: number } | null = null;
         // Before the handles see the press: a press on a handle is not a selection
         this.view.surface.addEventListener('pointerdown', (event) => {
-            start = event.isPrimary && event.button === 0 && this.gizmo.axis === null ? { x: event.clientX, y: event.clientY } : null;
+            // Where both handles are, the arrow of the height wins
+            this.gizmo.enabled = this.lifter.axis === null;
+            start = this.selecting && event.isPrimary && event.button === 0 && this.gizmo.axis === null && this.lifter.axis === null ? { x: event.clientX, y: event.clientY } : null;
         }, { capture: true });
         this.view.surface.addEventListener('pointerup', (event) => {
-            if (start === null || this.gizmo.dragging || Math.hypot(event.clientX - start.x, event.clientY - start.y) > PRESS) {
+            this.gizmo.enabled = true;
+            if (start === null || this.gizmo.dragging || this.lifter.dragging || Math.hypot(event.clientX - start.x, event.clientY - start.y) > PRESS) {
                 return;
             }
             const area = this.view.surface.getBoundingClientRect();

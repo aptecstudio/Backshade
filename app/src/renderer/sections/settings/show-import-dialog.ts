@@ -113,7 +113,9 @@ export function openShowImportDialog(): void {
         const expanded = new Set<ImportCategory>();
         const rows: ItemRow[] = [];
         const categories: Array<{ category: ImportCategory; toggle: Key; expand: Key; list: Stack; rows: ItemRow[] }> = [];
-        const neededBy = (key: string): string[] => catalog.items.filter((item) => item.requires.includes(key)).map((item) => item.label);
+        // The parts of the stage have no name of their own
+        const nameOf = (item: ImportCatalog['items'][number]): string => item.label === '' ? t(`showImport.kinds.${item.kind}`) : item.label;
+        const neededBy = (key: string): string[] => catalog.items.filter((item) => item.requires.includes(key)).map(nameOf);
 
         const update = (): void => {
             const effective = withRequirements(catalog.items, chosen);
@@ -146,7 +148,7 @@ export function openShowImportDialog(): void {
                 continue;
             }
             const categoryRows = items.map((item): ItemRow => {
-                const toggle = new Key({ label: item.label });
+                const toggle = new Key({ label: nameOf(item) });
                 toggle.onPress(() => {
                     if (chosen.has(item.key)) {
                         chosen.delete(item.key);

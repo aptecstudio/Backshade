@@ -23,6 +23,8 @@ export interface UniverseMap {
     widePairs: Array<[number, number]>;
     /** 1 for the channels used by a fixture */
     patched: Uint8Array;
+    /** 1 for the channels set to 0 by the blackout and by a closed grand master */
+    stopped: Uint8Array;
 }
 
 // Color channels that give the intensity of fixtures without a dimmer channel
@@ -36,7 +38,8 @@ function emptyUniverse(): UniverseMap {
         intensity: new Uint8Array(UNIVERSE_SIZE),
         finePairs: [],
         widePairs: [],
-        patched: new Uint8Array(UNIVERSE_SIZE)
+        patched: new Uint8Array(UNIVERSE_SIZE),
+        stopped: new Uint8Array(UNIVERSE_SIZE)
     };
 }
 
@@ -72,6 +75,9 @@ export function buildChannelMap(patch: ShowPatch, lookup: (id: string) => Fixtur
             map.defaults[index] = channel.defaultValue ?? 0;
             if (isIntensity(channel.attribute)) {
                 map.intensity[index] = 1;
+            }
+            if (channel.blackout === true) {
+                map.stopped[index] = 1;
             }
         });
         for (const channel of definition.channels) {

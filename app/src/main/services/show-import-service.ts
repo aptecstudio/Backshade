@@ -104,6 +104,10 @@ export function registerShowImportService(router: RequestRouter, bus: EventBus, 
         if (plan.memories !== null) {
             session.setMemories(plan.memories);
         }
+        // After the patch, whose fixtures the stage places
+        if (plan.stage !== null) {
+            session.setStage(plan.stage);
+        }
         if (plan.operators !== null) {
             session.setOperators(plan.operators);
         }

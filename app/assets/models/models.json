@@ -1,31 +1,232 @@
 [
     {
+        "id": "truss-05m",
+        "category": "truss",
+        "file": "truss-05m.obj",
+        "width": 0.52,
+        "length": 0.5
+    },
+    {
         "id": "truss-1m",
         "category": "truss",
         "file": "truss-1m.obj",
+        "width": 1.02,
         "length": 1
     },
     {
         "id": "truss-2m",
         "category": "truss",
         "file": "truss-2m.obj",
+        "width": 2.02,
         "length": 2
     },
     {
         "id": "truss-3m",
         "category": "truss",
         "file": "truss-3m.obj",
+        "width": 3.02,
         "length": 3
+    },
+    {
+        "id": "truss-4m",
+        "category": "truss",
+        "file": "truss-4m.obj",
+        "width": 4.02,
+        "length": 4
+    },
+    {
+        "id": "truss-corner",
+        "category": "truss",
+        "file": "truss-corner.obj",
+        "width": 0.66,
+        "rails": [
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0.5,
+                    0,
+                    0
+                ]
+            ],
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0.5
+                ]
+            ]
+        ]
+    },
+    {
+        "id": "truss-t",
+        "category": "truss",
+        "file": "truss-t.obj",
+        "width": 1.02,
+        "rails": [
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0.5,
+                    0,
+                    0
+                ]
+            ],
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    -0.5,
+                    0,
+                    0
+                ]
+            ],
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0.5
+                ]
+            ]
+        ]
+    },
+    {
+        "id": "truss-cross",
+        "category": "truss",
+        "file": "truss-cross.obj",
+        "width": 1.02,
+        "rails": [
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0.5,
+                    0,
+                    0
+                ]
+            ],
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    -0.5,
+                    0,
+                    0
+                ]
+            ],
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0.5
+                ]
+            ],
+            [
+                [
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    -0.5
+                ]
+            ]
+        ]
+    },
+    {
+        "id": "truss-base",
+        "category": "truss",
+        "file": "truss-base.obj",
+        "width": 0.8
+    },
+    {
+        "id": "tower-3m",
+        "category": "truss",
+        "file": "tower-3m.obj",
+        "width": 0.8,
+        "tower": 3
+    },
+    {
+        "id": "tower-4m",
+        "category": "truss",
+        "file": "tower-4m.obj",
+        "width": 0.8,
+        "tower": 4
+    },
+    {
+        "id": "deck-1x1",
+        "category": "stage",
+        "file": "deck-1x1.obj",
+        "width": 1
     },
     {
         "id": "deck-2x1",
         "category": "stage",
-        "file": "deck-2x1.obj"
+        "file": "deck-2x1.obj",
+        "width": 2
+    },
+    {
+        "id": "deck-2x1-high",
+        "category": "stage",
+        "file": "deck-2x1-high.obj",
+        "width": 2
+    },
+    {
+        "id": "drum-riser",
+        "category": "stage",
+        "file": "drum-riser.obj",
+        "width": 2
+    },
+    {
+        "id": "stairs-40",
+        "category": "stage",
+        "file": "stairs-40.obj",
+        "width": 1
+    },
+    {
+        "id": "stairs-100",
+        "category": "stage",
+        "file": "stairs-100.obj",
+        "width": 1
     },
     {
         "id": "moving-head",
         "category": "fixtures",
         "file": "moving-head.obj",
+        "width": 0.4,
         "pivots": {
             "pan": [
                 0,
@@ -38,56 +239,643 @@
                 0
             ]
         },
-        "emitter": {
-            "position": [
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.593,
+                    0
+                ],
+                "direction": [
+                    0,
+                    1,
+                    0
+                ],
+                "radius": 0.09
+            }
+        ]
+    },
+    {
+        "id": "moving-head-wash",
+        "category": "fixtures",
+        "file": "moving-head-wash.obj",
+        "width": 0.4,
+        "pivots": {
+            "pan": [
                 0,
-                0.593,
+                0.16,
                 0
             ],
-            "direction": [
+            "tilt": [
                 0,
-                1,
+                0.4,
+                0
+            ]
+        },
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.513,
+                    0
+                ],
+                "direction": [
+                    0,
+                    1,
+                    0
+                ],
+                "radius": 0.13
+            }
+        ]
+    },
+    {
+        "id": "moving-head-beam",
+        "category": "fixtures",
+        "file": "moving-head-beam.obj",
+        "width": 0.4,
+        "pivots": {
+            "pan": [
+                0,
+                0.16,
                 0
             ],
-            "radius": 0.09
-        }
+            "tilt": [
+                0,
+                0.4,
+                0
+            ]
+        },
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.576,
+                    0
+                ],
+                "direction": [
+                    0,
+                    1,
+                    0
+                ],
+                "radius": 0.05
+            }
+        ]
     },
     {
         "id": "par",
         "category": "fixtures",
         "file": "par.obj",
-        "emitter": {
-            "position": [
-                0,
-                0.18,
-                0.091
-            ],
-            "direction": [
-                0,
-                0,
-                1
-            ],
-            "radius": 0.09
-        }
+        "width": 0.26,
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.18,
+                    0.091
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.09
+            }
+        ]
+    },
+    {
+        "id": "led-bar",
+        "category": "fixtures",
+        "file": "led-bar.obj",
+        "width": 1,
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.09,
+                    0.053
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.2
+            }
+        ]
+    },
+    {
+        "id": "blinder",
+        "category": "fixtures",
+        "file": "blinder.obj",
+        "width": 0.54,
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.18,
+                    0.069
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.2
+            }
+        ]
+    },
+    {
+        "id": "strobe",
+        "category": "fixtures",
+        "file": "strobe.obj",
+        "width": 0.48,
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    0.16,
+                    0.07
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.15
+            }
+        ]
+    },
+    {
+        "id": "follow-spot",
+        "category": "fixtures",
+        "file": "follow-spot.obj",
+        "width": 0.81,
+        "emitters": [
+            {
+                "position": [
+                    0,
+                    1.38,
+                    0.529
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.095
+            }
+        ]
+    },
+    {
+        "id": "stairville-quad",
+        "category": "fixtures",
+        "file": "stairville-quad.obj",
+        "width": 1.2,
+        "mount": 0.262,
+        "hang": 0.308,
+        "emitters": [
+            {
+                "position": [
+                    -0.47,
+                    0.13,
+                    0.038
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.08
+            },
+            {
+                "position": [
+                    -0.18,
+                    0.13,
+                    0.038
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.08
+            },
+            {
+                "position": [
+                    0.18,
+                    0.13,
+                    0.038
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.08
+            },
+            {
+                "position": [
+                    0.47,
+                    0.13,
+                    0.038
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.08
+            }
+        ]
+    },
+    {
+        "id": "stairville-bossfx",
+        "category": "fixtures",
+        "file": "stairville-bossfx.obj",
+        "width": 1.52,
+        "mount": 0.23,
+        "hang": 0.415,
+        "emitters": [
+            {
+                "position": [
+                    -0.6,
+                    0.11,
+                    -0.13
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.2,
+                "kind": "derby"
+            },
+            {
+                "position": [
+                    -0.22,
+                    0.11,
+                    0.07
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.085
+            },
+            {
+                "position": [
+                    0.22,
+                    0.11,
+                    0.07
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.085
+            },
+            {
+                "position": [
+                    0.6,
+                    0.11,
+                    -0.13
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.2,
+                "kind": "derby"
+            },
+            {
+                "position": [
+                    0,
+                    0.365,
+                    0.077
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.02,
+                "kind": "laser"
+            },
+            {
+                "position": [
+                    -0.68,
+                    0.265,
+                    0.044
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.018,
+                "kind": "led"
+            },
+            {
+                "position": [
+                    -0.4,
+                    0.265,
+                    0.044
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.018,
+                "kind": "led"
+            },
+            {
+                "position": [
+                    0.4,
+                    0.265,
+                    0.044
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.018,
+                "kind": "led"
+            },
+            {
+                "position": [
+                    0.68,
+                    0.265,
+                    0.044
+                ],
+                "direction": [
+                    0,
+                    0,
+                    1
+                ],
+                "radius": 0.018,
+                "kind": "led"
+            }
+        ]
     },
     {
         "id": "singer-male",
         "category": "musicians",
-        "file": "singer-male.obj"
+        "file": "singer-male.obj",
+        "width": 0.63
     },
     {
         "id": "singer-female",
         "category": "musicians",
-        "file": "singer-female.obj"
+        "file": "singer-female.obj",
+        "width": 0.56
     },
     {
-        "id": "wedge",
+        "id": "guitarist-male",
+        "category": "musicians",
+        "file": "guitarist-male.obj",
+        "width": 1
+    },
+    {
+        "id": "guitarist-female",
+        "category": "musicians",
+        "file": "guitarist-female.obj",
+        "width": 0.99
+    },
+    {
+        "id": "guitarist-acoustic-male",
+        "category": "musicians",
+        "file": "guitarist-acoustic-male.obj",
+        "width": 1.02
+    },
+    {
+        "id": "guitarist-acoustic-female",
+        "category": "musicians",
+        "file": "guitarist-acoustic-female.obj",
+        "width": 1.01
+    },
+    {
+        "id": "bassist-male",
+        "category": "musicians",
+        "file": "bassist-male.obj",
+        "width": 1.17
+    },
+    {
+        "id": "bassist-female",
+        "category": "musicians",
+        "file": "bassist-female.obj",
+        "width": 1.16
+    },
+    {
+        "id": "drummer-male",
+        "category": "musicians",
+        "file": "drummer-male.obj",
+        "width": 1.6
+    },
+    {
+        "id": "drummer-female",
+        "category": "musicians",
+        "file": "drummer-female.obj",
+        "width": 1.6
+    },
+    {
+        "id": "keyboardist-male",
+        "category": "musicians",
+        "file": "keyboardist-male.obj",
+        "width": 1.28
+    },
+    {
+        "id": "keyboardist-female",
+        "category": "musicians",
+        "file": "keyboardist-female.obj",
+        "width": 1.28
+    },
+    {
+        "id": "pianist-male",
+        "category": "musicians",
+        "file": "pianist-male.obj",
+        "width": 1.48
+    },
+    {
+        "id": "pianist-female",
+        "category": "musicians",
+        "file": "pianist-female.obj",
+        "width": 1.48
+    },
+    {
+        "id": "harpist-male",
+        "category": "musicians",
+        "file": "harpist-male.obj",
+        "width": 0.65
+    },
+    {
+        "id": "harpist-female",
+        "category": "musicians",
+        "file": "harpist-female.obj",
+        "width": 0.61
+    },
+    {
+        "id": "violinist-male",
+        "category": "musicians",
+        "file": "violinist-male.obj",
+        "width": 0.72
+    },
+    {
+        "id": "violinist-female",
+        "category": "musicians",
+        "file": "violinist-female.obj",
+        "width": 0.72
+    },
+    {
+        "id": "trumpeter-male",
+        "category": "musicians",
+        "file": "trumpeter-male.obj",
+        "width": 0.54
+    },
+    {
+        "id": "trumpeter-female",
+        "category": "musicians",
+        "file": "trumpeter-female.obj",
+        "width": 0.47
+    },
+    {
+        "id": "trombonist-male",
+        "category": "musicians",
+        "file": "trombonist-male.obj",
+        "width": 0.54
+    },
+    {
+        "id": "trombonist-female",
+        "category": "musicians",
+        "file": "trombonist-female.obj",
+        "width": 0.47
+    },
+    {
+        "id": "saxophonist-male",
+        "category": "musicians",
+        "file": "saxophonist-male.obj",
+        "width": 0.6
+    },
+    {
+        "id": "saxophonist-female",
+        "category": "musicians",
+        "file": "saxophonist-female.obj",
+        "width": 0.53
+    },
+    {
+        "id": "flutist-male",
+        "category": "musicians",
+        "file": "flutist-male.obj",
+        "width": 0.83
+    },
+    {
+        "id": "flutist-female",
+        "category": "musicians",
+        "file": "flutist-female.obj",
+        "width": 0.8
+    },
+    {
+        "id": "string-trio-male",
+        "category": "musicians",
+        "file": "string-trio-male.obj",
+        "width": 3.2
+    },
+    {
+        "id": "string-trio-female",
+        "category": "musicians",
+        "file": "string-trio-female.obj",
+        "width": 3.2
+    },
+    {
+        "id": "string-trio-mixed",
+        "category": "musicians",
+        "file": "string-trio-mixed.obj",
+        "width": 3.2
+    },
+    {
+        "id": "windup-stand",
         "category": "elements",
-        "file": "wedge.obj"
+        "file": "windup-stand.obj",
+        "width": 1.18,
+        "lift": {
+            "min": 1.67,
+            "max": 3.7
+        }
     },
     {
         "id": "amp",
         "category": "elements",
-        "file": "amp.obj"
+        "file": "amp.obj",
+        "width": 0.76
+    },
+    {
+        "id": "guitar-combo",
+        "category": "elements",
+        "file": "guitar-combo.obj",
+        "width": 0.56
+    },
+    {
+        "id": "bass-amp",
+        "category": "elements",
+        "file": "bass-amp.obj",
+        "width": 0.66
+    },
+    {
+        "id": "wedge",
+        "category": "elements",
+        "file": "wedge.obj",
+        "width": 0.56
+    },
+    {
+        "id": "pa-speaker",
+        "category": "elements",
+        "file": "pa-speaker.obj",
+        "width": 0.89
+    },
+    {
+        "id": "subwoofer",
+        "category": "elements",
+        "file": "subwoofer.obj",
+        "width": 0.72
+    },
+    {
+        "id": "mic-stand",
+        "category": "elements",
+        "file": "mic-stand.obj",
+        "width": 0.3
+    },
+    {
+        "id": "keyboard-stand",
+        "category": "elements",
+        "file": "keyboard-stand.obj",
+        "width": 0.74
+    },
+    {
+        "id": "guitar-stand",
+        "category": "elements",
+        "file": "guitar-stand.obj",
+        "width": 0.5
+    },
+    {
+        "id": "case-small",
+        "category": "elements",
+        "file": "case-small.obj",
+        "width": 0.62
+    },
+    {
+        "id": "case-large",
+        "category": "elements",
+        "file": "case-large.obj",
+        "width": 1.22
+    },
+    {
+        "id": "dj-booth",
+        "category": "elements",
+        "file": "dj-booth.obj",
+        "width": 1.8
     }
 ]

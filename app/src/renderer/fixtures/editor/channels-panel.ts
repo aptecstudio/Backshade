@@ -1,7 +1,7 @@
 /**
  * Fixture editor: the channels of the definition, one row each with
- * name, attribute, coarse channel (for 16-bit values), default value
- * and value ranges. The rows are rebuilt when the structure changes.
+ * name, attribute, coarse channel (for 16-bit values), default value,
+ * value ranges and whether the blackout stops it. The rows are rebuilt when the structure changes.
  */
 
 import { Key, Label, NumberField, Panel, SelectField, Stack, TextField } from '../../../framework/ts/index.js';
@@ -17,7 +17,8 @@ const COLUMNS: readonly TextKey[] = [
     'fixtureEditor.attribute',
     'fixtureEditor.fineOf',
     'fixtureEditor.defaultValue',
-    'fixtureEditor.capabilities'
+    'fixtureEditor.capabilities',
+    'fixtureEditor.blackout'
 ];
 
 export class ChannelsPanel extends Panel {
@@ -69,6 +70,19 @@ export class ChannelsPanel extends Panel {
         const capabilities = new Key({
             label: count === 0 ? t('fixtureEditor.noCapabilities') : t('fixtureEditor.capabilityCount', { count })
         });
+        const blackout = new Key({
+            label: t(channel.blackout === true ? 'fixtureEditor.blackoutStops' : 'fixtureEditor.blackoutKeeps'),
+            state: channel.blackout === true ? 'active' : 'normal'
+        });
+        blackout.onPress(() => {
+            if (channel.blackout === true) {
+                delete channel.blackout;
+            } else {
+                channel.blackout = true;
+            }
+            blackout.setState(channel.blackout === true ? 'active' : 'normal');
+            blackout.setLabel(t(channel.blackout === true ? 'fixtureEditor.blackoutStops' : 'fixtureEditor.blackoutKeeps'));
+        });
         const remove = new Key({ label: t('fixtureEditor.removeChannel'), icon: 'trash-2', iconOnly: true });
 
         name.onInput((value) => {
@@ -97,7 +111,7 @@ export class ChannelsPanel extends Panel {
             gap: 8,
             align: 'center',
             classes: ['channel-row'],
-            children: [name, attribute, fineOf, defaultValue, capabilities, remove]
+            children: [name, attribute, fineOf, defaultValue, capabilities, blackout, remove]
         });
     }
 }

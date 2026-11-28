@@ -1,14 +1,15 @@
 /**
  * Import from another show: scenes, chasers, fixtures (with matrices and
  * groups), audio (playlist items and files), video (outputs, text gobos,
- * timers and files), images and operators. Every item lists the items it
+ * timers and files), images, operators and the 3D stage (its scenery and
+ * its placed fixtures). Every item lists the items it
  * needs, which are imported with it; an item that takes a place already used
  * in the open show has a conflict, solved by adding it elsewhere, replacing
  * what is there or skipping it.
  */
 
 /** Categories of the import dialog */
-export const IMPORT_CATEGORIES = ['scenes', 'chasers', 'fixtures', 'audio', 'video', 'images', 'operators'] as const;
+export const IMPORT_CATEGORIES = ['scenes', 'chasers', 'fixtures', 'audio', 'video', 'images', 'operators', 'stage'] as const;
 
 export type ImportCategory = typeof IMPORT_CATEGORIES[number];
 
@@ -19,7 +20,8 @@ export type ImportItemKind =
     | 'audioItem' | 'audioFile'
     | 'videoOutput' | 'gobo' | 'timer' | 'videoFile'
     | 'imageFile'
-    | 'operator';
+    | 'operator'
+    | 'stageScenery' | 'stageFixtures';
 
 /** Category of every kind */
 export const IMPORT_KIND_CATEGORY: Readonly<Record<ImportItemKind, ImportCategory>> = {
@@ -35,7 +37,9 @@ export const IMPORT_KIND_CATEGORY: Readonly<Record<ImportItemKind, ImportCategor
     timer: 'video',
     videoFile: 'video',
     imageFile: 'images',
-    operator: 'operators'
+    operator: 'operators',
+    stageScenery: 'stage',
+    stageFixtures: 'stage'
 };
 
 /**
@@ -49,7 +53,7 @@ export const CONFLICT_RESOLUTIONS = ['add', 'replace', 'skip'] as const;
 export type ConflictResolution = typeof CONFLICT_RESOLUTIONS[number];
 
 /** What an imported item would collide with */
-export type ImportConflictKind = 'slot' | 'address' | 'file' | 'name';
+export type ImportConflictKind = 'slot' | 'address' | 'file' | 'name' | 'stage';
 
 export interface ImportConflict {
     kind: ImportConflictKind;

@@ -218,6 +218,26 @@ export function buildCatalog(source: ImportShow, target: ImportShow, currentOper
         });
     }
 
+    // The 3D stage in two parts: the scenery, and the fixtures with what they hang on
+    const parts = [
+        { kind: 'stageScenery', objects: from.stage.objects.filter((object) => object.fixture === null), there: to.stage.objects.filter((object) => object.fixture === null) },
+        { kind: 'stageFixtures', objects: from.stage.objects.filter((object) => object.fixture !== null), there: to.stage.objects.filter((object) => object.fixture !== null) }
+    ] as const;
+    for (const { kind, objects, there } of parts) {
+        if (objects.length === 0) {
+            continue;
+        }
+        const scenery = kind === 'stageFixtures' && objects.some((object) => object.hungOn !== null) ? [importKey('stageScenery', 'stage')] : [];
+        items.push({
+            key: importKey(kind, 'stage'),
+            kind,
+            label: '',
+            detail: String(objects.length),
+            requires: [...objects.flatMap((object) => object.fixture === null ? [] : patchKey(object.fixture)), ...scenery],
+            conflict: there.length === 0 ? null : { kind: 'stage', with: String(there.length), resolutions: ALL }
+        });
+    }
+
     // Requirements only point to items of the catalog
     const keys = new Set(items.map((item) => item.key));
     for (const item of items) {

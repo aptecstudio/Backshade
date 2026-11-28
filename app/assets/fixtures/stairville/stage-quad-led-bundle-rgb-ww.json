@@ -1,0 +1,671 @@
+{
+  "formatVersion": 1,
+  "manufacturer": "Stairville",
+  "model": "Stage Quad LED Bundle RGB WW",
+  "category": "ledBar",
+  "physical": {
+    "width": 1200,
+    "height": 330,
+    "depth": 70,
+    "weight": 12.5,
+    "power": 110,
+    "source": "LED 28 x 4 W RGB WW",
+    "beamAngle": {
+      "min": 40,
+      "max": 40
+    }
+  },
+  "channels": [
+    {
+      "key": "dimmer",
+      "name": "Dimmer",
+      "attribute": "dimmer"
+    },
+    {
+      "key": "red",
+      "name": "Red",
+      "attribute": "red"
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "attribute": "green"
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite",
+      "name": "Warm white",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "red12",
+      "name": "Red spots 1-2",
+      "attribute": "red"
+    },
+    {
+      "key": "green12",
+      "name": "Green spots 1-2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue12",
+      "name": "Blue spots 1-2",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite12",
+      "name": "Warm white spots 1-2",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "red34",
+      "name": "Red spots 3-4",
+      "attribute": "red"
+    },
+    {
+      "key": "green34",
+      "name": "Green spots 3-4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue34",
+      "name": "Blue spots 3-4",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite34",
+      "name": "Warm white spots 3-4",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "red1",
+      "name": "Red spot 1",
+      "attribute": "red"
+    },
+    {
+      "key": "green1",
+      "name": "Green spot 1",
+      "attribute": "green"
+    },
+    {
+      "key": "blue1",
+      "name": "Blue spot 1",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite1",
+      "name": "Warm white spot 1",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "red2",
+      "name": "Red spot 2",
+      "attribute": "red"
+    },
+    {
+      "key": "green2",
+      "name": "Green spot 2",
+      "attribute": "green"
+    },
+    {
+      "key": "blue2",
+      "name": "Blue spot 2",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite2",
+      "name": "Warm white spot 2",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "red3",
+      "name": "Red spot 3",
+      "attribute": "red"
+    },
+    {
+      "key": "green3",
+      "name": "Green spot 3",
+      "attribute": "green"
+    },
+    {
+      "key": "blue3",
+      "name": "Blue spot 3",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite3",
+      "name": "Warm white spot 3",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "red4",
+      "name": "Red spot 4",
+      "attribute": "red"
+    },
+    {
+      "key": "green4",
+      "name": "Green spot 4",
+      "attribute": "green"
+    },
+    {
+      "key": "blue4",
+      "name": "Blue spot 4",
+      "attribute": "blue"
+    },
+    {
+      "key": "warmWhite4",
+      "name": "Warm white spot 4",
+      "attribute": "warmWhite"
+    },
+    {
+      "key": "programme2",
+      "name": "Automatic programme",
+      "attribute": "effect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 10,
+          "label": "Automatic show Pr.01",
+          "kind": "program"
+        },
+        {
+          "from": 11,
+          "to": 21,
+          "label": "Automatic show Pr.02",
+          "kind": "program"
+        },
+        {
+          "from": 22,
+          "to": 32,
+          "label": "Automatic show Pr.03",
+          "kind": "program"
+        },
+        {
+          "from": 33,
+          "to": 43,
+          "label": "Automatic show Pr.04",
+          "kind": "program"
+        },
+        {
+          "from": 44,
+          "to": 54,
+          "label": "Automatic show Pr.05",
+          "kind": "program"
+        },
+        {
+          "from": 55,
+          "to": 65,
+          "label": "Automatic show Pr.06",
+          "kind": "program"
+        },
+        {
+          "from": 66,
+          "to": 76,
+          "label": "Automatic show Pr.07",
+          "kind": "program"
+        },
+        {
+          "from": 77,
+          "to": 87,
+          "label": "Automatic show Pr.08",
+          "kind": "program"
+        },
+        {
+          "from": 88,
+          "to": 98,
+          "label": "Automatic show Pr.09",
+          "kind": "program"
+        },
+        {
+          "from": 99,
+          "to": 109,
+          "label": "Automatic show Pr.10",
+          "kind": "program"
+        },
+        {
+          "from": 110,
+          "to": 120,
+          "label": "Automatic show Pr.11",
+          "kind": "program"
+        },
+        {
+          "from": 121,
+          "to": 131,
+          "label": "Automatic show Pr.12",
+          "kind": "program"
+        },
+        {
+          "from": 132,
+          "to": 142,
+          "label": "Automatic show Pr.13",
+          "kind": "program"
+        },
+        {
+          "from": 143,
+          "to": 153,
+          "label": "Automatic show Pr.14",
+          "kind": "program"
+        },
+        {
+          "from": 154,
+          "to": 164,
+          "label": "Automatic show Pr.15",
+          "kind": "program"
+        },
+        {
+          "from": 165,
+          "to": 175,
+          "label": "Automatic show Pr.16",
+          "kind": "program"
+        },
+        {
+          "from": 176,
+          "to": 186,
+          "label": "Automatic show Pr.17",
+          "kind": "program"
+        },
+        {
+          "from": 187,
+          "to": 197,
+          "label": "Automatic show Pr.18",
+          "kind": "program"
+        },
+        {
+          "from": 198,
+          "to": 208,
+          "label": "Automatic show Pr.19",
+          "kind": "program"
+        },
+        {
+          "from": 209,
+          "to": 219,
+          "label": "Automatic show Pr.20",
+          "kind": "program"
+        },
+        {
+          "from": 220,
+          "to": 230,
+          "label": "Automatic show Pr.21",
+          "kind": "program"
+        },
+        {
+          "from": 231,
+          "to": 241,
+          "label": "Automatic show Pr.22",
+          "kind": "program"
+        },
+        {
+          "from": 242,
+          "to": 255,
+          "label": "Sound-controlled show",
+          "kind": "program"
+        }
+      ]
+    },
+    {
+      "key": "programme",
+      "name": "Automatic programme",
+      "attribute": "effect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 0,
+          "label": "Without function"
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "label": "Automatic show Pr.01",
+          "kind": "program"
+        },
+        {
+          "from": 11,
+          "to": 21,
+          "label": "Automatic show Pr.02",
+          "kind": "program"
+        },
+        {
+          "from": 22,
+          "to": 32,
+          "label": "Automatic show Pr.03",
+          "kind": "program"
+        },
+        {
+          "from": 33,
+          "to": 43,
+          "label": "Automatic show Pr.04",
+          "kind": "program"
+        },
+        {
+          "from": 44,
+          "to": 54,
+          "label": "Automatic show Pr.05",
+          "kind": "program"
+        },
+        {
+          "from": 55,
+          "to": 65,
+          "label": "Automatic show Pr.06",
+          "kind": "program"
+        },
+        {
+          "from": 66,
+          "to": 76,
+          "label": "Automatic show Pr.07",
+          "kind": "program"
+        },
+        {
+          "from": 77,
+          "to": 87,
+          "label": "Automatic show Pr.08",
+          "kind": "program"
+        },
+        {
+          "from": 88,
+          "to": 98,
+          "label": "Automatic show Pr.09",
+          "kind": "program"
+        },
+        {
+          "from": 99,
+          "to": 109,
+          "label": "Automatic show Pr.10",
+          "kind": "program"
+        },
+        {
+          "from": 110,
+          "to": 120,
+          "label": "Automatic show Pr.11",
+          "kind": "program"
+        },
+        {
+          "from": 121,
+          "to": 131,
+          "label": "Automatic show Pr.12",
+          "kind": "program"
+        },
+        {
+          "from": 132,
+          "to": 142,
+          "label": "Automatic show Pr.13",
+          "kind": "program"
+        },
+        {
+          "from": 143,
+          "to": 153,
+          "label": "Automatic show Pr.14",
+          "kind": "program"
+        },
+        {
+          "from": 154,
+          "to": 164,
+          "label": "Automatic show Pr.15",
+          "kind": "program"
+        },
+        {
+          "from": 165,
+          "to": 175,
+          "label": "Automatic show Pr.16",
+          "kind": "program"
+        },
+        {
+          "from": 176,
+          "to": 186,
+          "label": "Automatic show Pr.17",
+          "kind": "program"
+        },
+        {
+          "from": 187,
+          "to": 197,
+          "label": "Automatic show Pr.18",
+          "kind": "program"
+        },
+        {
+          "from": 198,
+          "to": 208,
+          "label": "Automatic show Pr.19",
+          "kind": "program"
+        },
+        {
+          "from": 209,
+          "to": 219,
+          "label": "Automatic show Pr.20",
+          "kind": "program"
+        },
+        {
+          "from": 220,
+          "to": 230,
+          "label": "Automatic show Pr.21",
+          "kind": "program"
+        },
+        {
+          "from": 231,
+          "to": 241,
+          "label": "Automatic show Pr.22",
+          "kind": "program"
+        },
+        {
+          "from": 242,
+          "to": 255,
+          "label": "Sound-controlled show",
+          "kind": "program"
+        }
+      ]
+    },
+    {
+      "key": "function",
+      "name": "Color, speed or sound mode",
+      "attribute": "effect",
+      "capabilities": [
+        {
+          "from": 0,
+          "to": 16,
+          "label": "Off, or programme speed"
+        },
+        {
+          "from": 17,
+          "to": 33,
+          "label": "Cyan, or programme speed"
+        },
+        {
+          "from": 34,
+          "to": 50,
+          "label": "Pink, or programme speed"
+        },
+        {
+          "from": 51,
+          "to": 67,
+          "label": "Magenta, or programme speed"
+        },
+        {
+          "from": 68,
+          "to": 84,
+          "label": "Orange, or programme speed"
+        },
+        {
+          "from": 85,
+          "to": 101,
+          "label": "Cold white, or programme speed"
+        },
+        {
+          "from": 102,
+          "to": 118,
+          "label": "Pompadour, or programme speed"
+        },
+        {
+          "from": 119,
+          "to": 135,
+          "label": "Light green, or programme speed"
+        },
+        {
+          "from": 136,
+          "to": 152,
+          "label": "Light blue, or programme speed"
+        },
+        {
+          "from": 153,
+          "to": 167,
+          "label": "Yellow, or programme speed"
+        },
+        {
+          "from": 168,
+          "to": 186,
+          "label": "Warm white, or programme speed"
+        },
+        {
+          "from": 187,
+          "to": 202,
+          "label": "Red, or programme speed"
+        },
+        {
+          "from": 203,
+          "to": 220,
+          "label": "Green, or programme speed"
+        },
+        {
+          "from": 221,
+          "to": 237,
+          "label": "Blue, or programme speed"
+        },
+        {
+          "from": 238,
+          "to": 254,
+          "label": "Amber, or programme speed"
+        },
+        {
+          "from": 255,
+          "to": 255,
+          "label": "Maximum brightness, or programme speed"
+        }
+      ]
+    },
+    {
+      "key": "strobe",
+      "name": "Strobe",
+      "attribute": "shutter"
+    }
+  ],
+  "modes": [
+    {
+      "name": "2 channels",
+      "channels": [
+        "programme2",
+        "function"
+      ]
+    },
+    {
+      "name": "4 channels",
+      "channels": [
+        "red",
+        "green",
+        "blue",
+        "warmWhite"
+      ]
+    },
+    {
+      "name": "5 channels",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "warmWhite"
+      ]
+    },
+    {
+      "name": "8 channels",
+      "channels": [
+        "dimmer",
+        "red",
+        "green",
+        "blue",
+        "warmWhite",
+        "programme",
+        "function",
+        "strobe"
+      ]
+    },
+    {
+      "name": "10 channels",
+      "channels": [
+        "dimmer",
+        "red12",
+        "green12",
+        "blue12",
+        "warmWhite12",
+        "red34",
+        "green34",
+        "blue34",
+        "warmWhite34",
+        "strobe"
+      ],
+      "heads": [
+        [
+          "red12",
+          "green12",
+          "blue12",
+          "warmWhite12"
+        ],
+        [
+          "red34",
+          "green34",
+          "blue34",
+          "warmWhite34"
+        ]
+      ]
+    },
+    {
+      "name": "18 channels",
+      "channels": [
+        "dimmer",
+        "red1",
+        "green1",
+        "blue1",
+        "warmWhite1",
+        "red2",
+        "green2",
+        "blue2",
+        "warmWhite2",
+        "red3",
+        "green3",
+        "blue3",
+        "warmWhite3",
+        "red4",
+        "green4",
+        "blue4",
+        "warmWhite4",
+        "strobe"
+      ],
+      "heads": [
+        [
+          "red1",
+          "green1",
+          "blue1",
+          "warmWhite1"
+        ],
+        [
+          "red2",
+          "green2",
+          "blue2",
+          "warmWhite2"
+        ],
+        [
+          "red3",
+          "green3",
+          "blue3",
+          "warmWhite3"
+        ],
+        [
+          "red4",
+          "green4",
+          "blue4",
+          "warmWhite4"
+        ]
+      ]
+    }
+  ]
+}

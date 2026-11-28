@@ -1,9 +1,11 @@
 /**
  * Standing human figure, male or female, with face, hair, clothes, hands and
- * shoes. Arms are posed by their elbow and wrist, so the same figure serves
- * singers and musicians. The figure faces +Z: its right side is towards -X.
+ * shoes. Arms are posed by their elbow and wrist, and the legs of a seated
+ * figure by their knee and ankle, so the same figure serves singers and
+ * musicians. The figure faces +Z: its right side is towards -X.
  */
 
+import type { Look } from './looks.mts';
 import type { Obj, Section } from './obj.mts';
 import { add, scale, sub, unit, type Vector } from './vector.mts';
 
@@ -17,6 +19,19 @@ export interface Arm {
     hand: Vector;
     /** Fingers curled around something */
     grip: boolean;
+}
+
+/** Leg of a seated figure */
+export interface Leg {
+    knee: Vector;
+    ankle: Vector;
+}
+
+export interface Pose {
+    /** How much a seated figure is lowered from standing, in meters */
+    drop?: number;
+    /** Legs of a seated figure, right then left; standing legs without them */
+    legs?: [Leg, Leg];
 }
 
 /** Measures that tell the two builds apart, in meters */
@@ -38,10 +53,15 @@ export function mouthOf(build: Build): Vector {
     return [0, 1.585 * BUILDS[build].scale, 0.098];
 }
 
-/** Shoulder joint of a side (-1 right, 1 left) */
-export function shoulderOf(build: Build, side: number): Vector {
+/** Shoulder joint of a side (-1 right, 1 left), lowered by the drop of a seated figure */
+export function shoulderOf(build: Build, side: number, drop = 0): Vector {
     const body = BUILDS[build];
-    return [side * body.shoulder, 1.42 * body.scale, -0.01];
+    return [side * body.shoulder, 1.42 * body.scale - drop, -0.01];
+}
+
+/** Hip joint of a side of a seated figure */
+export function hipOf(build: Build, side: number, drop: number): Vector {
+    return [side * 0.09, 0.9 * BUILDS[build].scale - drop, -0.005];
 }
 
 function head(obj: Obj, build: Build): void {
@@ -75,49 +95,94 @@ function head(obj: Obj, build: Build): void {
     obj.loft([round([-0.022, y(1.585), 0.092], 0.002), round([0, y(1.585), 0.099], build === 'female' ? 0.0075 : 0.0055), round([0.022, y(1.585), 0.092], 0.002)], 8, 3);
 }
 
-function hair(obj: Obj, build: Build): void {
+/** Cap of hair over the skull: how much it stands out from the head */
+function cap(obj: Obj, build: Build, volume: number, back: number): void {
     const y = (value: number): number => value * BUILDS[build].scale;
-    obj.material('hair');
-    if (build === 'male') {
-        // Short cut: a cap set back from the forehead
-        obj.loft([
-            level(y(1.615), 0.045, 0.03, -0.065),
-            level(y(1.66), 0.08, 0.07, -0.032),
-            level(y(1.705), 0.081, 0.093, -0.012),
-            level(y(1.738), 0.062, 0.082, -0.004),
-            level(y(1.762), 0.032, 0.048, 0.002),
-            level(y(1.766), 0.004, 0.004, 0.002)
-        ], 20, 3, true);
-        return;
-    }
-    // Long hair: the cap and the fall behind the shoulders
     obj.loft([
-        level(y(1.645), 0.083, 0.062, -0.05),
-        level(y(1.7), 0.084, 0.09, -0.018),
-        level(y(1.74), 0.065, 0.084, -0.006),
-        level(y(1.766), 0.033, 0.05, 0),
-        level(y(1.772), 0.004, 0.004, 0)
+        level(y(1.615), 0.045 * volume, 0.03, -0.065 - back),
+        level(y(1.66), 0.08 * volume, 0.07 * volume, -0.032 - back),
+        level(y(1.705), 0.081 * volume, 0.093 * volume, -0.012 - back),
+        level(y(1.738), 0.062 * volume, 0.082 * volume, -0.004 - back),
+        level(y(1.762 + (volume - 1) * 0.08), 0.032 * volume, 0.048 * volume, 0.002 - back),
+        level(y(1.766 + (volume - 1) * 0.1), 0.004, 0.004, 0.002 - back)
     ], 20, 3, true);
+}
+
+/** Hair falling behind the head down to a height, with the locks at the sides */
+function fall(obj: Obj, build: Build, bottom: number, locks: number): void {
+    const y = (value: number): number => value * BUILDS[build].scale;
     obj.loft([
-        level(y(1.32), 0.03, 0.012, -0.135),
-        level(y(1.4), 0.1, 0.025, -0.13),
-        level(y(1.5), 0.092, 0.042, -0.085),
+        level(y(bottom), 0.03, 0.012, -0.135),
+        level(y(bottom + 0.08), 0.1, 0.025, -0.13),
+        level(y(1.5 + (bottom - 1.32) * 0.3), 0.092, 0.042, -0.085),
         level(y(1.6), 0.09, 0.055, -0.058),
         level(y(1.67), 0.083, 0.058, -0.045)
     ], 20, 3, true);
     for (const side of [-1, 1]) {
-        obj.loft([level(y(1.46), 0.008, 0.008, -0.02, side * 0.07), level(y(1.57), 0.018, 0.03, -0.02, side * 0.08), level(y(1.69), 0.016, 0.045, -0.01, side * 0.072)], 10, 3, true);
+        obj.loft([level(y(locks), 0.008, 0.008, -0.02, side * 0.07), level(y((locks + 1.69) / 2), 0.018, 0.03, -0.02, side * 0.08), level(y(1.69), 0.016, 0.045, -0.01, side * 0.072)], 10, 3, true);
+    }
+}
+
+function hair(obj: Obj, build: Build, look: Look): void {
+    const y = (value: number): number => value * BUILDS[build].scale;
+    if (look.hair === 'bald') {
+        return;
+    }
+    obj.material(look.hairColor);
+    switch (look.hair) {
+        case 'buzz':
+            cap(obj, build, 0.97, -0.002);
+            break;
+        case 'short':
+            cap(obj, build, 1, 0);
+            break;
+        case 'quiff':
+            cap(obj, build, 1.03, 0);
+            obj.loft([level(y(1.73), 0.05, 0.03, 0.055), level(y(1.775), 0.055, 0.045, 0.045), level(y(1.795), 0.02, 0.02, 0.03)], 16, 3, true);
+            break;
+        case 'curly':
+            cap(obj, build, 1.06, 0.004);
+            for (let ring = 0; ring < 4; ring++) {
+                const height = 1.785 - ring * 0.036;
+                const radius = [0.035, 0.07, 0.088, 0.09][ring];
+                const count = [5, 10, 13, 13][ring];
+                for (let curl = 0; curl < count; curl++) {
+                    const angle = ((curl + ring * 0.5) / count) * Math.PI * 2;
+                    const z = Math.cos(angle) * radius - 0.012;
+                    // No curls over the face
+                    if (ring < 2 || z < 0.035) {
+                        obj.ball([Math.sin(angle) * radius, y(height), z], 0.024, 8, 5);
+                    }
+                }
+            }
+            break;
+        case 'bob':
+            cap(obj, build, 1.07, 0.006);
+            fall(obj, build, 1.52, 1.55);
+            break;
+        case 'long':
+            cap(obj, build, 1.05, 0.006);
+            fall(obj, build, 1.32, 1.46);
+            break;
+        case 'ponytail':
+            cap(obj, build, 1.02, 0.002);
+            obj.ball([0, y(1.69), -0.108], 0.028, 12, 8);
+            obj.loft([round([0, y(1.69), -0.11], 0.026), round([0, y(1.62), -0.155], 0.036), round([0, y(1.5), -0.14], 0.026), round([0, y(1.42), -0.125], 0.006)], 12, 3);
+            break;
+        case 'bun':
+            cap(obj, build, 1.02, 0.002);
+            obj.ball([0, y(1.72), -0.105], 0.048, 14, 10);
+            break;
     }
 }
 
 /** Shirt and trousers, or a knee length dress over the legs */
-function body(obj: Obj, build: Build): void {
+function body(obj: Obj, build: Build, dressed: boolean, look: Look): void {
     const b = BUILDS[build];
     const y = (value: number): number => value * b.scale;
     const female = build === 'female';
-    const top = female ? 'dress' : 'clothes';
-    obj.material(top);
-    const lower = female
+    obj.material(look.top);
+    const lower = dressed
         ? [level(y(0.55), 0.18, 0.125), level(y(0.72), 0.17, 0.12), level(y(0.9), b.hip * 1.03, 0.118, -0.008), level(y(1), b.hip * 0.9, 0.096)]
         : [level(y(0.95), b.hip, 0.1)];
     obj.loft([
@@ -130,20 +195,50 @@ function body(obj: Obj, build: Build): void {
         level(y(1.49), b.neck * 1.7, 0.062, -0.014),
         level(y(1.505), b.neck * 1.2, b.neck * 1.2, -0.01)
     ], 20, 3, true);
-    if (!female) {
-        obj.material('trousers');
+    if (!dressed) {
+        obj.material(look.bottom);
         obj.loft([level(y(0.84), 0.1, 0.075), level(y(0.9), b.hip * 0.98, 0.1, -0.006), level(y(0.99), b.hip * 0.96, 0.102)], 20, 3, true);
         obj.material('shoes');
         obj.loft([level(y(0.975), b.hip * 1.02, 0.107), level(y(1.005), b.hip * 1.01, 0.106)], 20, 1, true);
     }
 }
 
-function legs(obj: Obj, build: Build): void {
+/** Shoe flat on the floor under an ankle, pointing forward */
+function shoe(obj: Obj, build: Build, ankle: Vector): void {
+    const k = BUILDS[build].limb;
+    const [x, y, z] = ankle;
+    const low = y - 0.09;
+    obj.material('shoes');
+    obj.loft([
+        round([x, low + 0.045, z - 0.065], 0.012),
+        { at: [x, low + 0.05, z - 0.04], width: 0.046 * k, depth: 0.048 },
+        { at: [x, low + 0.05, z + 0.03], width: 0.05 * k, depth: 0.048 },
+        { at: [x, low + 0.036, z + 0.1], width: 0.05 * k, depth: 0.034 },
+        { at: [x, low + 0.027, z + 0.15], width: 0.038 * k, depth: 0.024 },
+        round([x, low + 0.024, z + 0.17], 0.008)
+    ], 10, 2);
+}
+
+/** Legs bent as given, for who sits */
+function seatedLegs(obj: Obj, build: Build, drop: number, pose: [Leg, Leg], look: Look): void {
+    const k = BUILDS[build].limb;
+    [-1, 1].forEach((side, index) => {
+        const hip = hipOf(build, side, drop);
+        const { knee, ankle } = pose[index];
+        obj.material(look.bottom);
+        obj.loft([round(hip, 0.082), round(between(hip, knee, 0.5), 0.07 * k), round(knee, 0.056 * k)], 12, 3);
+        obj.ball(knee, 0.056 * k, 10, 6);
+        obj.loft([round(knee, 0.054 * k), round(between(knee, ankle, 0.35), 0.056 * k), round(ankle, 0.037 * k)], 12, 3);
+        shoe(obj, build, ankle);
+    });
+}
+
+function legs(obj: Obj, build: Build, dressed: boolean, look: Look): void {
     const b = BUILDS[build];
     const y = (value: number): number => value * b.scale;
     for (const side of [-1, 1]) {
         const x = (value: number): number => side * value;
-        obj.material(build === 'female' ? 'figure' : 'trousers');
+        obj.material(dressed ? 'figure' : look.bottom);
         const k = b.limb;
         obj.loft([
             level(y(0.09), 0.036 * k, 0.04 * k, -0.01, x(0.105)),
@@ -168,9 +263,9 @@ function legs(obj: Obj, build: Build): void {
     }
 }
 
-function arm(obj: Obj, build: Build, side: number, pose: Arm): void {
+function arm(obj: Obj, build: Build, side: number, pose: Arm, drop: number, look: Look): void {
     const k = BUILDS[build].limb;
-    const shoulder = shoulderOf(build, side);
+    const shoulder = shoulderOf(build, side, drop);
     const sleeve = between(shoulder, pose.elbow, build === 'female' ? 0.28 : 0.72);
     obj.material('figure');
     obj.loft([
@@ -181,7 +276,7 @@ function arm(obj: Obj, build: Build, side: number, pose: Arm): void {
         round(pose.wrist, 0.023 * k)
     ], 12, 3);
     // Sleeve over the shoulder: short for him, shorter for her
-    obj.material(build === 'female' ? 'dress' : 'clothes');
+    obj.material(look.top);
     obj.ball(add(shoulder, [-side * 0.006, -0.008, 0]), 0.058 * k, 12, 8);
     obj.loft([round(shoulder, 0.056 * k), round(between(shoulder, sleeve, 0.55), 0.052 * k), round(sleeve, 0.047 * k)], 12, 3);
     hand(obj, side, pose, k);
@@ -210,12 +305,21 @@ function hand(obj: Obj, side: number, pose: Arm, k: number): void {
     obj.loft([round(thumb, 0.013 * k), round(add(add(along(0.07), scale(across, 0.046 * k)), scale(curl, 0.4)), 0.0085 * k)], 8, 2);
 }
 
-/** Adds the figure to the model */
-export function person(obj: Obj, build: Build, right: Arm, left: Arm): void {
-    legs(obj, build);
-    body(obj, build);
-    head(obj, build);
-    hair(obj, build);
-    arm(obj, build, -1, right);
-    arm(obj, build, 1, left);
+/** Adds the figure to the model; the arms are given where they end up, also for who sits */
+export function person(obj: Obj, build: Build, look: Look, right: Arm, left: Arm, pose: Pose = {}): void {
+    // Who sits wears trousers
+    const dressed = build === 'female' && look.dress === true && pose.legs === undefined;
+    const drop = pose.drop ?? 0;
+    if (pose.legs === undefined) {
+        legs(obj, build, dressed, look);
+    } else {
+        seatedLegs(obj, build, drop, pose.legs, look);
+    }
+    obj.within([0, -drop, 0], () => {
+        body(obj, build, dressed, look);
+        head(obj, build);
+        hair(obj, build, look);
+    });
+    arm(obj, build, -1, right, drop, look);
+    arm(obj, build, 1, left, drop, look);
 }

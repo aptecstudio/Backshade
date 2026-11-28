@@ -135,6 +135,7 @@ export const METHOD_RULES: Partial<Record<EngineMethod, MethodRule>> = {
     'fixtures.save': edit('patch'),
     'fixtures.delete': edit('patch'),
     'fixtures.import': edit('patch'),
+    'fixtures.readImage': edit('patch'),
     'output.setWorkstation': edit('output'),
     'output.setFrameRate': edit('output'),
     'output.updateUniverse': edit('output'),

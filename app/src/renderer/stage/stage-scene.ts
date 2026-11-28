@@ -10,6 +10,8 @@ import { loadModel, type ModelInfo } from './model-library.js';
 interface Entry {
     model: string;
     node: THREE.Group;
+    /** Height of the top, for an adjustable stand */
+    height: number | null;
 }
 
 export class StageScene {
@@ -48,7 +50,7 @@ export class StageScene {
                 if (entry !== undefined) {
                     this.root.remove(entry.node);
                 }
-                entry = { model: object.model, node: new THREE.Group() };
+                entry = { model: object.model, node: new THREE.Group(), height: object.height };
                 entry.node.userData.stageId = object.id;
                 this.entries.set(object.id, entry);
                 this.root.add(entry.node);
@@ -63,9 +65,28 @@ export class StageScene {
 
     /** Puts a 3D object where its stage object says */
     place(object: StageObject): void {
-        const node = this.node(object.id);
-        node?.position.set(...object.position);
-        node?.rotation.set(...object.rotation.map(THREE.MathUtils.degToRad) as [number, number, number]);
+        const entry = this.entries.get(object.id);
+        if (entry !== undefined) {
+            entry.node.position.set(...object.position);
+            entry.node.rotation.set(...object.rotation.map(THREE.MathUtils.degToRad) as [number, number, number]);
+            entry.height = object.height;
+            this.extend(entry);
+        }
+    }
+
+    /** Slides the risers of an adjustable stand to its height */
+    private extend(entry: Entry): void {
+        const lift = this.models.get(entry.model)?.lift;
+        if (lift === undefined) {
+            return;
+        }
+        const raised = Math.max(0, Math.min(lift.max, entry.height ?? lift.min) - lift.min);
+        const first = entry.node.getObjectByName('riser1');
+        const second = entry.node.getObjectByName('riser2');
+        if (first !== undefined && second !== undefined) {
+            first.position.y = raised / 2;
+            second.position.y = raised;
+        }
     }
 
     private async fill(entry: Entry): Promise<void> {
@@ -73,6 +94,7 @@ export class StageScene {
         const info = this.models.get(entry.model);
         if (info !== undefined) {
             entry.node.add(await loadModel(info));
+            this.extend(entry);
         }
     }
 }

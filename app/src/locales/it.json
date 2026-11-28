@@ -804,6 +804,30 @@
       "readOnly": "Le fixture incluse non si possono modificare: modifica una copia, che nella tua libreria sostituisce quella inclusa."
     },
     "fixtureEditor": {
+      "shake": "Shake",
+      "readyMask": "Maschera pronta",
+      "goboPresets": {
+        "circle": "Cerchio pieno",
+        "dotRing": "Corona di punti",
+        "swirl": "Girandola",
+        "wave": "Onda",
+        "flower": "Fiore",
+        "cross": "Croce"
+      },
+      "gobo": "Gobo o prisma",
+      "chooseMask": "Scegli maschera",
+      "removeMask": "Togli maschera",
+      "mask": "Maschera del gobo, il bianco è la parte illuminata",
+      "facets": "facce",
+      "dimmerCurve": "Curva del dimmer",
+      "curveKinds": {
+        "linear": "Lineare",
+        "square": "Quadratica",
+        "inverseSquare": "Quadratica inversa",
+        "s": "A S",
+        "custom": "Disegnata"
+      },
+      "curveHint": "Trascina i punti; premi in un punto vuoto per aggiungerne uno, tieni premuto un punto per toglierlo. In orizzontale il dimmer, in verticale la luce.",
       "newTitle": "Nuova fixture",
       "editTitle": "Modifica fixture",
       "general": "Generale",
@@ -831,6 +855,9 @@
       "fineOf": "Canale fine di",
       "notFine": "No (8 bit)",
       "defaultValue": "Predefinito",
+      "blackout": "Blackout",
+      "blackoutStops": "Lo spegne",
+      "blackoutKeeps": "Resta",
       "capabilities": "Intervalli di valori",
       "capabilityCount": "{count} intervalli",
       "noCapabilities": "Tutta la corsa",
@@ -889,6 +916,11 @@
       "control": "Controllo"
     },
     "fixtureAttributes": {
+      "laserRed": "Laser rosso",
+      "laserGreen": "Laser verde",
+      "laserRotation": "Rotazione laser",
+      "strobeWhite": "LED strobo bianchi",
+      "strobeUv": "LED UV",
       "dimmer": "Dimmer",
       "shutter": "Shutter e strobo",
       "red": "Rosso",
@@ -930,6 +962,7 @@
       "none": "Nessuna funzione"
     },
     "capabilityKinds": {
+      "program": "Programma automatico",
       "open": "Aperto",
       "closed": "Chiuso",
       "strobe": "Strobo",
@@ -946,6 +979,7 @@
       "none": "Nessuna funzione"
     },
     "fixtureIssues": {
+      "invalidDimmerCurve": "Curva del dimmer non valida",
       "invalidFormat": "Il file non è una definizione di fixture.",
       "newerFormat": "La definizione è stata creata con una versione più recente di Backshade.",
       "missingManufacturer": "Inserisci il produttore.",
@@ -1221,7 +1255,7 @@
     "showImport": {
       "title": "Importa da un altro show",
       "open": "Importa",
-      "panelHint": "Porta in questo show scene, chaser, fixture, audio, video, immagini e operatori di un altro show.",
+      "panelHint": "Porta in questo show scene, chaser, fixture, audio, video, immagini, operatori e palco 3D di un altro show.",
       "hint": "Scegli lo show da cui importare.",
       "recent": "Show recenti",
       "noRecent": "Nessun altro show recente.",
@@ -1241,7 +1275,8 @@
         "audio": "Audio",
         "video": "Video",
         "images": "Immagini",
-        "operators": "Operatori"
+        "operators": "Operatori",
+        "stage": "Palco 3D"
       },
       "kinds": {
         "scene": "Scena",
@@ -1256,7 +1291,9 @@
         "timer": "Timer",
         "videoFile": "File video",
         "imageFile": "Immagine",
-        "operator": "Operatore"
+        "operator": "Operatore",
+        "stageScenery": "Scenografia",
+        "stageFixtures": "Fari posati"
       },
       "resolutions": {
         "add": "Aggiungi",
@@ -1267,7 +1304,8 @@
         "slot": "Lo slot è occupato da \"{with}\"",
         "address": "Gli indirizzi sono occupati da {with}",
         "file": "Esiste già un file diverso {with}",
-        "name": "Esiste già un operatore di nome \"{with}\""
+        "name": "Esiste già un operatore di nome \"{with}\"",
+        "stage": "Il palco ha già {with} oggetti di questo tipo"
       }
     },
     "mixers": {
@@ -1484,16 +1522,75 @@
         "elements": "Elementi di scena"
       },
       "models": {
+        "truss-05m": "Traliccio, 0,5 m",
         "truss-1m": "Traliccio, 1 m",
         "truss-2m": "Traliccio, 2 m",
         "truss-3m": "Traliccio, 3 m",
+        "truss-4m": "Traliccio, 4 m",
+        "truss-corner": "Angolo di traliccio",
+        "truss-t": "Giunto a T",
+        "truss-cross": "Giunto a croce",
+        "truss-base": "Piastra di base",
+        "tower-3m": "Torre, 3 m",
+        "tower-4m": "Torre, 4 m",
+        "deck-1x1": "Pedana, 1 x 1 m",
         "deck-2x1": "Pedana, 2 x 1 m",
-        "moving-head": "Testa mobile",
+        "deck-2x1-high": "Pedana, 2 x 1 m, alta 1 m",
+        "drum-riser": "Pedana batteria",
+        "stairs-40": "Scala, 40 cm",
+        "stairs-100": "Scala, 1 m",
+        "moving-head": "Testa mobile spot",
+        "moving-head-wash": "Testa mobile wash",
+        "moving-head-beam": "Testa mobile beam",
         "par": "PAR",
+        "led-bar": "Barra LED",
+        "blinder": "Blinder",
+        "strobe": "Strobo",
+        "follow-spot": "Seguipersona",
+        "stairville-quad": "Barra Stairville Stage Quad LED",
+        "stairville-bossfx": "Barra Stairville LED BossFx-1 Pro",
+        "windup-stand": "Stativo wind-up",
         "singer-male": "Cantante uomo con microfono",
         "singer-female": "Cantante donna con microfono",
+        "guitarist-male": "Chitarrista uomo",
+        "guitarist-female": "Chitarrista donna",
+        "guitarist-acoustic-male": "Cantante uomo con chitarra acustica",
+        "guitarist-acoustic-female": "Cantante donna con chitarra acustica",
+        "bassist-male": "Bassista uomo",
+        "bassist-female": "Bassista donna",
+        "drummer-male": "Batterista uomo",
+        "drummer-female": "Batterista donna",
+        "keyboardist-male": "Tastierista uomo",
+        "keyboardist-female": "Tastierista donna",
+        "pianist-male": "Pianista uomo, piano a coda",
+        "pianist-female": "Pianista donna, piano a coda",
+        "harpist-male": "Arpista uomo",
+        "harpist-female": "Arpista donna",
+        "violinist-male": "Violinista uomo",
+        "violinist-female": "Violinista donna",
+        "trumpeter-male": "Trombettista uomo",
+        "trumpeter-female": "Trombettista donna",
+        "trombonist-male": "Trombonista uomo",
+        "trombonist-female": "Trombonista donna",
+        "saxophonist-male": "Sassofonista uomo",
+        "saxophonist-female": "Sassofonista donna",
+        "flutist-male": "Flautista uomo, flauto traverso",
+        "flutist-female": "Flautista donna, flauto traverso",
+        "string-trio-male": "Terzetto d'archi, uomini",
+        "string-trio-female": "Terzetto d'archi, donne",
+        "string-trio-mixed": "Terzetto d'archi misto",
+        "amp": "Testata e cassa chitarra",
+        "guitar-combo": "Amplificatore combo",
+        "bass-amp": "Testata e cassa basso",
         "wedge": "Monitor da palco",
-        "amp": "Testata e cassa"
+        "pa-speaker": "Cassa PA su asta",
+        "subwoofer": "Subwoofer",
+        "mic-stand": "Asta microfonica",
+        "keyboard-stand": "Supporto per tastiera",
+        "guitar-stand": "Chitarra sul supporto",
+        "case-small": "Flight case",
+        "case-large": "Flight case con ruote",
+        "dj-booth": "Consolle DJ"
       },
       "fixtures": "Fari del patch",
       "noFixtures": "Nessun faro da posare",
@@ -1508,6 +1605,10 @@
       "hang": "Appendi al traliccio",
       "detach": "Stacca dal traliccio",
       "hung": "Appeso a un traliccio",
+      "mount": "Monta in cima",
+      "unmount": "Smonta",
+      "mounted": "Montato in cima",
+      "height": "Altezza {height} m",
       "duplicate": "Duplica",
       "remove": "Togli dalla scena",
       "model": "Modello",
@@ -1527,14 +1628,25 @@
       },
       "quality": "Qualità",
       "qualityLevels": {
+        "auto": "Qualità automatica",
         "low": "Qualità bassa",
         "medium": "Qualità media",
         "high": "Qualità alta"
       },
       "frameRate": "Fotogrammi al secondo",
       "fps": "{count} fps",
+      "drawn": "{count} fps disegnati",
+      "shadows": "Ombre",
       "beams": "Fasci",
-      "strobe": "Strobo"
+      "strobe": "Strobo",
+      "tool": "Strumento",
+      "tools": {
+        "select": "Seleziona",
+        "orbit": "Orbita",
+        "pan": "Panoramica",
+        "zoom": "Zoom"
+      },
+      "notRemote": "Il palco 3D si vede solo sul computer che esegue Backshade."
     }
   }
 }
