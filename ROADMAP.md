@@ -280,7 +280,7 @@ Mapping of the video outputs on real surfaces: screens, projection surfaces, sce
   - [x] 14.2.2 Mesh warp with an editable grid of points (smooth curves through the points)
   - [x] 14.2.3 Masks: polygons and bezier shapes, with feather and inversion, over the whole output
   - [x] 14.2.4 Input crop: the part of the source shown on each surface
-- [ ] 14.3 Edge blending between overlapping projectors: blend width, curve and gamma per edge, black level compensation
+- [x] 14.3 Edge blending between overlapping projectors: blend width, curve and gamma per edge, black level compensation
 - [ ] 14.4 3D mapping on models:
   - [ ] 14.4.1 Mapping surfaces taken from the 3D stage models (scenery, objects, imported `.obj`)
   - [ ] 14.4.2 Virtual projector calibrated on the real one (position, orientation, lens), so the render from its point of view matches the real projection

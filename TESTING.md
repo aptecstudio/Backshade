@@ -260,3 +260,4 @@ How to use it:
 - [ ] Video inputs (cameras) mapped on a surface.
 - [ ] Mesh warp on a real curved or irregular surface: 4 x 4 and finer grids are enough; dragging points with a finger on a tablet.
 - [ ] Masks on a real projector: shapes follow the scenery, soft edges look right, dragging points and curve handles is precise with mouse and finger.
+- [ ] Edge blending with two overlapping projectors: with the same width on the facing sides no brighter or darker band appears with the right gamma, and the black level compensation hides the doubled black.
