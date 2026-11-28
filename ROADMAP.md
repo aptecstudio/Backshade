@@ -10,7 +10,7 @@ Versioning rules (see `AGENTS.md`):
 
 ---
 
-Development order from 2026-11-28 (decided by the human): Phase 13, Phase 14, Phase 15, 16.3, 10.3, then Phase 11 and finally Phase 12.
+Development order from 2026-11-28 (decided by the human): Phase 13, Phase 14, Phase 15, 16.3, 10.3, then Phase 11 and finally Phase 12. Changed the same day: Phase 14 comes before 13.9, which is then done as a whole, mapping preview included.
 
 ---
 
@@ -274,19 +274,19 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
 
 Mapping of the video outputs on real surfaces: screens, projection surfaces, scenery and LED walls. It depends on the video outputs and layers (Phase 7) and, for the 3D mapping, on the 3D stage (Phase 13). Rendering runs on the GPU with WebGL in the output windows.
 
-- [ ] 14.1 Output model: each video output has a canvas (resolution) split into one or more mapping surfaces, each with its own source (layer, media, video input)
+- [x] 14.1 Output model: each video output has a canvas (resolution) split into one or more mapping surfaces, each showing the whole program or one layer (decided by the human on 2026-11-28)
 - [ ] 14.2 2D warp on the output:
-  - [ ] 14.2.1 Corner pin (four corners)
+  - [x] 14.2.1 Corner pin (four corners)
   - [ ] 14.2.2 Mesh warp with an editable grid of points (bezier interpolation)
   - [ ] 14.2.3 Masks: polygons and bezier shapes, with feather and inversion
-  - [ ] 14.2.4 Input crop: the part of the source shown on each surface
+  - [x] 14.2.4 Input crop: the part of the source shown on each surface
 - [ ] 14.3 Edge blending between overlapping projectors: blend width, curve and gamma per edge, black level compensation
 - [ ] 14.4 3D mapping on models:
   - [ ] 14.4.1 Mapping surfaces taken from the 3D stage models (scenery, objects, imported `.obj`)
   - [ ] 14.4.2 Virtual projector calibrated on the real one (position, orientation, lens), so the render from its point of view matches the real projection
   - [ ] 14.4.3 Calibration helper: matching points between the model and the real projected image
 - [ ] 14.5 Pixel mapping of the video on LED walls and LED matrices (extends Phase 5.4): pixel area, pixel order, output on Art-Net universes or on a video output
-- [ ] 14.6 Mapping editor: live editing directly on the output, test patterns (grid, colors, numbers per projector), snap and zoom
+- [ ] 14.6 Mapping editor: live editing from the Video section (done), test patterns with grid, colors and numbers (done), snap and zoom
 - [ ] 14.7 Mapping presets saved in `show.json`, recallable from cues and from the timeline (Phase 8)
 
 ## Phase 15 - Multi-device

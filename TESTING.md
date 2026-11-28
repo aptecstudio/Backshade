@@ -252,3 +252,9 @@ How to use it:
 - [ ] Import real `.obj` models of different origins (CAD, 3D editors): size, orientation, colors; large files open in a reasonable time.
 - [ ] Copy a show with imported models to another computer: the models are there.
 - [ ] Libraries across two computers: a show with its own fixtures and models opens complete on a computer that never had them.
+
+## 20. Videomapping
+
+- [ ] On a real projector: surfaces and corners line up with the real shapes; arrow keys move by one pixel; editing from a phone or tablet.
+- [ ] Videos on several surfaces stay smooth at the output resolution on the show computer, also with transitions, timers and text gobos.
+- [ ] Video inputs (cameras) mapped on a surface.

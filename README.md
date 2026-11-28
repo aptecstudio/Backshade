@@ -56,6 +56,7 @@ Available now:
 - LED matrices with effects, animations and image mapping, recorded in scenes
 - Virtual console on a customizable grid for each show, with multi-touch
 - Audio player with playlist, fades and output device; video outputs on external displays with layers, inputs from cameras, preview and program, text gobos and timer screens
+- Videomapping on the video outputs: surfaces with corner pin and crop, edited live with test images
 - Timelines of tracks with lights, audio, video and automation clips, edited as in a DAW, with waveforms, markers, go mode, recording of live actions and MIDI timecode
 - External audio mixers over OSC and MIDI; MIDI controllers with learn and feedback
 - Remote control from other devices through the built-in web server, with the address as a QR code
@@ -65,7 +66,7 @@ Available now:
 Planned (see [ROADMAP.md](ROADMAP.md)):
 
 - Video outputs in the 3D stage
-- Videomapping and several synchronized machines
+- Mesh warp, masks, edge blending, 3D and pixel mapping; several synchronized machines
 - Layout for phones, OSC control surfaces and installers
 
 ## Requirements

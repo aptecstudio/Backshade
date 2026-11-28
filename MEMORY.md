@@ -885,6 +885,12 @@ Requested by the human on 2026-11-23: the 3D stage also emulates the video outpu
 
 Status: Confirmed (2026-11-23).
 
+Decided by the human on 2026-11-28, to be built after Phase 14:
+
+- **Screens and LED walls:** at the insertion the number of modules across and up is asked; they are drawn as one object, without much detail (what matters is the picture on them), with a curvature besides position and rotation.
+- **Look:** projection screens white, LED walls light grey.
+- **Pictures:** in the live view the real program of the linked video output; in setup a test pattern to place them.
+
 ## Videomapping
 
 Requested by the human on 2026-11-23 (Phase 14). Supported features:
@@ -894,12 +900,22 @@ Requested by the human on 2026-11-23 (Phase 14). Supported features:
 - 3D mapping on the stage models with virtual projectors calibrated on the real ones;
 - pixel mapping of the video on LED walls and LED matrices.
 
-Proposed technical choices:
+Technical choices:
 
-- rendering with WebGL in the fullscreen output windows, through three.js (already a dependency), without new libraries;
+- rendering with plain WebGL 2 in the output windows (`renderer/video/mapping-*.ts`), without libraries: it replaces the first idea of three.js, which only a perspective square does not need (Proposed);
 - mapping settings and presets saved in `show.json`.
 
 Status: Confirmed (features), Proposed (technical choices).
+
+### Surfaces and corner pin (14.1, 14.2.1, 14.2.4, 2026-11-28)
+
+Chosen by the human with polls: surfaces show the program or one layer; the editor is in the Video section; this block first, then warp mesh, masks, edge blending, presets and pixel mapping one at a time.
+
+- **Data:** `surfaces` of a video output (`shared/video/mapping.ts`): name, source (`program` or a layer index), four corners in parts of the output (they may go half its size outside), crop in parts of the picture; up to 16. Without surfaces the output shows its program as before. (Confirmed sources, Proposed rest)
+- **Rendering:** the composition keeps playing out of sight; every frame its videos, images, text gobos and timers are drawn on each surface with a perspective transform, in layer order and with their opacity, so transitions are unchanged. Folded shapes are not drawn. (Proposed)
+- **Editor** (`renderer/sections/video/mapping-dialog.ts`, key "Mapping" of the Video section, editors of the section): numbered handles dragged with mouse, pen or finger, arrows for 1 pixel (10 with Shift), source and crop fields, reset, remove; changes go to the output at once, Cancel restores. (Confirmed place, Proposed rest)
+- **Test image:** grid, diagonals, circle, number, surface and output name in a color per surface; on while the editor is open if chosen (`video.setTestPattern`, not saved). (Proposed)
+- **Demo show:** the stage screen has a main surface and a side panel showing the first layer.
 
 ## Multi-device
 
