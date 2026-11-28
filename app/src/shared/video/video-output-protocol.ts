@@ -4,6 +4,7 @@
  */
 
 import type { MappingSurface } from './mapping.js';
+import type { OutputMask } from './mask.js';
 import type { ShowTimer, TimerState } from './show-timer.js';
 import type { GoboContext, TextGobo } from './text-gobo.js';
 import type { LayerState } from './video.js';
@@ -22,6 +23,7 @@ export interface ComposeMessage {
     timerStates: Record<string, TimerState>;
     /** Videomapping of the output */
     surfaces: MappingSurface[];
+    masks: OutputMask[];
     /** A test image is shown on every surface instead of the program */
     testPattern: boolean;
     /** Name of the output, written on the test image */

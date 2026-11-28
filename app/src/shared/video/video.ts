@@ -7,6 +7,7 @@
  */
 
 import { normalizeSurfaces, type MappingSurface } from './mapping.js';
+import { normalizeMasks, type OutputMask } from './mask.js';
 import { MAX_TIMERS, normalizeTimer, type ShowTimer } from './show-timer.js';
 import { MAX_GOBOS, normalizeGobo, type TextGobo } from './text-gobo.js';
 
@@ -35,6 +36,8 @@ export interface VideoOutputConfig {
     layers: number;
     /** Videomapping surfaces, none when the output shows its program as it is */
     surfaces: MappingSurface[];
+    /** Masks over the whole output */
+    masks: OutputMask[];
 }
 
 /** Video section of show.json */
@@ -195,7 +198,8 @@ export function normalizeVideo(value: unknown): ShowVideo {
             height: int(output.height, 64, 16384, 720),
             stack: int(output.stack, 0, 99, 0),
             layers: int(output.layers, 1, MAX_VIDEO_LAYERS, 3),
-            surfaces: normalizeSurfaces(output.surfaces)
+            surfaces: normalizeSurfaces(output.surfaces),
+            masks: normalizeMasks(output.masks)
         });
     }
     const gobos: TextGobo[] = [];

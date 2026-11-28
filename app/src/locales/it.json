@@ -1709,7 +1709,25 @@
       "corners": "Angoli",
       "points": "Punti della griglia",
       "point": "Punto {number} della griglia",
-      "resetMesh": "Ripristina griglia"
+      "resetMesh": "Ripristina griglia",
+      "editing": "Modifica",
+      "surfaces": "Superfici",
+      "masks": "Maschere",
+      "mask": "Maschera {number}",
+      "addRectangle": "Rettangolo",
+      "addEllipse": "Ellisse",
+      "noMask": "Nessuna maschera: non si nasconde nulla.",
+      "maskEnabled": "Attiva",
+      "inverted": "Invertita: mostra solo dentro",
+      "feather": "Bordo sfumato",
+      "smooth": "Punto morbido",
+      "addPoint": "Aggiungi punto",
+      "removePoint": "Togli punto",
+      "removeMask": "Rimuovi maschera",
+      "pointTitle": "Punto {number}",
+      "maskPoint": "Punto {number} della maschera",
+      "handleIn": "Maniglia della curva prima del punto",
+      "handleOut": "Maniglia della curva dopo il punto"
     }
   }
 }

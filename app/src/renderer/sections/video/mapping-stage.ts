@@ -1,33 +1,51 @@
 /**
  * Picture of an output in the mapping editor: the mapped program with the
- * outlines of the surfaces over it and, on the chosen one, a handle on each
- * corner or on each point of its grid, dragged with mouse, pen or finger or
- * moved with the arrow keys (one pixel of the output, ten with Shift). The
- * space around the output lets points go outside it.
+ * outlines of the shapes over it and handles dragged with mouse, pen or
+ * finger or moved with the arrow keys (one pixel of the output, ten with
+ * Shift). What the shapes and handles are is told by the editor. The space
+ * around the output lets points go outside it.
  */
 
 import { Component, create, trackPointerDrag } from '../../../framework/ts/index.js';
-import { homography, meshPoint, project, type MappingPoint, type MappingSurface } from '../../../shared/video/mapping.js';
-import { t } from '../../i18n/i18n.js';
+import type { MappingPoint } from '../../../shared/video/mapping.js';
 
 /** Space shown around the output, in parts of its size */
 const AROUND = 0.1;
 
 const SVG = 'http://www.w3.org/2000/svg';
 
-/** Pieces of each edge and grid line drawn */
-const STEPS = 32;
+export interface StageShape {
+    id: string;
+    /** Data of an SVG path, in parts of the output */
+    path: string;
+    selected: boolean;
+}
 
-/** What the handles move */
-export type MappingHandles = 'corners' | 'mesh';
+export interface StageHandle {
+    point: MappingPoint;
+    /** Numbered corner, small point, curve handle */
+    style: 'corner' | 'point' | 'tangent';
+    chosen?: boolean;
+    text?: string;
+    label: string;
+}
 
-/** Handles of a surface, in parts of the output */
-function handlePoints(surface: MappingSurface, mode: MappingHandles): MappingPoint[] {
-    if (mode === 'corners') {
-        return surface.corners;
-    }
-    const matrix = homography(surface.corners);
-    return matrix === null || surface.mesh === undefined ? [] : surface.mesh.points.map((point) => project(matrix, point));
+export interface StageOverlay {
+    shapes: StageShape[];
+    /** Lines of a grid, as SVG path data */
+    grid: string[];
+    /** Lines from a point to its curve handles */
+    guides: Array<[MappingPoint, MappingPoint]>;
+    handles: StageHandle[];
+}
+
+export const EMPTY_OVERLAY: StageOverlay = { shapes: [], grid: [], guides: [], handles: [] };
+
+function node(name: string, classes: string, attributes: Record<string, string>): SVGElement {
+    const element = document.createElementNS(SVG, name);
+    element.setAttribute('class', classes);
+    Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+    return element;
 }
 
 export class MappingStage extends Component<HTMLDivElement> {
@@ -36,9 +54,10 @@ export class MappingStage extends Component<HTMLDivElement> {
     private readonly lines: SVGSVGElement;
     private readonly frame: HTMLDivElement;
     private handles: HTMLButtonElement[] = [];
-    private positions: MappingPoint[] = [];
+    private shown: StageHandle[] = [];
     private kind = '';
     private moved: (index: number, point: MappingPoint) => void = () => undefined;
+    private pressed: (index: number) => void = () => undefined;
     private picked: (id: string) => void = () => undefined;
 
     constructor(private readonly width: number, private readonly height: number) {
@@ -62,73 +81,54 @@ export class MappingStage extends Component<HTMLDivElement> {
         this.moved = listener;
     }
 
+    /** A handle was pressed */
+    onPress(listener: (index: number) => void): void {
+        this.pressed = listener;
+    }
+
     onPick(listener: (id: string) => void): void {
         this.picked = listener;
     }
 
-    show(surfaces: MappingSurface[], selected: string | null, mode: MappingHandles): void {
-        this.lines.replaceChildren(...surfaces.flatMap((surface) => this.draw(surface, surface.id === selected, mode)));
-        const surface = surfaces.find((item) => item.id === selected);
-        this.positions = surface === undefined ? [] : handlePoints(surface, mode);
-        // Handles are made again only when their number changes, so the one in use keeps the focus
-        const kind = `${mode} ${this.positions.length}`;
+    show({ shapes, grid, guides, handles }: StageOverlay): void {
+        this.lines.replaceChildren(
+            ...shapes.map((shape) => {
+                const element = node('path', shape.selected ? 'mapping-stage__shape mapping-stage__shape--selected' : 'mapping-stage__shape', { d: shape.path });
+                element.addEventListener('pointerdown', () => this.picked(shape.id));
+                return element;
+            }),
+            ...grid.map((path) => node('path', 'mapping-stage__grid', { d: path })),
+            ...guides.map(([from, to]) => node('line', 'mapping-stage__guide', { x1: String(from[0]), y1: String(from[1]), x2: String(to[0]), y2: String(to[1]) }))
+        );
+        this.shown = handles;
+        // Handles are made again only when they change kind, so the one in use keeps the focus
+        const kind = handles.map((handle) => handle.style).join(' ');
         if (kind !== this.kind) {
             this.kind = kind;
             this.handles.forEach((handle) => handle.remove());
-            this.handles = this.positions.map((_, index) => this.createHandle(index, mode));
+            this.handles = handles.map((_, index) => this.createHandle(index));
             this.frame.append(...this.handles);
         }
-        this.handles.forEach((handle, index) => {
-            handle.style.setProperty('--x', String(this.positions[index][0]));
-            handle.style.setProperty('--y', String(this.positions[index][1]));
+        this.handles.forEach((element, index) => {
+            const handle = handles[index];
+            element.className = `mapping-stage__handle mapping-stage__handle--${handle.style}${handle.chosen === true ? ' mapping-stage__handle--chosen' : ''}`;
+            element.textContent = handle.text ?? '';
+            element.setAttribute('aria-label', handle.label);
+            element.style.setProperty('--x', String(handle.point[0]));
+            element.style.setProperty('--y', String(handle.point[1]));
         });
     }
 
-    /** Outline of a surface, bent as it is, and the lines of the grid being edited */
-    private draw(surface: MappingSurface, selected: boolean, mode: MappingHandles): SVGElement[] {
-        const matrix = homography(surface.corners);
-        if (matrix === null) {
-            return [];
-        }
-        const path = (points: MappingPoint[]): string => points.map(([u, v]) => project(matrix, meshPoint(surface.mesh, u, v)).join(',')).join(' ');
-        const steps = Array.from({ length: STEPS + 1 }, (_, index) => index / STEPS);
-        const outline = document.createElementNS(SVG, 'polygon');
-        outline.setAttribute('class', selected ? 'mapping-stage__shape mapping-stage__shape--selected' : 'mapping-stage__shape');
-        outline.setAttribute('points', path([
-            ...steps.map((s): MappingPoint => [s, 0]), ...steps.map((s): MappingPoint => [1, s]),
-            ...steps.map((s): MappingPoint => [1 - s, 1]), ...steps.map((s): MappingPoint => [0, 1 - s])
-        ]));
-        outline.addEventListener('pointerdown', () => this.picked(surface.id));
-        if (!selected || mode !== 'mesh' || surface.mesh === undefined) {
-            return [outline];
-        }
-        const { columns, rows } = surface.mesh;
-        const line = (points: MappingPoint[]): SVGElement => {
-            const element = document.createElementNS(SVG, 'polyline');
-            element.setAttribute('class', 'mapping-stage__grid');
-            element.setAttribute('points', path(points));
-            return element;
-        };
-        return [
-            outline,
-            ...Array.from({ length: columns - 2 }, (_, index) => line(steps.map((s): MappingPoint => [(index + 1) / (columns - 1), s]))),
-            ...Array.from({ length: rows - 2 }, (_, index) => line(steps.map((s): MappingPoint => [s, (index + 1) / (rows - 1)])))
-        ];
-    }
-
-    private createHandle(index: number, mode: MappingHandles): HTMLButtonElement {
-        const handle = create('button', {
-            classes: ['mapping-stage__handle', ...(mode === 'mesh' ? ['mapping-stage__handle--point'] : [])],
-            text: mode === 'corners' ? String(index + 1) : '',
-            attributes: { type: 'button', 'aria-label': t(mode === 'corners' ? 'mapping.corner' : 'mapping.point', { number: index + 1 }) }
-        });
+    private createHandle(index: number): HTMLButtonElement {
+        const handle = create('button', { attributes: { type: 'button' } });
         handle.addEventListener('pointerdown', (event) => {
-            const start = this.positions[index];
+            const start = this.shown[index]?.point;
             if (event.button !== 0 || start === undefined) {
                 return;
             }
             event.preventDefault();
             handle.focus();
+            this.pressed(index);
             const area = this.frame.getBoundingClientRect();
             // The point follows the movement, without jumping under the pointer
             trackPointerDrag(handle, event, {
@@ -139,7 +139,7 @@ export class MappingStage extends Component<HTMLDivElement> {
             const step = event.shiftKey ? 10 : 1;
             const dx = event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0;
             const dy = event.key === 'ArrowDown' ? step : event.key === 'ArrowUp' ? -step : 0;
-            const at = this.positions[index];
+            const at = this.shown[index]?.point;
             if ((dx !== 0 || dy !== 0) && at !== undefined) {
                 event.preventDefault();
                 this.moved(index, [at[0] + dx / this.width, at[1] + dy / this.height]);

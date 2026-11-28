@@ -22,5 +22,5 @@ window.backshadeVideoOutput.onCompose((message) => {
     view.setGobos(message.gobos, message.context);
     view.setTimers(message.timers, message.timerStates);
     view.show(message.layers, message.transition);
-    mapping.apply({ surfaces: message.surfaces, testPattern: message.testPattern, name: message.name });
+    mapping.apply({ surfaces: message.surfaces, masks: message.masks, testPattern: message.testPattern, name: message.name });
 });

@@ -1709,7 +1709,25 @@
       "corners": "Corners",
       "points": "Grid points",
       "point": "Grid point {number}",
-      "resetMesh": "Reset grid"
+      "resetMesh": "Reset grid",
+      "editing": "Edit",
+      "surfaces": "Surfaces",
+      "masks": "Masks",
+      "mask": "Mask {number}",
+      "addRectangle": "Rectangle",
+      "addEllipse": "Ellipse",
+      "noMask": "No mask: nothing is hidden.",
+      "maskEnabled": "Active",
+      "inverted": "Inverted: show only inside",
+      "feather": "Soft edge",
+      "smooth": "Smooth point",
+      "addPoint": "Add point",
+      "removePoint": "Remove point",
+      "removeMask": "Remove mask",
+      "pointTitle": "Point {number}",
+      "maskPoint": "Mask point {number}",
+      "handleIn": "Curve handle before the point",
+      "handleOut": "Curve handle after the point"
     }
   }
 }

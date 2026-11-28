@@ -2514,6 +2514,62 @@
               ]
             }
           }
+        ],
+        "masks": [
+          {
+            "id": "demo-mask",
+            "name": "Cut for the riser",
+            "feather": 0.01,
+            "inverted": false,
+            "enabled": true,
+            "points": [
+              {
+                "at": [
+                  0.25,
+                  0.95
+                ],
+                "in": [
+                  0,
+                  0
+                ],
+                "out": [
+                  0,
+                  -0.12
+                ],
+                "smooth": false
+              },
+              {
+                "at": [
+                  0.37,
+                  0.76
+                ],
+                "in": [
+                  -0.055,
+                  0
+                ],
+                "out": [
+                  0.055,
+                  0
+                ],
+                "smooth": true
+              },
+              {
+                "at": [
+                  0.49,
+                  0.95
+                ],
+                "in": [
+                  0,
+                  -0.12
+                ],
+                "out": [
+                  0,
+                  0
+                ],
+                "smooth": false
+              }
+            ]
+          }
         ]
       }
     ],

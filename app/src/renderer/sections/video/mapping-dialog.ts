@@ -1,7 +1,7 @@
 /**
- * Videomapping editor of an output: its surfaces, the corners and the grid
- * of the chosen one, what it shows and the part of the picture it takes, and
- * the test image. Every change is sent at once, so it is seen on the output; Cancel
+ * Videomapping editor of an output: its surfaces (corners, grid, what they
+ * show and the part of the picture they take), its masks and the test
+ * image. Every change is sent at once, so it is seen on the output; Cancel
  * puts back the surfaces of before.
  */
 
@@ -14,7 +14,9 @@ import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
 import { MappedComposition } from '../../video/mapped-composition.js';
-import { MappingStage, type MappingHandles } from './mapping-stage.js';
+import { MappingMasks } from './mapping-masks.js';
+import { MappingStage } from './mapping-stage.js';
+import { surfaceOverlay, type MappingHandles } from './mapping-surface-overlay.js';
 
 /** Grid of a new number of points, keeping the shape of the one before */
 function resample(mesh: Mesh | undefined, columns: number, rows: number): Mesh {
@@ -41,6 +43,10 @@ export async function openMappingDialog(output: VideoOutputConfig): Promise<void
 function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputComposition | undefined, timers: Record<string, TimerState>, testing: boolean): void {
     const dialog = new Dialog({ title: t('mapping.title', { name: output.name }), size: 'large' });
     const before = structuredClone(output.surfaces);
+    const masks = new MappingMasks(structuredClone(output.masks));
+    const masksBefore = structuredClone(output.masks);
+    /** What is edited: surfaces or masks */
+    let editing: 'surfaces' | 'masks' = 'surfaces';
     let surfaces = structuredClone(output.surfaces);
     let selected: string | null = surfaces[0]?.id ?? null;
     let testPattern = testing;
@@ -69,7 +75,10 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
             return;
         }
         sending = true;
-        void engine().request('video.setSurfaces', { id: output.id, surfaces }).catch(showError).finally(() => {
+        void Promise.all([
+            engine().request('video.setSurfaces', { id: output.id, surfaces }),
+            engine().request('video.setMasks', { id: output.id, masks: masks.masks })
+        ]).catch(showError).finally(() => {
             sending = false;
             if (waiting) {
                 waiting = false;
@@ -79,8 +88,8 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
     };
 
     const draw = (): void => {
-        stage.show(surfaces, selected, handles);
-        mapping.apply({ surfaces, testPattern, name: output.name });
+        stage.show(editing === 'masks' ? masks.overlay() : surfaceOverlay(surfaces, selected, handles));
+        mapping.apply({ surfaces, masks: masks.masks, testPattern, name: output.name });
     };
 
     const change = (part: Partial<MappingSurface>): void => {
@@ -227,11 +236,24 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         draw();
         void engine().request('video.setTestPattern', { id: output.id, on }).catch(showError);
     });
-    stage.onPick(choose);
+    masks.onChange(() => {
+        draw();
+        send();
+    });
+    stage.onPick((id) => editing === 'masks' ? masks.pick(id) : choose(id));
+    stage.onPress((index) => {
+        if (editing === 'masks') {
+            masks.press(index);
+        }
+    });
     // A corner stays near the output; a point of the grid is kept in the surface it bends
     const limit = ([x, y]: MappingPoint): MappingPoint =>
         [x, y].map((value) => Math.round(Math.max(-CORNER_MARGIN, Math.min(1 + CORNER_MARGIN, value)) * 100000) / 100000) as MappingPoint;
     stage.onMove((index, point) => {
+        if (editing === 'masks') {
+            masks.move(index, point);
+            return;
+        }
         const surface = surfaces.find((item) => item.id === selected);
         if (surface === undefined) {
             return;
@@ -247,6 +269,20 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         }
     });
 
+    const surfacePanel = new Stack({ gap: 8, children: [add, list, detailArea] });
+    masks.element.element.hidden = true;
+    const sections = new ChoiceKeys<'surfaces' | 'masks'>({
+        ariaLabel: t('mapping.editing'),
+        options: [{ value: 'surfaces', label: t('mapping.surfaces') }, { value: 'masks', label: t('mapping.masks') }],
+        value: editing
+    });
+    sections.onChange((value) => {
+        editing = value;
+        surfacePanel.element.hidden = value !== 'surfaces';
+        masks.element.element.hidden = value !== 'masks';
+        draw();
+    });
+
     dialog.append(new Stack({
         direction: 'row',
         gap: 12,
@@ -254,13 +290,14 @@ function show(output: VideoOutputConfig, video: ShowVideo, composition: OutputCo
         classes: ['mapping-editor'],
         children: [
             new Stack({ gap: 8, classes: ['mapping-editor__picture'], children: [stage, new Label({ text: t('mapping.hint'), size: 'small', tone: 'secondary' })] }),
-            new Stack({ gap: 8, classes: ['mapping-editor__side'], children: [test, add, list, detailArea] })
+            new Stack({ gap: 8, classes: ['mapping-editor__side'], children: [sections, test, surfacePanel, masks.element] })
         ]
     }));
 
     const finish = (restore: boolean): void => {
         if (restore) {
             surfaces = before;
+            masks.masks = masksBefore;
             send();
         }
         // The test image is a help of the editor only
