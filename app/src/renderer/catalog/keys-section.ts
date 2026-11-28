@@ -41,7 +41,7 @@ export class KeysSection extends Panel {
             blackout.setArmed(armed);
         });
 
-        return new Stack({ direction: 'row', gap: 1, align: 'center', wrap: true, children: [consoleKey, grid, patch, blackout, play] });
+        return new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [consoleKey, grid, patch, blackout, play] });
     }
 
     private squareKeys(): Stack {
@@ -61,7 +61,7 @@ export class KeysSection extends Panel {
             });
         });
 
-        return new Stack({ direction: 'row', gap: 2, align: 'center', children: keys });
+        return new Stack({ direction: 'row', gap: 16, align: 'center', children: keys });
     }
 
     private functionKeys(): Stack {
@@ -82,6 +82,6 @@ export class KeysSection extends Panel {
             return key;
         });
 
-        return new Stack({ direction: 'row', gap: 2, children: keys });
+        return new Stack({ direction: 'row', gap: 16, children: keys });
     }
 }

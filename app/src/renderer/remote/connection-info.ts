@@ -15,11 +15,11 @@ function rank(address: string): number {
 }
 
 export class ConnectionInfo extends Stack {
-    private readonly content = new Stack({ gap: 2 });
+    private readonly content = new Stack({ gap: 12 });
     private shown: Stack | null = null;
 
     constructor() {
-        super({ gap: 2 });
+        super({ gap: 12 });
         this.append(this.content);
         void engine().request('remote.getInfo').then((info) => {
             const addresses = [...info.addresses].sort((a, b) => rank(a) - rank(b));
@@ -44,12 +44,12 @@ export class ConnectionInfo extends Stack {
         this.shown?.destroy();
         this.shown = new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 8,
             align: 'center',
             wrap: true,
             children: [
                 new QrView(address, t('remote.qrLabel', { address })),
-                new Stack({ gap: 1, children: [new Label({ text: address, size: 'large', weight: 'medium' }), new Label({ text: t('remote.scanHint'), tone: 'secondary', size: 'small' })] })
+                new Stack({ gap: 4, children: [new Label({ text: address, size: 'large', weight: 'medium' }), new Label({ text: t('remote.scanHint'), tone: 'secondary', size: 'small' })] })
             ]
         });
         this.content.append(this.shown);

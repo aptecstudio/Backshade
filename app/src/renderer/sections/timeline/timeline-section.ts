@@ -48,7 +48,7 @@ export class TimelineSection extends Stack {
     private frame = 0;
 
     constructor() {
-        super({ gap: 2, classes: ['timeline-section'] });
+        super({ gap: 12, classes: ['timeline-section'] });
         this.chooser = new SelectField<string>({ ariaLabel: t('timeline.choose'), options: [], value: '' });
         this.chooser.onChange((id) => void engine().request('timeline.load', { id }).then((state) => this.applyState(state)).catch(showError));
         const create = new Key({ label: t('timeline.new'), icon: 'plus' });
@@ -108,8 +108,8 @@ export class TimelineSection extends Stack {
 
         const header = new Panel({ classes: ['timeline-section__header'] });
         header.append(
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.chooser, this.settings, create, this.addTrack, undo, redo, new Spacer(), zoomOut, zoomIn, this.snap] }),
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [start, stop, this.play, this.record, this.loopKey, this.goKey, marker, new Spacer(), this.time, this.bar, this.bpm] })
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.chooser, this.settings, create, this.addTrack, undo, redo, new Spacer(), zoomOut, zoomIn, this.snap] }),
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [start, stop, this.play, this.record, this.loopKey, this.goKey, marker, new Spacer(), this.time, this.bar, this.bpm] })
         );
         this.markerPanel.onAction((action) => {
             switch (action.kind) {
@@ -119,7 +119,7 @@ export class TimelineSection extends Stack {
                 case 'open': void this.editor?.openMarker(action.id); break;
             }
         });
-        this.body = new Stack({ direction: 'row', gap: 2, classes: ['timeline-section__body'], children: [this.holder, this.markerPanel] });
+        this.body = new Stack({ direction: 'row', gap: 8, classes: ['timeline-section__body'], children: [this.holder, this.markerPanel] });
         this.append(header, this.empty, this.body, this.info);
 
         this.track(engine().on('timeline.changed', ({ recorded }) => void this.load(recorded === true)));

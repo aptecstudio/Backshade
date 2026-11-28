@@ -22,9 +22,9 @@ export class OutputSection extends Stack {
     private readonly monitor = new MonitorPanel();
 
     constructor() {
-        super({ gap: 3, classes: ['output-section'] });
+        super({ gap: 12, classes: ['output-section'] });
         this.append(
-            new Stack({ direction: 'row', gap: 3, align: 'stretch', children: [new MasterPanel(), new Stack({ gap: 3, classes: ['output-section__main'], children: [this.network, this.universes, new UsbPanel(), new MixersPanel()] })] }),
+            new Stack({ direction: 'row', gap: 12, align: 'stretch', children: [new MasterPanel(), new Stack({ gap: 12, classes: ['output-section__main'], children: [this.network, this.universes, new UsbPanel(), new MixersPanel()] })] }),
             this.monitor
         );
 

@@ -23,7 +23,7 @@ function typedInstance(value: string): DiscoveredInstance | null {
 export function openDiscoverDialog(): void {
     const dialog = new Dialog({ title: t('instance.remoteControl'), size: 'wide' });
     const status = new Label({ text: '', tone: 'secondary', size: 'small' });
-    const list = new Stack({ gap: 1 });
+    const list = new Stack({ gap: 8 });
     const address = new TextField({ label: t('instance.address'), value: '', maxLength: 260 });
     const connect = new Key({ label: t('instance.connect') });
     const again = new Key({ label: t('instance.searchAgain'), icon: 'search' });
@@ -71,7 +71,7 @@ export function openDiscoverDialog(): void {
     dialog.append(
         status,
         list,
-        new Stack({ direction: 'row', gap: 1, align: 'end', children: [address, connect] })
+        new Stack({ direction: 'row', gap: 8, align: 'end', children: [address, connect] })
     );
     const close = new Key({ label: t('common.close') });
     close.onPress(() => dialog.close());

@@ -23,7 +23,7 @@ export class PinDialog {
         this.dialog.element.classList.add('pin-dialog');
         this.pad = new PinPad(t('operators.enterHint'), this.dialog.element);
         this.pad.onComplete((pin) => void this.send(pin));
-        this.choices = new Stack({ direction: 'row', gap: 1, wrap: true });
+        this.choices = new Stack({ direction: 'row', gap: 8, wrap: true });
         this.dialog.append(this.pad, this.choices);
         const close = new Key({ label: t('operators.closeShow') });
         close.onPress(() => void closeShow());

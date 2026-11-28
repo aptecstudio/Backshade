@@ -3,7 +3,7 @@
 
 .stage-page {
     height: 100vh;
-    padding: space(2);
+    padding: space(8);
 }
 
 .stage-editor {
@@ -18,7 +18,7 @@
 }
 
 .stage-panel {
-    flex: 0 0 space(8) * 4;
+    flex: 0 0 space(64) * 4;
     overflow-y: auto;
 }
 

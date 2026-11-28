@@ -122,10 +122,10 @@ export function openMatrixDialog(matrix: MatrixEntry | null, rows: readonly Patc
     update();
 
     dialog.append(
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, number] }),
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [width, height, pixelType] }),
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [startCorner, direction, snake] }),
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [universeField, address] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, number] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [width, height, pixelType] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [startCorner, direction, snake] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [universeField, address] }),
         summary,
         new Label({ text: t('matrix.hint'), tone: 'secondary', size: 'small' })
     );

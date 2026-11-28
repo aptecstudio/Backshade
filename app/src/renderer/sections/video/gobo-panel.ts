@@ -44,8 +44,8 @@ import { ColorSwatch } from '../matrices/color-swatch.js';
 const SAVE_DELAY_MS = 150;
 
 export class GoboPanel extends Panel {
-    private readonly keysRow = new Stack({ direction: 'row', gap: 1, wrap: true });
-    private readonly editorHolder = new Stack({ gap: 2 });
+    private readonly keysRow = new Stack({ direction: 'row', gap: 8, wrap: true });
+    private readonly editorHolder = new Stack({ gap: 8 });
     private keys: Key[] = [];
     private editor: Stack | null = null;
     private gobos: TextGobo[] = [];
@@ -63,7 +63,7 @@ export class GoboPanel extends Panel {
             void engine().request('video.saveGobo', { gobo }).catch(showError);
         });
         markEdit(add);
-        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.keysRow, add] }), this.editorHolder);
+        this.append(new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.keysRow, add] }), this.editorHolder);
         this.track(() => {
             if (this.timer !== null) {
                 window.clearTimeout(this.timer);
@@ -122,7 +122,7 @@ export class GoboPanel extends Panel {
         const slider = (label: string, value: number, apply: (value: number) => Partial<TextGobo>, scale = 1): Stack => {
             const control = new LinearSlider({ label, value: value / scale });
             control.onChange((next) => change(apply(next * scale)));
-            return new Stack({ gap: 1, classes: ['gobo-panel__slider'], children: [new Label({ text: label, size: 'small' }), control] });
+            return new Stack({ gap: 8, classes: ['gobo-panel__slider'], children: [new Label({ text: label, size: 'small' }), control] });
         };
         const swatch = (label: string, color: string, apply: (color: string) => Partial<TextGobo>): ColorSwatch => {
             const control = new ColorSwatch(label, color);
@@ -196,20 +196,20 @@ export class GoboPanel extends Panel {
         }));
 
         const section = (title: string, ...children: Component[]): Stack =>
-            new Stack({ gap: 1, children: [new Label({ text: title, size: 'small', weight: 'medium' }), new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children })] });
+            new Stack({ gap: 4, children: [new Label({ text: title, size: 'small', weight: 'medium' }), new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children })] });
 
         this.editor = new Stack({
             direction: 'row',
-            gap: 3,
+            gap: 12,
             align: 'start',
             classes: ['gobo-panel__editor'],
             children: [
-                new Stack({ gap: 2, classes: ['gobo-panel__side'], children: [preview, new Label({ text: t('gobos.placeholders', { list: GOBO_PLACEHOLDERS.join(' ') }), tone: 'secondary', size: 'small' }), remove] }),
+                new Stack({ gap: 12, classes: ['gobo-panel__side'], children: [preview, new Label({ text: t('gobos.placeholders', { list: GOBO_PLACEHOLDERS.join(' ') }), tone: 'secondary', size: 'small' }), remove] }),
                 new Stack({
-                    gap: 2,
+                    gap: 12,
                     classes: ['gobo-panel__fields'],
                     children: [
-                        new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, font] }),
+                        new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, font] }),
                         text,
                         section(t('gobos.style'),
                             choice(t('gobos.weight'), ['regular', 'bold'] as const, gobo.weight, (value) => t(`gobos.weights.${value}`), (value) => ({ weight: value })),

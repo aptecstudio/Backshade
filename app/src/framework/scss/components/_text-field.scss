@@ -5,7 +5,7 @@
 .text-field {
     display: flex;
     flex-direction: column;
-    gap: space(1);
+    gap: space(4);
     min-width: 0;
 }
 
@@ -16,7 +16,7 @@
 
 .text-field__input {
     height: 40px;
-    padding: 0 space(2);
+    padding: 0 space(12);
     border: 1px solid color('panel-border');
     border-radius: $radius-square-key;
     background: color('display');
@@ -32,7 +32,7 @@
 
 .text-field__input--area {
     height: auto;
-    padding: space(1) space(2);
+    padding: space(8) space(12);
     line-height: 1.5;
     resize: vertical;
 }
@@ -41,7 +41,7 @@
 .number-field__row {
     display: flex;
     align-items: center;
-    gap: space(1);
+    gap: space(8);
 }
 
 .number-field__input {
@@ -59,19 +59,19 @@
 .choice-keys {
     display: flex;
     flex-direction: column;
-    gap: space(1);
+    gap: space(4);
 }
 
 .choice-keys__row {
     display: flex;
     flex-wrap: wrap;
-    gap: space(1);
+    gap: space(8);
 }
 
 // Select field: native list, same surface as the text fields
 .select-field__input {
     min-width: 0;
-    padding-right: space(1);
+    padding-right: space(8);
     cursor: pointer;
 
     &:disabled {

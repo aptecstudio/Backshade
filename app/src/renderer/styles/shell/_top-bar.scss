@@ -3,7 +3,7 @@
 
 .top-bar {
     flex-shrink: 0;
-    padding: space(2) space(3);
+    padding: space(8) space(12);
 }
 
 .brand-block {
@@ -12,8 +12,8 @@
 }
 
 .brand-block__logo {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: $radius-panel;
 }
 

@@ -88,7 +88,7 @@ export class NetworkPanel extends Panel {
 
         this.append(
             status,
-            new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [enabled, networkInterface, this.frameRate] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [enabled, networkInterface, this.frameRate] }),
             new Label({ text: t('output.workstationHint'), tone: 'secondary', size: 'small' })
         );
     }

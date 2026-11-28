@@ -12,7 +12,7 @@ import { KeysSection } from './keys-section.js';
 
 export class CatalogPage extends Stack {
     constructor() {
-        super({ gap: 3, classes: ['catalog-page'] });
+        super({ gap: 24, classes: ['catalog-page'] });
 
         this.append(
             new Label({ text: t('catalog.title'), size: 'large', weight: 'medium' }),

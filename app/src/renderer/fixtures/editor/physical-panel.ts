@@ -91,7 +91,7 @@ export class PhysicalPanel extends Panel {
 
         this.append(
             new Label({ text: t('fixtureEditor.physicalHint'), tone: 'secondary', size: 'small' }),
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [...fields, beamMin, beamMax] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [...fields, beamMin, beamMax] }),
             source
         );
     }

@@ -29,7 +29,7 @@ export class GeneralPanel extends Panel {
             definition.category = value;
         }));
 
-        this.append(new Stack({ direction: 'row', gap: 2, classes: ['fixture-editor__fields'], children: [this.manufacturer, model, category] }));
+        this.append(new Stack({ direction: 'row', gap: 8, classes: ['fixture-editor__fields'], children: [this.manufacturer, model, category] }));
     }
 
     /**

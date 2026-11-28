@@ -34,7 +34,7 @@ export async function openAddAudio(): Promise<void> {
     });
     dialog.append(files.length === 0
         ? new Label({ text: t('audio.noFiles'), tone: 'secondary', size: 'small' })
-        : new Stack({ direction: 'row', gap: 1, wrap: true, classes: ['audio-add__files'], children: keys }));
+        : new Stack({ direction: 'row', gap: 8, wrap: true, classes: ['audio-add__files'], children: keys }));
     const cancel = new Key({ label: t('common.cancel') });
     const add = new Key({ label: t('audio.add'), icon: 'plus', state: 'active' });
     add.setDisabled(true);

@@ -22,7 +22,7 @@ const COLUMNS: readonly TextKey[] = [
 
 export class ChannelsPanel extends Panel {
     private readonly draft: FixtureDraft;
-    private readonly list = new Stack({ gap: 1 });
+    private readonly list = new Stack({ gap: 8 });
     private rows: Stack[] = [];
 
     constructor(draft: FixtureDraft) {
@@ -36,7 +36,7 @@ export class ChannelsPanel extends Panel {
         this.append(
             new Stack({
                 direction: 'row',
-                gap: 1,
+                gap: 8,
                 classes: ['channel-row', 'channel-row--header'],
                 children: COLUMNS.map((key) => new Label({ text: t(key), tone: 'secondary', size: 'small' }))
             }),
@@ -94,7 +94,7 @@ export class ChannelsPanel extends Panel {
 
         return new Stack({
             direction: 'row',
-            gap: 1,
+            gap: 8,
             align: 'center',
             classes: ['channel-row'],
             children: [name, attribute, fineOf, defaultValue, capabilities, remove]

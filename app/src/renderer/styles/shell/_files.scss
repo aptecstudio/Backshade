@@ -13,7 +13,7 @@
 }
 
 .file-browser__places {
-    flex: 0 0 space(8) * 3;
+    flex: 0 0 space(64) * 3;
     overflow-y: auto;
 }
 
@@ -35,7 +35,7 @@
     min-width: 0;
     min-height: 0;
     // Room for the focus ring of the keys
-    padding: space(1);
+    padding: space(8);
 }
 
 // Long paths wrap instead of widening the window
@@ -45,7 +45,7 @@
 
 .file-browser__list {
     flex: 1 1 auto;
-    min-height: space(8) * 3;
+    min-height: space(64) * 3;
     overflow-y: auto;
     border: 1px solid color('panel-border');
     border-radius: $radius-panel;
@@ -54,8 +54,8 @@
 .file-row {
     display: flex;
     align-items: center;
-    gap: space(1);
-    padding: 0 space(1);
+    gap: space(8);
+    padding: 0 space(8);
 
     .list-item {
         flex: 1 1 auto;
@@ -93,7 +93,7 @@
     }
 
     .file-dialog .file-browser__toolbar {
-        padding: 4px;
+        padding: space(4);
     }
 
     .file-dialog .file-browser__main {

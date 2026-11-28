@@ -11,7 +11,7 @@ export class FolderPicker extends Stack {
     private readonly field: TextField;
 
     constructor(label: string, folder: string) {
-        super({ direction: 'row', gap: 1, align: 'end', classes: ['folder-picker'] });
+        super({ direction: 'row', gap: 8, align: 'end', classes: ['folder-picker'] });
 
         this.field = new TextField({ label, value: folder });
         const choose = new Key({ label: t('newShow.chooseFolder'), icon: 'folder-open' });

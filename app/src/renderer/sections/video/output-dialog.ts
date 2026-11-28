@@ -39,17 +39,17 @@ export async function openOutputDialog(output: VideoOutputConfig): Promise<void>
     const height = new NumberField({ label: t('video.height'), value: output.height, min: 64, max: 16384 });
     const stack = new NumberField({ label: t('video.stack'), value: output.stack, min: 0, max: 99 });
     const layers = new NumberField({ label: t('video.layers'), value: output.layers, min: 1, max: MAX_VIDEO_LAYERS });
-    const windowRow = new Stack({ direction: 'row', gap: 2, wrap: true, children: [x, y, width, height] });
+    const windowRow = new Stack({ direction: 'row', gap: 8, wrap: true, children: [x, y, width, height] });
     windowRow.element.hidden = output.fullscreen;
     fullscreen.onChange((value) => {
         windowRow.element.hidden = value === 'yes';
     });
 
     dialog.append(
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [name, enabled] }),
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [display, fullscreen] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [name, enabled] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [display, fullscreen] }),
         windowRow,
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [stack, layers] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [stack, layers] }),
         new Label({ text: t('video.outputHint'), tone: 'secondary', size: 'small' })
     );
 

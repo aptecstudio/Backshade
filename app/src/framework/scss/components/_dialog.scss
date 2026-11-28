@@ -8,18 +8,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: space(4);
+    padding: space(16);
     background: rgba(0, 0, 0, 0.6);
 }
 
 .dialog {
     display: flex;
     flex-direction: column;
-    gap: space(3);
+    gap: space(12);
     width: 480px;
     max-width: 100%;
     max-height: 100%;
-    padding: space(3);
+    padding: space(16);
     border: 1px solid color('panel-border');
     border-radius: $radius-panel;
     background: color('panel');
@@ -43,14 +43,16 @@
 .dialog__body {
     display: flex;
     flex-direction: column;
-    gap: space(2);
+    gap: space(12);
     min-height: 0;
     overflow: auto;
+    padding: space(4);
+    margin: calc(space(4) * -1);
 }
 
 .dialog__actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: space(1);
+    gap: space(8);
 }

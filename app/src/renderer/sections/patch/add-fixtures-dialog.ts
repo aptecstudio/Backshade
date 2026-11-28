@@ -43,10 +43,10 @@ export async function openAddFixtures(entries: readonly PatchEntry[], universe =
     const add = new Key({ label: t('patch.add'), state: 'active' });
 
     const form = new Stack({
-        gap: 2,
+        gap: 12,
         children: [
             mode,
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [count, universeField, address, number] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [count, universeField, address, number] }),
             name,
             placement,
             new Stack({ direction: 'row', children: [firstFree] })
@@ -54,7 +54,7 @@ export async function openAddFixtures(entries: readonly PatchEntry[], universe =
     });
     const side = new Panel({ classes: ['add-fixtures__form'] });
     side.append(hint, form);
-    dialog.append(new Stack({ direction: 'row', gap: 2, align: 'stretch', classes: ['fixture-library'], children: [picker, side] }));
+    dialog.append(new Stack({ direction: 'row', gap: 8, align: 'stretch', classes: ['fixture-library'], children: [picker, side] }));
 
     const channelCount = (): number =>
         picker.selected?.modes.find((item) => item.name === mode.value)?.channelCount ?? 0;

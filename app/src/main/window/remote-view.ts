@@ -11,7 +11,7 @@ import { allowOrigin } from '../security/navigation-guard';
 import { SURFACE_COLOR } from './main-window';
 
 /** Height of the bar of the local interface above the view, in pixels */
-export const REMOTE_BAR_HEIGHT = 64;
+export const REMOTE_BAR_HEIGHT = 48;
 const PARTITION = 'persist:remote';
 
 let open: { window: BrowserWindow; view: WebContentsView; resize: () => void } | null = null;

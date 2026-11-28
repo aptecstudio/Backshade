@@ -94,12 +94,12 @@ export class MemoryPanel extends Panel {
         this.step = new Label({ text: '', tone: 'secondary', size: 'small' });
 
         this.append(
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.bank, this.hint, new Spacer(), this.record, this.edit, release] }),
-            new Stack({ direction: 'row', gap: 2, classes: ['memory-row'], children: [rowTitle(t('memories.scenes')), this.keyRow(this.sceneKeys)] }),
-            new Stack({ direction: 'row', gap: 2, classes: ['memory-row'], children: [rowTitle(t('memories.chasers')), this.keyRow(this.chaserKeys)] }),
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.bank, this.hint, new Spacer(), this.record, this.edit, release] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['memory-row'], children: [rowTitle(t('memories.scenes')), this.keyRow(this.sceneKeys)] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['memory-row'], children: [rowTitle(t('memories.chasers')), this.keyRow(this.chaserKeys)] }),
             new Stack({
                 direction: 'row',
-                gap: 2,
+                gap: 8,
                 align: 'center',
                 wrap: true,
                 children: [new Label({ text: t('memories.tempo'), size: 'small', weight: 'medium' }), this.chaserName, this.bpm, this.tap, this.step]
@@ -119,7 +119,7 @@ export class MemoryPanel extends Panel {
     }
 
     private keyRow(keys: Key[]): Stack {
-        return new Stack({ direction: 'row', gap: 1, classes: ['memory-row__keys'], children: keys });
+        return new Stack({ direction: 'row', gap: 8, classes: ['memory-row__keys'], children: keys });
     }
 
     private async load(): Promise<void> {

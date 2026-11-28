@@ -41,7 +41,7 @@ export class MarkerPanel extends Panel {
         markMidi(go, { kind: 'timeline', action: 'go' }, 'button');
         markMidi(back, { kind: 'timeline', action: 'back' }, 'button');
         this.empty = new Label({ text: t('timeline.noMarkers'), tone: 'secondary', size: 'small' });
-        this.append(new Stack({ gap: 2, children: [this.next, go, back, this.empty, this.list] }));
+        this.append(new Stack({ gap: 12, children: [this.next, go, back, this.empty, this.list] }));
         this.track(() => this.actions.clear());
     }
 
@@ -70,7 +70,7 @@ export class MarkerPanel extends Panel {
             const edit = new Key({ label: t('timeline.editMarker', { name: marker.name }), icon: 'pencil', iconOnly: true });
             edit.onPress(() => this.actions.emit({ kind: 'open', id: marker.id }));
             markEdit(edit);
-            const element = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['marker-row'], children: [item, edit] });
+            const element = new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['marker-row'], children: [item, edit] });
             this.list.append(element);
             return { marker, element };
         });

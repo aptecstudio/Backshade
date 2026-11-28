@@ -19,7 +19,7 @@ export class StageLibraryPanel extends Panel {
     private readonly additions = new Emitter<string>();
     private readonly placements = new Emitter<PatchEntry>();
     private fixtureList = new Stack();
-    private readonly fixtureArea = new Stack({ gap: 1 });
+    private readonly fixtureArea = new Stack({ gap: 8 });
 
     constructor(models: readonly ModelInfo[]) {
         super({ title: t('stage.library'), classes: ['stage-panel'] });

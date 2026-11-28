@@ -13,9 +13,9 @@ import { PresetSurface } from './preset-surface.js';
 
 export class ConsoleSection extends Stack {
     constructor() {
-        super({ gap: 2, align: 'stretch', classes: ['console-section'] });
+        super({ gap: 12, align: 'stretch', classes: ['console-section'] });
         this.append(
-            new Stack({ direction: 'row', gap: 2, align: 'stretch', classes: ['console-section__desk'], children: [new PresetSurface(), new DeskControls()] }),
+            new Stack({ direction: 'row', gap: 8, align: 'stretch', classes: ['console-section__desk'], children: [new PresetSurface(), new DeskControls()] }),
             new MemoryPanel(),
             new CuePanel(),
             new AttributesPanel()

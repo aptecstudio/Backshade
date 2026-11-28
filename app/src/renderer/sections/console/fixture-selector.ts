@@ -32,21 +32,21 @@ export class FixtureSelector extends Stack {
     private selection: string[] = [];
 
     constructor() {
-        super({ gap: 1, classes: ['fixture-selector'] });
+        super({ gap: 8, classes: ['fixture-selector'] });
 
         this.count = new Label({ text: '', tone: 'secondary', size: 'small' });
         this.clear = new Key({ label: t('attributesPanel.clear'), icon: 'x' });
         this.clear.onPress(() => this.select([]));
         this.empty = new Label({ text: t('attributesPanel.noFixtures'), tone: 'secondary', size: 'small' });
-        this.keysRow = new Stack({ direction: 'row', gap: 1, wrap: true, classes: ['fixture-selector__keys'] });
-        this.groupsRow = new Stack({ direction: 'row', gap: 1, wrap: true, classes: ['fixture-selector__groups'] });
+        this.keysRow = new Stack({ direction: 'row', gap: 8, wrap: true, classes: ['fixture-selector__keys'] });
+        this.groupsRow = new Stack({ direction: 'row', gap: 8, wrap: true, classes: ['fixture-selector__groups'] });
         this.saveGroup = new Key({ label: t('groups.saveSelection'), icon: 'plus' });
         this.saveGroup.onPress(() => void this.saveAsGroup());
 
         this.append(
             new Stack({
                 direction: 'row',
-                gap: 2,
+                gap: 8,
                 align: 'center',
                 children: [new Label({ text: t('attributesPanel.fixtures'), size: 'small', weight: 'medium' }), this.count, this.clear, this.saveGroup]
             }),

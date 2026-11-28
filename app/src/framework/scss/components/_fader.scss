@@ -30,7 +30,7 @@ $cap-shade: #7f8186;
 }
 
 .fader--compact {
-    height: 144px;
+    height: 128px;
 }
 
 // Height of the container, for the cells of the grid
@@ -54,7 +54,7 @@ $cap-shade: #7f8186;
 .fader__slot {
     position: absolute;
     top: 16px;
-    bottom: space(1);
+    bottom: space(8);
     left: 50%;
     width: 4px;
     margin-left: -2px;
@@ -77,7 +77,7 @@ $cap-shade: #7f8186;
     left: calc(50% + 12px);
     display: flex;
     align-items: center;
-    gap: space(1);
+    gap: space(4);
     color: color('scale-text');
     font-family: $font-family-mono;
     font-size: $font-size-micro;

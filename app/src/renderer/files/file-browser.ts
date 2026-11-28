@@ -35,7 +35,7 @@ const isFolder = (entry: FileEntry): boolean => entry.kind === 'folder' || entry
 
 export class FileBrowser extends Stack {
     private readonly options: BrowserOptions;
-    private readonly places = new Stack({ gap: 1, classes: ['file-browser__places'] });
+    private readonly places = new Stack({ gap: 8, classes: ['file-browser__places'] });
     private readonly pathLabel = new Label({ text: '', size: 'small', tone: 'secondary' });
     private readonly list = new Stack({ classes: ['file-browser__list'] });
     private readonly empty = new Label({ text: t('files.emptyFolder'), tone: 'secondary', size: 'small' });
@@ -51,7 +51,7 @@ export class FileBrowser extends Stack {
     private busy = false;
 
     constructor(options: BrowserOptions) {
-        super({ gap: 2, classes: ['file-browser'] });
+        super({ gap: 12, classes: ['file-browser'] });
         this.options = options;
 
         const key = (label: string, icon: IconName, action: () => void, iconOnly = false, armed = false): Key => {
@@ -75,14 +75,14 @@ export class FileBrowser extends Stack {
         this.send.element.hidden = !isRemote() || !manage;
         const toolbar = new Stack({
             direction: 'row',
-            gap: 1,
+            gap: 8,
             wrap: true,
             classes: ['file-browser__toolbar'],
             children: manage ? [this.up, newFolder, this.send, rename, copy, cut, this.paste, trash, remove] : [this.up, newFolder]
         });
         this.append(
             this.places,
-            new Stack({ gap: 1, classes: ['file-browser__main'], children: [toolbar, this.pathLabel, this.empty, this.list] })
+            new Stack({ gap: 8, classes: ['file-browser__main'], children: [toolbar, this.pathLabel, this.empty, this.list] })
         );
         this.track(() => this.changes.clear());
         this.render();

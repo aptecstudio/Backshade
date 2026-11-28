@@ -53,7 +53,7 @@ export function openOperatorDialog(operator: OperatorProfile | null): void {
         });
         rows.append(new Label({ text: title }), choice);
     }
-    const sections = new Stack({ gap: 1, children: [new Label({ text: t('operators.sections'), weight: 'medium' }), rows] });
+    const sections = new Stack({ gap: 4, children: [new Label({ text: t('operators.sections'), weight: 'medium' }), rows] });
 
     const renderAdmin = (): void => {
         adminKey.setState(admin ? 'active' : 'normal');
@@ -67,7 +67,7 @@ export function openOperatorDialog(operator: OperatorProfile | null): void {
     renderAdmin();
 
     dialog.append(
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, pin] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, pin] }),
         new Stack({ direction: 'row', children: [adminKey] }),
         adminHint,
         sections

@@ -42,7 +42,7 @@ export function openTrackDialog(track: Track, timeline: Timeline, context: Edito
             value: track.parent ?? ''
         });
         const height = new NumberField({ label: t('timeline.height'), value: track.height, min: TRACK_HEIGHT.min, max: TRACK_HEIGHT.max, unit: 'px' });
-        const fields: Stack[] = [new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, parent, height] })];
+        const fields: Stack[] = [new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, parent, height] })];
 
         const device = new SelectField<string>({
             label: t('audio.output'),
@@ -78,9 +78,9 @@ export function openTrackDialog(track: Track, timeline: Timeline, context: Edito
         if (track.kind === 'mixer') {
             fields.push(new Stack({ children: [mixer] }));
         } else if (track.kind === 'audio') {
-            fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [device, new Stack({ gap: 1, classes: ['clip-dialog__slider'], children: [new Label({ text: t('audio.volume'), size: 'small' }), volume] })] }));
+            fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [device, new Stack({ gap: 8, classes: ['clip-dialog__slider'], children: [new Label({ text: t('audio.volume'), size: 'small' }), volume] })] }));
         } else if (track.kind === 'video') {
-            fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, children: [output, layer] }));
+            fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, children: [output, layer] }));
         } else if (track.kind === 'automation') {
             fields.push(new Stack({ children: [target] }));
         }

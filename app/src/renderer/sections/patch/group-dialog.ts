@@ -40,7 +40,7 @@ export function openGroupEditor(group: FixtureGroup | null, fixtures: readonly P
     const sorted = [...fixtures].sort((a, b) => a.number - b.number);
     const keyRow = new Stack({
         direction: 'row',
-        gap: 1,
+        gap: 8,
         wrap: true,
         classes: ['group-editor__fixtures'],
         children: sorted.map((entry) => {
@@ -58,7 +58,7 @@ export function openGroupEditor(group: FixtureGroup | null, fixtures: readonly P
             return key;
         })
     });
-    dialog.append(new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, number] }), count, keyRow);
+    dialog.append(new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, number] }), count, keyRow);
     render();
 
     const apply = async (): Promise<void> => {

@@ -6,11 +6,12 @@
     flex-shrink: 0;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    gap: space(3);
-    padding: 0 space(1);
+    gap: space(12);
+    padding: 0 space(8);
 
     > :last-child {
         justify-self: end;
+        white-space: nowrap;
     }
 }
 

@@ -22,8 +22,8 @@ export class InstancePanel extends Panel {
         const connect = new Key({ label: t('remote.connectTitle'), icon: 'scan-line' });
         connect.onPress(() => openConnectionDialog());
         this.append(
-            new Stack({ gap: 1, children: [this.name, new Label({ text: t('instance.hint'), tone: 'secondary', size: 'small' })] }),
-            new Stack({ direction: 'row', gap: 1, wrap: true, children: [rename, connect] })
+            new Stack({ gap: 8, children: [this.name, new Label({ text: t('instance.hint'), tone: 'secondary', size: 'small' })] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [rename, connect] })
         );
         void engine().request('settings.get').then((settings) => this.name.setText(settings.instanceName)).catch(showError);
     }

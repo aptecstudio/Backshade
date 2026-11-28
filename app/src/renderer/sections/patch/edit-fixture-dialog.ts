@@ -74,7 +74,7 @@ export async function openEditFixture(entry: PatchEntry): Promise<void> {
     dialog.append(
         new Label({ text: entryFixture(entry), tone: 'secondary' }),
         name,
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [number, universe, address] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [number, universe, address] }),
         mode,
         note
     );

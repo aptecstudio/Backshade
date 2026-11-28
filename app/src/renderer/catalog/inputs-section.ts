@@ -20,7 +20,7 @@ export class InputsSection extends Panel {
         wheel.onChange((rgb) => colorValue.setText(`${rgbToHex(rgb)}  R ${rgb.r}  G ${rgb.g}  B ${rgb.b}`));
 
         this.append(
-            new Stack({ direction: 'row', gap: 2, align: 'end', children: [time, timeValue] }),
+            new Stack({ direction: 'row', gap: 16, align: 'end', children: [time, timeValue] }),
             wheel,
             colorValue
         );

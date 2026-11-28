@@ -11,7 +11,7 @@ export class DisplaysSection extends Panel {
 
         const readouts = new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 16,
             children: [
                 new ReadoutDisplay({ text: '00:12:48:20', label: t('console.timecode') }),
                 new ReadoutDisplay({ text: '128.0', label: t('console.tempo') })
@@ -20,7 +20,7 @@ export class DisplaysSection extends Panel {
 
         const channels = new Stack({
             direction: 'row',
-            gap: 1,
+            gap: 8,
             classes: ['catalog-displays'],
             children: [
                 new ChannelDisplay({ name: t('catalog.sample.washLeft'), value: t('units.percent', { value: 85 }), level: 0.85, color: 'blue' }),
@@ -32,7 +32,7 @@ export class DisplaysSection extends Panel {
 
         const values = new Stack({
             direction: 'row',
-            gap: 1,
+            gap: 8,
             classes: ['catalog-displays'],
             children: [
                 new ValueDisplay({ caption: t('attributes.intensity'), value: t('units.percent', { value: 85 }) }),

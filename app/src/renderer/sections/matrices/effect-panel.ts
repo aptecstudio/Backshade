@@ -31,7 +31,7 @@ import { renderTextMask } from './text-mask.js';
 export class EffectPanel extends Panel {
     private readonly matrix: MatrixEntry;
     private readonly kindKeys = new Map<MatrixEffectKind | 'off', Key>();
-    private readonly params = new Stack({ gap: 2, classes: ['effect-panel__params'] });
+    private readonly params = new Stack({ gap: 12, classes: ['effect-panel__params'] });
     private effect: MatrixEffect | null;
     private paramParts: Stack[] = [];
 
@@ -41,12 +41,12 @@ export class EffectPanel extends Panel {
         this.effect = effect;
 
         const group = (title: string, kinds: ReadonlyArray<MatrixEffectKind | 'off'>): Stack => new Stack({
-            gap: 1,
+            gap: 8,
             children: [
                 new Label({ text: title, tone: 'secondary', size: 'small' }),
                 new Stack({
                     direction: 'row',
-                    gap: 1,
+                    gap: 8,
                     wrap: true,
                     children: kinds.map((kind) => {
                         const key = new Key({ label: t(`matrices.kinds.${kind}`) });
@@ -107,14 +107,14 @@ export class EffectPanel extends Panel {
                 swatch.onChange((value) => this.change((current) => ({ ...current, colors: current.colors.map((item, at) => at === index ? value : item) })));
                 return swatch;
             });
-            parts.push(new Stack({ direction: 'row', gap: 1, wrap: true, children: swatches }));
+            parts.push(new Stack({ direction: 'row', gap: 8, wrap: true, children: swatches }));
         }
         if (spec.text) {
             const text = new TextField({ label: t('matrices.text'), value: effect.text, maxLength: EFFECT_TEXT_MAX_LENGTH });
             const font = new SelectField<string>({ label: t('matrices.font'), options: EFFECT_FONTS.map((item) => ({ value: item, label: item })), value: effect.font });
             text.onInput((value) => this.change((current) => this.withMask({ ...current, text: value })));
             font.onChange((value) => this.change((current) => this.withMask({ ...current, font: value })));
-            parts.push(new Stack({ direction: 'row', gap: 2, wrap: true, children: [text, font] }));
+            parts.push(new Stack({ direction: 'row', gap: 8, wrap: true, children: [text, font] }));
         }
         if (spec.image) {
             parts.push(this.imageControls(effect));
@@ -174,13 +174,13 @@ export class EffectPanel extends Panel {
             );
             note.setText(images.length === 0 ? t('matrices.noImages') : '');
         }).catch(showError);
-        return new Stack({ gap: 1, children: [new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [file, fit] }), note] });
+        return new Stack({ gap: 8, children: [new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [file, fit] }), note] });
     }
 
     private slider(label: string, value: number, change: (value: number) => void): Stack {
         const slider = new LinearSlider({ label, value });
         slider.onChange(change);
-        return new Stack({ gap: 1, classes: ['effect-panel__slider'], children: [new Label({ text: label, size: 'small' }), slider] });
+        return new Stack({ gap: 8, classes: ['effect-panel__slider'], children: [new Label({ text: label, size: 'small' }), slider] });
     }
 
     private withMask(effect: MatrixEffect): MatrixEffect {

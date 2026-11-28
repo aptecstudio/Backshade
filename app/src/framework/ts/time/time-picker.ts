@@ -95,15 +95,15 @@ export function pickTime(options: TimePickerOptions): Promise<number | null> {
             readout,
             new Stack({
                 direction: 'row',
-                gap: 3,
+                gap: 24,
                 align: 'center',
                 classes: ['time-picker__body'],
                 children: [
                     wheel,
-                    new Stack({ gap: 2, children: [entry, new Stack({ direction: 'row', gap: 1, children: [fineKey, resetKey] })] })
+                    new Stack({ gap: 16, children: [entry, new Stack({ direction: 'row', gap: 8, children: [fineKey, resetKey] })] })
                 ]
             }),
-            new Stack({ direction: 'row', gap: 1, classes: ['time-picker__steps'], children: steps })
+            new Stack({ direction: 'row', gap: 8, classes: ['time-picker__steps'], children: steps })
         );
 
         const finish = (value: number | null): void => {

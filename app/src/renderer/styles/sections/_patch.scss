@@ -2,10 +2,10 @@
 @use 'framework/scss/tokens' as *;
 
 // Columns: type icon, number, name, fixture, mode, addresses, channels, problem
-$patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr) space(8) minmax(0, 3fr);
+$patch-columns: space(24) space(48) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr) space(64) minmax(0, 3fr);
 
 .patch-universe {
-    padding: space(2);
+    padding: space(8);
 
     .panel__body {
         gap: 0;
@@ -15,13 +15,13 @@ $patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) m
 .patch-table__row {
     display: grid;
     grid-template-columns: $patch-columns;
-    gap: space(1);
+    gap: space(8);
     align-items: center;
 }
 
 // The header has the same padding and border as the rows, so the columns line up
 .patch-table__row--header {
-    padding: space(1) space(2);
+    padding: space(4) space(12);
     border: 1px solid transparent;
     border-bottom-color: color('panel-border');
 }
@@ -57,12 +57,12 @@ $patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) m
 
 // Grid of the 512 channels: cells of at least 48 px, so they work with touch
 .patch-grid {
-    padding: space(2);
+    padding: space(8);
 }
 
 .universe-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(space(6), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(space(48), 1fr));
     gap: 1px;
     padding: 1px;
     border-radius: $radius-square-key;
@@ -75,8 +75,8 @@ $patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) m
     flex-direction: column;
     justify-content: space-between;
     min-width: 0;
-    height: space(6);
-    padding: 0 space(1);
+    height: space(48);
+    padding: 0 space(8);
     border: 0;
     background: color('display');
     color: color('text-secondary');
@@ -135,13 +135,13 @@ $patch-columns: space(3) space(6) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2fr) m
 // Fixture groups: list and editor
 .group-list__row {
     display: grid;
-    grid-template-columns: space(6) minmax(0, 1fr) auto;
+    grid-template-columns: space(48) minmax(0, 1fr) auto;
     align-items: center;
-    gap: space(2);
+    gap: space(12);
     text-align: left;
 }
 
 .group-editor__fixtures {
-    max-height: space(8) * 5;
+    max-height: space(64) * 5;
     overflow-y: auto;
 }

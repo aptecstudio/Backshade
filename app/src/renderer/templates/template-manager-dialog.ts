@@ -19,9 +19,9 @@ import { localized } from './template-text.js';
  */
 function templateRow(template: TemplateInfo): Stack {
     const name = localized(template.name);
-    const row = new Stack({ direction: 'row', gap: 2, align: 'center', classes: ['template-row'] });
+    const row = new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['template-row'] });
     row.append(new Stack({
-        gap: 1,
+        gap: 8,
         classes: ['template-row__text'],
         children: [
             new Label({ text: name, weight: 'medium' }),
@@ -117,7 +117,7 @@ function group(title: string, templates: readonly TemplateInfo[], emptyText: str
  */
 export function openTemplateManager(): void {
     const dialog = new Dialog({ title: t('templates.title'), size: 'wide' });
-    const content = new Stack({ gap: 2 });
+    const content = new Stack({ gap: 12 });
     dialog.append(content);
 
     let groups: Panel[] = [];

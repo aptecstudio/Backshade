@@ -21,7 +21,7 @@ export class AdminFields extends Stack {
     private readonly message = new Label({ text: '', tone: 'accent', size: 'small' });
 
     constructor() {
-        super({ gap: 1 });
+        super({ gap: 8 });
         this.name = new TextField({ label: t('operators.adminName'), value: t('operators.adminDefaultName'), maxLength: OPERATOR_NAME_LENGTH });
         const digits = (label: string): TextField => new TextField({ label, maxLength: PIN_LENGTH, secret: true, inputMode: 'numeric' });
         this.pin = digits(t('operators.pin'));
@@ -29,7 +29,7 @@ export class AdminFields extends Stack {
         this.message.element.setAttribute('role', 'alert');
         this.append(
             new Label({ text: t('operators.adminRequired'), tone: 'secondary', size: 'small' }),
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [this.name, this.pin, this.confirm] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [this.name, this.pin, this.confirm] }),
             this.message
         );
     }

@@ -18,9 +18,9 @@
     flex-wrap: wrap;
 }
 
-@each $step, $value in $scale {
-    .stack--gap-#{$step} {
-        gap: $value;
+@each $size in $scale {
+    .stack--gap-#{$size} {
+        gap: space($size);
     }
 }
 

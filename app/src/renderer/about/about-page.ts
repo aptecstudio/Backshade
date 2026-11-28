@@ -13,7 +13,7 @@ const LICENSE_URL = 'https://www.gnu.org/licenses/gpl-3.0.html';
 
 export class AboutPage extends Stack {
     constructor(info: AppInfo) {
-        super({ gap: 3, align: 'center', classes: ['about-page'] });
+        super({ gap: 12, align: 'center', classes: ['about-page'] });
 
         const close = new Key({ label: t('common.close') });
         close.onPress(() => window.close());
@@ -21,7 +21,7 @@ export class AboutPage extends Stack {
         this.append(
             new ImageView({ src: LOGO_SRC, alt: '', classes: ['about-page__logo'] }),
             new Stack({
-                gap: 1,
+                gap: 8,
                 align: 'center',
                 children: [
                     new Label({ text: info.name, size: 'large', weight: 'medium' }),
@@ -30,7 +30,7 @@ export class AboutPage extends Stack {
             }),
             new Label({ text: t('about.description'), tone: 'secondary', size: 'small' }),
             new Stack({
-                gap: 1,
+                gap: 8,
                 align: 'center',
                 children: [
                     new Label({ text: t('about.license'), size: 'small' }),

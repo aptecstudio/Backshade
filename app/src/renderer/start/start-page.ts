@@ -11,10 +11,10 @@ import { StartActionsPanel } from './start-actions-panel.js';
 
 export class StartPage extends Stack {
     constructor() {
-        super({ direction: 'row', gap: 3, align: 'start', classes: ['start-page'] });
+        super({ direction: 'row', gap: 12, align: 'start', classes: ['start-page'] });
 
         this.append(
-            new Stack({ gap: 3, classes: ['start-page__side'], children: [new StartActionsPanel(), new CurrentShowPanel(), new InstancePanel()] }),
+            new Stack({ gap: 12, classes: ['start-page__side'], children: [new StartActionsPanel(), new CurrentShowPanel(), new InstancePanel()] }),
             new RecentShowsPanel()
         );
     }

@@ -74,7 +74,7 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
             });
             return new Stack({
                 direction: 'row',
-                gap: 1,
+                gap: 8,
                 align: 'center',
                 classes: ['chaser-steps__row'],
                 children: [
@@ -106,10 +106,10 @@ export function openChaserDialog(slot: number, chaser: Chaser | null, scenes: re
 
     dialog.append(
         name,
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [bpm, fade, direction] }),
-        new Stack({ gap: 1, children: [followTempo, new Label({ text: t('memories.tempoSharedHint'), tone: 'secondary', size: 'small' })] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [bpm, fade, direction] }),
+        new Stack({ gap: 8, children: [followTempo, new Label({ text: t('memories.tempoSharedHint'), tone: 'secondary', size: 'small' })] }),
         list,
-        new Stack({ direction: 'row', gap: 1, align: 'center', children: [sceneChoice, add] }),
+        new Stack({ direction: 'row', gap: 8, align: 'center', children: [sceneChoice, add] }),
         new Label({ text: scenes.length === 0 ? t('memories.noScenes') : t('memories.stepsHint'), tone: 'secondary', size: 'small' })
     );
     render();

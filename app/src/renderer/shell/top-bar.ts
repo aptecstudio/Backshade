@@ -43,7 +43,7 @@ export class TopBar extends Panel {
 
         this.append(new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 8,
             align: 'center',
             children: [
                 this.brand,

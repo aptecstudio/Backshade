@@ -19,7 +19,7 @@ export function openTimelineDialog(timeline: Timeline): Promise<TimelineDialogRe
         const bpm = new NumberField({ label: t('memories.bpm'), value: timeline.bpm, min: TIMELINE_LIMITS.bpm.min, max: TIMELINE_LIMITS.bpm.max, decimals: 1, unit: t('memories.bpmUnit') });
         const meter = new NumberField({ label: t('timeline.beatsPerBar'), value: timeline.beatsPerBar, min: 1, max: 16 });
         const length = new TimeField({ label: t('timeline.length'), value: timeline.length, min: 1, max: TIMELINE_LIMITS.length, decimals: 0, labels: timePickerLabels() });
-        dialog.append(name, new Stack({ direction: 'row', gap: 2, wrap: true, children: [bpm, meter, length] }));
+        dialog.append(name, new Stack({ direction: 'row', gap: 8, wrap: true, children: [bpm, meter, length] }));
         const finish = (result: TimelineDialogResult | null): void => {
             dialog.close();
             resolve(result);

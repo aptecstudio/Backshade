@@ -32,7 +32,7 @@ export class PresetStrip extends Stack {
     private readonly flashes = new Emitter<boolean>();
 
     constructor() {
-        super({ gap: 1, align: 'center', classes: ['preset-strip'] });
+        super({ gap: 4, align: 'center', classes: ['preset-strip'] });
 
         this.fixture = new Label({ text: '', tone: 'secondary', size: 'small' });
         this.display = new ChannelDisplay({ name: '', value: '', level: 0, color: 'blue' });
@@ -54,7 +54,7 @@ export class PresetStrip extends Stack {
         });
 
         this.append(
-            new Stack({ direction: 'row', gap: 1, classes: ['preset-strip__head'], children: [this.number, this.fixture] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['preset-strip__head'], children: [this.number, this.fixture] }),
             this.display,
             this.fader,
             this.flash

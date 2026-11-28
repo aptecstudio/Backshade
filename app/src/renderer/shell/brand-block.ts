@@ -11,13 +11,13 @@ export class BrandBlock extends Stack {
     private readonly showName: Label;
 
     constructor() {
-        super({ direction: 'row', gap: 2, align: 'center', classes: ['brand-block'] });
+        super({ direction: 'row', gap: 8, align: 'center', classes: ['brand-block'] });
 
         this.showName = new Label({ text: t('shell.noShow'), size: 'large', weight: 'medium' });
         this.append(
             new ImageView({ src: LOGO_SRC, alt: '', classes: ['brand-block__logo'] }),
             new Stack({
-                gap: 1,
+                gap: 8,
                 classes: ['brand-block__names'],
                 children: [
                     new Label({ text: t('app.name'), tone: 'accent', size: 'small', weight: 'medium' }),

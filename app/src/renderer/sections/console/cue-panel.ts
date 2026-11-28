@@ -72,17 +72,17 @@ export class CuePanel extends Panel {
 
         this.append(new Stack({
             direction: 'row',
-            gap: 3,
+            gap: 12,
             align: 'start',
             classes: ['cue-panel__layout'],
             children: [
                 new Stack({
-                    gap: 1,
+                    gap: 8,
                     classes: ['cue-panel__left'],
-                    children: [this.empty, this.list, new Stack({ direction: 'row', gap: 1, align: 'center', children: [this.sceneChoice, this.add] })]
+                    children: [this.empty, this.list, new Stack({ direction: 'row', gap: 8, align: 'center', children: [this.sceneChoice, this.add] })]
                 }),
                 new Stack({
-                    gap: 2,
+                    gap: 12,
                     classes: ['cue-panel__controls'],
                     children: [
                         this.current,
@@ -90,7 +90,7 @@ export class CuePanel extends Panel {
                         this.fade,
                         this.follow,
                         go,
-                        new Stack({ direction: 'row', gap: 1, classes: ['cue-panel__keys'], children: [back, this.pause, release] })
+                        new Stack({ direction: 'row', gap: 8, classes: ['cue-panel__keys'], children: [back, this.pause, release] })
                     ]
                 })
             ]
@@ -148,7 +148,7 @@ export class CuePanel extends Panel {
             const edit = new Key({ label: t('cues.edit', { number: formatCue(cue.number) }), icon: 'pencil', iconOnly: true });
             edit.onPress(() => openCueDialog(cue, this.memories.scenes));
             markEdit(edit);
-            const element = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['cue-row'], children: [item, edit] });
+            const element = new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['cue-row'], children: [item, edit] });
             this.list.append(element);
             return { cue, element };
         });

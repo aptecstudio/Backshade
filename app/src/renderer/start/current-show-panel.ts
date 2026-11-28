@@ -36,8 +36,8 @@ export class CurrentShowPanel extends Panel {
         });
 
         this.append(
-            new Stack({ gap: 1, children: [this.name, this.state, this.folder] }),
-            new Stack({ direction: 'row', gap: 1, wrap: true, children: keys })
+            new Stack({ gap: 8, children: [this.name, this.state, this.folder] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: keys })
         );
 
         this.render(currentShow());

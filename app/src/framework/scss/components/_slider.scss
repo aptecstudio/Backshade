@@ -17,9 +17,9 @@
 .slider__track {
     position: absolute;
     top: 50%;
-    right: space(1);
-    left: space(1);
-    height: space(1);
+    right: space(8);
+    left: space(8);
+    height: space(8);
     border: 1px solid color('panel-border');
     border-radius: 4px;
     background: linear-gradient(90deg, #000, var(--slider-color, #{color('text')}));

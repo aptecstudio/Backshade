@@ -23,8 +23,8 @@
 }
 
 .effect-panel {
-    flex: 1 1 space(8) * 5;
-    min-width: space(8) * 5;
+    flex: 1 1 space(64) * 5;
+    min-width: space(64) * 5;
 }
 
 .effect-panel__slider .slider {
@@ -35,9 +35,9 @@
 .color-swatch {
     display: inline-flex;
     align-items: center;
-    gap: space(1);
-    height: space(6);
-    padding: 0 space(2);
+    gap: space(8);
+    height: space(40);
+    padding: 0 space(12);
     border: 1px solid color('panel-border');
     border-radius: $radius-key;
     background: color('display');
@@ -46,8 +46,8 @@
 }
 
 .color-swatch__chip {
-    width: space(3);
-    height: space(3);
+    width: space(20);
+    height: space(20);
     border-radius: $radius-square-key;
     background: var(--swatch-color);
 }

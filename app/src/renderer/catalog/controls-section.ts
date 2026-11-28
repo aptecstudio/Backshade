@@ -41,7 +41,7 @@ export class ControlsSection extends Panel {
 
         this.append(new Stack({
             direction: 'row',
-            gap: 4,
+            gap: 32,
             align: 'start',
             children: [
                 ...strips.map((strip, index) => this.strip(strip, index + 1)),
@@ -66,7 +66,7 @@ export class ControlsSection extends Panel {
         this.track(bindControlValue('knob', knob, { input: knobInput }));
 
         return new Stack({
-            gap: 2,
+            gap: 16,
             align: 'center',
             classes: ['catalog-strip'],
             children: [
@@ -75,7 +75,7 @@ export class ControlsSection extends Panel {
                 knobInput,
                 new Stack({
                     direction: 'row',
-                    gap: 1,
+                    gap: 8,
                     children: [
                         new SquareKey({ variant: 'flash', icon: 'zap', label: t('console.flash') }),
                         new SquareKey({ variant: 'solo', icon: 'headphones', label: t('console.solo') })
@@ -95,7 +95,7 @@ export class ControlsSection extends Panel {
         this.track(bindControlValue('fader', fader, { text: (text) => level.setText(text) }));
 
         return new Stack({
-            gap: 2,
+            gap: 16,
             align: 'center',
             children: [new Label({ text: t('console.grandMaster'), tone: 'secondary', size: 'small' }), fader, level]
         });
@@ -109,7 +109,7 @@ export class ControlsSection extends Panel {
 
         return new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 16,
             align: 'center',
             classes: ['catalog-displays'],
             children: [knob, input, display]

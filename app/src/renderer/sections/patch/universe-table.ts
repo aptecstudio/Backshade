@@ -49,7 +49,7 @@ function typeCell(entry: PatchRow): Stack {
  */
 function problemCell(entry: PatchRow): Stack {
     const problem = entryProblem(entry);
-    const stack = new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['patch-table__cell', 'patch-table__problem'] });
+    const stack = new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['patch-table__cell', 'patch-table__problem'] });
     if (problem !== null) {
         stack.element.append(icon(entry.missing ? 'circle-help' : 'triangle-alert'));
         stack.append(new Label({ text: problem, size: 'small' }));

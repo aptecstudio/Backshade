@@ -11,7 +11,7 @@ import { attributeLabel } from '../fixture-text.js';
 
 function channelText(channel: FixtureChannel): Stack {
     return new Stack({
-        gap: 1,
+        gap: 8,
         classes: ['mode-channels__text'],
         children: [
             new Label({ text: channel.name, weight: 'medium' }),
@@ -57,7 +57,7 @@ export function editModeChannels(modeName: string, channels: readonly FixtureCha
                 });
                 return new Stack({
                     direction: 'row',
-                    gap: 1,
+                    gap: 8,
                     align: 'center',
                     classes: ['mode-channels__row'],
                     children: [new Label({ text: String(index + 1), tone: 'secondary', size: 'small' }), channelText(channel), new Spacer(), remove]
@@ -81,7 +81,7 @@ export function editModeChannels(modeName: string, channels: readonly FixtureCha
 
         dialog.append(
             new Label({ text: t('fixtureEditor.modeHint'), tone: 'secondary', size: 'small' }),
-            new Stack({ direction: 'row', gap: 2, align: 'start', classes: ['mode-channels'], children: [available, inMode] })
+            new Stack({ direction: 'row', gap: 8, align: 'start', classes: ['mode-channels'], children: [available, inMode] })
         );
         render();
 

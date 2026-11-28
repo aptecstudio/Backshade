@@ -1,20 +1,14 @@
-// Spacing scale: multiples of 8 only (see MEMORY.md, Design system)
-@use 'sass:map';
+// Spacing scale in pixels: multiples of 4; 2 only for rare fine adjustments
+// (see MEMORY.md, Design system)
+@use 'sass:list';
 
-$scale: (
-    1: 8px,
-    2: 16px,
-    3: 24px,
-    4: 32px,
-    6: 48px,
-    8: 64px
-);
+$scale: 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64;
 
-/// Returns a spacing from the scale; error if the step does not exist.
-/// @param {Number} $step - Scale step: 1, 2, 3, 4, 6 or 8
-@function space($step) {
-    @if not map.has-key($scale, $step) {
-        @error 'Spacing "#{$step}" is not in the scale: use 1, 2, 3, 4, 6 or 8.';
+/// Returns a spacing from the scale; error if it is not in it.
+/// @param {Number} $size - Size in pixels, without unit
+@function space($size) {
+    @if not list.index($scale, $size) {
+        @error 'Spacing "#{$size}" is not in the scale: use a value of $scale.';
     }
-    @return map.get($scale, $step);
+    @return $size * 1px;
 }

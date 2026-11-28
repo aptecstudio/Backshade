@@ -34,7 +34,7 @@ export class LanguageSettings extends Panel {
             }
             return key;
         });
-        return new Stack({ direction: 'row', gap: 1, wrap: true, classes: ['language-keys'], children: keys });
+        return new Stack({ direction: 'row', gap: 8, wrap: true, classes: ['language-keys'], children: keys });
     }
 
     /**

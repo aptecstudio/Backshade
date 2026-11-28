@@ -23,7 +23,7 @@ import { categoryLabel, fixtureTitle, sourceLabel } from './fixture-text.js';
 class FixtureDetails extends Panel {
     private readonly title = new Label({ text: '', weight: 'medium' });
     private readonly info = new Label({ text: '', tone: 'secondary', size: 'small' });
-    private readonly modes = new Stack({ gap: 1 });
+    private readonly modes = new Stack({ gap: 8 });
     private readonly hint = new Label({ text: t('fixtures.readOnly'), tone: 'secondary', size: 'small' });
     private readonly edit = new Key({ label: t('fixtures.edit'), icon: 'pencil' });
     private readonly exportKey = new Key({ label: t('fixtures.export'), icon: 'package' });
@@ -37,7 +37,7 @@ class FixtureDetails extends Panel {
             this.info,
             this.modes,
             this.hint,
-            new Stack({ direction: 'row', gap: 1, wrap: true, children: [this.edit, this.exportKey, this.remove] })
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [this.edit, this.exportKey, this.remove] })
         );
         this.edit.onPress(() => void this.editFixture());
         this.exportKey.onPress(() => void this.exportFixture());
@@ -139,7 +139,7 @@ export function openFixtureLibrary(): void {
     const dialog = new Dialog({ title: t('fixtures.libraryTitle'), size: 'large' });
     const picker = new FixturePicker();
     const details = new FixtureDetails();
-    dialog.append(new Stack({ direction: 'row', gap: 2, align: 'stretch', classes: ['fixture-library'], children: [picker, details] }));
+    dialog.append(new Stack({ direction: 'row', gap: 8, align: 'stretch', classes: ['fixture-library'], children: [picker, details] }));
     picker.onSelect((fixture) => details.show(fixture));
 
     const load = async (): Promise<void> => {

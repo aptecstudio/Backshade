@@ -11,7 +11,7 @@ import type { SpacingStep } from '../theme/spacing.js';
 export interface StackOptions {
     /** Direction: row or column (default) */
     direction?: 'row' | 'column';
-    /** Spacing between children, as a scale step (default 1) */
+    /** Spacing between children, as a scale step in pixels (default 8) */
     gap?: SpacingStep;
     /** Alignment on the cross axis */
     align?: 'start' | 'center' | 'end' | 'stretch';
@@ -28,7 +28,7 @@ export class Stack extends Component<HTMLDivElement> {
         const classes = [
             'stack',
             `stack--${options.direction ?? 'column'}`,
-            `stack--gap-${options.gap ?? 1}`,
+            `stack--gap-${options.gap ?? 8}`,
             ...(options.align === undefined ? [] : [`stack--align-${options.align}`]),
             ...(options.wrap === true ? ['stack--wrap'] : []),
             ...(options.classes ?? [])

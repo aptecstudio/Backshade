@@ -20,7 +20,7 @@ class OptionalTime extends Stack {
     private readonly field: NumberField;
 
     constructor(label: string, noneLabel: string, value: number | null, fallback: number) {
-        super({ gap: 1, classes: ['cue-dialog__time'] });
+        super({ gap: 8, classes: ['cue-dialog__time'] });
         this.mode = new SelectField<'none' | 'set'>({
             label,
             options: [{ value: 'none', label: noneLabel }, { value: 'set', label: t('cues.setTime') }],
@@ -57,9 +57,9 @@ export function openCueDialog(cue: Cue, scenes: readonly SceneSummary[]): void {
     const follow = new OptionalTime(t('cues.follow'), t('cues.manual'), cue.follow, 0);
 
     dialog.append(
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [number, sceneField] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [number, sceneField] }),
         note,
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'start', children: [fadeIn, fadeOut, follow] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'start', children: [fadeIn, fadeOut, follow] }),
         new Label({ text: t('cues.followHint'), tone: 'secondary', size: 'small' })
     );
 

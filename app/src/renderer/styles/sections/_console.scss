@@ -15,7 +15,7 @@
 }
 
 .preset-row__title {
-    flex: 0 0 space(3);
+    flex: 0 0 space(16);
     align-items: center;
     justify-content: center;
 
@@ -73,7 +73,7 @@
 }
 
 .desk-controls {
-    flex: 0 0 352px;
+    flex: 0 0 320px;
 
     .number-field__unit {
         display: none;
@@ -94,17 +94,19 @@
 
 // Attributes panel: fixture selection, channel faders, pan and tilt wheels, color wheel
 .fixture-selector__keys {
-    max-height: space(8) * 2 + space(1);
+    max-height: space(64) * 2 + space(16);
+    // Room for the hit area of the keys, which would otherwise make the list scroll
+    padding: space(4) 0;
     overflow-y: auto;
 }
 
 // Wheels stay beside the faders; with many channels the faders scroll
 .attributes-panel__strips {
     display: grid;
-    grid-auto-columns: space(8) + space(2);
+    grid-auto-columns: space(64) + space(8);
     grid-auto-flow: column;
     flex: 1 1 0;
-    min-width: space(8) * 4;
+    min-width: space(64) * 4;
     overflow-x: auto;
 }
 
@@ -144,7 +146,7 @@
 }
 
 .memory-row__title {
-    flex: 0 0 space(8);
+    flex: 0 0 space(48);
     justify-content: center;
 
     .label {
@@ -160,7 +162,7 @@
 
     > .key {
         min-width: 0;
-        padding: 0 space(1);
+        padding: 0 space(8);
     }
 
     .key__label {
@@ -173,12 +175,14 @@
 // Chaser dialog: list of steps
 .chaser-steps .panel__body {
     gap: 0;
-    max-height: space(8) * 4;
+    // Room for the hit area of the keys, which would otherwise make the list scroll
+    padding: space(4) 0;
+    max-height: space(64) * 4;
     overflow-y: auto;
 }
 
 .chaser-steps__row {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {
@@ -193,12 +197,14 @@
 }
 
 .cue-panel__list {
-    max-height: space(8) * 4;
+    // Room for the hit area of the keys, which would otherwise make the list scroll
+    padding: space(4) 0;
+    max-height: space(64) * 4;
     overflow-y: auto;
 }
 
 .cue-panel__controls {
-    flex: 0 0 space(8) * 5;
+    flex: 0 0 space(64) * 5;
 }
 
 .cue-panel__go,
@@ -221,9 +227,9 @@
 .cue-row__item {
     display: grid;
     flex: 1 1 auto;
-    grid-template-columns: space(6) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 2fr);
+    grid-template-columns: space(48) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 2fr);
     align-items: center;
-    gap: space(2);
+    gap: space(12);
     min-width: 0;
     text-align: left;
 
@@ -252,7 +258,7 @@
 }
 
 .cue-progress__track {
-    height: space(1);
+    height: space(8);
     border-radius: $radius-square-key;
     background: color('display');
     overflow: hidden;

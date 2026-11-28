@@ -59,20 +59,20 @@ export class PresetSurface extends Panel {
                 return strip;
             });
             this.strips[row] = strips;
-            return new Stack({ direction: 'row', gap: 1, classes: ['preset-row__strips'], children: strips });
+            return new Stack({ direction: 'row', gap: 8, classes: ['preset-row__strips'], children: strips });
         });
         this.titleB = rowTitle(t('deskConsole.presetB'));
 
         this.append(
             new Stack({
                 direction: 'row',
-                gap: 2,
+                gap: 8,
                 align: 'center',
                 wrap: true,
                 children: [previous, this.bank, next, new Label({ text: t('deskConsole.universe'), tone: 'secondary', size: 'small' }), this.universeField, new Spacer(), this.mode]
             }),
-            new Stack({ direction: 'row', gap: 2, classes: ['preset-row'], children: [rowTitle(t('deskConsole.presetA')), rows[0]] }),
-            new Stack({ direction: 'row', gap: 2, classes: ['preset-row'], children: [this.titleB, rows[1]] })
+            new Stack({ direction: 'row', gap: 8, classes: ['preset-row'], children: [rowTitle(t('deskConsole.presetA')), rows[0]] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['preset-row'], children: [this.titleB, rows[1]] })
         );
 
         this.track(engine().on('console.stateChanged', ({ state }) => this.apply(state)));

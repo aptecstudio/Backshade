@@ -10,7 +10,7 @@
 }
 
 .start-actions .panel__body {
-    gap: space(1);
+    gap: space(8);
 }
 
 .start-actions .key {
@@ -26,7 +26,7 @@
 }
 
 .recent-shows .panel__body {
-    gap: space(1);
+    gap: space(4);
 }
 
 .recent-shows__row > .list-item {
@@ -47,12 +47,14 @@
 }
 
 .template-choice {
+    // Room for the hit area of the keys, which would otherwise make the list scroll
+    padding: space(4) 0;
     max-height: 240px;
     overflow: auto;
 }
 
 .template-row {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {
@@ -65,7 +67,7 @@
 }
 
 .media-row {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {

@@ -54,7 +54,7 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
         const width = new NumberField({ label: t('grid.width'), value: widget.w, min: 1, max: page.columns - widget.x });
         const height = new NumberField({ label: t('grid.height'), value: widget.h, min: 1, max: page.rows - widget.y });
         const hint = new Label({ text: '', tone: 'secondary', size: 'small' });
-        const channelRow = new Stack({ direction: 'row', gap: 2, children: [universe, channel] });
+        const channelRow = new Stack({ direction: 'row', gap: 8, children: [universe, channel] });
         const timerAction = new SelectField<TimerAction>({
             label: t('grid.timerAction'),
             options: TIMER_ACTIONS.map((action) => ({ value: action, label: t(`grid.timerActions.${action}`) })),
@@ -115,12 +115,12 @@ export function openWidgetDialog(widget: GridWidget, isNew: boolean, page: GridP
         renderKinds();
 
         dialog.append(
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [typeField, label] }),
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [linkKind, target] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [typeField, label] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [linkKind, target] }),
             channelRow,
             timerAction,
             hint,
-            new Stack({ direction: 'row', gap: 2, children: [width, height] })
+            new Stack({ direction: 'row', gap: 8, children: [width, height] })
         );
 
         const link = (): WidgetLink => {

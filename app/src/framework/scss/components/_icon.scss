@@ -4,8 +4,8 @@
 .icon {
     display: inline-block;
     flex-shrink: 0;
-    width: space(2);
-    height: space(2);
+    width: space(16);
+    height: space(16);
     fill: none;
     stroke: currentColor;
     stroke-width: 2;
@@ -15,6 +15,6 @@
 }
 
 .icon--large {
-    width: space(3);
-    height: space(3);
+    width: space(24);
+    height: space(24);
 }

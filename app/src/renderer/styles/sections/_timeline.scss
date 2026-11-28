@@ -5,8 +5,8 @@
     position: relative;
     // Fingers scroll the editor; the pinch zooms the time (handled by the editor), never the page
     touch-action: pan-x pan-y;
-    height: 60vh;
-    min-height: space(8) * 5;
+    flex: 1 1 0;
+    min-height: 0;
     border: 1px solid color('panel-border');
     border-radius: $radius-panel;
     background: color('surface');
@@ -28,7 +28,7 @@
     position: sticky;
     z-index: 3;
     top: 0;
-    height: space(4);
+    height: space(32);
     border-bottom: 1px solid color('panel-border');
     background: color('panel');
 }
@@ -40,7 +40,7 @@
     display: flex;
     flex: 0 0 var(--header-width);
     align-items: center;
-    padding: 0 space(2);
+    padding: 0 space(12);
     border-right: 1px solid color('panel-border');
     background: color('panel');
     color: color('text-secondary');
@@ -59,12 +59,12 @@
     top: 0;
     bottom: 0;
     left: var(--tick-x);
-    padding-left: space(1);
+    padding-left: space(8);
     border-left: 1px solid color('panel-border');
     color: color('text-secondary');
     font-family: $font-family-mono;
     font-size: $font-size-micro;
-    line-height: space(2);
+    line-height: space(16);
     pointer-events: none;
 }
 
@@ -83,14 +83,14 @@
 
 .timeline-ruler__marker {
     position: absolute;
-    top: space(2);
+    top: space(16);
     left: var(--tick-x);
-    max-width: space(8) * 2;
-    padding: 0 space(1);
+    max-width: space(64) * 2;
+    padding: 0 space(8);
     border-left: 2px solid color('solo');
     color: color('solo');
     font-size: $font-size-micro;
-    line-height: space(2);
+    line-height: space(16);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -117,9 +117,9 @@
     display: flex;
     flex: 0 0 var(--header-width);
     align-items: center;
-    gap: space(1);
-    padding-right: space(1);
-    padding-left: calc(var(--track-depth, 0) * #{space(2)});
+    gap: space(8);
+    padding-right: space(8);
+    padding-left: calc(var(--track-depth, 0) * #{space(16)});
     border-right: 1px solid color('panel-border');
     background: color('panel');
     overflow: hidden;
@@ -127,7 +127,7 @@
 
 .track-header__color {
     align-self: stretch;
-    flex: 0 0 space(1);
+    flex: 0 0 space(8);
     background: var(--channel-color);
 }
 
@@ -162,7 +162,7 @@
 
 .track-header__keys {
     display: flex;
-    gap: space(1);
+    gap: space(8);
 }
 
 .timeline-row__lane {
@@ -177,8 +177,8 @@
 // Clip: a block with a header strip, fades as triangles and handles on the edges
 .timeline-clip {
     position: absolute;
-    top: space(1);
-    bottom: space(1);
+    top: space(8);
+    bottom: space(8);
     left: var(--clip-x);
     width: var(--clip-w);
     border: 1px solid var(--channel-color);
@@ -197,11 +197,11 @@
 
 .timeline-clip__name {
     display: block;
-    padding: 0 space(1);
+    padding: 0 space(8);
     background: var(--channel-color);
     color: color('surface');
     font-size: $font-size-small;
-    line-height: space(2);
+    line-height: space(16);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -210,19 +210,19 @@
 // Waveform of an audio clip, below the name strip
 .timeline-clip__waveform {
     position: absolute;
-    top: space(2);
+    top: space(16);
     right: 0;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - #{space(2)});
+    height: calc(100% - #{space(16)});
     fill: color-mix(in srgb, var(--channel-color) 70%, transparent);
     pointer-events: none;
 }
 
 .timeline-clip__fade {
     position: absolute;
-    top: space(2);
+    top: space(16);
     bottom: 0;
     pointer-events: none;
 }
@@ -245,7 +245,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: space(1);
+    width: space(8);
     cursor: ew-resize;
 }
 
@@ -261,18 +261,18 @@
     position: absolute;
     z-index: 1;
     top: 0;
-    width: space(1);
-    height: space(1);
+    width: space(8);
+    height: space(8);
     background: color('text');
     cursor: crosshair;
 }
 
 .timeline-clip__handle--fade-in {
-    left: calc(var(--fade-in) - #{space(1)} / 2);
+    left: calc(var(--fade-in) - #{space(8)} / 2);
 }
 
 .timeline-clip__handle--fade-out {
-    right: calc(var(--fade-out) - #{space(1)} / 2);
+    right: calc(var(--fade-out) - #{space(8)} / 2);
 }
 
 // Automation: a line with points over the whole lane
@@ -318,22 +318,31 @@
 }
 
 .clip-dialog__slider .slider {
-    width: space(8) * 3;
+    width: space(64) * 3;
 }
 
-// Editor and markers panel side by side
+// Editor and markers panel side by side, filling the height left by the toolbar
+.timeline-section {
+    height: 100%;
+    min-height: space(64) * 7;
+}
+
 .timeline-section__body {
+    flex: 1 1 0;
     align-items: stretch;
+    min-height: 0;
 }
 
 .timeline-section__editor {
     flex: 1 1 auto;
     min-width: 0;
+    min-height: 0;
 }
 
 .marker-panel {
-    flex: 0 0 space(8) * 4;
+    flex: 0 0 space(64) * 4;
     min-width: 0;
+    overflow-y: auto;
 }
 
 .marker-panel__go,
@@ -342,7 +351,9 @@
 }
 
 .marker-panel__list {
-    max-height: space(8) * 4;
+    // Room for the hit area of the keys, which would otherwise make the list scroll
+    padding: space(4) 0;
+    max-height: space(64) * 4;
     overflow-y: auto;
 }
 
@@ -360,7 +371,7 @@
     flex: 1 1 auto;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    column-gap: space(1);
+    column-gap: space(8);
     min-width: 0;
     border-left: 2px solid transparent;
     text-align: left;
@@ -391,11 +402,11 @@
 // Touch mode: wider edges and fade handles of the clips
 .touch-mode {
     .timeline-clip__edge {
-        width: space(2);
+        width: space(16);
     }
 
     .timeline-clip__handle {
-        width: space(2);
-        height: space(2);
+        width: space(16);
+        height: space(16);
     }
 }

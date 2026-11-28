@@ -46,7 +46,7 @@ export class AudioSection extends Stack {
     private playback: AudioPlayback = { item: null, paused: false, position: 0, duration: 0, fromScene: false };
 
     constructor() {
-        super({ gap: 2, classes: ['audio-section'] });
+        super({ gap: 12, classes: ['audio-section'] });
 
         this.title = new Label({ text: '', size: 'large' });
         this.elapsed = new ReadoutDisplay({ text: '', label: t('audio.elapsed') });
@@ -82,17 +82,17 @@ export class AudioSection extends Stack {
         this.advance.onChange((value) => void engine().request('audio.setPlayer', { autoAdvance: value === 'yes' }).catch(showError));
 
         const transport = new Panel({ title: t('audio.player'), classes: ['audio-transport'] });
-        const progress = new Stack({ gap: 1, classes: ['audio-transport__progress'] });
+        const progress = new Stack({ gap: 8, classes: ['audio-transport__progress'] });
         progress.element.append(track);
         transport.append(
             this.title,
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.elapsed, this.remaining, progress] }),
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.elapsed, this.remaining, progress] }),
             new Stack({
                 direction: 'row',
-                gap: 2,
+                gap: 8,
                 align: 'end',
                 wrap: true,
-                children: [previous, play, this.pause, stop, next, new Spacer(), new Stack({ gap: 1, classes: ['audio-volume'], children: [new Label({ text: t('audio.volume'), size: 'small' }), this.volume] }), this.device, this.advance]
+                children: [previous, play, this.pause, stop, next, new Spacer(), new Stack({ gap: 8, classes: ['audio-volume'], children: [new Label({ text: t('audio.volume'), size: 'small' }), this.volume] }), this.device, this.advance]
             })
         );
 
@@ -101,7 +101,7 @@ export class AudioSection extends Stack {
         add.onPress(() => void openAddAudio());
         markEdit(add);
         this.empty = new Label({ text: t('audio.empty'), tone: 'secondary', size: 'small' });
-        playlist.append(new Stack({ direction: 'row', gap: 2, children: [add] }), this.empty, this.list);
+        playlist.append(new Stack({ direction: 'row', gap: 8, children: [add] }), this.empty, this.list);
 
         this.append(transport, playlist);
         // Items of the playlist are reordered by dragging them
@@ -155,7 +155,7 @@ export class AudioSection extends Stack {
             markEdit(edit);
             const row = new Stack({
                 direction: 'row',
-                gap: 2,
+                gap: 8,
                 align: 'center',
                 classes: ['audio-playlist__row'],
                 children: [

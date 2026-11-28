@@ -2,7 +2,7 @@
 // no arrows and no glow; sizes come from the spacing scale
 @use '../tokens' as *;
 
-$size: space(1);
+$size: space(8);
 
 ::-webkit-scrollbar {
     width: $size;

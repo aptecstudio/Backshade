@@ -27,7 +27,7 @@ export class ShowsFolderSettings extends Panel {
         })());
 
         this.append(
-            new Stack({ direction: 'row', gap: 1, align: 'end', classes: ['folder-picker'], children: [field, choose] }),
+            new Stack({ direction: 'row', gap: 8, align: 'end', classes: ['folder-picker'], children: [field, choose] }),
             new Label({ text: t('settings.showsFolderHint'), tone: 'secondary', size: 'small' })
         );
 

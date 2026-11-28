@@ -35,7 +35,7 @@ export class FixturePicker extends Component<HTMLDivElement> {
         this.count = new Label({ text: '', tone: 'secondary', size: 'small' });
         this.list = create('div', { classes: ['fixture-picker__list'], attributes: { role: 'list' } });
 
-        this.append(new Stack({ direction: 'row', gap: 2, classes: ['fixture-picker__filters'], children: [this.search, this.category] }), this.count);
+        this.append(new Stack({ direction: 'row', gap: 8, classes: ['fixture-picker__filters'], children: [this.search, this.category] }), this.count);
         this.element.append(this.list);
 
         this.track(this.search.onInput(() => this.render()));
@@ -91,7 +91,7 @@ export class FixturePicker extends Component<HTMLDivElement> {
             label: fixtureTitle(fixture),
             children: [
                 new Stack({
-                    gap: 1,
+                    gap: 8,
                     classes: ['fixture-picker__text'],
                     children: [
                         new Label({ text: fixtureTitle(fixture), weight: 'medium' }),

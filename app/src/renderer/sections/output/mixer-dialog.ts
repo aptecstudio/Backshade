@@ -49,8 +49,8 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
         options: [{ value: 'no', label: t('matrix.snakeNo') }, { value: 'yes', label: t('matrix.snakeYes') }],
         value: draft.bankSelect ? 'yes' : 'no'
     });
-    const midi = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [midiDevice, midiChannel, bankSelect] });
-    const network = new Stack({ direction: 'row', gap: 2, wrap: true, children: [host, port] });
+    const midi = new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [midiDevice, midiChannel, bankSelect] });
+    const network = new Stack({ direction: 'row', gap: 8, wrap: true, children: [host, port] });
     void engine().request('midi.getState').then((state) => {
         const names = [...new Set(state.devices.filter((device) => device.kind === 'output').map((device) => device.name))];
         if (draft.midiDevice !== '' && !names.includes(draft.midiDevice)) {
@@ -60,7 +60,7 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
     }).catch(() => undefined);
     const genericHint = new Label({ text: t('mixers.addressHint', { placeholder: NUMBER_PLACEHOLDER }), tone: 'secondary', size: 'small' });
     const modelHint = new Label({ text: '', tone: 'secondary', size: 'small' });
-    const generic = new Stack({ gap: 1, children: [new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [address, argument] }), genericHint] });
+    const generic = new Stack({ gap: 8, children: [new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [address, argument] }), genericHint] });
 
     const testNumber = new NumberField({ label: t('mixers.testScene'), value: MIXER_PROFILES[draft.model].first, min: 0, max: 9999 });
     const test = new Key({ label: t('mixers.test'), icon: 'play' });
@@ -123,12 +123,12 @@ export function openMixerDialog(mixer: ShowMixer | null, number: number): void {
     })());
 
     dialog.append(
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, model] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, model] }),
         network,
         midi,
         modelHint,
         generic,
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [testNumber, test] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [testNumber, test] }),
         testResult
     );
 

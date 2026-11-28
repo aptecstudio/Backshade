@@ -41,7 +41,7 @@ export class StageInspector extends Panel {
 
     show({ object, fixture, editable, hasTruss }: InspectorState): void {
         this.content.destroy();
-        this.content = new Stack({ gap: 2 });
+        this.content = new Stack({ gap: 12 });
         this.area.append(this.content);
         if (object === null) {
             this.content.append(new Label({ text: t('stage.noSelection'), size: 'small' }));

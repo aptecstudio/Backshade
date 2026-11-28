@@ -14,7 +14,7 @@ const REFRESH_MS = 66;
 const unitPreference = new LocalPreference('backshade.monitorUnit');
 
 export class MonitorPanel extends Panel {
-    private readonly universeKeys = new Stack({ direction: 'row', gap: 1, wrap: true });
+    private readonly universeKeys = new Stack({ direction: 'row', gap: 8, wrap: true });
     private readonly empty = new Label({ text: t('output.monitorEmpty'), tone: 'secondary', size: 'small' });
     private keys: Key[] = [];
     private grid: DmxMonitorGrid | null = null;
@@ -37,7 +37,7 @@ export class MonitorPanel extends Panel {
             unitPreference.set(value);
             this.grid?.setUnit(value);
         });
-        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.universeKeys, unit] }), this.empty);
+        this.append(new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.universeKeys, unit] }), this.empty);
         this.track(() => {
             this.stopped = true;
             if (this.timer !== null) {

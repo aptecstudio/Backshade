@@ -54,7 +54,7 @@ export class OperatorsSettings extends Panel {
                 edit.onPress(() => openOperatorDialog(operator));
                 return new Stack({
                     direction: 'row',
-                    gap: 2,
+                    gap: 8,
                     align: 'center',
                     classes: ['operator-row'],
                     children: [
@@ -67,7 +67,7 @@ export class OperatorsSettings extends Panel {
             }),
             this.addKey(t('operators.add'))
         ];
-        this.content = new Stack({ gap: 2, children });
+        this.content = new Stack({ gap: 12, children });
         this.append(this.content);
     }
 

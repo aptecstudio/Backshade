@@ -14,11 +14,11 @@ import { EffectPanel } from './effect-panel.js';
 import { MatrixPreview } from './matrix-preview.js';
 
 export class MatricesSection extends Panel {
-    private readonly keysRow = new Stack({ direction: 'row', gap: 1, wrap: true });
+    private readonly keysRow = new Stack({ direction: 'row', gap: 8, wrap: true });
     private readonly info = new Label({ text: '', tone: 'secondary', size: 'small' });
     private readonly empty = new Label({ text: '', tone: 'secondary' });
     private readonly holder = new Stack({ classes: ['matrices-section__preview'] });
-    private readonly layout = new Stack({ direction: 'row', gap: 3, align: 'start', classes: ['matrices-section__body'] });
+    private readonly layout = new Stack({ direction: 'row', gap: 12, align: 'start', classes: ['matrices-section__body'] });
     private effectPanel: EffectPanel | null = null;
     private live: Record<string, MatrixEffect> = {};
     private keys: Key[] = [];

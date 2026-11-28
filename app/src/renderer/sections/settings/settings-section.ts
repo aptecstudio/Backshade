@@ -27,13 +27,13 @@ export class SettingsSection extends Stack {
     private tab: SettingsTab = 'application';
 
     constructor() {
-        super({ gap: 3, classes: ['settings-section'] });
+        super({ gap: 12, classes: ['settings-section'] });
 
         this.applicationKey = new Key({ label: t('settings.application') });
         this.showKey = new Key({ label: t('settings.show') });
         this.applicationKey.onPress(() => this.open('application'));
         this.showKey.onPress(() => this.open('show'));
-        this.append(new Stack({ direction: 'row', gap: 1, children: [this.applicationKey, this.showKey] }));
+        this.append(new Stack({ direction: 'row', gap: 8, children: [this.applicationKey, this.showKey] }));
 
         this.open(this.showAvailable() ? 'show' : 'application');
         const follow = (): void => {
@@ -56,7 +56,7 @@ export class SettingsSection extends Stack {
         this.content?.destroy();
         this.content = null;
         if (tab === 'application') {
-            this.mountContent(new Stack({ gap: 3, children: [new LanguageSettings(), new ControlValuesSettings(), new TouchSettings(), new ShowsFolderSettings(), new RemoteSettings(), new AboutSettings()] }));
+            this.mountContent(new Stack({ gap: 12, children: [new LanguageSettings(), new ControlValuesSettings(), new TouchSettings(), new ShowsFolderSettings(), new RemoteSettings(), new AboutSettings()] }));
             return;
         }
         void engine().request('show.getSettings').then((settings) => {

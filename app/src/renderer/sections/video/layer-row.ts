@@ -56,7 +56,7 @@ export class LayerRow extends Stack {
         gobos: readonly TextGobo[],
         timers: readonly ShowTimer[]
     ) {
-        super({ direction: 'row', gap: 2, align: 'end', wrap: true, classes: ['video-layer'] });
+        super({ direction: 'row', gap: 8, align: 'end', wrap: true, classes: ['video-layer'] });
         this.layer = layer;
         const files = media.filter((item) => item.kind === 'video' || (item.kind === 'image' && !item.file.toLowerCase().endsWith('.svg')));
         const current = layer.source;
@@ -85,7 +85,7 @@ export class LayerRow extends Stack {
             options: INPUT_FRAME_RATES.map((rate) => ({ value: String(rate), label: t('video.fps', { rate }) })),
             value: String(current?.kind === 'input' ? current.frameRate : 30)
         });
-        this.inputRow = new Stack({ direction: 'row', gap: 1, children: [this.quality, this.frameRate] });
+        this.inputRow = new Stack({ direction: 'row', gap: 8, children: [this.quality, this.frameRate] });
         this.opacity = new LinearSlider({ label: t('video.opacity'), value: layer.opacity });
         this.fit = new SelectField<LayerFit>({
             ariaLabel: t('video.fit'),
@@ -133,7 +133,7 @@ export class LayerRow extends Stack {
             new Label({ text: t('video.layer', { number: index + 1 }), tone: 'secondary', size: 'small' }),
             this.source,
             this.inputRow,
-            new Stack({ gap: 1, children: [new Label({ text: t('video.opacity'), size: 'small' }), this.opacity] }),
+            new Stack({ gap: 4, children: [new Label({ text: t('video.opacity'), size: 'small' }), this.opacity] }),
             this.fit,
             this.loop
         );

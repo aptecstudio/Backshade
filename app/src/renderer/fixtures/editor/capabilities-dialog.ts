@@ -36,7 +36,7 @@ function capabilityRow(capability: FixtureCapability, onRemove: () => void): Sta
     });
     remove.onPress(onRemove);
 
-    return new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['capability-row'], children: [from, to, label, kind, remove] });
+    return new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['capability-row'], children: [from, to, label, kind, remove] });
 }
 
 const COLUMNS: readonly TextKey[] = ['fixtureEditor.from', 'fixtureEditor.to', 'fixtureEditor.label', 'fixtureEditor.kind'];
@@ -47,7 +47,7 @@ const COLUMNS: readonly TextKey[] = ['fixtureEditor.from', 'fixtureEditor.to', '
 function header(): Stack {
     return new Stack({
         direction: 'row',
-        gap: 1,
+        gap: 8,
         classes: ['capability-row', 'capability-row--header'],
         children: COLUMNS.map((key) => new Label({ text: t(key), tone: 'secondary', size: 'small' }))
     });
@@ -60,7 +60,7 @@ export function editCapabilities(channelName: string, capabilities: readonly Fix
     return new Promise((resolve) => {
         const dialog = new Dialog({ title: t('fixtureEditor.capabilitiesTitle', { name: channelName }), size: 'wide' });
         const working = capabilities.map((capability) => ({ ...capability }));
-        const list = new Stack({ gap: 1 });
+        const list = new Stack({ gap: 8 });
         let rows: Stack[] = [];
 
         const render = (): void => {

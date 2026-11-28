@@ -5,10 +5,11 @@
 .list-item {
     display: flex;
     align-items: center;
-    gap: space(2);
+    gap: space(12);
     width: 100%;
     min-width: 0;
-    padding: space(1) space(2);
+    min-height: 40px;
+    padding: space(4) space(12);
     border: 1px solid transparent;
     border-radius: $radius-square-key;
     background: none;

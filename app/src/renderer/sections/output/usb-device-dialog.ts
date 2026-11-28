@@ -68,10 +68,10 @@ export async function openUsbDeviceDialog(device: UsbDmxDevice | null, universe:
     refresh.onPress(() => void loadPorts());
 
     dialog.append(
-        new Stack({ direction: 'row', gap: 2, align: 'end', classes: ['usb-port-row'], children: [port, refresh] }),
+        new Stack({ direction: 'row', gap: 8, align: 'end', classes: ['usb-port-row'], children: [port, refresh] }),
         noPorts,
         type,
-        new Stack({ direction: 'row', gap: 2, align: 'end', children: [universeField, enabled] })
+        new Stack({ direction: 'row', gap: 8, align: 'end', children: [universeField, enabled] })
     );
 
     const submit = async (): Promise<void> => {

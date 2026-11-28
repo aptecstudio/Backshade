@@ -23,7 +23,7 @@ export class AppShell extends Stack {
     private showOpen: boolean;
 
     constructor() {
-        super({ gap: 3, classes: ['app-shell'] });
+        super({ gap: 8, classes: ['app-shell'] });
 
         const show = currentShow();
         this.showOpen = show !== null;

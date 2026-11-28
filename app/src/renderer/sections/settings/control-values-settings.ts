@@ -27,7 +27,7 @@ export class ControlValuesSettings extends Panel {
         this.append(
             new Stack({
                 direction: 'row',
-                gap: 4,
+                gap: 16,
                 wrap: true,
                 children: [choice('fader', t('settings.faderValues')), choice('knob', t('settings.knobValues'))]
             }),

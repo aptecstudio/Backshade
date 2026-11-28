@@ -27,10 +27,10 @@ interface Monitor {
 }
 
 export class VideoSection extends Stack {
-    private readonly outputKeys = new Stack({ direction: 'row', gap: 1, wrap: true });
+    private readonly outputKeys = new Stack({ direction: 'row', gap: 8, wrap: true });
     private readonly settings: Key;
     private readonly empty: Label;
-    private readonly body = new Stack({ gap: 2 });
+    private readonly body = new Stack({ gap: 8 });
     private readonly transition: NumberField;
     private keys: Key[] = [];
     private monitors: { preview: Monitor; program: Monitor } | null = null;
@@ -46,7 +46,7 @@ export class VideoSection extends Stack {
     private selected: string | null = null;
 
     constructor() {
-        super({ gap: 2, classes: ['video-section'] });
+        super({ gap: 12, classes: ['video-section'] });
         const add = new Key({ label: t('video.addOutput'), icon: 'plus' });
         add.onPress(() => void engine().request('video.addOutput', { name: t('video.defaultName', { number: this.video.outputs.length + 1 }) }).catch(showError));
         this.settings = new Key({ label: t('video.settings'), icon: 'settings' });
@@ -67,7 +67,7 @@ export class VideoSection extends Stack {
         const header = new Panel({ title: t('video.outputs') });
         header.append(new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 8,
             align: 'center',
             wrap: true,
             children: [this.outputKeys, add, this.settings, new Spacer(), new Label({ text: t('video.transition'), size: 'small' }), this.transition, takeAll, take]

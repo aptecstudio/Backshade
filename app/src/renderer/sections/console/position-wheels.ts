@@ -25,13 +25,13 @@ export class PositionWheels extends Stack {
     private readonly moves = new Emitter<{ axis: PositionAxis; delta: number }>();
 
     constructor() {
-        super({ direction: 'row', gap: 2, classes: ['position-wheels'] });
+        super({ direction: 'row', gap: 8, classes: ['position-wheels'] });
 
         const axis = (name: PositionAxis): AxisView => {
             const wheel = new JogWheel({ label: t(name === 'pan' ? 'attributesPanel.panWheel' : 'attributesPanel.tiltWheel'), size: 'compact' });
             const display = new ValueDisplay({ caption: t(name === 'pan' ? 'attributesPanel.pan' : 'attributesPanel.tilt'), value: '' });
             wheel.onTurn((turns) => this.moves.emit({ axis: name, delta: turns * TRAVEL_PER_TURN }));
-            const column = new Stack({ gap: 1, align: 'center', children: [display, wheel] });
+            const column = new Stack({ gap: 8, align: 'center', children: [display, wheel] });
             this.append(column);
             return { wheel, display, column };
         };

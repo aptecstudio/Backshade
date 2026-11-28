@@ -41,8 +41,8 @@ export function openAudioItemDialog(item: AudioItem): void {
     dialog.append(
         new Label({ text: item.file, tone: 'secondary', size: 'small' }),
         name,
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [start, endMode, end] }),
-        new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [fadeIn, fadeOut, volume, loop] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [start, endMode, end] }),
+        new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [fadeIn, fadeOut, volume, loop] }),
         new Label({ text: t('audio.itemHint'), tone: 'secondary', size: 'small' })
     );
 

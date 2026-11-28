@@ -21,8 +21,8 @@ import { ColorSwatch } from '../matrices/color-swatch.js';
 const SAVE_DELAY_MS = 150;
 
 export class TimerPanel extends Panel {
-    private readonly keysRow = new Stack({ direction: 'row', gap: 1, wrap: true });
-    private readonly holder = new Stack({ gap: 2 });
+    private readonly keysRow = new Stack({ direction: 'row', gap: 8, wrap: true });
+    private readonly holder = new Stack({ gap: 8 });
     private keys: Key[] = [];
     private editor: Stack | null = null;
     private preview: CompositionView | null = null;
@@ -50,7 +50,7 @@ export class TimerPanel extends Panel {
             void engine().request('video.saveTimer', { timer }).catch(showError);
         });
         markEdit(add);
-        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.keysRow, add] }), this.holder);
+        this.append(new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.keysRow, add] }), this.holder);
         this.track(() => {
             if (this.saveTimer !== null) {
                 window.clearTimeout(this.saveTimer);
@@ -173,23 +173,23 @@ export class TimerPanel extends Panel {
 
         const counting = timer.mode === 'countdown' || timer.mode === 'countdownTo';
         const fields: Stack[] = [
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, label, font] })
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, label, font] })
         ];
         if (timer.mode === 'clock') {
-            fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, children: [
+            fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, children: [
                 yesNo(t('timers.showSeconds'), timer.showSeconds, (value) => ({ showSeconds: value })),
                 yesNo(t('timers.showDate'), timer.showDate, (value) => ({ showDate: value }))
             ] }));
         }
         if (counting) {
-            fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [
+            fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [
                 timer.mode === 'countdown' ? duration : target,
                 warning,
                 atZero,
                 yesNo(t('timers.flash'), timer.flashAtZero, (value) => ({ flashAtZero: value }))
             ] }));
         }
-        fields.push(new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [
+        fields.push(new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [
             swatch(t('gobos.color'), timer.color, (color) => ({ color })),
             ...(counting ? [swatch(t('timers.warningColor'), timer.warningColor, (color) => ({ warningColor: color })), swatch(t('timers.endColor'), timer.endColor, (color) => ({ endColor: color }))] : []),
             background,
@@ -217,16 +217,16 @@ export class TimerPanel extends Panel {
 
         this.editor = new Stack({
             direction: 'row',
-            gap: 3,
+            gap: 12,
             align: 'start',
             children: [
-                new Stack({ gap: 2, classes: ['gobo-panel__side'], children: [
+                new Stack({ gap: 12, classes: ['gobo-panel__side'], children: [
                     preview,
                     new Label({ text: t(`timers.modes.${timer.mode}`), tone: 'secondary', size: 'small' }),
-                    new Stack({ direction: 'row', gap: 1, wrap: true, children: controls }),
+                    new Stack({ direction: 'row', gap: 8, wrap: true, children: controls }),
                     remove
                 ] }),
-                new Stack({ gap: 2, classes: ['gobo-panel__fields'], children: fields })
+                new Stack({ gap: 8, classes: ['gobo-panel__fields'], children: fields })
             ]
         });
         markEdit(remove, ...this.editor.element.querySelectorAll<HTMLElement>('.gobo-panel__fields'));

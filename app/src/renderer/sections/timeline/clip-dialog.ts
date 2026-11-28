@@ -97,14 +97,14 @@ export function openClipDialog(track: Track, clip: Clip, isNew: boolean, context
         fadeIn.element.hidden = isMixer;
         fadeOut.element.hidden = isMixer;
 
-        const slider = (label: string, control: LinearSlider): Stack => new Stack({ gap: 1, classes: ['clip-dialog__slider'], children: [new Label({ text: label, size: 'small' }), control] });
+        const slider = (label: string, control: LinearSlider): Stack => new Stack({ gap: 8, classes: ['clip-dialog__slider'], children: [new Label({ text: label, size: 'small' }), control] });
         dialog.append(
             isMixer ? sceneNumber : options.length === 0 ? new Label({ text: t(`timeline.noSources.${track.kind as 'light' | 'audio' | 'video'}`), tone: 'secondary', size: 'small' }) : source,
             name,
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [start, duration, offset] }),
-            new Stack({ direction: 'row', gap: 2, wrap: true, children: [fadeIn, fadeOut] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [start, duration, offset] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, children: [fadeIn, fadeOut] }),
             ...(track.kind === 'audio' ? [slider(t('audio.volume'), volume)] : []),
-            ...(track.kind === 'video' ? [new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [slider(t('video.opacity'), opacity), fit] })] : [])
+            ...(track.kind === 'video' ? [new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [slider(t('video.opacity'), opacity), fit] })] : [])
         );
 
         // A new audio or video clip takes the length of its file

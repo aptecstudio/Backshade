@@ -75,7 +75,7 @@ export function openShowImportDialog(): void {
             pad.setBusy(true);
             void inspect();
         });
-        show(new Stack({ gap: 2, classes: ['show-import__pin'], children: [pad] }));
+        show(new Stack({ gap: 12, classes: ['show-import__pin'], children: [pad] }));
     };
 
     const showSources = async (): Promise<void> => {
@@ -97,11 +97,11 @@ export function openShowImportDialog(): void {
             }
         }).catch(showError));
         show(new Stack({
-            gap: 2,
+            gap: 12,
             children: [
                 new Label({ text: t('showImport.hint'), tone: 'secondary', size: 'small' }),
                 new Label({ text: t('showImport.recent'), weight: 'medium' }),
-                keys.length === 0 ? new Label({ text: t('showImport.noRecent'), tone: 'secondary', size: 'small' }) : new Stack({ gap: 1, children: keys }),
+                keys.length === 0 ? new Label({ text: t('showImport.noRecent'), tone: 'secondary', size: 'small' }) : new Stack({ gap: 8, children: keys }),
                 new Stack({ direction: 'row', children: [browse] })
             ]
         }));
@@ -156,7 +156,7 @@ export function openShowImportDialog(): void {
                     update();
                 });
                 const needed = new Label({ text: '', tone: 'accent', size: 'small' });
-                const conflict = new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, classes: ['show-import__conflict'] });
+                const conflict = new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, classes: ['show-import__conflict'] });
                 if (item.conflict !== null) {
                     const choice = new ChoiceKeys<ConflictResolution>({
                         ariaLabel: t(`showImport.conflicts.${item.conflict.kind}`, { with: item.conflict.with }),
@@ -171,15 +171,15 @@ export function openShowImportDialog(): void {
                 return row;
             });
             const list = new Stack({
-                gap: 1,
+                gap: 8,
                 classes: ['show-import__items'],
                 children: categoryRows.map((row) => new Stack({
-                    gap: 1,
+                    gap: 8,
                     classes: ['show-import__item'],
                     children: [
                         new Stack({
                             direction: 'row',
-                            gap: 2,
+                            gap: 8,
                             align: 'center',
                             wrap: true,
                             children: [
@@ -217,9 +217,9 @@ export function openShowImportDialog(): void {
             });
             categories.push({ category, toggle, expand, list, rows: categoryRows });
             children.push(new Stack({
-                gap: 1,
+                gap: 8,
                 classes: ['show-import__category'],
-                children: [new Stack({ direction: 'row', gap: 1, align: 'center', children: [expand, toggle, new Spacer()] }), list]
+                children: [new Stack({ direction: 'row', gap: 8, align: 'center', children: [expand, toggle, new Spacer()] }), list]
             }));
         }
         if (categories.length === 0) {
@@ -243,7 +243,7 @@ export function openShowImportDialog(): void {
             }
         };
         importKey.element.hidden = false;
-        show(new Stack({ gap: 2, children }));
+        show(new Stack({ gap: 12, children }));
         update();
     };
 

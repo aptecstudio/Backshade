@@ -59,7 +59,7 @@ body.video-output {
 .video-monitors {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: space(2);
+    gap: space(8);
 }
 
 .video-monitor .composition {
@@ -73,7 +73,7 @@ body.video-output {
 }
 
 .video-layer {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {
@@ -82,12 +82,12 @@ body.video-output {
 }
 
 .video-layer .slider {
-    width: space(8) * 2;
+    width: space(64) * 2;
 }
 
 // Text gobos: preview beside the fields
 .gobo-panel__side {
-    flex: 0 0 space(8) * 6;
+    flex: 0 0 space(64) * 6;
 }
 
 .gobo-panel__preview,
@@ -98,10 +98,10 @@ body.video-output {
 }
 
 .gobo-panel__fields {
-    flex: 1 1 space(8) * 6;
+    flex: 1 1 space(64) * 6;
     min-width: 0;
 }
 
 .gobo-panel__slider .slider {
-    width: space(8) * 2;
+    width: space(64) * 2;
 }

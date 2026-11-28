@@ -33,7 +33,7 @@ export function askNewShow(templates: readonly TemplateInfo[], defaultFolder: st
         const items = templates.map((template) => {
             const item = new ListItem({
                 children: [new Stack({
-                    gap: 1,
+                    gap: 8,
                     children: [
                         new Label({ text: localized(template.name), weight: 'medium' }),
                         new Label({ text: localized(template.description), tone: 'secondary', size: 'small' })
@@ -52,10 +52,10 @@ export function askNewShow(templates: readonly TemplateInfo[], defaultFolder: st
             name,
             folder,
             new Stack({
-                gap: 1,
+                gap: 8,
                 children: [
                     new Label({ text: t('newShow.template'), tone: 'secondary', size: 'small' }),
-                    new Stack({ gap: 1, classes: ['template-choice'], children: items })
+                    new Stack({ gap: 8, classes: ['template-choice'], children: items })
                 ]
             }),
             admin

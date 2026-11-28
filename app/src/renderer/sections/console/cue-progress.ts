@@ -16,12 +16,12 @@ export class CueProgress extends Stack {
     private frame = 0;
 
     constructor(caption: string) {
-        super({ gap: 1, classes: ['cue-progress'] });
+        super({ gap: 8, classes: ['cue-progress'] });
         this.bar = create('div', { classes: ['cue-progress__fill'] });
         this.time = new Label({ text: '', tone: 'secondary', size: 'small' });
         const track = new BarTrack(this.bar);
         this.append(
-            new Stack({ direction: 'row', gap: 1, classes: ['cue-progress__head'], children: [new Label({ text: caption, size: 'small' }), this.time] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['cue-progress__head'], children: [new Label({ text: caption, size: 'small' }), this.time] }),
             track
         );
         this.track(() => cancelAnimationFrame(this.frame));

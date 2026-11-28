@@ -35,7 +35,7 @@ export class MediaSection extends Panel {
         sendKey.element.hidden = !isRemote();
         markEdit(sendKey);
         this.summary = new Label({ text: '', tone: 'secondary', size: 'small' });
-        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', children: [importKey, sendKey, this.summary] }));
+        this.append(new Stack({ direction: 'row', gap: 8, align: 'center', children: [importKey, sendKey, this.summary] }));
 
         void this.load();
         this.track(engine().on('media.changed', () => void this.load()));
@@ -95,11 +95,11 @@ export class MediaSection extends Panel {
         remove.onPress(() => void this.remove(item));
         markEdit(remove);
 
-        const row = new Stack({ direction: 'row', gap: 2, align: 'center', classes: ['media-row'] });
+        const row = new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['media-row'] });
         row.element.prepend(icon(KIND_ICONS[item.kind], { classes: ['icon--large'] }));
         row.append(
             new Stack({
-                gap: 1,
+                gap: 8,
                 classes: ['media-row__text'],
                 children: [
                     new Label({ text: item.name, weight: 'medium' }),

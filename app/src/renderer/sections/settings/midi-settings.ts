@@ -27,10 +27,10 @@ function messageText(mapping: MidiMapping): string {
 }
 
 export class MidiSettings extends Panel {
-    private readonly devices = new Stack({ gap: 1 });
-    private readonly list = new Stack({ gap: 1 });
-    private readonly msc = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end' });
-    private readonly mtc = new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end' });
+    private readonly devices = new Stack({ gap: 8 });
+    private readonly list = new Stack({ gap: 8 });
+    private readonly msc = new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end' });
+    private readonly mtc = new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end' });
     private inputs: string[] = [];
     private fps = 25;
     private readonly monitorList = new Stack({ classes: ['midi-monitor'] });
@@ -58,7 +58,7 @@ export class MidiSettings extends Panel {
         setUp.onPress(() => void this.setUpProfile());
         this.profile.onChange(() => this.showProfileDevice());
         this.append(
-            new Stack({ direction: 'row', gap: 2, wrap: true, align: 'end', children: [this.profile, this.profileDevice, setUp] }),
+            new Stack({ direction: 'row', gap: 8, wrap: true, align: 'end', children: [this.profile, this.profileDevice, setUp] }),
             new Label({ text: t('midi.profilesHint'), tone: 'secondary', size: 'small' }),
             new Label({ text: t('midi.mappings'), weight: 'medium', size: 'small' }),
             this.list
@@ -73,7 +73,7 @@ export class MidiSettings extends Panel {
             new Label({ text: t('midi.mtc'), weight: 'medium', size: 'small' }),
             new Label({ text: t('midi.mtcHint'), tone: 'secondary', size: 'small' }),
             this.mtc,
-            new Stack({ direction: 'row', gap: 2, align: 'center', children: [new Label({ text: t('midi.monitorTitle'), weight: 'medium', size: 'small' }), this.monitorKey] }),
+            new Stack({ direction: 'row', gap: 8, align: 'center', children: [new Label({ text: t('midi.monitorTitle'), weight: 'medium', size: 'small' }), this.monitorKey] }),
             this.monitorList
         );
         this.track(engine().on('midi.stateChanged', ({ state }) => this.showDevices(state)));
@@ -230,7 +230,7 @@ export class MidiSettings extends Panel {
         for (const device of [...new Set(mappings.map((mapping) => mapping.input.device))]) {
             const clear = new Key({ label: t('midi.clearDevice'), icon: 'trash-2' });
             clear.onPress(() => void engine().request('midi.clearMappings', { device }).catch(showError));
-            this.list.append(new Stack({ direction: 'row', gap: 2, align: 'center', children: [new Label({ text: device, weight: 'medium' }), clear] }));
+            this.list.append(new Stack({ direction: 'row', gap: 8, align: 'center', children: [new Label({ text: device, weight: 'medium' }), clear] }));
             for (const mapping of mappings.filter((item) => item.input.device === device)) {
                 const remove = new Key({ label: t('midi.deleteMapping'), icon: 'trash-2', iconOnly: true });
                 remove.onPress(() => void engine().request('midi.deleteMapping', { id: mapping.id }).catch(showError));
@@ -247,7 +247,7 @@ export class MidiSettings extends Panel {
                 }
                 this.list.append(new Stack({
                     direction: 'row',
-                    gap: 2,
+                    gap: 8,
                     align: 'center',
                     classes: ['midi-mapping-row'],
                     children: [

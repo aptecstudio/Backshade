@@ -56,9 +56,9 @@ export class ColorWheel extends Component<HTMLDivElement> {
         this.channels = [channel(options.labels.red), channel(options.labels.green), channel(options.labels.blue)];
         this.hex = new TextField({ label: options.labels.hex, value: '', maxLength: 7 });
 
-        const side = new Stack({ gap: 2, classes: ['color-wheel__side'] });
+        const side = new Stack({ gap: 16, classes: ['color-wheel__side'] });
         side.append(
-            new Stack({ direction: 'row', gap: 1, children: this.channels }),
+            new Stack({ direction: 'row', gap: 8, children: this.channels }),
             this.hex,
             this.brightness
         );

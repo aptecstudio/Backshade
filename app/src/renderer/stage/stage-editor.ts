@@ -45,7 +45,7 @@ export class StageEditor extends Stack {
     private camera: StageCamera = 'free';
 
     constructor(models: readonly ModelInfo[]) {
-        super({ gap: 2, classes: ['stage-editor'] });
+        super({ gap: 12, classes: ['stage-editor'] });
         this.models = new Map(models.map((model) => [model.id, model]));
         this.scene = new StageScene(this.models, () => this.handles.refresh());
         this.view.scene.add(this.scene.root);
@@ -82,8 +82,8 @@ export class StageEditor extends Stack {
         this.modeKeys.onChange((mode) => this.handles.setMode(mode));
 
         this.append(
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [modes, cameras, new Spacer(), this.readOnly, this.liveBar, this.modeKeys, this.undoKey, this.redoKey] }),
-            new Stack({ direction: 'row', gap: 2, classes: ['stage-editor__body'], children: [this.library, this.view, this.inspector] })
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [modes, cameras, new Spacer(), this.readOnly, this.liveBar, this.modeKeys, this.undoKey, this.redoKey] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['stage-editor__body'], children: [this.library, this.view, this.inspector] })
         );
         this.bind();
     }

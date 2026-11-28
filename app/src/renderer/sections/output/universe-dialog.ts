@@ -57,8 +57,8 @@ export function openUniverseDialog(destination: OutputUniverse, configured: bool
     const targetsHint = new Label({ text: t('output.targetsHint'), tone: 'secondary', size: 'small' });
     const discover = new Key({ label: t('output.discover'), icon: 'search' });
     const nodesStatus = new Label({ text: '', tone: 'secondary', size: 'small' });
-    const nodes = new Stack({ gap: 1, classes: ['artnet-nodes'] });
-    const unicast = new Stack({ gap: 2, children: [targets, targetsHint, new Stack({ direction: 'row', gap: 2, align: 'center', children: [discover, nodesStatus] }), nodes] });
+    const nodes = new Stack({ gap: 8, classes: ['artnet-nodes'] });
+    const unicast = new Stack({ gap: 8, children: [targets, targetsHint, new Stack({ direction: 'row', gap: 8, align: 'center', children: [discover, nodesStatus] }), nodes] });
 
     const showTransport = (value: OutputTransport): void => {
         unicast.element.hidden = value !== 'unicast';
@@ -102,7 +102,7 @@ export function openUniverseDialog(destination: OutputUniverse, configured: bool
         void engine().request('output.discover').then(showNodes).catch(showError).finally(() => discover.setDisabled(false));
     });
 
-    dialog.append(enabled, new Stack({ gap: 1, children: [portAddress, hint] }), transport, unicast);
+    dialog.append(enabled, new Stack({ gap: 8, children: [portAddress, hint] }), transport, unicast);
 
     const apply = async (): Promise<void> => {
         const list = parseTargets(targets.value);

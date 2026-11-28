@@ -11,7 +11,7 @@ import { editModeChannels } from './mode-channels-dialog.js';
 
 export class ModesPanel extends Panel {
     private readonly draft: FixtureDraft;
-    private readonly list = new Stack({ gap: 1 });
+    private readonly list = new Stack({ gap: 8 });
     private rows: Stack[] = [];
 
     constructor(draft: FixtureDraft) {
@@ -62,7 +62,7 @@ export class ModesPanel extends Panel {
 
         return new Stack({
             direction: 'row',
-            gap: 1,
+            gap: 8,
             align: 'center',
             classes: ['mode-row'],
             children: [

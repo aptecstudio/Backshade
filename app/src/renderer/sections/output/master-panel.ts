@@ -32,7 +32,7 @@ export class MasterPanel extends Panel {
         }));
 
         this.append(new Stack({
-            gap: 2,
+            gap: 12,
             align: 'center',
             children: [new Label({ text: t('output.grandMaster'), tone: 'secondary', size: 'small' }), fader, input, level, new BlackoutKey()]
         }));

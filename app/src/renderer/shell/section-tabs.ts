@@ -11,7 +11,7 @@ export class SectionTabs extends Stack {
     private readonly keys = new Map<SectionId, Key>();
 
     constructor(sections: readonly SectionDefinition[], navigation: SectionNavigation, label?: string) {
-        super({ direction: 'row', gap: 1, classes: ['section-tabs'] });
+        super({ direction: 'row', gap: 8, classes: ['section-tabs'] });
         this.element.setAttribute('role', 'navigation');
         if (label !== undefined) {
             this.element.setAttribute('aria-label', label);

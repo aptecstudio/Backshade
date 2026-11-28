@@ -67,9 +67,9 @@ export class DeskControls extends Panel {
         this.blindHint.element.hidden = true;
 
         this.append(
-            new Stack({ direction: 'row', gap: 2, classes: ['desk-controls__masters'], children: strips.map((strip) => strip.element) }),
+            new Stack({ direction: 'row', gap: 8, classes: ['desk-controls__masters'], children: strips.map((strip) => strip.element) }),
             new Label({ text: t('deskConsole.masterHint'), tone: 'secondary', size: 'small' }),
-            new Stack({ direction: 'row', gap: 1, classes: ['desk-controls__keys'], children: [this.fullOn, this.blind, home] }),
+            new Stack({ direction: 'row', gap: 8, classes: ['desk-controls__keys'], children: [this.fullOn, this.blind, home] }),
             this.blindHint
         );
 
@@ -82,7 +82,7 @@ export class DeskControls extends Panel {
         const input = new RangeInput(fader, { label: title });
         this.track(bindControlValue('fader', fader, { input }));
         const element = new Stack({
-            gap: 1,
+            gap: 8,
             align: 'center',
             classes: ['desk-controls__master'],
             children: [new Label({ text: title, tone: reversed ? 'secondary' : 'accent', size: 'small', weight: 'medium' }), fader, input]

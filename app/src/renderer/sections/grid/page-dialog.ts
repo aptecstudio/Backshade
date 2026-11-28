@@ -21,7 +21,7 @@ export function openPageDialog(page: GridPage | null, defaultName: string): Prom
         const name = new TextField({ label: t('patch.name'), value: page?.name ?? defaultName, maxLength: 60 });
         const columns = new NumberField({ label: t('grid.columns'), value: page?.columns ?? 12, min: GRID_LIMITS.columns.min, max: GRID_LIMITS.columns.max });
         const rows = new NumberField({ label: t('grid.rows'), value: page?.rows ?? 8, min: GRID_LIMITS.rows.min, max: GRID_LIMITS.rows.max });
-        dialog.append(name, new Stack({ direction: 'row', gap: 2, children: [columns, rows] }));
+        dialog.append(name, new Stack({ direction: 'row', gap: 8, children: [columns, rows] }));
         const finish = (result: PageDialogResult | null): void => {
             dialog.close();
             resolve(result);

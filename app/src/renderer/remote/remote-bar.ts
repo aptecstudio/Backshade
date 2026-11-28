@@ -16,7 +16,7 @@ class RemoteBar extends Component<HTMLDivElement> {
         close.onPress(() => void this.leave());
         this.append(new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 8,
             align: 'center',
             classes: ['remote-bar__content'],
             children: [

@@ -14,7 +14,7 @@ import { engine } from '../../transport/engine.js';
 
 function item(missing: MissingFixture): Stack {
     return new Stack({
-        gap: 1,
+        gap: 8,
         classes: ['missing-fixture'],
         children: [
             new Label({ text: missing.definition, weight: 'medium' }),

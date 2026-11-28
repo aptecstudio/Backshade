@@ -26,7 +26,7 @@ export class AttributeStrip extends Stack {
     private readonly moves = new Emitter<number>();
 
     constructor(channel: AttributeChannel) {
-        super({ gap: 1, align: 'center', classes: ['attribute-strip'] });
+        super({ gap: 8, align: 'center', classes: ['attribute-strip'] });
         this.channel = channel;
 
         const display = new ChannelDisplay({ name: channel.name, value: '', level: 0, color: GROUP_COLORS[ATTRIBUTE_GROUPS[channel.attribute]] });

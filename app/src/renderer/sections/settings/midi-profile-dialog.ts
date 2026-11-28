@@ -40,7 +40,7 @@ export async function openProfileDialog(profile: GuidedProfile, describe: (targe
     const progress = new Label({ text: '', tone: 'secondary', size: 'small' });
     const control = new Label({ text: '', size: 'large', weight: 'medium' });
     const role = new Label({ text: '', tone: 'secondary' });
-    dialog.append(new Stack({ gap: 1, children: [progress, control, role, new Label({ text: t('midi.profileHint'), tone: 'secondary', size: 'small' })] }));
+    dialog.append(new Stack({ gap: 8, children: [progress, control, role, new Label({ text: t('midi.profileHint'), tone: 'secondary', size: 'small' })] }));
 
     let index = -1;
     let learned = 0;

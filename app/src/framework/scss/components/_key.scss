@@ -8,10 +8,10 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    gap: space(1);
-    min-width: 96px;
-    height: 48px;
-    padding: 0 space(2);
+    gap: space(8);
+    min-width: 80px;
+    height: 40px;
+    padding: 0 space(12);
     border: 1px solid color('key-border');
     border-radius: $radius-key;
     background: linear-gradient(180deg, color('key-top') 0%, color('key-bottom') 100%);
@@ -22,6 +22,13 @@
     user-select: none;
 
     @include focus.focus-ring;
+
+    // Hit area of at least 48 px, without changing the look
+    &::after {
+        position: absolute;
+        inset: -4px 0;
+        content: '';
+    }
 
     &:disabled {
         color: color('text-secondary');
@@ -36,12 +43,12 @@
 }
 
 .key--icon-only {
-    min-width: 48px;
+    min-width: 40px;
     padding: 0;
 }
 
 .key--large {
-    height: 64px;
+    height: 48px;
     font-size: $font-size-large;
 }
 
@@ -56,8 +63,8 @@
 // LED in the top right corner, visible only when active
 .key__led {
     position: absolute;
-    top: space(1);
-    right: space(1);
+    top: space(4);
+    right: space(4);
     display: none;
     width: 12px;
     height: 6px;
@@ -74,8 +81,8 @@
 .key__armed-bar {
     position: absolute;
     top: -1px;
-    right: space(2);
-    left: space(2);
+    right: space(12);
+    left: space(12);
     display: none;
     height: 4px;
     border-radius: 0 0 2px 2px;

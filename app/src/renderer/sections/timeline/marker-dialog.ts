@@ -21,7 +21,7 @@ export function openMarkerDialog(marker: Marker, timeline: Timeline): Promise<Ma
             options: [{ value: 'no', label: t('timeline.markerPass') }, { value: 'yes', label: t('timeline.markerPause') }],
             value: marker.stop ? 'yes' : 'no'
         });
-        dialog.append(new Stack({ direction: 'row', gap: 2, wrap: true, children: [name, time, stop] }));
+        dialog.append(new Stack({ direction: 'row', gap: 8, wrap: true, children: [name, time, stop] }));
         const finish = (result: MarkerDialogResult | null): void => {
             dialog.close();
             resolve(result);

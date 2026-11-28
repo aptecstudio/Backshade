@@ -36,7 +36,7 @@ class LoginScreen extends Component<HTMLDivElement> {
         const panel = new Panel({ title: t('remote.title') });
         this.pad = new PinPad(t('remote.pinHint'), this.element);
         this.waiting = new Label({ text: t('remote.noOperator'), tone: 'secondary', size: 'small' });
-        panel.append(new Stack({ gap: 2, align: 'center', children: [this.waiting, this.pad] }));
+        panel.append(new Stack({ gap: 12, align: 'center', children: [this.waiting, this.pad] }));
         this.append(panel);
         this.pad.onComplete((pin) => void this.send(pin, entered));
     }

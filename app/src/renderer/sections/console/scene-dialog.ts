@@ -66,8 +66,8 @@ function buildSceneDialog(scene: SceneSummary, usedBy: number, mixers: ShowMixer
     dialog.append(
         new Label({ text: t('memories.channelCount', { count: scene.channelCount }), tone: 'secondary', size: 'small' }),
         name,
-        new Stack({ direction: 'row', gap: 2, wrap: true, children: [fadeIn, fadeOut] }),
-        ...(mixers.length > 0 ? [new Stack({ direction: 'row', gap: 2, wrap: true, children: [mixer, number] })] : [])
+        new Stack({ direction: 'row', gap: 8, wrap: true, children: [fadeIn, fadeOut] }),
+        ...(mixers.length > 0 ? [new Stack({ direction: 'row', gap: 8, wrap: true, children: [mixer, number] })] : [])
     );
 
     const apply = async (): Promise<void> => {

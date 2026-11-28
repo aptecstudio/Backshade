@@ -56,9 +56,9 @@ export class PatchSection extends Panel {
 
         this.append(new Stack({
             direction: 'row',
-            gap: 2,
+            gap: 8,
             align: 'center',
-            children: [add, addMatrix, groups, library, this.summary, new Spacer(), new Stack({ direction: 'row', gap: 1, children: [this.listKey, this.gridKey] })]
+            children: [add, addMatrix, groups, library, this.summary, new Spacer(), new Stack({ direction: 'row', gap: 8, children: [this.listKey, this.gridKey] })]
         }));
 
         void this.load();

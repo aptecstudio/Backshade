@@ -41,12 +41,12 @@ export class AttributesPanel extends Panel {
 
         this.selector = new FixtureSelector();
         this.hint = new Label({ text: t('attributesPanel.noSelection'), tone: 'secondary', size: 'small' });
-        this.stripsRow = new Stack({ direction: 'row', gap: 1, classes: ['attributes-panel__strips'] });
+        this.stripsRow = new Stack({ direction: 'row', gap: 8, classes: ['attributes-panel__strips'] });
         this.wheels = new PositionWheels();
         this.colorWheel = new ColorWheel({ value: { r: 0, g: 0, b: 0 }, labels: colorWheelLabels() });
         this.controls = new Stack({
             direction: 'row',
-            gap: 3,
+            gap: 12,
             align: 'start',
             classes: ['attributes-panel__controls'],
             children: [this.stripsRow, this.wheels, this.colorWheel]

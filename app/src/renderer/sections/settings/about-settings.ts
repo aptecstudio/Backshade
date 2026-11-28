@@ -19,7 +19,7 @@ export class AboutSettings extends Panel {
             void engine().request('window.openAbout');
         });
 
-        this.append(new Stack({ direction: 'row', gap: 2, align: 'center', children: [open, version] }));
+        this.append(new Stack({ direction: 'row', gap: 8, align: 'center', children: [open, version] }));
 
         void engine().request('app.getInfo').then((info) => {
             version.setText(`${info.name} ${t('about.version', { version: info.version })}`);

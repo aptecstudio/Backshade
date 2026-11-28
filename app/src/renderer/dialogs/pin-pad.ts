@@ -20,7 +20,7 @@ export class PinPad extends Stack {
      * @param keyboardTarget - Element whose keys type the digits, usually the dialog
      */
     constructor(hint: string, keyboardTarget: HTMLElement) {
-        super({ gap: 2, classes: ['pin-pad'] });
+        super({ gap: 12, classes: ['pin-pad'] });
         this.display = new ReadoutDisplay({ text: '', label: t('operators.pin') });
         this.display.element.classList.add('pin-pad__display');
         this.message = new Label({ text: hint, tone: 'secondary', size: 'small' });
@@ -33,10 +33,10 @@ export class PinPad extends Stack {
         };
         const backspace = new Key({ label: t('operators.backspace'), icon: 'delete', iconOnly: true, size: 'large' });
         backspace.onPress(() => this.erase());
-        const rows = [0, 3, 6].map((start) => new Stack({ direction: 'row', gap: 1, children: DIGITS.slice(start, start + 3).map(digit) }));
+        const rows = [0, 3, 6].map((start) => new Stack({ direction: 'row', gap: 8, children: DIGITS.slice(start, start + 3).map(digit) }));
         // The 0 sits under the 8, as on a phone keypad
-        rows.push(new Stack({ direction: 'row', gap: 1, children: [new Stack({ classes: ['pin-pad__gap'] }), digit('0'), backspace] }));
-        this.append(this.message, this.display, new Stack({ gap: 1, classes: ['pin-pad__keys'], children: rows }));
+        rows.push(new Stack({ direction: 'row', gap: 8, children: [new Stack({ classes: ['pin-pad__gap'] }), digit('0'), backspace] }));
+        this.append(this.message, this.display, new Stack({ gap: 8, classes: ['pin-pad__keys'], children: rows }));
 
         this.listen(keyboardTarget, 'keydown', (event) => {
             if (/^[0-9]$/.test(event.key)) {

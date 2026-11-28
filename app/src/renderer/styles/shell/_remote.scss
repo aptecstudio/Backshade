@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: space(2);
+    padding: space(16);
     outline: none;
 }
 
@@ -19,15 +19,15 @@
 }
 
 .remote-bar__content {
-    height: space(8);
-    padding: 0 space(2);
+    height: space(48);
+    padding: 0 space(8);
     border-bottom: 1px solid color('panel-border');
     background: color('panel');
 }
 
 // Progress of a file being sent, from the custom property set by the component
 .upload-progress {
-    height: space(1);
+    height: space(8);
     border-radius: $radius-square-key;
     background: color('surface');
     overflow: hidden;

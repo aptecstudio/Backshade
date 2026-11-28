@@ -40,7 +40,7 @@ export class RecentShowsPanel extends Panel {
             muted: show.missing,
             label: show.name,
             children: [new Stack({
-                gap: 1,
+                gap: 8,
                 classes: ['recent-shows__text'],
                 children: [
                     new Label({ text: show.name, weight: 'medium' }),
@@ -60,6 +60,6 @@ export class RecentShowsPanel extends Panel {
         const remove = new Key({ label: t('start.removeRecent'), icon: 'x', iconOnly: true });
         remove.onPress(() => void engine().request('recent.remove', { folder: show.folder }));
 
-        return new Stack({ direction: 'row', gap: 1, align: 'center', classes: ['recent-shows__row'], children: [item, remove] });
+        return new Stack({ direction: 'row', gap: 8, align: 'center', classes: ['recent-shows__row'], children: [item, remove] });
     }
 }

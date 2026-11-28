@@ -9,17 +9,17 @@
 .pin-pad__keys {
     .key,
     .pin-pad__gap {
-        width: space(8);
+        width: space(64);
         // The keys have a larger minimum width: without this the last row would not line up
-        min-width: space(8);
+        min-width: space(64);
     }
 }
 
 .section-host__notice {
     display: flex;
-    gap: space(1);
+    gap: space(8);
     align-items: center;
-    margin: 0 0 space(2);
+    margin: 0 0 space(8);
     color: color('text-secondary');
     font-size: $font-size-small;
 
@@ -28,8 +28,8 @@
     }
 
     .icon {
-        width: space(2);
-        height: space(2);
+        width: space(16);
+        height: space(16);
     }
 }
 
@@ -39,7 +39,7 @@
 }
 
 .operator-row {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {
@@ -50,18 +50,18 @@
 .operator-dialog__access {
     display: grid;
     grid-template-columns: max-content 1fr;
-    gap: space(1) space(2);
+    gap: space(8) space(12);
     align-items: center;
 }
 
 // Import from another show
 .show-import__category {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 }
 
 .show-import__items {
-    padding-left: space(6);
+    padding-left: space(32);
 
     &[hidden] {
         display: none;

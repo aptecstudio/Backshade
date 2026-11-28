@@ -13,7 +13,7 @@ import { UniverseGrid } from './universe-grid.js';
 
 export class PatchGridView extends Panel {
     private readonly entries: readonly PatchRow[];
-    private readonly universeKeys = new Stack({ direction: 'row', gap: 1, wrap: true });
+    private readonly universeKeys = new Stack({ direction: 'row', gap: 8, wrap: true });
     private readonly universeField: NumberField;
     private readonly usage = new Label({ text: '', tone: 'secondary', size: 'small' });
     private keys: Key[] = [];
@@ -31,7 +31,7 @@ export class PatchGridView extends Panel {
         this.universeField = new NumberField({ label: t('patch.universeField'), value: universe, min: 1, max: MAX_UNIVERSE });
         this.universeField.onChange((value) => this.show(value));
         this.append(
-            new Stack({ direction: 'row', gap: 2, align: 'end', wrap: true, children: [this.universeField, this.universeKeys] }),
+            new Stack({ direction: 'row', gap: 8, align: 'end', wrap: true, children: [this.universeField, this.universeKeys] }),
             this.usage
         );
         this.show(universe);

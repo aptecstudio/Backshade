@@ -11,7 +11,7 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    gap: space(2);
+    gap: space(8);
     min-width: 0;
     min-height: 0;
 }
@@ -24,8 +24,8 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    gap: space(1);
-    min-height: space(8);
+    gap: space(4);
+    min-height: space(64);
     overflow: auto;
 }
 
@@ -63,8 +63,8 @@
 
 .channel-row {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr) auto minmax(0, 2fr) space(6);
-    gap: space(1);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr) auto minmax(0, 2fr) space(48);
+    gap: space(8);
     align-items: center;
 }
 
@@ -75,7 +75,7 @@
 .mode-row {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) auto auto;
-    gap: space(1);
+    gap: space(8);
     align-items: center;
 }
 
@@ -87,8 +87,8 @@
 
 .capability-row {
     display: grid;
-    grid-template-columns: auto auto minmax(0, 3fr) minmax(0, 2fr) space(6);
-    gap: space(1);
+    grid-template-columns: auto auto minmax(0, 3fr) minmax(0, 2fr) space(48);
+    gap: space(8);
     align-items: center;
 }
 
@@ -102,11 +102,11 @@
 }
 
 .mode-channels__list .panel__body {
-    gap: space(1);
+    gap: space(8);
 }
 
 .mode-channels__row {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {

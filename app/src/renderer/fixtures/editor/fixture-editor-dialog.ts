@@ -32,7 +32,7 @@ export function openFixtureEditor(source: FixtureDefinition | null, previousId?:
     const draft = new FixtureDraft(source);
     const general = new GeneralPanel(draft);
     dialog.append(new Stack({
-        gap: 2,
+        gap: 12,
         classes: ['fixture-editor'],
         children: [general, new ChannelsPanel(draft), new ModesPanel(draft), new PhysicalPanel(draft)]
     }));

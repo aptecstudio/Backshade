@@ -37,7 +37,7 @@ function delayed(field: 'description' | 'notes'): (value: string) => void {
 
 export class ShowSettingsPanels extends Stack {
     constructor(settings: ShowSettings) {
-        super({ gap: 3, classes: ['show-settings'] });
+        super({ gap: 12, classes: ['show-settings'] });
 
         const description = new TextField({ label: t('settings.description'), value: settings.description, maxLength: 200 });
         const notes = new TextArea({ label: t('settings.notes'), value: settings.notes, maxLength: 10000 });
@@ -69,7 +69,7 @@ export class ShowSettingsPanels extends Stack {
         const timecode = new Panel({ title: t('settings.timecode') });
         timecode.append(rate);
         const fades = new Panel({ title: t('settings.fades') });
-        fades.append(new Stack({ direction: 'row', gap: 3, children: [fadeIn, fadeOut] }));
+        fades.append(new Stack({ direction: 'row', gap: 12, children: [fadeIn, fadeOut] }));
 
         this.append(general, timecode, fades, new OperatorsSettings(), new MidiSettings(), new ShowImportSettings());
     }

@@ -5,10 +5,10 @@
 .time-field__button {
     display: inline-flex;
     align-items: center;
-    gap: space(1);
+    gap: space(8);
     min-width: 128px;
     height: 40px;
-    padding: 0 space(2);
+    padding: 0 space(12);
     border: 1px solid color('panel-border');
     border-radius: $radius-square-key;
     background: color('display');
@@ -45,7 +45,7 @@
 .range-input .number-field__input {
     width: 64px;
     height: 32px;
-    padding: 0 space(1);
+    padding: 0 space(8);
 }
 
 .number-field--compact .number-field__row {

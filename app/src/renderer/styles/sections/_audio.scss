@@ -2,11 +2,11 @@
 @use 'framework/scss/tokens' as *;
 
 .audio-transport__progress {
-    flex: 1 1 space(8) * 4;
+    flex: 1 1 space(64) * 4;
 }
 
 .audio-progress {
-    height: space(1);
+    height: space(8);
     border-radius: $radius-square-key;
     background: color('display');
     overflow: hidden;
@@ -24,7 +24,7 @@
 }
 
 .audio-volume {
-    width: space(8) * 3;
+    width: space(64) * 3;
 }
 
 .audio-volume .slider {
@@ -32,7 +32,7 @@
 }
 
 .audio-playlist__row {
-    padding: space(1) 0;
+    padding: space(4) 0;
     border-bottom: 1px solid color('panel-border');
 
     &:last-child {
@@ -45,6 +45,8 @@
 }
 
 .audio-add__files {
-    max-height: space(8) * 5;
+    // Room for the hit area of the keys, which would otherwise make the list scroll
+    padding: space(4) 0;
+    max-height: space(64) * 5;
     overflow-y: auto;
 }

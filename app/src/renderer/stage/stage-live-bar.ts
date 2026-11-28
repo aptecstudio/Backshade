@@ -11,7 +11,7 @@ export class StageLiveBar extends Stack {
     private readonly changes = new Emitter<LiveSettings>();
 
     constructor(private settings: LiveSettings) {
-        super({ direction: 'row', gap: 2, align: 'center', wrap: true });
+        super({ direction: 'row', gap: 8, align: 'center', wrap: true });
         const haze = new SelectField<LiveSettings['haze']>({
             ariaLabel: t('stage.haze'),
             options: HAZE_LEVELS.map((value) => ({ value, label: t(`stage.hazeLevels.${value}`) })),

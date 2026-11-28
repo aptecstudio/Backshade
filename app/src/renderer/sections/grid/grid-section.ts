@@ -24,7 +24,7 @@ const newId = (): string => crypto.randomUUID();
 
 export class GridSection extends Panel {
     private readonly store = new GridStore();
-    private readonly pageKeys = new Stack({ direction: 'row', gap: 1, wrap: true });
+    private readonly pageKeys = new Stack({ direction: 'row', gap: 8, wrap: true });
     private readonly editKey: Key;
     private readonly addPage: Key;
     private readonly pageSettings: Key;
@@ -55,7 +55,7 @@ export class GridSection extends Panel {
         this.empty = new Label({ text: t('grid.empty'), tone: 'secondary' });
 
         this.append(
-            new Stack({ direction: 'row', gap: 2, align: 'center', wrap: true, children: [this.pageKeys, new Spacer(), this.addPage, this.pageSettings, this.editKey] }),
+            new Stack({ direction: 'row', gap: 8, align: 'center', wrap: true, children: [this.pageKeys, new Spacer(), this.addPage, this.pageSettings, this.editKey] }),
             this.empty,
             this.holder
         );
