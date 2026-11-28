@@ -196,6 +196,8 @@ How to use it:
 - [ ] Long press in the timeline: opens a clip, adds a clip, opens or adds a marker, removes an automation point; the system menu never appears.
 - [ ] Pinch zoom in the timeline follows the fingers and lands on the right point; scrolling with one or two fingers works; the page never zooms.
 - [ ] Small square keys and knobs can be hit with a finger also slightly outside their drawing.
+- [ ] Compact layout: without the touch mode, keys and section tabs (40 px with a 48 px hit area) are still comfortable on a real screen; neighbouring keys are never hit by mistake.
+- [ ] Compact layout on the real screens used live (laptop, small and large monitor): texts are readable, nothing overlaps, the compact faders are long enough.
 
 ## 17. File manager
 

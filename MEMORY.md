@@ -107,7 +107,7 @@ Built in the first block of Phase 2 (2026-11-23).
 - **Framework additions:** `TextField`, `TextArea`, `NumberField` (accepts comma or point as decimal separator, clamps to its limits), `ChoiceKeys`, `Dialog` (modal, Esc to cancel, focus kept inside), `ListItem`, `onShortcut`, `Key.setDisabled`; the base styles make the `hidden` attribute always win over component `display` rules and set `color-scheme: dark` for native controls.
 - **Framework additions of Phase 3:** `SelectField` (native select styled as the text fields, with groups), compact `TextField` without a label (`ariaLabel`) and its `onChange` on confirmation, `Dialog` size `large` for editors, `TabBar` (flat tabs, 48 px high), `ChoiceKeys` without a label and with a `value` getter, `ListItem` `classes`, labels keep line breaks, palette color `warning` for functional indicators.
 - **Desktop-only methods:** `requireDesktop()` (`src/main/transport/require-desktop.ts`) is the single guard used by every service.
-- **Scrollbars** (`framework/scss/base/_scrollbar.scss`, requested by the human on 2026-11-23): themed like the console, 8 px (`space(1)`), transparent track, thumb in the key grey with the key border and a lighter tone on hover and drag, no arrow buttons; browsers without the webkit selectors get `scrollbar-color` with the same colors.
+- **Scrollbars** (`framework/scss/base/_scrollbar.scss`, requested by the human on 2026-11-23): themed like the console, 8 px (`space(8)`), transparent track, thumb in the key grey with the key border and a lighter tone on hover and drag, no arrow buttons; browsers without the webkit selectors get `scrollbar-color` with the same colors.
 - **Value input controls** (requested by the human on 2026-11-23), to be used everywhere:
   - **durations:** always a `TimeField`, a key showing the time ("2.5 s", "1:15.0") that opens the time picker: large readout, `JogWheel` turned by dragging around its center (one turn is 10 s, 1 s in fine mode), mouse wheel and arrow keys, step keys (-1, -0.1, +0.1, +1 s), zero key and direct entry of the seconds;
   - **RGB colors:** always a `ColorWheel`: hue around the wheel (red at the top, clockwise), saturation from the center, brightness on a `LinearSlider`, plus R, G, B (0 to 255) and hex fields;
@@ -199,7 +199,7 @@ Built on 2026-11-28.
 - **Instance name:** `instanceName` in the global settings (default the computer name, at most 40 characters), shown and renamed in a "This computer" panel of the start page, with or without a show. (Confirmed per computer; Proposed default and panel)
 - **Discovery** (`src/main/network/discovery.ts`): UDP port 4746 (native `dgram`); a search sends `BACKSHADE-DISCOVER 1` to the broadcast addresses and collects for 1.5 s the answers (name and web port) of the other instances; nothing else is told. (Proposed port and protocol)
 - **Remote control** on the start page (not inside a remote client): a dialog lists the instances found, searches again, or takes an IP address typed by hand (port 4747 by default) when broadcast is blocked. (Confirmed list; Proposed manual address)
-- **View** (`src/main/window/remote-view.ts`): the interface of the other instance in a `WebContentsView` of the main window below a 64 px bar with name, address and Close; sandboxed, no preload (no access to this computer), all permissions refused, its own partition, it can only navigate within that instance and opens nothing; leaving forgets its session cookie, so the PIN is asked again. Closing the application closes it first. (Proposed)
+- **View** (`src/main/window/remote-view.ts`): the interface of the other instance in a `WebContentsView` of the main window below a 48 px bar with name, address and Close; sandboxed, no preload (no access to this computer), all permissions refused, its own partition, it can only navigate within that instance and opens nothing; leaving forgets its session cookie, so the PIN is asked again. Closing the application closes it first. (Proposed)
 
 ### Files sent from remote devices (10.8)
 
@@ -339,7 +339,7 @@ Implementation of 4.1 (2026-11-24):
 - **Full on:** applied by the output engine on every universe: intensity channels of the patched fixtures and every channel without a fixture at full; colors and movements of fixtures with a dimmer stay as they are; blackout still wins.
 - **Home:** every fader of every universe back to 0.
 - The state of the desk lives in the engine for the running session (like the physical faders of a desk) and is not saved in the show; every window follows `console.stateChanged`, `console.faderChanged` and `console.levelsChanged`. Universes controlled by a source are sent with Art-Net even when nothing is patched on them.
-- **Interface** (`src/renderer/sections/console/`): Console section with the preset surface (bank keys, universe, mode, two rows of strips with channel number, fixture and channel name from the patch, display with the value, compact fader, flash; no typed field under these faders) and the masters panel (A, B with reversed scale, scenes, grand master, full on, blind, home). Framework additions: `Fader` size `compact` (144 px), `SquareKey.onHold` for momentary keys.
+- **Interface** (`src/renderer/sections/console/`): Console section with the preset surface (bank keys, universe, mode, two rows of strips with channel number, fixture and channel name from the patch, display with the value, compact fader, flash; no typed field under these faders) and the masters panel (A, B with reversed scale, scenes, grand master, full on, blind, home). Framework additions: `Fader` size `compact` (128 px, 144 px until 2026-11-28), `SquareKey.onHold` for momentary keys.
 
 Status: Confirmed (2026-11-24).
 
@@ -718,9 +718,13 @@ Status: Confirmed (2026-11-23).
 
 ### Spacing
 
-Single scale, multiples of 8 only: `8, 16, 24, 32, 48, 64` px. No other values are used.
+Single scale of multiples of 4: `4, 8, 12, 16, 20, 24, 32, 40, 48, 64` px, plus `2` only exceptionally, for rare fine adjustments. No other values are used. It replaces the first scale of multiples of 8 (changed by the human on 2026-11-28).
 
-Status: Confirmed (proposed scale).
+- The steps are named by their size in pixels, both in SCSS (`space(8)`) and in TypeScript (`SpacingStep`, `gap: 8`).
+- **Use** (compact layout of 2026-11-28): 8 px around and between the regions of the window and between rows of keys; 12 px inside panels and between the groups of a section; 16 px inside dialogs; 4 px between a label and its control, between the rows of a list and inside the small widgets.
+- **Sizes** (with a mouse): keys 40 px high (large 48 px, at least 80 px wide), tabs of the sections 40 px, fields 40 px, list rows at least 40 px, compact faders 128 px. Keys and tabs keep a hit area of 48 px with an invisible border.
+
+Status: Confirmed (scale and compact layout), Proposed (use and sizes).
 
 ### Colors
 
@@ -742,7 +746,7 @@ Status: Proposed.
 - Never emoji or emoticons.
 - Sources: one SVG file per icon in `app/assets/icons/lucide/`, copied unchanged from `lucide-static` 1.78.0, with the Lucide `LICENSE`. Only the icons used by the interface are kept (decided by the human on 2026-11-23).
 - Build: `scripts/build-icons.mts` generates the sprite `dist/web/assets/icons.svg` (one `<symbol>` per icon, served at `/assets/icons.svg`) and the type `IconName` in `src/framework/ts/icons/icon-names.ts`, so a wrong icon name is a compile error.
-- Rendering: `icon(name)` creates an `<svg class="icon">` that references the sprite; stroke and color come from `.icon` in the SCSS framework (stroke width 2, `currentColor`), sizes `space(2)` and `space(3)` (`.icon--large`).
+- Rendering: `icon(name)` creates an `<svg class="icon">` that references the sprite; stroke and color come from `.icon` in the SCSS framework (stroke width 2, `currentColor`), sizes `space(16)` and `space(24)` (`.icon--large`).
 
 Status: Confirmed.
 
@@ -864,7 +868,7 @@ Built on 2026-11-27.
 - **Hit areas:** square keys and knobs have an invisible area of at least 48 px around them (`::before` of the square key, `knob__hit`), with the look unchanged; automation points have an invisible circle of 16 px radius. (Proposed)
 - **Long press** (framework `onLongPress`, 500 ms, 8 px of tolerance): the touch replacement of the double click and of the right click. In the timeline it opens a clip, adds a clip on an empty lane, opens a marker, adds a marker on the ruler and removes an automation point. The system menu of a long press is never shown on these controls. (Proposed)
 - **Pinch in the timeline:** two fingers zoom the time around the point between them; while they move the lanes are only stretched with a transform (rebuilding them would lose the touch, whose target must stay in the page), the zoom is applied when they lift. One and two fingers scroll the editor natively; the page itself never zooms (`touch-action: pan-x pan-y`). (Proposed)
-- **Touch mode** (`src/renderer/preferences/touch-mode.ts`, Application settings): automatic (on when the main pointer is a finger, `pointer: coarse`), always or never, saved per device (`backshade.touchMode`) and applied to every window at once with the class `touch-mode` of the document (framework `base/_touch.scss`): keys 64 px high (large keys 80 px), square keys 40 px, fields 48 px, list rows 64 px, clip edges and fade handles of the timeline 16 px. (Proposed sizes)
+- **Touch mode** (`src/renderer/preferences/touch-mode.ts`, Application settings): automatic (on when the main pointer is a finger, `pointer: coarse`), always or never, saved per device (`backshade.touchMode`) and applied to every window at once with the class `touch-mode` of the document (framework `base/_touch.scss`): keys and section tabs 48 px high (large keys 64 px), square keys 40 px, fields 48 px, list rows 48 px, clip edges and fade handles of the timeline 16 px. (Proposed sizes)
 - **Tests:** touch is tested with the touch emulation of Chromium; the automatic touch mode turns on under emulation and moves the layout, so coordinates must be read with the emulation on.
 
 ### MIDI layer: input (16.2a)
