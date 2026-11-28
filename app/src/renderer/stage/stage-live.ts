@@ -308,7 +308,8 @@ export class StageLive {
 
     private show(time: number, step: number): void {
         const spots: Spot[] = [];
-        const projectors: Projector[] = [];
+        /** Gobos and prisms, with their strength apart from the strobe, which keeps their choice steady */
+        const patterns: Array<{ projector: Projector; angle: number; lumens: number; strength: number }> = [];
         const haze = HAZE_STRENGTH[this.settings.haze];
         this.occlusion.refill();
         this.beams.frame();
@@ -417,11 +418,18 @@ export class StageLive {
                 if (pattern === null) {
                     spots.push({ position, direction, color, level, angle: light.angle, lumens: source.profile.lumens / source.lights.length, soft: light.soft > 0 ? light.soft : undefined });
                 } else {
-                    projectors.push({ position, direction, color, level, cone: THREE.MathUtils.radToDeg(cone) * 2, picture: pattern });
+                    const lumens = source.profile.lumens / source.lights.length;
+                    patterns.push({ projector: { position, direction, color, level, cone: THREE.MathUtils.radToDeg(cone) * 2, picture: pattern }, angle: light.angle, lumens, strength: light.level * lumens });
                 }
             });
         });
+        // With shadows on, the strongest patterns go to lights that objects stop; the others are projected through them
+        patterns.sort((a, b) => b.strength - a.strength);
+        const stopped = this.settings.shadows ? patterns.splice(0, SHADOW_LIGHTS) : [];
+        for (const { projector: { position, direction, color, level, cone, picture }, angle, lumens } of stopped) {
+            spots.push({ position, direction, color, level, angle, lumens, cone, gobo: picture });
+        }
         this.lights.set(spots);
-        this.projection.set(projectors);
+        this.projection.set(patterns.map((pattern) => pattern.projector));
     }
 }

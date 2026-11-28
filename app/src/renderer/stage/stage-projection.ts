@@ -170,11 +170,7 @@ export class StageProjection {
             this.camera.fov = Math.max(2, Math.min(120, projector.cone));
             this.camera.updateProjectionMatrix();
             this.camera.position.copy(projector.position);
-            // Straight down or up, another direction has to be the top of the picture
-            this.camera.up.set(0, 1, 0);
-            if (Math.abs(projector.direction.y) > 0.99) {
-                this.camera.up.set(0, 0, -1);
-            }
+            // Aimed as the shadow lights of the library, so a pattern never turns passing from one way to the other
             this.camera.lookAt(projector.position.clone().add(projector.direction));
             this.camera.updateMatrixWorld(true);
             (uniforms.matrices.value as THREE.Matrix4[])[index].multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse);
