@@ -5,6 +5,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
+import { normalizeSurfaces } from '../../shared/video/mapping';
 import { MAX_VIDEO_LAYERS, MAX_VIDEO_OUTPUTS, normalizeLayer, type ShowVideo, type VideoInput, type VideoOutputConfig } from '../../shared/video/video';
 import { MAX_TIMERS, normalizeTimer, TIMER_ACTIONS, type TimerState } from '../../shared/video/show-timer';
 import { MAX_GOBOS, normalizeGobo } from '../../shared/video/text-gobo';
@@ -117,7 +118,7 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         }
         const base: VideoOutputConfig = {
             id: randomUUID(), name: requireString(input, 'name'), enabled: false, display: '', fullscreen: true,
-            x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3
+            x: 0, y: 0, width: 1280, height: 720, stack: session.video().outputs.length, layers: 3, surfaces: []
         };
         const output = outputData(input, base);
         return update((video) => ({ ...video, outputs: [...video.outputs, output] }));
@@ -133,6 +134,30 @@ export function registerVideoService(router: RequestRouter, bus: EventBus, sessi
         const output = outputData(input, current);
         return update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? output : item) }));
     });
+
+    const knownOutput = (id: string): VideoOutputConfig => {
+        const output = session.video().outputs.find((item) => item.id === id);
+        if (output === undefined) {
+            throw new EngineError('video-output-not-found', `Video output not found: ${id}`);
+        }
+        return output;
+    };
+
+    router.register('video.setSurfaces', (params) => {
+        const input = requireObject(params);
+        const { id } = knownOutput(requireString(input, 'id'));
+        const surfaces = normalizeSurfaces(input.surfaces);
+        update((video) => ({ ...video, outputs: video.outputs.map((item) => item.id === id ? { ...item, surfaces } : item) }));
+        return undefined;
+    });
+
+    router.register('video.setTestPattern', (params) => {
+        const input = requireObject(params);
+        engine.setTestPattern(knownOutput(requireString(input, 'id')).id, input.on === true);
+        return undefined;
+    });
+
+    router.register('video.getTestPatterns', () => engine.testPatterns());
 
     router.register('video.removeOutput', (params) => {
         const id = requireString(requireObject(params), 'id');

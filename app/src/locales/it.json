@@ -1679,6 +1679,29 @@
     "library": {
       "alsoPersonal": "Aggiungi anche alla libreria per tutti i progetti",
       "import": "Importa"
+    },
+    "mapping": {
+      "open": "Mappatura",
+      "title": "Mappatura di \"{name}\"",
+      "add": "Aggiungi superficie",
+      "surface": "Superficie {number}",
+      "none": "Nessuna superficie: l'uscita mostra il programma così com'è.",
+      "name": "Nome",
+      "source": "Mostra",
+      "program": "Tutto il programma",
+      "layer": "Layer {number}",
+      "cropTitle": "Parte dell'immagine mostrata",
+      "crop": {
+        "x": "Da sinistra",
+        "y": "Dall'alto",
+        "width": "Larghezza",
+        "height": "Altezza"
+      },
+      "resetCorners": "Ripristina angoli",
+      "remove": "Rimuovi superficie",
+      "testPattern": "Immagine di prova",
+      "corner": "Angolo {number}",
+      "hint": "Trascina gli angoli numerati sulla forma reale; le frecce spostano di un pixel, dieci con Maiusc. L'uscita segue subito."
     }
   }
 }

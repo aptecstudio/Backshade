@@ -2412,7 +2412,67 @@
         "width": 640,
         "height": 360,
         "stack": 0,
-        "layers": 3
+        "layers": 3,
+        "surfaces": [
+          {
+            "id": "demo-surface-main",
+            "name": "Main screen",
+            "source": "program",
+            "corners": [
+              [
+                0.04,
+                0.08
+              ],
+              [
+                0.7,
+                0.14
+              ],
+              [
+                0.7,
+                0.86
+              ],
+              [
+                0.04,
+                0.92
+              ]
+            ],
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "width": 1,
+              "height": 1
+            }
+          },
+          {
+            "id": "demo-surface-side",
+            "name": "Side panel",
+            "source": 0,
+            "corners": [
+              [
+                0.74,
+                0.22
+              ],
+              [
+                0.96,
+                0.16
+              ],
+              [
+                0.96,
+                0.84
+              ],
+              [
+                0.74,
+                0.78
+              ]
+            ],
+            "crop": {
+              "x": 0.25,
+              "y": 0,
+              "width": 0.5,
+              "height": 1
+            }
+          }
+        ]
       }
     ],
     "gobos": [

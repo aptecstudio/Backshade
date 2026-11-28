@@ -105,3 +105,107 @@ body.video-output {
 .gobo-panel__slider .slider {
     width: space(64) * 2;
 }
+
+// Videomapping: the composition keeps playing out of sight under the surfaces
+.composition--hidden {
+    visibility: hidden;
+}
+
+.mapping-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+body.video-output .mapping-canvas {
+    position: fixed;
+    inset: 0;
+}
+
+// Mapping editor: the output with room around it, surfaces and handles over it
+.mapping-editor__picture {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.mapping-editor__side {
+    flex: 0 0 space(64) * 4;
+    min-width: 0;
+}
+
+.mapping-stage {
+    position: relative;
+    width: 100%;
+    padding: calc(100% * var(--around, 0.1));
+    background: color('surface');
+    border: 1px solid color('panel-border');
+    border-radius: $radius-panel;
+    overflow: hidden;
+}
+
+.mapping-stage__output {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--output-ratio, 16 / 9);
+    background: color('video-black');
+
+    > .composition,
+    > .mapping-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// Over the mapped picture
+.mapping-stage__frame {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+}
+
+.mapping-stage__lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.mapping-stage__shape {
+    fill: transparent;
+    stroke: color('text-secondary');
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    cursor: pointer;
+}
+
+.mapping-stage__shape--selected {
+    stroke: color('accent');
+    stroke-width: 2;
+}
+
+.mapping-stage__handle {
+    position: absolute;
+    left: calc(var(--x) * 100%);
+    top: calc(var(--y) * 100%);
+    width: space(24);
+    height: space(24);
+    margin: calc(space(24) / -2) 0 0 calc(space(24) / -2);
+    padding: 0;
+    border: 2px solid color('accent');
+    border-radius: 50%;
+    background: color('display');
+    color: color('text');
+    font-size: $font-size-micro;
+    cursor: move;
+    touch-action: none;
+
+    // Hit area of 48 px
+    &::after {
+        position: absolute;
+        inset: calc((space(24) - space(48)) / 2);
+        content: '';
+    }
+}

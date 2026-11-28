@@ -18,6 +18,7 @@ import { engine } from '../../transport/engine.js';
 import { CompositionView } from '../../video/composition-view.js';
 import { GoboPanel } from './gobo-panel.js';
 import { LayerRow } from './layer-row.js';
+import { openMappingDialog } from './mapping-dialog.js';
 import { TimerPanel } from './timer-panel.js';
 import { openOutputDialog } from './output-dialog.js';
 
@@ -29,6 +30,7 @@ interface Monitor {
 export class VideoSection extends Stack {
     private readonly outputKeys = new Stack({ direction: 'row', gap: 8, wrap: true });
     private readonly settings: Key;
+    private readonly mapping: Key;
     private readonly empty: Label;
     private readonly body = new Stack({ gap: 8 });
     private readonly transition: NumberField;
@@ -57,7 +59,14 @@ export class VideoSection extends Stack {
             }
         });
         this.transition = new NumberField({ ariaLabel: t('video.transition'), value: 1, min: 0, max: 60, decimals: 1, unit: 's' });
-        markEdit(add, this.settings);
+        this.mapping = new Key({ label: t('mapping.open'), icon: 'grid-3x3' });
+        this.mapping.onPress(() => {
+            const output = this.output();
+            if (output !== null) {
+                void openMappingDialog(output).catch(showError);
+            }
+        });
+        markEdit(add, this.settings, this.mapping);
         const take = new Key({ label: t('video.take'), size: 'large' });
         const takeAll = new Key({ label: t('video.takeAll') });
         take.onPress(() => this.take(this.selected));
@@ -70,7 +79,7 @@ export class VideoSection extends Stack {
             gap: 8,
             align: 'center',
             wrap: true,
-            children: [this.outputKeys, add, this.settings, new Spacer(), new Label({ text: t('video.transition'), size: 'small' }), this.transition, takeAll, take]
+            children: [this.outputKeys, add, this.settings, this.mapping, new Spacer(), new Label({ text: t('video.transition'), size: 'small' }), this.transition, takeAll, take]
         }), this.empty);
         this.append(header, this.body);
         this.timerPanel = new TimerPanel();
@@ -126,6 +135,7 @@ export class VideoSection extends Stack {
         this.goboPanel?.show(this.video.gobos, this.media);
         this.timerPanel?.show(this.video.timers, this.timerStates);
         this.settings.element.hidden = output === null;
+        this.mapping.element.hidden = output === null;
         this.empty.element.hidden = output !== null;
 
         this.grid?.destroy();

@@ -1,8 +1,9 @@
 /**
  * Messages from the engine to the video output windows: the layers to
- * show and the time of the transition to them.
+ * show, the time of the transition to them and their videomapping.
  */
 
+import type { MappingSurface } from './mapping.js';
 import type { ShowTimer, TimerState } from './show-timer.js';
 import type { GoboContext, TextGobo } from './text-gobo.js';
 import type { LayerState } from './video.js';
@@ -19,6 +20,12 @@ export interface ComposeMessage {
     /** Timer presets of the show and their live states */
     timers: ShowTimer[];
     timerStates: Record<string, TimerState>;
+    /** Videomapping of the output */
+    surfaces: MappingSurface[];
+    /** A test image is shown on every surface instead of the program */
+    testPattern: boolean;
+    /** Name of the output, written on the test image */
+    name: string;
 }
 
 /** IPC channel of the video output windows */

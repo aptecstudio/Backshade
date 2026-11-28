@@ -89,6 +89,7 @@ export { ValueDisplay, type ValueDisplayOptions } from './displays/value-display
 export { RangeControl, type RangeControlOptions } from './controls/range-control.js';
 export { Knob, type KnobOptions } from './controls/knob.js';
 export { Checkbox, type CheckboxOptions } from './controls/checkbox.js';
+export { trackPointerDrag } from './controls/pointer-drag.js';
 export { CurveEditor, type CurveEditorOptions, type CurveEditorPoint } from './controls/curve-editor.js';
 export { Fader, type FaderOptions } from './controls/fader.js';
 export { LinearSlider } from './controls/linear-slider.js';

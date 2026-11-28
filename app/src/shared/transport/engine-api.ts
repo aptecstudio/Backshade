@@ -16,6 +16,7 @@ import type { ShowTimer, TimerAction, TimerState } from '../video/show-timer.js'
 import type { ShowTimelines, Timeline, TimelineState } from '../timeline/timeline.js';
 import type { TextGobo } from '../video/text-gobo.js';
 import type { LayerState, OutputComposition, ShowVideo, VideoDisplay, VideoInput, VideoOutputConfig } from '../video/video.js';
+import type { MappingSurface } from '../video/mapping.js';
 import type { Chaser, ChaserDirection, Cue, MemoriesState, MemoriesSummary, MemoryKind, SceneSummary } from '../console/memories.js';
 import type { ChannelLabel, PresetDeskState, PresetLevels, PresetMaster, PresetMode, PresetRow } from '../console/preset-desk.js';
 import type { FixtureCategory, FixtureDefinition } from '../fixtures/fixture-definition.js';
@@ -539,6 +540,10 @@ export interface EngineMethods {
     'video.get': { params: undefined; result: ShowVideo };
     /** Program and preview of every video output */
     'video.getState': { params: undefined; result: Record<string, OutputComposition> };
+    /** Videomapping surfaces of an output, saved in the show */
+    'video.setSurfaces': { params: { id: string; surfaces: MappingSurface[] }; result: undefined };
+    'video.setTestPattern': { params: { id: string; on: boolean }; result: undefined };
+    'video.getTestPatterns': { params: undefined; result: string[] };
     /** Displays of the computer */
     'video.listDisplays': { params: undefined; result: VideoDisplay[] };
     /** Video inputs of the computer: cameras and capture cards */

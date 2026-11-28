@@ -33,6 +33,8 @@ export class VideoEngine {
     private readonly onState: (compositions: Record<string, OutputComposition>) => void;
     private readonly runtime = new Map<string, OutputRuntime>();
     private readonly windows = new Map<string, OutputWindow>();
+    /** Outputs showing their test image */
+    private readonly tests = new Set<string>();
     private context: GoboContext = { cue: '', song: '' };
     /** Layers taken by the timeline: "output:index" -> layer */
     private readonly timeline = new Map<string, LayerState>();
@@ -90,7 +92,7 @@ export class VideoEngine {
             if (window === undefined) {
                 window = new OutputWindow(output);
                 this.windows.set(output.id, window);
-                window.compose(this.message(this.withTimeline(output.id, state.program), 0));
+                window.compose(this.message(output, this.withTimeline(output.id, state.program), 0));
             } else {
                 window.apply(output);
             }
@@ -193,6 +195,7 @@ export class VideoEngine {
         this.windows.clear();
         this.runtime.clear();
         this.timeline.clear();
+        this.tests.clear();
         this.announce();
     }
 
@@ -212,8 +215,9 @@ export class VideoEngine {
 
     private send(outputId: string, transition: number): void {
         const state = this.runtime.get(outputId);
-        if (state !== undefined) {
-            this.windows.get(outputId)?.compose(this.message(this.withTimeline(outputId, state.program), transition));
+        const output = this.outputs().find((item) => item.id === outputId);
+        if (state !== undefined && output !== undefined) {
+            this.windows.get(outputId)?.compose(this.message(output, this.withTimeline(outputId, state.program), transition));
         }
     }
 
@@ -263,8 +267,26 @@ export class VideoEngine {
         return program.map((layer, index) => this.timeline.get(`${outputId}:${index}`) ?? layer);
     }
 
-    private message(layers: LayerState[], transition: number): ComposeMessage {
-        return { layers, transition, gobos: this.video()?.gobos ?? [], context: this.context, timers: this.video()?.timers ?? [], timerStates: this.timerStates() };
+    /** Test image of an output on or off */
+    setTestPattern(outputId: string, on: boolean): void {
+        if (on) {
+            this.tests.add(outputId);
+        } else {
+            this.tests.delete(outputId);
+        }
+        this.send(outputId, 0);
+    }
+
+    /** Outputs showing their test image */
+    testPatterns(): string[] {
+        return [...this.tests];
+    }
+
+    private message(output: VideoOutputConfig, layers: LayerState[], transition: number): ComposeMessage {
+        return {
+            layers, transition, gobos: this.video()?.gobos ?? [], context: this.context, timers: this.video()?.timers ?? [], timerStates: this.timerStates(),
+            surfaces: output.surfaces, testPattern: this.tests.has(output.id), name: output.name
+        };
     }
 
     private announce(): void {

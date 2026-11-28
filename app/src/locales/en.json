@@ -1679,6 +1679,29 @@
     "library": {
       "alsoPersonal": "Also add to the library for all the projects",
       "import": "Import"
+    },
+    "mapping": {
+      "open": "Mapping",
+      "title": "Mapping of \"{name}\"",
+      "add": "Add surface",
+      "surface": "Surface {number}",
+      "none": "No surface: the output shows its program as it is.",
+      "name": "Name",
+      "source": "Shows",
+      "program": "The whole program",
+      "layer": "Layer {number}",
+      "cropTitle": "Part of the picture shown",
+      "crop": {
+        "x": "From the left",
+        "y": "From the top",
+        "width": "Width",
+        "height": "Height"
+      },
+      "resetCorners": "Reset corners",
+      "remove": "Remove surface",
+      "testPattern": "Test image",
+      "corner": "Corner {number}",
+      "hint": "Drag the numbered corners onto the real shape; arrow keys move one pixel, ten with Shift. The output follows at once."
     }
   }
 }
