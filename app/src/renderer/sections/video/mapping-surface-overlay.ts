@@ -47,3 +47,9 @@ export function surfaceOverlay(surfaces: readonly MappingSurface[], selected: st
     }
     return overlay;
 }
+
+/** Corners and grid points of a surface, in parts of the output */
+export function surfacePoints(surface: MappingSurface): MappingPoint[] {
+    const matrix = homography(surface.corners);
+    return matrix === null ? [...surface.corners] : [...surface.corners, ...(surface.mesh?.points.map((point) => project(matrix, point)) ?? [])];
+}

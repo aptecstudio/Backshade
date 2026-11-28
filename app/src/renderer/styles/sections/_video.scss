@@ -140,13 +140,25 @@ body.video-output .mapping-canvas {
     background: color('surface');
     border: 1px solid color('panel-border');
     border-radius: $radius-panel;
-    overflow: hidden;
+    // Clipped, so focusing a handle out of view never scrolls the picture
+    overflow: clip;
+    // Dragging moves the zoomed picture, two fingers zoom it, nothing is selected
+    touch-action: none;
+    user-select: none;
 }
 
-.mapping-stage__output {
+.mapping-stage__place {
     position: relative;
     width: 100%;
     aspect-ratio: var(--output-ratio, 16 / 9);
+}
+
+.mapping-stage__output {
+    position: absolute;
+    left: calc(var(--pan-x, 0) * 100%);
+    top: calc(var(--pan-y, 0) * 100%);
+    width: calc(var(--zoom, 1) * 100%);
+    height: calc(var(--zoom, 1) * 100%);
     background: color('video-black');
 
     > .composition,
@@ -287,4 +299,22 @@ body.video-output .blend-layer {
 
 .mapping-stage__output > .blend-layer {
     z-index: 0;
+}
+
+// Snap grid and the lines through what a dragged point caught
+.mapping-stage__snap-grid {
+    fill: none;
+    stroke: color('text-secondary');
+    stroke-width: 1;
+    stroke-opacity: 0.25;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+}
+
+.mapping-stage__caught {
+    stroke: color('accent');
+    stroke-width: 1;
+    stroke-dasharray: 4 4;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
 }

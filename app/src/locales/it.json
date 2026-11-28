@@ -1753,7 +1753,11 @@
       "overwrite": "Sovrascrivi",
       "presetHint": "I preset si salvano subito e si richiamano da scene e timeline, muovendosi nel tempo di morph.",
       "recallOn": "Mappatura di {name}",
-      "noPreset": "Invariata"
+      "noPreset": "Invariata",
+      "fit": "Adatta",
+      "snapPoints": "Aggancia a bordi e punti",
+      "snapGrid": "Aggancia alla griglia",
+      "gridStep": "Passo della griglia"
     }
   }
 }

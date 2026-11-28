@@ -20,7 +20,8 @@ import { MappingBlend } from './mapping-blend.js';
 import { MappingMasks } from './mapping-masks.js';
 import { MappingPresets } from './mapping-presets.js';
 import { EMPTY_OVERLAY, MappingStage } from './mapping-stage.js';
-import { surfaceOverlay, type MappingHandles } from './mapping-surface-overlay.js';
+import { surfaceOverlay, surfacePoints, type MappingHandles } from './mapping-surface-overlay.js';
+import { mappingViewBar } from './mapping-view-bar.js';
 
 /** Corners of a new surface: smaller than the output and a little aside of the one before */
 function newCorners(index: number): MappingSurface['corners'] {
@@ -89,7 +90,13 @@ function show(output: VideoOutputConfig, current: { mapping: OutputMapping; pres
     };
 
     const draw = (morph = 0): void => {
-        stage.show(editing === 'masks' ? masks.overlay() : editing === 'surfaces' ? surfaceOverlay(surfaces, selected, handles) : EMPTY_OVERLAY);
+        const overlay = editing === 'masks' ? masks.overlay() : editing === 'surfaces' ? surfaceOverlay(surfaces, selected, handles) : EMPTY_OVERLAY;
+        // Dragged points can catch the points of the other shapes
+        const others = [
+            ...surfaces.filter((surface) => editing !== 'surfaces' || surface.id !== selected).flatMap(surfacePoints),
+            ...masks.masks.filter((mask) => editing !== 'masks' || mask.id !== masks.selectedId).flatMap((mask) => mask.points.map((point) => point.at))
+        ];
+        stage.show({ ...overlay, snap: others });
         mapping.apply({ ...now(), testPattern, name: output.name }, morph);
     };
 
@@ -256,6 +263,8 @@ function show(output: VideoOutputConfig, current: { mapping: OutputMapping; pres
         draw();
         send();
     });
+    // Masks are drawn again at the new size of the picture
+    stage.zoom.onChange(() => mapping.apply({ ...now(), testPattern, name: output.name }));
     stage.onPick((id) => editing === 'masks' ? masks.pick(id) : choose(id));
     stage.onPress((index) => {
         if (editing === 'masks') {
@@ -312,7 +321,7 @@ function show(output: VideoOutputConfig, current: { mapping: OutputMapping; pres
         align: 'start',
         classes: ['mapping-editor'],
         children: [
-            new Stack({ gap: 8, classes: ['mapping-editor__picture'], children: [stage, hint] }),
+            new Stack({ gap: 8, classes: ['mapping-editor__picture'], children: [stage, mappingViewBar(stage), hint] }),
             new Stack({ gap: 8, classes: ['mapping-editor__side'], children: [sections, test, surfacePanel, masks.element, blending.element, presets.element] })
         ]
     }));

@@ -1753,7 +1753,11 @@
       "overwrite": "Overwrite",
       "presetHint": "Presets are saved at once and recalled by scenes and timelines, moving there in the morph time.",
       "recallOn": "Mapping of {name}",
-      "noPreset": "Unchanged"
+      "noPreset": "Unchanged",
+      "fit": "Fit",
+      "snapPoints": "Snap to edges and points",
+      "snapGrid": "Snap to grid",
+      "gridStep": "Grid step"
     }
   }
 }

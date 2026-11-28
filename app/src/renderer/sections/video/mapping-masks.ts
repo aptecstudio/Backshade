@@ -37,6 +37,10 @@ export class MappingMasks {
         this.changed = listener;
     }
 
+    get selectedId(): string | null {
+        return this.selected;
+    }
+
     /** Puts other masks and shows them */
     set(masks: OutputMask[]): void {
         this.masks = masks;
