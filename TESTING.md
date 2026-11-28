@@ -258,3 +258,4 @@ How to use it:
 - [ ] On a real projector: surfaces and corners line up with the real shapes; arrow keys move by one pixel; editing from a phone or tablet.
 - [ ] Videos on several surfaces stay smooth at the output resolution on the show computer, also with transitions, timers and text gobos.
 - [ ] Video inputs (cameras) mapped on a surface.
+- [ ] Mesh warp on a real curved or irregular surface: 4 x 4 and finer grids are enough; dragging points with a finger on a tablet.

@@ -915,7 +915,8 @@ Chosen by the human with polls: surfaces show the program or one layer; the edit
 - **Rendering:** the composition keeps playing out of sight; every frame its videos, images, text gobos and timers are drawn on each surface with a perspective transform, in layer order and with their opacity, so transitions are unchanged. Folded shapes are not drawn. (Proposed)
 - **Editor** (`renderer/sections/video/mapping-dialog.ts`, key "Mapping" of the Video section, editors of the section): numbered handles dragged with mouse, pen or finger, arrows for 1 pixel (10 with Shift), source and crop fields, reset, remove; changes go to the output at once, Cancel restores. (Confirmed place, Proposed rest)
 - **Test image:** grid, diagonals, circle, number, surface and output name in a color per surface; on while the editor is open if chosen (`video.setTestPattern`, not saved). (Proposed)
-- **Demo show:** the stage screen has a main surface and a side panel showing the first layer.
+- **Mesh warp** (14.2.2): an optional grid of 2 to 9 points a side for each surface, in parts of the surface before the corners (so corner pin still works over it); smooth curves (Catmull-Rom, the same as joined cubic bezier pieces) pass through the points, a regular grid changes nothing; drawn in 48 x 48 pieces. In the editor "Curved grid" adds a grid of 4 x 4, "Move" chooses corners or grid points, changing the number of points keeps the shape, "Reset grid" flattens it. (Confirmed curved grid, Proposed rest)
+- **Demo show:** the stage screen has a main surface and a bent side panel showing the first layer.
 
 ## Multi-device
 

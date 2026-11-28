@@ -277,7 +277,7 @@ Mapping of the video outputs on real surfaces: screens, projection surfaces, sce
 - [x] 14.1 Output model: each video output has a canvas (resolution) split into one or more mapping surfaces, each showing the whole program or one layer (decided by the human on 2026-11-28)
 - [ ] 14.2 2D warp on the output:
   - [x] 14.2.1 Corner pin (four corners)
-  - [ ] 14.2.2 Mesh warp with an editable grid of points (bezier interpolation)
+  - [x] 14.2.2 Mesh warp with an editable grid of points (smooth curves through the points)
   - [ ] 14.2.3 Masks: polygons and bezier shapes, with feather and inversion
   - [x] 14.2.4 Input crop: the part of the source shown on each surface
 - [ ] 14.3 Edge blending between overlapping projectors: blend width, curve and gamma per edge, black level compensation
