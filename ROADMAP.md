@@ -287,7 +287,7 @@ Mapping of the video outputs on real surfaces: screens, projection surfaces, sce
   - [ ] 14.4.3 Calibration helper: matching points between the model and the real projected image
 - [ ] 14.5 Pixel mapping of the video on LED walls and LED matrices (extends Phase 5.4): pixel area, pixel order, output on Art-Net universes or on a video output
 - [ ] 14.6 Mapping editor: live editing from the Video section (done), test patterns with grid, colors and numbers (done), snap and zoom
-- [ ] 14.7 Mapping presets saved in `show.json`, recallable from cues and from the timeline (Phase 8)
+- [x] 14.7 Mapping presets saved in `show.json`, recallable from cues and from the timeline (Phase 8)
 
 ## Phase 15 - Multi-device
 
