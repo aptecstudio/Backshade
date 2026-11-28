@@ -1,0 +1,4 @@
+newmtl base
+Kd 0.25 0.27 0.31
+newmtl wood
+Kd 0.55 0.40 0.26

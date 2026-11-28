@@ -1,12 +1,15 @@
 /**
  * Panel of what can be added to the stage: the fixtures of the patch not yet
- * placed, and the models of the library by category. The categories are
- * closed at first; those opened stay open on this computer.
+ * placed, the models of the library by category and those imported, of the
+ * show and of the personal library, which can be changed. The categories are closed at first; those
+ * opened stay open on this computer.
  */
 
 import { Emitter, Key, Label, ListItem, LocalPreference, Panel, Stack, type Unsubscribe } from '../../framework/ts/index.js';
+import type { CustomModel } from '../../shared/stage/custom-model.js';
 import type { PatchEntry } from '../../shared/transport/engine-api.js';
 import { t } from '../i18n/i18n.js';
+import { customName } from './custom-models.js';
 import type { ModelCategory, ModelInfo } from './model-library.js';
 
 /** Categories added from the library; fixtures come from the patch */
@@ -18,7 +21,7 @@ const SCENERY: readonly string[] = ['follow-spot'];
 const openPreference = new LocalPreference('backshade.stageCategories');
 
 export function modelName(id: string): string {
-    return t(`stage.models.${id}` as 'stage.models.par');
+    return customName(id) ?? t(`stage.models.${id}` as 'stage.models.par');
 }
 
 export class StageLibraryPanel extends Panel {
@@ -27,35 +30,83 @@ export class StageLibraryPanel extends Panel {
     private fixtureList = new Stack();
     private readonly fixtureArea = new Stack({ gap: 8 });
 
+    private readonly open = new Set((openPreference.get() ?? '').split(' '));
+    private importedList = new Stack();
+    private readonly importedArea = new Stack({ gap: 4 });
+    private readonly importModels = new Emitter<void>();
+    private readonly edits = new Emitter<string>();
+
     constructor(models: readonly ModelInfo[]) {
         super({ title: t('stage.library'), classes: ['stage-panel'] });
         this.append(new Label({ text: t('stage.fixtures'), tone: 'secondary', size: 'small' }), this.fixtureArea);
-        const open = new Set((openPreference.get() ?? '').split(' '));
         for (const category of CATEGORIES) {
-            const rows = models.filter((model) => model.category === category || (category === 'elements' && SCENERY.includes(model.id))).map((model) => {
-                const item = new ListItem({ children: [new Label({ text: modelName(model.id), size: 'small' })] });
-                item.onPress(() => this.additions.emit(model.id));
-                return item;
-            });
-            if (rows.length === 0) {
-                continue;
+            const rows = models.filter((model) => model.category === category || (category === 'elements' && SCENERY.includes(model.id))).map((model) => this.item(model.id));
+            if (rows.length > 0) {
+                this.addCategory(category, new Stack({ gap: 4, children: rows }));
             }
-            const list = new Stack({ gap: 4, children: rows });
-            list.element.hidden = !open.has(category);
-            const header = new Key({ label: t(`stage.categories.${category}`), icon: open.has(category) ? 'chevron-down' : 'chevron-right' });
-            header.element.classList.add('stage-category');
-            header.onPress(() => {
-                list.element.hidden = !list.element.hidden;
-                if (list.element.hidden) {
-                    open.delete(category);
-                } else {
-                    open.add(category);
-                }
-                header.setIcon(list.element.hidden ? 'chevron-right' : 'chevron-down');
-                openPreference.set([...open].join(' '));
-            });
-            this.append(header, list);
         }
+        const choose = new Key({ label: t('stage.importModel'), icon: 'plus' });
+        choose.onPress(() => this.importModels.emit());
+        this.importedArea.append(choose, this.importedList);
+        this.addCategory('custom', this.importedArea);
+    }
+
+    private item(model: string): ListItem {
+        const item = new ListItem({ children: [new Label({ text: modelName(model), size: 'small' })] });
+        item.onPress(() => this.additions.emit(model));
+        return item;
+    }
+
+    /** A header that opens and closes its content */
+    private addCategory(category: ModelCategory, content: Stack): void {
+        content.element.hidden = !this.open.has(category);
+        const header = new Key({ label: t(`stage.categories.${category}`), icon: this.open.has(category) ? 'chevron-down' : 'chevron-right' });
+        header.element.classList.add('stage-category');
+        header.onPress(() => {
+            content.element.hidden = !content.element.hidden;
+            if (content.element.hidden) {
+                this.open.delete(category);
+            } else {
+                this.open.add(category);
+            }
+            header.setIcon(content.element.hidden ? 'chevron-right' : 'chevron-down');
+            openPreference.set([...this.open].join(' '));
+        });
+        this.append(header, content);
+    }
+
+    /** Shows the models of the show and those of the personal library not in it yet */
+    setImported(models: readonly CustomModel[], library: readonly CustomModel[]): void {
+        const inShow = new Set(models.map((model) => model.id));
+        const row = (model: CustomModel, fromLibrary: boolean): Stack => {
+            const edit = new Key({ label: t('stage.editModel'), icon: 'pencil', iconOnly: true });
+            edit.onPress(() => this.edits.emit(model.id));
+            const item = new ListItem({
+                children: [
+                    new Label({ text: model.name, size: 'small' }),
+                    ...(fromLibrary ? [new Label({ text: t('stage.fromLibrary'), size: 'small', tone: 'secondary' })] : [])
+                ]
+            });
+            item.onPress(() => this.additions.emit(model.id));
+            item.element.classList.add('stage-imported__item');
+            return new Stack({ direction: 'row', gap: 4, align: 'center', children: [item, edit] });
+        };
+        this.importedList.destroy();
+        this.importedList = new Stack({
+            gap: 4,
+            children: [...models.map((model) => row(model, false)), ...library.filter((model) => !inShow.has(model.id)).map((model) => row(model, true))]
+        });
+        this.importedArea.append(this.importedList);
+    }
+
+    /** Import of an .obj asked */
+    onImport(listener: () => void): Unsubscribe {
+        return this.importModels.subscribe(listener);
+    }
+
+    /** Change of an imported model asked */
+    onEdit(listener: (model: string) => void): Unsubscribe {
+        return this.edits.subscribe(listener);
     }
 
     /** A model of the library was chosen */

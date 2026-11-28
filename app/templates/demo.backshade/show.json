@@ -3873,6 +3873,36 @@
         "fixture": "699fcda7-b2d5-51bf-ae9d-5e6b18b58f51",
         "hungOn": "back-truss-3",
         "height": null
+      },
+      {
+        "id": "lectern",
+        "model": "custom-0000000000000001",
+        "position": [
+          -0.8,
+          0.4,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "fixture": null,
+        "hungOn": null,
+        "height": null
+      }
+    ],
+    "models": [
+      {
+        "id": "custom-0000000000000001",
+        "name": "Lectern",
+        "unit": "cm",
+        "up": "y",
+        "size": [
+          60,
+          118,
+          44
+        ]
       }
     ]
   },

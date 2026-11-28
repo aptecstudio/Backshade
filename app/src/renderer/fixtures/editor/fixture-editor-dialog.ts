@@ -1,13 +1,15 @@
 /**
  * Fixture editor: general data, physical data, channels and modes of a
- * user definition. The definition is checked before saving and the
- * problems are listed; closing with unsaved changes asks first.
+ * definition, saved into the show and, when asked, into the personal
+ * library. The definition is checked before saving and the problems are
+ * listed; closing with unsaved changes asks first.
  */
 
 import { Dialog, Key, Stack } from '../../../framework/ts/index.js';
 import type { FixtureDefinition } from '../../../shared/fixtures/fixture-definition.js';
 import { validateFixture } from '../../../shared/fixtures/validate-fixture.js';
 import { askChoice } from '../../dialogs/ask-choice.js';
+import { libraryCheckbox } from '../../dialogs/library-choice.js';
 import { showError } from '../../dialogs/show-error.js';
 import { t } from '../../i18n/i18n.js';
 import { engine } from '../../transport/engine.js';
@@ -64,18 +66,19 @@ export function openFixtureEditor(source: FixtureDefinition | null, previousId?:
             return;
         }
         try {
-            await engine().request('fixtures.save', { definition: result.definition, previousId });
+            await engine().request('fixtures.save', { definition: result.definition, previousId, library: keep.checked });
             close();
         } catch (error) {
             await showError(error);
         }
     };
 
+    const keep = libraryCheckbox();
     const cancelKey = new Key({ label: t('common.cancel') });
     const saveKey = new Key({ label: t('fixtureEditor.save'), state: 'active' });
     cancelKey.onPress(() => void cancel());
     saveKey.onPress(() => void save());
-    dialog.addActions(cancelKey, saveKey);
+    dialog.addActions(keep, cancelKey, saveKey);
     dialog.onCancel(() => void cancel());
     dialog.open();
     general.focus();

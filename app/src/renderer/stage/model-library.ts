@@ -6,12 +6,14 @@
 import * as THREE from 'three';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { fetchJson } from '../../framework/ts/index.js';
+import type { CustomModel } from '../../shared/stage/custom-model.js';
+import { loadCustomModel } from './custom-model-loader.js';
 import { stageMaterial } from './stage-materials.js';
 
 const FOLDER = '/assets/models';
 
 /** Category of a model */
-export type ModelCategory = 'truss' | 'stage' | 'fixtures' | 'musicians' | 'elements';
+export type ModelCategory = 'truss' | 'stage' | 'fixtures' | 'musicians' | 'elements' | 'custom';
 
 /** Entry of the model list */
 export interface ModelInfo {
@@ -40,6 +42,8 @@ export interface ModelInfo {
     rails?: Array<[[number, number, number], [number, number, number]]>;
     /** Height of a tower: fixtures hang on its sides and stand on its top */
     tower?: number;
+    /** A model imported into the show, without a bundled file */
+    custom?: CustomModel;
     /** Points the moving parts of a fixture turn around */
     pivots?: { pan: [number, number, number]; tilt: [number, number, number] };
 }
@@ -70,12 +74,20 @@ async function parse(file: string): Promise<THREE.Group> {
     return group;
 }
 
+/** Changes when what is drawn for a model changes */
+export function modelKey(info: ModelInfo): string {
+    return info.custom === undefined ? info.file : `${info.custom.id} ${info.custom.unit} ${info.custom.up}`;
+}
+
 /** A new copy of a model; the file is read once, the geometry is shared */
 export async function loadModel(info: ModelInfo): Promise<THREE.Group> {
-    let model = loaded.get(info.file);
+    const key = modelKey(info);
+    let model = loaded.get(key);
     if (model === undefined) {
-        model = parse(info.file);
-        loaded.set(info.file, model);
+        model = info.custom === undefined ? parse(info.file) : loadCustomModel(info.custom);
+        loaded.set(key, model);
+        // A file that could not be read is tried again
+        model.catch(() => loaded.delete(key));
     }
     return (await model).clone();
 }

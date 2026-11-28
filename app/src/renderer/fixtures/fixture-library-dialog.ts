@@ -2,13 +2,15 @@
  * Fixture library: list of the included and user definitions, with
  * the details of the selected one and the keys to create, edit, copy,
  * import, export and delete definitions. Included definitions are
- * read-only: editing one creates a user copy that replaces it.
+ * read-only: editing one creates a copy that replaces it. What is imported
+ * goes into the show, and into the personal library when asked.
  * The list updates with the fixtures.changed event.
  */
 
 import { Dialog, Key, Label, Panel, Stack } from '../../framework/ts/index.js';
 import type { FixtureSummary } from '../../shared/transport/engine-api.js';
 import { askChoice } from '../dialogs/ask-choice.js';
+import { askImportToLibrary } from '../dialogs/library-choice.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
 import { pickFiles, pickSaveFile } from '../files/file-dialogs.js';
@@ -69,7 +71,7 @@ class FixtureDetails extends Panel {
         try {
             const record = await engine().request('fixtures.get', { id: fixture.id });
             // An included definition is edited as a new user definition that replaces it
-            openFixtureEditor(record.definition, fixture.source === 'user' ? fixture.id : undefined);
+            openFixtureEditor(record.definition, fixture.source === 'bundled' ? undefined : fixture.id);
         } catch (error) {
             await showError(error);
         }
@@ -121,7 +123,11 @@ export async function importFixtures(): Promise<number> {
         if (files.length === 0) {
             return 0;
         }
-        const ids = await engine().request('fixtures.import', { files });
+        const library = await askImportToLibrary(t('fixtures.import'), t('fixtures.importIntoShow', { count: files.length }));
+        if (library === null) {
+            return 0;
+        }
+        const ids = await engine().request('fixtures.import', { files, library });
         if (ids.length > 0) {
             await askChoice(t('fixtures.import'), t('fixtures.imported', { count: ids.length }), [{ id: 'ok', label: t('common.ok'), primary: true }]);
         }

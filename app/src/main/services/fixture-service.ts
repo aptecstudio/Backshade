@@ -26,6 +26,16 @@ const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 export function registerFixtureService(router: RequestRouter, bus: EventBus, session: ShowSession, library: FixtureLibrary): void {
     const changed = (): void => bus.emit('fixtures.changed', {});
 
+    // A show carries the definitions it uses; another show has others
+    session.onContentChange((part) => {
+        if ((part === 'patch' || part === 'all') && session.summary() !== null) {
+            library.keepInShow(session.patch().fixtures.map((fixture) => fixture.definition));
+        }
+        if (part === 'all') {
+            changed();
+        }
+    });
+
     router.register('fixtures.list', () => library.list().map(toSummary));
 
     router.register('fixtures.get', (params) => {
@@ -41,7 +51,7 @@ export function registerFixtureService(router: RequestRouter, bus: EventBus, ses
     router.register('fixtures.save', (params) => {
         const input = requireObject(params);
         const previousId = optionalString(input, 'previousId');
-        const record = library.saveUser(input.definition, previousId);
+        const record = library.save(input.definition, previousId, input.library === true);
         if (session.summary() !== null) {
             session.setPatch(followDefinition(session.patch(), previousId ?? record.id, record.id, record.definition));
         }
@@ -51,18 +61,19 @@ export function registerFixtureService(router: RequestRouter, bus: EventBus, ses
     });
 
     router.register('fixtures.delete', (params) => {
-        library.deleteUser(requireString(requireObject(params), 'id'));
+        library.delete(requireString(requireObject(params), 'id'));
         changed();
         bus.emit('patch.changed', {});
         return undefined;
     });
 
     router.register('fixtures.import', (params) => {
-        const files = requireStringArray(requireObject(params), 'files').map((file) => pickedFile(file, session));
+        const input = requireObject(params);
+        const files = requireStringArray(input, 'files').map((file) => pickedFile(file, session));
         if (files.length === 0) {
             return [];
         }
-        const ids = library.importFiles(files);
+        const ids = library.importFiles(files, input.library === true);
         changed();
         bus.emit('patch.changed', {});
         return ids;

@@ -5,6 +5,7 @@
  * can come from remote clients.
  */
 
+import type { CustomModel, ModelAxis, ModelUnit } from '../stage/custom-model.js';
 import type { ShowStage } from '../stage/stage.js';
 import type { DiscoveredInstance } from '../remote/instance.js';
 import type { FileRoot, FolderContent } from '../files/file-entry.js';
@@ -128,7 +129,7 @@ export interface FixtureSummary {
     model: string;
     category: FixtureCategory;
     /** Included in the application (read-only) or created or imported by the user */
-    source: 'bundled' | 'user';
+    source: 'bundled' | 'user' | 'show';
     /** User definition that replaces an included one with the same identifier */
     replacesBundled: boolean;
     modes: FixtureModeSummary[];
@@ -282,6 +283,16 @@ export interface EngineMethods {
     'stage.set': { params: { stage: ShowStage }; result: ShowStage };
     /** Opens the window of the 3D stage (desktop only) */
     'stage.open': { params: undefined; result: undefined };
+    /** Measures an .obj before importing it */
+    'stage.inspectModel': { params: { file: string }; result: { size: [number, number, number]; name: string; materials: boolean } };
+    'stage.importModel': { params: { file: string; name: string; unit: ModelUnit; up: ModelAxis; library?: boolean }; result: CustomModel };
+    'stage.updateModel': { params: { id: string; name: string; unit: ModelUnit; up: ModelAxis; library?: boolean }; result: undefined };
+    /** Personal library of imported models, for all the shows */
+    'stage.listLibraryModels': { params: undefined; result: CustomModel[] };
+    'stage.useLibraryModel': { params: { id: string }; result: undefined };
+    'stage.removeLibraryModel': { params: { id: string }; result: undefined };
+    'stage.removeModel': { params: { id: string }; result: undefined };
+    'stage.readModel': { params: { id: string }; result: { obj: string; mtl: string | null } };
     /** Searches the other instances on the local network */
     'remote.discover': { params: undefined; result: DiscoveredInstance[] };
     /** Shows the remote control of another instance in the main window (desktop only) */
@@ -366,11 +377,11 @@ export interface EngineMethods {
      * Saves a user definition; previousId is the identifier it had before the
      * change, so a renamed definition replaces the old file and the patch follows it
      */
-    'fixtures.save': { params: { definition: FixtureDefinition; previousId?: string }; result: FixtureSummary };
+    'fixtures.save': { params: { definition: FixtureDefinition; previousId?: string; library?: boolean }; result: FixtureSummary };
     /** Deletes a user definition */
     'fixtures.delete': { params: { id: string }; result: undefined };
     /** Copies definition files into the user library; returns the identifiers */
-    'fixtures.import': { params: { files: string[] }; result: string[] };
+    'fixtures.import': { params: { files: string[]; library?: boolean }; result: string[] };
     /** Exports a definition to a file; returns the file */
     'fixtures.readImage': { params: { file: string }; result: string };
     'fixtures.export': { params: { id: string; file: string }; result: string };

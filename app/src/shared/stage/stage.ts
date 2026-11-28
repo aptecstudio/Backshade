@@ -4,6 +4,8 @@
  * rotations in degrees, applied in X, Y, Z order.
  */
 
+import { normalizeCustomModels, type CustomModel } from './custom-model.js';
+
 /** Step of the positions on the grid, in meters */
 export const STAGE_GRID = 0.2;
 
@@ -43,10 +45,12 @@ export interface StageObject {
 /** Stage section of show.json */
 export interface ShowStage {
     objects: StageObject[];
+    /** Models imported into the show */
+    models: CustomModel[];
 }
 
 /** Empty stage of a new show */
-export const EMPTY_STAGE: ShowStage = { objects: [] };
+export const EMPTY_STAGE: ShowStage = { objects: [], models: [] };
 
 const MODEL_ID = /^[a-z0-9-]{1,64}$/;
 
@@ -64,7 +68,7 @@ function vector(value: unknown, limit: number): StageVector {
  * patched fixture is shown once and links to missing objects are cleared.
  */
 export function normalizeStage(value: unknown): ShowStage {
-    const input = typeof value === 'object' && value !== null ? value as { objects?: unknown } : {};
+    const input = typeof value === 'object' && value !== null ? value as { objects?: unknown; models?: unknown } : {};
     const objects: StageObject[] = [];
     const ids = new Set<string>();
     const fixtures = new Set<string>();
@@ -91,5 +95,5 @@ export function normalizeStage(value: unknown): ShowStage {
             height: typeof entry.height === 'number' && Number.isFinite(entry.height) ? Math.max(0, Math.min(MAX_HEIGHT, entry.height)) : null
         });
     }
-    return { objects: objects.map((object) => object.hungOn === null || (object.hungOn !== object.id && ids.has(object.hungOn)) ? object : { ...object, hungOn: null }) };
+    return { models: normalizeCustomModels(input.models), objects: objects.map((object) => object.hungOn === null || (object.hungOn !== object.id && ids.has(object.hungOn)) ? object : { ...object, hungOn: null }) };
 }

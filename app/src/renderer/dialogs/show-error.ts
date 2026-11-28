@@ -45,6 +45,8 @@ const MESSAGES: Record<string, TextKey> = {
     'operator-not-found': 'errors.operatorNotFound',
     'file-not-found': 'errors.fileNotFound',
     'file-not-allowed': 'errors.fileNotAllowed',
+    'model-invalid': 'errors.modelInvalid',
+    'model-too-large': 'errors.modelTooLarge',
     'file-protected': 'errors.fileProtected',
     'file-exists': 'errors.fileExists',
     'copy-into-itself': 'errors.copyIntoItself',

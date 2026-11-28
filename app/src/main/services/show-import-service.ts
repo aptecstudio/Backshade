@@ -7,6 +7,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import type { FixtureLibrary } from '../fixtures/fixture-library';
 import { CONFLICT_RESOLUTIONS, type ConflictResolution, withRequirements } from '../../shared/show/show-import';
 import { matchesPin } from '../operators/operator-pin';
 import { buildCatalog, type ImportShow } from '../show-import/import-catalog';
@@ -23,7 +24,7 @@ import type { OperatorSessionInfo } from './operator-service';
 // Wait after a wrong PIN of the source, so that PINs cannot be tried quickly
 const WRONG_PIN_DELAY_MS = 400;
 
-export function registerShowImportService(router: RequestRouter, bus: EventBus, session: ShowSession, operators: OperatorSessionInfo): void {
+export function registerShowImportService(router: RequestRouter, bus: EventBus, session: ShowSession, operators: OperatorSessionInfo, library: FixtureLibrary): void {
     const target = (): ImportShow => {
         if (session.summary() === null) {
             throw new EngineError('no-show', 'No show is open');
@@ -90,7 +91,10 @@ export function registerShowImportService(router: RequestRouter, bus: EventBus, 
             fs.copyFileSync(copy.from, copy.to);
         }
         if (plan.copies.length > 0) {
+            // Definitions may have come with the files: they are read before the patch uses them
+            library.reload();
             bus.emit('media.changed', {});
+            bus.emit('fixtures.changed', {});
         }
         if (plan.patch !== null) {
             session.setPatch(plan.patch);

@@ -15,10 +15,13 @@ import { findFreeAddress, findFreeNumber, fixturesInRange, occupiedRanges } from
 import { matrixSegments } from '../../shared/patch/matrix';
 import { MAX_UNIVERSE, type ShowPatch } from '../../shared/patch/patch';
 import type { ShowOperator } from '../../shared/show/operators';
+import { MODELS_FOLDER } from '../../shared/stage/custom-model';
 import type { ShowStage } from '../../shared/stage/stage';
 import { importKey, type ConflictResolution, type ImportCatalog, type ImportItemKind, type ImportResult } from '../../shared/show/show-import';
 import type { LayerState, ShowVideo } from '../../shared/video/video';
+import { definitionFile, SHOW_FIXTURES_FOLDER } from '../fixtures/fixture-library';
 import { removeFixtures } from '../patch/patch-editor';
+import { modelFiles } from '../stage/custom-model-files';
 import { resolveMediaPath } from '../shows/media-library';
 import { mediaItemKind, type ImportShow } from './import-catalog';
 
@@ -160,6 +163,12 @@ export function planImport(
             }
             universe -= 1;
             address = found;
+        }
+        // A definition the other show carries comes with the fixture
+        const definition = definitionFile(path.join(source.folder, SHOW_FIXTURES_FOLDER), fixture.definition);
+        const kept = definitionFile(path.join(target.folder, SHOW_FIXTURES_FOLDER), fixture.definition);
+        if (fs.existsSync(definition) && !fs.existsSync(kept) && !copies.some((copy) => copy.to === kept)) {
+            copies.push({ from: definition, to: kept });
         }
         const id = randomUUID();
         patchIds.set(fixture.id, id);
@@ -394,6 +403,14 @@ export function planImport(
             const fixture = object.fixture === null ? null : patchIds.get(object.fixture);
             if (fixture === undefined) {
                 continue;
+            }
+            // An imported model comes with its files, under the same identifier
+            const model = from.stage.models.find((item) => item.id === object.model);
+            if (model !== undefined && !stage.models.some((item) => item.id === model.id)) {
+                stage.models.push(model);
+                for (const file of modelFiles(source.folder, model.id)) {
+                    copies.push({ from: file, to: path.join(target.folder, MODELS_FOLDER, path.basename(file)) });
+                }
             }
             const id = randomUUID();
             stageIds.set(object.id, id);

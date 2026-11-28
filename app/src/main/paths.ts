@@ -41,3 +41,6 @@ export const BUNDLED_FIXTURES_DIR = path.join(appRoot, 'assets', 'fixtures');
 
 /** Fixture definitions created or imported by the user */
 export const USER_FIXTURES_DIR = path.join(app.getPath('userData'), 'fixtures');
+
+/** Personal library of imported 3D models, for all the shows */
+export const USER_MODELS_DIR = path.join(app.getPath('userData'), 'models');

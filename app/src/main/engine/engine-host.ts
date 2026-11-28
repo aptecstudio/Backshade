@@ -51,7 +51,7 @@ export function startEngine(): void {
     const router = new RequestRouter();
     const bus = new EventBus();
     const session = new ShowSession((show) => bus.emit('show.changed', { show }));
-    const library = new FixtureLibrary();
+    const library = new FixtureLibrary(() => session.summary()?.folder ?? null);
 
     registerAppInfoService(router);
     registerWindowService(router, bus);
@@ -78,7 +78,7 @@ export function startEngine(): void {
     registerTemplateService(router, bus, session);
     registerMediaService(router, bus, session);
     registerFileService(router, bus, session);
-    registerShowImportService(router, bus, session, operators);
+    registerShowImportService(router, bus, session, operators, library);
     startLocaleService(bus);
     startCloseGuard(bus, session);
 

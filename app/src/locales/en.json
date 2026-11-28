@@ -168,7 +168,9 @@
       "unsupportedFile": "This kind of file cannot be sent.",
       "fileTooLarge": "The file is too large.",
       "diskFull": "There is not enough space on the disk of the computer.",
-      "uploadBusy": "Too many files are waiting: try again in a moment."
+      "uploadBusy": "Too many files are waiting: try again in a moment.",
+      "modelInvalid": "The file is not a model with faces.",
+      "modelTooLarge": "The model is larger than 30 MB."
     },
     "settings": {
       "language": "Language",
@@ -801,7 +803,9 @@
       "deleteReplacingConfirm": "Your version of \"{name}\" will be deleted and the included definition will be used again.",
       "imported": "{count} definitions imported.",
       "exported": "Definition exported to {file}.",
-      "readOnly": "Included fixtures cannot be changed: edit a copy, which replaces the included one in your library."
+      "readOnly": "Included fixtures cannot be changed: edit a copy, which replaces the included one in your library.",
+      "inShow": "In the show",
+      "importIntoShow": "{count} definition files are imported into the show."
     },
     "fixtureEditor": {
       "shake": "Shake",
@@ -1519,7 +1523,8 @@
         "stage": "Stage",
         "fixtures": "Fixtures",
         "musicians": "Musicians",
-        "elements": "Stage elements"
+        "elements": "Stage elements",
+        "custom": "Imported models"
       },
       "models": {
         "truss-05m": "Truss, 0.5 m",
@@ -1646,7 +1651,34 @@
         "pan": "Pan",
         "zoom": "Zoom"
       },
-      "notRemote": "The 3D stage is shown only on the computer running Backshade."
+      "notRemote": "The 3D stage is shown only on the computer running Backshade.",
+      "importModel": "Import .obj model",
+      "editModel": "Model settings",
+      "removeModel": "Remove the model",
+      "removeModelMessage": "The model and its objects leave the stage.",
+      "modelName": "Name",
+      "unit": "Unit of the measures",
+      "units": {
+        "m": "Meters",
+        "cm": "Centimeters",
+        "mm": "Millimeters"
+      },
+      "upAxis": "Axis pointing up",
+      "axes": {
+        "y": "Y",
+        "z": "Z"
+      },
+      "modelSize": "Width {width} m, height {height} m, depth {depth} m",
+      "withColors": "With the colors of its material file.",
+      "withoutColors": "No material file beside it: it is drawn in grey.",
+      "import": "Import",
+      "fromLibrary": "Library",
+      "removeFromLibrary": "Remove from the library",
+      "removeFromLibraryMessage": "The model leaves the library of this computer; the shows that use it keep their copy."
+    },
+    "library": {
+      "alsoPersonal": "Also add to the library for all the projects",
+      "import": "Import"
     }
   }
 }

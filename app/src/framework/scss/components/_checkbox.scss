@@ -1,0 +1,23 @@
+// Checkbox: a native box in the accent color with its text; the row is the hit area
+@use '../tokens' as *;
+@use 'focus';
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: space(8);
+    min-height: space(48);
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox__input {
+    flex-shrink: 0;
+    width: space(20);
+    height: space(20);
+    margin: 0;
+    accent-color: color('accent');
+    cursor: pointer;
+
+    @include focus.focus-ring;
+}

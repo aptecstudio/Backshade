@@ -5,11 +5,14 @@
  */
 
 import { ChoiceKeys, Key, Label, Spacer, Stack } from '../../framework/ts/index.js';
+import type { CustomModel } from '../../shared/stage/custom-model.js';
 import type { StageObject } from '../../shared/stage/stage.js';
 import type { PatchEntry } from '../../shared/transport/engine-api.js';
 import { showError } from '../dialogs/show-error.js';
 import { t } from '../i18n/i18n.js';
 import { engine } from '../transport/engine.js';
+import { editCustomModel, importCustomModel } from './custom-model-actions.js';
+import { useCustomModels } from './custom-models.js';
 import { defaultModel } from './default-model.js';
 import type { ModelInfo } from './model-library.js';
 import { StageDocument } from './stage-document.js';
@@ -27,7 +30,8 @@ import { STAGE_CAMERAS, StageView, VIEW_TOOLS, type StageCamera, type ViewTool }
 type StageMode = 'setup' | 'live';
 
 export class StageEditor extends Stack {
-    private readonly models: ReadonlyMap<string, ModelInfo>;
+    /** Bundled models and those imported into the show */
+    private readonly models: Map<string, ModelInfo>;
     private readonly document = new StageDocument();
     private readonly view = new StageView();
     private readonly scene: StageScene;
@@ -44,6 +48,8 @@ export class StageEditor extends Stack {
     private readonly liveBar: StageLiveBar;
     private mode: StageMode = 'setup';
     private editable = false;
+    /** Personal library of imported models */
+    private libraryModels: CustomModel[] = [];
     private camera: StageCamera = 'free';
 
     constructor(models: readonly ModelInfo[]) {
@@ -101,6 +107,8 @@ export class StageEditor extends Stack {
     async load(newShow: boolean): Promise<void> {
         this.fixtures = await engine().request('patch.get');
         await this.document.load(newShow);
+        this.libraryModels = await engine().request('stage.listLibraryModels');
+        this.showImported();
         await this.live.update(this.document.objects, this.fixtures);
         if (newShow) {
             this.handles.select(null);
@@ -141,6 +149,7 @@ export class StageEditor extends Stack {
 
     private bind(): void {
         this.track(this.document.onChange(() => {
+            this.showImported();
             void this.scene.sync(this.document.objects)
                 .then(() => this.live.update(this.document.objects, this.fixtures))
                 .catch(showError);
@@ -179,13 +188,35 @@ export class StageEditor extends Stack {
             this.handles.refresh();
         });
         this.handles.onLifted((change) => this.document.apply(edits.setHeight(this.document.objects, change.id, change.height, this.models)));
-        this.library.onAdd((model) => this.add(model, null));
+        this.library.onAdd((model) => void this.addModel(model).catch(showError));
+        this.library.onImport(() => void importCustomModel());
+        this.library.onEdit((id) => {
+            const there = this.document.models.find((item) => item.id === id);
+            const model = there ?? this.libraryModels.find((item) => item.id === id);
+            if (model !== undefined) {
+                void editCustomModel(model, there === undefined ? 'library' : 'show');
+            }
+        });
         this.library.onPlace((fixture) => void defaultModel(fixture).then((model) => this.add(model, fixture.id)));
         this.inspector.onAction((action) => this.act(action));
         this.inspector.onModel((model) => this.change((objects, id) => objects.map((object) => object.id === id ? { ...object, model } : object)));
         this.undoKey.onPress(() => this.document.undo());
         this.redoKey.onPress(() => this.document.redo());
         this.listen(document, 'keydown', (event) => this.shortcut(event));
+    }
+
+    private showImported(): void {
+        useCustomModels(this.models, this.document.models);
+        this.library.setImported(this.document.models, this.libraryModels);
+    }
+
+    /** Places a model; one of the personal library is first copied into the show */
+    private async addModel(id: string): Promise<void> {
+        if (this.editable && !this.document.models.some((item) => item.id === id) && this.libraryModels.some((item) => item.id === id)) {
+            await engine().request('stage.useLibraryModel', { id });
+            await this.document.load(false);
+        }
+        this.add(id, null);
     }
 
     private add(model: string, fixture: string | null): void {

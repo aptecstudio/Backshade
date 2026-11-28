@@ -168,7 +168,9 @@
       "unsupportedFile": "Questo tipo di file non si può inviare.",
       "fileTooLarge": "Il file è troppo grande.",
       "diskFull": "Sul disco del computer non c'è abbastanza spazio.",
-      "uploadBusy": "Troppi file in attesa: riprova tra un momento."
+      "uploadBusy": "Troppi file in attesa: riprova tra un momento.",
+      "modelInvalid": "Il file non è un modello con facce.",
+      "modelTooLarge": "Il modello supera i 30 MB."
     },
     "settings": {
       "language": "Lingua",
@@ -801,7 +803,9 @@
       "deleteReplacingConfirm": "La tua versione di \"{name}\" verrà eliminata e tornerà in uso la definizione inclusa.",
       "imported": "{count} definizioni importate.",
       "exported": "Definizione esportata in {file}.",
-      "readOnly": "Le fixture incluse non si possono modificare: modifica una copia, che nella tua libreria sostituisce quella inclusa."
+      "readOnly": "Le fixture incluse non si possono modificare: modifica una copia, che nella tua libreria sostituisce quella inclusa.",
+      "inShow": "Nello show",
+      "importIntoShow": "File di definizione importati nello show: {count}."
     },
     "fixtureEditor": {
       "shake": "Shake",
@@ -1519,7 +1523,8 @@
         "stage": "Palco",
         "fixtures": "Fari",
         "musicians": "Musicisti",
-        "elements": "Elementi di scena"
+        "elements": "Elementi di scena",
+        "custom": "Modelli importati"
       },
       "models": {
         "truss-05m": "Traliccio, 0,5 m",
@@ -1646,7 +1651,34 @@
         "pan": "Panoramica",
         "zoom": "Zoom"
       },
-      "notRemote": "Il palco 3D si vede solo sul computer che esegue Backshade."
+      "notRemote": "Il palco 3D si vede solo sul computer che esegue Backshade.",
+      "importModel": "Importa modello .obj",
+      "editModel": "Impostazioni del modello",
+      "removeModel": "Rimuovi il modello",
+      "removeModelMessage": "Il modello e i suoi oggetti escono dal palco.",
+      "modelName": "Nome",
+      "unit": "Unità delle misure",
+      "units": {
+        "m": "Metri",
+        "cm": "Centimetri",
+        "mm": "Millimetri"
+      },
+      "upAxis": "Asse verso l'alto",
+      "axes": {
+        "y": "Y",
+        "z": "Z"
+      },
+      "modelSize": "Larghezza {width} m, altezza {height} m, profondità {depth} m",
+      "withColors": "Con i colori del suo file dei materiali.",
+      "withoutColors": "Nessun file dei materiali accanto: è disegnato in grigio.",
+      "import": "Importa",
+      "fromLibrary": "Libreria",
+      "removeFromLibrary": "Rimuovi dalla libreria",
+      "removeFromLibraryMessage": "Il modello esce dalla libreria di questo computer; gli show che lo usano tengono la loro copia."
+    },
+    "library": {
+      "alsoPersonal": "Aggiungi anche alla libreria per tutti i progetti",
+      "import": "Importa"
     }
   }
 }

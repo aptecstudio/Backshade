@@ -5,10 +5,12 @@
 
 import * as THREE from 'three';
 import type { StageObject } from '../../shared/stage/stage.js';
-import { loadModel, type ModelInfo } from './model-library.js';
+import { loadModel, modelKey, type ModelInfo } from './model-library.js';
 
 interface Entry {
     model: string;
+    /** What was drawn: an imported model changes with its unit and axis */
+    key: string;
     node: THREE.Group;
     /** Height of the top, for an adjustable stand */
     height: number | null;
@@ -46,11 +48,13 @@ export class StageScene {
         const loading: Promise<void>[] = [];
         for (const object of objects) {
             let entry = this.entries.get(object.id);
-            if (entry === undefined || entry.model !== object.model) {
+            const info = this.models.get(object.model);
+            const key = info === undefined ? '' : modelKey(info);
+            if (entry === undefined || entry.model !== object.model || entry.key !== key) {
                 if (entry !== undefined) {
                     this.root.remove(entry.node);
                 }
-                entry = { model: object.model, node: new THREE.Group(), height: object.height };
+                entry = { model: object.model, key, node: new THREE.Group(), height: object.height };
                 entry.node.userData.stageId = object.id;
                 this.entries.set(object.id, entry);
                 this.root.add(entry.node);
@@ -93,8 +97,13 @@ export class StageScene {
         // A model of a newer version is not drawn, but stays in the show
         const info = this.models.get(entry.model);
         if (info !== undefined) {
-            entry.node.add(await loadModel(info));
-            this.extend(entry);
+            try {
+                entry.node.add(await loadModel(info));
+                this.extend(entry);
+            } catch (error) {
+                // An imported file that is missing or broken leaves its place empty
+                console.warn(`Model ${entry.model} not drawn`, error);
+            }
         }
     }
 }

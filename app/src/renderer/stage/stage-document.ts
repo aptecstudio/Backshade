@@ -5,6 +5,7 @@
  */
 
 import { Emitter, type Unsubscribe } from '../../framework/ts/index.js';
+import type { CustomModel } from '../../shared/stage/custom-model.js';
 import type { StageObject } from '../../shared/stage/stage.js';
 import { showError } from '../dialogs/show-error.js';
 import { engine } from '../transport/engine.js';
@@ -13,6 +14,7 @@ const HISTORY = 100;
 
 export class StageDocument {
     private current: StageObject[] = [];
+    private imported: CustomModel[] = [];
     private undone: StageObject[][] = [];
     private done: StageObject[][] = [];
     private readonly changes = new Emitter<void>();
@@ -21,6 +23,11 @@ export class StageDocument {
 
     get objects(): readonly StageObject[] {
         return this.current;
+    }
+
+    /** Models imported into the show */
+    get models(): readonly CustomModel[] {
+        return this.imported;
     }
 
     get canUndo(): boolean {
@@ -40,7 +47,8 @@ export class StageDocument {
         if (this.sending > 0 && !newShow) {
             return;
         }
-        const { objects } = await engine().request('stage.get');
+        const { objects, models } = await engine().request('stage.get');
+        this.imported = models;
         if (newShow) {
             this.done = [];
             this.undone = [];
@@ -51,6 +59,7 @@ export class StageDocument {
 
     clear(): void {
         this.current = [];
+        this.imported = [];
         this.done = [];
         this.undone = [];
         this.changes.emit();
@@ -85,7 +94,7 @@ export class StageDocument {
         this.current = objects;
         this.changes.emit();
         this.sending++;
-        void engine().request('stage.set', { stage: { objects } }).then(
+        void engine().request('stage.set', { stage: { objects, models: this.imported } }).then(
             () => {
                 this.sending--;
             },

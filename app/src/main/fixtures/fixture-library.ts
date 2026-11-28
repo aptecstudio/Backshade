@@ -1,8 +1,10 @@
 /**
  * Library of fixture definitions: the definitions included in the
- * application (read-only) and those created or imported by the user,
- * in the user data folder. A user definition with the same identifier
- * as an included one replaces it, like the language packs.
+ * application (read-only), those of the personal library of the user, in the
+ * user data folder, and those of the open show, in its fixtures/ folder.
+ * With the same identifier, the show comes before the personal library,
+ * which comes before the included ones. What the user imports or saves goes
+ * into the show, and into the personal library only when asked.
  *
  * Files are "<manufacturer>/<model>.json"; the identifier comes from the
  * manufacturer and model written in the file. Invalid files are ignored
@@ -19,13 +21,19 @@ import { BUNDLED_FIXTURES_DIR, USER_FIXTURES_DIR } from '../paths';
 import { readJsonFile, writeJsonFileAtomic } from '../storage/json-file';
 import { EngineError } from '../transport/engine-error';
 
+/** Folder of the definitions inside a show */
+export const SHOW_FIXTURES_FOLDER = 'fixtures';
+
+/** File of a definition inside a library folder or a show */
+export const definitionFile = (directory: string, id: string): string => path.join(directory, ...`${id}.json`.split('/'));
+
 /** Extension of the definition files */
 export const FIXTURE_FILE_EXTENSION = 'json';
 
 /** Definition found on disk */
 export interface FixtureRecord {
     id: string;
-    source: 'bundled' | 'user';
+    source: 'bundled' | 'user' | 'show';
     replacesBundled: boolean;
     file: string;
     definition: FixtureDefinition;
@@ -89,6 +97,13 @@ export function toSummary(record: FixtureRecord): FixtureSummary {
 export class FixtureLibrary {
     private records: Map<string, FixtureRecord> | null = null;
     private readonly bundledIds = new Set<string>();
+    /** Show folder the records were read with */
+    private loadedShow: string | null = null;
+
+    /**
+     * @param showFolder - Folder of the open show, null without one
+     */
+    constructor(private readonly showFolder: () => string | null = () => null) {}
 
     /**
      * Scans the folders again, for example after files were added by hand.
@@ -96,7 +111,13 @@ export class FixtureLibrary {
     reload(): void {
         const records = new Map<string, FixtureRecord>();
         this.bundledIds.clear();
-        for (const [source, directory] of [['bundled', BUNDLED_FIXTURES_DIR], ['user', USER_FIXTURES_DIR]] as const) {
+        this.loadedShow = this.showFolder();
+        const folders = [
+            ['bundled', BUNDLED_FIXTURES_DIR],
+            ['user', USER_FIXTURES_DIR],
+            ...(this.loadedShow === null ? [] : [['show', path.join(this.loadedShow, SHOW_FIXTURES_FOLDER)]])
+        ] as Array<[FixtureRecord['source'], string]>;
+        for (const [source, directory] of folders) {
             for (const file of definitionFiles(directory)) {
                 let definition: FixtureDefinition;
                 try {
@@ -108,11 +129,11 @@ export class FixtureLibrary {
                 const id = fixtureId(definition.manufacturer, definition.model);
                 if (source === 'bundled') {
                     this.bundledIds.add(id);
-                } else if (records.get(id)?.source === 'user') {
+                } else if (records.get(id)?.source === source) {
                     console.warn(`Fixture definition ignored, duplicate identifier ${id}: ${file}`);
                     continue;
                 }
-                records.set(id, { id, source, replacesBundled: source === 'user' && this.bundledIds.has(id), file, definition });
+                records.set(id, { id, source, replacesBundled: source !== 'bundled' && this.bundledIds.has(id), file, definition });
             }
         }
         this.records = records;
@@ -148,36 +169,39 @@ export class FixtureLibrary {
     }
 
     /**
-     * Saves a user definition. With previousId, the definition replaces
-     * the user definition it was edited from, also when its identifier changes.
+     * Saves a definition into the show, and into the personal library when
+     * asked or without a show. With previousId, it replaces the definition it
+     * was edited from, also when its identifier changes.
      * @throws EngineError "invalid-fixture" or "fixture-exists"
      */
-    saveUser(data: unknown, previousId?: string): FixtureRecord {
+    save(data: unknown, previousId: string | undefined, toLibrary: boolean): FixtureRecord {
         const result = validateFixture(data);
         if (!result.ok) {
             throw invalidFixtureError(result.issues, 'from the editor');
         }
         const id = fixtureId(result.definition.manufacturer, result.definition.model);
-        const existing = this.find(id);
-        if (existing !== undefined && existing.source === 'user' && id !== previousId) {
-            throw new EngineError('fixture-exists', `A user fixture definition already exists: ${id}`);
+        const directories = this.targets(toLibrary);
+        if (id !== previousId && directories.some((directory) => fs.existsSync(definitionFile(directory, id)))) {
+            throw new EngineError('fixture-exists', `A fixture definition already exists: ${id}`);
         }
-        const previous = previousId === undefined ? undefined : this.find(previousId);
-        if (previous !== undefined && previous.source === 'user' && previous.id !== id) {
-            fs.rmSync(previous.file, { force: true });
+        for (const directory of directories) {
+            if (previousId !== undefined && previousId !== id) {
+                fs.rmSync(definitionFile(directory, previousId), { force: true });
+            }
+            writeJsonFileAtomic(definitionFile(directory, id), result.definition);
         }
-        writeJsonFileAtomic(this.userFile(id), result.definition);
         this.reload();
         return this.require(id);
     }
 
     /**
-     * Deletes a user definition; an included definition it replaced becomes visible again.
+     * Deletes a definition where it is used from (the show or the personal
+     * library); one it was covering becomes visible again.
      * @throws EngineError "fixture-read-only" for included definitions
      */
-    deleteUser(id: string): void {
+    delete(id: string): void {
         const record = this.require(id);
-        if (record.source !== 'user') {
+        if (record.source === 'bundled') {
             throw new EngineError('fixture-read-only', 'Included fixture definitions cannot be changed');
         }
         fs.rmSync(record.file, { force: true });
@@ -185,30 +209,59 @@ export class FixtureLibrary {
     }
 
     /**
-     * Copies definition files into the user library, replacing user
-     * definitions with the same identifier. All the files are checked first:
-     * if one is invalid, nothing is imported.
+     * Copies definition files into the show, and into the personal library
+     * when asked or without a show, replacing definitions with the same
+     * identifier. All the files are checked first: if one is invalid, nothing
+     * is imported.
      * @returns The identifiers of the imported definitions
      */
-    importFiles(files: readonly string[]): string[] {
+    importFiles(files: readonly string[], toLibrary: boolean): string[] {
         const definitions = files.map(readFixtureFile);
+        const directories = this.targets(toLibrary);
         const ids = definitions.map((definition) => {
             const id = fixtureId(definition.manufacturer, definition.model);
-            writeJsonFileAtomic(this.userFile(id), definition);
+            for (const directory of directories) {
+                writeJsonFileAtomic(definitionFile(directory, id), definition);
+            }
             return id;
         });
         this.reload();
         return ids;
     }
 
+    /**
+     * Copies into the show the definitions it uses from the personal library,
+     * so that it carries them to other computers.
+     */
+    keepInShow(ids: Iterable<string>): void {
+        const show = this.showFolder();
+        let copied = false;
+        for (const id of new Set(ids)) {
+            const record = this.find(id);
+            if (show !== null && record?.source === 'user') {
+                writeJsonFileAtomic(definitionFile(path.join(show, SHOW_FIXTURES_FOLDER), id), record.definition);
+                copied = true;
+            }
+        }
+        if (copied) {
+            this.reload();
+        }
+    }
+
+    /** Folders what is saved or imported goes to */
+    private targets(toLibrary: boolean): string[] {
+        const show = this.showFolder();
+        return [
+            ...(show === null ? [] : [path.join(show, SHOW_FIXTURES_FOLDER)]),
+            ...(toLibrary || show === null ? [USER_FIXTURES_DIR] : [])
+        ];
+    }
+
     private all(): Map<string, FixtureRecord> {
-        if (this.records === null) {
+        // Another show has other definitions
+        if (this.records === null || this.loadedShow !== this.showFolder()) {
             this.reload();
         }
         return this.records as Map<string, FixtureRecord>;
-    }
-
-    private userFile(id: string): string {
-        return path.join(USER_FIXTURES_DIR, ...`${id}.${FIXTURE_FILE_EXTENSION}`.split('/'));
     }
 }

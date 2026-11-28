@@ -77,6 +77,9 @@ export function sourceLabel(fixture: FixtureSummary): string {
     if (fixture.source === 'bundled') {
         return t('fixtures.bundled');
     }
+    if (fixture.source === 'show') {
+        return t('fixtures.inShow');
+    }
     return fixture.replacesBundled ? t('fixtures.replacesBundled') : t('fixtures.user');
 }
 

@@ -63,3 +63,9 @@
     justify-content: flex-start;
     width: 100%;
 }
+
+// Name of an imported model beside the key that changes it
+.stage-imported__item {
+    flex: 1 1 auto;
+    min-width: 0;
+}
