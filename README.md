@@ -50,7 +50,7 @@ Available now:
 - Show templates, with a complete "Demo show" to try every feature; export and import of shows and templates as single archives, show media in the show folder
 - Show operators with a 4 digit PIN, mandatory in every show: each operator sees the sections of the profile, hidden, read only or editable
 - Import from another show: scenes, chasers, fixtures, audio, video, images, operators and the 3D stage, with their dependencies and the choice of how to solve conflicts
-- Fixture library with a custom fixture editor (gobo masks, prisms, dimmer curves); multi-universe patch with groups and LED matrices
+- Fixture library with a custom fixture editor (gobo masks, prisms, dimmer curves), with definitions kept in the show and, on request, in a personal library for all the shows; multi-universe patch with groups and LED matrices
 - DMX output over Art-Net and USB DMX interfaces, with grand master, blackout and a DMX monitor
 - Simple console: two-preset desk, attributes panel with jog wheels and color wheel, scenes, chasers with tap tempo, live cues
 - LED matrices with effects, animations and image mapping, recorded in scenes
@@ -59,12 +59,12 @@ Available now:
 - Timelines of tracks with lights, audio, video and automation clips, edited as in a DAW, with waveforms, markers, go mode, recording of live actions and MIDI timecode
 - External audio mixers over OSC and MIDI; MIDI controllers with learn and feedback
 - Remote control from other devices through the built-in web server, with the address as a QR code
-- 3D stage in real scale: library of trusses, stage elements, fixtures and musicians, hanging and mounting, and a live view of the fixtures from the DMX output with beams, gobos, prisms, effects and shadows
+- 3D stage in real scale: library of trusses, stage elements, fixtures and musicians, your own `.obj` models, hanging and mounting, and a live view of the fixtures from the DMX output with beams, gobos, prisms, effects and shadows
 - Multilingual interface (English and Italian), extensible with language packs
 
 Planned (see [ROADMAP.md](ROADMAP.md)):
 
-- Video outputs and custom models in the 3D stage
+- Video outputs in the 3D stage
 - Videomapping and several synchronized machines
 - Layout for phones, OSC control surfaces and installers
 

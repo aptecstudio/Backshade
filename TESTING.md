@@ -249,3 +249,6 @@ How to use it:
 - [ ] Prism and gobo shake, rotation, indexing and zoom against the real fixtures: speeds, ways and the width of the movement.
 - [ ] Many gobo fixtures projecting at once on the show computer: the frame rate holds with automatic quality.
 - [ ] Import the 3D stage from a real previous show, adding to and replacing the one there.
+- [ ] Import real `.obj` models of different origins (CAD, 3D editors): size, orientation, colors; large files open in a reasonable time.
+- [ ] Copy a show with imported models to another computer: the models are there.
+- [ ] Libraries across two computers: a show with its own fixtures and models opens complete on a computer that never had them.

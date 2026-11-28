@@ -239,7 +239,7 @@ Static website presenting Backshade, in English and Italian. It lives in `/landi
   - [x] 13.6.3 Movements: pan and tilt with realistic speed, zoom
   - [x] 13.6.4 Visible beams (volumetric cones) and light on the stage surfaces, with an optional haze level
 - [x] 13.7 Performance: frame rate limit, quality levels, beam on/off switch
-- [ ] 13.8 Import of custom `.obj` models into the show folder
+- [x] 13.8 Import of custom `.obj` models into the show folder
 - [ ] 13.9 Video outputs in the 3D stage, to pre-program the whole show (lights and video together) without the real hardware:
   - [ ] 13.9.1 Screens and LED walls: flat or curved surfaces, sized in meters and pixels, showing the real program output of the linked video output as a live texture
   - [ ] 13.9.2 Virtual projectors: position, orientation, lens (throw ratio, lens shift), brightness and aspect ratio; the image is projected on the stage surfaces and models, with the visible light cone
